@@ -7,3 +7,4 @@ Appended by `scripts/wfc.py`, one line per stage run.
 - 2026-10-31T10:08:33+00:00 **build**: fail (1 distinct errors)
 - 2026-10-31T10:10:41+00:00 **smoke**: fail (6/14 probes)
 - 2026-10-31T10:13:01+00:00 **build**: fail (1 distinct errors)
+- 2026-10-31T10:25:08+00:00 **build**: fail (1 distinct errors)

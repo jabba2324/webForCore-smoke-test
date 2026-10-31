@@ -1,7 +1,8 @@
 # eShopLegacyWebForms (eShopModernizing): migration notes
 
 Status: blocked (webForCore bugs F8, F1). Source: https://github.com/dotnet-architecture/eShopModernizing at
-`63bc9ec4` (archived; same commit as eshop-legacy-mvc). webForCore at `4ec57209`, from source.
+`63bc9ec4` (archived; same commit as eshop-legacy-mvc). webForCore 0.1.0
+from its GitHub release packages (first migrated against the source at `4ec57209`; the results are the same).
 
 ## Assessment
 
@@ -22,8 +23,8 @@ Status: blocked (webForCore bugs F8, F1). Source: https://github.com/dotnet-arch
 
 ## Migration
 
-1. `eShopLegacyWebForms.csproj` → `.csproj.netfx`; SDK-style project per `docs/MIGRATING.md` section 2, the "Always"
-   set plus Optimization and Optimization.WebForms through `$(WEBFORCORE_DIR)`. The old `<Compile>` list equals the
+1. `eShopLegacyWebForms.csproj` → `.csproj.netfx`; SDK-style project per `docs/MIGRATING.md` section 2, the `webForCore`
+   package plus `webForCore.Web.Optimization` and `.Web.Optimization.WebForms`, 0.1.0. The old `<Compile>` list equals the
    glob. `packages.config` removed.
 2. Packages as in eshop-legacy-mvc: EntityFramework 6.5.1, Newtonsoft.Json 13.0.4 ([F7](../../FINDINGS.md#f7));
    `Microsoft.AI.Web.dll` referenced from the package ([F6](../../FINDINGS.md#f6)).
