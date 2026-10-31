@@ -1,6 +1,6 @@
 # ReaLocate: migration notes
 
-Status: migrated (webForCore 0.2.0, all probes pass). Source: https://github.com/MichaelaIvanova/ReaLocate at
+Status: migrated (webForCore 0.4.0, all probes pass).
 `0c2a3bd7`. Found by searching GitHub on 2026-10-31; the repo, licence (MIT), web project and its
 `<TargetFrameworkVersion>` were checked through the GitHub API. webForCore 0.2.0 packages.
 
@@ -55,6 +55,10 @@ the admin user.
 Not probed: `/` is a 500 (`Sequence contains no elements`) because `Views/Home/Index.cshtml:34` calls `m.First()` on the
 listings in a `TextBoxFor` lambda, and the seed creates none. MVC 5 catches only `NullReferenceException` there, so it's
 the same on .NET Framework. The PDF invoices (Rotativa, which runs `wkhtmltopdf.exe`) weren't exercised.
+
+### Round 3: webForCore 0.4.0
+
+All 13 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0, and its 4 `ExcludeAssets` references for transitive Microsoft packages were removed: webForCore's packages override them since 0.3.0 (webForCore#23).
 
 ## Open problems
 

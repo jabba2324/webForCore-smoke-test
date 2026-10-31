@@ -1,5 +1,5 @@
 diff --git a/ReaLocate.Source/Data/ReaLocate.Data.Common/ReaLocate.Data.Common.csproj b/ReaLocate.Source/Data/ReaLocate.Data.Common/ReaLocate.Data.Common.csproj
-index 53e81b8..21a16a6 100644
+index 53e81b8..87d0fbb 100644
 --- a/ReaLocate.Source/Data/ReaLocate.Data.Common/ReaLocate.Data.Common.csproj
 +++ b/ReaLocate.Source/Data/ReaLocate.Data.Common/ReaLocate.Data.Common.csproj
 @@ -1,85 +1,28 @@
@@ -83,8 +83,8 @@ index 53e81b8..21a16a6 100644
 -    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
 -    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
 -    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
-+    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.2.0" />
++    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.4.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -212,7 +212,7 @@ index 37a4c93..0000000
 -</packages>
 \ No newline at end of file
 diff --git a/ReaLocate.Source/Data/ReaLocate.Data.Models/ReaLocate.Data.Models.csproj b/ReaLocate.Source/Data/ReaLocate.Data.Models/ReaLocate.Data.Models.csproj
-index eab343c..05687d8 100644
+index eab343c..a87ebc6 100644
 --- a/ReaLocate.Source/Data/ReaLocate.Data.Models/ReaLocate.Data.Models.csproj
 +++ b/ReaLocate.Source/Data/ReaLocate.Data.Models/ReaLocate.Data.Models.csproj
 @@ -1,105 +1,34 @@
@@ -311,10 +311,10 @@ index eab343c..05687d8 100644
 -      <Project>{edfe3c57-ef5b-4636-9ecc-d0baca6b6379}</Project>
 -      <Name>ReaLocate.Data.Common</Name>
 -    </ProjectReference>
-+    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.2.0" />
++    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.4.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -471,7 +471,7 @@ index 67761f0..0000000
 -</packages>
 \ No newline at end of file
 diff --git a/ReaLocate.Source/Data/ReaLocate.Data/ReaLocate.Data.csproj b/ReaLocate.Source/Data/ReaLocate.Data/ReaLocate.Data.csproj
-index 3b2c9d5..ad65a7a 100644
+index 3b2c9d5..f0144af 100644
 --- a/ReaLocate.Source/Data/ReaLocate.Data/ReaLocate.Data.csproj
 +++ b/ReaLocate.Source/Data/ReaLocate.Data/ReaLocate.Data.csproj
 @@ -1,98 +1,35 @@
@@ -558,10 +558,10 @@ index 3b2c9d5..ad65a7a 100644
 -    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
 -    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
 -    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
-+    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.2.0" />
++    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.4.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -717,7 +717,7 @@ index 67761f0..0000000
 -</packages>
 \ No newline at end of file
 diff --git a/ReaLocate.Source/Services/ReaLocate.Services.Data/ReaLocate.Services.Data.csproj b/ReaLocate.Source/Services/ReaLocate.Services.Data/ReaLocate.Services.Data.csproj
-index d0ff088..839a419 100644
+index d0ff088..939c987 100644
 --- a/ReaLocate.Source/Services/ReaLocate.Services.Data/ReaLocate.Services.Data.csproj
 +++ b/ReaLocate.Source/Services/ReaLocate.Services.Data/ReaLocate.Services.Data.csproj
 @@ -1,104 +1,34 @@
@@ -802,8 +802,8 @@ index d0ff088..839a419 100644
 -    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
 -    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
 -    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
-+    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.2.0" />
++    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.4.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -971,7 +971,7 @@ index e0c6eb9..0000000
 -</packages>
 \ No newline at end of file
 diff --git a/ReaLocate.Source/Services/ReaLocate.Services.Web/ReaLocate.Services.Web.csproj b/ReaLocate.Source/Services/ReaLocate.Services.Web/ReaLocate.Services.Web.csproj
-index 01799dc..95e7fe3 100644
+index 01799dc..011cf6f 100644
 --- a/ReaLocate.Source/Services/ReaLocate.Services.Web/ReaLocate.Services.Web.csproj
 +++ b/ReaLocate.Source/Services/ReaLocate.Services.Web/ReaLocate.Services.Web.csproj
 @@ -1,73 +1,27 @@
@@ -1043,8 +1043,8 @@ index 01799dc..95e7fe3 100644
 -    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
 -    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
 -    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
-+    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.2.0" />
++    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.4.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -1201,7 +1201,7 @@ index 94c3c40..68f152c 100644
      }
  }
 diff --git a/ReaLocate.Source/Web/ReaLocate.Web.Infrastructure/ReaLocate.Web.Infrastructure.csproj b/ReaLocate.Source/Web/ReaLocate.Web.Infrastructure/ReaLocate.Web.Infrastructure.csproj
-index 04a33c3..e7265e9 100644
+index 04a33c3..d4472c4 100644
 --- a/ReaLocate.Source/Web/ReaLocate.Web.Infrastructure/ReaLocate.Web.Infrastructure.csproj
 +++ b/ReaLocate.Source/Web/ReaLocate.Web.Infrastructure/ReaLocate.Web.Infrastructure.csproj
 @@ -1,77 +1,28 @@
@@ -1277,8 +1277,8 @@ index 04a33c3..e7265e9 100644
 -    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
 -    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
 -    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
-+    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.2.0" />
++    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.4.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -1425,10 +1425,10 @@ index 0000000..63f7251
 +    }
 +}
 diff --git a/ReaLocate.Source/Web/ReaLocate.Web/ReaLocate.Web.csproj b/ReaLocate.Source/Web/ReaLocate.Web/ReaLocate.Web.csproj
-index 32ba153..b9be30f 100644
+index 32ba153..93fae96 100644
 --- a/ReaLocate.Source/Web/ReaLocate.Web/ReaLocate.Web.csproj
 +++ b/ReaLocate.Source/Web/ReaLocate.Web/ReaLocate.Web.csproj
-@@ -1,571 +1,84 @@
+@@ -1,571 +1,77 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
@@ -1654,8 +1654,7 @@ index 32ba153..b9be30f 100644
 -      <HintPath>..\..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
 -    </Reference>
 -  </ItemGroup>
-+
-   <ItemGroup>
+-  <ItemGroup>
 -    <Compile Include="App_Start\ApplicationSignInManager.cs" />
 -    <Compile Include="App_Start\ApplicationUserManager.cs" />
 -    <Compile Include="App_Start\AutofacConfig.cs" />
@@ -1737,16 +1736,8 @@ index 32ba153..b9be30f 100644
 -    <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
 -    <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
 -    <Compile Include="ViewModels\Visitor\VisitorViewModel.cs" />
-+    <Compile Remove="App_Code/**;bin_dotnet/**;obj/**" />
-+    <Compile Remove="App_Start/GlimpseSecurityPolicy.cs" />
-+    <Content Remove="bin_dotnet/**" />
-+    <None Remove="bin_dotnet/**" />
-+    <Compile Remove="Filters/ValidateFileAttribute.cs" />
-+    <Compile Remove="ViewModels/CreatePhotoViewModel.cs" />
-+    <Compile Remove="ViewModels/CreateRealEstateAndPhotoViewModel.cs" />
-   </ItemGroup>
-+
-   <ItemGroup>
+-  </ItemGroup>
+-  <ItemGroup>
 -    <Content Include="Content\bootstrap-theme.css" />
 -    <Content Include="Content\bootstrap-theme.min.css" />
 -    <Content Include="Content\bootstrap.css" />
@@ -1934,20 +1925,7 @@ index 32ba153..b9be30f 100644
 -    <Content Include="Views\InviteBrokers\GetAllBrokersByAgency.cshtml" />
 -    <Content Include="Views\Home\Index.cshtml" />
 -    <Content Include="Views\Home\_RealEstateTilePartialView.cshtml" />
-+    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Web.Helpers" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.SignalR.SystemWeb" Version="0.2.0" />
-   </ItemGroup>
+-  </ItemGroup>
 +
    <ItemGroup>
 -    <Folder Include="App_Data\" />
@@ -1957,6 +1935,36 @@ index 32ba153..b9be30f 100644
 -    <Folder Include="UploadedFiles\RealEstatePhotos\" />
 -    <Folder Include="Views\Base\" />
 -    <Folder Include="Views\Users\" />
++    <Compile Remove="App_Code/**;bin_dotnet/**;obj/**" />
++    <Compile Remove="App_Start/GlimpseSecurityPolicy.cs" />
++    <Content Remove="bin_dotnet/**" />
++    <None Remove="bin_dotnet/**" />
++    <Compile Remove="Filters/ValidateFileAttribute.cs" />
++    <Compile Remove="ViewModels/CreatePhotoViewModel.cs" />
++    <Compile Remove="ViewModels/CreateRealEstateAndPhotoViewModel.cs" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <Content Include="packages.config" />
++    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.Helpers" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.SignalR.SystemWeb" Version="0.4.0" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
 +    <!-- The app's own libraries. -->
 +    <PackageReference Include="Autofac" Version="3.4.0" />
 +    <PackageReference Include="Autofac.Mvc5" Version="3.3.4" />
@@ -1977,7 +1985,9 @@ index 32ba153..b9be30f 100644
    </ItemGroup>
 +
    <ItemGroup>
--    <Content Include="packages.config" />
+-    <AdditionalFiles Include="..\..\stylecop.json">
+-      <Link>stylecop.json</Link>
+-    </AdditionalFiles>
 +    <ProjectReference Include="../../Data/ReaLocate.Data.Common/ReaLocate.Data.Common.csproj" />
 +    <ProjectReference Include="../../Data/ReaLocate.Data.Models/ReaLocate.Data.Models.csproj" />
 +    <ProjectReference Include="../../Data/ReaLocate.Data/ReaLocate.Data.csproj" />
@@ -1985,22 +1995,6 @@ index 32ba153..b9be30f 100644
 +    <ProjectReference Include="../../Services/ReaLocate.Services.Web/ReaLocate.Services.Web.csproj" />
 +    <ProjectReference Include="../ReaLocate.Web.Infrastructure/ReaLocate.Web.Infrastructure.csproj" />
    </ItemGroup>
-+
-   <ItemGroup>
--    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
--    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
--    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
-+    <!-- Autofac.Mvc5 bring Microsoft's ASP.NET packages back; webForCore replaces them (docs/MIGRATING.md). -->
-+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.1.0" ExcludeAssets="all" />
-+    <PackageReference Include="Microsoft.AspNet.Razor" Version="3.1.0" ExcludeAssets="all" />
-+    <PackageReference Include="Microsoft.AspNet.WebPages" Version="3.1.0" ExcludeAssets="all" />
-+    <PackageReference Include="Microsoft.Web.Infrastructure" Version="1.0.0" ExcludeAssets="all" />
-   </ItemGroup>
--  <ItemGroup>
--    <AdditionalFiles Include="..\..\stylecop.json">
--      <Link>stylecop.json</Link>
--    </AdditionalFiles>
--  </ItemGroup>
 -  <ItemGroup>
 -    <ProjectReference Include="..\..\Data\ReaLocate.Data.Common\ReaLocate.Data.Common.csproj">
 -      <Project>{edfe3c57-ef5b-4636-9ecc-d0baca6b6379}</Project>
@@ -2070,6 +2064,7 @@ index 32ba153..b9be30f 100644
 -  </Target> -->
 -</Project>
 \ No newline at end of file
++
 +</Project>
 diff --git a/ReaLocate.Source/Web/ReaLocate.Web/ReaLocate.Web.csproj.netfx b/ReaLocate.Source/Web/ReaLocate.Web/ReaLocate.Web.csproj.netfx
 new file mode 100644
