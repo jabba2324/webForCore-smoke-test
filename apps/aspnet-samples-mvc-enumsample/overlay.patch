@@ -1,5 +1,5 @@
 diff --git a/samples/aspnet/MVC/EnumSample/EnumSample/EnumSample.csproj b/samples/aspnet/MVC/EnumSample/EnumSample/EnumSample.csproj
-index 22bff01..f6dcc55 100644
+index 22bff01..4937424 100644
 --- a/samples/aspnet/MVC/EnumSample/EnumSample/EnumSample.csproj
 +++ b/samples/aspnet/MVC/EnumSample/EnumSample/EnumSample.csproj
 @@ -1,195 +1,47 @@
@@ -168,11 +168,11 @@ index 22bff01..f6dcc55 100644
 -    <Compile Include="Models\MyData.cs" />
 -    <Compile Include="Models\MyDataContext.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
-+    <!-- webForCore 0.1.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Web.Helpers" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.2.0" />
++    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.Helpers" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.4.0" />
    </ItemGroup>
 +
    <ItemGroup>
