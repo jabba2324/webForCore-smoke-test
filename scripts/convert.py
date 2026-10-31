@@ -4,7 +4,7 @@
     scripts/convert.py apps/<id>/src/<web project>.csproj [--lib apps/<id>/src/<library>.csproj]...
 
 - copies each project to <name>.csproj.netfx (once) and rewrites it as an SDK-style net11.0 project;
-- adds the webForCore packages for the frameworks it references ($WEBFORCORE_VERSION, default 0.1.0); keeps the app's
+- adds the webForCore packages for the frameworks it references ($WEBFORCORE_VERSION, default 0.2.0); keeps the app's
   other packages (from packages.config or PackageReference), drops Microsoft's ASP.NET packages and the System.*
   packages that are part of .NET, and raises the versions webForCore forces (FINDINGS.md F7); keeps HintPath
   references outside packages/;
@@ -18,7 +18,7 @@ Standard library only (Python 3.11+)."""
 import re, shutil, sys
 from pathlib import Path
 
-WFC = __import__("os").environ.get("WEBFORCORE_VERSION", "0.1.0")
+WFC = __import__("os").environ.get("WEBFORCORE_VERSION", "0.2.0")
 DROP = re.compile(r"(?i)^(Microsoft\.AspNet\.(Mvc|Razor|WebPages|WebApi.*|Web\.Optimization.*|Cors|SignalR.*|Identity.*|Providers.*|FriendlyUrls.*|ScriptManager.*|TelemetryCorrelation|SessionState.*)|Microsoft\.Owin.*|Owin|Microsoft\.Web\.Infrastructure|WebGrease|Antlr|Microsoft\.CodeDom\.Providers\..*|Microsoft\.Net\.Compilers.*|Microsoft\.Net\.Compilers\.Toolset|"
                   r"System\.(Buffers|Memory|Numerics\.Vectors|Runtime\.CompilerServices\.Unsafe|Threading\.Tasks\.Extensions|ValueTuple|Net\.Http|IO|IO\.Compression|IO\.Compression\.ZipFile|Diagnostics\.DiagnosticSource|Threading\.Channels|IO\.Pipelines|Text\.Encodings\.Web|Text\.Json|Runtime|Collections\.Immutable|Reflection\.Metadata|Security\.Cryptography\..*|Net\.Primitives|Net\.Sockets|Linq|Console|Globalization)|Microsoft\.Bcl.*|NETStandard\.Library|Microsoft\.CSharp)$")
 # Microsoft packages webForCore doesn't replace, kept (they may load): the ones in DROP's Microsoft.AspNet group that
