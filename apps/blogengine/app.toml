@@ -7,7 +7,7 @@ site = "BlogEngine/BlogEngine.NET"
 kinds = ["webforms", "webapi", "webpages"]
 licence = "MS-RL"
 status = "blocked"
-notes = "Blocked pending a decision: BlogEngine.Core compiles a LINQ to SQL DataContext (the optional database file store). Drop it, or rewrite it on EF 6/ADO.NET."
+notes = "Blocked: BlogEngine.Core compiles a LINQ to SQL DataContext (the database file store). webForCore recommends moving it to EF 6; that rewrite is the app's, so not pursued here."
 
 # The first request compiles the site, so it gets 120 s.
 # [[probes]]

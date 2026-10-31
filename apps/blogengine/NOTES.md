@@ -1,7 +1,7 @@
 # BlogEngine.NET: migration notes
 
-Status: blocked: needs a decision on LINQ to SQL (see Assessment). Source: https://github.com/BlogEngine/BlogEngine.NET
-at `95c84261` (master, 2023). MS-RL (stated in README.md; the repo has no licence file). Not migrated yet.
+Status: blocked (LINQ to SQL; not pursued). Source: https://github.com/BlogEngine/BlogEngine.NET
+at `95c84261` (master, 2023). MS-RL (stated in README.md; the repo has no licence file). Not migrated.
 
 ## Assessment
 
@@ -32,15 +32,14 @@ at `95c84261` (master, 2023). MS-RL (stated in README.md; the repo has no licenc
   NuGet.Core 2.8.2 (for the extension gallery; net40-client only), DynamicQuery 1.0. (c) checked-in binaries in
   `lib/`: AjaxMin, BlogML, ICSharpCode.SharpZipLib.
 
-**Recommendation:** go, once the LINQ to SQL question is decided. The options (`docs/AGENT-MIGRATION.md` says to ask
-before either):
-1. Leave `FileStoreDb.cs`, `DbFileSystemProvider.cs` and `LinqLengthExpressionBuilder.cs` out of the build: the XML
-   setup works without them, and the database file store is gone (a feature removed).
-2. Rewrite `FileStoreDb` on EF 6 or ADO.NET: keeps the feature, but changes the data access code.
+**Decision (2026-10-31):** webForCore's recommendation for LINQ to SQL is to move the code to EF 6 (`docs/NAMESPACES.md`:
+"EF 6.4+ or EF Core"), and that rewrite is the app developers' job, not a platform change, so this test bed doesn't
+pursue it. BlogEngine stays blocked: `FileStoreDb` and its users would have to be rewritten on EF 6 before the rest
+of the migration is worth doing. Not a webForCore finding (documented gap).
 
 ## Migration
 
-(Not started.)
+Not started (see the decision above).
 
 ## Smoke
 
@@ -48,4 +47,4 @@ before either):
 
 ## Open problems
 
-- Decision needed: LINQ to SQL in BlogEngine.Core (documented gap), options above.
+- LINQ to SQL in BlogEngine.Core (documented gap): to be rewritten on EF 6 by the app; not pursued here.
