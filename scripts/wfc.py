@@ -4,7 +4,7 @@ migrated projects against webForCore, run them on Kestrel and probe them.
 
 Standard library only (Python 3.11+, for tomllib).
 
-    scripts/wfc.py packages [--version 0.1.0]  # download webForCore's release packages into .packages/
+    scripts/wfc.py packages [--version 0.2.0]  # download webForCore's release packages into .packages/
     scripts/wfc.py list
     scripts/wfc.py fetch <id>... | --all [--reset]
     scripts/wfc.py assess <id>... | --all
@@ -45,7 +45,7 @@ WEBFORCORE = Path(os.environ.get("WEBFORCORE_DIR", ROOT.parent / "webForCore")).
 # builds restore from it (apps reference the packages, docs/MIGRATING.md section 1). WEBFORCORE_DIR is only needed by
 # apps still migrated against webForCore's source.
 WEBFORCORE_REPO = "jabba2324/webForCore"
-WEBFORCORE_VERSION = os.environ.get("WEBFORCORE_VERSION", "0.1.0")
+WEBFORCORE_VERSION = os.environ.get("WEBFORCORE_VERSION", "0.2.0")
 PACKAGES = ROOT / ".packages"
 
 # Phase 0 of webForCore's docs/AGENT-MIGRATION.md.
@@ -226,15 +226,16 @@ def save_overlay(app):
     # Build output and files webForCore generates at run time aren't part of the migration. The apps' own
     # .gitignore files predate bin_dotnet.
     generated = [":(exclude,glob)**/bin_dotnet/**", ":(exclude,glob)**/obj/**", ":(exclude,glob)**/App_Data/machine.config",
-                 ":(exclude,glob)**/logs/W3SVC*/**"] + [f":(exclude,glob){p}" for p in app.get("remove", [])]
+                 ":(exclude,glob)**/logs/W3SVC*/**", ":(exclude,glob)**/logs/*/W3SVC*/**"] + [f":(exclude,glob){p}" for p in app.get("remove", [])]
     git("reset", "-q", cwd=dest, check=False)  # drops intent-to-add entries from an earlier save
     # Deletions must stay unstaged, or they drop out of the diff.
     git("add", "-N", "--ignore-removal", "--", ".", *generated, cwd=dest)
-    diff = git("diff", "--binary", "--", ".", *generated, cwd=dest).stdout
+    # As bytes: the apps' files with CRLF line endings must keep them, or the patch no longer applies to the checkout.
+    diff = subprocess.run(["git", "diff", "--binary", "--", ".", *generated], cwd=dest, check=True, capture_output=True).stdout
     p = app_dir(app["id"]) / "overlay.patch"
     if diff:
-        p.write_text(diff)
-        print(f"wrote {p.relative_to(ROOT)} ({diff.count(chr(10))} lines)")
+        p.write_bytes(diff)
+        print(f"wrote {p.relative_to(ROOT)} ({diff.count(b'\n')} lines)")
     else:
         print("no changes")
 
@@ -346,7 +347,12 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
         return None
 
 
-OPENER = urllib.request.build_opener(NoRedirect)
+# Apps with https = true (RequireHttpsAttribute) are served over HTTPS with the .NET development certificate
+# (`dotnet dev-certs https`), which isn't verified.
+_TLS = __import__("ssl").create_default_context()
+_TLS.check_hostname = False
+_TLS.verify_mode = __import__("ssl").CERT_NONE
+OPENER = urllib.request.build_opener(NoRedirect, urllib.request.HTTPSHandler(context=_TLS))
 
 
 def get(url, timeout):
@@ -367,7 +373,7 @@ def smoke(app):
     if not dll.exists():
         return record(app["id"], "smoke", "skip", summary=f"not built ({dll.relative_to(ROOT)} missing)")
     port = free_port()
-    base = f"http://127.0.0.1:{port}"
+    base = f"{'https' if app.get('https') else 'http'}://127.0.0.1:{port}"
     log = logs_dir(app["id"]) / "server.log"
     e = env()
     e.update(app.get("env", {}))
@@ -395,8 +401,12 @@ def smoke(app):
         time.sleep(1.5)
         w3c = sorted((site / "logs").glob("W3SVC*/*.txt"))
         w3c = [f"/{w3c[0].relative_to(site).as_posix()}"] if w3c else []
+        # An app whose error handler answers 200 with its own "not found" page sets [forbidden."<path>"] in app.toml,
+        # e.g. { status = 200, absent = "<package " }: what matters is that the file's content isn't served.
+        overrides = app.get("forbidden", {})
         for path in FORBIDDEN + [f"/bin_dotnet/{dll.name}"]:
-            checks.append(run_probe(base, {"path": path, "status": 404, "forbidden": True}, timeout=30))
+            probe = {"path": path, "status": 404, "forbidden": True, **overrides.get(path, {})}
+            checks.append(run_probe(base, probe, timeout=30))
         for path in w3c:  # an app that answers every URL itself (OWIN) may return 200: what matters is the log's content
             checks.append(run_probe(base, {"path": path, "status": 404, "forbidden": True, "absent": "#Fields:"}, timeout=30))
     finally:
@@ -464,7 +474,7 @@ def main():
     p.add_argument("ids", nargs="*")
     p.add_argument("--all", action="store_true")
     p.add_argument("--reset", action="store_true", help="fetch: discard the checkout's changes and reapply the overlay")
-    p.add_argument("--version", help="packages: the webForCore release (default: $WEBFORCORE_VERSION or 0.1.0)")
+    p.add_argument("--version", help="packages: the webForCore release (default: $WEBFORCORE_VERSION or 0.2.0)")
     a = p.parse_args()
     if a.command == "packages":
         global WEBFORCORE_VERSION

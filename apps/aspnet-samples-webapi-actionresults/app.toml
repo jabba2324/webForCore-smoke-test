@@ -7,8 +7,8 @@ site = "samples/aspnet/WebApi/ActionResults/ActionResults"
 project = "samples/aspnet/WebApi/ActionResults/ActionResults/ActionResults.csproj"
 kinds = ["webapi"]
 licence = "Apache-2.0"
-status = "blocked"
-notes = "All app probes pass (attribute routes, custom IHttpActionResults); only the served W3C log (F4) fails."
+status = "migrated"
+notes = "webForCore 0.2.0: passes all 10 probes with the round-1 overlay moved to the 0.2.0 packages."
 
 # The first request compiles the site, so it gets 120 s.
 [[probes]]

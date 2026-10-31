@@ -4,7 +4,8 @@ One entry per distinct problem found while migrating apps. webForCore bugs and g
 [jabba2324/webForCore](https://github.com/jabba2324/webForCore/issues), security problems included (webForCore is
 pre-release and not recommended for production). See CLAUDE.md for the format. Every entry was found
 with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 release packages (tag `v0.1.0`,
-`2942b694`), unless the entry says otherwise. Repro sites are small enough to paste: a `Program.cs` as in
+`2942b694`), unless the entry says otherwise. F16 onwards were found in round 2, on the released 0.2.0 packages
+(tag `v0.2.0`, `1c92215`), where F1–F15 are fixed or documented. F16–F21 and F24 are fixed in [jabba2324/webForCore#24](https://github.com/jabba2324/webForCore/pull/24), checked against the apps. Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
 
 | # | Problem | Classification | Apps | Raised |
@@ -25,6 +26,16 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 
 | [F14](#f14) | The trailing-slash 301 for a directory pre-empts routing with `RouteExistingFiles = true` | webForCore bug | clean-architecture-mvc5 | [#13](https://github.com/jabba2324/webForCore/issues/13) |
 | [F15](#f15) | The VS template's social login packages (Facebook, Google, MicrosoftAccount, Twitter) aren't in webForCore | guide gap | aspnetdocs-mvcmovie | [#14](https://github.com/jabba2324/webForCore/issues/14) |
+| [F16](#f16) | Replaced packages are one version; Identity 2.0 apps collide with 2.2's `SignInStatus` | guide gap | open-order-framework | [#17](https://github.com/jabba2324/webForCore/issues/17) |
+| [F17](#f17) | Katana's social providers need `System.Net.Http.WebRequest` and fail at start-up when used | guide gap | open-order-framework, socialgoal | [#18](https://github.com/jabba2324/webForCore/issues/18) |
+| [F18](#f18) | Configuration types referenced through `System.dll` reach the host's ConfigurationManager (ELMAH) | webForCore bug | socialgoal | [#19](https://github.com/jabba2324/webForCore/issues/19) |
+| [F19](#f19) | `System.Web.Abstractions`/`System.Web.Routing` 4.0.0.0 in web.config can't be loaded | webForCore bug | roadkill | [#20](https://github.com/jabba2324/webForCore/issues/20) |
+| [F20](#f20) | `Assembly.LoadFrom` returns the default context's copy; WebActivatorEx start methods never run | webForCore bug | applicant-tracking, roadkill | [#21](https://github.com/jabba2324/webForCore/issues/21) |
+| [F21](#f21) | Glimpse doesn't run on .NET | guide gap | realocate | [#22](https://github.com/jabba2324/webForCore/issues/22) |
+| [F22](#f22) | AutoMapper before 12 doesn't run on .NET 11 | app/environment | realocate, socialgoal | - |
+| [F23](#f23) | `recaptcha` 1.0.5's lib folders aren't framework names (NU1202) | app/environment | roadkill | - |
+| [F24](#f24) | A transitive Microsoft.AspNet.Razor replaces webForCore's in the output with no build error | webForCore bug | bonobo-git-server, applicant-tracking, realocate, roadkill | [#23](https://github.com/jabba2324/webForCore/issues/23) |
+| [F25](#f25) | StructureMap 4.0's .NET Framework build needs `AppDomainSetup.PrivateBinPath` | app/environment | roadkill | - |
 ---
 
 ## F1
@@ -146,7 +157,8 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 
 **Third-party packages bring Microsoft's ASP.NET packages back transitively.** Guide gap. Raised as [#4](https://github.com/jabba2324/webForCore/issues/4).
 
-- **Apps:** eshop-legacy-mvc: `Autofac.Mvc5` 4.0.2 depends on `Microsoft.AspNet.Mvc` 5.1.0 (and through it Razor 3.1,
+- **Apps:** eshop-legacy-mvc, and in round 2 bonobo-git-server, applicant-tracking, realocate and roadkill (where it
+  showed as F24, at run time). eshop-legacy-mvc: `Autofac.Mvc5` 4.0.2 depends on `Microsoft.AspNet.Mvc` 5.1.0 (and through it Razor 3.1,
   WebPages 3.1, Microsoft.Web.Infrastructure 1.0); `Autofac.WebApi2` 6.0.1 on `Microsoft.AspNet.WebApi.Core` 5.2.0 and
   `.Client` 5.2.0.
 - **Error:** 13 distinct `CS0433: The type 'Controller' exists in both 'System.Web.Mvc, Version=5.1.0.0' and
@@ -374,4 +386,223 @@ consequence isn't. Raised as [#8](https://github.com/jabba2324/webForCore/issues
   ```
   It builds and the app runs; the providers themselves weren't exercised (they need the external services). Lifting
   them (they're in the same Katana repository webForCore lifts from) or documenting this would cover the template.
+- **Round 2:** 0.2.0 documents this step. It isn't enough once a provider is actually registered: see F17.
 
+## F16
+
+**Packages webForCore replaces are at one version; an app written against an older one can collide with its additions.**
+Guide gap. Raised as [#17](https://github.com/jabba2324/webForCore/issues/17). Found on 0.2.0.
+
+- **Apps:** open-order-framework (ASP.NET Identity 2.0.0).
+- **Error:** `CS0104: 'SignInStatus' is an ambiguous reference between 'OpenOrderFramework.Models.SignInStatus' and
+  'Microsoft.AspNet.Identity.Owin.SignInStatus'` in `Controllers/AccountController.cs`. Identity 2.0.0 had no
+  `SignInStatus`, and the app's template defines its own in `App_Start/IdentityConfig.cs`. webForCore's
+  `Microsoft.AspNet.Identity.Owin` is 2.2, which added `SignInStatus` and `SignInManager`. The app has
+  `using Microsoft.AspNet.Identity.Owin;` and `using OpenOrderFramework.Models;`.
+- **What the guide says:** `docs/MIGRATING.md` section 1 lists the packages webForCore replaces, but not that each is
+  one version (MVC 5.3, Web API 5.3, Web Pages 3.3, Identity 2.2, Katana 4.2), so an app on an older version gets
+  an upgrade. On .NET Framework the same clash happens when the app upgrades its packages, but here it happens as
+  part of the migration.
+- **What worked:** a using alias in the file with the clash:
+  `using SignInStatus = OpenOrderFramework.Models.SignInStatus;`.
+- **Suggested fix:** in `docs/MIGRATING.md` section 1, say which version each replaced package is, that the migration
+  upgrades older ones, and that new types (Identity 2.1/2.2's `SignInStatus`, `SignInManager`) can be ambiguous with
+  an app's own copies from the Identity 2.0 samples.
+
+## F17
+
+**The Katana social providers webForCore doesn't lift fail at start-up when they're used:**
+`System.Net.Http.WebRequest` doesn't exist on .NET. Guide gap: F15's documented step works only while the providers are
+commented out. Raised as [#18](https://github.com/jabba2324/webForCore/issues/18). Found on 0.2.0.
+
+- **Apps:** open-order-framework (Katana 2.1.0), socialgoal (Katana 2.0.0). Both call `app.UseGoogleAuthentication()`
+  in `Startup.Auth.cs`. MvcMovie (F15), where the providers are commented out, works.
+- **Error:** every request, static files included, fails in `OwinHttpModule.Init`:
+  ```
+  FileNotFoundException: Could not load file or assembly 'System.Net.Http.WebRequest, Version=4.0.0.0,
+  Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'.
+     at Microsoft.Owin.Security.Google.GoogleAuthenticationMiddleware.ResolveHttpMessageHandler(GoogleAuthenticationOptions options)
+     at Microsoft.Owin.Builder.AppBuilder.BuildInternal(Type signature)
+     at Microsoft.Owin.Host.SystemWeb.OwinAppContext.Initialize(Action`1 startup)
+  ```
+  Each Katana provider (Google, Facebook, MicrosoftAccount, Twitter; 2.x to 4.x) does
+  `options.BackchannelHttpHandler ?? new WebRequestHandler()`. `WebRequestHandler` is in .NET Framework's
+  `System.Net.Http.WebRequest.dll`, which .NET doesn't have. The method can't be compiled, so setting
+  `BackchannelHttpHandler` doesn't help.
+- **Repro:** the F15 setup (`Microsoft.Owin.Security.Google` 3.0.1 with `Microsoft.Owin`/`.Security` excluded), and in
+  the OWIN startup `app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions { ClientId = "x", ClientSecret = "y" });`.
+  Any request is a 500 with the error above.
+- **Suggested fix:** lift the four providers (they're in the Katana repository webForCore lifts from) with their
+  back-channel handler as `HttpClientHandler`. Or ship a `System.Net.Http.WebRequest` assembly with a
+  `WebRequestHandler : HttpClientHandler`, which would cover the original packages, `WsFederation` and third-party
+  Katana providers too. At least, `docs/MIGRATING.md`'s "Katana packages webForCore doesn't lift" should say that
+  the original packages only compile and fail as soon as a provider is registered.
+
+## F18
+
+**Configuration types an assembly references through `System.dll` reach the host's ConfigurationManager, not the
+application's:** ELMAH's section handlers fail. webForCore bug: the part of F1 that 0.2.0's fix doesn't cover. Found
+on 0.2.0.
+
+- **Apps:** socialgoal (elmah.corelibrary 1.2.2, with Elmah.MVC). ELMAH is one of the most common ASP.NET packages.
+- **Error:** every request:
+  ```
+  Configuration Error. An error occurred creating the configuration section handler for elmah/errorMail:
+  Type 'Elmah.ErrorMailSectionHandler' does not inherit from 'System.Configuration.IConfigurationSectionHandler'.
+     at System.Configuration.RuntimeConfigurationRecord.CreateSectionFactory(FactoryRecord factoryRecord)
+  ```
+- **Cause:** `ErrorMailSectionHandler` derives from `System.Configuration.SingleTagSectionHandler`, which ELMAH (built for
+  .NET 2.0) references from `System, Version=2.0.0.0`. Its metadata shows `SingleTagSectionHandler -> System 2.0.0.0` and
+  `ConfigurationException -> System 2.0.0.0`; `ConfigurationManager` comes from `System.Configuration`. On .NET,
+  `System.dll` is a facade that forwards these types to `System.Configuration.ConfigurationManager`. 0.2.0 loads the
+  `System.Configuration` facade per PseudoAppDomain (`PseudoAppDomain.PerDomainFrameworkAssemblies`, F1), but `System`
+  is still shared from the default context. So its forwards resolve to the host's copy of
+  `System.Configuration.ConfigurationManager`, and the application's configuration system, which is the domain's copy,
+  sees a different `IConfigurationSectionHandler`.
+- **Repro:** a site with `<PackageReference Include="elmah.corelibrary" Version="1.2.2" />`, ELMAH's `<sectionGroup
+  name="elmah">` in web.config and its `ErrorMailModule` in `<system.webServer><modules>`. Or, smaller: a net20–net48
+  class library with `public class H : System.Configuration.SingleTagSectionHandler {}`, declared as a `<section>` and
+  read with `ConfigurationManager.GetSection`.
+- **Suggested fix:** add `System` to `PerDomainFrameworkAssemblies` (its other forwards go to framework assemblies,
+  which still resolve to the shared ones), and check the other facades that forward into
+  `System.Configuration.ConfigurationManager`.
+
+## F19
+
+**`System.Web.Abstractions` and `System.Web.Routing` 4.0.0.0 can't be loaded:** web.configs that list them in
+`<compilation><assemblies>` fail on every request. webForCore bug. Raised as [#19](https://github.com/jabba2324/webForCore/issues/19). Raised as [#20](https://github.com/jabba2324/webForCore/issues/20). Found on 0.2.0.
+
+- **Apps:** roadkill. Web.configs from MVC 2-4 projects have
+  `<add assembly="System.Web.Abstractions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" />` and
+  the same for `System.Web.Routing`, and libraries built for .NET 3.5/4.0 reference them.
+- **Error:** every request:
+  ```
+  Configuration Error. Could not load file or assembly 'System.Web.Abstractions, Version=4.0.0.0, Culture=neutral,
+  PublicKeyToken=31bf3856ad364e35'. The system cannot find the file specified.
+  Source File: .../web.config Line: 34
+  ```
+- **On .NET Framework:** since 4.0 both are in the GAC as facades that type-forward `HttpContextBase` and the rest of
+  the abstractions, and `RouteTable`, `RouteBase` and the rest of routing, to `System.Web`. So the entries resolve,
+  and assemblies compiled against them bind.
+- **Repro:** any site, with the two `<add assembly=... Version=4.0.0.0 ...>` lines in `<compilation><assemblies>`.
+- **Suggested fix:** ship `System.Web.Abstractions.dll` and `System.Web.Routing.dll` 4.0.0.0 facades (type forwarders
+  to `System.Web`) in the `webForCore` package, as .NET does for its own facades. That fixes the web.config entries and
+  old assemblies that reference them.
+
+## F20
+
+**`Assembly.LoadFrom` in an application returns the default load context's copy:** WebActivatorEx's start methods
+never run. webForCore bug. Raised as [#21](https://github.com/jabba2324/webForCore/issues/21). Found on 0.2.0.
+
+- **Apps:** applicant-tracking (Unity.Mvc 5 registers its resolver from `UnityMvcActivator` by
+  `WebActivatorEx.PreApplicationStartMethod`), roadkill (StructureMap from `LocatorStartup` in `Roadkill.Core`).
+  WebActivatorEx is how Unity.Mvc, Ninject.MVC, StructureMap.MVC, Glimpse and many other packages start; Bonobo Git
+  Server has the same activator but calls `SetResolver` again from `Global.asax`, so it doesn't show.
+- **Error:** none at start-up. The activators silently don't run, and the first symptom is
+  `Cannot dynamically create an instance of type '...Controller'. Reason: No parameterless constructor defined.`
+  (applicant-tracking) or a `NullReferenceException` on the container in the OWIN startup (roadkill).
+- **Cause:** WebActivatorEx's `ActivationManager` (started by its own `System.Web.PreApplicationStartMethod`) finds the
+  attributes by `Assembly.LoadFrom` on every DLL in `HttpRuntime.BinDirectory`, then
+  `GetCustomAttributes(typeof(WebActivatorEx.PreApplicationStartMethodAttribute))`. On .NET, `Assembly.LoadFrom` always
+  loads into `AssemblyLoadContext.Default`, so it returns a second copy whose attributes are a different
+  `WebActivatorEx` type from the one running in the PseudoAppDomain. Checked from `Application_Start` in
+  applicant-tracking:
+  ```
+  IsHosted=True bin=<site>/bin_dotnet/
+  mine ALC=PseudoAppDomain 4f77251c-1 (<site>)
+  LoadFrom ALC="Default" System.Runtime.Loader.DefaultAssemblyLoadContext #0 same=False attrs=0
+  ```
+  On .NET Framework, `LoadFrom` in the application's AppDomain returns the assembly already loaded there.
+- **Repro:** a site with `<PackageReference Include="WebActivatorEx" Version="2.2.0" />` and
+  `[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Start), "Run")]` on a class whose `Run` sets a static
+  field that a page prints. The page prints the unset value. Or, in `Application_Start`:
+  `ReferenceEquals(Assembly.LoadFrom(Path.Combine(HttpRuntime.BinDirectory, "App.dll")), typeof(Global).Assembly)` is
+  `false`.
+- **Suggested fix:** .NET has no hook to redirect `LoadFrom`. Since it's one package used everywhere, webForCore could
+  lift WebActivatorEx (Apache 2.0) with `Assembly.LoadFrom` replaced by a load into the calling assembly's context (or
+  `BuildManager.GetReferencedAssemblies()`). It would also be worth listing `Assembly.LoadFrom` as a difference in
+  `docs/IIS-COMPATIBILITY.md`, since application code that does the same has the same problem.
+
+## F21
+
+**Glimpse doesn't run on .NET.** Guide gap. Raised as [#22](https://github.com/jabba2324/webForCore/issues/22). Found on 0.2.0.
+
+- **Apps:** realocate (Glimpse 1.8/1.9: Core, Ado, AspNet, EF6, Mvc5).
+- **Errors:** Glimpse.Ado's pre-application-start method throws `NullReferenceException` in
+  `Glimpse.Ado.AlternateType.Support.FindDbProviderFactoryTable` (it reflects into .NET Framework's private
+  `DbProviderFactories` table). Without Glimpse.Ado, `Glimpse.AspNet.HttpModule.Init` throws `MissingMethodException:
+  'System.String System.AppDomainSetup.get_ShadowCopyFiles()'`.
+- **What the guide says:** `docs/MIGRATING.md` mentions Glimpse only as a package that brings MVC back (F5).
+- **What worked:** remove Glimpse (a development diagnostics tool): its packages, the `glimpse` config section, module
+  and handler, and the app's `GlimpseSecurityPolicy`.
+- **Suggested fix:** say in `docs/MIGRATING.md` that Glimpse 1.x can't run on .NET and must be removed.
+
+## F22
+
+**AutoMapper before 12 doesn't run on .NET 11.** App/environment (not webForCore: it reproduces in a plain .NET 11
+console app). Found on 0.2.0.
+
+- **Apps:** realocate (AutoMapper 4.2.0, upgraded to 12.0.1), socialgoal (AutoMapper 3.1.1, static API, not upgraded).
+- **Error:** configuring a map throws from `MakeGenericMethod`. AutoMapper 3.x/4.x: `The type or method has 3 generic
+  parameter(s), but 1 generic argument(s) were provided`. 5.x to 11.x: `GenericArguments[0], 'System.Char', on 'T
+  MaxFloat[T](IEnumerable`1[T])' violates the constraint of type 'T'`. AutoMapper scans `System.Linq.Enumerable`'s
+  extension methods, non-public ones included, for flattening, and .NET 11's include `MaxInteger<T>`/`MaxFloat<T>`,
+  which have generic math constraints.
+- **Repro:** .NET 11, `#:package AutoMapper@11.0.1`,
+  `new MapperConfiguration(c => c.CreateMap(typeof(Src), typeof(Dst)))` where `Src` has `string Name` and `Dst` has
+  `string Name` and `int NameLength`. It throws; with AutoMapper 12.0.1 it works.
+- **Note:** AutoMapper 12 has a different configuration API from 3–4 (no static `Mapper`, `IMapperConfiguration` is
+  `IMapperConfigurationExpression`). A line in `docs/MIGRATING.md`'s package list would save the search.
+
+## F23
+
+**`recaptcha` 1.0.5's lib folders aren't framework names**, so NuGet won't restore it for net11.0. App/environment.
+Found on 0.2.0.
+
+- **Apps:** roadkill.
+- **Error:** `NU1202: Package recaptcha 1.0.5 is not compatible with net11.0`. The package has `lib/.NetFramework 2.0/`
+  and `lib/.NetFramework 4.0/`.
+- **What worked:** restore it for its path only and reference the DLL, as for F6:
+  ```xml
+  <PackageReference Include="recaptcha" Version="1.0.5.0" GeneratePathProperty="true" ExcludeAssets="all" />
+  <Reference Include="Recaptcha" HintPath="$(Pkgrecaptcha)/lib/.NetFramework 4.0/Recaptcha.dll" />
+  ```
+
+## F24
+
+**A transitive Microsoft.AspNet.Razor/WebPages replaces webForCore's in the output with no build error;** every view
+then fails. webForCore bug (F5's documented step is the workaround). Raised as [#23](https://github.com/jabba2324/webForCore/issues/23). Found on 0.2.0.
+
+- **Apps:** bonobo-git-server (Unity.Mvc 5.11 → Microsoft.AspNet.Mvc 5.2.7), applicant-tracking (Unity.Mvc 5.0.13 →
+  5.2.3), realocate (Autofac.Mvc5 3.3.4 → 5.1.0), roadkill (FixedDisplayModes and Swashbuckle → MVC 5.0, Web API 4.0).
+- **Error:** the build succeeds, because the app's code compiles against webForCore's `System.Web.Mvc`. But the
+  transitive package's `System.Web.Razor.dll` (3.x, 2018) and `System.Web.WebPages*.dll` are copied to `bin_dotnet/`
+  over webForCore's, and every Razor view fails:
+  ```
+  MissingMethodException: Method not found: 'System.CodeDom.CodeTypeDeclaration
+  System.Web.Razor.Generator.CodeGeneratorContext.get_GeneratedClass()'.
+     at System.Web.Mvc.Razor.MvcCSharpRazorCodeGenerator.SetBaseType(String modelTypeName)
+  ```
+  F5 is about the build-time CS0433 this causes when the app's code uses the types. This is the same cause with no
+  build error, so nothing tells the developer.
+- **Repro:** an MVC site (one controller, one Razor view) with `<PackageReference Include="Unity.Mvc" Version="5.11.1" />`.
+  The build passes and the view is a 500 with the error above.
+- **Suggested fix:** webForCore's targets drop the compile and runtime assets of the Microsoft packages it replaces
+  (`Microsoft.AspNet.Mvc`, `.Razor`, `.WebPages`, `.WebApi.*`, `.Web.Optimization`, `Microsoft.Web.Infrastructure`, the
+  Katana packages it lifts, ...) when they arrive transitively, as 0.2.0 already does for the framework `HttpUtility`
+  (F8). That would make F5's manual step unnecessary too.
+
+## F25
+
+**StructureMap 4.0's .NET Framework build needs `AppDomainSetup.PrivateBinPath`.** App/environment. Found on the
+packages of jabba2324/webForCore#24 (it was behind F19 and F20).
+
+- **Apps:** roadkill (`structuremap` 4.0.0.315, through `StructureMap.MVC5` and `structuremap.web`).
+- **Error:** every request, from Roadkill's WebActivatorEx start method:
+  ```
+  MissingMethodException: Method not found: 'System.String System.AppDomainSetup.get_PrivateBinPath()'.
+     at StructureMap.Graph.AssemblyFinder.FindBinPath()
+     at StructureMap.Graph.AssemblyScannerExtensions.AssembliesFromApplicationBaseDirectory(IAssemblyScanner scanner, ...)
+  ```
+  .NET's `AppDomainSetup` has no `PrivateBinPath`. The `lib/net40` StructureMap is built for .NET Framework.
+- **Next step:** a StructureMap version with a .NET Standard build, or scanning with `AssembliesFromPath(HttpRuntime.BinDirectory)`.

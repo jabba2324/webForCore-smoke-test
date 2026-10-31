@@ -7,11 +7,33 @@ site = "OpenOrderFramework"
 project = "OpenOrderFramework/OpenOrderFramework.csproj"
 kinds = ["mvc", "owin", "identity"]
 licence = "MIT"
-status = "verified"
-notes = "MVC 5 shopping cart with Identity 2; .NET 4.5.1. Needs SQL Server (LocalDB in the repo)."
+status = "blocked"
+notes = "Builds; every request fails at OWIN start-up: Katana's Google provider needs System.Net.Http.WebRequest (F17). Past it (by hand), all pages work. Identity 2.0 -> 2.2 SignInStatus clash aliased (F16)."
 
 # The first request compiles the site, so it gets 120 s.
-# [[probes]]
-# path = "/"
-# status = 200
-# contains = ""
+needs = ["mssql"]
+
+# The first request compiles the site and EF creates the database (Identity samples seed), so it gets 120 s.
+[[probes]]
+path = "/"
+contains = "Home Page - Order Framework"
+
+[[probes]]
+path = "/Store"
+contains = "Browse Genres"
+
+[[probes]]
+path = "/ShoppingCart"
+contains = "Shopping Cart - Order Framework"
+
+[[probes]]
+path = "/Account/Login"
+contains = "Log in - Order Framework"
+
+[[probes]]
+path = "/Account/Register"
+contains = "__RequestVerificationToken"
+
+[[probes]]
+path = "/Content/Site.css"
+contains = "padding-top"

@@ -1,5 +1,5 @@
 diff --git a/aspnet/mvc/overview/deployment/docker-aspnetmvc/samples/MVCRandomAnswerGenerator/MVCRandomAnswerGenerator/MVCRandomAnswerGenerator.csproj b/aspnet/mvc/overview/deployment/docker-aspnetmvc/samples/MVCRandomAnswerGenerator/MVCRandomAnswerGenerator/MVCRandomAnswerGenerator.csproj
-index ea55ba18d..5dd3fb341 100644
+index ea55ba18d..00f2fb029 100644
 --- a/aspnet/mvc/overview/deployment/docker-aspnetmvc/samples/MVCRandomAnswerGenerator/MVCRandomAnswerGenerator/MVCRandomAnswerGenerator.csproj
 +++ b/aspnet/mvc/overview/deployment/docker-aspnetmvc/samples/MVCRandomAnswerGenerator/MVCRandomAnswerGenerator/MVCRandomAnswerGenerator.csproj
 @@ -1,215 +1,48 @@
@@ -190,11 +190,11 @@ index ea55ba18d..5dd3fb341 100644
    <ItemGroup>
 -    <Folder Include="App_Data\" />
 +    <!-- webForCore 0.1.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.Helpers" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.1.0" />
++    <PackageReference Include="webForCore" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Helpers" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.2.0" />
    </ItemGroup>
 +
    <ItemGroup>

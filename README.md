@@ -41,7 +41,7 @@ Each app goes through four stages:
 
 Apps reference webForCore's NuGet packages, which are attached to its GitHub releases (not on nuget.org).
 `scripts/wfc.py packages` downloads a release into `.packages/v<version>/` (needs `gh`), and builds restore from
-there. `WEBFORCORE_VERSION` picks the release (default 0.1.0). An app migrated against webForCore's source instead
+there. `WEBFORCORE_VERSION` picks the release (default 0.2.0). An app migrated against webForCore's source instead
 refers to it through `$(WEBFORCORE_DIR)` (default `../webForCore`).
 
 ```sh
@@ -70,8 +70,8 @@ section 1). Reference the packages by version; the runner adds `.packages/` as a
 need no `nuget.config` and work on any machine:
 
 ```xml
-<PackageReference Include="webForCore" Version="0.1.0" />
-<PackageReference Include="webForCore.Web.Mvc" Version="0.1.0" />
+<PackageReference Include="webForCore" Version="0.2.0" />
+<PackageReference Include="webForCore.Web.Mvc" Version="0.2.0" />
 ```
 
 Change only what the platform needs, as the guide says. A workaround in the app for a webForCore bug doesn't count
@@ -92,7 +92,9 @@ as a pass: note it in `NOTES.md` and `FINDINGS.md`, and fix webForCore instead.
 | `needs` | Services from `services/compose.yml`: `mssql`, `mysql`, `postgres` |
 | `env` | Extra environment for the server process (a table) |
 | `remove` | Globs of files `fetch` deletes before applying the overlay, kept out of the patch (the app's checked-in DLLs) |
-| `[[probes]]` | `path`, `status` (default 200), `contains` (text that proves the page rendered) |
+| `https` | `true` to serve the app over HTTPS with the .NET development certificate (`dotnet dev-certs https`), for apps with `RequireHttpsAttribute` |
+| `[[probes]]` | `path`, `status` (default 200), `contains` (text that proves the page rendered), `absent` (text that must not be in the response) |
+| `[forbidden."<path>"]` | Overrides for one of the paths that must not be served (`/web.config`, `/packages.config`, ...), for an app whose error handler answers 200 with its own page: `status`, `absent`, `contains` |
 | `notes` | One line for the summary; the detail goes in `NOTES.md` |
 
 ## Adding apps

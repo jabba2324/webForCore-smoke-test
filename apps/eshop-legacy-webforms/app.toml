@@ -7,8 +7,8 @@ site = "eShopLegacyWebFormsSolution/src/eShopLegacyWebForms"
 project = "eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/eShopLegacyWebForms.csproj"
 kinds = ["webforms"]
 licence = "MIT"
-status = "blocked"
-notes = "Build fails on webForCore bug F8 (HttpUtility CS0433); past it, F1 (session module) blocks every request and F9 (ItemType needs DynamicData) the home page. Postbacks work."
+status = "migrated"
+notes = "webForCore 0.2.0: passes all 14 probes with the round-1 overlay moved to the 0.2.0 packages."
 
 # The first request compiles the site, so it gets 120 s.
 [[probes]]

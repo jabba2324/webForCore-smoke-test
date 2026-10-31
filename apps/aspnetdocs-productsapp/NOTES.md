@@ -1,7 +1,7 @@
 # AspNetDocs: ProductsApp (Web API 2 tutorial): migration notes
 
-Status: blocked. Source: https://github.com/dotnet/AspNetDocs at `546ffe72`, `aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client/sample/server/ProductsApp`. Code under MIT
-(`LICENSE-CODE`; the docs are CC-BY-4.0). Split out of the `aspnetdocs-samples` entry. webForCore 0.1.0 packages.
+Status: migrated (webForCore 0.2.0, all probes pass).
+(`LICENSE-CODE`; the docs are CC-BY-4.0). Split out of the `aspnetdocs-samples` entry. webForCore 0.1.0 packages (0.2.0 from round 2).
 
 ## Assessment
 
@@ -15,6 +15,12 @@ Converter: `ProductsApp.csproj` → `.csproj.netfx`; SDK project with the `webFo
 
 **10 of 11 pass**: `GET /api/products` (JSON list), `/api/products/2`, `/api/products?category=Hardware` (action selection by query string) and `/api/products/99` (404 from `HttpResponseException`). Only the served W3C log fails ([F4](../../FINDINGS.md#f4)).
 
+### Round 2: webForCore 0.2.0
+
+All 10 probes pass on the released 0.2.0 packages (the overlay's `PackageReference`s moved from 0.1.0 to 0.2.0). The round-1 failures above were fixed in webForCore PR #16 and are kept as the record of round 1.
+
 ## Open problems
+
+Round 1 (webForCore 0.1.0); the webForCore bugs below are fixed in 0.2.0 (PR #16) and kept for the record.
 
 - [F4](../../FINDINGS.md#f4) (webForCore bug): W3C log served.

@@ -1,7 +1,7 @@
 # MiniBlog: migration notes
 
-Status: blocked (webForCore bugs F11, F12, F13). Source: https://github.com/madskristensen/MiniBlog at `7700ea7b`
-(master, 2022; still the Web Pages version). Apache-2.0. webForCore 0.1.0 packages.
+Status: migrated (webForCore 0.2.0, all probes pass).
+(master, 2022; still the Web Pages version). Apache-2.0. webForCore 0.1.0 packages (0.2.0 from round 2).
 
 ## Assessment
 
@@ -65,7 +65,13 @@ Also checked by hand:
   `TrySkipIisCustomErrors`, so IIS also passes them through with `existingResponse="Auto"` for a URL that reaches
   ASP.NET; not compared with IIS, so not counted as a finding.
 
+### Round 2: webForCore 0.2.0
+
+All 18 probes pass on the released 0.2.0 packages (the overlay's `PackageReference`s moved from 0.1.0 to 0.2.0). The round-1 failures above were fixed in webForCore PR #16 and are kept as the record of round 1.
+
 ## Open problems
+
+Round 1 (webForCore 0.1.0); the webForCore bugs below are fixed in 0.2.0 (PR #16) and kept for the record.
 
 - [F11](../../FINDINGS.md#f11) (webForCore bug): every rewrite rule dropped; fails open on `posts/*.xml`.
 - [F12](../../FINDINGS.md#f12) (webForCore bug): query-only rewrites crash.

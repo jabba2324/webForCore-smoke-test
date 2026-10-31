@@ -1,0 +1,2760 @@
+diff --git a/ReaLocate.Source/Data/ReaLocate.Data.Common/ReaLocate.Data.Common.csproj b/ReaLocate.Source/Data/ReaLocate.Data.Common/ReaLocate.Data.Common.csproj
+index 53e81b8..21a16a6 100644
+--- a/ReaLocate.Source/Data/ReaLocate.Data.Common/ReaLocate.Data.Common.csproj
++++ b/ReaLocate.Source/Data/ReaLocate.Data.Common/ReaLocate.Data.Common.csproj
+@@ -1,85 +1,28 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++<Project Sdk="Microsoft.NET.Sdk">
++  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is ReaLocate.Data.Common.csproj.netfx. -->
+   <PropertyGroup>
+-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+-    <ProjectGuid>{EDFE3C57-EF5B-4636-9ECC-D0BACA6B6379}</ProjectGuid>
+-    <OutputType>Library</OutputType>
+-    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <TargetFramework>net11.0</TargetFramework>
+     <RootNamespace>ReaLocate.Data.Common</RootNamespace>
+     <AssemblyName>ReaLocate.Data.Common</AssemblyName>
+-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+-    <FileAlignment>512</FileAlignment>
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
++    <NoWarn>$(NoWarn);NU1701</NoWarn>
+   </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+-    <DebugSymbols>true</DebugSymbols>
+-    <DebugType>full</DebugType>
+-    <Optimize>false</Optimize>
+-    <OutputPath>bin\Debug\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+-    <DebugType>pdbonly</DebugType>
+-    <Optimize>true</Optimize>
+-    <OutputPath>bin\Release\</OutputPath>
+-    <DefineConstants>TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+-  </PropertyGroup>
+-  <ItemGroup>
+-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="System" />
+-    <Reference Include="System.ComponentModel.DataAnnotations" />
+-    <Reference Include="System.Core" />
+-    <Reference Include="System.Xml.Linq" />
+-    <Reference Include="System.Data.DataSetExtensions" />
+-    <Reference Include="Microsoft.CSharp" />
+-    <Reference Include="System.Data" />
+-    <Reference Include="System.Net.Http" />
+-    <Reference Include="System.Xml" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Compile Include="DbRepository{T}.cs" />
+-    <Compile Include="EfGenericRepository.cs" />
+-    <Compile Include="IDbRepository{T}.cs" />
+-    <Compile Include="IRepository.cs" />
+-    <Compile Include="Models\BaseModel{TKey}.cs" />
+-    <Compile Include="Models\IAuditInfo.cs" />
+-    <Compile Include="Models\IDeletableEntity.cs" />
+-    <Compile Include="Properties\AssemblyInfo.cs" />
+-  </ItemGroup>
++
+   <ItemGroup>
+-    <None Include="App.config" />
+-    <None Include="packages.config" />
++    <Compile Remove="bin/**;obj/**" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
++    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.2.0" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <AdditionalFiles Include="..\..\stylecop.json">
+-      <Link>stylecop.json</Link>
+-    </AdditionalFiles>
++    <!-- The app's own libraries. -->
++    <PackageReference Include="EntityFramework" Version="6.5.1" />
++    <PackageReference Include="StyleCop.Analyzers" Version="1.0.0" />
+   </ItemGroup>
+-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+-       Other similar extension points exist, see Microsoft.Common.targets.
+-  <Target Name="BeforeBuild">
+-  </Target>
+-  <Target Name="AfterBuild">
+-  </Target>
+-  -->
+-</Project>
+\ No newline at end of file
++
++</Project>
+diff --git a/ReaLocate.Source/Data/ReaLocate.Data.Common/ReaLocate.Data.Common.csproj.netfx b/ReaLocate.Source/Data/ReaLocate.Data.Common/ReaLocate.Data.Common.csproj.netfx
+new file mode 100644
+index 0000000..53e81b8
+--- /dev/null
++++ b/ReaLocate.Source/Data/ReaLocate.Data.Common/ReaLocate.Data.Common.csproj.netfx
+@@ -0,0 +1,85 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++  <PropertyGroup>
++    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
++    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
++    <ProjectGuid>{EDFE3C57-EF5B-4636-9ECC-D0BACA6B6379}</ProjectGuid>
++    <OutputType>Library</OutputType>
++    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <RootNamespace>ReaLocate.Data.Common</RootNamespace>
++    <AssemblyName>ReaLocate.Data.Common</AssemblyName>
++    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
++    <FileAlignment>512</FileAlignment>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
++    <DebugSymbols>true</DebugSymbols>
++    <DebugType>full</DebugType>
++    <Optimize>false</Optimize>
++    <OutputPath>bin\Debug\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
++    <DebugType>pdbonly</DebugType>
++    <Optimize>true</Optimize>
++    <OutputPath>bin\Release\</OutputPath>
++    <DefineConstants>TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
++  </PropertyGroup>
++  <ItemGroup>
++    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="System" />
++    <Reference Include="System.ComponentModel.DataAnnotations" />
++    <Reference Include="System.Core" />
++    <Reference Include="System.Xml.Linq" />
++    <Reference Include="System.Data.DataSetExtensions" />
++    <Reference Include="Microsoft.CSharp" />
++    <Reference Include="System.Data" />
++    <Reference Include="System.Net.Http" />
++    <Reference Include="System.Xml" />
++  </ItemGroup>
++  <ItemGroup>
++    <Compile Include="DbRepository{T}.cs" />
++    <Compile Include="EfGenericRepository.cs" />
++    <Compile Include="IDbRepository{T}.cs" />
++    <Compile Include="IRepository.cs" />
++    <Compile Include="Models\BaseModel{TKey}.cs" />
++    <Compile Include="Models\IAuditInfo.cs" />
++    <Compile Include="Models\IDeletableEntity.cs" />
++    <Compile Include="Properties\AssemblyInfo.cs" />
++  </ItemGroup>
++  <ItemGroup>
++    <None Include="App.config" />
++    <None Include="packages.config" />
++  </ItemGroup>
++  <ItemGroup>
++    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
++    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
++    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
++  </ItemGroup>
++  <ItemGroup>
++    <AdditionalFiles Include="..\..\stylecop.json">
++      <Link>stylecop.json</Link>
++    </AdditionalFiles>
++  </ItemGroup>
++  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
++  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
++       Other similar extension points exist, see Microsoft.Common.targets.
++  <Target Name="BeforeBuild">
++  </Target>
++  <Target Name="AfterBuild">
++  </Target>
++  -->
++</Project>
+\ No newline at end of file
+diff --git a/ReaLocate.Source/Data/ReaLocate.Data.Common/packages.config b/ReaLocate.Source/Data/ReaLocate.Data.Common/packages.config
+deleted file mode 100644
+index 37a4c93..0000000
+--- a/ReaLocate.Source/Data/ReaLocate.Data.Common/packages.config
++++ /dev/null
+@@ -1,5 +0,0 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<packages>
+-  <package id="EntityFramework" version="6.1.3" targetFramework="net46" />
+-  <package id="StyleCop.Analyzers" version="1.0.0" targetFramework="net46" developmentDependency="true" />
+-</packages>
+\ No newline at end of file
+diff --git a/ReaLocate.Source/Data/ReaLocate.Data.Models/ReaLocate.Data.Models.csproj b/ReaLocate.Source/Data/ReaLocate.Data.Models/ReaLocate.Data.Models.csproj
+index eab343c..05687d8 100644
+--- a/ReaLocate.Source/Data/ReaLocate.Data.Models/ReaLocate.Data.Models.csproj
++++ b/ReaLocate.Source/Data/ReaLocate.Data.Models/ReaLocate.Data.Models.csproj
+@@ -1,105 +1,34 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++<Project Sdk="Microsoft.NET.Sdk">
++  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is ReaLocate.Data.Models.csproj.netfx. -->
+   <PropertyGroup>
+-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+-    <ProjectGuid>{048DF115-FAD9-4BD4-9BA0-D99DFD32A2B2}</ProjectGuid>
+-    <OutputType>Library</OutputType>
+-    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <TargetFramework>net11.0</TargetFramework>
+     <RootNamespace>ReaLocate.Data.Models</RootNamespace>
+     <AssemblyName>ReaLocate.Data.Models</AssemblyName>
+-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+-    <FileAlignment>512</FileAlignment>
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
++    <NoWarn>$(NoWarn);NU1701</NoWarn>
+   </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+-    <DebugSymbols>true</DebugSymbols>
+-    <DebugType>full</DebugType>
+-    <Optimize>false</Optimize>
+-    <OutputPath>bin\Debug\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+-    <DebugType>pdbonly</DebugType>
+-    <Optimize>true</Optimize>
+-    <OutputPath>bin\Release\</OutputPath>
+-    <DefineConstants>TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+-  </PropertyGroup>
+-  <ItemGroup>
+-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="System" />
+-    <Reference Include="System.ComponentModel.DataAnnotations" />
+-    <Reference Include="System.Core" />
+-    <Reference Include="System.Xml.Linq" />
+-    <Reference Include="System.Data.DataSetExtensions" />
+-    <Reference Include="Microsoft.CSharp" />
+-    <Reference Include="System.Data" />
+-    <Reference Include="System.Net.Http" />
+-    <Reference Include="System.Xml" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Compile Include="Agency.cs" />
+-    <Compile Include="Amentity.cs" />
+-    <Compile Include="Duration.cs" />
+-    <Compile Include="ExtendedUserRole.cs" />
+-    <Compile Include="Invoice.cs" />
+-    <Compile Include="OfferType.cs" />
+-    <Compile Include="PaymentDetails.cs" />
+-    <Compile Include="PaymentType.cs" />
+-    <Compile Include="Photo.cs" />
+-    <Compile Include="RealEstate.cs" />
+-    <Compile Include="RealEstateType.cs" />
+-    <Compile Include="User.cs" />
+-    <Compile Include="Properties\AssemblyInfo.cs" />
+-    <Compile Include="VisitorsDetails.cs" />
+-  </ItemGroup>
++
+   <ItemGroup>
+-    <None Include="App.config" />
+-    <None Include="packages.config" />
++    <Compile Remove="bin/**;obj/**" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <ProjectReference Include="..\ReaLocate.Data.Common\ReaLocate.Data.Common.csproj">
+-      <Project>{edfe3c57-ef5b-4636-9ecc-d0baca6b6379}</Project>
+-      <Name>ReaLocate.Data.Common</Name>
+-    </ProjectReference>
++    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.2.0" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
++    <!-- The app's own libraries. -->
++    <PackageReference Include="EntityFramework" Version="6.5.1" />
++    <PackageReference Include="StyleCop.Analyzers" Version="1.0.0" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <AdditionalFiles Include="..\..\stylecop.json">
+-      <Link>stylecop.json</Link>
+-    </AdditionalFiles>
++    <ProjectReference Include="../ReaLocate.Data.Common/ReaLocate.Data.Common.csproj" />
+   </ItemGroup>
+-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+-       Other similar extension points exist, see Microsoft.Common.targets.
+-  <Target Name="BeforeBuild">
+-  </Target>
+-  <Target Name="AfterBuild">
+-  </Target>
+-  -->
+-</Project>
+\ No newline at end of file
++
++</Project>
+diff --git a/ReaLocate.Source/Data/ReaLocate.Data.Models/ReaLocate.Data.Models.csproj.netfx b/ReaLocate.Source/Data/ReaLocate.Data.Models/ReaLocate.Data.Models.csproj.netfx
+new file mode 100644
+index 0000000..eab343c
+--- /dev/null
++++ b/ReaLocate.Source/Data/ReaLocate.Data.Models/ReaLocate.Data.Models.csproj.netfx
+@@ -0,0 +1,105 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++  <PropertyGroup>
++    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
++    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
++    <ProjectGuid>{048DF115-FAD9-4BD4-9BA0-D99DFD32A2B2}</ProjectGuid>
++    <OutputType>Library</OutputType>
++    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <RootNamespace>ReaLocate.Data.Models</RootNamespace>
++    <AssemblyName>ReaLocate.Data.Models</AssemblyName>
++    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
++    <FileAlignment>512</FileAlignment>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
++    <DebugSymbols>true</DebugSymbols>
++    <DebugType>full</DebugType>
++    <Optimize>false</Optimize>
++    <OutputPath>bin\Debug\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
++    <DebugType>pdbonly</DebugType>
++    <Optimize>true</Optimize>
++    <OutputPath>bin\Release\</OutputPath>
++    <DefineConstants>TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
++  </PropertyGroup>
++  <ItemGroup>
++    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="System" />
++    <Reference Include="System.ComponentModel.DataAnnotations" />
++    <Reference Include="System.Core" />
++    <Reference Include="System.Xml.Linq" />
++    <Reference Include="System.Data.DataSetExtensions" />
++    <Reference Include="Microsoft.CSharp" />
++    <Reference Include="System.Data" />
++    <Reference Include="System.Net.Http" />
++    <Reference Include="System.Xml" />
++  </ItemGroup>
++  <ItemGroup>
++    <Compile Include="Agency.cs" />
++    <Compile Include="Amentity.cs" />
++    <Compile Include="Duration.cs" />
++    <Compile Include="ExtendedUserRole.cs" />
++    <Compile Include="Invoice.cs" />
++    <Compile Include="OfferType.cs" />
++    <Compile Include="PaymentDetails.cs" />
++    <Compile Include="PaymentType.cs" />
++    <Compile Include="Photo.cs" />
++    <Compile Include="RealEstate.cs" />
++    <Compile Include="RealEstateType.cs" />
++    <Compile Include="User.cs" />
++    <Compile Include="Properties\AssemblyInfo.cs" />
++    <Compile Include="VisitorsDetails.cs" />
++  </ItemGroup>
++  <ItemGroup>
++    <None Include="App.config" />
++    <None Include="packages.config" />
++  </ItemGroup>
++  <ItemGroup>
++    <ProjectReference Include="..\ReaLocate.Data.Common\ReaLocate.Data.Common.csproj">
++      <Project>{edfe3c57-ef5b-4636-9ecc-d0baca6b6379}</Project>
++      <Name>ReaLocate.Data.Common</Name>
++    </ProjectReference>
++  </ItemGroup>
++  <ItemGroup>
++    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
++    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
++    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
++  </ItemGroup>
++  <ItemGroup>
++    <AdditionalFiles Include="..\..\stylecop.json">
++      <Link>stylecop.json</Link>
++    </AdditionalFiles>
++  </ItemGroup>
++  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
++  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
++       Other similar extension points exist, see Microsoft.Common.targets.
++  <Target Name="BeforeBuild">
++  </Target>
++  <Target Name="AfterBuild">
++  </Target>
++  -->
++</Project>
+\ No newline at end of file
+diff --git a/ReaLocate.Source/Data/ReaLocate.Data.Models/packages.config b/ReaLocate.Source/Data/ReaLocate.Data.Models/packages.config
+deleted file mode 100644
+index 67761f0..0000000
+--- a/ReaLocate.Source/Data/ReaLocate.Data.Models/packages.config
++++ /dev/null
+@@ -1,7 +0,0 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<packages>
+-  <package id="EntityFramework" version="6.1.0" targetFramework="net46" />
+-  <package id="Microsoft.AspNet.Identity.Core" version="2.2.1" targetFramework="net46" />
+-  <package id="Microsoft.AspNet.Identity.EntityFramework" version="2.2.1" targetFramework="net46" />
+-  <package id="StyleCop.Analyzers" version="1.0.0" targetFramework="net46" developmentDependency="true" />
+-</packages>
+\ No newline at end of file
+diff --git a/ReaLocate.Source/Data/ReaLocate.Data/ReaLocate.Data.csproj b/ReaLocate.Source/Data/ReaLocate.Data/ReaLocate.Data.csproj
+index 3b2c9d5..ad65a7a 100644
+--- a/ReaLocate.Source/Data/ReaLocate.Data/ReaLocate.Data.csproj
++++ b/ReaLocate.Source/Data/ReaLocate.Data/ReaLocate.Data.csproj
+@@ -1,98 +1,35 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++<Project Sdk="Microsoft.NET.Sdk">
++  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is ReaLocate.Data.csproj.netfx. -->
+   <PropertyGroup>
+-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+-    <ProjectGuid>{7C950CDC-9587-4B65-A204-988EFED17948}</ProjectGuid>
+-    <OutputType>Library</OutputType>
+-    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <TargetFramework>net11.0</TargetFramework>
+     <RootNamespace>ReaLocate.Data</RootNamespace>
+     <AssemblyName>ReaLocate.Data</AssemblyName>
+-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+-    <FileAlignment>512</FileAlignment>
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
++    <NoWarn>$(NoWarn);NU1701</NoWarn>
+   </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+-    <DebugSymbols>true</DebugSymbols>
+-    <DebugType>full</DebugType>
+-    <Optimize>false</Optimize>
+-    <OutputPath>bin\Debug\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+-    <DebugType>pdbonly</DebugType>
+-    <Optimize>true</Optimize>
+-    <OutputPath>bin\Release\</OutputPath>
+-    <DefineConstants>TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+-  </PropertyGroup>
+-  <ItemGroup>
+-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+-      <HintPath>..\..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="System" />
+-    <Reference Include="System.ComponentModel.DataAnnotations" />
+-    <Reference Include="System.Core" />
+-    <Reference Include="System.Xml.Linq" />
+-    <Reference Include="System.Data.DataSetExtensions" />
+-    <Reference Include="Microsoft.CSharp" />
+-    <Reference Include="System.Data" />
+-    <Reference Include="System.Net.Http" />
+-    <Reference Include="System.Xml" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Compile Include="ApplicationDbContext.cs" />
+-    <Compile Include="Migrations\Configuration.cs" />
+-    <Compile Include="Properties\AssemblyInfo.cs" />
+-  </ItemGroup>
++
+   <ItemGroup>
+-    <None Include="App.config" />
+-    <None Include="packages.config" />
++    <Compile Remove="bin/**;obj/**" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
++    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.2.0" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <AdditionalFiles Include="..\..\stylecop.json">
+-      <Link>stylecop.json</Link>
+-    </AdditionalFiles>
++    <!-- The app's own libraries. -->
++    <PackageReference Include="EntityFramework" Version="6.5.1" />
++    <PackageReference Include="StyleCop.Analyzers" Version="1.0.0" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <ProjectReference Include="..\ReaLocate.Data.Common\ReaLocate.Data.Common.csproj">
+-      <Project>{edfe3c57-ef5b-4636-9ecc-d0baca6b6379}</Project>
+-      <Name>ReaLocate.Data.Common</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\ReaLocate.Data.Models\ReaLocate.Data.Models.csproj">
+-      <Project>{048df115-fad9-4bd4-9ba0-d99dfd32a2b2}</Project>
+-      <Name>ReaLocate.Data.Models</Name>
+-    </ProjectReference>
++    <ProjectReference Include="../ReaLocate.Data.Common/ReaLocate.Data.Common.csproj" />
++    <ProjectReference Include="../ReaLocate.Data.Models/ReaLocate.Data.Models.csproj" />
+   </ItemGroup>
+-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+-       Other similar extension points exist, see Microsoft.Common.targets.
+-  <Target Name="BeforeBuild">
+-  </Target>
+-  <Target Name="AfterBuild">
+-  </Target>
+-  -->
+-</Project>
+\ No newline at end of file
++
++</Project>
+diff --git a/ReaLocate.Source/Data/ReaLocate.Data/ReaLocate.Data.csproj.netfx b/ReaLocate.Source/Data/ReaLocate.Data/ReaLocate.Data.csproj.netfx
+new file mode 100644
+index 0000000..3b2c9d5
+--- /dev/null
++++ b/ReaLocate.Source/Data/ReaLocate.Data/ReaLocate.Data.csproj.netfx
+@@ -0,0 +1,98 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++  <PropertyGroup>
++    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
++    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
++    <ProjectGuid>{7C950CDC-9587-4B65-A204-988EFED17948}</ProjectGuid>
++    <OutputType>Library</OutputType>
++    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <RootNamespace>ReaLocate.Data</RootNamespace>
++    <AssemblyName>ReaLocate.Data</AssemblyName>
++    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
++    <FileAlignment>512</FileAlignment>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
++    <DebugSymbols>true</DebugSymbols>
++    <DebugType>full</DebugType>
++    <Optimize>false</Optimize>
++    <OutputPath>bin\Debug\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
++    <DebugType>pdbonly</DebugType>
++    <Optimize>true</Optimize>
++    <OutputPath>bin\Release\</OutputPath>
++    <DefineConstants>TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
++  </PropertyGroup>
++  <ItemGroup>
++    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
++      <HintPath>..\..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="System" />
++    <Reference Include="System.ComponentModel.DataAnnotations" />
++    <Reference Include="System.Core" />
++    <Reference Include="System.Xml.Linq" />
++    <Reference Include="System.Data.DataSetExtensions" />
++    <Reference Include="Microsoft.CSharp" />
++    <Reference Include="System.Data" />
++    <Reference Include="System.Net.Http" />
++    <Reference Include="System.Xml" />
++  </ItemGroup>
++  <ItemGroup>
++    <Compile Include="ApplicationDbContext.cs" />
++    <Compile Include="Migrations\Configuration.cs" />
++    <Compile Include="Properties\AssemblyInfo.cs" />
++  </ItemGroup>
++  <ItemGroup>
++    <None Include="App.config" />
++    <None Include="packages.config" />
++  </ItemGroup>
++  <ItemGroup>
++    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
++    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
++    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
++  </ItemGroup>
++  <ItemGroup>
++    <AdditionalFiles Include="..\..\stylecop.json">
++      <Link>stylecop.json</Link>
++    </AdditionalFiles>
++  </ItemGroup>
++  <ItemGroup>
++    <ProjectReference Include="..\ReaLocate.Data.Common\ReaLocate.Data.Common.csproj">
++      <Project>{edfe3c57-ef5b-4636-9ecc-d0baca6b6379}</Project>
++      <Name>ReaLocate.Data.Common</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\ReaLocate.Data.Models\ReaLocate.Data.Models.csproj">
++      <Project>{048df115-fad9-4bd4-9ba0-d99dfd32a2b2}</Project>
++      <Name>ReaLocate.Data.Models</Name>
++    </ProjectReference>
++  </ItemGroup>
++  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
++  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
++       Other similar extension points exist, see Microsoft.Common.targets.
++  <Target Name="BeforeBuild">
++  </Target>
++  <Target Name="AfterBuild">
++  </Target>
++  -->
++</Project>
+\ No newline at end of file
+diff --git a/ReaLocate.Source/Data/ReaLocate.Data/packages.config b/ReaLocate.Source/Data/ReaLocate.Data/packages.config
+deleted file mode 100644
+index 67761f0..0000000
+--- a/ReaLocate.Source/Data/ReaLocate.Data/packages.config
++++ /dev/null
+@@ -1,7 +0,0 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<packages>
+-  <package id="EntityFramework" version="6.1.0" targetFramework="net46" />
+-  <package id="Microsoft.AspNet.Identity.Core" version="2.2.1" targetFramework="net46" />
+-  <package id="Microsoft.AspNet.Identity.EntityFramework" version="2.2.1" targetFramework="net46" />
+-  <package id="StyleCop.Analyzers" version="1.0.0" targetFramework="net46" developmentDependency="true" />
+-</packages>
+\ No newline at end of file
+diff --git a/ReaLocate.Source/Services/ReaLocate.Services.Data/ReaLocate.Services.Data.csproj b/ReaLocate.Source/Services/ReaLocate.Services.Data/ReaLocate.Services.Data.csproj
+index d0ff088..839a419 100644
+--- a/ReaLocate.Source/Services/ReaLocate.Services.Data/ReaLocate.Services.Data.csproj
++++ b/ReaLocate.Source/Services/ReaLocate.Services.Data/ReaLocate.Services.Data.csproj
+@@ -1,104 +1,34 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++<Project Sdk="Microsoft.NET.Sdk">
++  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is ReaLocate.Services.Data.csproj.netfx. -->
+   <PropertyGroup>
+-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+-    <ProjectGuid>{90FE4C4D-122A-406D-8A40-79C561FB8184}</ProjectGuid>
+-    <OutputType>Library</OutputType>
+-    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <TargetFramework>net11.0</TargetFramework>
+     <RootNamespace>ReaLocate.Services.Data</RootNamespace>
+     <AssemblyName>ReaLocate.Services.Data</AssemblyName>
+-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+-    <FileAlignment>512</FileAlignment>
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
++    <NoWarn>$(NoWarn);NU1701</NoWarn>
+   </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+-    <DebugSymbols>true</DebugSymbols>
+-    <DebugType>full</DebugType>
+-    <Optimize>false</Optimize>
+-    <OutputPath>bin\Debug\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+-    <DebugType>pdbonly</DebugType>
+-    <Optimize>true</Optimize>
+-    <OutputPath>bin\Release\</OutputPath>
+-    <DefineConstants>TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+-  </PropertyGroup>
+-  <ItemGroup>
+-    <Reference Include="System" />
+-    <Reference Include="System.ComponentModel.DataAnnotations" />
+-    <Reference Include="System.Core" />
+-    <Reference Include="System.Xml.Linq" />
+-    <Reference Include="System.Data.DataSetExtensions" />
+-    <Reference Include="Microsoft.CSharp" />
+-    <Reference Include="System.Data" />
+-    <Reference Include="System.Net.Http" />
+-    <Reference Include="System.Xml" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Compile Include="AgenciesService.cs" />
+-    <Compile Include="Contracts\IAgenciesService.cs" />
+-    <Compile Include="Contracts\IInvoicesService.cs" />
+-    <Compile Include="Contracts\IPaymentDetailsService.cs" />
+-    <Compile Include="Contracts\IPhotosService.cs" />
+-    <Compile Include="Contracts\IRealEstatesService.cs" />
+-    <Compile Include="Contracts\IUsersRolesService.cs" />
+-    <Compile Include="Contracts\IVisitorsService.cs" />
+-    <Compile Include="Contracts\IUsersService.cs" />
+-    <Compile Include="InvoicesService.cs" />
+-    <Compile Include="PaymentDetailsService.cs" />
+-    <Compile Include="PhotosService.cs" />
+-    <Compile Include="Properties\AssemblyInfo.cs" />
+-    <Compile Include="RealEstatesService.cs" />
+-    <Compile Include="UsersRolesService.cs" />
+-    <Compile Include="UsersService.cs" />
+-    <Compile Include="VisitorsService.cs" />
+-  </ItemGroup>
++
+   <ItemGroup>
+-    <None Include="App.config" />
+-    <None Include="packages.config" />
++    <Compile Remove="bin/**;obj/**" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
++    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.2.0" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <AdditionalFiles Include="..\..\stylecop.json">
+-      <Link>stylecop.json</Link>
+-    </AdditionalFiles>
++    <!-- The app's own libraries. -->
++    <PackageReference Include="StyleCop.Analyzers" Version="1.0.0" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <ProjectReference Include="..\..\Data\ReaLocate.Data.Common\ReaLocate.Data.Common.csproj">
+-      <Project>{edfe3c57-ef5b-4636-9ecc-d0baca6b6379}</Project>
+-      <Name>ReaLocate.Data.Common</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\..\Data\ReaLocate.Data.Models\ReaLocate.Data.Models.csproj">
+-      <Project>{048df115-fad9-4bd4-9ba0-d99dfd32a2b2}</Project>
+-      <Name>ReaLocate.Data.Models</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\..\Data\ReaLocate.Data\ReaLocate.Data.csproj">
+-      <Project>{7c950cdc-9587-4b65-a204-988efed17948}</Project>
+-      <Name>ReaLocate.Data</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\ReaLocate.Services.Web\ReaLocate.Services.Web.csproj">
+-      <Project>{deab17a2-58c1-448c-8a66-d49c3af7fc6c}</Project>
+-      <Name>ReaLocate.Services.Web</Name>
+-    </ProjectReference>
++    <ProjectReference Include="../../Data/ReaLocate.Data.Common/ReaLocate.Data.Common.csproj" />
++    <ProjectReference Include="../../Data/ReaLocate.Data.Models/ReaLocate.Data.Models.csproj" />
++    <ProjectReference Include="../../Data/ReaLocate.Data/ReaLocate.Data.csproj" />
++    <ProjectReference Include="../ReaLocate.Services.Web/ReaLocate.Services.Web.csproj" />
+   </ItemGroup>
+-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+-       Other similar extension points exist, see Microsoft.Common.targets.
+-  <Target Name="BeforeBuild">
+-  </Target>
+-  <Target Name="AfterBuild">
+-  </Target>
+-  -->
+-</Project>
+\ No newline at end of file
++
++</Project>
+diff --git a/ReaLocate.Source/Services/ReaLocate.Services.Data/ReaLocate.Services.Data.csproj.netfx b/ReaLocate.Source/Services/ReaLocate.Services.Data/ReaLocate.Services.Data.csproj.netfx
+new file mode 100644
+index 0000000..d0ff088
+--- /dev/null
++++ b/ReaLocate.Source/Services/ReaLocate.Services.Data/ReaLocate.Services.Data.csproj.netfx
+@@ -0,0 +1,104 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++  <PropertyGroup>
++    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
++    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
++    <ProjectGuid>{90FE4C4D-122A-406D-8A40-79C561FB8184}</ProjectGuid>
++    <OutputType>Library</OutputType>
++    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <RootNamespace>ReaLocate.Services.Data</RootNamespace>
++    <AssemblyName>ReaLocate.Services.Data</AssemblyName>
++    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
++    <FileAlignment>512</FileAlignment>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
++    <DebugSymbols>true</DebugSymbols>
++    <DebugType>full</DebugType>
++    <Optimize>false</Optimize>
++    <OutputPath>bin\Debug\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
++    <DebugType>pdbonly</DebugType>
++    <Optimize>true</Optimize>
++    <OutputPath>bin\Release\</OutputPath>
++    <DefineConstants>TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
++  </PropertyGroup>
++  <ItemGroup>
++    <Reference Include="System" />
++    <Reference Include="System.ComponentModel.DataAnnotations" />
++    <Reference Include="System.Core" />
++    <Reference Include="System.Xml.Linq" />
++    <Reference Include="System.Data.DataSetExtensions" />
++    <Reference Include="Microsoft.CSharp" />
++    <Reference Include="System.Data" />
++    <Reference Include="System.Net.Http" />
++    <Reference Include="System.Xml" />
++  </ItemGroup>
++  <ItemGroup>
++    <Compile Include="AgenciesService.cs" />
++    <Compile Include="Contracts\IAgenciesService.cs" />
++    <Compile Include="Contracts\IInvoicesService.cs" />
++    <Compile Include="Contracts\IPaymentDetailsService.cs" />
++    <Compile Include="Contracts\IPhotosService.cs" />
++    <Compile Include="Contracts\IRealEstatesService.cs" />
++    <Compile Include="Contracts\IUsersRolesService.cs" />
++    <Compile Include="Contracts\IVisitorsService.cs" />
++    <Compile Include="Contracts\IUsersService.cs" />
++    <Compile Include="InvoicesService.cs" />
++    <Compile Include="PaymentDetailsService.cs" />
++    <Compile Include="PhotosService.cs" />
++    <Compile Include="Properties\AssemblyInfo.cs" />
++    <Compile Include="RealEstatesService.cs" />
++    <Compile Include="UsersRolesService.cs" />
++    <Compile Include="UsersService.cs" />
++    <Compile Include="VisitorsService.cs" />
++  </ItemGroup>
++  <ItemGroup>
++    <None Include="App.config" />
++    <None Include="packages.config" />
++  </ItemGroup>
++  <ItemGroup>
++    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
++    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
++    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
++  </ItemGroup>
++  <ItemGroup>
++    <AdditionalFiles Include="..\..\stylecop.json">
++      <Link>stylecop.json</Link>
++    </AdditionalFiles>
++  </ItemGroup>
++  <ItemGroup>
++    <ProjectReference Include="..\..\Data\ReaLocate.Data.Common\ReaLocate.Data.Common.csproj">
++      <Project>{edfe3c57-ef5b-4636-9ecc-d0baca6b6379}</Project>
++      <Name>ReaLocate.Data.Common</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\..\Data\ReaLocate.Data.Models\ReaLocate.Data.Models.csproj">
++      <Project>{048df115-fad9-4bd4-9ba0-d99dfd32a2b2}</Project>
++      <Name>ReaLocate.Data.Models</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\..\Data\ReaLocate.Data\ReaLocate.Data.csproj">
++      <Project>{7c950cdc-9587-4b65-a204-988efed17948}</Project>
++      <Name>ReaLocate.Data</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\ReaLocate.Services.Web\ReaLocate.Services.Web.csproj">
++      <Project>{deab17a2-58c1-448c-8a66-d49c3af7fc6c}</Project>
++      <Name>ReaLocate.Services.Web</Name>
++    </ProjectReference>
++  </ItemGroup>
++  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
++  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
++       Other similar extension points exist, see Microsoft.Common.targets.
++  <Target Name="BeforeBuild">
++  </Target>
++  <Target Name="AfterBuild">
++  </Target>
++  -->
++</Project>
+\ No newline at end of file
+diff --git a/ReaLocate.Source/Services/ReaLocate.Services.Data/packages.config b/ReaLocate.Source/Services/ReaLocate.Services.Data/packages.config
+deleted file mode 100644
+index e0c6eb9..0000000
+--- a/ReaLocate.Source/Services/ReaLocate.Services.Data/packages.config
++++ /dev/null
+@@ -1,4 +0,0 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<packages>
+-  <package id="StyleCop.Analyzers" version="1.0.0" targetFramework="net46" developmentDependency="true" />
+-</packages>
+\ No newline at end of file
+diff --git a/ReaLocate.Source/Services/ReaLocate.Services.Web/ReaLocate.Services.Web.csproj b/ReaLocate.Source/Services/ReaLocate.Services.Web/ReaLocate.Services.Web.csproj
+index 01799dc..95e7fe3 100644
+--- a/ReaLocate.Source/Services/ReaLocate.Services.Web/ReaLocate.Services.Web.csproj
++++ b/ReaLocate.Source/Services/ReaLocate.Services.Web/ReaLocate.Services.Web.csproj
+@@ -1,73 +1,27 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++<Project Sdk="Microsoft.NET.Sdk">
++  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is ReaLocate.Services.Web.csproj.netfx. -->
+   <PropertyGroup>
+-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+-    <ProjectGuid>{DEAB17A2-58C1-448C-8A66-D49C3AF7FC6C}</ProjectGuid>
+-    <OutputType>Library</OutputType>
+-    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <TargetFramework>net11.0</TargetFramework>
+     <RootNamespace>ReaLocate.Services.Web</RootNamespace>
+     <AssemblyName>ReaLocate.Services.Web</AssemblyName>
+-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+-    <FileAlignment>512</FileAlignment>
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
++    <NoWarn>$(NoWarn);NU1701</NoWarn>
+   </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+-    <DebugSymbols>true</DebugSymbols>
+-    <DebugType>full</DebugType>
+-    <Optimize>false</Optimize>
+-    <OutputPath>bin\Debug\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+-    <DebugType>pdbonly</DebugType>
+-    <Optimize>true</Optimize>
+-    <OutputPath>bin\Release\</OutputPath>
+-    <DefineConstants>TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+-  </PropertyGroup>
+-  <ItemGroup>
+-    <Reference Include="System" />
+-    <Reference Include="System.Core" />
+-    <Reference Include="System.Web" />
+-    <Reference Include="System.Xml.Linq" />
+-    <Reference Include="System.Data.DataSetExtensions" />
+-    <Reference Include="Microsoft.CSharp" />
+-    <Reference Include="System.Data" />
+-    <Reference Include="System.Net.Http" />
+-    <Reference Include="System.Xml" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Compile Include="HttpCacheService.cs" />
+-    <Compile Include="ICacheService.cs" />
+-    <Compile Include="IdentifierProvider.cs" />
+-    <Compile Include="IIdentifierProvider.cs" />
+-    <Compile Include="Properties\AssemblyInfo.cs" />
+-  </ItemGroup>
++
+   <ItemGroup>
+-    <None Include="packages.config" />
++    <Compile Remove="bin/**;obj/**" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
++    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.2.0" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <AdditionalFiles Include="..\..\stylecop.json">
+-      <Link>stylecop.json</Link>
+-    </AdditionalFiles>
++    <!-- The app's own libraries. -->
++    <PackageReference Include="StyleCop.Analyzers" Version="1.0.0" />
+   </ItemGroup>
+-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+-       Other similar extension points exist, see Microsoft.Common.targets.
+-  <Target Name="BeforeBuild">
+-  </Target>
+-  <Target Name="AfterBuild">
+-  </Target>
+-  -->
+-</Project>
+\ No newline at end of file
++
++</Project>
+diff --git a/ReaLocate.Source/Services/ReaLocate.Services.Web/ReaLocate.Services.Web.csproj.netfx b/ReaLocate.Source/Services/ReaLocate.Services.Web/ReaLocate.Services.Web.csproj.netfx
+new file mode 100644
+index 0000000..01799dc
+--- /dev/null
++++ b/ReaLocate.Source/Services/ReaLocate.Services.Web/ReaLocate.Services.Web.csproj.netfx
+@@ -0,0 +1,73 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++  <PropertyGroup>
++    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
++    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
++    <ProjectGuid>{DEAB17A2-58C1-448C-8A66-D49C3AF7FC6C}</ProjectGuid>
++    <OutputType>Library</OutputType>
++    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <RootNamespace>ReaLocate.Services.Web</RootNamespace>
++    <AssemblyName>ReaLocate.Services.Web</AssemblyName>
++    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
++    <FileAlignment>512</FileAlignment>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
++    <DebugSymbols>true</DebugSymbols>
++    <DebugType>full</DebugType>
++    <Optimize>false</Optimize>
++    <OutputPath>bin\Debug\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
++    <DebugType>pdbonly</DebugType>
++    <Optimize>true</Optimize>
++    <OutputPath>bin\Release\</OutputPath>
++    <DefineConstants>TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
++  </PropertyGroup>
++  <ItemGroup>
++    <Reference Include="System" />
++    <Reference Include="System.Core" />
++    <Reference Include="System.Web" />
++    <Reference Include="System.Xml.Linq" />
++    <Reference Include="System.Data.DataSetExtensions" />
++    <Reference Include="Microsoft.CSharp" />
++    <Reference Include="System.Data" />
++    <Reference Include="System.Net.Http" />
++    <Reference Include="System.Xml" />
++  </ItemGroup>
++  <ItemGroup>
++    <Compile Include="HttpCacheService.cs" />
++    <Compile Include="ICacheService.cs" />
++    <Compile Include="IdentifierProvider.cs" />
++    <Compile Include="IIdentifierProvider.cs" />
++    <Compile Include="Properties\AssemblyInfo.cs" />
++  </ItemGroup>
++  <ItemGroup>
++    <None Include="packages.config" />
++  </ItemGroup>
++  <ItemGroup>
++    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
++    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
++    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
++  </ItemGroup>
++  <ItemGroup>
++    <AdditionalFiles Include="..\..\stylecop.json">
++      <Link>stylecop.json</Link>
++    </AdditionalFiles>
++  </ItemGroup>
++  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
++  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
++       Other similar extension points exist, see Microsoft.Common.targets.
++  <Target Name="BeforeBuild">
++  </Target>
++  <Target Name="AfterBuild">
++  </Target>
++  -->
++</Project>
+\ No newline at end of file
+diff --git a/ReaLocate.Source/Services/ReaLocate.Services.Web/packages.config b/ReaLocate.Source/Services/ReaLocate.Services.Web/packages.config
+deleted file mode 100644
+index e0c6eb9..0000000
+--- a/ReaLocate.Source/Services/ReaLocate.Services.Web/packages.config
++++ /dev/null
+@@ -1,4 +0,0 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<packages>
+-  <package id="StyleCop.Analyzers" version="1.0.0" targetFramework="net46" developmentDependency="true" />
+-</packages>
+\ No newline at end of file
+diff --git a/ReaLocate.Source/Web/ReaLocate.Web.Infrastructure/Mapping/AutoMapperConfig.cs b/ReaLocate.Source/Web/ReaLocate.Web.Infrastructure/Mapping/AutoMapperConfig.cs
+index 1d9c865..28571ea 100644
+--- a/ReaLocate.Source/Web/ReaLocate.Web.Infrastructure/Mapping/AutoMapperConfig.cs
++++ b/ReaLocate.Source/Web/ReaLocate.Web.Infrastructure/Mapping/AutoMapperConfig.cs
+@@ -23,7 +23,7 @@
+                 });
+         }
+ 
+-        private static void LoadStandardMappings(IEnumerable<Type> types, IMapperConfiguration mapperConfiguration)
++        private static void LoadStandardMappings(IEnumerable<Type> types, IMapperConfigurationExpression mapperConfiguration)
+         {
+             var maps = (from t in types
+                         from i in t.GetInterfaces()
+@@ -42,7 +42,7 @@
+             }
+         }
+ 
+-        private static void LoadReverseMappings(IEnumerable<Type> types, IMapperConfiguration mapperConfiguration)
++        private static void LoadReverseMappings(IEnumerable<Type> types, IMapperConfigurationExpression mapperConfiguration)
+         {
+             var maps = (from t in types
+                         from i in t.GetInterfaces()
+@@ -61,7 +61,7 @@
+             }
+         }
+ 
+-        private static void LoadCustomMappings(IEnumerable<Type> types, IMapperConfiguration mapperConfiguration)
++        private static void LoadCustomMappings(IEnumerable<Type> types, IMapperConfigurationExpression mapperConfiguration)
+         {
+             var maps = (from t in types
+                         from i in t.GetInterfaces()
+diff --git a/ReaLocate.Source/Web/ReaLocate.Web.Infrastructure/Mapping/IHaveCustomMappings.cs b/ReaLocate.Source/Web/ReaLocate.Web.Infrastructure/Mapping/IHaveCustomMappings.cs
+index 94c3c40..68f152c 100644
+--- a/ReaLocate.Source/Web/ReaLocate.Web.Infrastructure/Mapping/IHaveCustomMappings.cs
++++ b/ReaLocate.Source/Web/ReaLocate.Web.Infrastructure/Mapping/IHaveCustomMappings.cs
+@@ -4,6 +4,6 @@
+ 
+     public interface IHaveCustomMappings
+     {
+-        void CreateMappings(IMapperConfiguration configuration);
++        void CreateMappings(IMapperConfigurationExpression configuration);
+     }
+ }
+diff --git a/ReaLocate.Source/Web/ReaLocate.Web.Infrastructure/ReaLocate.Web.Infrastructure.csproj b/ReaLocate.Source/Web/ReaLocate.Web.Infrastructure/ReaLocate.Web.Infrastructure.csproj
+index 04a33c3..e7265e9 100644
+--- a/ReaLocate.Source/Web/ReaLocate.Web.Infrastructure/ReaLocate.Web.Infrastructure.csproj
++++ b/ReaLocate.Source/Web/ReaLocate.Web.Infrastructure/ReaLocate.Web.Infrastructure.csproj
+@@ -1,77 +1,28 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++<Project Sdk="Microsoft.NET.Sdk">
++  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is ReaLocate.Web.Infrastructure.csproj.netfx. -->
+   <PropertyGroup>
+-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+-    <ProjectGuid>{6813DC53-5EEE-4507-8604-5301EE51A0D3}</ProjectGuid>
+-    <OutputType>Library</OutputType>
+-    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <TargetFramework>net11.0</TargetFramework>
+     <RootNamespace>ReaLocate.Web.Infrastructure</RootNamespace>
+     <AssemblyName>ReaLocate.Web.Infrastructure</AssemblyName>
+-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+-    <FileAlignment>512</FileAlignment>
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
++    <NoWarn>$(NoWarn);NU1701</NoWarn>
+   </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+-    <DebugSymbols>true</DebugSymbols>
+-    <DebugType>full</DebugType>
+-    <Optimize>false</Optimize>
+-    <OutputPath>bin\Debug\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+-    <DebugType>pdbonly</DebugType>
+-    <Optimize>true</Optimize>
+-    <OutputPath>bin\Release\</OutputPath>
+-    <DefineConstants>TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+-  </PropertyGroup>
+-  <ItemGroup>
+-    <Reference Include="AutoMapper, Version=4.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\AutoMapper.4.2.0\lib\net45\AutoMapper.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="System" />
+-    <Reference Include="System.Core" />
+-    <Reference Include="System.Xml.Linq" />
+-    <Reference Include="System.Data.DataSetExtensions" />
+-    <Reference Include="Microsoft.CSharp" />
+-    <Reference Include="System.Data" />
+-    <Reference Include="System.Net.Http" />
+-    <Reference Include="System.Xml" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Compile Include="Mapping\AutoMapperConfig.cs" />
+-    <Compile Include="Mapping\IHaveCustomMappings.cs" />
+-    <Compile Include="Mapping\IMapFrom{T}.cs" />
+-    <Compile Include="Mapping\IMapTo{T}.cs" />
+-    <Compile Include="Mapping\QueryableExtensions.cs" />
+-    <Compile Include="Properties\AssemblyInfo.cs" />
+-  </ItemGroup>
++
+   <ItemGroup>
+-    <None Include="packages.config" />
++    <Compile Remove="bin/**;obj/**" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
++    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.2.0" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <AdditionalFiles Include="..\..\stylecop.json">
+-      <Link>stylecop.json</Link>
+-    </AdditionalFiles>
++    <!-- The app's own libraries. -->
++    <PackageReference Include="AutoMapper" Version="12.0.1" />
++    <PackageReference Include="StyleCop.Analyzers" Version="1.0.0" />
+   </ItemGroup>
+-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+-       Other similar extension points exist, see Microsoft.Common.targets.
+-  <Target Name="BeforeBuild">
+-  </Target>
+-  <Target Name="AfterBuild">
+-  </Target>
+-  -->
+-</Project>
+\ No newline at end of file
++
++</Project>
+diff --git a/ReaLocate.Source/Web/ReaLocate.Web.Infrastructure/ReaLocate.Web.Infrastructure.csproj.netfx b/ReaLocate.Source/Web/ReaLocate.Web.Infrastructure/ReaLocate.Web.Infrastructure.csproj.netfx
+new file mode 100644
+index 0000000..04a33c3
+--- /dev/null
++++ b/ReaLocate.Source/Web/ReaLocate.Web.Infrastructure/ReaLocate.Web.Infrastructure.csproj.netfx
+@@ -0,0 +1,77 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++  <PropertyGroup>
++    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
++    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
++    <ProjectGuid>{6813DC53-5EEE-4507-8604-5301EE51A0D3}</ProjectGuid>
++    <OutputType>Library</OutputType>
++    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <RootNamespace>ReaLocate.Web.Infrastructure</RootNamespace>
++    <AssemblyName>ReaLocate.Web.Infrastructure</AssemblyName>
++    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
++    <FileAlignment>512</FileAlignment>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
++    <DebugSymbols>true</DebugSymbols>
++    <DebugType>full</DebugType>
++    <Optimize>false</Optimize>
++    <OutputPath>bin\Debug\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
++    <DebugType>pdbonly</DebugType>
++    <Optimize>true</Optimize>
++    <OutputPath>bin\Release\</OutputPath>
++    <DefineConstants>TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
++  </PropertyGroup>
++  <ItemGroup>
++    <Reference Include="AutoMapper, Version=4.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\AutoMapper.4.2.0\lib\net45\AutoMapper.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="System" />
++    <Reference Include="System.Core" />
++    <Reference Include="System.Xml.Linq" />
++    <Reference Include="System.Data.DataSetExtensions" />
++    <Reference Include="Microsoft.CSharp" />
++    <Reference Include="System.Data" />
++    <Reference Include="System.Net.Http" />
++    <Reference Include="System.Xml" />
++  </ItemGroup>
++  <ItemGroup>
++    <Compile Include="Mapping\AutoMapperConfig.cs" />
++    <Compile Include="Mapping\IHaveCustomMappings.cs" />
++    <Compile Include="Mapping\IMapFrom{T}.cs" />
++    <Compile Include="Mapping\IMapTo{T}.cs" />
++    <Compile Include="Mapping\QueryableExtensions.cs" />
++    <Compile Include="Properties\AssemblyInfo.cs" />
++  </ItemGroup>
++  <ItemGroup>
++    <None Include="packages.config" />
++  </ItemGroup>
++  <ItemGroup>
++    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
++    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
++    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
++  </ItemGroup>
++  <ItemGroup>
++    <AdditionalFiles Include="..\..\stylecop.json">
++      <Link>stylecop.json</Link>
++    </AdditionalFiles>
++  </ItemGroup>
++  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
++  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
++       Other similar extension points exist, see Microsoft.Common.targets.
++  <Target Name="BeforeBuild">
++  </Target>
++  <Target Name="AfterBuild">
++  </Target>
++  -->
++</Project>
+\ No newline at end of file
+diff --git a/ReaLocate.Source/Web/ReaLocate.Web.Infrastructure/packages.config b/ReaLocate.Source/Web/ReaLocate.Web.Infrastructure/packages.config
+deleted file mode 100644
+index f097cfb..0000000
+--- a/ReaLocate.Source/Web/ReaLocate.Web.Infrastructure/packages.config
++++ /dev/null
+@@ -1,5 +0,0 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<packages>
+-  <package id="AutoMapper" version="4.2.0" targetFramework="net46" />
+-  <package id="StyleCop.Analyzers" version="1.0.0" targetFramework="net46" developmentDependency="true" />
+-</packages>
+\ No newline at end of file
+diff --git a/ReaLocate.Source/Web/ReaLocate.Web/Program.cs b/ReaLocate.Source/Web/ReaLocate.Web/Program.cs
+new file mode 100644
+index 0000000..63f7251
+--- /dev/null
++++ b/ReaLocate.Source/Web/ReaLocate.Web/Program.cs
+@@ -0,0 +1,21 @@
++using Microsoft.AspNetCore.Builder;
++using Microsoft.Extensions.DependencyInjection;
++using WebFormsForCore.Hosting.IIS;
++
++namespace ReaLocate.Web
++{
++    // webForCore host (docs/MIGRATING.md section 4).
++    public class Program
++    {
++        public static void Main(string[] args)
++        {
++            var builder = WebApplication.CreateBuilder(args);
++            builder.Services.AddWebForms();
++
++            var app = builder.Build();
++            app.UseWebForms(o => o
++                .HandleAllRequestsWithWebForms());
++            app.Run();
++        }
++    }
++}
+diff --git a/ReaLocate.Source/Web/ReaLocate.Web/ReaLocate.Web.csproj b/ReaLocate.Source/Web/ReaLocate.Web/ReaLocate.Web.csproj
+index 32ba153..b9be30f 100644
+--- a/ReaLocate.Source/Web/ReaLocate.Web/ReaLocate.Web.csproj
++++ b/ReaLocate.Source/Web/ReaLocate.Web/ReaLocate.Web.csproj
+@@ -1,571 +1,84 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+-  <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+-  <Import Project="..\..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props')" />
+-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++<Project Sdk="Microsoft.NET.Sdk.Web">
++  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is ReaLocate.Web.csproj.netfx. -->
+   <PropertyGroup>
+-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+-    <ProductVersion>
+-    </ProductVersion>
+-    <SchemaVersion>2.0</SchemaVersion>
+-    <ProjectGuid>{67CC40FF-4933-4F83-810E-357E6BC8B973}</ProjectGuid>
+-    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+-    <OutputType>Library</OutputType>
+-    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <TargetFramework>net11.0</TargetFramework>
++    <OutputType>Exe</OutputType>
+     <RootNamespace>ReaLocate.Web</RootNamespace>
+     <AssemblyName>ReaLocate.Web</AssemblyName>
+-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+-    <MvcBuildViews>false</MvcBuildViews>
+-    <UseIISExpress>true</UseIISExpress>
+-    <IISExpressSSLPort />
+-    <IISExpressAnonymousAuthentication />
+-    <IISExpressWindowsAuthentication />
+-    <IISExpressUseClassicPipelineMode />
+-    <UseGlobalApplicationHostFile />
+-    <NuGetPackageImportStamp>
+-    </NuGetPackageImportStamp>
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
++    <OutputPath>bin_dotnet</OutputPath>
++    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
++    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
++    <GenerateDependencyFile>true</GenerateDependencyFile>
++    <NoWarn>$(NoWarn);NU1701</NoWarn>
++    <PredefinedCulturesOnly>true</PredefinedCulturesOnly>
++    <EnableDefaultRazorGenerateItems>false</EnableDefaultRazorGenerateItems>
++    <RazorCompileOnBuild>false</RazorCompileOnBuild>
++    <RazorCompileOnPublish>false</RazorCompileOnPublish>
+   </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+-    <DebugSymbols>true</DebugSymbols>
+-    <DebugType>full</DebugType>
+-    <Optimize>false</Optimize>
+-    <OutputPath>bin\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+-    <DebugType>pdbonly</DebugType>
+-    <Optimize>true</Optimize>
+-    <OutputPath>bin\</OutputPath>
+-    <DefineConstants>TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
+-  </PropertyGroup>
+-  <ItemGroup>
+-    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="Autofac, Version=3.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Autofac.3.4.0\lib\net40\Autofac.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="Autofac.Integration.Mvc, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Autofac.Mvc5.3.3.4\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="AutoMapper, Version=4.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\AutoMapper.4.2.0\lib\net45\AutoMapper.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="Geocoding, Version=3.3.0.0, Culture=neutral, PublicKeyToken=7c714700b88674c7, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Geocoding.net.3.3.0\lib\net40\Geocoding.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="Glimpse.Ado, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Glimpse.Ado.1.7.3\lib\net45\Glimpse.Ado.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="Glimpse.AspNet, Version=1.9.2.0, Culture=neutral, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Glimpse.AspNet.1.9.2\lib\net45\Glimpse.AspNet.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="Glimpse.Core, Version=1.8.6.0, Culture=neutral, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Glimpse.1.8.6\lib\net45\Glimpse.Core.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="Glimpse.EF6, Version=1.6.5.0, Culture=neutral, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Glimpse.EF6.1.6.5\lib\net45\Glimpse.EF6.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="Glimpse.Mvc5, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Glimpse.Mvc5.1.5.3\lib\net45\Glimpse.Mvc5.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="Kendo.Mvc, Version=2016.1.112.545, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+-      <SpecificVersion>False</SpecificVersion>
+-      <HintPath>External Libraries\Kendo.Mvc.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="Microsoft.CSharp" />
+-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Rotativa.1.6.4\lib\net40\Rotativa.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="System" />
+-    <Reference Include="System.Data" />
+-    <Reference Include="System.Drawing" />
+-    <Reference Include="System.Web.DynamicData" />
+-    <Reference Include="System.Web.Entity" />
+-    <Reference Include="System.Web.ApplicationServices" />
+-    <Reference Include="System.ComponentModel.DataAnnotations" />
+-    <Reference Include="System.Core" />
+-    <Reference Include="System.Data.DataSetExtensions" />
+-    <Reference Include="System.Xml.Linq" />
+-    <Reference Include="System.Web" />
+-    <Reference Include="System.Web.Extensions" />
+-    <Reference Include="System.Web.Abstractions" />
+-    <Reference Include="System.Web.Routing" />
+-    <Reference Include="System.Xml" />
+-    <Reference Include="System.Configuration" />
+-    <Reference Include="System.Web.Services" />
+-    <Reference Include="System.EnterpriseServices" />
+-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Net.Http">
+-    </Reference>
+-    <Reference Include="System.Net.Http.WebRequest">
+-    </Reference>
+-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.Optimization">
+-      <HintPath>..\..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+-    </Reference>
+-    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+-      <Private>True</Private>
+-    </Reference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Reference Include="EntityFramework">
+-      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+-    </Reference>
+-    <Reference Include="EntityFramework.SqlServer">
+-      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.AspNet.Identity.Core">
+-      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.AspNet.Identity.Owin">
+-      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+-      <HintPath>..\..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Owin">
+-      <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.Owin">
+-      <HintPath>..\..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+-      <HintPath>..\..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.Owin.Security">
+-      <HintPath>..\..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.Owin.Security.Facebook">
+-      <HintPath>..\..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.Owin.Security.Cookies">
+-      <HintPath>..\..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.Owin.Security.OAuth">
+-      <HintPath>..\..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+-    </Reference>
+-  </ItemGroup>
++
+   <ItemGroup>
+-    <Compile Include="App_Start\ApplicationSignInManager.cs" />
+-    <Compile Include="App_Start\ApplicationUserManager.cs" />
+-    <Compile Include="App_Start\AutofacConfig.cs" />
+-    <Compile Include="App_Start\BundleConfig.cs" />
+-    <Compile Include="App_Start\EmailService.cs" />
+-    <Compile Include="App_Start\FilterConfig.cs" />
+-    <Compile Include="App_Start\RouteConfig.cs" />
+-    <Compile Include="App_Start\SmsService.cs" />
+-    <Compile Include="App_Start\Startup.Auth.cs" />
+-    <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
+-    <Compile Include="Areas\Administration\Controllers\AdminController.cs" />
+-    <Compile Include="Areas\Administration\Controllers\AgenciesAdminController.cs" />
+-    <Compile Include="Areas\Administration\Controllers\InvoicesAdminController.cs" />
+-    <Compile Include="Areas\Administration\Controllers\RealEstateAdminController.cs" />
+-    <Compile Include="Areas\Administration\Controllers\UsersController.cs" />
+-    <Compile Include="Areas\Administration\ViewModels\AdminRealEstateViewModel.cs" />
+-    <Compile Include="Areas\Administration\ViewModels\AgencyAdminPanelViewModel.cs" />
+-    <Compile Include="Areas\Administration\ViewModels\InvoiceAdminPanelViewModel.cs" />
+-    <Compile Include="Areas\Administration\ViewModels\UserAdminInputViewModel.cs" />
+-    <Compile Include="Areas\Administration\ViewModels\UserAdminPanelViewModel.cs" />
+-    <Compile Include="Areas\AgencyAdministration\AgencyAdministrationAreaRegistration.cs" />
+-    <Compile Include="Areas\AgencyAdministration\Controllers\MyAgencyAdminController.cs" />
+-    <Compile Include="Areas\AgencyAdministration\Controllers\MyAgencyInvoicesController.cs" />
+-    <Compile Include="Areas\AgencyAdministration\Controllers\RealEstatesOffersController.cs" />
+-    <Compile Include="Areas\AgencyAdministration\ViewModels\AdminRealEstateViewModel.cs" />
+-    <Compile Include="Controllers\AccountController.cs" />
+-    <Compile Include="Controllers\AgenciesController.cs" />
+-    <Compile Include="Controllers\AgencyRealEstatesController.cs" />
+-    <Compile Include="Controllers\BaseController.cs" />
+-    <Compile Include="Controllers\ErrorController.cs" />
+-    <Compile Include="Controllers\InviteBrokersController.cs" />
+-    <Compile Include="Controllers\InvoicesController.cs" />
+-    <Compile Include="Helpers\IRealEstateCreateUtil.cs" />
+-    <Compile Include="ViewModels\Agency\AgencyAsInvoiceRecepientViewModel.cs" />
+-    <Compile Include="ViewModels\Invoice\AgencyInvoiceViewModel.cs" />
+-    <Compile Include="ViewModels\Broker\BrokerInputViewModel.cs" />
+-    <Compile Include="ViewModels\Broker\BrokerViewModel.cs" />
+-    <Compile Include="ViewModels\RealEstate\SearchedRealEstateViewModel.cs" />
+-    <Compile Include="ViewModels\Invoice\UserAsInvoiceRecepientViewModel.cs" />
+-    <Compile Include="ViewModels\Invoice\UserInvoiceViewModel.cs" />
+-    <Compile Include="ViewModels\Invoice\InvoiceByUserViewModel.cs" />
+-    <Compile Include="Helpers\RealEstateCreateUtil.cs" />
+-    <Compile Include="Hubs\ChatHub.cs" />
+-    <Compile Include="ViewModels\Home\CoordinateViewModel.cs" />
+-    <Compile Include="ViewModels\Agency\CreateAgencyViewModel.cs" />
+-    <Compile Include="Controllers\HomeController.cs" />
+-    <Compile Include="Controllers\ManageController.cs" />
+-    <Compile Include="App_Start\GlimpseSecurityPolicy.cs" />
+-    <Compile Include="Controllers\RealEstatesController.cs" />
+-    <Compile Include="ViewModels\Agency\DetailsAgencyViewModel.cs" />
+-    <Compile Include="ViewModels\Home\IndexMapAndGridViewModel.cs" />
+-    <Compile Include="ViewModels\Invoice\PaymentDetailsViewModel.cs" />
+-    <Compile Include="ViewModels\Visitor\VisitorDetailsViewModel.cs" />
+-    <Compile Include="Controllers\VisitorsController.cs" />
+-    <Compile Include="Filters\MaxFileSizeAttribute.cs" />
+-    <Compile Include="ViewModels\RealEstate\CreateRealEstateViewModel.cs" />
+-    <Compile Include="Global.asax.cs">
+-      <DependentUpon>Global.asax</DependentUpon>
+-    </Compile>
+-    <Compile Include="ViewModels\Account\ExternalLoginConfirmationViewModel.cs" />
+-    <Compile Include="ViewModels\Account\ForgotPasswordViewModel.cs" />
+-    <Compile Include="ViewModels\Account\ExternalLoginListViewModel.cs" />
+-    <Compile Include="ViewModels\Account\ForgotViewModel.cs" />
+-    <Compile Include="ViewModels\Account\LoginViewModel.cs" />
+-    <Compile Include="ViewModels\Account\RegisterViewModel.cs" />
+-    <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
+-    <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
+-    <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
+-    <Compile Include="ViewModels\RealEstate\DetailsRealEstateViewModel.cs" />
+-    <Compile Include="ViewModels\Home\IndexViewModel.cs" />
+-    <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
+-    <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
+-    <Compile Include="ViewModels\Manage\FactorViewModel.cs" />
+-    <Compile Include="ViewModels\Manage\IndexViewModel.cs" />
+-    <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
+-    <Compile Include="ViewModels\Manage\ConfigureTwoFactorViewModel.cs" />
+-    <Compile Include="Properties\AssemblyInfo.cs" />
+-    <Compile Include="Startup.cs" />
+-    <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
+-    <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
+-    <Compile Include="ViewModels\Visitor\VisitorViewModel.cs" />
++    <Compile Remove="App_Code/**;bin_dotnet/**;obj/**" />
++    <Compile Remove="App_Start/GlimpseSecurityPolicy.cs" />
++    <Content Remove="bin_dotnet/**" />
++    <None Remove="bin_dotnet/**" />
++    <Compile Remove="Filters/ValidateFileAttribute.cs" />
++    <Compile Remove="ViewModels/CreatePhotoViewModel.cs" />
++    <Compile Remove="ViewModels/CreateRealEstateAndPhotoViewModel.cs" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <Content Include="Content\bootstrap-theme.css" />
+-    <Content Include="Content\bootstrap-theme.min.css" />
+-    <Content Include="Content\bootstrap.css" />
+-    <Content Include="Content\bootstrap.min.css" />
+-    <Content Include="Content\KendoUI\Default\editor.png" />
+-    <Content Include="Content\KendoUI\Default\imagebrowser.png" />
+-    <Content Include="Content\KendoUI\Default\indeterminate.gif" />
+-    <Content Include="Content\KendoUI\Default\loading-image.gif" />
+-    <Content Include="Content\KendoUI\Default\loading.gif" />
+-    <Content Include="Content\KendoUI\Default\loading_2x.gif" />
+-    <Content Include="Content\KendoUI\Default\markers.png" />
+-    <Content Include="Content\KendoUI\Default\markers_2x.png" />
+-    <Content Include="Content\KendoUI\Default\slider-h.gif" />
+-    <Content Include="Content\KendoUI\Default\slider-v.gif" />
+-    <Content Include="Content\KendoUI\Default\sprite.png" />
+-    <Content Include="Content\KendoUI\Default\sprite_2x.png" />
+-    <Content Include="Content\KendoUI\Default\sprite_kpi.png" />
+-    <Content Include="Content\KendoUI\Default\sprite_kpi_2x.png" />
+-    <Content Include="Content\KendoUI\fonts\DejaVu\LICENSE.txt" />
+-    <Content Include="Content\KendoUI\fonts\glyphs\KendoUIGlyphs.svg" />
+-    <Content Include="Content\KendoUI\images\back.png" />
+-    <Content Include="Content\KendoUI\images\kendoui.svg" />
+-    <Content Include="Content\KendoUI\images\wp8_icons.png" />
+-    <Content Include="Content\KendoUI\images\wp8_inverseicons.png" />
+-    <Content Include="Content\KendoUI\kendo.common.min.css" />
+-    <Content Include="Content\KendoUI\kendo.default.min.css" />
+-    <Content Include="Content\KendoUI\textures\brushed-metal.png" />
+-    <Content Include="Content\KendoUI\textures\dots1.png" />
+-    <Content Include="Content\KendoUI\textures\dots10.png" />
+-    <Content Include="Content\KendoUI\textures\dots11.png" />
+-    <Content Include="Content\KendoUI\textures\dots12.png" />
+-    <Content Include="Content\KendoUI\textures\dots13.png" />
+-    <Content Include="Content\KendoUI\textures\dots2.png" />
+-    <Content Include="Content\KendoUI\textures\dots3.png" />
+-    <Content Include="Content\KendoUI\textures\dots4.png" />
+-    <Content Include="Content\KendoUI\textures\dots5.png" />
+-    <Content Include="Content\KendoUI\textures\dots6.png" />
+-    <Content Include="Content\KendoUI\textures\dots7.png" />
+-    <Content Include="Content\KendoUI\textures\dots8.png" />
+-    <Content Include="Content\KendoUI\textures\dots9.png" />
+-    <Content Include="Content\KendoUI\textures\glass-lighter.png" />
+-    <Content Include="Content\KendoUI\textures\glass.png" />
+-    <Content Include="Content\KendoUI\textures\highlight.png" />
+-    <Content Include="Content\KendoUI\textures\hsv-gradient.png" />
+-    <Content Include="Content\KendoUI\textures\hue.png" />
+-    <Content Include="Content\KendoUI\textures\leather1.png" />
+-    <Content Include="Content\KendoUI\textures\leather2.png" />
+-    <Content Include="Content\KendoUI\textures\noise.png" />
+-    <Content Include="Content\KendoUI\textures\stripe1.png" />
+-    <Content Include="Content\KendoUI\textures\stripe2.png" />
+-    <Content Include="Content\KendoUI\textures\stripe3.png" />
+-    <Content Include="Content\KendoUI\textures\stripe4.png" />
+-    <Content Include="Content\KendoUI\textures\stripe5.png" />
+-    <Content Include="Content\KendoUI\textures\stripe6.png" />
+-    <Content Include="Content\KendoUI\textures\transparency.png" />
+-    <Content Include="Content\KendoUI\textures\transtexture.png" />
+-    <Content Include="External Libraries\Kendo.Mvc.dll" />
+-    <Content Include="favicon.ico" />
+-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+-    <Content Include="Global.asax" />
+-    <Content Include="Content\Site.css" />
+-    <Content Include="Rotativa\wkhtmltopdf.exe" />
+-    <Content Include="Scripts\bootstrap.js" />
+-    <Content Include="Scripts\bootstrap.min.js" />
+-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+-    <Content Include="Content\bootstrap.min.css.map" />
+-    <Content Include="Content\bootstrap.css.map" />
+-    <Content Include="Content\bootstrap-theme.min.css.map" />
+-    <Content Include="Content\bootstrap-theme.css.map" />
+-    <Content Include="Areas\Administration\Views\web.config" />
+-    <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
+-    <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
+-    <Content Include="Areas\Administration\Views\Shared\_AdminMenu.cshtml" />
+-    <Content Include="Areas\Administration\Views\Users\Index.cshtml" />
+-    <Content Include="Areas\Administration\Views\Shared\EditorTemplates\Date.cshtml" />
+-    <Content Include="Areas\Administration\Views\Shared\DisplayTemplates\Date.cshtml" />
+-    <Content Include="Areas\Administration\Views\Shared\DisplayTemplates\DateTime.cshtml" />
+-    <Content Include="Areas\Administration\Views\Users\UsersIndex.cshtml" />
+-    <Content Include="Areas\Administration\Views\Users\UsersCreate.cshtml" />
+-    <Content Include="Areas\Administration\Views\Users\UsersEdit.cshtml" />
+-    <Content Include="Areas\Administration\Views\Users\UsersEditForm.cshtml" />
+-    <Content Include="Areas\Administration\Views\Users\Users.cshtml" />
+-    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSans-Bold.ttf" />
+-    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSans-BoldOblique.ttf" />
+-    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSans-ExtraLight.ttf" />
+-    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSans-Oblique.ttf" />
+-    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSans.ttf" />
+-    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSansMono-Bold.ttf" />
+-    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSansMono-BoldOblique.ttf" />
+-    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSansMono-Oblique.ttf" />
+-    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSansMono.ttf" />
+-    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSerif-Bold.ttf" />
+-    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSerif-BoldItalic.ttf" />
+-    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSerif-Italic.ttf" />
+-    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSerif.ttf" />
+-    <Content Include="Content\KendoUI\fonts\glyphs\KendoUIGlyphs.eot" />
+-    <Content Include="Content\KendoUI\fonts\glyphs\KendoUIGlyphs.ttf" />
+-    <Content Include="Content\KendoUI\fonts\glyphs\KendoUIGlyphs.woff" />
+-    <Content Include="Content\KendoUI\images\kendoui.ttf" />
+-    <Content Include="Content\KendoUI\images\kendoui.woff" />
+-    <Content Include="App_Browsers\qt.browser" />
+-    <Content Include="Areas\Administration\Views\RealEstateAdmin\RealEstateAdmin.cshtml" />
+-    <Content Include="Areas\Administration\Views\AgenciesAdmin\AgenciesAdmin.cshtml" />
+-    <Content Include="Areas\Administration\Views\InvoicesAdmin\InvoicesAdmin.cshtml" />
+-    <Content Include="Areas\AgencyAdministration\Views\web.config" />
+-    <Content Include="Areas\AgencyAdministration\Views\_ViewStart.cshtml" />
+-    <Content Include="Areas\AgencyAdministration\Views\Shared\_AdminMenu.cshtml" />
+-    <Content Include="Areas\AgencyAdministration\Views\RealEstatesOffers\RealEstatesOffers.cshtml" />
+-    <Content Include="Areas\AgencyAdministration\Views\MyAgencyInvoices\MyAgencyInvoices.cshtml" />
+-    <None Include="Properties\PublishProfiles\ReaLocateChezza - Web Deploy.pubxml" />
+-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+-    <Content Include="Scripts\jquery-1.10.2.js" />
+-    <Content Include="Scripts\jquery-1.10.2.min.js" />
+-    <Content Include="Scripts\jquery-1.10.2.min.map" />
+-    <None Include="Scripts\jquery-2.2.0.intellisense.js" />
+-    <Content Include="Scripts\jquery-2.2.0.js" />
+-    <Content Include="Scripts\jquery-2.2.0.min.js" />
+-    <None Include="Scripts\jquery.validate-vsdoc.js" />
+-    <Content Include="Scripts\jquery.signalR-2.2.0.js" />
+-    <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
+-    <Content Include="Scripts\jquery.validate.js" />
+-    <Content Include="Scripts\jquery.validate.min.js" />
+-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+-    <Content Include="Scripts\KendoScripts\kendo.all.min.js" />
+-    <Content Include="Scripts\KendoScripts\kendo.aspnetmvc.min.js" />
+-    <Content Include="Scripts\modernizr-2.6.2.js" />
+-    <Content Include="Scripts\_references.js" />
+-    <Content Include="UploadedFiles\avatar-placeholder.jpg" />
+-    <Content Include="Web.config" />
+-    <Content Include="Web.Debug.config">
+-      <DependentUpon>Web.config</DependentUpon>
+-    </Content>
+-    <Content Include="Web.Release.config">
+-      <DependentUpon>Web.config</DependentUpon>
+-    </Content>
+-    <Content Include="Views\Web.config" />
+-    <Content Include="Views\_ViewStart.cshtml" />
+-    <Content Include="Views\Shared\Error.cshtml" />
+-    <Content Include="Views\Shared\_Layout.cshtml" />
+-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+-    <Content Include="Views\Account\ForgotPassword.cshtml" />
+-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+-    <Content Include="Views\Account\Login.cshtml" />
+-    <Content Include="Views\Account\Register.cshtml" />
+-    <Content Include="Views\Account\ResetPassword.cshtml" />
+-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+-    <Content Include="Views\Account\SendCode.cshtml" />
+-    <Content Include="Views\Account\VerifyCode.cshtml" />
+-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+-    <Content Include="Views\Manage\ChangePassword.cshtml" />
+-    <Content Include="Views\Manage\Index.cshtml" />
+-    <Content Include="Views\Manage\ManageLogins.cshtml" />
+-    <Content Include="Views\Manage\SetPassword.cshtml" />
+-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+-    <Content Include="Views\Shared\Lockout.cshtml" />
+-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+-    <Content Include="Scripts\jquery-2.2.0.min.map" />
+-    <Content Include="Views\RealEstates\CreateRealEstate.cshtml" />
+-    <Content Include="Views\RealEstates\RealEstateDetails.cshtml" />
+-    <Content Include="Views\Visitors\WhoViewRealEstateDetails.cshtml" />
+-    <Content Include="Views\Visitors\VisitorDetails.cshtml" />
+-    <Content Include="Views\Agencies\CreateAgency.cshtml" />
+-    <Content Include="Views\Agencies\AgencyDetails.cshtml" />
+-    <Content Include="Views\Home\Chat.cshtml" />
+-    <Content Include="Views\Home\GetAllRealEstatesList.cshtml" />
+-    <Content Include="Views\Invoices\CreateInvoiceRegularUser.cshtml" />
+-    <Content Include="Views\Invoices\InvoiceDetails.cshtml" />
+-    <Content Include="Views\AgencyRealEstates\CreateRealEstate.cshtml" />
+-    <Content Include="Views\Invoices\PreviewAgencyInvoices.cshtml" />
+-    <Content Include="Views\Invoices\InvoiceAgencyDetails.cshtml" />
+-    <Content Include="Views\Shared\_AdminPartialMenu.cshtml" />
+-    <Content Include="Views\Shared\_AgencyPartialMenu.cshtml" />
+-    <Content Include="Views\Shared\_NormalUserPartialMenu.cshtml" />
+-    <Content Include="Views\Error\NotFound.cshtml" />
+-    <Content Include="Views\Error\NotAuthorized.cshtml" />
+-    <Content Include="Views\InviteBrokers\InviteBrokers.cshtml" />
+-    <Content Include="Views\Error\ErrorUserAlredyIsInAgency.cshtml" />
+-    <Content Include="Views\InviteBrokers\GetAllBrokersByAgency.cshtml" />
+-    <Content Include="Views\Home\Index.cshtml" />
+-    <Content Include="Views\Home\_RealEstateTilePartialView.cshtml" />
++    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Helpers" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.SignalR.SystemWeb" Version="0.2.0" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <Folder Include="App_Data\" />
+-    <Folder Include="Areas\Administration\Views\Admin\" />
+-    <Folder Include="Areas\AgencyAdministration\Views\MyAgencyAdmin\" />
+-    <Folder Include="UploadedFiles\ProfileImages\" />
+-    <Folder Include="UploadedFiles\RealEstatePhotos\" />
+-    <Folder Include="Views\Base\" />
+-    <Folder Include="Views\Users\" />
++    <!-- The app's own libraries. -->
++    <PackageReference Include="Autofac" Version="3.4.0" />
++    <PackageReference Include="Autofac.Mvc5" Version="3.3.4" />
++    <PackageReference Include="AutoMapper" Version="12.0.1" />
++    <PackageReference Include="bootstrap" Version="3.0.0" />
++    <PackageReference Include="EntityFramework" Version="6.5.1" />
++    <PackageReference Include="Geocoding.net" Version="3.3.0" />
++    <!-- Glimpse (Glimpse, .Ado, .AspNet, .EF6, .Mvc5) removed: it needs AppDomainSetup.ShadowCopyFiles and .NET
++         Framework's private DbProviderFactories table, which .NET doesn't have. -->
++    <PackageReference Include="jQuery" Version="1.10.2" />
++    <PackageReference Include="jQuery.Validation" Version="1.14.0" />
++    <PackageReference Include="Microsoft.jQuery.Unobtrusive.Validation" Version="3.2.3" />
++    <PackageReference Include="Modernizr" Version="2.6.2" />
++    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
++    <PackageReference Include="Rotativa" Version="1.6.4" />
++    <PackageReference Include="StyleCop.Analyzers" Version="1.0.0" />
++    <Reference Include="Kendo.Mvc" HintPath="External Libraries/Kendo.Mvc.dll" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <Content Include="packages.config" />
++    <ProjectReference Include="../../Data/ReaLocate.Data.Common/ReaLocate.Data.Common.csproj" />
++    <ProjectReference Include="../../Data/ReaLocate.Data.Models/ReaLocate.Data.Models.csproj" />
++    <ProjectReference Include="../../Data/ReaLocate.Data/ReaLocate.Data.csproj" />
++    <ProjectReference Include="../../Services/ReaLocate.Services.Data/ReaLocate.Services.Data.csproj" />
++    <ProjectReference Include="../../Services/ReaLocate.Services.Web/ReaLocate.Services.Web.csproj" />
++    <ProjectReference Include="../ReaLocate.Web.Infrastructure/ReaLocate.Web.Infrastructure.csproj" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
+-    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
++    <!-- Autofac.Mvc5 bring Microsoft's ASP.NET packages back; webForCore replaces them (docs/MIGRATING.md). -->
++    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.1.0" ExcludeAssets="all" />
++    <PackageReference Include="Microsoft.AspNet.Razor" Version="3.1.0" ExcludeAssets="all" />
++    <PackageReference Include="Microsoft.AspNet.WebPages" Version="3.1.0" ExcludeAssets="all" />
++    <PackageReference Include="Microsoft.Web.Infrastructure" Version="1.0.0" ExcludeAssets="all" />
+   </ItemGroup>
+-  <ItemGroup>
+-    <AdditionalFiles Include="..\..\stylecop.json">
+-      <Link>stylecop.json</Link>
+-    </AdditionalFiles>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <ProjectReference Include="..\..\Data\ReaLocate.Data.Common\ReaLocate.Data.Common.csproj">
+-      <Project>{edfe3c57-ef5b-4636-9ecc-d0baca6b6379}</Project>
+-      <Name>ReaLocate.Data.Common</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\..\Data\ReaLocate.Data.Models\ReaLocate.Data.Models.csproj">
+-      <Project>{048df115-fad9-4bd4-9ba0-d99dfd32a2b2}</Project>
+-      <Name>ReaLocate.Data.Models</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\..\Data\ReaLocate.Data\ReaLocate.Data.csproj">
+-      <Project>{7c950cdc-9587-4b65-a204-988efed17948}</Project>
+-      <Name>ReaLocate.Data</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\..\Services\ReaLocate.Services.Data\ReaLocate.Services.Data.csproj">
+-      <Project>{90fe4c4d-122a-406d-8a40-79c561fb8184}</Project>
+-      <Name>ReaLocate.Services.Data</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\..\Services\ReaLocate.Services.Web\ReaLocate.Services.Web.csproj">
+-      <Project>{deab17a2-58c1-448c-8a66-d49c3af7fc6c}</Project>
+-      <Name>ReaLocate.Services.Web</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\ReaLocate.Web.Infrastructure\ReaLocate.Web.Infrastructure.csproj">
+-      <Project>{6813dc53-5eee-4507-8604-5301ee51a0d3}</Project>
+-      <Name>ReaLocate.Web.Infrastructure</Name>
+-    </ProjectReference>
+-  </ItemGroup>
+-  <PropertyGroup>
+-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+-  </PropertyGroup>
+-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+-  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+-  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+-    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+-  </Target>
+-  <ProjectExtensions>
+-    <VisualStudio>
+-      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+-        <WebProjectProperties>
+-          <UseIIS>True</UseIIS>
+-          <AutoAssignPort>True</AutoAssignPort>
+-          <DevelopmentServerPort>2509</DevelopmentServerPort>
+-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+-          <IISUrl>http://localhost:2509/</IISUrl>
+-          <NTLMAuthentication>False</NTLMAuthentication>
+-          <UseCustomServer>False</UseCustomServer>
+-          <CustomServerUrl>
+-          </CustomServerUrl>
+-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+-        </WebProjectProperties>
+-      </FlavorProperties>
+-    </VisualStudio>
+-  </ProjectExtensions>
+-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+-    <PropertyGroup>
+-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+-    </PropertyGroup>
+-    <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props'))" />
+-    <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+-  </Target>
+-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+-       Other similar extension points exist, see Microsoft.Common.targets.
+-  <Target Name="BeforeBuild">
+-  </Target>
+-  <Target Name="AfterBuild">
+-  </Target> -->
+-</Project>
+\ No newline at end of file
++</Project>
+diff --git a/ReaLocate.Source/Web/ReaLocate.Web/ReaLocate.Web.csproj.netfx b/ReaLocate.Source/Web/ReaLocate.Web/ReaLocate.Web.csproj.netfx
+new file mode 100644
+index 0000000..32ba153
+--- /dev/null
++++ b/ReaLocate.Source/Web/ReaLocate.Web/ReaLocate.Web.csproj.netfx
+@@ -0,0 +1,571 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
++  <Import Project="..\..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props')" />
++  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++  <PropertyGroup>
++    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
++    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
++    <ProductVersion>
++    </ProductVersion>
++    <SchemaVersion>2.0</SchemaVersion>
++    <ProjectGuid>{67CC40FF-4933-4F83-810E-357E6BC8B973}</ProjectGuid>
++    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
++    <OutputType>Library</OutputType>
++    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <RootNamespace>ReaLocate.Web</RootNamespace>
++    <AssemblyName>ReaLocate.Web</AssemblyName>
++    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
++    <MvcBuildViews>false</MvcBuildViews>
++    <UseIISExpress>true</UseIISExpress>
++    <IISExpressSSLPort />
++    <IISExpressAnonymousAuthentication />
++    <IISExpressWindowsAuthentication />
++    <IISExpressUseClassicPipelineMode />
++    <UseGlobalApplicationHostFile />
++    <NuGetPackageImportStamp>
++    </NuGetPackageImportStamp>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
++    <DebugSymbols>true</DebugSymbols>
++    <DebugType>full</DebugType>
++    <Optimize>false</Optimize>
++    <OutputPath>bin\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
++    <DebugType>pdbonly</DebugType>
++    <Optimize>true</Optimize>
++    <OutputPath>bin\</OutputPath>
++    <DefineConstants>TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++    <CodeAnalysisRuleSet>..\..\Rules.ruleset</CodeAnalysisRuleSet>
++  </PropertyGroup>
++  <ItemGroup>
++    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="Autofac, Version=3.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Autofac.3.4.0\lib\net40\Autofac.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="Autofac.Integration.Mvc, Version=3.3.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Autofac.Mvc5.3.3.4\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="AutoMapper, Version=4.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\AutoMapper.4.2.0\lib\net45\AutoMapper.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="Geocoding, Version=3.3.0.0, Culture=neutral, PublicKeyToken=7c714700b88674c7, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Geocoding.net.3.3.0\lib\net40\Geocoding.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="Glimpse.Ado, Version=1.7.3.0, Culture=neutral, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Glimpse.Ado.1.7.3\lib\net45\Glimpse.Ado.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="Glimpse.AspNet, Version=1.9.2.0, Culture=neutral, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Glimpse.AspNet.1.9.2\lib\net45\Glimpse.AspNet.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="Glimpse.Core, Version=1.8.6.0, Culture=neutral, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Glimpse.1.8.6\lib\net45\Glimpse.Core.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="Glimpse.EF6, Version=1.6.5.0, Culture=neutral, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Glimpse.EF6.1.6.5\lib\net45\Glimpse.EF6.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="Glimpse.Mvc5, Version=1.5.3.0, Culture=neutral, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Glimpse.Mvc5.1.5.3\lib\net45\Glimpse.Mvc5.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="Kendo.Mvc, Version=2016.1.112.545, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
++      <SpecificVersion>False</SpecificVersion>
++      <HintPath>External Libraries\Kendo.Mvc.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="Microsoft.CSharp" />
++    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Rotativa.1.6.4\lib\net40\Rotativa.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="System" />
++    <Reference Include="System.Data" />
++    <Reference Include="System.Drawing" />
++    <Reference Include="System.Web.DynamicData" />
++    <Reference Include="System.Web.Entity" />
++    <Reference Include="System.Web.ApplicationServices" />
++    <Reference Include="System.ComponentModel.DataAnnotations" />
++    <Reference Include="System.Core" />
++    <Reference Include="System.Data.DataSetExtensions" />
++    <Reference Include="System.Xml.Linq" />
++    <Reference Include="System.Web" />
++    <Reference Include="System.Web.Extensions" />
++    <Reference Include="System.Web.Abstractions" />
++    <Reference Include="System.Web.Routing" />
++    <Reference Include="System.Xml" />
++    <Reference Include="System.Configuration" />
++    <Reference Include="System.Web.Services" />
++    <Reference Include="System.EnterpriseServices" />
++    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Net.Http">
++    </Reference>
++    <Reference Include="System.Net.Http.WebRequest">
++    </Reference>
++    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.Optimization">
++      <HintPath>..\..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
++    </Reference>
++    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
++      <Private>True</Private>
++    </Reference>
++  </ItemGroup>
++  <ItemGroup>
++    <Reference Include="EntityFramework">
++      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
++    </Reference>
++    <Reference Include="EntityFramework.SqlServer">
++      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.AspNet.Identity.Core">
++      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.AspNet.Identity.Owin">
++      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
++      <HintPath>..\..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
++    </Reference>
++    <Reference Include="Owin">
++      <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.Owin">
++      <HintPath>..\..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.Owin.Host.SystemWeb">
++      <HintPath>..\..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.Owin.Security">
++      <HintPath>..\..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.Owin.Security.Facebook">
++      <HintPath>..\..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.Owin.Security.Cookies">
++      <HintPath>..\..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.Owin.Security.OAuth">
++      <HintPath>..\..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
++    </Reference>
++  </ItemGroup>
++  <ItemGroup>
++    <Compile Include="App_Start\ApplicationSignInManager.cs" />
++    <Compile Include="App_Start\ApplicationUserManager.cs" />
++    <Compile Include="App_Start\AutofacConfig.cs" />
++    <Compile Include="App_Start\BundleConfig.cs" />
++    <Compile Include="App_Start\EmailService.cs" />
++    <Compile Include="App_Start\FilterConfig.cs" />
++    <Compile Include="App_Start\RouteConfig.cs" />
++    <Compile Include="App_Start\SmsService.cs" />
++    <Compile Include="App_Start\Startup.Auth.cs" />
++    <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
++    <Compile Include="Areas\Administration\Controllers\AdminController.cs" />
++    <Compile Include="Areas\Administration\Controllers\AgenciesAdminController.cs" />
++    <Compile Include="Areas\Administration\Controllers\InvoicesAdminController.cs" />
++    <Compile Include="Areas\Administration\Controllers\RealEstateAdminController.cs" />
++    <Compile Include="Areas\Administration\Controllers\UsersController.cs" />
++    <Compile Include="Areas\Administration\ViewModels\AdminRealEstateViewModel.cs" />
++    <Compile Include="Areas\Administration\ViewModels\AgencyAdminPanelViewModel.cs" />
++    <Compile Include="Areas\Administration\ViewModels\InvoiceAdminPanelViewModel.cs" />
++    <Compile Include="Areas\Administration\ViewModels\UserAdminInputViewModel.cs" />
++    <Compile Include="Areas\Administration\ViewModels\UserAdminPanelViewModel.cs" />
++    <Compile Include="Areas\AgencyAdministration\AgencyAdministrationAreaRegistration.cs" />
++    <Compile Include="Areas\AgencyAdministration\Controllers\MyAgencyAdminController.cs" />
++    <Compile Include="Areas\AgencyAdministration\Controllers\MyAgencyInvoicesController.cs" />
++    <Compile Include="Areas\AgencyAdministration\Controllers\RealEstatesOffersController.cs" />
++    <Compile Include="Areas\AgencyAdministration\ViewModels\AdminRealEstateViewModel.cs" />
++    <Compile Include="Controllers\AccountController.cs" />
++    <Compile Include="Controllers\AgenciesController.cs" />
++    <Compile Include="Controllers\AgencyRealEstatesController.cs" />
++    <Compile Include="Controllers\BaseController.cs" />
++    <Compile Include="Controllers\ErrorController.cs" />
++    <Compile Include="Controllers\InviteBrokersController.cs" />
++    <Compile Include="Controllers\InvoicesController.cs" />
++    <Compile Include="Helpers\IRealEstateCreateUtil.cs" />
++    <Compile Include="ViewModels\Agency\AgencyAsInvoiceRecepientViewModel.cs" />
++    <Compile Include="ViewModels\Invoice\AgencyInvoiceViewModel.cs" />
++    <Compile Include="ViewModels\Broker\BrokerInputViewModel.cs" />
++    <Compile Include="ViewModels\Broker\BrokerViewModel.cs" />
++    <Compile Include="ViewModels\RealEstate\SearchedRealEstateViewModel.cs" />
++    <Compile Include="ViewModels\Invoice\UserAsInvoiceRecepientViewModel.cs" />
++    <Compile Include="ViewModels\Invoice\UserInvoiceViewModel.cs" />
++    <Compile Include="ViewModels\Invoice\InvoiceByUserViewModel.cs" />
++    <Compile Include="Helpers\RealEstateCreateUtil.cs" />
++    <Compile Include="Hubs\ChatHub.cs" />
++    <Compile Include="ViewModels\Home\CoordinateViewModel.cs" />
++    <Compile Include="ViewModels\Agency\CreateAgencyViewModel.cs" />
++    <Compile Include="Controllers\HomeController.cs" />
++    <Compile Include="Controllers\ManageController.cs" />
++    <Compile Include="App_Start\GlimpseSecurityPolicy.cs" />
++    <Compile Include="Controllers\RealEstatesController.cs" />
++    <Compile Include="ViewModels\Agency\DetailsAgencyViewModel.cs" />
++    <Compile Include="ViewModels\Home\IndexMapAndGridViewModel.cs" />
++    <Compile Include="ViewModels\Invoice\PaymentDetailsViewModel.cs" />
++    <Compile Include="ViewModels\Visitor\VisitorDetailsViewModel.cs" />
++    <Compile Include="Controllers\VisitorsController.cs" />
++    <Compile Include="Filters\MaxFileSizeAttribute.cs" />
++    <Compile Include="ViewModels\RealEstate\CreateRealEstateViewModel.cs" />
++    <Compile Include="Global.asax.cs">
++      <DependentUpon>Global.asax</DependentUpon>
++    </Compile>
++    <Compile Include="ViewModels\Account\ExternalLoginConfirmationViewModel.cs" />
++    <Compile Include="ViewModels\Account\ForgotPasswordViewModel.cs" />
++    <Compile Include="ViewModels\Account\ExternalLoginListViewModel.cs" />
++    <Compile Include="ViewModels\Account\ForgotViewModel.cs" />
++    <Compile Include="ViewModels\Account\LoginViewModel.cs" />
++    <Compile Include="ViewModels\Account\RegisterViewModel.cs" />
++    <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
++    <Compile Include="ViewModels\Account\SendCodeViewModel.cs" />
++    <Compile Include="ViewModels\Account\VerifyCodeViewModel.cs" />
++    <Compile Include="ViewModels\RealEstate\DetailsRealEstateViewModel.cs" />
++    <Compile Include="ViewModels\Home\IndexViewModel.cs" />
++    <Compile Include="ViewModels\Manage\AddPhoneNumberViewModel.cs" />
++    <Compile Include="ViewModels\Manage\ChangePasswordViewModel.cs" />
++    <Compile Include="ViewModels\Manage\FactorViewModel.cs" />
++    <Compile Include="ViewModels\Manage\IndexViewModel.cs" />
++    <Compile Include="ViewModels\Manage\ManageLoginsViewModel.cs" />
++    <Compile Include="ViewModels\Manage\ConfigureTwoFactorViewModel.cs" />
++    <Compile Include="Properties\AssemblyInfo.cs" />
++    <Compile Include="Startup.cs" />
++    <Compile Include="ViewModels\Manage\SetPasswordViewModel.cs" />
++    <Compile Include="ViewModels\Manage\VerifyPhoneNumberViewModel.cs" />
++    <Compile Include="ViewModels\Visitor\VisitorViewModel.cs" />
++  </ItemGroup>
++  <ItemGroup>
++    <Content Include="Content\bootstrap-theme.css" />
++    <Content Include="Content\bootstrap-theme.min.css" />
++    <Content Include="Content\bootstrap.css" />
++    <Content Include="Content\bootstrap.min.css" />
++    <Content Include="Content\KendoUI\Default\editor.png" />
++    <Content Include="Content\KendoUI\Default\imagebrowser.png" />
++    <Content Include="Content\KendoUI\Default\indeterminate.gif" />
++    <Content Include="Content\KendoUI\Default\loading-image.gif" />
++    <Content Include="Content\KendoUI\Default\loading.gif" />
++    <Content Include="Content\KendoUI\Default\loading_2x.gif" />
++    <Content Include="Content\KendoUI\Default\markers.png" />
++    <Content Include="Content\KendoUI\Default\markers_2x.png" />
++    <Content Include="Content\KendoUI\Default\slider-h.gif" />
++    <Content Include="Content\KendoUI\Default\slider-v.gif" />
++    <Content Include="Content\KendoUI\Default\sprite.png" />
++    <Content Include="Content\KendoUI\Default\sprite_2x.png" />
++    <Content Include="Content\KendoUI\Default\sprite_kpi.png" />
++    <Content Include="Content\KendoUI\Default\sprite_kpi_2x.png" />
++    <Content Include="Content\KendoUI\fonts\DejaVu\LICENSE.txt" />
++    <Content Include="Content\KendoUI\fonts\glyphs\KendoUIGlyphs.svg" />
++    <Content Include="Content\KendoUI\images\back.png" />
++    <Content Include="Content\KendoUI\images\kendoui.svg" />
++    <Content Include="Content\KendoUI\images\wp8_icons.png" />
++    <Content Include="Content\KendoUI\images\wp8_inverseicons.png" />
++    <Content Include="Content\KendoUI\kendo.common.min.css" />
++    <Content Include="Content\KendoUI\kendo.default.min.css" />
++    <Content Include="Content\KendoUI\textures\brushed-metal.png" />
++    <Content Include="Content\KendoUI\textures\dots1.png" />
++    <Content Include="Content\KendoUI\textures\dots10.png" />
++    <Content Include="Content\KendoUI\textures\dots11.png" />
++    <Content Include="Content\KendoUI\textures\dots12.png" />
++    <Content Include="Content\KendoUI\textures\dots13.png" />
++    <Content Include="Content\KendoUI\textures\dots2.png" />
++    <Content Include="Content\KendoUI\textures\dots3.png" />
++    <Content Include="Content\KendoUI\textures\dots4.png" />
++    <Content Include="Content\KendoUI\textures\dots5.png" />
++    <Content Include="Content\KendoUI\textures\dots6.png" />
++    <Content Include="Content\KendoUI\textures\dots7.png" />
++    <Content Include="Content\KendoUI\textures\dots8.png" />
++    <Content Include="Content\KendoUI\textures\dots9.png" />
++    <Content Include="Content\KendoUI\textures\glass-lighter.png" />
++    <Content Include="Content\KendoUI\textures\glass.png" />
++    <Content Include="Content\KendoUI\textures\highlight.png" />
++    <Content Include="Content\KendoUI\textures\hsv-gradient.png" />
++    <Content Include="Content\KendoUI\textures\hue.png" />
++    <Content Include="Content\KendoUI\textures\leather1.png" />
++    <Content Include="Content\KendoUI\textures\leather2.png" />
++    <Content Include="Content\KendoUI\textures\noise.png" />
++    <Content Include="Content\KendoUI\textures\stripe1.png" />
++    <Content Include="Content\KendoUI\textures\stripe2.png" />
++    <Content Include="Content\KendoUI\textures\stripe3.png" />
++    <Content Include="Content\KendoUI\textures\stripe4.png" />
++    <Content Include="Content\KendoUI\textures\stripe5.png" />
++    <Content Include="Content\KendoUI\textures\stripe6.png" />
++    <Content Include="Content\KendoUI\textures\transparency.png" />
++    <Content Include="Content\KendoUI\textures\transtexture.png" />
++    <Content Include="External Libraries\Kendo.Mvc.dll" />
++    <Content Include="favicon.ico" />
++    <Content Include="fonts\glyphicons-halflings-regular.svg" />
++    <Content Include="Global.asax" />
++    <Content Include="Content\Site.css" />
++    <Content Include="Rotativa\wkhtmltopdf.exe" />
++    <Content Include="Scripts\bootstrap.js" />
++    <Content Include="Scripts\bootstrap.min.js" />
++    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
++    <Content Include="fonts\glyphicons-halflings-regular.woff" />
++    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
++    <Content Include="fonts\glyphicons-halflings-regular.eot" />
++    <Content Include="Content\bootstrap.min.css.map" />
++    <Content Include="Content\bootstrap.css.map" />
++    <Content Include="Content\bootstrap-theme.min.css.map" />
++    <Content Include="Content\bootstrap-theme.css.map" />
++    <Content Include="Areas\Administration\Views\web.config" />
++    <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
++    <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
++    <Content Include="Areas\Administration\Views\Shared\_AdminMenu.cshtml" />
++    <Content Include="Areas\Administration\Views\Users\Index.cshtml" />
++    <Content Include="Areas\Administration\Views\Shared\EditorTemplates\Date.cshtml" />
++    <Content Include="Areas\Administration\Views\Shared\DisplayTemplates\Date.cshtml" />
++    <Content Include="Areas\Administration\Views\Shared\DisplayTemplates\DateTime.cshtml" />
++    <Content Include="Areas\Administration\Views\Users\UsersIndex.cshtml" />
++    <Content Include="Areas\Administration\Views\Users\UsersCreate.cshtml" />
++    <Content Include="Areas\Administration\Views\Users\UsersEdit.cshtml" />
++    <Content Include="Areas\Administration\Views\Users\UsersEditForm.cshtml" />
++    <Content Include="Areas\Administration\Views\Users\Users.cshtml" />
++    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSans-Bold.ttf" />
++    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSans-BoldOblique.ttf" />
++    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSans-ExtraLight.ttf" />
++    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSans-Oblique.ttf" />
++    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSans.ttf" />
++    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSansMono-Bold.ttf" />
++    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSansMono-BoldOblique.ttf" />
++    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSansMono-Oblique.ttf" />
++    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSansMono.ttf" />
++    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSerif-Bold.ttf" />
++    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSerif-BoldItalic.ttf" />
++    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSerif-Italic.ttf" />
++    <Content Include="Content\KendoUI\fonts\DejaVu\DejaVuSerif.ttf" />
++    <Content Include="Content\KendoUI\fonts\glyphs\KendoUIGlyphs.eot" />
++    <Content Include="Content\KendoUI\fonts\glyphs\KendoUIGlyphs.ttf" />
++    <Content Include="Content\KendoUI\fonts\glyphs\KendoUIGlyphs.woff" />
++    <Content Include="Content\KendoUI\images\kendoui.ttf" />
++    <Content Include="Content\KendoUI\images\kendoui.woff" />
++    <Content Include="App_Browsers\qt.browser" />
++    <Content Include="Areas\Administration\Views\RealEstateAdmin\RealEstateAdmin.cshtml" />
++    <Content Include="Areas\Administration\Views\AgenciesAdmin\AgenciesAdmin.cshtml" />
++    <Content Include="Areas\Administration\Views\InvoicesAdmin\InvoicesAdmin.cshtml" />
++    <Content Include="Areas\AgencyAdministration\Views\web.config" />
++    <Content Include="Areas\AgencyAdministration\Views\_ViewStart.cshtml" />
++    <Content Include="Areas\AgencyAdministration\Views\Shared\_AdminMenu.cshtml" />
++    <Content Include="Areas\AgencyAdministration\Views\RealEstatesOffers\RealEstatesOffers.cshtml" />
++    <Content Include="Areas\AgencyAdministration\Views\MyAgencyInvoices\MyAgencyInvoices.cshtml" />
++    <None Include="Properties\PublishProfiles\ReaLocateChezza - Web Deploy.pubxml" />
++    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
++    <Content Include="Scripts\jquery-1.10.2.js" />
++    <Content Include="Scripts\jquery-1.10.2.min.js" />
++    <Content Include="Scripts\jquery-1.10.2.min.map" />
++    <None Include="Scripts\jquery-2.2.0.intellisense.js" />
++    <Content Include="Scripts\jquery-2.2.0.js" />
++    <Content Include="Scripts\jquery-2.2.0.min.js" />
++    <None Include="Scripts\jquery.validate-vsdoc.js" />
++    <Content Include="Scripts\jquery.signalR-2.2.0.js" />
++    <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
++    <Content Include="Scripts\jquery.validate.js" />
++    <Content Include="Scripts\jquery.validate.min.js" />
++    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
++    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
++    <Content Include="Scripts\KendoScripts\kendo.all.min.js" />
++    <Content Include="Scripts\KendoScripts\kendo.aspnetmvc.min.js" />
++    <Content Include="Scripts\modernizr-2.6.2.js" />
++    <Content Include="Scripts\_references.js" />
++    <Content Include="UploadedFiles\avatar-placeholder.jpg" />
++    <Content Include="Web.config" />
++    <Content Include="Web.Debug.config">
++      <DependentUpon>Web.config</DependentUpon>
++    </Content>
++    <Content Include="Web.Release.config">
++      <DependentUpon>Web.config</DependentUpon>
++    </Content>
++    <Content Include="Views\Web.config" />
++    <Content Include="Views\_ViewStart.cshtml" />
++    <Content Include="Views\Shared\Error.cshtml" />
++    <Content Include="Views\Shared\_Layout.cshtml" />
++    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
++    <Content Include="Views\Account\ConfirmEmail.cshtml" />
++    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
++    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
++    <Content Include="Views\Account\ForgotPassword.cshtml" />
++    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
++    <Content Include="Views\Account\Login.cshtml" />
++    <Content Include="Views\Account\Register.cshtml" />
++    <Content Include="Views\Account\ResetPassword.cshtml" />
++    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
++    <Content Include="Views\Account\SendCode.cshtml" />
++    <Content Include="Views\Account\VerifyCode.cshtml" />
++    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
++    <Content Include="Views\Manage\ChangePassword.cshtml" />
++    <Content Include="Views\Manage\Index.cshtml" />
++    <Content Include="Views\Manage\ManageLogins.cshtml" />
++    <Content Include="Views\Manage\SetPassword.cshtml" />
++    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
++    <Content Include="Views\Shared\Lockout.cshtml" />
++    <Content Include="Views\Shared\_LoginPartial.cshtml" />
++    <Content Include="Scripts\jquery-2.2.0.min.map" />
++    <Content Include="Views\RealEstates\CreateRealEstate.cshtml" />
++    <Content Include="Views\RealEstates\RealEstateDetails.cshtml" />
++    <Content Include="Views\Visitors\WhoViewRealEstateDetails.cshtml" />
++    <Content Include="Views\Visitors\VisitorDetails.cshtml" />
++    <Content Include="Views\Agencies\CreateAgency.cshtml" />
++    <Content Include="Views\Agencies\AgencyDetails.cshtml" />
++    <Content Include="Views\Home\Chat.cshtml" />
++    <Content Include="Views\Home\GetAllRealEstatesList.cshtml" />
++    <Content Include="Views\Invoices\CreateInvoiceRegularUser.cshtml" />
++    <Content Include="Views\Invoices\InvoiceDetails.cshtml" />
++    <Content Include="Views\AgencyRealEstates\CreateRealEstate.cshtml" />
++    <Content Include="Views\Invoices\PreviewAgencyInvoices.cshtml" />
++    <Content Include="Views\Invoices\InvoiceAgencyDetails.cshtml" />
++    <Content Include="Views\Shared\_AdminPartialMenu.cshtml" />
++    <Content Include="Views\Shared\_AgencyPartialMenu.cshtml" />
++    <Content Include="Views\Shared\_NormalUserPartialMenu.cshtml" />
++    <Content Include="Views\Error\NotFound.cshtml" />
++    <Content Include="Views\Error\NotAuthorized.cshtml" />
++    <Content Include="Views\InviteBrokers\InviteBrokers.cshtml" />
++    <Content Include="Views\Error\ErrorUserAlredyIsInAgency.cshtml" />
++    <Content Include="Views\InviteBrokers\GetAllBrokersByAgency.cshtml" />
++    <Content Include="Views\Home\Index.cshtml" />
++    <Content Include="Views\Home\_RealEstateTilePartialView.cshtml" />
++  </ItemGroup>
++  <ItemGroup>
++    <Folder Include="App_Data\" />
++    <Folder Include="Areas\Administration\Views\Admin\" />
++    <Folder Include="Areas\AgencyAdministration\Views\MyAgencyAdmin\" />
++    <Folder Include="UploadedFiles\ProfileImages\" />
++    <Folder Include="UploadedFiles\RealEstatePhotos\" />
++    <Folder Include="Views\Base\" />
++    <Folder Include="Views\Users\" />
++  </ItemGroup>
++  <ItemGroup>
++    <Content Include="packages.config" />
++  </ItemGroup>
++  <ItemGroup>
++    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
++    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
++    <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
++  </ItemGroup>
++  <ItemGroup>
++    <AdditionalFiles Include="..\..\stylecop.json">
++      <Link>stylecop.json</Link>
++    </AdditionalFiles>
++  </ItemGroup>
++  <ItemGroup>
++    <ProjectReference Include="..\..\Data\ReaLocate.Data.Common\ReaLocate.Data.Common.csproj">
++      <Project>{edfe3c57-ef5b-4636-9ecc-d0baca6b6379}</Project>
++      <Name>ReaLocate.Data.Common</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\..\Data\ReaLocate.Data.Models\ReaLocate.Data.Models.csproj">
++      <Project>{048df115-fad9-4bd4-9ba0-d99dfd32a2b2}</Project>
++      <Name>ReaLocate.Data.Models</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\..\Data\ReaLocate.Data\ReaLocate.Data.csproj">
++      <Project>{7c950cdc-9587-4b65-a204-988efed17948}</Project>
++      <Name>ReaLocate.Data</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\..\Services\ReaLocate.Services.Data\ReaLocate.Services.Data.csproj">
++      <Project>{90fe4c4d-122a-406d-8a40-79c561fb8184}</Project>
++      <Name>ReaLocate.Services.Data</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\..\Services\ReaLocate.Services.Web\ReaLocate.Services.Web.csproj">
++      <Project>{deab17a2-58c1-448c-8a66-d49c3af7fc6c}</Project>
++      <Name>ReaLocate.Services.Web</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\ReaLocate.Web.Infrastructure\ReaLocate.Web.Infrastructure.csproj">
++      <Project>{6813dc53-5eee-4507-8604-5301ee51a0d3}</Project>
++      <Name>ReaLocate.Web.Infrastructure</Name>
++    </ProjectReference>
++  </ItemGroup>
++  <PropertyGroup>
++    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
++    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
++  </PropertyGroup>
++  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
++  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
++  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
++  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
++    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
++  </Target>
++  <ProjectExtensions>
++    <VisualStudio>
++      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
++        <WebProjectProperties>
++          <UseIIS>True</UseIIS>
++          <AutoAssignPort>True</AutoAssignPort>
++          <DevelopmentServerPort>2509</DevelopmentServerPort>
++          <DevelopmentServerVPath>/</DevelopmentServerVPath>
++          <IISUrl>http://localhost:2509/</IISUrl>
++          <NTLMAuthentication>False</NTLMAuthentication>
++          <UseCustomServer>False</UseCustomServer>
++          <CustomServerUrl>
++          </CustomServerUrl>
++          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
++        </WebProjectProperties>
++      </FlavorProperties>
++    </VisualStudio>
++  </ProjectExtensions>
++  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
++    <PropertyGroup>
++      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
++    </PropertyGroup>
++    <Error Condition="!Exists('..\..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.Net.Compilers.1.1.1\build\Microsoft.Net.Compilers.props'))" />
++    <Error Condition="!Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.1\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
++  </Target>
++  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
++       Other similar extension points exist, see Microsoft.Common.targets.
++  <Target Name="BeforeBuild">
++  </Target>
++  <Target Name="AfterBuild">
++  </Target> -->
++</Project>
+\ No newline at end of file
+diff --git a/ReaLocate.Source/Web/ReaLocate.Web/Web.config b/ReaLocate.Source/Web/ReaLocate.Web/Web.config
+index ff3d73d..db829f4 100644
+--- a/ReaLocate.Source/Web/ReaLocate.Web/Web.config
++++ b/ReaLocate.Source/Web/ReaLocate.Web/Web.config
+@@ -1,11 +1,10 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
++<?xml version="1.0" encoding="utf-8"?>
+ <configuration>
+   <configSections>
+     <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+-    <section name="glimpse" type="Glimpse.Core.Configuration.Section, Glimpse.Core" />
+   </configSections>
+   <connectionStrings>
+-    <add name="DefaultConnection" connectionString="Data Source=.;Initial Catalog=ReaLocate;MultipleActiveResultSets=True;Integrated Security=True" providerName="System.Data.SqlClient" />
++    <add name="DefaultConnection" connectionString="Data Source=127.0.0.1,14330;Initial Catalog=ReaLocate;User ID=sa;Password=Smoke_test_1234;TrustServerCertificate=True;MultipleActiveResultSets=True" providerName="System.Data.SqlClient" />
+   </connectionStrings>
+   <appSettings>
+     <add key="webpages:Version" value="3.0.0.0" />
+@@ -24,21 +23,13 @@
+     <httpRuntime targetFramework="4.6" />
+     <!-- Glimpse: This can be commented in to add additional data to the Trace tab when using WebForms
+         <trace writeToDiagnosticsTrace="true" enabled="true" pageOutput="false"/> -->
+-    <httpModules>
+-      <add name="Glimpse" type="Glimpse.AspNet.HttpModule, Glimpse.AspNet" />
+-    </httpModules>
+-    <httpHandlers>
+-      <add path="glimpse.axd" verb="GET" type="Glimpse.AspNet.HttpHandler, Glimpse.AspNet" />
+-    </httpHandlers>
+   </system.web>
+   <system.webServer>
+     <modules>
+       <remove name="FormsAuthentication" />
+-      <add name="Glimpse" type="Glimpse.AspNet.HttpModule, Glimpse.AspNet" preCondition="integratedMode" />
+     </modules>
+     <validation validateIntegratedModeConfiguration="false" />
+     <handlers>
+-      <add name="Glimpse" path="glimpse.axd" verb="GET" type="Glimpse.AspNet.HttpHandler, Glimpse.AspNet" preCondition="integratedMode" />
+     </handlers>
+   </system.webServer>
+   <runtime>
+@@ -103,16 +94,4 @@
+       <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+     </providers>
+   </entityFramework>
+-  <glimpse defaultRuntimePolicy="On" endpointBaseUri="~/Glimpse.axd">
+-    <!-- 
+-          For more information on how to configure Glimpse, please visit http://getglimpse.com/Help/Configuration
+-          or access {your site}/Glimpse.axd for even more details and a Configuration Tool to support you. 
+-      -->
+-  </glimpse>
+-  <system.codedom>
+-    <compilers>
+-      <compiler language="c#;cs;csharp" extension=".cs" type="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.CSharpCodeProvider, Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" warningLevel="4" compilerOptions="/langversion:6 /nowarn:1659;1699;1701" />
+-      <compiler language="vb;vbs;visualbasic;vbscript" extension=".vb" type="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.VBCodeProvider, Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" warningLevel="4" compilerOptions="/langversion:14 /nowarn:41008 /define:_MYTYPE=\&quot;Web\&quot; /optionInfer+" />
+-    </compilers>
+-  </system.codedom>
+ </configuration>
+\ No newline at end of file
+diff --git a/ReaLocate.Source/Web/ReaLocate.Web/packages.config b/ReaLocate.Source/Web/ReaLocate.Web/packages.config
+deleted file mode 100644
+index d9ac093..0000000
+--- a/ReaLocate.Source/Web/ReaLocate.Web/packages.config
++++ /dev/null
+@@ -1,44 +0,0 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<packages>
+-  <package id="Antlr" version="3.5.0.2" targetFramework="net46" />
+-  <package id="Autofac" version="3.4.0" targetFramework="net46" />
+-  <package id="Autofac.Mvc5" version="3.3.4" targetFramework="net46" />
+-  <package id="AutoMapper" version="4.2.0" targetFramework="net46" />
+-  <package id="bootstrap" version="3.0.0" targetFramework="net46" />
+-  <package id="EntityFramework" version="6.1.3" targetFramework="net46" />
+-  <package id="Geocoding.net" version="3.3.0" targetFramework="net46" />
+-  <package id="Glimpse" version="1.8.6" targetFramework="net46" />
+-  <package id="Glimpse.Ado" version="1.7.3" targetFramework="net46" />
+-  <package id="Glimpse.AspNet" version="1.9.2" targetFramework="net46" />
+-  <package id="Glimpse.EF6" version="1.6.5" targetFramework="net46" />
+-  <package id="Glimpse.Mvc5" version="1.5.3" targetFramework="net46" />
+-  <package id="jQuery" version="1.10.2" targetFramework="net46" />
+-  <package id="jQuery.Validation" version="1.14.0" targetFramework="net46" />
+-  <package id="Microsoft.AspNet.Identity.Core" version="2.2.1" targetFramework="net46" />
+-  <package id="Microsoft.AspNet.Identity.EntityFramework" version="2.2.1" targetFramework="net46" />
+-  <package id="Microsoft.AspNet.Identity.Owin" version="2.2.1" targetFramework="net46" />
+-  <package id="Microsoft.AspNet.Mvc" version="5.2.3" targetFramework="net46" />
+-  <package id="Microsoft.AspNet.Razor" version="3.2.3" targetFramework="net46" />
+-  <package id="Microsoft.AspNet.SignalR" version="2.2.0" targetFramework="net46" />
+-  <package id="Microsoft.AspNet.SignalR.Core" version="2.2.0" targetFramework="net46" />
+-  <package id="Microsoft.AspNet.SignalR.JS" version="2.2.0" targetFramework="net46" />
+-  <package id="Microsoft.AspNet.SignalR.SystemWeb" version="2.2.0" targetFramework="net46" />
+-  <package id="Microsoft.AspNet.Web.Optimization" version="1.1.3" targetFramework="net46" />
+-  <package id="Microsoft.AspNet.WebPages" version="3.2.3" targetFramework="net46" />
+-  <package id="Microsoft.CodeDom.Providers.DotNetCompilerPlatform" version="1.0.1" targetFramework="net46" />
+-  <package id="Microsoft.jQuery.Unobtrusive.Validation" version="3.2.3" targetFramework="net46" />
+-  <package id="Microsoft.Net.Compilers" version="1.1.1" targetFramework="net46" developmentDependency="true" />
+-  <package id="Microsoft.Owin" version="3.0.1" targetFramework="net46" />
+-  <package id="Microsoft.Owin.Host.SystemWeb" version="3.0.1" targetFramework="net46" />
+-  <package id="Microsoft.Owin.Security" version="3.0.1" targetFramework="net46" />
+-  <package id="Microsoft.Owin.Security.Cookies" version="3.0.1" targetFramework="net46" />
+-  <package id="Microsoft.Owin.Security.Facebook" version="3.0.1" targetFramework="net46" />
+-  <package id="Microsoft.Owin.Security.OAuth" version="3.0.1" targetFramework="net46" />
+-  <package id="Microsoft.Web.Infrastructure" version="1.0.0.0" targetFramework="net46" />
+-  <package id="Modernizr" version="2.6.2" targetFramework="net46" />
+-  <package id="Newtonsoft.Json" version="8.0.2" targetFramework="net46" />
+-  <package id="Owin" version="1.0" targetFramework="net46" />
+-  <package id="Rotativa" version="1.6.4" targetFramework="net46" />
+-  <package id="StyleCop.Analyzers" version="1.0.0" targetFramework="net46" developmentDependency="true" />
+-  <package id="WebGrease" version="1.6.0" targetFramework="net46" />
+-</packages>
+\ No newline at end of file

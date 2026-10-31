@@ -1,8 +1,8 @@
 diff --git a/Bonobo.Git.Server/Bonobo.Git.Server.csproj b/Bonobo.Git.Server/Bonobo.Git.Server.csproj
-index ad78e85..cfab089 100644
+index ad78e85..248dc6f 100644
 --- a/Bonobo.Git.Server/Bonobo.Git.Server.csproj
 +++ b/Bonobo.Git.Server/Bonobo.Git.Server.csproj
-@@ -1,775 +1,76 @@
+@@ -1,775 +1,80 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
@@ -739,14 +739,14 @@ index ad78e85..cfab089 100644
 -    <EmbeddedResource Include="App_GlobalResources\Resources.zh-CN.resx" />
 -    <EmbeddedResource Include="App_GlobalResources\Resources.zh-HK.resx" />
 -    <EmbeddedResource Include="App_GlobalResources\Resources.zh-TW.resx" />
-+    <!-- webForCore 0.1.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.Helpers" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.1.0" />
++    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Helpers" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.2.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -768,16 +768,20 @@ index ad78e85..cfab089 100644
 +    <PackageReference Include="Serilog.Settings.AppSettings" Version="2.1.0" />
 +    <PackageReference Include="Serilog.Sinks.File" Version="3.2.0" />
 +    <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
-+    <PackageReference Include="System.Data.SQLite" Version="1.0.104.0" />
-+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.104.0" />
-+    <PackageReference Include="System.Data.SQLite.EF6" Version="1.0.104.0" />
-+    <PackageReference Include="System.Data.SQLite.Linq" Version="1.0.104.0" />
++    <PackageReference Include="System.Data.SQLite" Version="1.0.119" />
++    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
++    <PackageReference Include="System.Data.SQLite.EF6" Version="1.0.119" />
 +    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="4.0.4.403061554" />
 +    <PackageReference Include="UDE.CSharp" Version="1.1.0" />
 +    <PackageReference Include="Unity" Version="5.11.7" />
 +    <PackageReference Include="Unity.Abstractions" Version="5.11.1" />
 +    <PackageReference Include="Unity.Container" Version="5.11.1" />
 +    <PackageReference Include="Unity.Mvc" Version="5.11.1" />
++    <!-- Unity.Mvc depends on Microsoft.AspNet.Mvc 5.2.7, whose System.Web.Razor/WebPages would replace webForCore's
++         (MissingMethodException in MvcCSharpRazorCodeGenerator). MIGRATING.md, "Packages that need more than a reference". -->
++    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" ExcludeAssets="all" />
++    <PackageReference Include="Microsoft.AspNet.WebPages" Version="3.2.7" ExcludeAssets="all" />
++    <PackageReference Include="Microsoft.AspNet.Razor" Version="3.2.7" ExcludeAssets="all" />
 +    <PackageReference Include="WebActivatorEx" Version="2.2.0" />
 +    <!-- Not in webForCore: the WS-Federation provider (Security/FederationAuthenticationProvider.cs). Its Katana 3.0.1
 +         dependencies would clash with webForCore's Microsoft.Owin (FINDINGS F5). -->

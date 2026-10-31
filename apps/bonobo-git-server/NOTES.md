@@ -1,7 +1,7 @@
 # Bonobo Git Server: migration notes
 
-Status: blocked (webForCore bugs F8, F1). Source: https://github.com/jakubgarfield/Bonobo-Git-Server at `6277ecfe`
-(master, 2021). MIT. webForCore 0.1.0 packages.
+Status: migrated (webForCore 0.2.0, all probes pass).
+(master, 2021). MIT. webForCore 0.1.0 packages (0.2.0 from round 2).
 
 ## Assessment
 
@@ -56,7 +56,15 @@ customErrors off, the error is [F1](../../FINDINGS.md#f1): WebActivatorEx's `Pre
 Nothing runs past that point, so SQLite (1.0.104 has no .NET build; 1.0.119 would be the upgrade), LibGit2Sharp
 0.23.1 (`net40`, native binaries for Linux included) and git over HTTP are untested.
 
+### Round 2: webForCore 0.2.0
+
+All 9 probes pass on the released 0.2.0 packages (the overlay's `PackageReference`s moved from 0.1.0 to 0.2.0). The round-1 failures above were fixed in webForCore PR #16 and are kept as the record of round 1.
+
+Overlay changes for 0.2.0: System.Data.SQLite 1.0.104 → 1.0.119 (1.0.104 ships only the Windows `SQLite.Interop.dll`; 1.0.119 has `runtimes/linux-x64/native`), `System.Data.SQLite.Linq` dropped (merged into the main package); `Microsoft.AspNet.Mvc`, `.WebPages` and `.Razor` 3.2.7 referenced with `ExcludeAssets="all"` because Unity.Mvc pulls them in and their `System.Web.Razor` 3.0 replaced webForCore's (MissingMethodException in `MvcCSharpRazorCodeGenerator.SetBaseType`; `docs/MIGRATING.md`, "Packages that need more than a reference"). The SQLite database is created by `AutomaticUpdater` on the first request and the log-on page renders. `/packages.config` answers 200 with the app's own "404 Page Not Found" page: web.config clears requestFiltering's `fileExtensions`/`hiddenSegments`, and `Application_Error` calls `Response.Clear()` (which resets the status to 200, as on .NET Framework) before rendering `Home/PageNotFound`. The file is not served; the probe is overridden in `app.toml` to check that. Repository hosting over HTTP and LibGit2Sharp are still untested.
+
 ## Open problems
+
+Round 1 (webForCore 0.1.0); the webForCore bugs below are fixed in 0.2.0 (PR #16) and kept for the record.
 
 - [F8](../../FINDINGS.md#f8) (webForCore bug): `IHtmlString` ambiguous in compiled code. Blocks the build.
 - [F1](../../FINDINGS.md#f1) (webForCore bug): WebActivatorEx can't read appSettings. Blocks every request.

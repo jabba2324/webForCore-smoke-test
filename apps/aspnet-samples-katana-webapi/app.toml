@@ -7,8 +7,8 @@ site = "samples/aspnet/Katana/WebApi"
 project = "samples/aspnet/Katana/WebApi/WebApi.csproj"
 kinds = ["webapi", "owin"]
 licence = "Apache-2.0"
-status = "blocked"
-notes = "All app probes pass (Web API on OWIN, XmlSerializer); only the served W3C log (F4) fails."
+status = "migrated"
+notes = "webForCore 0.2.0: passes all 8 probes with the round-1 overlay moved to the 0.2.0 packages."
 
 # The first request compiles the site, so it gets 120 s.
 [[probes]]

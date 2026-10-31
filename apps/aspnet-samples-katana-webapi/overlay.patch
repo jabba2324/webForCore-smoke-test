@@ -26,7 +26,7 @@ index 0000000..6a1813e
 +    }
 +}
 diff --git a/samples/aspnet/Katana/WebApi/WebApi.csproj b/samples/aspnet/Katana/WebApi/WebApi.csproj
-index ce64f0b..f9e255e 100644
+index ce64f0b..f05f353 100644
 --- a/samples/aspnet/Katana/WebApi/WebApi.csproj
 +++ b/samples/aspnet/Katana/WebApi/WebApi.csproj
 @@ -1,140 +1,37 @@
@@ -151,9 +151,9 @@ index ce64f0b..f9e255e 100644
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 -    <Compile Include="Startup.cs" />
 +    <!-- webForCore 0.1.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.Http.Owin" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.1.0" />
++    <PackageReference Include="webForCore" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Http.Owin" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.2.0" />
    </ItemGroup>
 +
    <ItemGroup>

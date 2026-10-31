@@ -7,8 +7,8 @@ site = "aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client/sam
 project = "aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client/sample/server/ProductsApp/ProductsApp.csproj"
 kinds = ["webapi"]
 licence = "MIT"
-status = "blocked"
-notes = "All app probes pass; only the served W3C log (F4) fails."
+status = "migrated"
+notes = "webForCore 0.2.0: passes all 10 probes with the round-1 overlay moved to the 0.2.0 packages."
 
 # The first request compiles the site, so it gets 120 s.
 [[probes]]

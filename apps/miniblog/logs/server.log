@@ -1,7 +1,7 @@
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application 578c5743 (start 1, in a PseudoAppDomain).
+      Started application 31f35f6d (start 1, in a PseudoAppDomain).
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://127.0.0.1:55435
+      Now listening on: http://127.0.0.1:56133
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
@@ -9,93 +9,80 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Content root path: <repo>/apps/miniblog/src/Website
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55435/ - - -
-fail: WebFormsForCore.Hosting.IIS.IISModules[0]
-      The <rewrite> rules for / cannot be used.
-      System.NotSupportedException: Wildcard syntax is not supported
-         at Microsoft.AspNetCore.Rewrite.IISUrlRewrite.UrlRewriteRuleBuilder.AddUrlMatch(String input, Boolean ignoreCase, Boolean negate, PatternSyntax patternSyntax)
-         at Microsoft.AspNetCore.Rewrite.IISUrlRewrite.UrlRewriteFileParser.ParseRuleAttributes(XElement rule, UrlRewriteRuleBuilder builder)
-         at Microsoft.AspNetCore.Rewrite.IISUrlRewrite.UrlRewriteFileParser.ParseRules(XElement rules, IList`1 result, Boolean global)
-         at Microsoft.AspNetCore.Rewrite.IISUrlRewrite.UrlRewriteFileParser.Parse(TextReader reader, Boolean alwaysUseManagedServerVariables)
-         at Microsoft.AspNetCore.Rewrite.IISUrlRewriteOptionsExtensions.AddIISUrlRewrite(RewriteOptions options, TextReader reader, Boolean alwaysUseManagedServerVariables)
-         at WebFormsForCore.Hosting.IIS.InboundRewrite.<>c__DisplayClass10_0.<Rules>b__1(String _)
+      Request starting HTTP/1.1 GET http://127.0.0.1:56133/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55435/post/test-1 - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:56133/post/test-1 - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55435/Index.cshtml - 200 5298 text/html;+charset=utf-8 1656.8930ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:56133/Index.cshtml - 200 5298 text/html;+charset=utf-8 1707.0874ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:56133/Index.cshtml?slug=test-1 - 200 2721 text/html;+charset=utf-8 22.1964ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55435/category/Test - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:56133/category/Chrome - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:56133/Index.cshtml?category=Chrome&page= - 200 4627 text/html;+charset=utf-8 9.0775ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55435/feed/rss/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:56133/feed/rss/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55435/category/Test - 404 2680 text/html;+charset=utf-8 7.4176ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55435/post/test-1 - 404 2678 text/html;+charset=utf-8 67.8669ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55435/feed/rss/ - 404 2676 text/html;+charset=utf-8 2.8545ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:56133/feed/rss/ - 200 3644 text/xml;+charset=utf-8 43.3118ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55435/robots.txt - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:56133/robots.txt - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55435/robots.txt - 404 2677 text/html;+charset=utf-8 2.1877ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:56133/views/robots/robots.cshtml - 200 78 text/plain;+charset=utf-8 84.3902ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55435/sitemap.xml - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:56133/sitemap.xml - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55435/sitemap.xml - 404 2678 text/html;+charset=utf-8 1.9359ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:56133/views/robots/sitemap.cshtml - 200 429 text/xml;+charset=utf-8 2.9373ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55435/views/login.cshtml - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:56133/views/login.cshtml - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55435/views/login.cshtml - 200 2487 text/html;+charset=utf-8 94.2905ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:56133/views/login.cshtml - 200 2487 text/html;+charset=utf-8 97.9098ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55435/metaweblog - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:56133/metaweblog - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55435/metaweblog - 404 2677 text/html;+charset=utf-8 2.9350ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:56133/metaweblog - 200 5709 text/html 59.0757ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55435/views/robots/rsd - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:56133/views/robots/rsd - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55435/views/robots/rsd - 200 376 text/xml;+charset=utf-8 129.9888ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:56133/views/robots/rsd - 200 376 text/xml;+charset=utf-8 3.1422ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55435/themes/OneColumn/site.css - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:56133/themes/OneColumn/site.css - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55435/themes/OneColumn/site.css - 200 2729 text/css;+charset=utf-8 120.8933ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:56133/themes/OneColumn/site.css - 200 2729 text/css;+charset=utf-8 115.0740ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55435/posts/9fa751db-c036-435b-97e3-bd6373b0991b.xml - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:56133/posts/9fa751db-c036-435b-97e3-bd6373b0991b.xml - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55435/posts/9fa751db-c036-435b-97e3-bd6373b0991b.xml - 200 5071 text/xml 19.3217ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:56133/posts/9fa751db-c036-435b-97e3-bd6373b0991b.xml - 403 9 text/plain;+charset=utf-8 2.6957ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55435/no-such-page - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:56133/no-such-page - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55435/no-such-page - 404 2679 text/html;+charset=utf-8 2.0329ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:56133/no-such-page - 404 2679 text/html;+charset=utf-8 60.0840ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55435/web.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:56133/web.config - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55435/web.config - 404 252 text/html 2.4846ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:56133/web.config - 404 252 text/html 3.0348ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55435/App_Data/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:56133/App_Data/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55435/App_Data/ - 404 252 text/html 0.6615ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:56133/App_Data/ - 404 252 text/html 0.7647ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55435/Global.asax.cs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:56133/Global.asax.cs - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55435/Global.asax.cs - 404 215 text/html 0.5945ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:56133/Global.asax.cs - 404 215 text/html 0.7438ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55435/obj/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:56133/obj/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55435/obj/ - 404 252 text/html 0.5389ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:56133/obj/ - 404 252 text/html 0.7833ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55435/packages.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:56133/packages.config - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55435/packages.config - 404 215 text/html 0.5139ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:56133/packages.config - 404 215 text/html 0.6955ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55435/bin_dotnet/MiniBlog.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:56133/bin_dotnet/MiniBlog.dll - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55435/bin_dotnet/MiniBlog.dll - 404 252 text/html 1.5318ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55435/logs/W3SVC1/u_ex20261031.0000.txt - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55435/logs/W3SVC1/u_ex20261031.0000.txt - 200 1461 text/plain 3.0426ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:56133/bin_dotnet/MiniBlog.dll - 404 252 text/html 1.6348ms
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application 578c5743 (start 1) is shutting down.
+      Application 31f35f6d (start 1) is shutting down.
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application 578c5743 (start 1) is unloading.
+      Application 31f35f6d (start 1) is unloading.

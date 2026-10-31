@@ -1,5 +1,5 @@
 diff --git a/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client/sample/server/ProductsApp/ProductsApp.csproj b/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client/sample/server/ProductsApp/ProductsApp.csproj
-index 8fd9e6225..b30ff0eab 100644
+index 8fd9e6225..cf14a917b 100644
 --- a/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client/sample/server/ProductsApp/ProductsApp.csproj
 +++ b/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client/sample/server/ProductsApp/ProductsApp.csproj
 @@ -1,144 +1,36 @@
@@ -129,8 +129,8 @@ index 8fd9e6225..b30ff0eab 100644
 -      <DependentUpon>Web.config</DependentUpon>
 -    </None>
 +    <!-- webForCore 0.1.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.1.0" />
++    <PackageReference Include="webForCore" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.2.0" />
    </ItemGroup>
 +
    <ItemGroup>

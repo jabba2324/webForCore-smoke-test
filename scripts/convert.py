@@ -4,7 +4,7 @@
     scripts/convert.py apps/<id>/src/<web project>.csproj [--lib apps/<id>/src/<library>.csproj]...
 
 - copies each project to <name>.csproj.netfx (once) and rewrites it as an SDK-style net11.0 project;
-- adds the webForCore packages for the frameworks it references ($WEBFORCORE_VERSION, default 0.1.0); keeps the app's
+- adds the webForCore packages for the frameworks it references ($WEBFORCORE_VERSION, default 0.2.0); keeps the app's
   other packages (from packages.config or PackageReference), drops Microsoft's ASP.NET packages and the System.*
   packages that are part of .NET, and raises the versions webForCore forces (FINDINGS.md F7); keeps HintPath
   references outside packages/;
@@ -12,18 +12,22 @@
 - gives the web project a Program.cs (with session state if the code uses Session) and removes <system.codedom>.
 
 It prints what it did, for NOTES.md. It is a starting point, not the whole migration: check its output, then build.
-It doesn't handle packages that bring Microsoft's ASP.NET packages back transitively (F5), Katana packages
-webForCore doesn't provide (F15), lib/net45 assemblies NuGet skips (F6), connection strings or Linux paths.
+It keeps the Katana providers webForCore doesn't provide (Google, Facebook, WsFederation, ...) with their Katana
+dependencies excluded. It doesn't handle packages that bring Microsoft's ASP.NET packages back transitively (F5),
+lib/net45 assemblies NuGet skips (F6), connection strings or Linux paths.
 Standard library only (Python 3.11+)."""
 import re, shutil, sys
 from pathlib import Path
 
-WFC = __import__("os").environ.get("WEBFORCORE_VERSION", "0.1.0")
+WFC = __import__("os").environ.get("WEBFORCORE_VERSION", "0.2.0")
 DROP = re.compile(r"(?i)^(Microsoft\.AspNet\.(Mvc|Razor|WebPages|WebApi.*|Web\.Optimization.*|Cors|SignalR.*|Identity.*|Providers.*|FriendlyUrls.*|ScriptManager.*|TelemetryCorrelation|SessionState.*)|Microsoft\.Owin.*|Owin|Microsoft\.Web\.Infrastructure|WebGrease|Antlr|Microsoft\.CodeDom\.Providers\..*|Microsoft\.Net\.Compilers.*|Microsoft\.Net\.Compilers\.Toolset|"
                   r"System\.(Buffers|Memory|Numerics\.Vectors|Runtime\.CompilerServices\.Unsafe|Threading\.Tasks\.Extensions|ValueTuple|Net\.Http|IO|IO\.Compression|IO\.Compression\.ZipFile|Diagnostics\.DiagnosticSource|Threading\.Channels|IO\.Pipelines|Text\.Encodings\.Web|Text\.Json|Runtime|Collections\.Immutable|Reflection\.Metadata|Security\.Cryptography\..*|Net\.Primitives|Net\.Sockets|Linq|Console|Globalization)|Microsoft\.Bcl.*|NETStandard\.Library|Microsoft\.CSharp)$")
 # Microsoft packages webForCore doesn't replace, kept (they may load): the ones in DROP's Microsoft.AspNet group that
 # aren't replaced are re-added below from KEEP_MS.
 KEEP_MS = re.compile(r"(?i)^Microsoft\.AspNet\.(FriendlyUrls.*|ScriptManager.*|TelemetryCorrelation|SessionState.*|Providers.*)$")
+# Katana packages webForCore doesn't lift (docs/MIGRATING.md, "Katana packages webForCore doesn't lift"): kept, with
+# their Microsoft.Owin and Microsoft.Owin.Security dependencies excluded so webForCore's Microsoft.Owin is the only one.
+KATANA_KEEP = re.compile(r"(?i)^Microsoft\.Owin\.Security\.(Facebook|Google|MicrosoftAccount|Twitter|WsFederation|Jwt|OpenIdConnect|ActiveDirectory)$")
 MIN_VERSIONS = {"newtonsoft.json": "13.0.4", "entityframework": "6.5.1"}
 FRAMEWORKS = [  # (regex over references and packages, webForCore package)
     (r"System\.Web\.Mvc\b|Microsoft\.AspNet\.Mvc\b", "webForCore.Web.Mvc"),
@@ -47,6 +51,7 @@ FRAMEWORKS = [  # (regex over references and packages, webForCore package)
     (r"Microsoft\.AspNet\.SignalR\.SystemWeb|Microsoft\.AspNet\.SignalR\b", "webForCore.Microsoft.AspNet.SignalR.SystemWeb"),
     (r"System\.Web\.DataVisualization", "webForCore.Web.DataVisualization"),
     (r"AjaxControlToolkit", "webForCore.AjaxControlToolkit"),
+    (r"(?<![\w.])WebGrease\b", "webForCore.WebGrease"),
 ]
 WEB_PROPS = """    <TargetFramework>net11.0</TargetFramework>
     <OutputType>Exe</OutputType>{names}
@@ -72,6 +77,17 @@ def version_key(v):
     return [int(x) if x.isdigit() else 0 for x in re.split(r"[.-]", v)]
 
 
+def real_case(base, rel):
+    """rel (a / path relative to base) with each segment in its case on disk, where it differs only by case."""
+    cur, parts = base, []
+    for seg in rel.split("/"):
+        if seg in ("", ".", "..") or (cur / seg).exists() or not cur.is_dir():
+            parts.append(seg); cur = cur / seg; continue
+        match = next((c.name for c in cur.iterdir() if c.name.lower() == seg.lower()), seg)
+        parts.append(match); cur = cur / match
+    return "/".join(parts)
+
+
 def convert(proj, web):
     report = []
     netfx = proj.with_name(proj.name + ".netfx")
@@ -84,6 +100,9 @@ def convert(proj, web):
     names = "".join(f"\n    <{t}>{m.group(1)}</{t}>" for t, m in (("RootNamespace", ns), ("AssemblyName", asm)) if m)
     compiles = [c.replace("\\", "/") for c in re.findall(r'<Compile Include="([^"]+)"', old)]
     asminfo = "\n    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>" if any(c.endswith("AssemblyInfo.cs") for c in compiles) else ""
+    # AssemblyVersion("2.0.*") is CS8357 in an SDK-style project, which is deterministic by default.
+    if any(re.search(r'AssemblyVersion\("[^"]*\*', p.read_text(errors="replace")) for p in d.rglob("AssemblyInfo.cs")):
+        asminfo += "\n    <Deterministic>false</Deterministic>"
     # packages
     pkgs = {}
     pc = d / "packages.config"
@@ -99,7 +118,7 @@ def convert(proj, web):
         wfc = [p for p in wfc if p not in ("webForCore.Web.WebPages.Razor",)]
     kept, dropped = [], []
     for name, ver in sorted(pkgs.items(), key=lambda kv: kv[0].lower()):
-        if DROP.match(name) and not KEEP_MS.match(name):
+        if DROP.match(name) and not KEEP_MS.match(name) and not KATANA_KEEP.match(name):
             dropped.append(name)
             continue
         low = name.lower()
@@ -107,17 +126,21 @@ def convert(proj, web):
             report.append(f"{name} {ver} -> {MIN_VERSIONS[low]}")
             ver = MIN_VERSIONS[low]
         kept.append((name, ver))
+    katana = sorted({v for n, v in kept if KATANA_KEEP.match(n)}, key=version_key)
+    excluded = [("Microsoft.Owin", katana[-1]), ("Microsoft.Owin.Security", katana[-1])] if katana else []
     hints = []
     for m in re.finditer(r'<Reference\s+Include="([^",]+)[^"]*"[^>]*>\s*(?:<[^H][^>]*>[^<]*</[^>]+>\s*)*<HintPath>([^<]+)</HintPath>', old):
         name, hint = m.group(1), m.group(2).replace("\\", "/")
         if "/packages/" in "/" + hint:
             continue
-        hints.append((name, hint))
+        hints.append((name, real_case(d, hint)))
     # compile list: anything the SDK glob adds that the old project didn't compile
     globbed = {str(p.relative_to(d)) for p in d.rglob("*.cs") if not any(x in p.relative_to(d).parts for x in ("bin", "obj", "bin_dotnet"))
                and not str(p.relative_to(d)).lower().startswith("app_code/")}
-    extra = sorted(globbed - set(compiles) - {"Program.cs"})
-    missing = sorted(set(c for c in compiles if not c.startswith("..")) - globbed)
+    listed = {c.lower() for c in compiles}
+    on_disk = {g.lower() for g in globbed}
+    extra = sorted(g for g in globbed if g.lower() not in listed and g != "Program.cs")
+    missing = sorted(c for c in set(compiles) if not c.startswith("..") and c.lower() not in on_disk)
     linked = [c for c in compiles if c.startswith("..")]
     projrefs = [r.replace("\\", "/") for r in re.findall(r'<ProjectReference\s+Include="([^"]+)"', old)]
     props = (WEB_PROPS if web else LIB_PROPS).format(names=names, asminfo=asminfo, razor=RAZOR if web and list(d.rglob("*.cshtml")) else "")
@@ -134,6 +157,9 @@ def convert(proj, web):
     if kept or hints:
         out += ["  <ItemGroup>", "    <!-- The app's own libraries. -->", *[f'    <PackageReference Include="{n}" Version="{v}" />' for n, v in kept],
                 *[f'    <Reference Include="{n}" HintPath="{h}" />' for n, h in hints], "  </ItemGroup>", ""]
+    if excluded:
+        out += ["  <ItemGroup>", "    <!-- Katana dependencies of the providers above: webForCore's Microsoft.Owin replaces them. -->",
+                *[f'    <PackageReference Include="{n}" Version="{v}" ExcludeAssets="all" />' for n, v in excluded], "  </ItemGroup>", ""]
     if projrefs:
         out += ["  <ItemGroup>", *[f'    <ProjectReference Include="{r}" />' for r in projrefs], "  </ItemGroup>", ""]
     out.append("</Project>")
