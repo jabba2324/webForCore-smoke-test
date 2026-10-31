@@ -8,14 +8,14 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 
 | # | Problem | Classification | Apps | Raised |
 | --- | --- | --- | --- | --- |
-| [F1](#f1) | .NET Framework libraries get a second `ConfigurationManager` that can't read web.config | webForCore bug | eshop-legacy-mvc, eshop-legacy-webforms | [#1](https://github.com/jabba2324/webForCore/issues/1) |
+| [F1](#f1) | .NET Framework libraries get a second `ConfigurationManager` that can't read web.config | webForCore bug | eshop-legacy-mvc, eshop-legacy-webforms, bonobo-git-server | [#1](https://github.com/jabba2324/webForCore/issues/1) |
 | [F2](#f2) | `CacheDependency` on one file under two spellings throws on Linux (bundling) | webForCore bug | eshop-legacy-mvc | [#2](https://github.com/jabba2324/webForCore/issues/2) |
 | [F3](#f3) | `AppDomain.CurrentDomain.BaseDirectory` is `bin_dotnet/`, not the site root | webForCore bug | eshop-legacy-mvc | [#3](https://github.com/jabba2324/webForCore/issues/3) |
 | [F4](#f4) | W3C logs are written inside the site and served over HTTP | webForCore bug (security) | every app using `AddWebForms()` | [draft advisory](https://github.com/jabba2324/webForCore/security/advisories/GHSA-vh52-xcrc-hq5h) (private) |
-| [F5](#f5) | Third-party packages bring Microsoft's ASP.NET packages back transitively (CS0433) | guide gap | eshop-legacy-mvc | [#4](https://github.com/jabba2324/webForCore/issues/4) |
+| [F5](#f5) | Third-party packages bring Microsoft's ASP.NET packages back transitively (CS0433) | guide gap | eshop-legacy-mvc, bonobo-git-server | [#4](https://github.com/jabba2324/webForCore/issues/4) |
 | [F6](#f6) | A `lib/net45`-only package with a `build/` folder restores with no assembly | guide gap | eshop-legacy-mvc, eshop-legacy-webforms | [#5](https://github.com/jabba2324/webForCore/issues/5) |
-| [F7](#f7) | Packages that must be upgraded: EF 6.2 → 6.4+, Newtonsoft.Json 12 → 13 | guide gap | eshop-legacy-mvc, eshop-legacy-webforms | [#6](https://github.com/jabba2324/webForCore/issues/6) |
-| [F8](#f8) | `HttpUtility` in app code is CS0433 outside webForCore's repository | webForCore bug | eshop-legacy-webforms | [#7](https://github.com/jabba2324/webForCore/issues/7) |
+| [F7](#f7) | Packages that must be upgraded: EF 6.2 → 6.4+, Newtonsoft.Json 12 → 13 | guide gap | eshop-legacy-mvc, eshop-legacy-webforms, bonobo-git-server | [#6](https://github.com/jabba2324/webForCore/issues/6) |
+| [F8](#f8) | `HttpUtility` in app code is CS0433 outside webForCore's repository | webForCore bug | eshop-legacy-webforms, bonobo-git-server | [#7](https://github.com/jabba2324/webForCore/issues/7) |
 | [F9](#f9) | Data controls with `ItemType` need System.Web.DynamicData, which isn't built | documented gap (consequence undocumented) | eshop-legacy-webforms | [#8](https://github.com/jabba2324/webForCore/issues/8) |
 | [F10](#f10) | .NET Framework assemblies that are NuGet packages on .NET (System.ServiceModel.Syndication) | guide gap | miniblog | [#9](https://github.com/jabba2324/webForCore/issues/9) |
 | [F11](#f11) | One URL Rewrite feature ASP.NET Core lacks (Wildcard syntax, `{CACHE_URL}`) drops every rule, failing open | webForCore bug | miniblog | [#10](https://github.com/jabba2324/webForCore/issues/10) |
@@ -29,7 +29,8 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 
 **.NET Framework libraries get a second `ConfigurationManager` that can't read web.config.** webForCore bug. Raised as [#1](https://github.com/jabba2324/webForCore/issues/1).
 
-- **Apps:** eshop-legacy-mvc, eshop-legacy-webforms (`Microsoft.AspNet.SessionState.SessionStateModule` 1.1.0, which web.config's
+- **Apps:** bonobo-git-server (WebActivatorEx 2.2.0, which reads `AppSettings` in its PreApplicationStartMethod, so
+  the whole site fails); eshop-legacy-mvc, eshop-legacy-webforms (`Microsoft.AspNet.SessionState.SessionStateModule` 1.1.0, which web.config's
   `<system.webServer><modules>` puts in place of the session module). Likely any `net4x` library that calls
   `ConfigurationManager`: it is compiled against `System.Configuration, Version=4.0.0.0`.
 - **Error**, on every request, from `SessionStateModuleAsync.Init`:
@@ -191,14 +192,18 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
   2022.
 - `Newtonsoft.Json` below 13.0.4 is a restore error: `NU1605: Detected package downgrade: Newtonsoft.Json from 13.0.4
   to 12.0.1` (`eShopLegacyMVC -> webForCore.Web.Optimization -> Newtonsoft.Json (>= 13.0.4)`; System.Net.Http.Formatting
-  references 13.0.4 too). The guide could list the minimum versions webForCore's assemblies
+  references 13.0.4 too).
+- `Microsoft.IdentityModel.Tokens` below 8.19.1 is a restore error too (bonobo-git-server had 5.1.3, from
+  WS-Federation): `NU1605 ... webForCore -> webForCore.Web.Extensions -> CoreWCF.Http -> Microsoft.IdentityModel.Tokens
+  (>= 8.19.1)`. So every app gets CoreWCF and IdentityModel 8 through the "Always" set. The guide could list the minimum versions webForCore's assemblies
   impose.
 
 ## F8
 
 **`HttpUtility` in app code is CS0433 outside webForCore's repository.** webForCore bug. Raised as [#7](https://github.com/jabba2324/webForCore/issues/7).
 
-- **Apps:** eshop-legacy-webforms (`ViewSwitcher.ascx.cs:39`, `HttpUtility.UrlEncode`), the Visual Studio Web Forms
+- **Apps:** bonobo-git-server (`IHtmlString`: every type in the framework's `System.Web.HttpUtility.dll` clashes);
+  eshop-legacy-webforms (`ViewSwitcher.ascx.cs:39`, `HttpUtility.UrlEncode`), the Visual Studio Web Forms
   template's own code. Any compiled code (code-behind, controllers, libraries) that names `HttpUtility`.
 - **Error:** `CS0433: The type 'HttpUtility' exists in both 'System.Web.HttpUtility, Version=11.0.0.0, Culture=neutral,
   PublicKeyToken=cc7b13ffcd2ddd51' and 'System.Web, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'`.

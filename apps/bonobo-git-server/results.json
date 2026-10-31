@@ -1,0 +1,47 @@
+{
+  "id": "bonobo-git-server",
+  "stages": {
+    "assess": {
+      "at": "2026-10-31T10:15:18+00:00",
+      "blockers": {
+        "ef-objectcontext": [
+          "Data/Update/AutomaticUpdater.cs:48",
+          "Data/Update/AutomaticUpdater.cs:65"
+        ],
+        "windows-auth": [
+          "Owin/WindowsAuthenticationHandshake.cs:76",
+          "Owin/WindowsAuthenticationHandshake.cs:76"
+        ]
+      },
+      "kinds": [
+        "ef6",
+        "mvc",
+        "owin",
+        "webpages"
+      ],
+      "status": "blocked",
+      "summary": "ef-objectcontext, windows-auth",
+      "target_frameworks": [
+        "v4.6"
+      ]
+    },
+    "build": {
+      "at": "2026-10-31T10:46:21+00:00",
+      "error_count": 1,
+      "errors": [
+        "error CS0433: The type 'IHtmlString' exists in both 'System.Web.HttpUtility, Version=11.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51' and 'System.Web, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' "
+      ],
+      "log": "apps/bonobo-git-server/logs/build.log",
+      "seconds": 0,
+      "status": "fail",
+      "summary": "1 distinct errors",
+      "webforcore": "packages 0.1.0"
+    },
+    "fetch": {
+      "at": "2026-10-31T10:15:17+00:00",
+      "commit": "6277ecfe1015b4612795bf8bb0f03ae2dd25b1ad",
+      "overlay": false,
+      "status": "pass"
+    }
+  }
+}
