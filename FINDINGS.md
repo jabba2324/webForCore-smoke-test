@@ -7,13 +7,15 @@ shown.
 
 | # | Problem | Classification | Apps |
 | --- | --- | --- | --- |
-| [F1](#f1) | .NET Framework libraries get a second `ConfigurationManager` that can't read web.config | webForCore bug | eshop-legacy-mvc |
+| [F1](#f1) | .NET Framework libraries get a second `ConfigurationManager` that can't read web.config | webForCore bug | eshop-legacy-mvc, eshop-legacy-webforms |
 | [F2](#f2) | `CacheDependency` on one file under two spellings throws on Linux (bundling) | webForCore bug | eshop-legacy-mvc |
 | [F3](#f3) | `AppDomain.CurrentDomain.BaseDirectory` is `bin_dotnet/`, not the site root | webForCore bug | eshop-legacy-mvc |
 | [F4](#f4) | W3C logs are written inside the site and served over HTTP | webForCore bug (security) | every app using `AddWebForms()` |
 | [F5](#f5) | Third-party packages bring Microsoft's ASP.NET packages back transitively (CS0433) | guide gap | eshop-legacy-mvc |
-| [F6](#f6) | A `lib/net45`-only package with a `build/` folder restores with no assembly | guide gap | eshop-legacy-mvc |
-| [F7](#f7) | Packages that must be upgraded: EF 6.2 → 6.4+, Newtonsoft.Json 12 → 13 | guide gap | eshop-legacy-mvc |
+| [F6](#f6) | A `lib/net45`-only package with a `build/` folder restores with no assembly | guide gap | eshop-legacy-mvc, eshop-legacy-webforms |
+| [F7](#f7) | Packages that must be upgraded: EF 6.2 → 6.4+, Newtonsoft.Json 12 → 13 | guide gap | eshop-legacy-mvc, eshop-legacy-webforms |
+| [F8](#f8) | `HttpUtility` in app code is CS0433 outside webForCore's repository | webForCore bug | eshop-legacy-webforms |
+| [F9](#f9) | Data controls with `ItemType` need System.Web.DynamicData, which isn't built | documented gap (consequence undocumented) | eshop-legacy-webforms |
 
 ---
 
@@ -21,7 +23,7 @@ shown.
 
 **.NET Framework libraries get a second `ConfigurationManager` that can't read web.config.** webForCore bug.
 
-- **Apps:** eshop-legacy-mvc (`Microsoft.AspNet.SessionState.SessionStateModule` 1.1.0, which web.config's
+- **Apps:** eshop-legacy-mvc, eshop-legacy-webforms (`Microsoft.AspNet.SessionState.SessionStateModule` 1.1.0, which web.config's
   `<system.webServer><modules>` puts in place of the session module). Likely any `net4x` library that calls
   `ConfigurationManager`: it is compiled against `System.Configuration, Version=4.0.0.0`.
 - **Error**, on every request, from `SessionStateModuleAsync.Init`:
@@ -182,3 +184,46 @@ shown.
   to 12.0.1` (`eShopLegacyMVC -> webForCore.Web.Optimization -> Newtonsoft.Json (>= 13.0.4)`; System.Net.Http.Formatting
   references 13.0.4 too). The guide could list the minimum versions webForCore's assemblies
   impose.
+
+## F8
+
+**`HttpUtility` in app code is CS0433 outside webForCore's repository.** webForCore bug.
+
+- **Apps:** eshop-legacy-webforms (`ViewSwitcher.ascx.cs:39`, `HttpUtility.UrlEncode`), the Visual Studio Web Forms
+  template's own code. Any compiled code (code-behind, controllers, libraries) that names `HttpUtility`.
+- **Error:** `CS0433: The type 'HttpUtility' exists in both 'System.Web.HttpUtility, Version=11.0.0.0, Culture=neutral,
+  PublicKeyToken=cc7b13ffcd2ddd51' and 'System.Web, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'`.
+- **Cause:** the step that drops the shared framework's `System.Web.HttpUtility.dll` from the references
+  (`WebForCoreDropFrameworkHttpUtility`) is in webForCore's own `Directory.Build.targets`, which only its own projects
+  import. `src/webForCore.WebStack.targets`, which apps import (and which the `webForCore.Web` package ships as
+  `buildTransitive/webForCore.Web.targets`), drops only the `System.Web.dll` facade. webForCore's samples and tests
+  never see the problem because they build inside the repository.
+- **Repro:** the minimal project from `docs/MIGRATING.md` section 2 with one file:
+  ```csharp
+  public static class Encode
+  {
+      public static string Html(string s) => System.Web.HttpUtility.HtmlEncode(s);   // CS0433
+  }
+  ```
+- **Fix belongs in webForCore:** move the target into `webForCore.WebStack.targets` (its condition on a project
+  reference to System.Web also needs to accept the package's reference). Run-time compiled pages aren't affected.
+
+## F9
+
+**Data controls with `ItemType` need System.Web.DynamicData, which isn't built.** Documented gap, but the
+consequence isn't.
+
+- **Apps:** eshop-legacy-webforms: `Default.aspx`'s `<asp:ListView ... ItemType="eShopLegacyWebForms.Models.CatalogItem">`.
+- **Error:** `FileNotFoundException: Could not load file or assembly 'System.Web.DynamicData, Version=4.0.0.0,
+  Culture=neutral, PublicKeyToken=31bf3856ad364e35'`, from `DataBoundControlHelper.EnableDynamicData`
+  (`src/WebFormsForCore.Web/UI/WebControls/DataBoundControlHelper.cs:133`) in `Control.InitRecursive`.
+- **Cause:** as in .NET Framework 4.5+, `GridView`, `ListView`, `Repeater`, `FormView`, `DetailsView`,
+  `CheckBoxList` and `RadioButtonList` call `DataControlExtensions.EnableDynamicData` in `OnInit` whenever `ItemType`
+  is set, so every strongly-typed data control (the 4.5 model binding pattern) loads System.Web.DynamicData.
+  `docs/NAMESPACES.md` lists System.Web.DynamicData as "Not built by the solution" (`WebFormsForCore.slnx` has
+  `<Build Project="false" />` for it), which reads as "Dynamic Data sites don't work", not "typed data controls
+  don't work".
+- **Repro:** `<asp:Repeater runat="server" ItemType="System.String"><ItemTemplate><%# Item %></ItemTemplate></asp:Repeater>`
+  in any page.
+- **Fix belongs in webForCore:** build System.Web.DynamicData (at least `DataControlExtensions`), or document that
+  `ItemType` needs it.
