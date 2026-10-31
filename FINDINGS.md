@@ -1,7 +1,8 @@
 # Findings
 
 One entry per distinct problem found while migrating apps. webForCore bugs and guide gaps are raised on
-[jabba2324/webForCore](https://github.com/jabba2324/webForCore/issues); security problems as a draft security advisory. See CLAUDE.md for the format. Every entry was found
+[jabba2324/webForCore](https://github.com/jabba2324/webForCore/issues), security problems included (webForCore is
+pre-release and not recommended for production). See CLAUDE.md for the format. Every entry was found
 with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 release packages (tag `v0.1.0`,
 `2942b694`), unless the entry says otherwise. Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
@@ -11,7 +12,7 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 | [F1](#f1) | .NET Framework libraries get a second `ConfigurationManager` that can't read web.config | webForCore bug | eshop-legacy-mvc, eshop-legacy-webforms, bonobo-git-server | [#1](https://github.com/jabba2324/webForCore/issues/1) |
 | [F2](#f2) | `CacheDependency` on one file under two spellings throws on Linux (bundling) | webForCore bug | eshop-legacy-mvc | [#2](https://github.com/jabba2324/webForCore/issues/2) |
 | [F3](#f3) | `AppDomain.CurrentDomain.BaseDirectory` is `bin_dotnet/`, not the site root | webForCore bug | eshop-legacy-mvc | [#3](https://github.com/jabba2324/webForCore/issues/3) |
-| [F4](#f4) | W3C logs are written inside the site and served over HTTP | webForCore bug (security) | every app using `AddWebForms()` (seen on 10) | [draft advisory](https://github.com/jabba2324/webForCore/security/advisories/GHSA-vh52-xcrc-hq5h) (private) |
+| [F4](#f4) | W3C logs are written inside the site and served over HTTP | webForCore bug (security) | every app using `AddWebForms()` (seen on 10) | [#15](https://github.com/jabba2324/webForCore/issues/15) |
 | [F5](#f5) | Third-party packages bring Microsoft's ASP.NET packages back transitively (CS0433) | guide gap | eshop-legacy-mvc, bonobo-git-server | [#4](https://github.com/jabba2324/webForCore/issues/4) |
 | [F6](#f6) | A `lib/net45`-only package with a `build/` folder restores with no assembly | guide gap | eshop-legacy-mvc, eshop-legacy-webforms | [#5](https://github.com/jabba2324/webForCore/issues/5) |
 | [F7](#f7) | Packages that must be upgraded: EF 6.2 → 6.4+, Newtonsoft.Json 12 → 13 | guide gap | eshop-legacy-mvc, eshop-legacy-webforms, bonobo-git-server | [#6](https://github.com/jabba2324/webForCore/issues/6) |
@@ -125,7 +126,7 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 
 ## F4
 
-**W3C logs are written inside the site and served over HTTP.** webForCore bug, with security impact. Raised as [draft advisory](https://github.com/jabba2324/webForCore/security/advisories/GHSA-vh52-xcrc-hq5h) (private).
+**W3C logs are written inside the site and served over HTTP.** webForCore bug, with security impact. Raised as [#15](https://github.com/jabba2324/webForCore/issues/15).
 
 - **Apps:** every app whose `Program.cs` calls `builder.Services.AddWebForms()` with the defaults, as
   `docs/MIGRATING.md` section 4 says. Found on eshop-legacy-mvc and confirmed on a minimal site.

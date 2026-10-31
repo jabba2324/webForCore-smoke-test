@@ -43,8 +43,8 @@ reproduction where you can make one, and the classification:
 
 Don't change webForCore itself from here. Write the finding up so it can be fixed there, and raise each webForCore
 bug and guide gap as an issue on [jabba2324/webForCore](https://github.com/jabba2324/webForCore/issues) (check for an
-existing one first), with the repro; link it from `FINDINGS.md`. Security problems go in a draft security advisory
-instead of a public issue. App/environment problems stay here.
+existing one first), with the repro; link it from `FINDINGS.md`. Security problems are public issues too: webForCore is pre-release and
+not recommended for production. App/environment problems stay here.
 
 ## Rules
 
