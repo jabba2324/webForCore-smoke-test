@@ -1,5 +1,5 @@
 diff --git a/CleanArchitectureAspNetMvc5.csproj b/CleanArchitectureAspNetMvc5.csproj
-index e4d9d2a..7e1015f 100644
+index e4d9d2a..d3d403b 100644
 --- a/CleanArchitectureAspNetMvc5.csproj
 +++ b/CleanArchitectureAspNetMvc5.csproj
 @@ -1,178 +1,35 @@
@@ -144,10 +144,10 @@ index e4d9d2a..7e1015f 100644
 -      <SubType>Code</SubType>
 -    </Compile>
 -    <Compile Include="Properties\AssemblyInfo.cs" />
-+    <!-- webForCore 0.1.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Web.Helpers" Version="0.2.0" />
++    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.Helpers" Version="0.4.0" />
    </ItemGroup>
 -  <ItemGroup>
 -    <Content Include="packages.config" />
