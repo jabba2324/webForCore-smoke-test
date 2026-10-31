@@ -18,3 +18,6 @@ Appended by `scripts/wfc.py`, one line per stage run.
 - 2026-10-31T10:22:18+00:00 **build**: pass
 - 2026-10-31T10:22:33+00:00 **smoke**: fail (6/15 probes)
 - 2026-10-31T10:24:33+00:00 **smoke**: fail (6/16 probes)
+- 2026-10-31T10:38:31+00:00 **assess**: blocked (dpapi-config)
+- 2026-10-31T10:38:42+00:00 **assess**: blocked (binaryformatter)
+- 2026-10-31T10:38:57+00:00 **assess**: pass (no blockers found)

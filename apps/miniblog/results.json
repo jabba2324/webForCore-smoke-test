@@ -2,11 +2,15 @@
   "id": "miniblog",
   "stages": {
     "assess": {
-      "at": "2026-10-31T10:29:22+00:00",
+      "at": "2026-10-31T10:38:58+00:00",
       "blockers": {},
-      "kinds": [
-        "webpages"
-      ],
+      "kinds": [],
+      "libraries": [],
+      "notices": {
+        "smtpclient-config": [
+          "app_code/handlers/CommentHandler.cs:84"
+        ]
+      },
       "status": "pass",
       "summary": "no blockers found",
       "target_frameworks": []

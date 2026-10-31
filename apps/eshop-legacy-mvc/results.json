@@ -2,7 +2,7 @@
   "id": "eshop-legacy-mvc",
   "stages": {
     "assess": {
-      "at": "2026-10-31T09:47:27+00:00",
+      "at": "2026-10-31T10:38:57+00:00",
       "blockers": {},
       "kinds": [
         "ef6",
@@ -10,9 +10,19 @@
         "webapi",
         "webpages"
       ],
+      "libraries": [
+        "eShopLegacyMVCSolution/eShopLegacy.Utilities"
+      ],
+      "notices": {
+        "binaryformatter": [
+          "eShopLegacyMVCSolution/eShopLegacy.Utilities/Serializing.cs:11",
+          "eShopLegacyMVCSolution/eShopLegacy.Utilities/Serializing.cs:19"
+        ]
+      },
       "status": "pass",
       "summary": "no blockers found",
       "target_frameworks": [
+        "v4.6.1",
         "v4.7.2"
       ]
     },
