@@ -1,6 +1,6 @@
 # eShopLegacyWebForms (eShopModernizing): migration notes
 
-Status: blocked (webForCore bugs F8, F1). Source: https://github.com/dotnet-architecture/eShopModernizing at
+Status: migrated (webForCore 0.2.0, all probes pass).
 `63bc9ec4` (archived; same commit as eshop-legacy-mvc). webForCore 0.1.0
 from its GitHub release packages (first migrated against the source at `4ec57209`; the results are the same).
 
@@ -56,7 +56,13 @@ the project, and the session module lines removed from web.config):
   as on IIS) and PNGs are served. The Autofac.Web, TelemetryCorrelation and Application Insights modules load.
 - With the faithful web.config, every request fails on [F1](../../FINDINGS.md#f1), as in eshop-legacy-mvc.
 
+### Round 2: webForCore 0.2.0
+
+All 14 probes pass on the released 0.2.0 packages (the overlay's `PackageReference`s moved from 0.1.0 to 0.2.0). The round-1 failures above were fixed in webForCore PR #16 and are kept as the record of round 1.
+
 ## Open problems
+
+Round 1 (webForCore 0.1.0); the webForCore bugs below are fixed in 0.2.0 (PR #16) and kept for the record.
 
 - [F8](../../FINDINGS.md#f8) (webForCore bug): `HttpUtility` is ambiguous in compiled app code. Blocks the build.
 - [F1](../../FINDINGS.md#f1) (webForCore bug): the session module can't read web.config. Blocks every request.

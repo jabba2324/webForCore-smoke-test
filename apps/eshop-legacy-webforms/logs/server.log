@@ -1,9 +1,9 @@
 info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
       User profile is available. Using '~/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application e38de744 (start 1, in a PseudoAppDomain).
+      Started application 87a0bab0 (start 1, in a PseudoAppDomain).
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://127.0.0.1:55097
+      Now listening on: http://127.0.0.1:55659
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
@@ -11,64 +11,64 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Content root path: <repo>/apps/eshop-legacy-webforms/src/eShopLegacyWebFormsSolution/src/eShopLegacyWebForms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55097/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55659/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55097/Default/index/1/size/10 - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55659/Default/index/1/size/10 - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55659/Default.aspx - 200 28167 text/html;+charset=utf-8 2874.6114ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55659/Default/index/1/size/10 - 200 9868 text/html;+charset=utf-8 17.3182ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55097/Catalog/Details/1 - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55659/Catalog/Details/1 - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55097/Default.aspx - 500 12101 text/html;+charset=utf-8 445.2094ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55097/Catalog/Details/1 - 500 12101 text/html;+charset=utf-8 3.0070ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55097/Default/index/1/size/10 - 500 12101 text/html;+charset=utf-8 8.0366ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:55659/Catalog/Details/1 - 200 4910 text/html;+charset=utf-8 203.0694ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55097/Catalog/Create - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55659/Catalog/Create - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55097/Catalog/Create - 500 12101 text/html;+charset=utf-8 1.6628ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:55659/Catalog/Create - 200 7571 text/html;+charset=utf-8 81.5329ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55097/About - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55659/About.aspx - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55097/About - 500 12101 text/html;+charset=utf-8 1.4001ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:55659/About.aspx - 200 2943 text/html;+charset=utf-8 7.2697ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55097/Content/site.css - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55659/Content/site.css - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55097/Content/site.css - 500 12101 text/html;+charset=utf-8 4.8053ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:55659/Content/site.css - 200 3849 text/css 48.5736ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55097/bundles/MsAjaxJs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55659/bundles/MsAjaxJs - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55097/bundles/MsAjaxJs - 500 12101 text/html;+charset=utf-8 1.6982ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:55659/bundles/MsAjaxJs - 200 145442 text/javascript;+charset=utf-8 21.8930ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55097/Pics/1.png - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55659/Pics/1.png - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55097/Pics/1.png - 500 12101 text/html;+charset=utf-8 1.7505ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:55659/Pics/1.png - 200 151640 image/png 2.6251ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55097/web.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55659/web.config - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55097/web.config - 404 252 text/html 2.2724ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:55659/web.config - 404 252 text/html 2.5540ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55097/App_Data/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55659/App_Data/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55097/App_Data/ - 404 252 text/html 0.4596ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:55659/App_Data/ - 404 252 text/html 0.6545ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55097/Global.asax.cs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55659/Global.asax.cs - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55097/Global.asax.cs - 404 215 text/html 0.3303ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:55659/Global.asax.cs - 404 215 text/html 0.6177ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55097/obj/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55659/obj/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55097/obj/ - 404 252 text/html 0.3358ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:55659/obj/ - 404 252 text/html 0.6007ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55097/packages.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55659/packages.config - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55097/packages.config - 404 215 text/html 0.2974ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:55659/packages.config - 404 215 text/html 0.5586ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55097/bin_dotnet/eShopLegacyWebForms.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55659/bin_dotnet/eShopLegacyWebForms.dll - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55097/bin_dotnet/eShopLegacyWebForms.dll - 404 252 text/html 0.5467ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:55659/bin_dotnet/eShopLegacyWebForms.dll - 404 252 text/html 1.2907ms
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application e38de744 (start 1) is shutting down.
+      Application 87a0bab0 (start 1) is shutting down.
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application e38de744 (start 1) is unloading.
+      Application 87a0bab0 (start 1) is unloading.

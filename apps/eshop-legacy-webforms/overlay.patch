@@ -59,7 +59,7 @@ index 225bea0..3bd981e 100644
  </configuration>
 \ No newline at end of file
 diff --git a/eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/eShopLegacyWebForms.csproj b/eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/eShopLegacyWebForms.csproj
-index 4d34a93..9c6e55f 100644
+index 4d34a93..2c2d993 100644
 --- a/eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/eShopLegacyWebForms.csproj
 +++ b/eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/eShopLegacyWebForms.csproj
 @@ -1,491 +1,53 @@
@@ -515,9 +515,9 @@ index 4d34a93..9c6e55f 100644
 -      <DependentUpon>Web.config</DependentUpon>
 -    </None>
 +    <!-- webForCore 0.1.0 packages (GitHub release): "webForCore" is the "Always" set; then bundling with its Web Forms controls. -->
-+    <PackageReference Include="webForCore" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.Optimization.WebForms" Version="0.1.0" />
++    <PackageReference Include="webForCore" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Optimization.WebForms" Version="0.2.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -1148,3 +1148,20 @@ index 100cf8a..0000000
 -  <package id="WebGrease" version="1.6.0" targetFramework="net472" />
 -</packages>
 \ No newline at end of file
+diff --git a/eShopLegacyWebFormsSolution/src/logs/eShopLegacyWebForms/W3SVC1/u_ex20261031.0000.txt b/eShopLegacyWebFormsSolution/src/logs/eShopLegacyWebForms/W3SVC1/u_ex20261031.0000.txt
+new file mode 100644
+index 0000000..0604e4a
+--- /dev/null
++++ b/eShopLegacyWebFormsSolution/src/logs/eShopLegacyWebForms/W3SVC1/u_ex20261031.0000.txt
+@@ -0,0 +1,11 @@
++#Version: 1.0
++#Start-Date: 2026-10-31 19:37:13
++#Fields: date time c-ip cs-username s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status time-taken cs(User-Agent) cs(Referer)
++2026-10-31 19:37:09 127.0.0.1 - 127.0.0.1 55659 GET / - 200 2871.2407 webForCore-smoke-test -
++2026-10-31 19:37:12 127.0.0.1 - 127.0.0.1 55659 GET /Default/index/1/size/10 - 200 16.923 webForCore-smoke-test -
++2026-10-31 19:37:12 127.0.0.1 - 127.0.0.1 55659 GET /Catalog/Details/1 - 200 202.9113 webForCore-smoke-test -
++2026-10-31 19:37:12 127.0.0.1 - 127.0.0.1 55659 GET /Catalog/Create - 200 81.3809 webForCore-smoke-test -
++2026-10-31 19:37:13 127.0.0.1 - 127.0.0.1 55659 GET /About.aspx - 200 7.0749 webForCore-smoke-test -
++2026-10-31 19:37:13 127.0.0.1 - 127.0.0.1 55659 GET /Content/site.css - 200 48.3879 webForCore-smoke-test -
++2026-10-31 19:37:13 127.0.0.1 - 127.0.0.1 55659 GET /bundles/MsAjaxJs - 200 21.6313 webForCore-smoke-test -
++2026-10-31 19:37:13 127.0.0.1 - 127.0.0.1 55659 GET /Pics/1.png - 200 2.4462 webForCore-smoke-test -
