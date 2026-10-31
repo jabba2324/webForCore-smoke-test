@@ -1,0 +1,131 @@
+{
+  "id": "open-order-framework",
+  "stages": {
+    "assess": {
+      "at": "2026-10-31T19:34:53+00:00",
+      "blockers": {},
+      "kinds": [
+        "ef6",
+        "identity",
+        "mvc",
+        "owin",
+        "webpages"
+      ],
+      "libraries": [],
+      "notices": {},
+      "status": "pass",
+      "summary": "no blockers found",
+      "target_frameworks": [
+        "v4.5.1"
+      ]
+    },
+    "build": {
+      "at": "2026-10-31T20:17:16+00:00",
+      "error_count": 0,
+      "errors": [],
+      "log": "apps/open-order-framework/logs/build.log",
+      "seconds": 1,
+      "status": "pass",
+      "summary": null,
+      "webforcore": "packages 0.2.0"
+    },
+    "fetch": {
+      "at": "2026-10-31T19:34:40+00:00",
+      "commit": "a6e2573643507b83db3c4b5921153737229b0200",
+      "overlay": false,
+      "status": "pass"
+    },
+    "smoke": {
+      "at": "2026-10-31T20:17:47+00:00",
+      "checks": [
+        {
+          "expected_text": "Home Page - Order Framework",
+          "ms": 901,
+          "ok": false,
+          "path": "/",
+          "status": 500,
+          "title": "Could not load file or assembly 'System.Net.Http.WebRequest, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'. The system cannot find the file specified.<br>"
+        },
+        {
+          "expected_text": "Browse Genres",
+          "ms": 15,
+          "ok": false,
+          "path": "/Store",
+          "status": 500,
+          "title": "Could not load file or assembly 'System.Net.Http.WebRequest, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'. The system cannot find the file specified.<br>"
+        },
+        {
+          "expected_text": "Shopping Cart - Order Framework",
+          "ms": 10,
+          "ok": false,
+          "path": "/ShoppingCart",
+          "status": 500,
+          "title": "Could not load file or assembly 'System.Net.Http.WebRequest, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'. The system cannot find the file specified.<br>"
+        },
+        {
+          "expected_text": "Log in - Order Framework",
+          "ms": 10,
+          "ok": false,
+          "path": "/Account/Login",
+          "status": 500,
+          "title": "Could not load file or assembly 'System.Net.Http.WebRequest, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'. The system cannot find the file specified.<br>"
+        },
+        {
+          "expected_text": "__RequestVerificationToken",
+          "ms": 10,
+          "ok": false,
+          "path": "/Account/Register",
+          "status": 500,
+          "title": "Could not load file or assembly 'System.Net.Http.WebRequest, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'. The system cannot find the file specified.<br>"
+        },
+        {
+          "expected_text": "padding-top",
+          "ms": 14,
+          "ok": false,
+          "path": "/Content/Site.css",
+          "status": 500,
+          "title": "Could not load file or assembly 'System.Net.Http.WebRequest, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'. The system cannot find the file specified.<br>"
+        },
+        {
+          "ms": 8,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 1,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 1,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 1,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "ms": 1,
+          "ok": true,
+          "path": "/packages.config",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/bin_dotnet/OpenOrderFramework.dll",
+          "status": 404
+        }
+      ],
+      "log": "apps/open-order-framework/logs/server.log",
+      "status": "fail",
+      "summary": "6/12 probes"
+    }
+  }
+}
