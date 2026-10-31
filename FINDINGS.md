@@ -38,6 +38,13 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 | [F25](#f25) | .NET Framework builds of StructureMap 4.0 and NLog 4.2 need `AppDomainSetup` members .NET lacks; their .NET Standard builds work | app/environment | roadkill | - |
 | [F26](#f26) | OpenOrderFramework's Identity seed deadlocks on a fresh database (EF 6 initialization lock + `AsyncHelper.RunSync`) | app/environment | open-order-framework | - |
 | [F27](#f27) | LightSpeed (closed-source ORM) needs `AppDomain.DefineDynamicAssembly` | app/environment | roadkill | - |
+| [F28](#f28) | A `configSource` in a subfolder can't be loaded on Linux (`\` isn't a separator; `/` is rejected) | webForCore bug | mvcforum | [#26](https://github.com/jabba2324/webForCore/issues/26) |
+| [F29](#f29) | `relaxedUrlToFileSystemMapping="true"` makes every `MapPath` return `NOT_A_VALID_FILESYSTEM_PATH` | webForCore bug | mvcforum | [#27](https://github.com/jabba2324/webForCore/issues/27) |
+| [F30](#f30) | `webForCore.Web.Mvc` doesn't bring System.Web.Helpers, which Microsoft.AspNet.Mvc did | webForCore bug | mvcforum | [#28](https://github.com/jabba2324/webForCore/issues/28) |
+| [F31](#f31) | System.Web.ApplicationServices is visible to every project: a library's own `MembershipUser` is ambiguous | guide gap | mvcforum | [#29](https://github.com/jabba2324/webForCore/issues/29) |
+| [F32](#f32) | More versions webForCore requires: Humanizer.Core 2.14.1, System.* packages at 11.0 | guide gap | aspnet-mvc5-starter, mvcforum | [#30](https://github.com/jabba2324/webForCore/issues/30) |
+| [F33](#f33) | Some packages' .NET Standard builds have less than their net45 builds (WindowsAzure.Storage, Hangfire 1.6) | guide gap | aspnet-mvc5-starter, mvcforum | [#31](https://github.com/jabba2324/webForCore/issues/31) |
+| [F34](#f34) | Build-time tools that don't run on Linux or the .NET 11 SDK (BuildWebCompiler, LibMan.Build 2.0) | app/environment | mvcforum, aspnet-mvc5-starter | - |
 ---
 
 ## F1
@@ -648,3 +655,123 @@ F19, F20 and F25).
 - **Why it stops there:** LightSpeed (Mindscape, 2012) is closed source, checked into the app's `lib/` as .NET
   Framework DLLs, and is Roadkill's data layer for every SQL database; the only other backend is MongoDB, on an old
   driver. .NET has `AssemblyBuilder.DefineDynamicAssembly` instead, but the DLLs can't be rebuilt.
+
+## F28
+
+**A `configSource` in a subfolder can't be loaded on Linux.** webForCore bug. Raised as [#26](https://github.com/jabba2324/webForCore/issues/26). Found on 0.4.0.
+
+- **Apps:** mvcforum (ImageProcessor's `<security configSource="Config\imageprocessor\security.config"/>`, and `cache`,
+  `processing`). Splitting sections into a `Config\` folder is common (ImageProcessor, Umbraco, connection strings and
+  app settings in their own files).
+- **Error:** every request: `Configuration Error. Unable to open configSource file 'Config\imageprocessor\processing.config'.`
+- **Cause:** `InternalConfigHost.StaticGetStreamNameForConfigSource` (the System.Configuration port) does
+  `Path.Combine(dirStream, configSource)`. On Linux `\` isn't a directory separator, so the result names a file called
+  `Config\imageprocessor\processing.config` in the site folder. Writing the path with `/` doesn't help: System.Configuration
+  rejects it, as on .NET Framework (`The configSource attribute must be a relative physical path, so the '/' character is
+  not allowed`). So on Linux no `configSource` file can be in a subfolder. The client host already does
+  `configSource.Replace('\\', '/')` (`ClientConfigurationHost.cs:355`); the web host doesn't.
+- **Repro:** a site whose web.config has `<appSettings configSource="Config\app.config" />` and a `Config/app.config`
+  with `<appSettings><add key="k" value="v"/></appSettings>`; any request is a Configuration Error.
+- **Suggested fix:** in `StaticGetStreamNameForConfigSource`, treat `\` as the directory separator when combining on a
+  non-Windows OS (the validation that rejects `/` stays, as on .NET Framework).
+
+## F29
+
+**`relaxedUrlToFileSystemMapping="true"` makes every `MapPath` return `NOT_A_VALID_FILESYSTEM_PATH` on Linux.**
+webForCore bug. Raised as [#27](https://github.com/jabba2324/webForCore/issues/27). Found on 0.4.0.
+
+- **Apps:** mvcforum (`<httpRuntime relaxedUrlToFileSystemMapping="true" ...>`, common in apps that allow special
+  characters in URLs).
+- **Error:** `HostingEnvironment.MapPath("~/App_Data/forum.config")` returns `<site>/NOT_A_VALID_FILESYSTEM_PATH`, so
+  `Could not find file '<site>/NOT_A_VALID_FILESYSTEM_PATH'` from the app's `XmlDocument.Load`, in its EF seed (every
+  request).
+- **Cause:** with the setting on, `HttpRuntime.GetRelaxedMapPathResult` replaces a mapped path that contains any of
+  `s_InvalidPhysicalPathChars` with that placeholder. The list, from .NET Framework, is
+  `{ '/', '?', '*', '<', '>', '|', '"' }`. On Windows a physical path has no `/`; on Linux every physical path does.
+- **Repro:** a site with `<httpRuntime relaxedUrlToFileSystemMapping="true" />` and a page that writes
+  `Server.MapPath("~/x.txt")`: it prints `<site>/NOT_A_VALID_FILESYSTEM_PATH`.
+- **Suggested fix:** leave `/` out of `s_InvalidPhysicalPathChars` when the directory separator is `/`.
+
+## F30
+
+**`webForCore.Web.Mvc` doesn't bring System.Web.Helpers, which Microsoft.AspNet.Mvc did.** webForCore bug (packaging).
+Found on 0.4.0.
+
+- **Apps:** mvcforum (web.config `<add assembly="System.Web.Helpers, Version=3.0.0.0, ..."/>`).
+- **Error:** `Configuration Error. Could not load file or assembly 'System.Web.Helpers, Version=3.0.0.0'`.
+- **Cause:** on .NET Framework, `Microsoft.AspNet.Mvc` depends on `Microsoft.AspNet.WebPages`, which contains
+  `System.Web.Helpers.dll`, so every MVC 5 app has it (WebGrid, Chart, Crypto, Json). webForCore has it as a separate
+  package, `webForCore.Web.Helpers`, which `webForCore.Web.Mvc` doesn't depend on; `docs/MIGRATING.md` section 3 maps
+  packages one to one and doesn't say an MVC app needs it.
+- **Repro:** an MVC site referencing `webForCore` and `webForCore.Web.Mvc`, with System.Web.Helpers in web.config's
+  `<compilation><assemblies>` (or a view using `@using System.Web.Helpers` / `WebGrid`).
+- **What worked:** `<PackageReference Include="webForCore.Web.Helpers" Version="0.4.0" />`.
+- **Suggested fix:** make `webForCore.Web.Mvc` depend on `webForCore.Web.Helpers`, as Microsoft.AspNet.Mvc's graph does.
+
+## F31
+
+**System.Web.ApplicationServices is visible to every project, so a library's own `MembershipUser` becomes ambiguous.**
+Guide gap. Raised as [#28](https://github.com/jabba2324/webForCore/issues/28). Raised as [#29](https://github.com/jabba2324/webForCore/issues/29). Found on 0.4.0.
+
+- **Apps:** mvcforum (`MVCForum.Core` defines `MembershipUser` and `MembershipCreateStatus` and has
+  `using System.Web.Security;`).
+- **Error:** 35 × `CS0104: 'MembershipUser' is an ambiguous reference between 'MvcForum.Core.Models.Entities.MembershipUser'
+  and 'System.Web.Security.MembershipUser'`.
+- **Cause:** on .NET Framework the library compiled against `System.Web` only (here through the `SystemWebPackage`
+  package; a plain `<Reference Include="System.Web" />` is the same). `System.Web` forwards the membership types
+  (`MembershipUser`, `MembershipCreateStatus`, `MembershipProvider`, `Roles`, ...) to `System.Web.ApplicationServices`,
+  and forwarded types aren't visible without that reference. The `webForCore` package brings
+  `System.Web.ApplicationServices` to every project.
+- **What worked:** in that library,
+  `<PackageReference Include="webForCore.Web.ApplicationServices" Version="0.4.0" ExcludeAssets="compile" />`.
+- **Suggested fix:** say this in `docs/MIGRATING.md`, or have the targets leave `System.Web.ApplicationServices` out of
+  a project's compile references unless it asks for it, as on .NET Framework.
+
+## F32
+
+**More versions webForCore requires: Humanizer.Core 2.14.1 and the System.* packages at 11.0.** Guide gap (extends
+F7, #6). Raised as [#30](https://github.com/jabba2324/webForCore/issues/30). Found on 0.4.0.
+
+- **Apps:** aspnet-mvc5-starter (`Humanizer.Core` 2.6.2), mvcforum (`System.Configuration.ConfigurationManager` and
+  `System.Runtime.Caching` 4.5.0-preview1).
+- **Error:** `NU1605: Detected package downgrade: Humanizer.Core from 2.14.1 to 2.6.2 ... webForCore 0.4.0 ->
+  webForCore.Compilers 0.4.0 -> Microsoft.CodeAnalysis 5.9.0 -> Humanizer.Core (>= 2.14.1)`, and the same for
+  `System.Runtime.Caching` and `System.Configuration.ConfigurationManager` from 11.0.0-rc.3.
+- **What the guide says:** `docs/MIGRATING.md`'s "Versions webForCore requires" lists Newtonsoft.Json 13.0.4,
+  Microsoft.IdentityModel.Tokens 8.19.1 and EntityFramework 6.4+.
+- **What worked:** Humanizer.Core raised to 2.14.1; the two System.* references removed (webForCore brings them).
+  `scripts/convert.py` now does both.
+
+## F33
+
+**Some packages' .NET Standard builds have less than their `net45` builds, and NuGet picks the .NET Standard one.**
+Guide gap. Raised as [#31](https://github.com/jabba2324/webForCore/issues/31). Found on 0.4.0.
+
+- **Apps:**
+  - aspnet-mvc5-starter: WindowsAzure.Storage 9.3.3's `netstandard1.3` build has no synchronous blob methods (`Exists`,
+    `OpenRead`, `UploadFromStream`, `GetPermissions`, ...): CS1061.
+  - mvcforum: Hangfire.Core 1.6.17's `netstandard1.3` build has no OWIN extensions (`app.UseHangfireServer`): CS1929.
+  - mvcforum: Hangfire.SqlServer 1.6.17's can't resolve a connection string name from web.config, so
+    `UseSqlServerStorage("MVCForumContext")` throws `Format of the initialization string does not conform to
+    specification` at start-up.
+- **What the guide says:** `docs/MIGRATING.md` section 3: "Keep other NuGet packages, preferring versions that target
+  .NET Standard or .NET". Here the same version's .NET Standard build is the problem.
+- **What worked:** restore the package for its path only and reference its `net45` DLL (as for F6), in every project
+  that gets it, the web project included:
+  ```xml
+  <PackageReference Include="Hangfire.Core" Version="1.6.17" GeneratePathProperty="true" ExcludeAssets="compile;runtime" />
+  <Reference Include="Hangfire.Core" HintPath="$(PkgHangfire_Core)/lib/net45/Hangfire.Core.dll" />
+  ```
+- **Suggested fix:** a bullet in `docs/MIGRATING.md`'s "Packages that need more than a reference".
+
+## F34
+
+**Build-time tools that don't run on Linux or the .NET 11 SDK.** App/environment. Found on 0.4.0.
+
+- **Apps:**
+  - mvcforum: BuildWebCompiler 1.11 (Sass/LESS at build time) starts `cmd.exe`. Removed; its output is checked in.
+  - aspnet-mvc5-starter: Microsoft.Web.LibraryManager.Build 2.0.48's restore task fails to load its providers by
+    reflection (`MSB4018 ... Dependencies.GetProvidersFromReflection`). LibMan.Build 3.0.114 works and restores the client
+    libraries from cdnjs at build time.
+- Also seen: MVCForum's plugins project copies its output into `App_Data/Plugins` in a post-build step; the folder is
+  created empty instead.
