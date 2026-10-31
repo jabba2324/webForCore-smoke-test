@@ -4,6 +4,7 @@ migrated projects against webForCore, run them on Kestrel and probe them.
 
 Standard library only (Python 3.11+, for tomllib).
 
+    scripts/wfc.py packages [--version 0.1.0]  # download webForCore's release packages into .packages/
     scripts/wfc.py list
     scripts/wfc.py fetch <id>... | --all [--reset]
     scripts/wfc.py assess <id>... | --all
@@ -40,6 +41,12 @@ APPS = ROOT / "apps"
 #   src/            the checkout (not committed)
 
 WEBFORCORE = Path(os.environ.get("WEBFORCORE_DIR", ROOT.parent / "webForCore")).resolve()
+# webForCore's NuGet packages come from its GitHub releases, not nuget.org. `packages` downloads a release here, and
+# builds restore from it (apps reference the packages, docs/MIGRATING.md section 1). WEBFORCORE_DIR is only needed by
+# apps still migrated against webForCore's source.
+WEBFORCORE_REPO = "jabba2324/webForCore"
+WEBFORCORE_VERSION = os.environ.get("WEBFORCORE_VERSION", "0.1.0")
+PACKAGES = ROOT / ".packages"
 
 # Phase 0 of webForCore's docs/AGENT-MIGRATION.md.
 BLOCKERS = [
@@ -54,6 +61,11 @@ BLOCKERS = [
     ("appdomain-thread-abort", r"AppDomain\.CreateDomain|Thread\.Abort|Thread\.ResetAbort"),
     ("com-plus", r"System\.EnterpriseServices|Transaction=\""),
     ("dpapi-config", r"DataProtectionConfigurationProvider"),
+]
+# Not blockers, but code to change (docs/NAMESPACES.md): listed by assess without blocking.
+NOTICES = [
+    ("binaryformatter", r"(?<!Formatters\.Binary\.)\bnew BinaryFormatter\b|System\.Runtime\.Serialization\.Formatters\.Binary"),
+    ("smtpclient-config", r"new SmtpClient\(\s*\)"),
 ]
 SCANNED = {".cs", ".vb", ".aspx", ".ascx", ".master", ".asax", ".ashx", ".asmx", ".cshtml", ".vbhtml", ".config", ".svc"}
 
@@ -96,8 +108,34 @@ def env():
     e.setdefault("OPENSSL_ENABLE_SHA1_SIGNATURES", "1")  # Fedora/RHEL
     e.setdefault("DOTNET_CLI_TELEMETRY_OPTOUT", "1")
     e.setdefault("DOTNET_NOLOGO", "1")
-    e["WEBFORCORE_DIR"] = str(WEBFORCORE)  # migrated projects import $(WEBFORCORE_DIR)/src/...
+    e["WEBFORCORE_DIR"] = str(WEBFORCORE)  # projects migrated against the source import $(WEBFORCORE_DIR)/src/...
     return e
+
+
+def package_source():
+    return PACKAGES / f"v{WEBFORCORE_VERSION}"
+
+
+def download_packages():
+    dest = package_source()
+    dest.mkdir(parents=True, exist_ok=True)
+    for attempt in range(3):  # release asset downloads fail with 503 now and then
+        r = subprocess.run(["gh", "release", "download", f"v{WEBFORCORE_VERSION}", "--repo", WEBFORCORE_REPO,
+                            "--pattern", "*.nupkg", "--dir", str(dest), "--skip-existing"], capture_output=True, text=True)
+        if r.returncode == 0:
+            break
+        time.sleep(5)
+    count = len(list(dest.glob("*.nupkg")))
+    print(f"{dest.relative_to(ROOT)}: {count} packages" + (f" (last error: {r.stderr.strip()[:200]})" if r.returncode else ""))
+    return r.returncode == 0
+
+
+def webforcore_used(proj):
+    """Which webForCore the project builds against, for the record."""
+    if "$(WEBFORCORE_DIR)" in proj.read_text(errors="replace"):
+        commit = git("rev-parse", "--short=12", "HEAD", cwd=WEBFORCORE, check=False).stdout.strip()
+        return f"source {commit}"
+    return f"packages {WEBFORCORE_VERSION}"
 
 
 def now():
@@ -107,7 +145,9 @@ def now():
 def scrub(log):
     """Logs are committed, so this machine's paths become placeholders."""
     text = log.read_text(errors="replace")
-    for path, name in ((str(WEBFORCORE), "$WEBFORCORE_DIR"), (str(ROOT), "<repo>"), (str(Path.home()), "~")):
+    # Longest first: the repo's path can start with webForCore's (../webForCore-smoke-test).
+    pairs = ((str(WEBFORCORE), "$WEBFORCORE_DIR"), (str(ROOT), "<repo>"), (str(Path.home()), "~"))
+    for path, name in sorted(pairs, key=lambda p: -len(p[0])):
         text = text.replace(path, name)
     log.write_text(text)
     return text
@@ -168,6 +208,10 @@ def fetch(app, reset=False):
         if r.returncode:
             return record(app["id"], "fetch", "fail", summary=f"no ref {ref}", error=r.stderr[-2000:])
     git("clean", "-fdx", "-e", "bin_dotnet", "-e", "obj", cwd=dest, check=False)
+    # Files the migration deletes but whose content shouldn't be in the patch (the app's checked-in binaries).
+    for pattern in app.get("remove", []):
+        for f in dest.glob(pattern):
+            f.unlink()
     commit = git("rev-parse", "HEAD", cwd=dest).stdout.strip()
     patch = app_dir(app["id"]) / "overlay.patch"
     if patch.exists():
@@ -179,8 +223,14 @@ def fetch(app, reset=False):
 
 def save_overlay(app):
     dest = checkout(app)
-    git("add", "-A", "-N", ".", cwd=dest)
-    diff = git("diff", "--binary", cwd=dest).stdout
+    # Build output and files webForCore generates at run time aren't part of the migration. The apps' own
+    # .gitignore files predate bin_dotnet.
+    generated = [":(exclude,glob)**/bin_dotnet/**", ":(exclude,glob)**/obj/**", ":(exclude,glob)**/App_Data/machine.config",
+                 ":(exclude,glob)**/logs/W3SVC*/**"] + [f":(exclude,glob){p}" for p in app.get("remove", [])]
+    git("reset", "-q", cwd=dest, check=False)  # drops intent-to-add entries from an earlier save
+    # Deletions must stay unstaged, or they drop out of the diff.
+    git("add", "-N", "--ignore-removal", "--", ".", *generated, cwd=dest)
+    diff = git("diff", "--binary", "--", ".", *generated, cwd=dest).stdout
     p = app_dir(app["id"]) / "overlay.patch"
     if diff:
         p.write_text(diff)
@@ -191,18 +241,37 @@ def save_overlay(app):
 
 # --- assess --------------------------------------------------------------------------------------
 
+def referenced_projects(proj, seen=None):
+    """The folders of the projects a project references, transitively (a class library's blockers block the site)."""
+    seen = seen if seen is not None else set()
+    text = proj.read_text(errors="replace") if proj.exists() else ""
+    netfx = proj.with_name(proj.name + ".netfx")  # the original project, if already converted
+    text += netfx.read_text(errors="replace") if netfx.exists() else ""
+    for ref in re.findall(r'<ProjectReference\s+Include="([^"$]+)"', text):
+        target = (proj.parent / ref.replace("\\", "/")).resolve()
+        if target.exists() and target not in seen:
+            seen.add(target)
+            referenced_projects(target, seen)
+    return seen
+
+
 def assess(app):
     root = site_dir(app)
     if not root.exists():
         return record(app["id"], "assess", "fail", summary=f"no folder {root.relative_to(ROOT)}")
-    hits = {name: [] for name, _ in BLOCKERS}
+    hits = {name: [] for name, _ in BLOCKERS + NOTICES}
     kinds = set()
     target_frameworks = set()
     refs_text = []
-    for p in root.rglob("*"):
+    proj = project_file(app)
+    libraries = sorted({t.parent for t in referenced_projects(proj)} - {root}) if proj else []
+    files = [(root, p) for p in root.rglob("*")] + [(lib, p) for lib in libraries for p in lib.rglob("*")]
+    for base, p in files:
         if not p.is_file() or any(part in {"bin", "obj", "bin_dotnet", "packages", "node_modules", ".git"} for part in p.parts):
             continue
-        rel = str(p.relative_to(root))
+        if p.name == "machine.config" and p.parent.name == "App_Data":  # webForCore extracts its own here at run time
+            continue
+        rel = str(p.relative_to(root if base == root else checkout(app)))
         if p.suffix.lower() == ".aspx":
             kinds.add("webforms")
         if p.name == "packages.config" or p.suffix == ".csproj" or p.name.endswith(".csproj.netfx"):
@@ -214,7 +283,7 @@ def assess(app):
                 text = p.read_text(errors="replace")
             except OSError:
                 continue
-            for name, pattern in BLOCKERS:
+            for name, pattern in BLOCKERS + NOTICES:
                 for m in re.finditer(pattern, text):
                     line = text.count("\n", 0, m.start()) + 1
                     hits[name].append(f"{rel}:{line}")
@@ -223,8 +292,10 @@ def assess(app):
         if kind != "webforms" and re.search(pattern, joined):
             kinds.add(kind)
     hits = {k: v[:20] + ([f"... {len(v) - 20} more"] if len(v) > 20 else []) for k, v in hits.items() if v}
+    notices = {k: hits.pop(k) for k, _ in NOTICES if k in hits}
     status = "blocked" if hits else "pass"
     return record(app["id"], "assess", status, kinds=sorted(kinds), target_frameworks=sorted(target_frameworks),
+                  libraries=[str(lib.relative_to(checkout(app))) for lib in libraries], notices=notices,
                   blockers=hits, summary=", ".join(sorted(hits)) or "no blockers found")
 
 
@@ -252,12 +323,13 @@ def build(app):
     log = logs_dir(app["id"]) / "build.log"
     t = time.time()
     with log.open("w") as f:
-        r = subprocess.run(["dotnet", "build", str(proj), "-c", "Release", "-nologo", "-clp:ErrorsOnly;Summary"],
+        r = subprocess.run(["dotnet", "build", str(proj), "-c", "Release", "-nologo", "-clp:ErrorsOnly;Summary",
+                            f"-p:RestoreAdditionalProjectSources={package_source()}"],
                            cwd=proj.parent, env=env(), stdout=f, stderr=subprocess.STDOUT)
     text = scrub(log)
     errors = sorted(set(re.findall(r"error [A-Z]+\d+: [^\[\n]+", text)))
     return record(app["id"], "build", "pass" if r.returncode == 0 else "fail", seconds=round(time.time() - t),
-                  errors=errors[:30], error_count=len(errors), log=str(log.relative_to(ROOT)),
+                  webforcore=webforcore_used(proj), errors=errors[:30], error_count=len(errors), log=str(log.relative_to(ROOT)),
                   summary=None if r.returncode == 0 else f"{len(errors)} distinct errors")
 
 
@@ -318,8 +390,15 @@ def smoke(app):
         for i, probe in enumerate(probes):
             # The first request compiles the site, as on IIS.
             checks.append(run_probe(base, probe, timeout=120 if i == 0 else 30))
+        # AddWebForms() writes W3C logs under the site folder by default (FINDINGS.md); they must not be served.
+        # The log is flushed every second, and entries not yet flushed are lost when the server stops.
+        time.sleep(1.5)
+        w3c = sorted((site / "logs").glob("W3SVC*/*.txt"))
+        w3c = [f"/{w3c[0].relative_to(site).as_posix()}"] if w3c else []
         for path in FORBIDDEN + [f"/bin_dotnet/{dll.name}"]:
             checks.append(run_probe(base, {"path": path, "status": 404, "forbidden": True}, timeout=30))
+        for path in w3c:  # an app that answers every URL itself (OWIN) may return 200: what matters is the log's content
+            checks.append(run_probe(base, {"path": path, "status": 404, "forbidden": True, "absent": "#Fields:"}, timeout=30))
     finally:
         server.terminate()
         try:
@@ -340,7 +419,9 @@ def run_probe(base, probe, timeout):
         status, headers, body = get(base + path, timeout)
     except Exception as ex:  # noqa: BLE001 - a probe reports any failure
         return {"path": path, "ok": False, "error": f"{type(ex).__name__}: {ex}"}
-    ok = status == probe.get("status", 200) or (probe.get("forbidden") and status in (403, 404))
+    ok = status == probe.get("status", 200) or bool(probe.get("forbidden") and status in (403, 404))
+    if probe.get("absent"):
+        ok = probe["absent"] not in body
     if ok and probe.get("contains") and probe["contains"] not in body:
         ok = False
     check = {"path": path, "ok": ok, "status": status, "ms": round((time.time() - t) * 1000)}
@@ -379,11 +460,16 @@ def report(apps):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("command", choices=["list", "fetch", "assess", "build", "smoke", "run", "save-overlay", "report"])
+    p.add_argument("command", choices=["packages", "list", "fetch", "assess", "build", "smoke", "run", "save-overlay", "report"])
     p.add_argument("ids", nargs="*")
     p.add_argument("--all", action="store_true")
     p.add_argument("--reset", action="store_true", help="fetch: discard the checkout's changes and reapply the overlay")
+    p.add_argument("--version", help="packages: the webForCore release (default: $WEBFORCORE_VERSION or 0.1.0)")
     a = p.parse_args()
+    if a.command == "packages":
+        global WEBFORCORE_VERSION
+        WEBFORCORE_VERSION = a.version or WEBFORCORE_VERSION
+        sys.exit(0 if download_packages() else 1)
     apps = catalog()
     if a.command == "list":
         for app in apps.values():
@@ -396,8 +482,8 @@ def main():
     unknown = [i for i in ids if i not in apps]
     if unknown or not ids:
         sys.exit(f"unknown app(s): {', '.join(unknown)}" if unknown else "give app ids or --all")
-    if not (WEBFORCORE / "WebFormsForCore.slnx").exists() and a.command in ("build", "run"):
-        sys.exit(f"webForCore not found at {WEBFORCORE}; set WEBFORCORE_DIR")
+    if a.command in ("build", "run") and not any(package_source().glob("webForCore.Web.*.nupkg")):
+        sys.exit(f"no webForCore {WEBFORCORE_VERSION} packages in {package_source().relative_to(ROOT)}: run scripts/wfc.py packages")
     for i in ids:
         app = apps[i]
         if a.command == "fetch":

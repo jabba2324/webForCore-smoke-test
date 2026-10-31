@@ -1,0 +1,20 @@
+# AspNetDocs: MVCRandomAnswerGenerator (Docker tutorial). Fields are described in README.md.
+
+name = "AspNetDocs: MVCRandomAnswerGenerator (Docker tutorial)"
+repo = "https://github.com/dotnet/AspNetDocs"
+ref = "546ffe728556a60591b93ab4fcbd4437f71e2449"
+site = "aspnet/mvc/overview/deployment/docker-aspnetmvc/samples/MVCRandomAnswerGenerator/MVCRandomAnswerGenerator"
+project = "aspnet/mvc/overview/deployment/docker-aspnetmvc/samples/MVCRandomAnswerGenerator/MVCRandomAnswerGenerator/MVCRandomAnswerGenerator.csproj"
+kinds = ["mvc"]
+licence = "MIT"
+status = "blocked"
+notes = "All app probes pass; only the served W3C log (F4) fails."
+
+# The first request compiles the site, so it gets 120 s.
+[[probes]]
+path = "/"
+contains = "Magic 8 ball"
+
+[[probes]]
+path = "/Home/About"
+contains = "<h2>"

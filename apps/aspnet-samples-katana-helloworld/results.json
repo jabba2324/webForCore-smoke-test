@@ -1,0 +1,97 @@
+{
+  "id": "aspnet-samples-katana-helloworld",
+  "stages": {
+    "assess": {
+      "at": "2026-10-31T10:58:21+00:00",
+      "blockers": {},
+      "kinds": [
+        "owin"
+      ],
+      "libraries": [],
+      "notices": {},
+      "status": "pass",
+      "summary": "no blockers found",
+      "target_frameworks": [
+        "v4.5"
+      ]
+    },
+    "build": {
+      "at": "2026-10-31T10:48:21+00:00",
+      "error_count": 0,
+      "errors": [],
+      "log": "apps/aspnet-samples-katana-helloworld/logs/build.log",
+      "seconds": 0,
+      "status": "pass",
+      "summary": null,
+      "webforcore": "packages 0.1.0"
+    },
+    "fetch": {
+      "at": "2026-10-31T10:47:52+00:00",
+      "commit": "f7d4a776327df09c13b39489b122209c5d04693b",
+      "overlay": false,
+      "status": "pass"
+    },
+    "smoke": {
+      "at": "2026-10-31T10:50:21+00:00",
+      "checks": [
+        {
+          "ms": 581,
+          "ok": true,
+          "path": "/",
+          "status": 200
+        },
+        {
+          "ms": 6,
+          "ok": true,
+          "path": "/any/path/at/all",
+          "status": 200
+        },
+        {
+          "ms": 8,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 1,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 1,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "ms": 1,
+          "ok": true,
+          "path": "/packages.config",
+          "status": 404
+        },
+        {
+          "ms": 1,
+          "ok": true,
+          "path": "/bin_dotnet/HelloWorld.dll",
+          "status": 404
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/logs/W3SVC1/u_ex20261031.0000.txt",
+          "status": 200
+        }
+      ],
+      "log": "apps/aspnet-samples-katana-helloworld/logs/server.log",
+      "status": "pass",
+      "summary": "9/9 probes"
+    }
+  }
+}

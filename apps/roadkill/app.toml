@@ -1,0 +1,17 @@
+# Roadkill Wiki. Fields are described in README.md.
+
+name = "Roadkill Wiki"
+repo = "https://github.com/roadkillwiki/roadkill"
+ref = "1061add4a727c55793234e0a92f146c6f1db62cf"
+site = "src/Roadkill.Web"
+project = "src/Roadkill.Web/Roadkill.Web.csproj"
+kinds = ["mvc", "webapi", "owin"]
+licence = "MS-PL"
+status = "verified"
+notes = "MVC 5 + Web API 2 wiki; .NET 4.5. Archived. Supports SQL Server, MySQL, PostgreSQL and SQLite through its own data layer."
+
+# The first request compiles the site, so it gets 120 s.
+# [[probes]]
+# path = "/"
+# status = 200
+# contains = ""

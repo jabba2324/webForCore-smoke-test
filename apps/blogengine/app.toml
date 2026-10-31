@@ -2,12 +2,12 @@
 
 name = "BlogEngine.NET"
 repo = "https://github.com/BlogEngine/BlogEngine.NET"
-ref = ""
+ref = "95c84261ed94402f45094c1fda85afbbf6f4d833"
 site = "BlogEngine/BlogEngine.NET"
-kinds = ["webforms", "webapi"]
+kinds = ["webforms", "webapi", "webpages"]
 licence = "MS-RL"
-status = "candidate"
-notes = "Stores data in XML files under App_Data by default, so no database is needed."
+status = "blocked"
+notes = "Blocked: BlogEngine.Core compiles a LINQ to SQL DataContext (the database file store). webForCore recommends moving it to EF 6; that rewrite is the app's, so not pursued here."
 
 # The first request compiles the site, so it gets 120 s.
 # [[probes]]

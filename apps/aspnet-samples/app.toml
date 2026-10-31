@@ -2,12 +2,12 @@
 
 name = "ASP.NET samples (Web API, MVC, Identity, OWIN, SignalR)"
 repo = "https://github.com/aspnet/samples"
-ref = ""
+ref = "f7d4a776327df09c13b39489b122209c5d04693b"
 site = "samples/aspnet"
 kinds = ["mvc", "webapi", "identity", "owin", "signalr"]
 licence = "Apache-2.0"
-status = "candidate"
-notes = "Many small samples in one repo. Split into one entry per sample (id aspnet-samples-<name>) once checked."
+status = "rejected"
+notes = "Split into one entry per sample (apps/aspnet-samples-*): the repo holds ~35 web projects. Apache-2.0, checked."
 
 # The first request compiles the site, so it gets 120 s.
 # [[probes]]

@@ -1,0 +1,19 @@
+# ASP.NET samples: Katana Web API. Fields are described in README.md.
+
+name = "ASP.NET samples: Katana Web API"
+repo = "https://github.com/aspnet/samples"
+ref = "f7d4a776327df09c13b39489b122209c5d04693b"
+site = "samples/aspnet/Katana/WebApi"
+project = "samples/aspnet/Katana/WebApi/WebApi.csproj"
+kinds = ["webapi", "owin"]
+licence = "Apache-2.0"
+status = "blocked"
+notes = "All app probes pass (Web API on OWIN, XmlSerializer); only the served W3C log (F4) fails."
+
+# The first request compiles the site, so it gets 120 s.
+[[probes]]
+path = "/Customer/7"
+contains = "<FirstName>Mary</FirstName>"
+
+[[probes]]
+path = "/Customer/7?$format=xml"

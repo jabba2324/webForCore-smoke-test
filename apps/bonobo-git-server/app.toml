@@ -2,15 +2,22 @@
 
 name = "Bonobo Git Server"
 repo = "https://github.com/jakubgarfield/Bonobo-Git-Server"
-ref = ""
+ref = "6277ecfe1015b4612795bf8bb0f03ae2dd25b1ad"
 site = "Bonobo.Git.Server"
 kinds = ["mvc"]
 licence = "MIT"
-status = "candidate"
-notes = "Real MVC 5 app. Uses SQLite by default and may have Windows authentication as an option."
+status = "blocked"
+notes = "Build fails on F8 (IHtmlString CS0433); past it, every request fails on F1 (WebActivatorEx reads AppSettings through System.Configuration 4.0.0.0). SQLite, LibGit2Sharp and git over HTTP untested."
 
 # The first request compiles the site, so it gets 120 s.
-# [[probes]]
-# path = "/"
-# status = 200
-# contains = ""
+[[probes]]
+path = "/Home/LogOn"
+contains = "Password"
+
+[[probes]]
+path = "/"
+status = 302
+
+[[probes]]
+path = "/Content/Site.css"
+contains = "body"

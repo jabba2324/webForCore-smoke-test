@@ -1,0 +1,17 @@
+# OpenOrderFramework. Fields are described in README.md.
+
+name = "OpenOrderFramework"
+repo = "https://github.com/lbacaj/OpenOrderFramework"
+ref = "a6e2573643507b83db3c4b5921153737229b0200"
+site = "OpenOrderFramework"
+project = "OpenOrderFramework/OpenOrderFramework.csproj"
+kinds = ["mvc", "owin", "identity"]
+licence = "MIT"
+status = "verified"
+notes = "MVC 5 shopping cart with Identity 2; .NET 4.5.1. Needs SQL Server (LocalDB in the repo)."
+
+# The first request compiles the site, so it gets 120 s.
+# [[probes]]
+# path = "/"
+# status = 200
+# contains = ""

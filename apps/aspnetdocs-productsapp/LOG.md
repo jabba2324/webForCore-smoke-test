@@ -1,0 +1,9 @@
+# aspnetdocs-productsapp: run log
+
+Appended by `scripts/wfc.py`, one line per stage run.
+
+- 2026-10-31T10:53:35+00:00 **fetch**: pass at `546ffe728556`
+- 2026-10-31T10:54:18+00:00 **assess**: pass (no blockers found)
+- 2026-10-31T10:54:30+00:00 **build**: pass
+- 2026-10-31T10:55:55+00:00 **smoke**: fail (9/11 probes)
+- 2026-10-31T10:57:39+00:00 **smoke**: fail (10/11 probes)

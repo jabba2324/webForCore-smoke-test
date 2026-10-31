@@ -39,10 +39,13 @@ Each app goes through four stages:
 
 ## Usage
 
-webForCore is expected next to this repo (`../webForCore`), built as its README says. Set `WEBFORCORE_DIR` to use
-another checkout.
+Apps reference webForCore's NuGet packages, which are attached to its GitHub releases (not on nuget.org).
+`scripts/wfc.py packages` downloads a release into `.packages/v<version>/` (needs `gh`), and builds restore from
+there. `WEBFORCORE_VERSION` picks the release (default 0.1.0). An app migrated against webForCore's source instead
+refers to it through `$(WEBFORCORE_DIR)` (default `../webForCore`).
 
 ```sh
+scripts/wfc.py packages                  # webForCore's release packages, into .packages/
 scripts/wfc.py list                      # every app and its last result
 scripts/wfc.py fetch eshop-legacy-mvc    # clone at the pinned commit, apply the overlay
 scripts/wfc.py assess eshop-legacy-mvc
@@ -58,12 +61,17 @@ reapplies the overlay.
 
 ## Migrating an app
 
-Follow webForCore's `docs/AGENT-MIGRATION.md` in the checkout. In migrated projects, refer to webForCore through the
-`WEBFORCORE_DIR` property, which the runner sets, so the patches work on any machine:
+`scripts/convert.py <web project>.csproj [--lib <library>.csproj]` does the mechanical part of Phase 2 (the SDK
+project, webForCore's packages, `Program.cs`, `<system.codedom>`) and prints what it changed; check it and note it
+in `NOTES.md`.
+
+Follow webForCore's `docs/AGENT-MIGRATION.md` in the checkout, with the package route (`docs/MIGRATING.md`
+section 1). Reference the packages by version; the runner adds `.packages/` as a restore source, so the patches
+need no `nuget.config` and work on any machine:
 
 ```xml
-<Import Project="$(WEBFORCORE_DIR)/src/webForCore.WebStack.targets" />
-<ProjectReference Include="$(WEBFORCORE_DIR)/src/WebFormsForCore.Web/WebFormsForCore.Web.csproj" />
+<PackageReference Include="webForCore" Version="0.1.0" />
+<PackageReference Include="webForCore.Web.Mvc" Version="0.1.0" />
 ```
 
 Change only what the platform needs, as the guide says. A workaround in the app for a webForCore bug doesn't count
@@ -83,6 +91,7 @@ as a pass: note it in `NOTES.md` and `FINDINGS.md`, and fix webForCore instead.
 | `status` | `candidate` (listed, unchecked), `verified` (repo, ref, licence and paths checked), `migrating`, `migrated` (builds and passes its probes), `blocked` (needs something webForCore doesn't provide), `rejected` (not a fit; kept so it isn't added again) |
 | `needs` | Services from `services/compose.yml`: `mssql`, `mysql`, `postgres` |
 | `env` | Extra environment for the server process (a table) |
+| `remove` | Globs of files `fetch` deletes before applying the overlay, kept out of the patch (the app's checked-in DLLs) |
 | `[[probes]]` | `path`, `status` (default 200), `contains` (text that proves the page rendered) |
 | `notes` | One line for the summary; the detail goes in `NOTES.md` |
 

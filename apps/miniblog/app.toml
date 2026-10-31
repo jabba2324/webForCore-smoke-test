@@ -2,15 +2,62 @@
 
 name = "MiniBlog"
 repo = "https://github.com/madskristensen/MiniBlog"
-ref = ""
+ref = "7700ea7b713a336657f3540b930c3a2e22c09ef0"
 site = "Website"
+project = "Website/MiniBlog.csproj"
+# The site's bin/ held Microsoft's Web Pages DLLs (webForCore replaces them) and its libraries' (now packages).
+remove = ["Website/bin/*.refresh", "Website/bin/*.xml", "Website/bin/AjaxMin.dll", "Website/bin/CookComputing.*",
+          "Website/bin/WebMarkupMin.Core.dll", "Website/bin/[Ss]ystem.[Ww]eb.*", "Website/bin/[Mm]icrosoft.[Ww]eb.[Ii]nfrastructure.dll"]
 kinds = ["webpages"]
 licence = "Apache-2.0"
-status = "candidate"
-notes = "Web Pages, posts stored as XML files. Pin a commit from before any ASP.NET Core rewrite."
+status = "blocked"
+notes = "Web Pages site (no project file before). Pages, app_code, forms login and minification work; every URL Rewrite rule is dropped (F11, fail-open: posts/*.xml served), query-only rewrites crash (F12), handlers mapped with a leading / are 404 (F13)."
 
 # The first request compiles the site, so it gets 120 s.
-# [[probes]]
-# path = "/"
-# status = 200
-# contains = ""
+[[probes]]
+path = "/"
+contains = "Web Developer Checklist"
+
+[[probes]]
+path = "/post/test-1"
+contains = "Test 1"
+
+[[probes]]
+path = "/category/Chrome"
+contains = "<article"
+
+[[probes]]
+path = "/feed/rss/"
+contains = "<rss"
+
+[[probes]]
+path = "/robots.txt"
+contains = "sitemap:"
+
+[[probes]]
+path = "/sitemap.xml"
+contains = "<urlset"
+
+[[probes]]
+path = "/views/login.cshtml"
+contains = "password"
+
+[[probes]]
+path = "/metaweblog"
+status = 200
+
+[[probes]]
+path = "/views/robots/rsd"
+contains = "metaweblog"
+
+[[probes]]
+path = "/themes/OneColumn/site.css"
+contains = "body"
+
+[[probes]]
+path = "/posts/9fa751db-c036-435b-97e3-bd6373b0991b.xml"
+status = 403
+
+[[probes]]
+path = "/no-such-page"
+status = 404

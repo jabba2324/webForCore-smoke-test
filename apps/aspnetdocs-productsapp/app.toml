@@ -1,0 +1,28 @@
+# AspNetDocs: ProductsApp (Web API 2 tutorial). Fields are described in README.md.
+
+name = "AspNetDocs: ProductsApp (Web API 2 tutorial)"
+repo = "https://github.com/dotnet/AspNetDocs"
+ref = "546ffe728556a60591b93ab4fcbd4437f71e2449"
+site = "aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client/sample/server/ProductsApp"
+project = "aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client/sample/server/ProductsApp/ProductsApp.csproj"
+kinds = ["webapi"]
+licence = "MIT"
+status = "blocked"
+notes = "All app probes pass; only the served W3C log (F4) fails."
+
+# The first request compiles the site, so it gets 120 s.
+[[probes]]
+path = "/api/products"
+contains = "Tomato soup"
+
+[[probes]]
+path = "/api/products/2"
+contains = "Yo-yo"
+
+[[probes]]
+path = "/api/products?category=Hardware"
+contains = "Hammer"
+
+[[probes]]
+path = "/api/products/99"
+status = 404

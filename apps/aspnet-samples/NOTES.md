@@ -1,6 +1,6 @@
 # ASP.NET samples (Web API, MVC, Identity, OWIN, SignalR): migration notes
 
-Status: candidate. Source: https://github.com/aspnet/samples
+Status: split into `apps/aspnet-samples-*` (one entry per sample), so this entry is closed as rejected. Source: https://github.com/aspnet/samples
 
 ## Assessment
 

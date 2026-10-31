@@ -1,0 +1,17 @@
+# CarrotCake CMS (MVC). Fields are described in README.md.
+
+name = "CarrotCake CMS (MVC)"
+repo = "https://github.com/ninianne98/CarrotCakeCMS-MVC"
+ref = "bfc5c38eba9564824a1c58d6ccd935a3755a2d61"
+site = "CMSAdmin"
+project = "CMSAdmin/CMSAdminMVC.csproj"
+kinds = ["mvc", "owin", "identity", "webforms"]
+licence = "MIT"
+status = "verified"
+notes = "Actively maintained MVC 5 CMS (2026); .NET 4.5 with plugin web projects (Northwind, PhotoGallery, ...). Needs SQL Server."
+
+# The first request compiles the site, so it gets 120 s.
+# [[probes]]
+# path = "/"
+# status = 200
+# contains = ""
