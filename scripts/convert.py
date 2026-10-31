@@ -26,13 +26,15 @@ THIRDPARTY = __import__("os").environ.get("THIRDPARTY_VERSION", "0.4.0")
 # (packages such as Unity.Mvc bring it anyway); the build wins the conflict.
 THIRDPARTY_PACKAGES = [(r"WebActivatorEx", "webForCore.WebActivatorEx"), (r"AjaxControlToolkit", "webForCore.AjaxControlToolkit")]
 DROP = re.compile(r"(?i)^(Microsoft\.AspNet\.(Mvc|Razor|WebPages|WebApi.*|Web\.Optimization.*|Cors|SignalR.*|Identity.*|Providers.*|FriendlyUrls.*|ScriptManager.*|TelemetryCorrelation|SessionState.*)|Microsoft\.Owin.*|Owin|Microsoft\.Web\.Infrastructure|WebGrease|Antlr|Microsoft\.CodeDom\.Providers\..*|Microsoft\.Net\.Compilers.*|Microsoft\.Net\.Compilers\.Toolset|"
-                  r"System\.(Buffers|Memory|Numerics\.Vectors|Runtime\.CompilerServices\.Unsafe|Threading\.Tasks\.Extensions|ValueTuple|Net\.Http|IO|IO\.Compression|IO\.Compression\.ZipFile|Diagnostics\.DiagnosticSource|Threading\.Channels|IO\.Pipelines|Text\.Encodings\.Web|Text\.Json|Runtime|Collections\.Immutable|Reflection\.Metadata|Security\.Cryptography\..*|Net\.Primitives|Net\.Sockets|Linq|Console|Globalization)|Microsoft\.Bcl.*|NETStandard\.Library|Microsoft\.CSharp)$")
+                  r"System\.(Buffers|Memory|Numerics\.Vectors|Runtime\.CompilerServices\.Unsafe|Threading\.Tasks\.Extensions|ValueTuple|Net\.Http|IO|IO\.Compression|IO\.Compression\.ZipFile|Diagnostics\.DiagnosticSource|Threading\.Channels|IO\.Pipelines|Text\.Encodings\.Web|Text\.Json|Runtime|Collections\.Immutable|Reflection\.Metadata|Security\.Cryptography\..*|Net\.Primitives|Net\.Sockets|Linq|Console|Globalization|Configuration\.ConfigurationManager|Runtime\.Caching)|Microsoft\.Bcl.*|NETStandard\.Library|Microsoft\.CSharp)$")
 # Microsoft packages webForCore doesn't replace, kept (they may load): the ones in DROP's Microsoft.AspNet group that
 # aren't replaced are re-added below from KEEP_MS.
 KEEP_MS = re.compile(r"(?i)^Microsoft\.AspNet\.(FriendlyUrls.*|ScriptManager.*|TelemetryCorrelation|SessionState.*|Providers.*)$")
 # Katana packages webForCore doesn't lift (docs/MIGRATING.md, "Katana packages webForCore doesn't lift"): kept.
 KATANA_KEEP = re.compile(r"(?i)^Microsoft\.Owin\.Security\.(Facebook|Google|MicrosoftAccount|Twitter|WsFederation|Jwt|OpenIdConnect|ActiveDirectory)$")
-MIN_VERSIONS = {"newtonsoft.json": "13.0.4", "entityframework": "6.5.1"}
+# Versions webForCore's packages need (NU1605 below them): its Web API (Newtonsoft.Json), EF 6's first .NET build, and
+# Roslyn in webForCore.Compilers (Humanizer.Core).
+MIN_VERSIONS = {"newtonsoft.json": "13.0.4", "entityframework": "6.5.1", "humanizer.core": "2.14.1"}
 FRAMEWORKS = [  # (regex over references and packages, webForCore package)
     (r"System\.Web\.Mvc\b|Microsoft\.AspNet\.Mvc\b", "webForCore.Web.Mvc"),
     (r"Microsoft\.Web\.Mvc\b|Mvc\.Futures", "webForCore.Microsoft.Web.Mvc"),
@@ -40,7 +42,9 @@ FRAMEWORKS = [  # (regex over references and packages, webForCore package)
     (r"System\.Web\.Http\.Owin|Microsoft\.AspNet\.WebApi\.Owin", "webForCore.Web.Http.Owin"),
     (r"System\.Web\.Http\.Cors|Microsoft\.AspNet\.WebApi\.Cors", "webForCore.Web.Http.Cors"),
     (r"System\.Web\.Cors\b|Microsoft\.AspNet\.Cors\b", "webForCore.Web.Cors"),
-    (r"System\.Web\.Helpers\b", "webForCore.Web.Helpers"),
+    # Microsoft.AspNet.WebPages (which Microsoft.AspNet.Mvc depends on) contains System.Web.Helpers; webForCore.Web.Mvc
+    # doesn't bring webForCore.Web.Helpers, and web.configs list it.
+    (r"System\.Web\.Helpers\b|Microsoft\.AspNet\.WebPages\b|Microsoft\.AspNet\.Mvc\b", "webForCore.Web.Helpers"),
     (r"System\.Web\.WebPages\.Razor|Microsoft\.AspNet\.WebPages\b", "webForCore.Web.WebPages.Razor"),
     (r"System\.Web\.WebPages\.Deployment", "webForCore.Web.WebPages.Deployment"),
     (r"System\.Web\.Optimization\b|Microsoft\.AspNet\.Web\.Optimization\b", "webForCore.Web.Optimization"),
