@@ -6,8 +6,8 @@ ref = "6277ecfe1015b4612795bf8bb0f03ae2dd25b1ad"
 site = "Bonobo.Git.Server"
 kinds = ["mvc"]
 licence = "MIT"
-status = "blocked"
-notes = "Build fails on F8 (IHtmlString CS0433); past it, every request fails on F1 (WebActivatorEx reads AppSettings through System.Configuration 4.0.0.0). SQLite, LibGit2Sharp and git over HTTP untested."
+status = "migrated"
+notes = "webForCore 0.2.0: passes all 9 probes with the round-1 overlay moved to the 0.2.0 packages plus the changes in NOTES.md (round 2)."
 
 # The first request compiles the site, so it gets 120 s.
 [[probes]]
@@ -21,3 +21,11 @@ status = 302
 [[probes]]
 path = "/Content/Site.css"
 contains = "body"
+
+# Bonobo's web.config clears requestFiltering's fileExtensions and hiddenSegments, and its Application_Error renders
+# Home/PageNotFound after Response.Clear(), which resets the status to 200 (as on .NET Framework). The file itself
+# must still not be served.
+[forbidden."/packages.config"]
+status = 200
+absent = "<package "
+contains = "404 Page Not Found"

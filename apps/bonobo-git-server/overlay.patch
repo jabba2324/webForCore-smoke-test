@@ -1,8 +1,8 @@
 diff --git a/Bonobo.Git.Server/Bonobo.Git.Server.csproj b/Bonobo.Git.Server/Bonobo.Git.Server.csproj
-index ad78e85..cfab089 100644
+index ad78e85..248dc6f 100644
 --- a/Bonobo.Git.Server/Bonobo.Git.Server.csproj
 +++ b/Bonobo.Git.Server/Bonobo.Git.Server.csproj
-@@ -1,775 +1,76 @@
+@@ -1,775 +1,80 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
@@ -739,14 +739,14 @@ index ad78e85..cfab089 100644
 -    <EmbeddedResource Include="App_GlobalResources\Resources.zh-CN.resx" />
 -    <EmbeddedResource Include="App_GlobalResources\Resources.zh-HK.resx" />
 -    <EmbeddedResource Include="App_GlobalResources\Resources.zh-TW.resx" />
-+    <!-- webForCore 0.1.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.Helpers" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.1.0" />
++    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Helpers" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.2.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -768,16 +768,20 @@ index ad78e85..cfab089 100644
 +    <PackageReference Include="Serilog.Settings.AppSettings" Version="2.1.0" />
 +    <PackageReference Include="Serilog.Sinks.File" Version="3.2.0" />
 +    <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
-+    <PackageReference Include="System.Data.SQLite" Version="1.0.104.0" />
-+    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.104.0" />
-+    <PackageReference Include="System.Data.SQLite.EF6" Version="1.0.104.0" />
-+    <PackageReference Include="System.Data.SQLite.Linq" Version="1.0.104.0" />
++    <PackageReference Include="System.Data.SQLite" Version="1.0.119" />
++    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
++    <PackageReference Include="System.Data.SQLite.EF6" Version="1.0.119" />
 +    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="4.0.4.403061554" />
 +    <PackageReference Include="UDE.CSharp" Version="1.1.0" />
 +    <PackageReference Include="Unity" Version="5.11.7" />
 +    <PackageReference Include="Unity.Abstractions" Version="5.11.1" />
 +    <PackageReference Include="Unity.Container" Version="5.11.1" />
 +    <PackageReference Include="Unity.Mvc" Version="5.11.1" />
++    <!-- Unity.Mvc depends on Microsoft.AspNet.Mvc 5.2.7, whose System.Web.Razor/WebPages would replace webForCore's
++         (MissingMethodException in MvcCSharpRazorCodeGenerator). MIGRATING.md, "Packages that need more than a reference". -->
++    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" ExcludeAssets="all" />
++    <PackageReference Include="Microsoft.AspNet.WebPages" Version="3.2.7" ExcludeAssets="all" />
++    <PackageReference Include="Microsoft.AspNet.Razor" Version="3.2.7" ExcludeAssets="all" />
 +    <PackageReference Include="WebActivatorEx" Version="2.2.0" />
 +    <!-- Not in webForCore: the WS-Federation provider (Security/FederationAuthenticationProvider.cs). Its Katana 3.0.1
 +         dependencies would clash with webForCore's Microsoft.Owin (FINDINGS F5). -->
@@ -1737,3 +1741,51 @@ index 7272fea..5d73286 100644
 -    </compilers>
 -  </system.codedom>
  </configuration>
+diff --git a/logs/Bonobo.Git.Server/W3SVC1/u_ex20261031.0000.txt b/logs/Bonobo.Git.Server/W3SVC1/u_ex20261031.0000.txt
+new file mode 100644
+index 0000000..b3cbb13
+--- /dev/null
++++ b/logs/Bonobo.Git.Server/W3SVC1/u_ex20261031.0000.txt
+@@ -0,0 +1,6 @@
++#Version: 1.0
++#Start-Date: 2026-10-31 19:36:26
++#Fields: date time c-ip cs-username s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status time-taken cs(User-Agent) cs(Referer)
++2026-10-31 19:36:24 127.0.0.1 - 127.0.0.1 38379 GET /Home/LogOn - 302 1234.0413 webForCore-smoke-test -
++2026-10-31 19:36:26 127.0.0.1 - 127.0.0.1 38379 GET / - 302 316.8155 webForCore-smoke-test -
++2026-10-31 19:36:26 127.0.0.1 - 127.0.0.1 38379 GET /Content/Site.css - 200 62.4699 webForCore-smoke-test -
+diff --git a/logs/Bonobo.Git.Server/W3SVC1/u_ex20261031.0001.txt b/logs/Bonobo.Git.Server/W3SVC1/u_ex20261031.0001.txt
+new file mode 100644
+index 0000000..651393a
+--- /dev/null
++++ b/logs/Bonobo.Git.Server/W3SVC1/u_ex20261031.0001.txt
+@@ -0,0 +1,6 @@
++#Version: 1.0
++#Start-Date: 2026-10-31 19:38:20
++#Fields: date time c-ip cs-username s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status time-taken cs(User-Agent) cs(Referer)
++2026-10-31 19:38:15 127.0.0.1 - 127.0.0.1 44481 GET /Home/LogOn - 200 4704.4104 webForCore-smoke-test -
++2026-10-31 19:38:19 127.0.0.1 - 127.0.0.1 44481 GET / - 302 28.8669 webForCore-smoke-test -
++2026-10-31 19:38:19 127.0.0.1 - 127.0.0.1 44481 GET /Content/Site.css - 200 59.0921 webForCore-smoke-test -
+diff --git a/logs/Bonobo.Git.Server/W3SVC1/u_ex20261031.0002.txt b/logs/Bonobo.Git.Server/W3SVC1/u_ex20261031.0002.txt
+new file mode 100644
+index 0000000..9d05aa4
+--- /dev/null
++++ b/logs/Bonobo.Git.Server/W3SVC1/u_ex20261031.0002.txt
+@@ -0,0 +1,6 @@
++#Version: 1.0
++#Start-Date: 2026-10-31 19:40:16
++#Fields: date time c-ip cs-username s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status time-taken cs(User-Agent) cs(Referer)
++2026-10-31 19:40:08 127.0.0.1 - 127.0.0.1 34429 GET /Home/LogOn - 200 6998.1739 webForCore-smoke-test -
++2026-10-31 19:40:15 127.0.0.1 - 127.0.0.1 34429 GET / - 302 30.4065 webForCore-smoke-test -
++2026-10-31 19:40:15 127.0.0.1 - 127.0.0.1 34429 GET /Content/Site.css - 200 57.2679 webForCore-smoke-test -
+diff --git a/logs/Bonobo.Git.Server/W3SVC1/u_ex20261031.0003.txt b/logs/Bonobo.Git.Server/W3SVC1/u_ex20261031.0003.txt
+new file mode 100644
+index 0000000..c57c45f
+--- /dev/null
++++ b/logs/Bonobo.Git.Server/W3SVC1/u_ex20261031.0003.txt
+@@ -0,0 +1,6 @@
++#Version: 1.0
++#Start-Date: 2026-10-31 19:41:11
++#Fields: date time c-ip cs-username s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status time-taken cs(User-Agent) cs(Referer)
++2026-10-31 19:41:04 127.0.0.1 - 127.0.0.1 36361 GET /Home/LogOn - 200 6783.5398 webForCore-smoke-test -
++2026-10-31 19:41:11 127.0.0.1 - 127.0.0.1 36361 GET / - 302 34.7555 webForCore-smoke-test -
++2026-10-31 19:41:11 127.0.0.1 - 127.0.0.1 36361 GET /Content/Site.css - 200 63.274 webForCore-smoke-test -
