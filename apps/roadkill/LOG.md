@@ -11,3 +11,12 @@ Appended by `scripts/wfc.py`, one line per stage run.
 - 2026-10-31T19:52:59+00:00 **build**: pass
 - 2026-10-31T20:17:25+00:00 **build**: pass
 - 2026-10-31T20:17:57+00:00 **smoke**: fail (6/9 probes)
+- 2026-10-31T21:01:26+00:00 **build**: pass
+- 2026-10-31T21:01:29+00:00 **smoke**: fail (6/9 probes)
+- 2026-10-31T21:08:02+00:00 **fetch**: pass (existing checkout) at `1061add4a727`
+- 2026-10-31T21:08:30+00:00 **fetch**: fail (overlay does not apply) at `1061add4a727`
+- 2026-10-31T21:11:52+00:00 **build**: skip (not migrated yet (no SDK-style project))
+- 2026-10-31T21:11:52+00:00 **smoke**: skip (not built (apps/roadkill/src/src/Roadkill.Web/bin_dotnet/Roadkill.Web.dll missing))
+- 2026-10-31T21:13:48+00:00 **build**: pass
+- 2026-10-31T21:13:51+00:00 **smoke**: fail (6/9 probes)
+- 2026-10-31T21:14:08+00:00 **fetch**: pass at `1061add4a727`

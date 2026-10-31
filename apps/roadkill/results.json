@@ -30,26 +30,26 @@
       ]
     },
     "build": {
-      "at": "2026-10-31T20:17:25+00:00",
+      "at": "2026-10-31T21:13:48+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/roadkill/logs/build.log",
-      "seconds": 2,
+      "seconds": 3,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.2.0"
     },
     "fetch": {
-      "at": "2026-10-31T19:34:50+00:00",
+      "at": "2026-10-31T21:14:08+00:00",
       "commit": "1061add4a727c55793234e0a92f146c6f1db62cf",
-      "overlay": false,
+      "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-10-31T20:17:57+00:00",
+      "at": "2026-10-31T21:13:51+00:00",
       "checks": [
         {
-          "ms": 282,
+          "ms": 270,
           "ok": false,
           "path": "/",
           "status": 500,
@@ -70,37 +70,37 @@
           "title": "Configuration Error"
         },
         {
-          "ms": 14,
+          "ms": 3,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 5,
+          "ms": 1,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 5,
+          "ms": 1,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 5,
+          "ms": 1,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 1,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 7,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/Roadkill.Web.dll",
           "status": 404
