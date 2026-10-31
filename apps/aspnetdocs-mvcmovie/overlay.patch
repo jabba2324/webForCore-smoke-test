@@ -1,8 +1,8 @@
 diff --git a/aspnet/mvc/overview/getting-started/introduction/sample/MvcMovie/MvcMovie/MvcMovie.csproj b/aspnet/mvc/overview/getting-started/introduction/sample/MvcMovie/MvcMovie/MvcMovie.csproj
-index a99e2c29d..d1b96ec31 100644
+index a99e2c29d..8cfb97b4e 100644
 --- a/aspnet/mvc/overview/getting-started/introduction/sample/MvcMovie/MvcMovie/MvcMovie.csproj
 +++ b/aspnet/mvc/overview/getting-started/introduction/sample/MvcMovie/MvcMovie/MvcMovie.csproj
-@@ -1,350 +1,70 @@
+@@ -1,350 +1,68 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -323,18 +323,18 @@ index a99e2c29d..d1b96ec31 100644
 +
    <ItemGroup>
 -    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-+    <!-- webForCore 0.1.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Web.Helpers" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.2.0" />
++    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.Helpers" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.4.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -347,8 +347,6 @@ index a99e2c29d..d1b96ec31 100644
 +    <PackageReference Include="Microsoft.Owin.Security.Google" Version="3.0.1" />
 +    <PackageReference Include="Microsoft.Owin.Security.MicrosoftAccount" Version="3.0.1" />
 +    <PackageReference Include="Microsoft.Owin.Security.Twitter" Version="3.0.1" />
-+    <PackageReference Include="Microsoft.Owin" Version="3.0.1" ExcludeAssets="all" />
-+    <PackageReference Include="Microsoft.Owin.Security" Version="3.0.1" ExcludeAssets="all" />
 +    <PackageReference Include="bootstrap" Version="3.4.1" />
 +    <PackageReference Include="cldrjs" Version="0.4.1" />
 +    <PackageReference Include="EntityFramework" Version="6.5.1" />
