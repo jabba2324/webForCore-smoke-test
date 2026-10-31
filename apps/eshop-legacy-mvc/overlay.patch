@@ -1,0 +1,1450 @@
+diff --git a/eShopLegacyMVCSolution/eShopLegacy.Utilities/Serializing.cs b/eShopLegacyMVCSolution/eShopLegacy.Utilities/Serializing.cs
+index 607fc48..e4a2847 100644
+--- a/eShopLegacyMVCSolution/eShopLegacy.Utilities/Serializing.cs
++++ b/eShopLegacyMVCSolution/eShopLegacy.Utilities/Serializing.cs
+@@ -1,5 +1,5 @@
+ ﻿using System.IO;
+-using System.Runtime.Serialization.Formatters.Binary;
++using WebFormsForCore.Serialization.Formatters.Binary;
+ 
+ namespace eShopLegacy.Utilities
+ {
+diff --git a/eShopLegacyMVCSolution/eShopLegacy.Utilities/eShopLegacy.Utilities.csproj b/eShopLegacyMVCSolution/eShopLegacy.Utilities/eShopLegacy.Utilities.csproj
+index efb378f..a4b9a60 100644
+--- a/eShopLegacyMVCSolution/eShopLegacy.Utilities/eShopLegacy.Utilities.csproj
++++ b/eShopLegacyMVCSolution/eShopLegacy.Utilities/eShopLegacy.Utilities.csproj
+@@ -1,48 +1,15 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++﻿<Project Sdk="Microsoft.NET.Sdk">
++  <!-- Migrated to .NET 11 for webForCore. The .NET Framework project is eShopLegacy.Utilities.csproj.netfx. -->
+   <PropertyGroup>
+-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+-    <ProjectGuid>{D466562E-F48C-4EF1-AE08-3A80B0ED9671}</ProjectGuid>
+-    <OutputType>Library</OutputType>
+-    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <TargetFramework>net11.0</TargetFramework>
+     <RootNamespace>eShopLegacy.Utilities</RootNamespace>
+     <AssemblyName>eShopLegacy.Utilities</AssemblyName>
+-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+-    <FileAlignment>512</FileAlignment>
+-    <Deterministic>true</Deterministic>
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+   </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+-    <DebugSymbols>true</DebugSymbols>
+-    <DebugType>full</DebugType>
+-    <Optimize>false</Optimize>
+-    <OutputPath>bin\Debug\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+-    <DebugType>pdbonly</DebugType>
+-    <Optimize>true</Optimize>
+-    <OutputPath>bin\Release\</OutputPath>
+-    <DefineConstants>TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-  </PropertyGroup>
+-  <ItemGroup>
+-    <Reference Include="System" />
+-    <Reference Include="System.Core" />
+-    <Reference Include="System.Xml.Linq" />
+-    <Reference Include="System.Data.DataSetExtensions" />
+-    <Reference Include="Microsoft.CSharp" />
+-    <Reference Include="System.Data" />
+-    <Reference Include="System.Net.Http" />
+-    <Reference Include="System.Xml" />
+-  </ItemGroup>
+   <ItemGroup>
+-    <Compile Include="Serializing.cs" />
+-    <Compile Include="Properties\AssemblyInfo.cs" />
++    <!-- BinaryFormatter: .NET 11's throws; webForCore's port replaces it (docs/NAMESPACES.md). -->
++    <ProjectReference Include="$(WEBFORCORE_DIR)/src/WebFormsForCore.Serialization.Formatters/WebFormsForCore.Serialization.Formatters.csproj" />
+   </ItemGroup>
+-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+-</Project>
+\ No newline at end of file
++</Project>
+diff --git a/eShopLegacyMVCSolution/eShopLegacy.Utilities/eShopLegacy.Utilities.csproj.netfx b/eShopLegacyMVCSolution/eShopLegacy.Utilities/eShopLegacy.Utilities.csproj.netfx
+new file mode 100644
+index 0000000..efb378f
+--- /dev/null
++++ b/eShopLegacyMVCSolution/eShopLegacy.Utilities/eShopLegacy.Utilities.csproj.netfx
+@@ -0,0 +1,48 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++  <PropertyGroup>
++    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
++    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
++    <ProjectGuid>{D466562E-F48C-4EF1-AE08-3A80B0ED9671}</ProjectGuid>
++    <OutputType>Library</OutputType>
++    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <RootNamespace>eShopLegacy.Utilities</RootNamespace>
++    <AssemblyName>eShopLegacy.Utilities</AssemblyName>
++    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
++    <FileAlignment>512</FileAlignment>
++    <Deterministic>true</Deterministic>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
++    <DebugSymbols>true</DebugSymbols>
++    <DebugType>full</DebugType>
++    <Optimize>false</Optimize>
++    <OutputPath>bin\Debug\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
++    <DebugType>pdbonly</DebugType>
++    <Optimize>true</Optimize>
++    <OutputPath>bin\Release\</OutputPath>
++    <DefineConstants>TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++  </PropertyGroup>
++  <ItemGroup>
++    <Reference Include="System" />
++    <Reference Include="System.Core" />
++    <Reference Include="System.Xml.Linq" />
++    <Reference Include="System.Data.DataSetExtensions" />
++    <Reference Include="Microsoft.CSharp" />
++    <Reference Include="System.Data" />
++    <Reference Include="System.Net.Http" />
++    <Reference Include="System.Xml" />
++  </ItemGroup>
++  <ItemGroup>
++    <Compile Include="Serializing.cs" />
++    <Compile Include="Properties\AssemblyInfo.cs" />
++  </ItemGroup>
++  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
++</Project>
+\ No newline at end of file
+diff --git a/eShopLegacyMVCSolution/src/eShopLegacyMVC/App_Start/BundleConfig.cs b/eShopLegacyMVCSolution/src/eShopLegacyMVC/App_Start/BundleConfig.cs
+index c6a0124..9589835 100644
+--- a/eShopLegacyMVCSolution/src/eShopLegacyMVC/App_Start/BundleConfig.cs
++++ b/eShopLegacyMVCSolution/src/eShopLegacyMVC/App_Start/BundleConfig.cs
+@@ -26,7 +26,7 @@ namespace eShopLegacyMVC
+                       "~/Content/bootstrap.css",
+                       "~/Content/custom.css",
+                       "~/Content/base.css",
+-                      "~/Content/site.css"));
++                      "~/Content/Site.css"));
+         }
+     }
+ }
+diff --git a/eShopLegacyMVCSolution/src/eShopLegacyMVC/Models/Infrastructure/CatalogDBInitializer.cs b/eShopLegacyMVCSolution/src/eShopLegacyMVC/Models/Infrastructure/CatalogDBInitializer.cs
+index 7db8faf..1c901db 100644
+--- a/eShopLegacyMVCSolution/src/eShopLegacyMVC/Models/Infrastructure/CatalogDBInitializer.cs
++++ b/eShopLegacyMVCSolution/src/eShopLegacyMVC/Models/Infrastructure/CatalogDBInitializer.cs
+@@ -16,9 +16,9 @@ namespace eShopLegacyMVC.Models.Infrastructure
+     {
+         private const string DBCatalogSequenceName = "catalog_type_hilo";
+         private const string DBBrandSequenceName = "catalog_brand_hilo";
+-        private const string CatalogItemHiLoSequenceScript = @"Models\Infrastructure\dbo.catalog_hilo.Sequence.sql";
+-        private const string CatalogBrandHiLoSequenceScript = @"Models\Infrastructure\dbo.catalog_brand_hilo.Sequence.sql";
+-        private const string CatalogTypeHiLoSequenceScript = @"Models\Infrastructure\dbo.catalog_type_hilo.Sequence.sql";
++        private const string CatalogItemHiLoSequenceScript = @"Models/Infrastructure/dbo.catalog_hilo.Sequence.sql";
++        private const string CatalogBrandHiLoSequenceScript = @"Models/Infrastructure/dbo.catalog_brand_hilo.Sequence.sql";
++        private const string CatalogTypeHiLoSequenceScript = @"Models/Infrastructure/dbo.catalog_type_hilo.Sequence.sql";
+ 
+         private CatalogItemHiLoGenerator indexGenerator;
+         private bool useCustomizationData;
+diff --git a/eShopLegacyMVCSolution/src/eShopLegacyMVC/Program.cs b/eShopLegacyMVCSolution/src/eShopLegacyMVC/Program.cs
+new file mode 100644
+index 0000000..f489cd7
+--- /dev/null
++++ b/eShopLegacyMVCSolution/src/eShopLegacyMVC/Program.cs
+@@ -0,0 +1,25 @@
++using Microsoft.AspNetCore.Builder;
++using Microsoft.Extensions.DependencyInjection;
++using WebFormsForCore.Hosting.IIS;
++
++namespace eShopLegacyMVC
++{
++    // webForCore host (docs/MIGRATING.md section 4). The app uses session state (Global.asax Session_Start).
++    public class Program
++    {
++        public static void Main(string[] args)
++        {
++            var builder = WebApplication.CreateBuilder(args);
++            builder.Services.AddWebForms();
++            builder.Services.AddDistributedMemoryCache();
++            builder.Services.AddSession();
++
++            var app = builder.Build();
++            app.UseSession();
++            app.UseWebForms(o => o
++                .HandleAllRequestsWithWebForms()
++                .UseAspNetCoreSessionProvider());
++            app.Run();
++        }
++    }
++}
+diff --git a/eShopLegacyMVCSolution/src/eShopLegacyMVC/Web.config b/eShopLegacyMVCSolution/src/eShopLegacyMVC/Web.config
+index dffd8ca..7232b90 100644
+--- a/eShopLegacyMVCSolution/src/eShopLegacyMVC/Web.config
++++ b/eShopLegacyMVCSolution/src/eShopLegacyMVC/Web.config
+@@ -9,7 +9,7 @@
+     
+   <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 --></configSections>
+   <connectionStrings>
+-    <add name="CatalogDBContext" connectionString="Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=Microsoft.eShopOnContainers.Services.CatalogDb; Integrated Security=True; MultipleActiveResultSets=True;" providerName="System.Data.SqlClient" />
++    <add name="CatalogDBContext" connectionString="Data Source=127.0.0.1,14330; Initial Catalog=Microsoft.eShopOnContainers.Services.CatalogDb; User ID=sa; Password=Smoke_test_1234; TrustServerCertificate=True; MultipleActiveResultSets=True;" providerName="System.Data.SqlClient" />
+   </connectionStrings>
+   <appSettings>
+     <add key="webpages:Version" value="3.0.0.0" />
+@@ -110,10 +110,4 @@
+       <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+     </providers>
+   </entityFramework>
+-  <system.codedom>
+-    <compilers>
+-      <compiler language="c#;cs;csharp" extension=".cs" type="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.CSharpCodeProvider, Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" warningLevel="4" compilerOptions="/langversion:default /nowarn:1659;1699;1701" />
+-      <compiler language="vb;vbs;visualbasic;vbscript" extension=".vb" type="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.VBCodeProvider, Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" warningLevel="4" compilerOptions="/langversion:default /nowarn:41008 /define:_MYTYPE=\&quot;Web\&quot; /optionInfer+" />
+-    </compilers>
+-  </system.codedom>
+ </configuration>
+\ No newline at end of file
+diff --git a/eShopLegacyMVCSolution/src/eShopLegacyMVC/eShopLegacyMVC.csproj b/eShopLegacyMVCSolution/src/eShopLegacyMVC/eShopLegacyMVC.csproj
+index 503535d..144a46c 100644
+--- a/eShopLegacyMVCSolution/src/eShopLegacyMVC/eShopLegacyMVC.csproj
++++ b/eShopLegacyMVCSolution/src/eShopLegacyMVC/eShopLegacyMVC.csproj
+@@ -1,573 +1,80 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+-  <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+-  <Import Project="..\..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props')" />
+-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++<Project Sdk="Microsoft.NET.Sdk.Web">
++  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is eShopLegacyMVC.csproj.netfx. -->
+   <PropertyGroup>
+-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+-    <ProductVersion>
+-    </ProductVersion>
+-    <SchemaVersion>2.0</SchemaVersion>
+-    <ProjectGuid>{C4E50A92-30E2-4592-9A9A-A9D2B1B13A7E}</ProjectGuid>
+-    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+-    <OutputType>Library</OutputType>
+-    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <TargetFramework>net11.0</TargetFramework>
++    <OutputType>Exe</OutputType>
+     <RootNamespace>eShopLegacyMVC</RootNamespace>
+     <AssemblyName>eShopLegacyMVC</AssemblyName>
+-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+-    <MvcBuildViews>false</MvcBuildViews>
+-    <UseIISExpress>true</UseIISExpress>
+-    <IISExpressSSLPort />
+-    <IISExpressAnonymousAuthentication />
+-    <IISExpressWindowsAuthentication />
+-    <IISExpressUseClassicPipelineMode />
+-    <UseGlobalApplicationHostFile />
+-    <NuGetPackageImportStamp>
+-    </NuGetPackageImportStamp>
+-    <TargetFrameworkProfile />
+-    <Use64BitIISExpress />
+-    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
++    <OutputPath>bin_dotnet</OutputPath>
++    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
++    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
++    <GenerateDependencyFile>true</GenerateDependencyFile>
++    <NoWarn>$(NoWarn);NU1701</NoWarn>
++    <PredefinedCulturesOnly>true</PredefinedCulturesOnly>
++    <EnableDefaultRazorGenerateItems>false</EnableDefaultRazorGenerateItems>
++    <RazorCompileOnBuild>false</RazorCompileOnBuild>
++    <RazorCompileOnPublish>false</RazorCompileOnPublish>
+   </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+-    <DebugSymbols>true</DebugSymbols>
+-    <DebugType>full</DebugType>
+-    <Optimize>false</Optimize>
+-    <OutputPath>bin\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-    <LangVersion>default</LangVersion>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+-    <DebugSymbols>true</DebugSymbols>
+-    <DebugType>pdbonly</DebugType>
+-    <Optimize>true</Optimize>
+-    <OutputPath>bin\</OutputPath>
+-    <DefineConstants>TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-  </PropertyGroup>
+-  <ItemGroup>
+-    <PackageReference Include="Autofac">
+-      <Version>6.1.0</Version>
+-    </PackageReference>
+-    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+-    </Reference>
+-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+-    </Reference>
+-    <PackageReference Include="autofac.webapi2">
+-      <Version>6.0.1</Version>
+-    </PackageReference>
+-    <PackageReference Include="EntityFramework">
+-      <Version>6.2.0</Version>
+-    </PackageReference>
+-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.AI.Web, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.ApplicationInsights.Web.2.9.1\lib\net45\Microsoft.AI.Web.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.AI.WindowsServer, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.CSharp" />
+-    <PackageReference Include="Microsoft.AspNet.WebApi">
+-      <Version>5.2.7</Version>
+-    </PackageReference>
+-    <PackageReference Include="Microsoft.AspNet.WebApi.Client">
+-      <Version>5.2.7</Version>
+-    </PackageReference>
+-    <PackageReference Include="Microsoft.AspNet.WebApi.Core">
+-      <Version>5.2.7</Version>
+-    </PackageReference>
+-    <PackageReference Include="Microsoft.AspNet.WebApi.WebHost">
+-      <Version>5.2.7</Version>
+-    </PackageReference>
+-    <PackageReference Include="Newtonsoft.Json">
+-      <Version>12.0.1</Version>
+-    </PackageReference>
+-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+-    </Reference>
+-    <PackageReference Include="Pipelines.Sockets.Unofficial">
+-      <Version>1.0.7</Version>
+-    </PackageReference>
+-    <Reference Include="Pipelines.Sockets.Unofficial, Version=1.0.0.0, Culture=neutral, PublicKeyToken=42ea0a778e13fbe2, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Pipelines.Sockets.Unofficial.1.0.7\lib\net472\Pipelines.Sockets.Unofficial.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System" />
+-    <PackageReference Include="System.Buffers">
+-      <Version>4.4.0</Version>
+-    </PackageReference>
+-    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Data" />
+-    <Reference Include="System.Data.DataSetExtensions" />
+-    <PackageReference Include="System.Diagnostics.DiagnosticSource">
+-      <Version>4.5.1</Version>
+-    </PackageReference>
+-    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\System.Diagnostics.DiagnosticSource.4.5.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+-    </Reference>
+-    <PackageReference Include="System.Diagnostics.PerformanceCounter">
+-      <Version>4.5.0</Version>
+-    </PackageReference>
+-    <Reference Include="System.Diagnostics.PerformanceCounter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\System.Diagnostics.PerformanceCounter.4.5.0\lib\net461\System.Diagnostics.PerformanceCounter.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Drawing" />
+-    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+-      <Private>True</Private>
+-      <Private>True</Private>
+-    </Reference>
+-    <Reference Include="System.IO.Compression.FileSystem" />
+-    <PackageReference Include="System.IO.Compression">
+-      <Version>4.3.0</Version>
+-    </PackageReference>
+-    <PackageReference Include="System.IO.Compression.ZipFile">
+-      <Version>4.3.0</Version>
+-    </PackageReference>
+-    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+-      <Private>True</Private>
+-      <Private>True</Private>
+-    </Reference>
+-    <PackageReference Include="System.IO.Pipelines">
+-      <Version>4.5.1</Version>
+-    </PackageReference>
+-    <Reference Include="System.IO.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\System.IO.Pipelines.4.5.1\lib\netstandard2.0\System.IO.Pipelines.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Management" />
+-    <PackageReference Include="System.Memory">
+-      <Version>4.5.1</Version>
+-    </PackageReference>
+-    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Numerics" />
+-    <PackageReference Include="System.Net.Http">
+-      <Version>4.3.4</Version>
+-    </PackageReference>
+-    <PackageReference Include="System.Numerics.Vectors">
+-      <Version>4.4.0</Version>
+-    </PackageReference>
+-    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Runtime.Caching" />
+-    <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
+-      <Version>4.5.0</Version>
+-    </PackageReference>
+-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+-    </Reference>
+-    <PackageReference Include="System.Threading.Channels">
+-      <Version>4.5.0</Version>
+-    </PackageReference>
+-    <Reference Include="System.Threading.Channels, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\System.Threading.Channels.4.5.0\lib\netstandard2.0\System.Threading.Channels.dll</HintPath>
+-    </Reference>
+-    <PackageReference Include="System.Threading.Tasks.Extensions">
+-      <Version>4.5.1</Version>
+-    </PackageReference>
+-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.5.1\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.DynamicData" />
+-    <Reference Include="System.Web.Entity" />
+-    <Reference Include="System.Web.ApplicationServices" />
+-    <Reference Include="System.ComponentModel.DataAnnotations" />
+-    <Reference Include="System.Web" />
+-    <Reference Include="System.Web.Abstractions" />
+-    <Reference Include="System.Web.Extensions" />
+-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.Routing" />
+-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Xml" />
+-    <Reference Include="System.Configuration" />
+-    <Reference Include="System.Web.Services" />
+-    <Reference Include="System.EnterpriseServices" />
+-    <Reference Include="System.Net.Http">
+-    </Reference>
+-    <Reference Include="System.Net.Http.WebRequest">
+-    </Reference>
+-    <Reference Include="System.Xml.Linq" />
+-    <PackageReference Include="WebGrease">
+-      <Version>1.6.0</Version>
+-    </PackageReference>
+-    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+-    </Reference>
+-    <PackageReference Include="Antlr">
+-      <Version>3.5.0.2</Version>
+-    </PackageReference>
+-    <PackageReference Include="log4net">
+-      <Version>2.0.10</Version>
+-    </PackageReference>
+-    <PackageReference Include="Microsoft.ApplicationInsights">
+-      <Version>2.9.1</Version>
+-    </PackageReference>
+-    <PackageReference Include="Microsoft.AspNet.SessionState.SessionStateModule">
+-      <Version>1.1.0</Version>
+-    </PackageReference>
+-    <PackageReference Include="Microsoft.AspNet.TelemetryCorrelation">
+-      <Version>1.0.5</Version>
+-    </PackageReference>
+-    <PackageReference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+-      <Version>2.0.1</Version>
+-    </PackageReference>
+-    <PackageReference Include="Microsoft.Web.Infrastructure">
+-      <Version>1.0.0.0</Version>
+-    </PackageReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Compile Include="App_Start\BundleConfig.cs" />
+-    <Compile Include="App_Start\FilterConfig.cs" />
+-    <Compile Include="App_Start\RouteConfig.cs" />
+-    <Compile Include="App_Start\WebApiConfig.cs" />
+-    <Compile Include="Controllers\Api\CatalogController.cs" />
+-    <Compile Include="Controllers\PicController.cs" />
+-    <Compile Include="Controllers\WebApi\FilesController.cs" />
+-    <Compile Include="Controllers\WebApi\BrandsController.cs" />
+-    <Compile Include="Models\Infrastructure\CatalogDBInitializer.cs" />
+-    <Compile Include="Models\CatalogItemHiLoGenerator.cs" />
+-    <Compile Include="Controllers\CatalogController.cs" />
+-    <Compile Include="Global.asax.cs">
+-      <DependentUpon>Global.asax</DependentUpon>
+-    </Compile>
+-    <Compile Include="Models\CatalogBrand.cs" />
+-    <Compile Include="Models\CatalogDBContext.cs" />
+-    <Compile Include="Models\CatalogItem.cs" />
+-    <Compile Include="Models\CatalogType.cs" />
+-    <Compile Include="Models\Infrastructure\PreconfiguredData.cs" />
+-    <Compile Include="Modules\ApplicationModule.cs" />
+-    <Compile Include="Properties\AssemblyInfo.cs" />
+-    <Compile Include="Services\CatalogService.cs" />
+-    <Compile Include="Services\CatalogServiceMock.cs" />
+-    <Compile Include="Services\ICatalogService.cs" />
+-    <Compile Include="ViewModel\PaginatedItemsViewModel.cs" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Content Include="Content\base.css" />
+-    <Content Include="Content\bootstrap-grid.css" />
+-    <Content Include="Content\bootstrap-grid.min.css" />
+-    <Content Include="Content\bootstrap-reboot.css" />
+-    <Content Include="Content\bootstrap-reboot.min.css" />
+-    <Content Include="Content\bootstrap.css" />
+-    <Content Include="Content\bootstrap.min.css" />
+-    <Content Include="Content\custom.css" />
+-    <Content Include="favicon.ico" />
+-    <Content Include="fonts\Montserrat-Bold.svg" />
+-    <Content Include="fonts\Montserrat-Regular.svg" />
+-    <Content Include="Global.asax" />
+-    <Content Include="Content\site.css" />
+-    <Content Include="Images\brand.png" />
+-    <Content Include="Images\brand_dark.png" />
+-    <Content Include="Images\main_banner.png" />
+-    <Content Include="Images\main_footer_text.png" />
+-    <Content Include="log4Net.xml" />
+-    <Content Include="Models\Infrastructure\dbo.catalog_brand_hilo.Sequence.sql">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Models\Infrastructure\dbo.catalog_hilo.Sequence.sql">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Models\Infrastructure\dbo.catalog_type_hilo.Sequence.sql">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Pics\1.png" />
+-    <Content Include="Pics\10.png" />
+-    <Content Include="Pics\11.png" />
+-    <Content Include="Pics\12.png" />
+-    <Content Include="Pics\2.png" />
+-    <Content Include="Pics\3.png" />
+-    <Content Include="Pics\4.png" />
+-    <Content Include="Pics\5.png" />
+-    <Content Include="Pics\6.png" />
+-    <Content Include="Pics\7.png" />
+-    <Content Include="Pics\8.png" />
+-    <Content Include="Pics\9.png" />
+-    <Content Include="Pics\dummy.png" />
+-    <Content Include="ApplicationInsights.config">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-      <SubType>Designer</SubType>
+-    </Content>
+-    <Content Include="fonts\Montserrat-Bold.eot" />
+-    <Content Include="fonts\Montserrat-Bold.ttf" />
+-    <Content Include="fonts\Montserrat-Bold.woff" />
+-    <Content Include="fonts\Montserrat-Bold.woff2" />
+-    <Content Include="fonts\Montserrat-Regular.eot" />
+-    <Content Include="fonts\Montserrat-Regular.ttf" />
+-    <Content Include="fonts\Montserrat-Regular.woff" />
+-    <Content Include="fonts\Montserrat-Regular.woff2" />
+-    <Content Include="Content\bootstrap.min.css.map" />
+-    <Content Include="Content\bootstrap.css.map" />
+-    <Content Include="Content\bootstrap-reboot.min.css.map" />
+-    <Content Include="Content\bootstrap-reboot.css.map" />
+-    <Content Include="Content\bootstrap-grid.min.css.map" />
+-    <Content Include="Content\bootstrap-grid.css.map" />
+-    <Content Include="Scripts\bootstrap.bundle.js" />
+-    <Content Include="Scripts\bootstrap.bundle.min.js" />
+-    <Content Include="Scripts\bootstrap.js" />
+-    <Content Include="Scripts\bootstrap.min.js" />
+-    <Content Include="Scripts\esm\popper-utils.js" />
+-    <Content Include="Scripts\esm\popper-utils.min.js" />
+-    <Content Include="Scripts\esm\popper.js" />
+-    <Content Include="Scripts\esm\popper.min.js" />
+-    <Content Include="Scripts\esm\popper.min.js.map" />
+-    <Content Include="Scripts\esm\popper.js.map" />
+-    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+-    <Content Include="Scripts\esm\popper-utils.js.map" />
+-    <Content Include="Scripts\bootstrap.min.js.map" />
+-    <Content Include="Scripts\bootstrap.js.map" />
+-    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+-    <Content Include="Scripts\bootstrap.bundle.js.map" />
+-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+-    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+-    <Content Include="Scripts\jquery-3.3.1.js" />
+-    <Content Include="Scripts\jquery-3.3.1.min.js" />
+-    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+-    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+-    <None Include="Scripts\jquery.validate-vsdoc.js" />
+-    <Content Include="Scripts\jquery.validate.js" />
+-    <Content Include="Scripts\jquery.validate.min.js" />
+-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+-    <Content Include="Scripts\modernizr-2.6.2.js" />
+-    <Content Include="Scripts\modernizr-2.8.3.js" />
+-    <Content Include="Scripts\popper-utils.js" />
+-    <Content Include="Scripts\popper-utils.min.js" />
+-    <Content Include="Scripts\popper.js" />
+-    <Content Include="Scripts\popper.min.js" />
+-    <Content Include="Scripts\respond.js" />
+-    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+-    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+-    <Content Include="Scripts\respond.min.js" />
+-    <Content Include="Scripts\umd\popper-utils.js" />
+-    <Content Include="Scripts\umd\popper-utils.min.js" />
+-    <Content Include="Scripts\umd\popper.js" />
+-    <Content Include="Scripts\umd\popper.min.js" />
+-    <Content Include="Web.config">
+-      <SubType>Designer</SubType>
+-    </Content>
+-    <Content Include="Web.Debug.config">
+-      <DependentUpon>Web.config</DependentUpon>
+-    </Content>
+-    <Content Include="Web.Release.config">
+-      <DependentUpon>Web.config</DependentUpon>
+-    </Content>
+-    <Content Include="Views\Web.config" />
+-    <Content Include="Views\_ViewStart.cshtml" />
+-    <Content Include="Views\Shared\Error.cshtml" />
+-    <Content Include="Views\Shared\_Layout.cshtml" />
+-    <Content Include="Views\Catalog\Create.cshtml" />
+-    <Content Include="Views\Catalog\Delete.cshtml" />
+-    <Content Include="Views\Catalog\Details.cshtml" />
+-    <Content Include="Views\Catalog\Edit.cshtml" />
+-    <Content Include="Views\Catalog\Index.cshtml" />
+-    <Content Include="Views\Catalog\CatalogTable.cshtml" />
+-    <Content Include="Setup\CatalogBrands.csv" />
+-    <Content Include="Setup\CatalogItems.csv" />
+-    <Content Include="Setup\CatalogTypes.csv" />
+-    <Content Include="Setup\CatalogItems.zip" />
+-    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+-    <Content Include="Scripts\jquery-3.3.1.min.map" />
+-    <Content Include="Scripts\umd\popper.min.js.map" />
+-    <Content Include="Scripts\umd\popper.js.map" />
+-    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+-    <Content Include="Scripts\umd\popper-utils.js.map" />
+-    <Content Include="Scripts\README.md" />
+-    <Content Include="Scripts\popper.min.js.map" />
+-    <Content Include="Scripts\popper.js.map" />
+-    <Content Include="Scripts\popper-utils.min.js.map" />
+-    <Content Include="Scripts\popper-utils.js.map" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Folder Include="App_Data\" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <TypeScriptCompile Include="Scripts\index.d.ts" />
+-  </ItemGroup>
+-  <PropertyGroup>
+-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+-  </PropertyGroup>
+-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+-  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+-  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+-    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+-  </Target>
+-  <ProjectExtensions>
+-    <VisualStudio>
+-      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+-        <WebProjectProperties>
+-          <UseIIS>True</UseIIS>
+-          <AutoAssignPort>True</AutoAssignPort>
+-          <DevelopmentServerPort>53134</DevelopmentServerPort>
+-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+-          <IISUrl>http://localhost:52429/</IISUrl>
+-          <NTLMAuthentication>False</NTLMAuthentication>
+-          <UseCustomServer>False</UseCustomServer>
+-          <CustomServerUrl>
+-          </CustomServerUrl>
+-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+-        </WebProjectProperties>
+-      </FlavorProperties>
+-    </VisualStudio>
+-  </ProjectExtensions>
+-  <Import Project="..\..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\build\Microsoft.ApplicationInsights.DependencyCollector.targets" Condition="Exists('..\..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\build\Microsoft.ApplicationInsights.DependencyCollector.targets')" />
+-  <Import Project="..\..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets" Condition="Exists('..\..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets')" />
+-  <Import Project="..\..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets" Condition="Exists('..\..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets')" />
+-  <Import Project="..\..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.targets" Condition="Exists('..\..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.targets')" />
+-  <Import Project="..\..\packages\Microsoft.ApplicationInsights.Web.2.9.1\build\Microsoft.ApplicationInsights.Web.targets" Condition="Exists('..\..\packages\Microsoft.ApplicationInsights.Web.2.9.1\build\Microsoft.ApplicationInsights.Web.targets')" />
+-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+-       Other similar extension points exist, see Microsoft.Common.targets.
+-  <Target Name="BeforeBuild">
+-  </Target>
+-  <Target Name="AfterBuild">
+-  </Target> -->
+-  <ItemGroup>
+-    <PackageReference Include="Autofac.Mvc5">
+-      <Version>4.0.2</Version>
+-    </PackageReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <PackageReference Include="bootstrap">
+-      <Version>4.3.1</Version>
+-    </PackageReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <PackageReference Include="jQuery">
+-      <Version>3.5.0</Version>
+-    </PackageReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <PackageReference Include="jQuery.Validation">
+-      <Version>1.19.4</Version>
+-    </PackageReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <PackageReference Include="Microsoft.ApplicationInsights.Agent.Intercept">
+-      <Version>2.4.0</Version>
+-    </PackageReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <PackageReference Include="Microsoft.ApplicationInsights.DependencyCollector">
+-      <Version>2.9.1</Version>
+-    </PackageReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <PackageReference Include="Microsoft.ApplicationInsights.PerfCounterCollector">
+-      <Version>2.9.1</Version>
+-    </PackageReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <PackageReference Include="Microsoft.ApplicationInsights.Web">
+-      <Version>2.9.1</Version>
+-    </PackageReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <PackageReference Include="Microsoft.ApplicationInsights.WindowsServer">
+-      <Version>2.9.1</Version>
+-    </PackageReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <PackageReference Include="Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel">
+-      <Version>2.9.1</Version>
+-    </PackageReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <PackageReference Include="Microsoft.AspNet.Mvc">
+-      <Version>5.2.7</Version>
+-    </PackageReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <PackageReference Include="Microsoft.AspNet.Razor">
+-      <Version>3.2.7</Version>
+-    </PackageReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <PackageReference Include="Microsoft.AspNet.Web.Optimization">
+-      <Version>1.1.3</Version>
+-    </PackageReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <PackageReference Include="Microsoft.AspNet.WebPages">
+-      <Version>3.2.7</Version>
+-    </PackageReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <PackageReference Include="Microsoft.jQuery.Unobtrusive.Validation">
+-      <Version>3.2.11</Version>
+-    </PackageReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <PackageReference Include="Microsoft.Net.Compilers">
+-      <Version>2.10.0</Version>
+-    </PackageReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <PackageReference Include="Modernizr">
+-      <Version>2.8.3</Version>
+-    </PackageReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <PackageReference Include="popper.js">
+-      <Version>1.14.3</Version>
+-    </PackageReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <PackageReference Include="Respond">
+-      <Version>1.4.2</Version>
+-    </PackageReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <ProjectReference Include="..\..\eShopLegacy.Utilities\eShopLegacy.Utilities.csproj">
+-      <Project>{d466562e-f48c-4ef1-ae08-3a80b0ed9671}</Project>
+-      <Name>eShopLegacy.Utilities</Name>
+-    </ProjectReference>
+-  </ItemGroup>
+-</Project>
+\ No newline at end of file
++
++  <Import Project="$(WEBFORCORE_DIR)/src/webForCore.WebStack.targets" />
++
++  <ItemGroup>
++    <Compile Remove="App_Code/**;bin_dotnet/**;obj/**" />
++    <Content Remove="bin_dotnet/**" />
++    <None Remove="bin_dotnet/**" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <!-- webForCore: the "Always" set, then MVC, Web API and bundling. -->
++    <ProjectReference Include="$(WEBFORCORE_DIR)/src/WebFormsForCore.Web/WebFormsForCore.Web.csproj" />
++    <ProjectReference Include="$(WEBFORCORE_DIR)/src/WebFormsForCore.Configuration/WebFormsForCore.Configuration.csproj" />
++    <ProjectReference Include="$(WEBFORCORE_DIR)/src/WebFormsForCore.Web.ApplicationServices/WebFormsForCore.Web.ApplicationServices.csproj" />
++    <ProjectReference Include="$(WEBFORCORE_DIR)/src/WebFormsForCore.Web.Services/WebFormsForCore.Web.Services.csproj" />
++    <ProjectReference Include="$(WEBFORCORE_DIR)/src/WebFormsForCore.Web.Extensions/WebFormsForCore.Web.Extensions.csproj" />
++    <ProjectReference Include="$(WEBFORCORE_DIR)/src/WebFormsForCore.Web.Infrastructure/WebFormsForCore.Web.Infrastructure.csproj" />
++    <ProjectReference Include="$(WEBFORCORE_DIR)/src/WebFormsForCore.Web.RegularExpressions/WebFormsForCore.Web.RegularExpressions.csproj" />
++    <ProjectReference Include="$(WEBFORCORE_DIR)/src/WebFormsForCore.Serialization.Formatters/WebFormsForCore.Serialization.Formatters.csproj" />
++    <ProjectReference Include="$(WEBFORCORE_DIR)/src/WebFormsForCore.Drawing/WebFormsForCore.Drawing.csproj" />
++    <ProjectReference Include="$(WEBFORCORE_DIR)/src/WebFormsForCore.Compilers/WebFormsForCore.Compilers.csproj" />
++    <ProjectReference Include="$(WEBFORCORE_DIR)/src/webForCore.System.Web.Mvc/webForCore.System.Web.Mvc.csproj" />
++    <ProjectReference Include="$(WEBFORCORE_DIR)/src/webForCore.System.Web.Helpers/webForCore.System.Web.Helpers.csproj" />
++    <ProjectReference Include="$(WEBFORCORE_DIR)/src/webForCore.System.Web.Http.WebHost/webForCore.System.Web.Http.WebHost.csproj" />
++    <ProjectReference Include="$(WEBFORCORE_DIR)/src/WebFormsForCore.Web.Optimization/WebFormsForCore.Web.Optimization.csproj" />
++    <ProjectReference Include="../../eShopLegacy.Utilities/eShopLegacy.Utilities.csproj" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <!-- The app's own packages. EntityFramework 6.2 -> 6.5.1 (first with a .NET build), Newtonsoft.Json 12 -> 13
++         (webForCore's Web API needs 13). -->
++    <PackageReference Include="Autofac" Version="6.1.0" />
++    <PackageReference Include="Autofac.Mvc5" Version="4.0.2" />
++    <PackageReference Include="Autofac.WebApi2" Version="6.0.1" />
++    <PackageReference Include="EntityFramework" Version="6.5.1" />
++    <PackageReference Include="log4net" Version="2.0.10" />
++    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
++    <PackageReference Include="Microsoft.ApplicationInsights.Web" Version="2.9.1" GeneratePathProperty="true" />
++    <PackageReference Include="Microsoft.AspNet.TelemetryCorrelation" Version="1.0.5" />
++    <PackageReference Include="Microsoft.AspNet.SessionState.SessionStateModule" Version="1.1.0" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <!-- Microsoft.ApplicationInsights.Web has only lib/net45, and its build/ targets make NuGet treat the package as
++         compatible, so AssetTargetFallback doesn't apply and Microsoft.AI.Web.dll (web.config's ApplicationInsightsWebTracking
++         module) isn't copied. Referenced directly from the package. -->
++    <Reference Include="Microsoft.AI.Web" HintPath="$(PkgMicrosoft_ApplicationInsights_Web)/lib/net45/Microsoft.AI.Web.dll" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <!-- Autofac.Mvc5 and Autofac.WebApi2 depend on Microsoft's ASP.NET packages, whose System.Web.Mvc, System.Web.Http
++         and friends clash with webForCore's (CS0433). Referencing them directly with no assets keeps them out. -->
++    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.1.0" ExcludeAssets="all" />
++    <PackageReference Include="Microsoft.AspNet.Razor" Version="3.1.0" ExcludeAssets="all" />
++    <PackageReference Include="Microsoft.AspNet.WebPages" Version="3.1.0" ExcludeAssets="all" />
++    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.0" ExcludeAssets="all" />
++    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.0" ExcludeAssets="all" />
++    <PackageReference Include="Microsoft.Web.Infrastructure" Version="1.0.0" ExcludeAssets="all" />
++  </ItemGroup>
++</Project>
+diff --git a/eShopLegacyMVCSolution/src/eShopLegacyMVC/eShopLegacyMVC.csproj.netfx b/eShopLegacyMVCSolution/src/eShopLegacyMVC/eShopLegacyMVC.csproj.netfx
+new file mode 100644
+index 0000000..503535d
+--- /dev/null
++++ b/eShopLegacyMVCSolution/src/eShopLegacyMVC/eShopLegacyMVC.csproj.netfx
+@@ -0,0 +1,573 @@
++<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
++  <Import Project="..\..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\..\packages\Microsoft.Net.Compilers.2.10.0\build\Microsoft.Net.Compilers.props')" />
++  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
++  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++  <PropertyGroup>
++    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
++    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
++    <ProductVersion>
++    </ProductVersion>
++    <SchemaVersion>2.0</SchemaVersion>
++    <ProjectGuid>{C4E50A92-30E2-4592-9A9A-A9D2B1B13A7E}</ProjectGuid>
++    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
++    <OutputType>Library</OutputType>
++    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <RootNamespace>eShopLegacyMVC</RootNamespace>
++    <AssemblyName>eShopLegacyMVC</AssemblyName>
++    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
++    <MvcBuildViews>false</MvcBuildViews>
++    <UseIISExpress>true</UseIISExpress>
++    <IISExpressSSLPort />
++    <IISExpressAnonymousAuthentication />
++    <IISExpressWindowsAuthentication />
++    <IISExpressUseClassicPipelineMode />
++    <UseGlobalApplicationHostFile />
++    <NuGetPackageImportStamp>
++    </NuGetPackageImportStamp>
++    <TargetFrameworkProfile />
++    <Use64BitIISExpress />
++    <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
++    <DebugSymbols>true</DebugSymbols>
++    <DebugType>full</DebugType>
++    <Optimize>false</Optimize>
++    <OutputPath>bin\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++    <LangVersion>default</LangVersion>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
++    <DebugSymbols>true</DebugSymbols>
++    <DebugType>pdbonly</DebugType>
++    <Optimize>true</Optimize>
++    <OutputPath>bin\</OutputPath>
++    <DefineConstants>TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++  </PropertyGroup>
++  <ItemGroup>
++    <PackageReference Include="Autofac">
++      <Version>6.1.0</Version>
++    </PackageReference>
++    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
++    </Reference>
++    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
++    </Reference>
++    <PackageReference Include="autofac.webapi2">
++      <Version>6.0.1</Version>
++    </PackageReference>
++    <PackageReference Include="EntityFramework">
++      <Version>6.2.0</Version>
++    </PackageReference>
++    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.AI.Web, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.ApplicationInsights.Web.2.9.1\lib\net45\Microsoft.AI.Web.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.AI.WindowsServer, Version=2.9.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.CSharp" />
++    <PackageReference Include="Microsoft.AspNet.WebApi">
++      <Version>5.2.7</Version>
++    </PackageReference>
++    <PackageReference Include="Microsoft.AspNet.WebApi.Client">
++      <Version>5.2.7</Version>
++    </PackageReference>
++    <PackageReference Include="Microsoft.AspNet.WebApi.Core">
++      <Version>5.2.7</Version>
++    </PackageReference>
++    <PackageReference Include="Microsoft.AspNet.WebApi.WebHost">
++      <Version>5.2.7</Version>
++    </PackageReference>
++    <PackageReference Include="Newtonsoft.Json">
++      <Version>12.0.1</Version>
++    </PackageReference>
++    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
++    </Reference>
++    <PackageReference Include="Pipelines.Sockets.Unofficial">
++      <Version>1.0.7</Version>
++    </PackageReference>
++    <Reference Include="Pipelines.Sockets.Unofficial, Version=1.0.0.0, Culture=neutral, PublicKeyToken=42ea0a778e13fbe2, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Pipelines.Sockets.Unofficial.1.0.7\lib\net472\Pipelines.Sockets.Unofficial.dll</HintPath>
++    </Reference>
++    <Reference Include="System" />
++    <PackageReference Include="System.Buffers">
++      <Version>4.4.0</Version>
++    </PackageReference>
++    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Data" />
++    <Reference Include="System.Data.DataSetExtensions" />
++    <PackageReference Include="System.Diagnostics.DiagnosticSource">
++      <Version>4.5.1</Version>
++    </PackageReference>
++    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\System.Diagnostics.DiagnosticSource.4.5.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
++    </Reference>
++    <PackageReference Include="System.Diagnostics.PerformanceCounter">
++      <Version>4.5.0</Version>
++    </PackageReference>
++    <Reference Include="System.Diagnostics.PerformanceCounter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\System.Diagnostics.PerformanceCounter.4.5.0\lib\net461\System.Diagnostics.PerformanceCounter.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Drawing" />
++    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
++      <Private>True</Private>
++      <Private>True</Private>
++    </Reference>
++    <Reference Include="System.IO.Compression.FileSystem" />
++    <PackageReference Include="System.IO.Compression">
++      <Version>4.3.0</Version>
++    </PackageReference>
++    <PackageReference Include="System.IO.Compression.ZipFile">
++      <Version>4.3.0</Version>
++    </PackageReference>
++    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
++      <Private>True</Private>
++      <Private>True</Private>
++    </Reference>
++    <PackageReference Include="System.IO.Pipelines">
++      <Version>4.5.1</Version>
++    </PackageReference>
++    <Reference Include="System.IO.Pipelines, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\System.IO.Pipelines.4.5.1\lib\netstandard2.0\System.IO.Pipelines.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Management" />
++    <PackageReference Include="System.Memory">
++      <Version>4.5.1</Version>
++    </PackageReference>
++    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Numerics" />
++    <PackageReference Include="System.Net.Http">
++      <Version>4.3.4</Version>
++    </PackageReference>
++    <PackageReference Include="System.Numerics.Vectors">
++      <Version>4.4.0</Version>
++    </PackageReference>
++    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Runtime.Caching" />
++    <PackageReference Include="System.Runtime.CompilerServices.Unsafe">
++      <Version>4.5.0</Version>
++    </PackageReference>
++    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.4.5.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
++    </Reference>
++    <PackageReference Include="System.Threading.Channels">
++      <Version>4.5.0</Version>
++    </PackageReference>
++    <Reference Include="System.Threading.Channels, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\System.Threading.Channels.4.5.0\lib\netstandard2.0\System.Threading.Channels.dll</HintPath>
++    </Reference>
++    <PackageReference Include="System.Threading.Tasks.Extensions">
++      <Version>4.5.1</Version>
++    </PackageReference>
++    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.5.1\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.DynamicData" />
++    <Reference Include="System.Web.Entity" />
++    <Reference Include="System.Web.ApplicationServices" />
++    <Reference Include="System.ComponentModel.DataAnnotations" />
++    <Reference Include="System.Web" />
++    <Reference Include="System.Web.Abstractions" />
++    <Reference Include="System.Web.Extensions" />
++    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.Routing" />
++    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Xml" />
++    <Reference Include="System.Configuration" />
++    <Reference Include="System.Web.Services" />
++    <Reference Include="System.EnterpriseServices" />
++    <Reference Include="System.Net.Http">
++    </Reference>
++    <Reference Include="System.Net.Http.WebRequest">
++    </Reference>
++    <Reference Include="System.Xml.Linq" />
++    <PackageReference Include="WebGrease">
++      <Version>1.6.0</Version>
++    </PackageReference>
++    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
++    </Reference>
++    <PackageReference Include="Antlr">
++      <Version>3.5.0.2</Version>
++    </PackageReference>
++    <PackageReference Include="log4net">
++      <Version>2.0.10</Version>
++    </PackageReference>
++    <PackageReference Include="Microsoft.ApplicationInsights">
++      <Version>2.9.1</Version>
++    </PackageReference>
++    <PackageReference Include="Microsoft.AspNet.SessionState.SessionStateModule">
++      <Version>1.1.0</Version>
++    </PackageReference>
++    <PackageReference Include="Microsoft.AspNet.TelemetryCorrelation">
++      <Version>1.0.5</Version>
++    </PackageReference>
++    <PackageReference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
++      <Version>2.0.1</Version>
++    </PackageReference>
++    <PackageReference Include="Microsoft.Web.Infrastructure">
++      <Version>1.0.0.0</Version>
++    </PackageReference>
++  </ItemGroup>
++  <ItemGroup>
++    <Compile Include="App_Start\BundleConfig.cs" />
++    <Compile Include="App_Start\FilterConfig.cs" />
++    <Compile Include="App_Start\RouteConfig.cs" />
++    <Compile Include="App_Start\WebApiConfig.cs" />
++    <Compile Include="Controllers\Api\CatalogController.cs" />
++    <Compile Include="Controllers\PicController.cs" />
++    <Compile Include="Controllers\WebApi\FilesController.cs" />
++    <Compile Include="Controllers\WebApi\BrandsController.cs" />
++    <Compile Include="Models\Infrastructure\CatalogDBInitializer.cs" />
++    <Compile Include="Models\CatalogItemHiLoGenerator.cs" />
++    <Compile Include="Controllers\CatalogController.cs" />
++    <Compile Include="Global.asax.cs">
++      <DependentUpon>Global.asax</DependentUpon>
++    </Compile>
++    <Compile Include="Models\CatalogBrand.cs" />
++    <Compile Include="Models\CatalogDBContext.cs" />
++    <Compile Include="Models\CatalogItem.cs" />
++    <Compile Include="Models\CatalogType.cs" />
++    <Compile Include="Models\Infrastructure\PreconfiguredData.cs" />
++    <Compile Include="Modules\ApplicationModule.cs" />
++    <Compile Include="Properties\AssemblyInfo.cs" />
++    <Compile Include="Services\CatalogService.cs" />
++    <Compile Include="Services\CatalogServiceMock.cs" />
++    <Compile Include="Services\ICatalogService.cs" />
++    <Compile Include="ViewModel\PaginatedItemsViewModel.cs" />
++  </ItemGroup>
++  <ItemGroup>
++    <Content Include="Content\base.css" />
++    <Content Include="Content\bootstrap-grid.css" />
++    <Content Include="Content\bootstrap-grid.min.css" />
++    <Content Include="Content\bootstrap-reboot.css" />
++    <Content Include="Content\bootstrap-reboot.min.css" />
++    <Content Include="Content\bootstrap.css" />
++    <Content Include="Content\bootstrap.min.css" />
++    <Content Include="Content\custom.css" />
++    <Content Include="favicon.ico" />
++    <Content Include="fonts\Montserrat-Bold.svg" />
++    <Content Include="fonts\Montserrat-Regular.svg" />
++    <Content Include="Global.asax" />
++    <Content Include="Content\site.css" />
++    <Content Include="Images\brand.png" />
++    <Content Include="Images\brand_dark.png" />
++    <Content Include="Images\main_banner.png" />
++    <Content Include="Images\main_footer_text.png" />
++    <Content Include="log4Net.xml" />
++    <Content Include="Models\Infrastructure\dbo.catalog_brand_hilo.Sequence.sql">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Models\Infrastructure\dbo.catalog_hilo.Sequence.sql">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Models\Infrastructure\dbo.catalog_type_hilo.Sequence.sql">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Pics\1.png" />
++    <Content Include="Pics\10.png" />
++    <Content Include="Pics\11.png" />
++    <Content Include="Pics\12.png" />
++    <Content Include="Pics\2.png" />
++    <Content Include="Pics\3.png" />
++    <Content Include="Pics\4.png" />
++    <Content Include="Pics\5.png" />
++    <Content Include="Pics\6.png" />
++    <Content Include="Pics\7.png" />
++    <Content Include="Pics\8.png" />
++    <Content Include="Pics\9.png" />
++    <Content Include="Pics\dummy.png" />
++    <Content Include="ApplicationInsights.config">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++      <SubType>Designer</SubType>
++    </Content>
++    <Content Include="fonts\Montserrat-Bold.eot" />
++    <Content Include="fonts\Montserrat-Bold.ttf" />
++    <Content Include="fonts\Montserrat-Bold.woff" />
++    <Content Include="fonts\Montserrat-Bold.woff2" />
++    <Content Include="fonts\Montserrat-Regular.eot" />
++    <Content Include="fonts\Montserrat-Regular.ttf" />
++    <Content Include="fonts\Montserrat-Regular.woff" />
++    <Content Include="fonts\Montserrat-Regular.woff2" />
++    <Content Include="Content\bootstrap.min.css.map" />
++    <Content Include="Content\bootstrap.css.map" />
++    <Content Include="Content\bootstrap-reboot.min.css.map" />
++    <Content Include="Content\bootstrap-reboot.css.map" />
++    <Content Include="Content\bootstrap-grid.min.css.map" />
++    <Content Include="Content\bootstrap-grid.css.map" />
++    <Content Include="Scripts\bootstrap.bundle.js" />
++    <Content Include="Scripts\bootstrap.bundle.min.js" />
++    <Content Include="Scripts\bootstrap.js" />
++    <Content Include="Scripts\bootstrap.min.js" />
++    <Content Include="Scripts\esm\popper-utils.js" />
++    <Content Include="Scripts\esm\popper-utils.min.js" />
++    <Content Include="Scripts\esm\popper.js" />
++    <Content Include="Scripts\esm\popper.min.js" />
++    <Content Include="Scripts\esm\popper.min.js.map" />
++    <Content Include="Scripts\esm\popper.js.map" />
++    <Content Include="Scripts\esm\popper-utils.min.js.map" />
++    <Content Include="Scripts\esm\popper-utils.js.map" />
++    <Content Include="Scripts\bootstrap.min.js.map" />
++    <Content Include="Scripts\bootstrap.js.map" />
++    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
++    <Content Include="Scripts\bootstrap.bundle.js.map" />
++    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
++    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
++    <Content Include="Scripts\jquery-3.3.1.js" />
++    <Content Include="Scripts\jquery-3.3.1.min.js" />
++    <Content Include="Scripts\jquery-3.3.1.slim.js" />
++    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
++    <None Include="Scripts\jquery.validate-vsdoc.js" />
++    <Content Include="Scripts\jquery.validate.js" />
++    <Content Include="Scripts\jquery.validate.min.js" />
++    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
++    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
++    <Content Include="Scripts\modernizr-2.6.2.js" />
++    <Content Include="Scripts\modernizr-2.8.3.js" />
++    <Content Include="Scripts\popper-utils.js" />
++    <Content Include="Scripts\popper-utils.min.js" />
++    <Content Include="Scripts\popper.js" />
++    <Content Include="Scripts\popper.min.js" />
++    <Content Include="Scripts\respond.js" />
++    <Content Include="Scripts\respond.matchmedia.addListener.js" />
++    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
++    <Content Include="Scripts\respond.min.js" />
++    <Content Include="Scripts\umd\popper-utils.js" />
++    <Content Include="Scripts\umd\popper-utils.min.js" />
++    <Content Include="Scripts\umd\popper.js" />
++    <Content Include="Scripts\umd\popper.min.js" />
++    <Content Include="Web.config">
++      <SubType>Designer</SubType>
++    </Content>
++    <Content Include="Web.Debug.config">
++      <DependentUpon>Web.config</DependentUpon>
++    </Content>
++    <Content Include="Web.Release.config">
++      <DependentUpon>Web.config</DependentUpon>
++    </Content>
++    <Content Include="Views\Web.config" />
++    <Content Include="Views\_ViewStart.cshtml" />
++    <Content Include="Views\Shared\Error.cshtml" />
++    <Content Include="Views\Shared\_Layout.cshtml" />
++    <Content Include="Views\Catalog\Create.cshtml" />
++    <Content Include="Views\Catalog\Delete.cshtml" />
++    <Content Include="Views\Catalog\Details.cshtml" />
++    <Content Include="Views\Catalog\Edit.cshtml" />
++    <Content Include="Views\Catalog\Index.cshtml" />
++    <Content Include="Views\Catalog\CatalogTable.cshtml" />
++    <Content Include="Setup\CatalogBrands.csv" />
++    <Content Include="Setup\CatalogItems.csv" />
++    <Content Include="Setup\CatalogTypes.csv" />
++    <Content Include="Setup\CatalogItems.zip" />
++    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
++    <Content Include="Scripts\jquery-3.3.1.min.map" />
++    <Content Include="Scripts\umd\popper.min.js.map" />
++    <Content Include="Scripts\umd\popper.js.map" />
++    <Content Include="Scripts\umd\popper-utils.min.js.map" />
++    <Content Include="Scripts\umd\popper-utils.js.map" />
++    <Content Include="Scripts\README.md" />
++    <Content Include="Scripts\popper.min.js.map" />
++    <Content Include="Scripts\popper.js.map" />
++    <Content Include="Scripts\popper-utils.min.js.map" />
++    <Content Include="Scripts\popper-utils.js.map" />
++  </ItemGroup>
++  <ItemGroup>
++    <Folder Include="App_Data\" />
++  </ItemGroup>
++  <ItemGroup>
++    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
++  </ItemGroup>
++  <ItemGroup>
++    <TypeScriptCompile Include="Scripts\index.d.ts" />
++  </ItemGroup>
++  <PropertyGroup>
++    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
++    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
++  </PropertyGroup>
++  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
++  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
++  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
++  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
++  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
++    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
++  </Target>
++  <ProjectExtensions>
++    <VisualStudio>
++      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
++        <WebProjectProperties>
++          <UseIIS>True</UseIIS>
++          <AutoAssignPort>True</AutoAssignPort>
++          <DevelopmentServerPort>53134</DevelopmentServerPort>
++          <DevelopmentServerVPath>/</DevelopmentServerVPath>
++          <IISUrl>http://localhost:52429/</IISUrl>
++          <NTLMAuthentication>False</NTLMAuthentication>
++          <UseCustomServer>False</UseCustomServer>
++          <CustomServerUrl>
++          </CustomServerUrl>
++          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
++        </WebProjectProperties>
++      </FlavorProperties>
++    </VisualStudio>
++  </ProjectExtensions>
++  <Import Project="..\..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\build\Microsoft.ApplicationInsights.DependencyCollector.targets" Condition="Exists('..\..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.9.1\build\Microsoft.ApplicationInsights.DependencyCollector.targets')" />
++  <Import Project="..\..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets" Condition="Exists('..\..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.9.1\build\Microsoft.ApplicationInsights.PerfCounterCollector.targets')" />
++  <Import Project="..\..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets" Condition="Exists('..\..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.targets')" />
++  <Import Project="..\..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.targets" Condition="Exists('..\..\packages\Microsoft.ApplicationInsights.WindowsServer.2.9.1\build\Microsoft.ApplicationInsights.WindowsServer.targets')" />
++  <Import Project="..\..\packages\Microsoft.ApplicationInsights.Web.2.9.1\build\Microsoft.ApplicationInsights.Web.targets" Condition="Exists('..\..\packages\Microsoft.ApplicationInsights.Web.2.9.1\build\Microsoft.ApplicationInsights.Web.targets')" />
++  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
++       Other similar extension points exist, see Microsoft.Common.targets.
++  <Target Name="BeforeBuild">
++  </Target>
++  <Target Name="AfterBuild">
++  </Target> -->
++  <ItemGroup>
++    <PackageReference Include="Autofac.Mvc5">
++      <Version>4.0.2</Version>
++    </PackageReference>
++  </ItemGroup>
++  <ItemGroup>
++    <PackageReference Include="bootstrap">
++      <Version>4.3.1</Version>
++    </PackageReference>
++  </ItemGroup>
++  <ItemGroup>
++    <PackageReference Include="jQuery">
++      <Version>3.5.0</Version>
++    </PackageReference>
++  </ItemGroup>
++  <ItemGroup>
++    <PackageReference Include="jQuery.Validation">
++      <Version>1.19.4</Version>
++    </PackageReference>
++  </ItemGroup>
++  <ItemGroup>
++    <PackageReference Include="Microsoft.ApplicationInsights.Agent.Intercept">
++      <Version>2.4.0</Version>
++    </PackageReference>
++  </ItemGroup>
++  <ItemGroup>
++    <PackageReference Include="Microsoft.ApplicationInsights.DependencyCollector">
++      <Version>2.9.1</Version>
++    </PackageReference>
++  </ItemGroup>
++  <ItemGroup>
++    <PackageReference Include="Microsoft.ApplicationInsights.PerfCounterCollector">
++      <Version>2.9.1</Version>
++    </PackageReference>
++  </ItemGroup>
++  <ItemGroup>
++    <PackageReference Include="Microsoft.ApplicationInsights.Web">
++      <Version>2.9.1</Version>
++    </PackageReference>
++  </ItemGroup>
++  <ItemGroup>
++    <PackageReference Include="Microsoft.ApplicationInsights.WindowsServer">
++      <Version>2.9.1</Version>
++    </PackageReference>
++  </ItemGroup>
++  <ItemGroup>
++    <PackageReference Include="Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel">
++      <Version>2.9.1</Version>
++    </PackageReference>
++  </ItemGroup>
++  <ItemGroup>
++    <PackageReference Include="Microsoft.AspNet.Mvc">
++      <Version>5.2.7</Version>
++    </PackageReference>
++  </ItemGroup>
++  <ItemGroup>
++    <PackageReference Include="Microsoft.AspNet.Razor">
++      <Version>3.2.7</Version>
++    </PackageReference>
++  </ItemGroup>
++  <ItemGroup>
++    <PackageReference Include="Microsoft.AspNet.Web.Optimization">
++      <Version>1.1.3</Version>
++    </PackageReference>
++  </ItemGroup>
++  <ItemGroup>
++    <PackageReference Include="Microsoft.AspNet.WebPages">
++      <Version>3.2.7</Version>
++    </PackageReference>
++  </ItemGroup>
++  <ItemGroup>
++    <PackageReference Include="Microsoft.jQuery.Unobtrusive.Validation">
++      <Version>3.2.11</Version>
++    </PackageReference>
++  </ItemGroup>
++  <ItemGroup>
++    <PackageReference Include="Microsoft.Net.Compilers">
++      <Version>2.10.0</Version>
++    </PackageReference>
++  </ItemGroup>
++  <ItemGroup>
++    <PackageReference Include="Modernizr">
++      <Version>2.8.3</Version>
++    </PackageReference>
++  </ItemGroup>
++  <ItemGroup>
++    <PackageReference Include="popper.js">
++      <Version>1.14.3</Version>
++    </PackageReference>
++  </ItemGroup>
++  <ItemGroup>
++    <PackageReference Include="Respond">
++      <Version>1.4.2</Version>
++    </PackageReference>
++  </ItemGroup>
++  <ItemGroup>
++    <ProjectReference Include="..\..\eShopLegacy.Utilities\eShopLegacy.Utilities.csproj">
++      <Project>{d466562e-f48c-4ef1-ae08-3a80b0ed9671}</Project>
++      <Name>eShopLegacy.Utilities</Name>
++    </ProjectReference>
++  </ItemGroup>
++</Project>
+\ No newline at end of file

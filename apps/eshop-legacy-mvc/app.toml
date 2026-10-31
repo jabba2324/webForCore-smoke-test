@@ -2,16 +2,47 @@
 
 name = "eShopLegacyMVC (eShopModernizing)"
 repo = "https://github.com/dotnet-architecture/eShopModernizing"
-ref = ""
+ref = "63bc9ec4414d7e281dc9f9d7bdcf70030950457d"
 site = "eShopLegacyMVCSolution/src/eShopLegacyMVC"
 project = "eShopLegacyMVCSolution/src/eShopLegacyMVC/eShopLegacyMVC.csproj"
 kinds = ["mvc", "webapi"]
 licence = "MIT"
-status = "candidate"
-notes = "Microsoft's reference legacy app. Has a mock-data mode (UseMockData in web.config) so it can run without SQL Server."
+status = "blocked"
+notes = "Builds; every request fails in SessionStateModuleAsync on webForCore bug F1. With that module removed and mock data, all page kinds work; the SQL Server seed hits F3."
+
+needs = ["mssql"]
 
 # The first request compiles the site, so it gets 120 s.
-# [[probes]]
-# path = "/"
-# status = 200
-# contains = ""
+[[probes]]
+path = "/"
+contains = ".NET Bot Black Hoodie"
+
+[[probes]]
+path = "/Catalog/Details/1"
+contains = ".NET Bot Black Hoodie"
+
+[[probes]]
+path = "/Catalog/Create"
+contains = "__RequestVerificationToken"
+
+[[probes]]
+path = "/items/1/pic"
+
+[[probes]]
+path = "/api/brands"
+contains = "\"Brand\":\"Azure\""
+
+[[probes]]
+path = "/api/brands/1"
+contains = "Azure"
+
+[[probes]]
+path = "/Content/base.css"
+contains = "esh-"
+
+[[probes]]
+path = "/Content/css"
+contains = "esh-"
+
+[[probes]]
+path = "/Images/brand.png"
