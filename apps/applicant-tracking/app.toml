@@ -1,0 +1,17 @@
+# ApplicantTracking. Fields are described in README.md.
+
+name = "ApplicantTracking"
+repo = "https://github.com/feliperomero3/ApplicantTracking"
+ref = "ff9a2eb4b4f8fcf68efbab3b2f7857bb33ac307e"
+site = "ApplicantTracking.Web"
+project = "ApplicantTracking.Web/ApplicantTracking.Web.csproj"
+kinds = ["mvc", "owin", "identity"]
+licence = "Apache-2.0"
+status = "verified"
+notes = "MVC 5 applicant tracking system with Identity 2; .NET 4.6.2. Needs SQL Server."
+
+# The first request compiles the site, so it gets 120 s.
+# [[probes]]
+# path = "/"
+# status = 200
+# contains = ""

@@ -1,0 +1,16 @@
+# AspxCommerce 2.7. Fields are described in README.md.
+
+name = "AspxCommerce 2.7"
+repo = "https://github.com/AspxCommerce/AspxCommerce2.7"
+ref = "a31386825eddfae439fbf8df42dacb4743900b13"
+site = ""
+kinds = ["webforms"]
+licence = "MIT"
+status = "candidate"
+notes = "Web Forms e-commerce on SageFrame; .NET 4.5.1. The web site looks like a web site project (no .csproj next to web.config): check before migrating."
+
+# The first request compiles the site, so it gets 120 s.
+# [[probes]]
+# path = "/"
+# status = 200
+# contains = ""

@@ -1,0 +1,17 @@
+# RazorVulnerableApp. Fields are described in README.md.
+
+name = "RazorVulnerableApp"
+repo = "https://github.com/cnotin/RazorVulnerableApp"
+ref = "780350f7f94474f6392fdcac6d27f7333e5bd584"
+site = ""
+project = "RazorVulnerableApp.csproj"
+kinds = ["mvc"]
+licence = "MIT"
+status = "verified"
+notes = "Deliberately vulnerable MVC 5 app (Razor injection); tiny, no database. Useful to check that webForCore behaves like IIS on hostile input."
+
+# The first request compiles the site, so it gets 120 s.
+# [[probes]]
+# path = "/"
+# status = 200
+# contains = ""

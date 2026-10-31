@@ -1,0 +1,17 @@
+# Kooboo CMS. Fields are described in README.md.
+
+name = "Kooboo CMS"
+repo = "https://github.com/Kooboo/CMS"
+ref = "e5879728c817f37b275219636e7c24bf84a02830"
+site = "Kooboo.CMS/Kooboo.CMS.Web"
+project = "Kooboo.CMS/Kooboo.CMS.Web/Kooboo.CMS.Web.csproj"
+kinds = ["mvc"]
+licence = "BSD-3-Clause"
+status = "verified"
+notes = "Large MVC CMS, .NET 4.0 (MVC 4 era: check the MVC version). Has a Mono project file, so it may already avoid Windows-only APIs."
+
+# The first request compiles the site, so it gets 120 s.
+# [[probes]]
+# path = "/"
+# status = 200
+# contains = ""

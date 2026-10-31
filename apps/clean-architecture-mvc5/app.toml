@@ -1,0 +1,17 @@
+# Clean Architecture in ASP.NET MVC 5. Fields are described in README.md.
+
+name = "Clean Architecture in ASP.NET MVC 5"
+repo = "https://github.com/matthewrenze/clean-architecture-in-asp-net-mvc-5"
+ref = "5cbeba34dd32db7212c8404e5451c7ba553b2829"
+site = ""
+project = "CleanArchitectureAspNetMvc5.csproj"
+kinds = ["mvc"]
+licence = "BSD-3-Clause"
+status = "verified"
+notes = "Small single-project MVC 5 sample app (.NET 4.5) with EF 6. Small and self-contained: a good early target."
+
+# The first request compiles the site, so it gets 120 s.
+# [[probes]]
+# path = "/"
+# status = 200
+# contains = ""

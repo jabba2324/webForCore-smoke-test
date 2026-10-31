@@ -1,0 +1,16 @@
+# YAF.NET 2.x. Fields are described in README.md.
+
+name = "YAF.NET 2.x"
+repo = "https://github.com/YAFNET/YAFNET"
+ref = "7435be389709e493854b09cdc622115e537544b8"
+site = "yafsrc/YetAnotherForum.NET"
+kinds = ["webforms"]
+licence = "Apache-2.0"
+status = "candidate"
+notes = "Forum, Web Forms. master is ASP.NET Core now; pinned to tag v2.31.16. The web project path and its web.config (shipped as *.config templates) still need checking."
+
+# The first request compiles the site, so it gets 120 s.
+# [[probes]]
+# path = "/"
+# status = 200
+# contains = ""
