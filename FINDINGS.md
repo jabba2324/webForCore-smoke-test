@@ -17,6 +17,10 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 | [F7](#f7) | Packages that must be upgraded: EF 6.2 → 6.4+, Newtonsoft.Json 12 → 13 | guide gap | eshop-legacy-mvc, eshop-legacy-webforms | [#6](https://github.com/jabba2324/webForCore/issues/6) |
 | [F8](#f8) | `HttpUtility` in app code is CS0433 outside webForCore's repository | webForCore bug | eshop-legacy-webforms | [#7](https://github.com/jabba2324/webForCore/issues/7) |
 | [F9](#f9) | Data controls with `ItemType` need System.Web.DynamicData, which isn't built | documented gap (consequence undocumented) | eshop-legacy-webforms | [#8](https://github.com/jabba2324/webForCore/issues/8) |
+| [F10](#f10) | .NET Framework assemblies that are NuGet packages on .NET (System.ServiceModel.Syndication) | guide gap | miniblog | |
+| [F11](#f11) | One URL Rewrite feature ASP.NET Core lacks (Wildcard syntax, `{CACHE_URL}`) drops every rule, failing open | webForCore bug | miniblog | |
+| [F12](#f12) | A rewrite to a query-only URL (`?slug={R:1}`) is a bare 500 (`IndexOutOfRangeException`) | webForCore bug | miniblog | |
+| [F13](#f13) | `<handlers>` entries whose `path` starts with `/` never match | webForCore bug | miniblog | |
 
 ---
 
@@ -231,3 +235,84 @@ consequence isn't. Raised as [#8](https://github.com/jabba2324/webForCore/issues
   in any page.
 - **Fix belongs in webForCore:** build System.Web.DynamicData (at least `DataControlExtensions`), or document that
   `ItemType` needs it.
+
+## F10
+
+**.NET Framework assemblies that are NuGet packages on .NET.** Guide gap.
+
+- **Apps:** miniblog: `app_code/handlers/FeedHandler.cs` uses `System.ServiceModel.Syndication` (`SyndicationFeed`,
+  `Rss20FeedFormatter`).
+- **Error:** every page, because `app_code` compiles as a whole: `Compilation Error ... CS1069: The type name
+  'SyndicationItem' could not be found in the namespace 'System.ServiceModel.Syndication'. This type has been forwarded
+  to assembly 'System.ServiceModel.Syndication, Version=10.0.0.0' Consider adding a reference to that assembly.`
+- **Cause:** on .NET Framework the type is in `System.ServiceModel.dll`, which the root web.config's
+  `<compilation><assemblies>` references for every site. On .NET it is the `System.ServiceModel.Syndication` package,
+  so code compiled at run time (App_Code, pages) only sees it if the app references the package.
+- **What the guide says:** `docs/MIGRATING.md` covers NuGet packages and Microsoft's ASP.NET assemblies, but not
+  .NET Framework assemblies that became packages. Others in the same position: `System.Data.SqlClient`,
+  `System.Data.OleDb`, `System.DirectoryServices`, `System.Runtime.Caching`, `System.ServiceModel.*` (client),
+  `System.Drawing.Common`'s friends, `System.Configuration.ConfigurationManager` (which webForCore supplies).
+- **What worked:** `<PackageReference Include="System.ServiceModel.Syndication" Version="10.0.0" />`.
+
+## F11
+
+**One URL Rewrite feature ASP.NET Core lacks drops every rule, failing open.** webForCore bug.
+
+- **Apps:** miniblog. Its first rule is IIS's own "Remove WWW" template:
+  ```xml
+  <rule name="Remove WWW" patternSyntax="Wildcard" stopProcessing="true">
+    <match url="*" />
+    <conditions><add input="{CACHE_URL}" pattern="*://www.*" /></conditions>
+    <action type="Redirect" url="{C:1}://{C:2}" redirectType="Permanent" />
+  </rule>
+  ```
+- **Error:** logged once per request, nothing in the response:
+  ```
+  fail: WebFormsForCore.Hosting.IIS.IISModules[0]
+        The <rewrite> rules for / cannot be used.
+        System.NotSupportedException: Wildcard syntax is not supported
+           at Microsoft.AspNetCore.Rewrite.IISUrlRewrite.UrlRewriteRuleBuilder.AddUrlMatch(...)
+  ```
+  and, with the rule rewritten as a regular expression, `System.FormatException: Unrecognized parameter type:
+  'CACHE_URL'` from `ServerVariables.FindServerVariable`.
+- **Impact:** all ten rules are skipped, including `ProtectStorageXml`, which answers `posts/*.xml` with 403: the
+  blog's post files (drafts and comment authors' e-mail addresses included) are served as static files. The slug,
+  paging, category, robots.txt and sitemap rewrites are 404s.
+- **Cause:** `InboundRewrite` hands the section to ASP.NET Core's `IISUrlRewrite` parser, which supports neither
+  `patternSyntax="Wildcard"` nor `{CACHE_URL}`, and on any parse error the whole level's rules are dropped.
+  `docs/IIS-COMPATIBILITY.md` lists inbound rewrite as "Works" without these limits.
+- **Repro:** web.config `<rewrite><rules>` with the rule above followed by
+  `<rule name="block"><match url="^secret\.txt$" /><action type="CustomResponse" statusCode="403" /></rule>`, and a
+  `secret.txt` file: `GET /secret.txt` returns the file.
+- **Suggested fix:** support wildcard patterns (IIS's `*`/`?` matching, `{R:n}` per `*`) and `{CACHE_URL}`; and fail
+  closed (500, as IIS does for configuration it can't use) instead of running without the rules.
+
+## F12
+
+**A rewrite to a query-only URL is a bare 500.** webForCore bug.
+
+- **Apps:** miniblog: `<action type="Rewrite" url="?slug={R:1}" />` for `^post/(.*)`, and the same for paging and
+  categories. On IIS the rewritten URL is resolved against the site root, so `/post/test-1` runs `/?slug=test-1`
+  (the default document).
+- **Error:** 500 with an empty body; Kestrel logs `System.IndexOutOfRangeException: Index was outside the bounds of the
+  array. at Microsoft.AspNetCore.Rewrite.UrlActions.RewriteAction.ApplyAction(...)` from
+  `WebFormsForCore.Hosting.IIS.InboundRewrite.ApplyGroup`.
+- **Repro:** `<rule name="q"><match url="^a$" /><action type="Rewrite" url="?x=1" /></rule>`, then `GET /a`.
+  `GET /?x=1` itself works.
+- **Suggested fix:** treat a rewrite URL that starts with `?` as the site root plus that query before handing it to
+  ASP.NET Core's action (or catch the exception and answer as IIS does).
+
+## F13
+
+**`<handlers>` entries whose `path` starts with `/` never match.** webForCore bug.
+
+- **Apps:** miniblog: `path="/comment.ashx"` (comment posting), `path="/post.ashx"`, `path="/metaweblog"` (Windows Live
+  Writer / XML-RPC) and `path="/feed/*"` (RSS and Atom) are all 404. `path="*.css"` and `path="*.js"` in the same
+  section work.
+- **Cause:** `WebServerModules.FindHandler` (`src/WebFormsForCore.Web/WebFormsForCore/AspNetCoreHosting/IIS/WebServerModules.cs:75`)
+  compares a pattern that contains `/` with the request path without its leading `/`
+  (`path.TrimStart('/')`), but leaves the pattern's own leading `/`, so `/metaweblog` is matched against `metaweblog`.
+- **Repro:** `<system.webServer><handlers><add name="h" verb="*" path="/hello" type="HelloHandler" /></handlers>` with
+  `HelloHandler : IHttpHandler` in App_Code: `GET /hello` is 404; with `path="hello"` it works.
+- **Suggested fix:** trim the pattern's leading `/` as well.
+
