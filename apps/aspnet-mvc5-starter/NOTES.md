@@ -5,7 +5,13 @@ repo, licence (MIT), web project and its `<TargetFrameworkVersion>` were checked
 
 ## Assessment
 
-(Phase 0: frameworks, target framework, blockers with file:line, dependencies in three groups, go/no-go.)
+Round 2 (webForCore 0.2.0), assessment only. MVC 5 starter template with OWIN, SignalR 2 and ASP.NET Identity,
+globalized, .NET Framework 4.7.1. The web project references 13 libraries under `sources/` (identity, data, a SQL
+Server store, a migrator, and infrastructure for Azure storage, Cloudinary, file system, MailGun, SMTP, dynamic images).
+
+- `scripts/wfc.py assess`: no blockers; notice `smtpclient-config` at
+  `sources/Shared.Infrastructure.Smtp/SystemNetSmtpEmailDispatcherService.cs:42` (documented replacement).
+- **Go**, with SQL Server; not migrated yet because of its size (14 projects). Next round.
 
 ## Migration
 

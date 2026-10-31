@@ -1,0 +1,47 @@
+{
+  "id": "aspnet-mvc5-starter",
+  "stages": {
+    "assess": {
+      "at": "2026-10-31T19:34:53+00:00",
+      "blockers": {},
+      "kinds": [
+        "identity",
+        "mvc",
+        "owin",
+        "signalr",
+        "webpages"
+      ],
+      "libraries": [
+        "sources/App.Identity",
+        "sources/Data.Core",
+        "sources/Data.Store.SqlServer",
+        "sources/Data.Tools.Migrator",
+        "sources/Domain.Core",
+        "sources/Shared.Extensions",
+        "sources/Shared.Infrastructure",
+        "sources/Shared.Infrastructure.Azure",
+        "sources/Shared.Infrastructure.Cloudinary",
+        "sources/Shared.Infrastructure.DynamicImage",
+        "sources/Shared.Infrastructure.FileSystem",
+        "sources/Shared.Infrastructure.MailGun",
+        "sources/Shared.Infrastructure.Smtp"
+      ],
+      "notices": {
+        "smtpclient-config": [
+          "sources/Shared.Infrastructure.Smtp/SystemNetSmtpEmailDispatcherService.cs:42"
+        ]
+      },
+      "status": "pass",
+      "summary": "no blockers found",
+      "target_frameworks": [
+        "v4.7.1"
+      ]
+    },
+    "fetch": {
+      "at": "2026-10-31T19:34:46+00:00",
+      "commit": "885be06e42b575e6532204ce51ee63242f207708",
+      "overlay": false,
+      "status": "pass"
+    }
+  }
+}
