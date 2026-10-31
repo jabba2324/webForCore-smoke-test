@@ -20,50 +20,50 @@
       ]
     },
     "build": {
-      "at": "2026-10-31T10:55:04+00:00",
+      "at": "2026-10-31T19:34:36+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/aspnetdocs-mvcmovie/logs/build.log",
-      "seconds": 1,
+      "seconds": 5,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.1.0"
+      "webforcore": "packages 0.2.0"
     },
     "fetch": {
-      "at": "2026-10-31T10:52:55+00:00",
+      "at": "2026-10-31T19:34:04+00:00",
       "commit": "546ffe728556a60591b93ab4fcbd4437f71e2449",
-      "overlay": false,
+      "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-10-31T10:56:28+00:00",
+      "at": "2026-10-31T19:35:01+00:00",
       "checks": [
         {
-          "ms": 3592,
+          "ms": 3675,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 13634,
+          "ms": 13826,
           "ok": true,
           "path": "/Movies",
           "status": 200
         },
         {
-          "ms": 276,
+          "ms": 293,
           "ok": true,
           "path": "/HelloWorld/Welcome?name=Scott&numTimes=4",
           "status": 200
         },
         {
-          "ms": 328,
+          "ms": 319,
           "ok": true,
           "path": "/Account/Register",
           "status": 200
         },
         {
-          "ms": 59,
+          "ms": 61,
           "ok": true,
           "path": "/Content/Site.css",
           "status": 200
@@ -75,7 +75,7 @@
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
@@ -99,22 +99,15 @@
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 3,
           "ok": true,
           "path": "/bin_dotnet/MvcMovie.dll",
           "status": 404
-        },
-        {
-          "ms": 4,
-          "ok": false,
-          "path": "/logs/W3SVC1/u_ex20261031.0000.txt",
-          "status": 200,
-          "title": "#Version: 1.0\n#Start-Date: 2026-10-31 10:56:13\n#Fields: date time c-ip cs-username s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status time-taken cs(User-Agent) cs(Referer)\n2026-10-31 10:56:09 127.0.0.1 - 127.0.0.1 54479 GET / - 200 3572.2976 webForCore-smoke-test -\n2026-10-31 10:56:12 127.0.0."
         }
       ],
       "log": "apps/aspnetdocs-mvcmovie/logs/server.log",
-      "status": "fail",
-      "summary": "11/12 probes"
+      "status": "pass",
+      "summary": "11/11 probes"
     }
   }
 }

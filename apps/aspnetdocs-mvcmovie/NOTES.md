@@ -1,7 +1,7 @@
 # AspNetDocs: MvcMovie (Getting Started with MVC 5): migration notes
 
-Status: blocked. Source: https://github.com/dotnet/AspNetDocs at `546ffe72`, `aspnet/mvc/overview/getting-started/introduction/sample/MvcMovie/MvcMovie`. Code under MIT
-(`LICENSE-CODE`; the docs are CC-BY-4.0). Split out of the `aspnetdocs-samples` entry. webForCore 0.1.0 packages.
+Status: migrated (webForCore 0.2.0, all probes pass).
+(`LICENSE-CODE`; the docs are CC-BY-4.0). Split out of the `aspnetdocs-samples` entry. webForCore 0.1.0 packages (0.2.0 from round 2).
 
 ## Assessment
 
@@ -30,7 +30,13 @@ By hand: registering `smoke@example.com` (anti-forgery token, Identity's passwor
 `SignInManager` issuing the OWIN cookie) returns 302 to `/` and the user is in `AspNetUsers`; `POST /Movies/Create`
 returns 302 to `/Movies` and the movie is listed.
 
+### Round 2: webForCore 0.2.0
+
+All 11 probes pass on the released 0.2.0 packages (the overlay's `PackageReference`s moved from 0.1.0 to 0.2.0). The round-1 failures above were fixed in webForCore PR #16 and are kept as the record of round 1.
+
 ## Open problems
+
+Round 1 (webForCore 0.1.0); the webForCore bugs below are fixed in 0.2.0 (PR #16) and kept for the record.
 
 - [F4](../../FINDINGS.md#f4) (webForCore bug): W3C log served.
 - [F15](../../FINDINGS.md#f15) (guide gap): social login packages.

@@ -1,5 +1,5 @@
 diff --git a/aspnet/mvc/overview/getting-started/introduction/sample/MvcMovie/MvcMovie/MvcMovie.csproj b/aspnet/mvc/overview/getting-started/introduction/sample/MvcMovie/MvcMovie/MvcMovie.csproj
-index a99e2c29d..0eb8392c6 100644
+index a99e2c29d..d1b96ec31 100644
 --- a/aspnet/mvc/overview/getting-started/introduction/sample/MvcMovie/MvcMovie/MvcMovie.csproj
 +++ b/aspnet/mvc/overview/getting-started/introduction/sample/MvcMovie/MvcMovie/MvcMovie.csproj
 @@ -1,350 +1,70 @@
@@ -324,17 +324,17 @@ index a99e2c29d..0eb8392c6 100644
    <ItemGroup>
 -    <Content Include="fonts\glyphicons-halflings-regular.eot" />
 +    <!-- webForCore 0.1.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.Helpers" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.1.0" />
++    <PackageReference Include="webForCore" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Helpers" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.2.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -858,3 +858,17 @@ index d99900213..000000000
 -  <package id="WebGrease" version="1.5.2" targetFramework="net461" />
 -</packages>
 \ No newline at end of file
+diff --git a/aspnet/mvc/overview/getting-started/introduction/sample/MvcMovie/logs/MvcMovie/W3SVC1/u_ex20261031.0000.txt b/aspnet/mvc/overview/getting-started/introduction/sample/MvcMovie/logs/MvcMovie/W3SVC1/u_ex20261031.0000.txt
+new file mode 100644
+index 000000000..9362813ee
+--- /dev/null
++++ b/aspnet/mvc/overview/getting-started/introduction/sample/MvcMovie/logs/MvcMovie/W3SVC1/u_ex20261031.0000.txt
+@@ -0,0 +1,8 @@
++#Version: 1.0
++#Start-Date: 2026-10-31 19:34:45
++#Fields: date time c-ip cs-username s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status time-taken cs(User-Agent) cs(Referer)
++2026-10-31 19:34:41 127.0.0.1 - 127.0.0.1 44161 GET / - 200 3639.1038 webForCore-smoke-test -
++2026-10-31 19:34:45 127.0.0.1 - 127.0.0.1 44161 GET /Movies - 200 13824.3804 webForCore-smoke-test -
++2026-10-31 19:34:58 127.0.0.1 - 127.0.0.1 44161 GET /HelloWorld/Welcome ?name=Scott&numTimes=4 200 292.1323 webForCore-smoke-test -
++2026-10-31 19:34:59 127.0.0.1 - 127.0.0.1 44161 GET /Account/Register - 200 317.4538 webForCore-smoke-test -
++2026-10-31 19:34:59 127.0.0.1 - 127.0.0.1 44161 GET /Content/Site.css - 200 60.4059 webForCore-smoke-test -
