@@ -10,8 +10,8 @@ Standard library only (Python 3.11+, for tomllib).
     scripts/wfc.py build <id>...
     scripts/wfc.py smoke <id>...
     scripts/wfc.py run <id>... | --all        # fetch, build and smoke
-    scripts/wfc.py save-overlay <id>         # the app checkout's changes -> overlays/<id>.patch
-    scripts/wfc.py report                    # results/*.json -> RESULTS.md
+    scripts/wfc.py save-overlay <id>         # the app checkout's changes -> apps/<id>/overlay.patch
+    scripts/wfc.py report                    # apps/*/results.json -> RESULTS.md
 """
 
 import argparse
@@ -29,11 +29,15 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-CATALOG = ROOT / "catalog" / "apps.toml"
-APPS = ROOT / "apps"          # checkouts (ignored by git)
-LOGS = ROOT / "logs"          # build and server logs (ignored by git)
-OVERLAYS = ROOT / "overlays"  # the migration of each app, as a patch on its pinned commit
-RESULTS = ROOT / "results"
+APPS = ROOT / "apps"
+# Each app has its own folder, apps/<id>/:
+#   app.toml        where it comes from, how to build it, what to probe
+#   NOTES.md        the migration notes: assessment, every change and why, open problems
+#   LOG.md          one line per stage run, appended by this script
+#   overlay.patch   the migration, as a patch on the pinned commit
+#   results.json    the latest result of each stage
+#   logs/           the latest build and server logs
+#   src/            the checkout (not committed)
 
 WEBFORCORE = Path(os.environ.get("WEBFORCORE_DIR", ROOT.parent / "webForCore")).resolve()
 
@@ -70,9 +74,21 @@ FORBIDDEN = ["/web.config", "/App_Data/", "/Global.asax.cs", "/obj/", "/packages
 
 
 def catalog():
-    with CATALOG.open("rb") as f:
-        apps = tomllib.load(f)["app"]
-    return {a["id"]: a for a in apps}
+    apps = {}
+    for f in sorted(APPS.glob("*/app.toml")):
+        with f.open("rb") as fh:
+            apps[f.parent.name] = {**tomllib.load(fh), "id": f.parent.name}
+    return apps
+
+
+def app_dir(app_id):
+    return APPS / app_id
+
+
+def logs_dir(app_id):
+    d = app_dir(app_id) / "logs"
+    d.mkdir(exist_ok=True)
+    return d
 
 
 def env():
@@ -88,8 +104,17 @@ def now():
     return datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds")
 
 
+def scrub(log):
+    """Logs are committed, so this machine's paths become placeholders."""
+    text = log.read_text(errors="replace")
+    for path, name in ((str(WEBFORCORE), "$WEBFORCORE_DIR"), (str(ROOT), "<repo>"), (str(Path.home()), "~")):
+        text = text.replace(path, name)
+    log.write_text(text)
+    return text
+
+
 def load_result(app_id):
-    p = RESULTS / f"{app_id}.json"
+    p = app_dir(app_id) / "results.json"
     return json.loads(p.read_text()) if p.exists() else {"id": app_id, "stages": {}}
 
 
@@ -97,8 +122,15 @@ def record(app_id, stage, status, **details):
     """status: pass | fail | blocked | skip"""
     r = load_result(app_id)
     r["stages"][stage] = {"status": status, "at": now(), **details}
-    RESULTS.mkdir(exist_ok=True)
-    (RESULTS / f"{app_id}.json").write_text(json.dumps(r, indent=2, sort_keys=True) + "\n")
+    (app_dir(app_id) / "results.json").write_text(json.dumps(r, indent=2, sort_keys=True) + "\n")
+    line = f"- {now()} **{stage}**: {status}" + (f" ({details['summary']})" if details.get("summary") else "")
+    if details.get("commit"):
+        line += f" at `{details['commit'][:12]}`"
+    log = app_dir(app_id) / "LOG.md"
+    if not log.exists():
+        log.write_text(f"# {app_id}: run log\n\nAppended by `scripts/wfc.py`, one line per stage run.\n\n")
+    with log.open("a") as f:
+        f.write(line + "\n")
     print(f"[{app_id}] {stage}: {status}" + (f" ({details.get('summary')})" if details.get("summary") else ""))
     return status
 
@@ -108,7 +140,7 @@ def git(*args, cwd=None, check=True):
 
 
 def checkout(app):
-    return APPS / app["id"]
+    return app_dir(app["id"]) / "src"
 
 
 def site_dir(app):
@@ -125,7 +157,6 @@ def fetch(app, reset=False):
         commit = git("rev-parse", "HEAD", cwd=dest).stdout.strip()
         return record(app["id"], "fetch", "pass", commit=commit, summary="existing checkout")
     if not dest.exists():
-        APPS.mkdir(exist_ok=True)
         r = git("clone", "--filter=blob:none", "--no-checkout", app["repo"], str(dest), check=False)
         if r.returncode:
             return record(app["id"], "fetch", "fail", summary="clone failed", error=r.stderr[-2000:])
@@ -138,7 +169,7 @@ def fetch(app, reset=False):
             return record(app["id"], "fetch", "fail", summary=f"no ref {ref}", error=r.stderr[-2000:])
     git("clean", "-fdx", "-e", "bin_dotnet", "-e", "obj", cwd=dest, check=False)
     commit = git("rev-parse", "HEAD", cwd=dest).stdout.strip()
-    patch = OVERLAYS / f"{app['id']}.patch"
+    patch = app_dir(app["id"]) / "overlay.patch"
     if patch.exists():
         r = git("apply", "--whitespace=nowarn", str(patch), cwd=dest, check=False)
         if r.returncode:
@@ -150,8 +181,7 @@ def save_overlay(app):
     dest = checkout(app)
     git("add", "-A", "-N", ".", cwd=dest)
     diff = git("diff", "--binary", cwd=dest).stdout
-    OVERLAYS.mkdir(exist_ok=True)
-    p = OVERLAYS / f"{app['id']}.patch"
+    p = app_dir(app["id"]) / "overlay.patch"
     if diff:
         p.write_text(diff)
         print(f"wrote {p.relative_to(ROOT)} ({diff.count(chr(10))} lines)")
@@ -219,13 +249,12 @@ def build(app):
         return record(app["id"], "build", "fail", summary="no project file")
     if "Microsoft.NET.Sdk" not in proj.read_text(errors="replace"):
         return record(app["id"], "build", "skip", summary="not migrated yet (no SDK-style project)")
-    LOGS.mkdir(exist_ok=True)
-    log = LOGS / f"{app['id']}-build.log"
+    log = logs_dir(app["id"]) / "build.log"
     t = time.time()
     with log.open("w") as f:
         r = subprocess.run(["dotnet", "build", str(proj), "-c", "Release", "-nologo", "-clp:ErrorsOnly;Summary"],
                            cwd=proj.parent, env=env(), stdout=f, stderr=subprocess.STDOUT)
-    text = log.read_text(errors="replace")
+    text = scrub(log)
     errors = sorted(set(re.findall(r"error [A-Z]+\d+: [^\[\n]+", text)))
     return record(app["id"], "build", "pass" if r.returncode == 0 else "fail", seconds=round(time.time() - t),
                   errors=errors[:30], error_count=len(errors), log=str(log.relative_to(ROOT)),
@@ -267,8 +296,7 @@ def smoke(app):
         return record(app["id"], "smoke", "skip", summary=f"not built ({dll.relative_to(ROOT)} missing)")
     port = free_port()
     base = f"http://127.0.0.1:{port}"
-    LOGS.mkdir(exist_ok=True)
-    log = LOGS / f"{app['id']}-server.log"
+    log = logs_dir(app["id"]) / "server.log"
     e = env()
     e.update(app.get("env", {}))
     with log.open("w") as f:
@@ -285,7 +313,7 @@ def smoke(app):
                 time.sleep(0.5)
         if server.poll() is not None:
             return record(app["id"], "smoke", "fail", summary=f"server exited with {server.returncode}",
-                          log_tail=log.read_text(errors="replace")[-3000:])
+                          log_tail=scrub(log)[-3000:])
         probes = app.get("probes") or [{"path": "/", "status": 200}]
         for i, probe in enumerate(probes):
             # The first request compiles the site, as on IIS.
@@ -298,6 +326,7 @@ def smoke(app):
             server.wait(10)
         except subprocess.TimeoutExpired:
             server.kill()
+        scrub(log)
     failed = [c for c in checks if not c["ok"]]
     return record(app["id"], "smoke", "fail" if failed else "pass", checks=checks,
                   summary=f"{len(checks) - len(failed)}/{len(checks)} probes",
@@ -338,8 +367,8 @@ def report(apps):
         cells = [ICON.get(s.get(st, {}).get("status")) for st in STAGES]
         smoke_summary = s.get("smoke", {}).get("summary", "")
         kinds = ", ".join(s.get("assess", {}).get("kinds", app.get("kinds", [])))
-        rows.append(f"| [{app['name']}]({app['repo']}) | {kinds} | " + " | ".join(cells) + f" | {smoke_summary} | {app.get('status', '')} |")
-    out = ["# Results", "", f"Generated by `scripts/wfc.py report` on {now()[:10]}. Details are in `results/<id>.json`.", "",
+        rows.append(f"| [{app['name']}](apps/{app['id']}/NOTES.md) | {kinds} | " + " | ".join(cells) + f" | {smoke_summary} | {app.get('status', '')} |")
+    out = ["# Results", "", f"Generated by `scripts/wfc.py report` on {now()[:10]}. Each app's notes, log and results are in `apps/<id>/`.", "",
            "| App | Kinds | Fetch | Assess | Build | Smoke | Probes | Catalog status |",
            "| --- | --- | --- | --- | --- | --- | --- | --- |", *rows, ""]
     (ROOT / "RESULTS.md").write_text("\n".join(out))

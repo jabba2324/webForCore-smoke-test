@@ -1,0 +1,16 @@
+# Kudu. Fields are described in README.md.
+
+name = "Kudu"
+repo = "https://github.com/projectkudu/kudu"
+ref = ""
+site = "Kudu.Services.Web"
+kinds = ["webapi", "signalr"]
+licence = "Apache-2.0"
+status = "candidate"
+notes = "Leans on Windows (IIS, processes); expect blockers. Good for Web API + SignalR coverage."
+
+# The first request compiles the site, so it gets 120 s.
+# [[probes]]
+# path = "/"
+# status = 200
+# contains = ""

@@ -1,0 +1,16 @@
+# Orchard CMS 1.x. Fields are described in README.md.
+
+name = "Orchard CMS 1.x"
+repo = "https://github.com/OrchardCMS/Orchard"
+ref = ""
+site = "src/Orchard.Web"
+kinds = ["mvc", "webapi"]
+licence = "BSD-3-Clause"
+status = "candidate"
+notes = "Module-based; compiles modules at run time with its own dynamic compilation. A hard test."
+
+# The first request compiles the site, so it gets 120 s.
+# [[probes]]
+# path = "/"
+# status = 200
+# contains = ""

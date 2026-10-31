@@ -1,0 +1,17 @@
+# eShopLegacyWebForms (eShopModernizing). Fields are described in README.md.
+
+name = "eShopLegacyWebForms (eShopModernizing)"
+repo = "https://github.com/dotnet-architecture/eShopModernizing"
+ref = ""
+site = "eShopLegacyWebFormsSolution/src/eShopLegacyWebForms"
+project = "eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/eShopLegacyWebForms.csproj"
+kinds = ["webforms"]
+licence = "MIT"
+status = "candidate"
+notes = "Web Forms twin of eshop-legacy-mvc; same mock-data switch."
+
+# The first request compiles the site, so it gets 120 s.
+# [[probes]]
+# path = "/"
+# status = 200
+# contains = ""

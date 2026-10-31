@@ -1,0 +1,16 @@
+# Opserver (before its ASP.NET Core port). Fields are described in README.md.
+
+name = "Opserver (before its ASP.NET Core port)"
+repo = "https://github.com/opserver/Opserver"
+ref = ""
+site = "Opserver"
+kinds = ["mvc"]
+licence = "MIT"
+status = "candidate"
+notes = "Pin a commit from before the move to ASP.NET Core."
+
+# The first request compiles the site, so it gets 120 s.
+# [[probes]]
+# path = "/"
+# status = 200
+# contains = ""

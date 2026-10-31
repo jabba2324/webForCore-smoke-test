@@ -1,0 +1,17 @@
+# nopCommerce 3.90. Fields are described in README.md.
+
+name = "nopCommerce 3.90"
+repo = "https://github.com/nopSolutions/nopCommerce"
+ref = "release-3.90"
+site = "src/Presentation/Nop.Web"
+kinds = ["mvc"]
+licence = "nopCommerce Public License (GPL-3.0 with attribution)"
+status = "candidate"
+needs = ["mssql"]
+notes = "Last MVC 5 release before ASP.NET Core. Large: plugins, Autofac, EF6."
+
+# The first request compiles the site, so it gets 120 s.
+# [[probes]]
+# path = "/"
+# status = 200
+# contains = ""

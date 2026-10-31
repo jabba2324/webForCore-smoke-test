@@ -1,0 +1,16 @@
+# MVCForum. Fields are described in README.md.
+
+name = "MVCForum"
+repo = "https://github.com/YodasMyDad/mvcforum"
+ref = ""
+site = ""
+kinds = ["mvc"]
+licence = ""
+status = "candidate"
+needs = ["mssql"]
+
+# The first request compiles the site, so it gets 120 s.
+# [[probes]]
+# path = "/"
+# status = 200
+# contains = ""

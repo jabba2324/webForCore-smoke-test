@@ -1,0 +1,17 @@
+# JabbR. Fields are described in README.md.
+
+name = "JabbR"
+repo = "https://github.com/JabbR/JabbR"
+ref = ""
+site = "JabbR"
+kinds = ["signalr", "owin"]
+licence = "MIT"
+status = "candidate"
+needs = ["mssql"]
+notes = "SignalR chat. Pages are Nancy, not MVC: check Nancy runs on .NET 11 before going far."
+
+# The first request compiles the site, so it gets 120 s.
+# [[probes]]
+# path = "/"
+# status = 200
+# contains = ""

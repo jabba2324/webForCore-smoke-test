@@ -1,0 +1,16 @@
+# SmartStoreNET. Fields are described in README.md.
+
+name = "SmartStoreNET"
+repo = "https://github.com/smartstore/SmartStoreNET"
+ref = ""
+site = "src/Presentation/SmartStore.Web"
+kinds = ["mvc"]
+licence = "GPL-3.0"
+status = "candidate"
+needs = ["mssql"]
+
+# The first request compiles the site, so it gets 120 s.
+# [[probes]]
+# path = "/"
+# status = 200
+# contains = ""

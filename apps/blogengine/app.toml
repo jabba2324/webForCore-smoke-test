@@ -1,0 +1,16 @@
+# BlogEngine.NET. Fields are described in README.md.
+
+name = "BlogEngine.NET"
+repo = "https://github.com/BlogEngine/BlogEngine.NET"
+ref = ""
+site = "BlogEngine/BlogEngine.NET"
+kinds = ["webforms", "webapi"]
+licence = "MS-RL"
+status = "candidate"
+notes = "Stores data in XML files under App_Data by default, so no database is needed."
+
+# The first request compiles the site, so it gets 120 s.
+# [[probes]]
+# path = "/"
+# status = 200
+# contains = ""
