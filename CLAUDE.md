@@ -31,6 +31,26 @@ Each app is a folder, `apps/<id>/` (see README.md). Nothing goes at the top leve
 5. `scripts/wfc.py save-overlay <id>`, update `status` and `notes` in `app.toml`, `scripts/wfc.py report`, and
    commit the app's folder (this repo only, one app per commit).
 
+## Third-party libraries
+
+webForCore ships only Microsoft assemblies. Builds of third-party libraries for it are in
+[webForCore-thirdparty](https://github.com/jabba2324/webForCore-thirdparty), for this test bed: an app that uses one
+of them references the package from there, downloaded into the folder `scripts/wfc.py packages` puts webForCore's in:
+
+```bash
+gh release download --repo jabba2324/webForCore-thirdparty --pattern '*.nupkg' --dir .packages/v<webForCore version> --skip-existing
+```
+
+| The app uses | Reference | Without it |
+| --- | --- | --- |
+| WebActivatorEx (directly, or through Unity.Mvc, Ninject.MVC, StructureMap.MVC, ...) | `webForCore.WebActivatorEx` | Its start methods never run (webForCore#21): the DI container is never set up, "No parameterless constructor defined" |
+| AjaxControlToolkit | `webForCore.AjaxControlToolkit` (+ `.StaticResources`, `.HtmlEditor.Sanitizer`) | Not provided by webForCore; the original package is built for .NET Framework |
+
+Record in the app's `NOTES.md` which webForCore-thirdparty version it used. webForCore's own guide gives the
+workaround without these packages (calling WebActivatorEx's start methods from `Application_Start`); a problem only
+the workaround shows is still a finding. webForCore 0.1.0-0.3.0 shipped `webForCore.WebActivatorEx` (0.3.0) and the
+AjaxControlToolkit packages itself; from 0.4.0 they come only from webForCore-thirdparty.
+
 ## Recording failures
 
 Every failure goes in `FINDINGS.md`, one entry per distinct problem, with the apps it affects, the error, a minimal
