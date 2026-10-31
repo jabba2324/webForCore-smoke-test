@@ -7,11 +7,36 @@ site = "ApplicantTracking.Web"
 project = "ApplicantTracking.Web/ApplicantTracking.Web.csproj"
 kinds = ["mvc", "owin", "identity"]
 licence = "Apache-2.0"
-status = "verified"
-notes = "MVC 5 applicant tracking system with Identity 2; .NET 4.6.2. Needs SQL Server."
+status = "blocked"
+https = true
+notes = "Builds and serves over HTTPS; the home page and static files work, but WebActivatorEx's start methods never run (F20), so Unity isn't registered and every DI controller fails."
 
 # The first request compiles the site, so it gets 120 s.
-# [[probes]]
-# path = "/"
-# status = 200
-# contains = ""
+needs = ["mssql"]
+
+# The first request compiles the site, so it gets 120 s. Served over HTTPS (RequireHttpsAttribute is a global filter).
+[[probes]]
+path = "/"
+contains = "Getting started"
+
+# EF 6 migrations create the database and seed four applicants.
+[[probes]]
+path = "/Applicant"
+contains = "Jesica"
+
+[[probes]]
+path = "/Applicant/Details/1"
+contains = "FRRO0123456789"
+
+# A form with an anti-forgery token.
+[[probes]]
+path = "/Applicant/Create"
+contains = "__RequestVerificationToken"
+
+[[probes]]
+path = "/Account/Login"
+contains = "Log in."
+
+[[probes]]
+path = "/Content/bootstrap.css"
+contains = "Bootstrap"

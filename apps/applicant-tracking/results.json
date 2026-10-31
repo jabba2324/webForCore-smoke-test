@@ -1,0 +1,130 @@
+{
+  "id": "applicant-tracking",
+  "stages": {
+    "assess": {
+      "at": "2026-10-31T19:34:53+00:00",
+      "blockers": {},
+      "kinds": [
+        "ef6",
+        "identity",
+        "mvc",
+        "owin",
+        "webpages"
+      ],
+      "libraries": [
+        "ApplicantTracking.Data",
+        "ApplicantTracking.Domain"
+      ],
+      "notices": {},
+      "status": "pass",
+      "summary": "no blockers found",
+      "target_frameworks": [
+        "v4.6.2"
+      ]
+    },
+    "build": {
+      "at": "2026-10-31T20:17:15+00:00",
+      "error_count": 0,
+      "errors": [],
+      "log": "apps/applicant-tracking/logs/build.log",
+      "seconds": 3,
+      "status": "pass",
+      "summary": null,
+      "webforcore": "packages 0.2.0"
+    },
+    "fetch": {
+      "at": "2026-10-31T19:34:41+00:00",
+      "commit": "ff9a2eb4b4f8fcf68efbab3b2f7857bb33ac307e",
+      "overlay": false,
+      "status": "pass"
+    },
+    "smoke": {
+      "at": "2026-10-31T20:17:40+00:00",
+      "checks": [
+        {
+          "ms": 3447,
+          "ok": true,
+          "path": "/",
+          "status": 200
+        },
+        {
+          "expected_text": "Jesica",
+          "ms": 58,
+          "ok": false,
+          "path": "/Applicant",
+          "status": 500,
+          "title": "Cannot dynamically create an instance of type 'ApplicantTracking.Web.Controllers.ApplicantController'. Reason: No parameterless constructor defined."
+        },
+        {
+          "expected_text": "FRRO0123456789",
+          "ms": 6,
+          "ok": false,
+          "path": "/Applicant/Details/1",
+          "status": 500,
+          "title": "Cannot dynamically create an instance of type 'ApplicantTracking.Web.Controllers.ApplicantController'. Reason: No parameterless constructor defined."
+        },
+        {
+          "expected_text": "__RequestVerificationToken",
+          "ms": 4,
+          "ok": false,
+          "path": "/Applicant/Create",
+          "status": 500,
+          "title": "Cannot dynamically create an instance of type 'ApplicantTracking.Web.Controllers.ApplicantController'. Reason: No parameterless constructor defined."
+        },
+        {
+          "expected_text": "Log in.",
+          "ms": 5,
+          "ok": false,
+          "path": "/Account/Login",
+          "status": 500,
+          "title": "Cannot dynamically create an instance of type 'ApplicantTracking.Web.Controllers.AccountController'. Reason: No parameterless constructor defined."
+        },
+        {
+          "ms": 67,
+          "ok": true,
+          "path": "/Content/bootstrap.css",
+          "status": 200
+        },
+        {
+          "ms": 5,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 3,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 3,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 3,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "ms": 3,
+          "ok": true,
+          "path": "/packages.config",
+          "status": 404
+        },
+        {
+          "ms": 3,
+          "ok": true,
+          "path": "/bin_dotnet/ApplicantTracking.Web.dll",
+          "status": 404
+        }
+      ],
+      "log": "apps/applicant-tracking/logs/server.log",
+      "status": "fail",
+      "summary": "8/12 probes"
+    }
+  }
+}
