@@ -1,6 +1,6 @@
 # MiniBlog: migration notes
 
-Status: migrated (webForCore 0.2.0, all probes pass).
+Status: migrated (webForCore 0.4.0, all probes pass).
 (master, 2022; still the Web Pages version). Apache-2.0. webForCore 0.1.0 packages (0.2.0 from round 2).
 
 ## Assessment
@@ -68,6 +68,10 @@ Also checked by hand:
 ### Round 2: webForCore 0.2.0
 
 All 18 probes pass on the released 0.2.0 packages (the overlay's `PackageReference`s moved from 0.1.0 to 0.2.0). The round-1 failures above were fixed in webForCore PR #16 and are kept as the record of round 1.
+
+### Round 3: webForCore 0.4.0
+
+All 18 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0.
 
 ## Open problems
 
