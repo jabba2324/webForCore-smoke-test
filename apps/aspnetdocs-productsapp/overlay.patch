@@ -388,16 +388,3 @@ index 97382cf1a..000000000
 -  <package id="Newtonsoft.Json" version="13.0.1" targetFramework="net461" />
 -</packages>
 \ No newline at end of file
-diff --git a/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client/sample/server/logs/ProductsApp/W3SVC1/u_ex20261031.0000.txt b/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client/sample/server/logs/ProductsApp/W3SVC1/u_ex20261031.0000.txt
-new file mode 100644
-index 000000000..4a4d5e169
---- /dev/null
-+++ b/aspnet/web-api/overview/advanced/calling-a-web-api-from-a-net-client/sample/server/logs/ProductsApp/W3SVC1/u_ex20261031.0000.txt
-@@ -0,0 +1,7 @@
-+#Version: 1.0
-+#Start-Date: 2026-10-31 19:35:18
-+#Fields: date time c-ip cs-username s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status time-taken cs(User-Agent) cs(Referer)
-+2026-10-31 19:35:16 127.0.0.1 - 127.0.0.1 44925 GET /api/products - 200 1036.1461 webForCore-smoke-test -
-+2026-10-31 19:35:17 127.0.0.1 - 127.0.0.1 44925 GET /api/products/2 - 200 25.0201 webForCore-smoke-test -
-+2026-10-31 19:35:17 127.0.0.1 - 127.0.0.1 44925 GET /api/products ?category=Hardware 200 15.1363 webForCore-smoke-test -
-+2026-10-31 19:35:18 127.0.0.1 - 127.0.0.1 44925 GET /api/products/99 - 404 13.7329 webForCore-smoke-test -
