@@ -92,7 +92,9 @@ as a pass: note it in `NOTES.md` and `FINDINGS.md`, and fix webForCore instead.
 | `needs` | Services from `services/compose.yml`: `mssql`, `mysql`, `postgres` |
 | `env` | Extra environment for the server process (a table) |
 | `remove` | Globs of files `fetch` deletes before applying the overlay, kept out of the patch (the app's checked-in DLLs) |
-| `[[probes]]` | `path`, `status` (default 200), `contains` (text that proves the page rendered) |
+| `https` | `true` to serve the app over HTTPS with the .NET development certificate (`dotnet dev-certs https`), for apps with `RequireHttpsAttribute` |
+| `[[probes]]` | `path`, `status` (default 200), `contains` (text that proves the page rendered), `absent` (text that must not be in the response) |
+| `[forbidden."<path>"]` | Overrides for one of the paths that must not be served (`/web.config`, `/packages.config`, ...), for an app whose error handler answers 200 with its own page: `status`, `absent`, `contains` |
 | `notes` | One line for the summary; the detail goes in `NOTES.md` |
 
 ## Adding apps

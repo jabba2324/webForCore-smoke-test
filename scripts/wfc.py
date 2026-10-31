@@ -226,7 +226,7 @@ def save_overlay(app):
     # Build output and files webForCore generates at run time aren't part of the migration. The apps' own
     # .gitignore files predate bin_dotnet.
     generated = [":(exclude,glob)**/bin_dotnet/**", ":(exclude,glob)**/obj/**", ":(exclude,glob)**/App_Data/machine.config",
-                 ":(exclude,glob)**/logs/W3SVC*/**"] + [f":(exclude,glob){p}" for p in app.get("remove", [])]
+                 ":(exclude,glob)**/logs/W3SVC*/**", ":(exclude,glob)**/logs/*/W3SVC*/**"] + [f":(exclude,glob){p}" for p in app.get("remove", [])]
     git("reset", "-q", cwd=dest, check=False)  # drops intent-to-add entries from an earlier save
     # Deletions must stay unstaged, or they drop out of the diff.
     git("add", "-N", "--ignore-removal", "--", ".", *generated, cwd=dest)
@@ -346,7 +346,12 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
         return None
 
 
-OPENER = urllib.request.build_opener(NoRedirect)
+# Apps with https = true (RequireHttpsAttribute) are served over HTTPS with the .NET development certificate
+# (`dotnet dev-certs https`), which isn't verified.
+_TLS = __import__("ssl").create_default_context()
+_TLS.check_hostname = False
+_TLS.verify_mode = __import__("ssl").CERT_NONE
+OPENER = urllib.request.build_opener(NoRedirect, urllib.request.HTTPSHandler(context=_TLS))
 
 
 def get(url, timeout):
@@ -367,7 +372,7 @@ def smoke(app):
     if not dll.exists():
         return record(app["id"], "smoke", "skip", summary=f"not built ({dll.relative_to(ROOT)} missing)")
     port = free_port()
-    base = f"http://127.0.0.1:{port}"
+    base = f"{'https' if app.get('https') else 'http'}://127.0.0.1:{port}"
     log = logs_dir(app["id"]) / "server.log"
     e = env()
     e.update(app.get("env", {}))
