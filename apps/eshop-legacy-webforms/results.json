@@ -17,86 +17,86 @@
       ]
     },
     "build": {
-      "at": "2026-10-31T19:37:05+00:00",
+      "at": "2026-10-31T23:21:44+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/eshop-legacy-webforms/logs/build.log",
       "seconds": 1,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.2.0"
+      "webforcore": "packages 0.4.0"
     },
     "fetch": {
-      "at": "2026-10-31T19:34:07+00:00",
+      "at": "2026-10-31T23:40:38+00:00",
       "commit": "63bc9ec4414d7e281dc9f9d7bdcf70030950457d",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-10-31T19:37:14+00:00",
+      "at": "2026-10-31T23:21:53+00:00",
       "checks": [
         {
-          "ms": 2888,
+          "ms": 2831,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 18,
+          "ms": 17,
           "ok": true,
           "path": "/Default/index/1/size/10",
           "status": 200
         },
         {
-          "ms": 204,
+          "ms": 203,
           "ok": true,
           "path": "/Catalog/Details/1",
           "status": 200
         },
         {
-          "ms": 83,
+          "ms": 71,
           "ok": true,
           "path": "/Catalog/Create",
           "status": 200
         },
         {
-          "ms": 8,
+          "ms": 6,
           "ok": true,
           "path": "/About.aspx",
           "status": 200
         },
         {
-          "ms": 49,
+          "ms": 41,
           "ok": true,
           "path": "/Content/site.css",
           "status": 200
         },
         {
-          "ms": 23,
+          "ms": 19,
           "ok": true,
           "path": "/bundles/MsAjaxJs",
           "status": 200
         },
         {
-          "ms": 5,
+          "ms": 4,
           "ok": true,
           "path": "/Pics/1.png",
           "status": 200
         },
         {
-          "ms": 3,
+          "ms": 4,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 3,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404

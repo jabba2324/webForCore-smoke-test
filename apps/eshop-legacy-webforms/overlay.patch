@@ -59,7 +59,7 @@ index 225bea0..3bd981e 100644
  </configuration>
 \ No newline at end of file
 diff --git a/eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/eShopLegacyWebForms.csproj b/eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/eShopLegacyWebForms.csproj
-index 4d34a93..2c2d993 100644
+index 4d34a93..2000f82 100644
 --- a/eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/eShopLegacyWebForms.csproj
 +++ b/eShopLegacyWebFormsSolution/src/eShopLegacyWebForms/eShopLegacyWebForms.csproj
 @@ -1,491 +1,53 @@
@@ -514,10 +514,10 @@ index 4d34a93..2c2d993 100644
 -    <None Include="Web.Release.config">
 -      <DependentUpon>Web.config</DependentUpon>
 -    </None>
-+    <!-- webForCore 0.1.0 packages (GitHub release): "webForCore" is the "Always" set; then bundling with its Web Forms controls. -->
-+    <PackageReference Include="webForCore" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Web.Optimization.WebForms" Version="0.2.0" />
++    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set; then bundling with its Web Forms controls. -->
++    <PackageReference Include="webForCore" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.Optimization.WebForms" Version="0.4.0" />
    </ItemGroup>
 +
    <ItemGroup>
