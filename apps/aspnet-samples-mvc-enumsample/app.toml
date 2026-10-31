@@ -1,0 +1,22 @@
+# ASP.NET samples: MVC EnumSample. Fields are described in README.md.
+
+name = "ASP.NET samples: MVC EnumSample"
+repo = "https://github.com/aspnet/samples"
+ref = "f7d4a776327df09c13b39489b122209c5d04693b"
+site = "samples/aspnet/MVC/EnumSample/EnumSample"
+project = "samples/aspnet/MVC/EnumSample/EnumSample/EnumSample.csproj"
+kinds = ["mvc"]
+licence = "Apache-2.0"
+status = "blocked"
+notes = "All app probes pass (EnumDropDownListFor, EF 6.5 on SQL Server, a POST by hand); only the served W3C log (F4) fails."
+
+# The first request compiles the site, so it gets 120 s.
+needs = ["mssql"]
+
+[[probes]]
+path = "/"
+contains = "Index - Enum Sample Application"
+
+[[probes]]
+path = "/Home/Create"
+contains = "<select"

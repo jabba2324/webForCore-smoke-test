@@ -1,0 +1,20 @@
+# ASP.NET samples: Katana HelloWorld. Fields are described in README.md.
+
+name = "ASP.NET samples: Katana HelloWorld"
+repo = "https://github.com/aspnet/samples"
+ref = "f7d4a776327df09c13b39489b122209c5d04693b"
+site = "samples/aspnet/Katana/HelloWorld"
+project = "samples/aspnet/Katana/HelloWorld/HelloWorld.csproj"
+kinds = ["owin"]
+licence = "Apache-2.0"
+status = "migrated"
+notes = "Passes all probes: OWIN Startup discovery and Microsoft.Owin.Host.SystemWeb work."
+
+# The first request compiles the site, so it gets 120 s.
+[[probes]]
+path = "/"
+contains = "Hello World"
+
+[[probes]]
+path = "/any/path/at/all"
+contains = "Hello World"

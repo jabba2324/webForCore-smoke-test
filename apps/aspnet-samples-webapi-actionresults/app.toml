@@ -1,0 +1,28 @@
+# ASP.NET samples: Web API ActionResults. Fields are described in README.md.
+
+name = "ASP.NET samples: Web API ActionResults"
+repo = "https://github.com/aspnet/samples"
+ref = "f7d4a776327df09c13b39489b122209c5d04693b"
+site = "samples/aspnet/WebApi/ActionResults/ActionResults"
+project = "samples/aspnet/WebApi/ActionResults/ActionResults/ActionResults.csproj"
+kinds = ["webapi"]
+licence = "Apache-2.0"
+status = "blocked"
+notes = "All app probes pass (attribute routes, custom IHttpActionResults); only the served W3C log (F4) fails."
+
+# The first request compiles the site, so it gets 120 s.
+[[probes]]
+path = "/text"
+contains = "Hello, world!"
+
+[[probes]]
+path = "/file"
+contains = "<"
+
+[[probes]]
+path = "/product/2"
+contains = "Bar"
+
+[[probes]]
+path = "/product/99"
+status = 404
