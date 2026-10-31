@@ -230,11 +230,12 @@ def save_overlay(app):
     git("reset", "-q", cwd=dest, check=False)  # drops intent-to-add entries from an earlier save
     # Deletions must stay unstaged, or they drop out of the diff.
     git("add", "-N", "--ignore-removal", "--", ".", *generated, cwd=dest)
-    diff = git("diff", "--binary", "--", ".", *generated, cwd=dest).stdout
+    # As bytes: the apps' files with CRLF line endings must keep them, or the patch no longer applies to the checkout.
+    diff = subprocess.run(["git", "diff", "--binary", "--", ".", *generated], cwd=dest, check=True, capture_output=True).stdout
     p = app_dir(app["id"]) / "overlay.patch"
     if diff:
-        p.write_text(diff)
-        print(f"wrote {p.relative_to(ROOT)} ({diff.count(chr(10))} lines)")
+        p.write_bytes(diff)
+        print(f"wrote {p.relative_to(ROOT)} ({diff.count(b'\n')} lines)")
     else:
         print("no changes")
 
