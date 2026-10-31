@@ -107,7 +107,9 @@ def now():
 def scrub(log):
     """Logs are committed, so this machine's paths become placeholders."""
     text = log.read_text(errors="replace")
-    for path, name in ((str(WEBFORCORE), "$WEBFORCORE_DIR"), (str(ROOT), "<repo>"), (str(Path.home()), "~")):
+    # Longest first: the repo's path can start with webForCore's (../webForCore-smoke-test).
+    pairs = ((str(WEBFORCORE), "$WEBFORCORE_DIR"), (str(ROOT), "<repo>"), (str(Path.home()), "~"))
+    for path, name in sorted(pairs, key=lambda p: -len(p[0])):
         text = text.replace(path, name)
     log.write_text(text)
     return text
@@ -179,8 +181,13 @@ def fetch(app, reset=False):
 
 def save_overlay(app):
     dest = checkout(app)
-    git("add", "-A", "-N", ".", cwd=dest)
-    diff = git("diff", "--binary", cwd=dest).stdout
+    # Build output and files webForCore generates at run time aren't part of the migration. The apps' own
+    # .gitignore files predate bin_dotnet.
+    generated = [":(exclude,glob)**/bin_dotnet/**", ":(exclude,glob)**/obj/**", ":(exclude,glob)**/App_Data/machine.config",
+                 ":(exclude,glob)**/logs/W3SVC*/**"]
+    git("reset", "-q", cwd=dest, check=False)  # drops intent-to-add entries from an earlier save
+    git("add", "-A", "-N", "--", ".", *generated, cwd=dest)
+    diff = git("diff", "--binary", "--", ".", *generated, cwd=dest).stdout
     p = app_dir(app["id"]) / "overlay.patch"
     if diff:
         p.write_text(diff)
@@ -318,7 +325,10 @@ def smoke(app):
         for i, probe in enumerate(probes):
             # The first request compiles the site, as on IIS.
             checks.append(run_probe(base, probe, timeout=120 if i == 0 else 30))
-        for path in FORBIDDEN + [f"/bin_dotnet/{dll.name}"]:
+        # AddWebForms() writes W3C logs under the site folder by default (FINDINGS.md); they must not be served.
+        w3c = sorted((site / "logs").glob("W3SVC*/*.txt"))
+        w3c = [f"/{w3c[0].relative_to(site).as_posix()}"] if w3c else []
+        for path in FORBIDDEN + [f"/bin_dotnet/{dll.name}"] + w3c:
             checks.append(run_probe(base, {"path": path, "status": 404, "forbidden": True}, timeout=30))
     finally:
         server.terminate()
@@ -340,7 +350,7 @@ def run_probe(base, probe, timeout):
         status, headers, body = get(base + path, timeout)
     except Exception as ex:  # noqa: BLE001 - a probe reports any failure
         return {"path": path, "ok": False, "error": f"{type(ex).__name__}: {ex}"}
-    ok = status == probe.get("status", 200) or (probe.get("forbidden") and status in (403, 404))
+    ok = status == probe.get("status", 200) or bool(probe.get("forbidden") and status in (403, 404))
     if ok and probe.get("contains") and probe["contains"] not in body:
         ok = False
     check = {"path": path, "ok": ok, "status": status, "ms": round((time.time() - t) * 1000)}
