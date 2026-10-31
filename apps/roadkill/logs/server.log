@@ -1,7 +1,7 @@
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
       Started application 5bef4b9c (start 1, in a PseudoAppDomain).
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://127.0.0.1:58117
+      Now listening on: http://127.0.0.1:38811
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
@@ -9,41 +9,41 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Content root path: <repo>/apps/roadkill/src/src/Roadkill.Web
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:58117/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:38811/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:58117/User/Login - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:38811/User/Login - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:38811/ - 500 12443 text/html;+charset=utf-8 2669.5424ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:38811/User/Login - 500 7787 text/html;+charset=utf-8 46.9842ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:58117/Assets/CSS/roadkill.css - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:38811/Assets/CSS/roadkill.css - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:58117/ - 500 7942 text/html;+charset=utf-8 252.2797ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:58117/Assets/CSS/roadkill.css - 500 7942 text/html;+charset=utf-8 4.2294ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:58117/User/Login - 500 7942 text/html;+charset=utf-8 7.9562ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:38811/Assets/CSS/roadkill.css - 404 2805 text/html;+charset=utf-8 25.1802ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:58117/web.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:38811/web.config - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:58117/web.config - 404 252 text/html 2.4785ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:38811/web.config - 404 252 text/html 10.7779ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:58117/App_Data/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:38811/App_Data/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:58117/App_Data/ - 404 252 text/html 0.4564ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:38811/App_Data/ - 404 252 text/html 1.9995ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:58117/Global.asax.cs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:38811/Global.asax.cs - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:58117/Global.asax.cs - 404 215 text/html 0.3629ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:38811/Global.asax.cs - 404 215 text/html 2.0281ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:58117/obj/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:38811/obj/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:58117/obj/ - 404 252 text/html 0.3521ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:38811/obj/ - 404 252 text/html 1.7872ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:58117/packages.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:38811/packages.config - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:58117/packages.config - 404 215 text/html 0.3232ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:38811/packages.config - 404 215 text/html 1.8259ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:58117/bin_dotnet/Roadkill.Web.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:38811/bin_dotnet/Roadkill.Web.dll - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:58117/bin_dotnet/Roadkill.Web.dll - 404 252 text/html 1.0671ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:38811/bin_dotnet/Roadkill.Web.dll - 404 252 text/html 3.7724ms
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]

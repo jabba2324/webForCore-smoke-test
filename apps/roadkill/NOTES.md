@@ -69,6 +69,21 @@ System.AppDomainSetup.get_PrivateBinPath()'` (the .NET Framework build of Struct
 App/environment: [F25](../../FINDINGS.md#f25). A StructureMap with a .NET build, or `scanner.AssembliesFromPath` in
 place of `AssembliesFromApplicationBaseDirectory`, is the next step.
 
+### Round 3: webForCore 0.4.0
+
+6 of 9 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0, and its 18 `ExcludeAssets` references for transitive Microsoft packages were removed: webForCore's packages override them since 0.3.0 (webForCore#23).
+
+`webForCore.WebActivatorEx` (webForCore-thirdparty 0.4.0) added to the web project: `LocatorStartup.StartMVC` runs. Then:
+1. StructureMap 4.0's .NET Framework build needs `AppDomainSetup.PrivateBinPath` (F25). `structuremap` 4.0.0.315 →
+   4.7.1, which has a .NET Standard 2.0 build: no change to the code.
+2. NLog 4.2's `LogManager` needs `AppDomainSetup.ConfigurationFile` (`TypeInitializationException`). NLog 4.2.0 →
+   4.7.15 (a .NET Standard build) in Roadkill.Core and Roadkill.Web.
+3. Every page then fails in LightSpeed: `MissingMethodException: 'AssemblyBuilder
+   System.AppDomain.DefineDynamicAssembly(AssemblyName, AssemblyBuilderAccess)'` from `ActiveSharp.PropertyMapping.OffsetUtil`,
+   called by `Mindscape.LightSpeed.Entity.GetInferredFieldName`. LightSpeed (Mindscape, 2012) is closed source, checked
+   into the app's `lib/` as .NET Framework DLLs, and is Roadkill's data layer for every SQL database (the only other
+   backend is MongoDB). It can't be rebuilt, so Roadkill stops here (F27, app/environment).
+
 ## Open problems
 
 - [F19](../../FINDINGS.md#f19) (webForCore bug): `System.Web.Abstractions`/`System.Web.Routing` 4.0.0.0 can't be loaded.

@@ -8,7 +8,7 @@ project = "src/Roadkill.Web/Roadkill.Web.csproj"
 kinds = ["mvc", "webapi", "owin"]
 licence = "MS-PL"
 status = "blocked"
-notes = "Builds (recaptcha by HintPath, F23); every request fails on System.Web.Abstractions 4.0 in web.config (F19). Past it (by hand), WebActivatorEx's start methods never run (F20)."
+notes = "Blocked on its closed-source LightSpeed ORM (AppDomain.DefineDynamicAssembly; F27). Got there on 0.4.0 with webForCore-thirdparty's WebActivatorEx, StructureMap 4.7.1 (F25) and NLog 4.7."
 
 # The first request compiles the site, so it gets 120 s.
 needs = ["mssql"]

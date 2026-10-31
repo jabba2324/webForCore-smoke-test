@@ -30,77 +30,77 @@
       ]
     },
     "build": {
-      "at": "2026-10-31T21:13:48+00:00",
+      "at": "2026-10-31T23:38:13+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/roadkill/logs/build.log",
-      "seconds": 3,
+      "seconds": 4,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.2.0"
+      "webforcore": "packages 0.4.0, webForCore-thirdparty 0.4.0"
     },
     "fetch": {
-      "at": "2026-10-31T21:14:08+00:00",
+      "at": "2026-10-31T23:40:38+00:00",
       "commit": "1061add4a727c55793234e0a92f146c6f1db62cf",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-10-31T21:13:51+00:00",
+      "at": "2026-10-31T23:38:19+00:00",
       "checks": [
         {
-          "ms": 270,
+          "ms": 2715,
           "ok": false,
           "path": "/",
           "status": 500,
-          "title": "Configuration Error"
+          "title": "Method not found: 'System.Reflection.Emit.AssemblyBuilder System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName, System.Reflection.Emit.AssemblyBuilderAccess)'."
         },
         {
-          "ms": 4,
+          "ms": 48,
           "ok": false,
           "path": "/User/Login",
           "status": 500,
-          "title": "Configuration Error"
+          "title": "The view 'Login' or its master was not found or no view engine supports the searched locations. The following locations were searched:<br>~/Views/User/Login.cshtml<br>~/Views/User/Login.vbhtml<br>~/Views/Shared/Login.cshtml<br>~/Views/Shared/Login.vbhtml<br>~/Plugins/Login.cshtml"
         },
         {
-          "ms": 4,
+          "ms": 11,
           "ok": false,
           "path": "/Assets/CSS/roadkill.css",
-          "status": 500,
-          "title": "Configuration Error"
+          "status": 404,
+          "title": "The resource cannot be found."
         },
         {
-          "ms": 3,
+          "ms": 12,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 4,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 4,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 4,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 4,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 8,
           "ok": true,
           "path": "/bin_dotnet/Roadkill.Web.dll",
           "status": 404
