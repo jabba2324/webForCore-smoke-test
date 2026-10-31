@@ -7,8 +7,8 @@ site = ""
 project = "CleanArchitectureAspNetMvc5.csproj"
 kinds = ["mvc"]
 licence = "BSD-3-Clause"
-status = "blocked"
-notes = "Builds and runs with no app code changes; /Products and /Contact (controllers named like their feature folders, RouteExistingFiles = true) get a 301 to the folder from webForCore (F14). Everything else passes."
+status = "migrated"
+notes = "webForCore 0.2.0: passes all 11 probes with the round-1 overlay moved to the 0.2.0 packages."
 
 # The first request compiles the site, so it gets 120 s.
 [[probes]]

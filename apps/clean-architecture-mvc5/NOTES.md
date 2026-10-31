@@ -1,7 +1,7 @@
 # Clean Architecture in ASP.NET MVC 5: migration notes
 
-Status: blocked (webForCore bug F14). Source: https://github.com/matthewrenze/clean-architecture-in-asp-net-mvc-5 at
-`5cbeba34` (master, 2018). BSD-3-Clause. webForCore 0.1.0 packages.
+Status: migrated (webForCore 0.2.0, all probes pass).
+`5cbeba34` (master, 2018). BSD-3-Clause. webForCore 0.1.0 packages (0.2.0 from round 2).
 
 ## Assessment
 
@@ -41,6 +41,12 @@ Not probed: static files. With `RouteExistingFiles = true` every request is rout
 `{controller}/{action}` and MVC answers 404; that is what IIS's integrated pipeline does too, as far as I can tell (not
 compared with IIS), so the site's CSS isn't served on either. Not counted as a finding.
 
+### Round 2: webForCore 0.2.0
+
+All 11 probes pass on the released 0.2.0 packages (the overlay's `PackageReference`s moved from 0.1.0 to 0.2.0). The round-1 failures above were fixed in webForCore PR #16 and are kept as the record of round 1.
+
 ## Open problems
+
+Round 1 (webForCore 0.1.0); the webForCore bugs below are fixed in 0.2.0 (PR #16) and kept for the record.
 
 - [F14](../../FINDINGS.md#f14) (webForCore bug): directory redirect pre-empts routing.
