@@ -4,7 +4,7 @@ migrated projects against webForCore, run them on Kestrel and probe them.
 
 Standard library only (Python 3.11+, for tomllib).
 
-    scripts/wfc.py packages [--version 0.2.0]  # download webForCore's release packages into .packages/
+    scripts/wfc.py packages [--version 0.4.0]  # download webForCore's (and webForCore-thirdparty's) release packages into .packages/
     scripts/wfc.py list
     scripts/wfc.py fetch <id>... | --all [--reset]
     scripts/wfc.py assess <id>... | --all
@@ -45,7 +45,12 @@ WEBFORCORE = Path(os.environ.get("WEBFORCORE_DIR", ROOT.parent / "webForCore")).
 # builds restore from it (apps reference the packages, docs/MIGRATING.md section 1). WEBFORCORE_DIR is only needed by
 # apps still migrated against webForCore's source.
 WEBFORCORE_REPO = "jabba2324/webForCore"
-WEBFORCORE_VERSION = os.environ.get("WEBFORCORE_VERSION", "0.2.0")
+WEBFORCORE_VERSION = os.environ.get("WEBFORCORE_VERSION", "0.4.0")
+# Builds of third-party libraries for webForCore (WebActivatorEx, AjaxControlToolkit; CLAUDE.md), from
+# webForCore-thirdparty's releases, go in the same folder.
+THIRDPARTY_REPO = "jabba2324/webForCore-thirdparty"
+THIRDPARTY_VERSION = os.environ.get("THIRDPARTY_VERSION", "0.4.0")
+THIRDPARTY_PACKAGES = ("webForCore.WebActivatorEx", "webForCore.AjaxControlToolkit")
 PACKAGES = ROOT / ".packages"
 
 # Phase 0 of webForCore's docs/AGENT-MIGRATION.md.
@@ -119,15 +124,20 @@ def package_source():
 def download_packages():
     dest = package_source()
     dest.mkdir(parents=True, exist_ok=True)
-    for attempt in range(3):  # release asset downloads fail with 503 now and then
-        r = subprocess.run(["gh", "release", "download", f"v{WEBFORCORE_VERSION}", "--repo", WEBFORCORE_REPO,
-                            "--pattern", "*.nupkg", "--dir", str(dest), "--skip-existing"], capture_output=True, text=True)
-        if r.returncode == 0:
-            break
-        time.sleep(5)
+    ok = True
+    for repo, version in ((WEBFORCORE_REPO, WEBFORCORE_VERSION), (THIRDPARTY_REPO, THIRDPARTY_VERSION)):
+        for attempt in range(3):  # release asset downloads fail with 503 now and then
+            r = subprocess.run(["gh", "release", "download", f"v{version}", "--repo", repo,
+                                "--pattern", "*.nupkg", "--dir", str(dest), "--skip-existing"], capture_output=True, text=True)
+            if r.returncode == 0:
+                break
+            time.sleep(5)
+        if r.returncode:
+            print(f"{repo} v{version}: {r.stderr.strip()[:200]}")
+            ok = False
     count = len(list(dest.glob("*.nupkg")))
-    print(f"{dest.relative_to(ROOT)}: {count} packages" + (f" (last error: {r.stderr.strip()[:200]})" if r.returncode else ""))
-    return r.returncode == 0
+    print(f"{dest.relative_to(ROOT)}: {count} packages (webForCore {WEBFORCORE_VERSION}, webForCore-thirdparty {THIRDPARTY_VERSION})")
+    return ok
 
 
 def webforcore_used(proj):
@@ -135,7 +145,12 @@ def webforcore_used(proj):
     if "$(WEBFORCORE_DIR)" in proj.read_text(errors="replace"):
         commit = git("rev-parse", "--short=12", "HEAD", cwd=WEBFORCORE, check=False).stdout.strip()
         return f"source {commit}"
-    return f"packages {WEBFORCORE_VERSION}"
+    used = f"packages {WEBFORCORE_VERSION}"
+    # The web project or one of the solution's libraries (beside it, or one folder up).
+    projects = {proj, *proj.parent.parent.rglob("*.csproj")}
+    if any(f'Include="{p}' in f.read_text(errors="replace") for f in projects for p in THIRDPARTY_PACKAGES):
+        used += f", webForCore-thirdparty {THIRDPARTY_VERSION}"
+    return used
 
 
 def now():
@@ -474,7 +489,7 @@ def main():
     p.add_argument("ids", nargs="*")
     p.add_argument("--all", action="store_true")
     p.add_argument("--reset", action="store_true", help="fetch: discard the checkout's changes and reapply the overlay")
-    p.add_argument("--version", help="packages: the webForCore release (default: $WEBFORCORE_VERSION or 0.2.0)")
+    p.add_argument("--version", help="packages: the webForCore release (default: $WEBFORCORE_VERSION or 0.4.0; webForCore-thirdparty: $THIRDPARTY_VERSION or 0.4.0)")
     a = p.parse_args()
     if a.command == "packages":
         global WEBFORCORE_VERSION
