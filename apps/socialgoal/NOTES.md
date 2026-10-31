@@ -54,6 +54,13 @@ webForCore 0.2.0's F1 fix (`System.Configuration` per domain) doesn't cover. [F1
 On the PR's packages, ELMAH's sections load (#19) and the Google provider starts (#18): `/Account/Login` and the CSS
 pass. `/` fails on AutoMapper 3.1 ([F22](../../FINDINGS.md#f22), app/environment), as found by hand above.
 
+### Round 3: webForCore 0.4.0
+
+8 of 9 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0, and its 2 `ExcludeAssets` references for transitive Microsoft packages were removed: webForCore's packages override them since 0.3.0 (webForCore#23).
+
+Unchanged: ELMAH and the Google provider work (0.3.0), and `/` fails on AutoMapper 3.1 (F22). Its Katana
+`ExcludeAssets` references were removed.
+
 ## Open problems
 
 - [F18](../../FINDINGS.md#f18) (webForCore bug): configuration types referenced through `System.dll` reach the host's
