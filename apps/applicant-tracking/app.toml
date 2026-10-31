@@ -7,9 +7,9 @@ site = "ApplicantTracking.Web"
 project = "ApplicantTracking.Web/ApplicantTracking.Web.csproj"
 kinds = ["mvc", "owin", "identity"]
 licence = "Apache-2.0"
-status = "blocked"
+status = "migrated"
 https = true
-notes = "Builds and serves over HTTPS; the home page and static files work, but WebActivatorEx's start methods never run (F20), so Unity isn't registered and every DI controller fails. With webForCore's fix (PR), all probes pass."
+notes = "webForCore 0.4.0: passes all 10 probes (with webForCore-thirdparty 0.4.0's WebActivatorEx)."
 
 needs = ["mssql"]
 

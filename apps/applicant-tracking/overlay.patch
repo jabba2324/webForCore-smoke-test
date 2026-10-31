@@ -1,5 +1,5 @@
 diff --git a/ApplicantTracking.Data/ApplicantTracking.Data.csproj b/ApplicantTracking.Data/ApplicantTracking.Data.csproj
-index 692da18..fb464dd 100644
+index 692da18..fde88e6 100644
 --- a/ApplicantTracking.Data/ApplicantTracking.Data.csproj
 +++ b/ApplicantTracking.Data/ApplicantTracking.Data.csproj
 @@ -1,128 +1,37 @@
@@ -120,13 +120,13 @@ index 692da18..fb464dd 100644
 +
    <ItemGroup>
 -    <None Include="packages.config" />
-+    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.2.0" />
++    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.4.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -313,7 +313,7 @@ index c92c5ba..0000000
 -</packages>
 \ No newline at end of file
 diff --git a/ApplicantTracking.Domain/ApplicantTracking.Domain.csproj b/ApplicantTracking.Domain/ApplicantTracking.Domain.csproj
-index 14ef59a..26394c1 100644
+index 14ef59a..2c6ce9d 100644
 --- a/ApplicantTracking.Domain/ApplicantTracking.Domain.csproj
 +++ b/ApplicantTracking.Domain/ApplicantTracking.Domain.csproj
 @@ -1,61 +1,22 @@
@@ -378,8 +378,8 @@ index 14ef59a..26394c1 100644
    <ItemGroup>
 -    <Folder Include="Enums\" />
 -    <Folder Include="ViewModels\" />
-+    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.2.0" />
++    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.4.0" />
    </ItemGroup>
 -  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 -  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -462,10 +462,10 @@ index 0000000..14ef59a
 +</Project>
 \ No newline at end of file
 diff --git a/ApplicantTracking.Web/ApplicantTracking.Web.csproj b/ApplicantTracking.Web/ApplicantTracking.Web.csproj
-index 70da1d2..13d775e 100644
+index 70da1d2..2bed84c 100644
 --- a/ApplicantTracking.Web/ApplicantTracking.Web.csproj
 +++ b/ApplicantTracking.Web/ApplicantTracking.Web.csproj
-@@ -1,364 +1,72 @@
+@@ -1,364 +1,71 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
@@ -686,18 +686,18 @@ index 70da1d2..13d775e 100644
 -    <Compile Include="ViewModels\ManageViewModels.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 -    <Compile Include="Startup.cs" />
-+    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Web.Helpers" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.2.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.2.0" />
++    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.Helpers" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.4.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.4.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -829,11 +829,9 @@ index 70da1d2..13d775e 100644
 -      <SubType>Designer</SubType>
 -    </Content>
 -    <Content Include="Scripts\jquery-1.10.2.min.map" />
-+    <!-- Unity.Mvc, WebActivatorEx bring Microsoft's ASP.NET packages back; webForCore replaces them (docs/MIGRATING.md). -->
-+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.3" ExcludeAssets="all" />
-+    <PackageReference Include="Microsoft.AspNet.Razor" Version="3.2.3" ExcludeAssets="all" />
-+    <PackageReference Include="Microsoft.AspNet.WebPages" Version="3.2.3" ExcludeAssets="all" />
-+    <PackageReference Include="Microsoft.Web.Infrastructure" Version="1.0.0" ExcludeAssets="all" />
++    <!-- webForCore-thirdparty 0.4.0: WebActivatorEx's start methods run (the original package's never do,
++         webForCore#21); it wins over the original that the app's packages bring. -->
++    <PackageReference Include="webForCore.WebActivatorEx" Version="0.4.0" />
    </ItemGroup>
 -  <ItemGroup>
 -    <ProjectReference Include="..\ApplicantTracking.Data\ApplicantTracking.Data.csproj">
@@ -888,6 +886,7 @@ index 70da1d2..13d775e 100644
 -  </Target> -->
 -</Project>
 \ No newline at end of file
++
 +</Project>
 diff --git a/ApplicantTracking.Web/ApplicantTracking.Web.csproj.netfx b/ApplicantTracking.Web/ApplicantTracking.Web.csproj.netfx
 new file mode 100644

@@ -1,6 +1,6 @@
 # ApplicantTracking: migration notes
 
-Status: blocked (F20: WebActivatorEx's start methods never run, so Unity isn't registered). Source:
+Status: migrated (webForCore 0.4.0, all probes pass).
 https://github.com/feliperomero3/ApplicantTracking at `ff9a2eb4`. Found by searching GitHub on 2026-10-31; the repo,
 licence (Apache-2.0), web project and its `<TargetFrameworkVersion>` were checked through the GitHub API. webForCore
 0.2.0 packages.
@@ -56,6 +56,15 @@ On the PR's packages, WebActivatorEx's start method registers Unity (#21) and th
 during model generation: ApplicantTracking.Data.Identity.Domicilio: EntityType 'Domicilio' has no key defined`.
 `Domain/Models/Domicilio.cs` has no key property and the context has a `DbSet<Domicilio>`, so EF 6 rejects the model on
 .NET Framework too. Those two probes are removed (app/environment). The others pass on the PR's packages.
+
+### Round 3: webForCore 0.4.0
+
+All 10 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0, and its 4 `ExcludeAssets` references for transitive Microsoft packages were removed: webForCore's packages override them since 0.3.0 (webForCore#23).
+
+`webForCore.WebActivatorEx` (webForCore-thirdparty 0.4.0) added to the web project: WebActivatorEx's start method registers Unity
+and all 10 probes pass. webForCore's documented workaround was tried as well, without the third-party package:
+`UnityMvcActivator.Start()` called from `Application_Start` (`docs/MIGRATING.md` section 3). That passes all 10 too, so
+the workaround shows no problem of its own here. The committed overlay uses the third-party package (CLAUDE.md).
 
 ## Open problems
 
