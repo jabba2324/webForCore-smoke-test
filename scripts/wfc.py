@@ -203,6 +203,10 @@ def fetch(app, reset=False):
         if r.returncode:
             return record(app["id"], "fetch", "fail", summary=f"no ref {ref}", error=r.stderr[-2000:])
     git("clean", "-fdx", "-e", "bin_dotnet", "-e", "obj", cwd=dest, check=False)
+    # Files the migration deletes but whose content shouldn't be in the patch (the app's checked-in binaries).
+    for pattern in app.get("remove", []):
+        for f in dest.glob(pattern):
+            f.unlink()
     commit = git("rev-parse", "HEAD", cwd=dest).stdout.strip()
     patch = app_dir(app["id"]) / "overlay.patch"
     if patch.exists():
@@ -217,7 +221,7 @@ def save_overlay(app):
     # Build output and files webForCore generates at run time aren't part of the migration. The apps' own
     # .gitignore files predate bin_dotnet.
     generated = [":(exclude,glob)**/bin_dotnet/**", ":(exclude,glob)**/obj/**", ":(exclude,glob)**/App_Data/machine.config",
-                 ":(exclude,glob)**/logs/W3SVC*/**"]
+                 ":(exclude,glob)**/logs/W3SVC*/**"] + [f":(exclude,glob){p}" for p in app.get("remove", [])]
     git("reset", "-q", cwd=dest, check=False)  # drops intent-to-add entries from an earlier save
     # Deletions must stay unstaged, or they drop out of the diff.
     git("add", "-N", "--ignore-removal", "--", ".", *generated, cwd=dest)

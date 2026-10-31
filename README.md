@@ -87,6 +87,7 @@ as a pass: note it in `NOTES.md` and `FINDINGS.md`, and fix webForCore instead.
 | `status` | `candidate` (listed, unchecked), `verified` (repo, ref, licence and paths checked), `migrating`, `migrated` (builds and passes its probes), `blocked` (needs something webForCore doesn't provide), `rejected` (not a fit; kept so it isn't added again) |
 | `needs` | Services from `services/compose.yml`: `mssql`, `mysql`, `postgres` |
 | `env` | Extra environment for the server process (a table) |
+| `remove` | Globs of files `fetch` deletes before applying the overlay, kept out of the patch (the app's checked-in DLLs) |
 | `[[probes]]` | `path`, `status` (default 200), `contains` (text that proves the page rendered) |
 | `notes` | One line for the summary; the detail goes in `NOTES.md` |
 
