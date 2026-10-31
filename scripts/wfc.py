@@ -186,7 +186,8 @@ def save_overlay(app):
     generated = [":(exclude,glob)**/bin_dotnet/**", ":(exclude,glob)**/obj/**", ":(exclude,glob)**/App_Data/machine.config",
                  ":(exclude,glob)**/logs/W3SVC*/**"]
     git("reset", "-q", cwd=dest, check=False)  # drops intent-to-add entries from an earlier save
-    git("add", "-A", "-N", "--", ".", *generated, cwd=dest)
+    # Deletions must stay unstaged, or they drop out of the diff.
+    git("add", "-N", "--ignore-removal", "--", ".", *generated, cwd=dest)
     diff = git("diff", "--binary", "--", ".", *generated, cwd=dest).stdout
     p = app_dir(app["id"]) / "overlay.patch"
     if diff:
