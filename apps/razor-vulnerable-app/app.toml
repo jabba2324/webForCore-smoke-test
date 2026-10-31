@@ -7,8 +7,8 @@ site = ""
 project = "RazorVulnerableApp.csproj"
 kinds = ["mvc"]
 licence = "MIT"
-status = "verified"
-notes = "Deliberately vulnerable MVC 5 app (Razor injection); tiny, no database. Useful to check that webForCore behaves like IIS on hostile input."
+status = "rejected"
+notes = "Rejected: a deliberately vulnerable demo whose POST compiles and runs any Razor template it is sent (remote code execution by design). One controller plus RazorEngine; not worth running."
 
 # The first request compiles the site, so it gets 120 s.
 # [[probes]]

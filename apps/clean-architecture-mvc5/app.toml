@@ -7,11 +7,27 @@ site = ""
 project = "CleanArchitectureAspNetMvc5.csproj"
 kinds = ["mvc"]
 licence = "BSD-3-Clause"
-status = "verified"
-notes = "Small single-project MVC 5 sample app (.NET 4.5) with EF 6. Small and self-contained: a good early target."
+status = "blocked"
+notes = "Builds and runs with no app code changes; /Products and /Contact (controllers named like their feature folders, RouteExistingFiles = true) get a 301 to the folder from webForCore (F14). Everything else passes."
 
 # The first request compiles the site, so it gets 120 s.
-# [[probes]]
-# path = "/"
-# status = 200
-# contains = ""
+[[probes]]
+path = "/"
+contains = "<h2>Home</h2>"
+
+[[probes]]
+path = "/Products"
+contains = "Ice Cream"
+
+[[probes]]
+path = "/Products/Details/2"
+contains = "Cake"
+
+[[probes]]
+path = "/Contact"
+contains = "<h2>Contact</h2>"
+
+# A view file requested directly: IIS refuses .cshtml when webpages:Enabled is false.
+[[probes]]
+path = "/Home/Views/Index.cshtml"
+status = 404

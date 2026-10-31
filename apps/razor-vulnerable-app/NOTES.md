@@ -1,11 +1,14 @@
 # RazorVulnerableApp: migration notes
 
-Status: verified. Source: https://github.com/cnotin/RazorVulnerableApp at `780350f7`. Found by searching GitHub on 2026-10-31; the
+Status: rejected. Source: https://github.com/cnotin/RazorVulnerableApp at `780350f7`. Found by searching GitHub on 2026-10-31; the
 repo, licence (MIT), web project and its `<TargetFrameworkVersion>` were checked through the GitHub API.
 
 ## Assessment
 
-(Phase 0: frameworks, target framework, blockers with file:line, dependencies in three groups, go/no-go.)
+Rejected after fetching it: `Controllers/HomeController.cs` passes the posted `razorTpl` to `RazorEngine.Razor.Parse`, so
+anyone who can reach the app runs arbitrary C# (its README says so: a server-side template injection demo). It is one
+controller and one view on MVC 5 plus RazorEngine 3.10, so it adds little that the other MVC apps don't cover, and
+running it, even bound to 127.0.0.1, isn't worth it. Not migrated.
 
 ## Migration
 
