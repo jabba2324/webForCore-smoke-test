@@ -6,3 +6,4 @@ Appended by `scripts/wfc.py`, one line per stage run.
 - 2026-10-31T10:48:21+00:00 **build**: pass
 - 2026-10-31T10:49:09+00:00 **smoke**: fail (8/9 probes)
 - 2026-10-31T10:50:21+00:00 **smoke**: pass (9/9 probes)
+- 2026-10-31T10:58:21+00:00 **assess**: pass (no blockers found)
