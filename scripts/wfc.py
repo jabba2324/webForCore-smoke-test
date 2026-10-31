@@ -56,9 +56,10 @@ PACKAGES = ROOT / ".packages"
 # Phase 0 of webForCore's docs/AGENT-MIGRATION.md.
 BLOCKERS = [
     ("windows-auth", r'mode="Windows"|WindowsIdentity|WindowsPrincipal|<identity\s+impersonate'),
-    ("wcf-hosting", r"ServiceHost\b|<services>"),
+    ("wcf-hosting", r"ServiceHost\b|<system\.serviceModel>(?:(?!</system\.serviceModel>)[\s\S])*?<services>"),
     ("linq-to-sql", r"System\.Data\.Linq|LinqDataSource"),
-    ("ef-objectcontext", r"\bObjectContext\b|EntityDataSource"),
+    # EF 1-4's ObjectContext (System.Data.Objects); EF 6's (System.Data.Entity.Core.Objects) runs on .NET.
+    ("ef-objectcontext", r"System\.Data\.Objects\b|EntityDataSource"),
     ("web-references", r"App_WebReferences"),
     ("windows-only", r"Microsoft\.Win32\.Registry|\[ComImport\]|Marshal\.GetActiveObject|System\.Messaging|Microsoft\.Office\.Interop"),
     ("metafiles", r"\bMetafile\b"),
