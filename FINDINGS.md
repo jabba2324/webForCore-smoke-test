@@ -11,7 +11,7 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 | [F1](#f1) | .NET Framework libraries get a second `ConfigurationManager` that can't read web.config | webForCore bug | eshop-legacy-mvc, eshop-legacy-webforms, bonobo-git-server | [#1](https://github.com/jabba2324/webForCore/issues/1) |
 | [F2](#f2) | `CacheDependency` on one file under two spellings throws on Linux (bundling) | webForCore bug | eshop-legacy-mvc | [#2](https://github.com/jabba2324/webForCore/issues/2) |
 | [F3](#f3) | `AppDomain.CurrentDomain.BaseDirectory` is `bin_dotnet/`, not the site root | webForCore bug | eshop-legacy-mvc | [#3](https://github.com/jabba2324/webForCore/issues/3) |
-| [F4](#f4) | W3C logs are written inside the site and served over HTTP | webForCore bug (security) | every app using `AddWebForms()` (seen on 7) | [draft advisory](https://github.com/jabba2324/webForCore/security/advisories/GHSA-vh52-xcrc-hq5h) (private) |
+| [F4](#f4) | W3C logs are written inside the site and served over HTTP | webForCore bug (security) | every app using `AddWebForms()` (seen on 10) | [draft advisory](https://github.com/jabba2324/webForCore/security/advisories/GHSA-vh52-xcrc-hq5h) (private) |
 | [F5](#f5) | Third-party packages bring Microsoft's ASP.NET packages back transitively (CS0433) | guide gap | eshop-legacy-mvc, bonobo-git-server | [#4](https://github.com/jabba2324/webForCore/issues/4) |
 | [F6](#f6) | A `lib/net45`-only package with a `build/` folder restores with no assembly | guide gap | eshop-legacy-mvc, eshop-legacy-webforms | [#5](https://github.com/jabba2324/webForCore/issues/5) |
 | [F7](#f7) | Packages that must be upgraded: EF 6.2 → 6.4+, Newtonsoft.Json 12 → 13 | guide gap | eshop-legacy-mvc, eshop-legacy-webforms, bonobo-git-server | [#6](https://github.com/jabba2324/webForCore/issues/6) |
@@ -23,6 +23,7 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 | [F13](#f13) | `<handlers>` entries whose `path` starts with `/` never match | webForCore bug | miniblog | [#12](https://github.com/jabba2324/webForCore/issues/12) |
 
 | [F14](#f14) | The trailing-slash 301 for a directory pre-empts routing with `RouteExistingFiles = true` | webForCore bug | clean-architecture-mvc5 | [#13](https://github.com/jabba2324/webForCore/issues/13) |
+| [F15](#f15) | The VS template's social login packages (Facebook, Google, MicrosoftAccount, Twitter) aren't in webForCore | guide gap | aspnetdocs-mvcmovie | [#14](https://github.com/jabba2324/webForCore/issues/14) |
 ---
 
 ## F1
@@ -351,4 +352,25 @@ consequence isn't. Raised as [#8](https://github.com/jabba2324/webForCore/issues
 - **Suggested fix:** skip the courtesy redirect when the application's `RouteTable.Routes.RouteExistingFiles` is true and
   a route matches the URL (or leave directories to System.Web, which runs the redirect itself when no route takes the
   request).
+
+## F15
+
+**The Visual Studio template's social login packages aren't in webForCore.** Guide gap. Raised as [#14](https://github.com/jabba2324/webForCore/issues/14).
+
+- **Apps:** aspnetdocs-mvcmovie. Every app made from the Visual Studio 2013-2019 "MVC" or "Web Forms" template with
+  individual accounts references `Microsoft.Owin.Security.Facebook`, `.Google`, `.MicrosoftAccount` and `.Twitter`, and
+  `App_Start/Startup.Auth.cs` has `using Microsoft.Owin.Security.Google;` even with the providers commented out.
+- **Error:** `CS0234: The type or namespace name 'Google' does not exist in the namespace 'Microsoft.Owin.Security'`
+  once the converter drops the Katana packages webForCore replaces.
+- **What the guide says:** `docs/MIGRATING.md` section 3 lists OWIN security as Cookies and OAuth; `docs/NAMESPACES.md`
+  likewise. Neither says what to do with the other Katana packages.
+- **What worked:** keep the original 3.0.1 packages and exclude their Katana dependencies, so webForCore's
+  `Microsoft.Owin` 4.2.3 is the only one:
+  ```xml
+  <PackageReference Include="Microsoft.Owin.Security.Google" Version="3.0.1" />
+  <PackageReference Include="Microsoft.Owin" Version="3.0.1" ExcludeAssets="all" />
+  <PackageReference Include="Microsoft.Owin.Security" Version="3.0.1" ExcludeAssets="all" />
+  ```
+  It builds and the app runs; the providers themselves weren't exercised (they need the external services). Lifting
+  them (they're in the same Katana repository webForCore lifts from) or documenting this would cover the template.
 

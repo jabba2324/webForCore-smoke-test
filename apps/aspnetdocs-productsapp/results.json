@@ -1,0 +1,110 @@
+{
+  "id": "aspnetdocs-productsapp",
+  "stages": {
+    "assess": {
+      "at": "2026-10-31T10:54:18+00:00",
+      "blockers": {},
+      "kinds": [
+        "webapi"
+      ],
+      "libraries": [],
+      "notices": {},
+      "status": "pass",
+      "summary": "no blockers found",
+      "target_frameworks": [
+        "v4.6.1"
+      ]
+    },
+    "build": {
+      "at": "2026-10-31T10:54:30+00:00",
+      "error_count": 0,
+      "errors": [],
+      "log": "apps/aspnetdocs-productsapp/logs/build.log",
+      "seconds": 0,
+      "status": "pass",
+      "summary": null,
+      "webforcore": "packages 0.1.0"
+    },
+    "fetch": {
+      "at": "2026-10-31T10:53:35+00:00",
+      "commit": "546ffe728556a60591b93ab4fcbd4437f71e2449",
+      "overlay": false,
+      "status": "pass"
+    },
+    "smoke": {
+      "at": "2026-10-31T10:57:39+00:00",
+      "checks": [
+        {
+          "ms": 686,
+          "ok": true,
+          "path": "/api/products",
+          "status": 200
+        },
+        {
+          "ms": 25,
+          "ok": true,
+          "path": "/api/products/2",
+          "status": 200
+        },
+        {
+          "ms": 15,
+          "ok": true,
+          "path": "/api/products?category=Hardware",
+          "status": 200
+        },
+        {
+          "ms": 5,
+          "ok": true,
+          "path": "/api/products/99",
+          "status": 404
+        },
+        {
+          "ms": 6,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "ms": 1,
+          "ok": true,
+          "path": "/packages.config",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/bin_dotnet/ProductsApp.dll",
+          "status": 404
+        },
+        {
+          "ms": 73,
+          "ok": false,
+          "path": "/logs/W3SVC1/u_ex20261031.0000.txt",
+          "status": 200,
+          "title": "#Version: 1.0\n#Start-Date: 2026-10-31 10:55:54\n#Fields: date time c-ip cs-username s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status time-taken cs(User-Agent) cs(Referer)\n2026-10-31 10:55:52 127.0.0.1 - 127.0.0.1 59745 GET /api/products - 200 1026.5947 webForCore-smoke-test -\n2026-10-31 10:55"
+        }
+      ],
+      "log": "apps/aspnetdocs-productsapp/logs/server.log",
+      "status": "fail",
+      "summary": "10/11 probes"
+    }
+  }
+}

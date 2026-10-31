@@ -1,6 +1,6 @@
 # AspNetDocs samples (Contoso University, Wingtip Toys, Web API tutorials): migration notes
 
-Status: candidate. Source: https://github.com/dotnet/AspNetDocs
+Status: split into `apps/aspnetdocs-*`, the repo's three complete web projects (the other samples are snippets), so this entry is closed as rejected. Source: https://github.com/dotnet/AspNetDocs
 
 ## Assessment
 
