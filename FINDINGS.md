@@ -1,9 +1,9 @@
 # Findings
 
-One entry per distinct problem found while migrating apps. See CLAUDE.md for the format. webForCore was at
-`4ec57209` (0.1.0) for every entry unless the entry says otherwise. Repro sites are small enough to paste: a
-`Program.cs` as in `docs/MIGRATING.md` section 4, an SDK project with webForCore's "Always" references, and the page
-shown.
+One entry per distinct problem found while migrating apps. See CLAUDE.md for the format. Every entry was found
+with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 release packages (tag `v0.1.0`,
+`2942b694`), unless the entry says otherwise. Repro sites are small enough to paste: a `Program.cs` as in
+`docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
 
 | # | Problem | Classification | Apps |
 | --- | --- | --- | --- |
@@ -126,6 +126,9 @@ shown.
   with its query string, user agents and referrers. IIS writes logs to `%SystemDrive%\inetpub\logs\LogFiles`, outside
   any site, and `logs` isn't a hidden segment.
 - **Repro:** the minimal site from F1, request any page, then `curl http://127.0.0.1:5000/logs/W3SVC1/u_ex$(date -u +%Y%m%d).0000.txt`.
+- **Cause:** `WebFormsServicesOptions.LogDirectory` defaults to `Path.Combine(AppContext.BaseDirectory, "..", "logs", "W3SVC1")`
+  (`src/WebFormsForCore.Web/WebFormsForCore/AspNetCoreHosting/IIS/IISServices.cs:33`), and `AppContext.BaseDirectory`
+  is `bin_dotnet/`, a direct subfolder of the site.
 - **Fix belongs in webForCore:** default to a folder outside the site (the systemd unit's `LogsDirectory`, or
   `/var/log/webforcore/<site>`), or refuse to serve the log folder. The runner now probes the first log file as a
   forbidden path, so every app's smoke shows it.

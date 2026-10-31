@@ -1,7 +1,9 @@
 # eShopLegacyMVC (eShopModernizing): migration notes
 
 Status: blocked (webForCore bug F1). Source: https://github.com/dotnet-architecture/eShopModernizing at `63bc9ec4`
-(the last commit; the repo is archived). webForCore at `4ec57209`.
+(the last commit; the repo is archived). webForCore 0.1.0, from its GitHub release packages (first migrated
+against the source at `4ec57209`, which the release differs from only in packaging; every result below was
+repeated on the packages).
 
 ## Assessment
 
@@ -28,11 +30,11 @@ Status: blocked (webForCore bug F1). Source: https://github.com/dotnet-architect
 ## Migration
 
 1. `eShopLegacyMVC.csproj` → `eShopLegacyMVC.csproj.netfx`; new SDK-style project per `docs/MIGRATING.md` section 2,
-   with webForCore's "Always" set, MVC, Helpers, Web API WebHost and Optimization as project references through
-   `$(WEBFORCORE_DIR)`. The old `<Compile>` list equals the `*.cs` glob, so nothing is removed. `GenerateAssemblyInfo`
+   with the `webForCore` package (the "Always" set), `webForCore.Web.Mvc`, `.Web.Helpers`, `.Web.Http.WebHost` and
+   `.Web.Optimization`, 0.1.0 (`docs/MIGRATING.md` section 1; the runner restores them from `.packages/`). The old `<Compile>` list equals the `*.cs` glob, so nothing is removed. `GenerateAssemblyInfo`
    off (the app has `Properties/AssemblyInfo.cs`). `packages.config` removed.
 2. `eShopLegacy.Utilities.csproj` → `.csproj.netfx`; new SDK-style `net11.0` library referencing webForCore's
-   `WebFormsForCore.Serialization.Formatters`, and `Serializing.cs` switched to
+   `webForCore.Serialization.Formatters` package, and `Serializing.cs` switched to
    `WebFormsForCore.Serialization.Formatters.Binary` (`docs/NAMESPACES.md`: .NET 11's BinaryFormatter throws).
 3. Packages: EntityFramework 6.2.0 → 6.5.1 (6.2 has no .NET build), Newtonsoft.Json 12.0.1 → 13.0.4 (NU1605 against
    webForCore's 13.0.4). [F7](../../FINDINGS.md#f7)

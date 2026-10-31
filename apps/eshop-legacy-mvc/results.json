@@ -17,13 +17,14 @@
       ]
     },
     "build": {
-      "at": "2026-10-31T10:06:48+00:00",
+      "at": "2026-10-31T10:22:18+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/eshop-legacy-mvc/logs/build.log",
-      "seconds": 20,
+      "seconds": 1,
       "status": "pass",
-      "summary": null
+      "summary": null,
+      "webforcore": "packages 0.1.0"
     },
     "fetch": {
       "at": "2026-10-31T10:06:28+00:00",
@@ -32,11 +33,11 @@
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-10-31T10:06:21+00:00",
+      "at": "2026-10-31T10:24:33+00:00",
       "checks": [
         {
           "expected_text": ".NET Bot Black Hoodie",
-          "ms": 1241,
+          "ms": 838,
           "ok": false,
           "path": "/",
           "status": 500,
@@ -44,7 +45,7 @@
         },
         {
           "expected_text": ".NET Bot Black Hoodie",
-          "ms": 6,
+          "ms": 5,
           "ok": false,
           "path": "/Catalog/Details/1",
           "status": 500,
@@ -52,7 +53,7 @@
         },
         {
           "expected_text": "__RequestVerificationToken",
-          "ms": 4,
+          "ms": 7,
           "ok": false,
           "path": "/Catalog/Create",
           "status": 500,
@@ -67,7 +68,7 @@
         },
         {
           "expected_text": "\"Brand\":\"Azure\"",
-          "ms": 3,
+          "ms": 2,
           "ok": false,
           "path": "/api/brands",
           "status": 500,
@@ -75,7 +76,7 @@
         },
         {
           "expected_text": "Azure",
-          "ms": 3,
+          "ms": 2,
           "ok": false,
           "path": "/api/brands/1",
           "status": 500,
@@ -91,57 +92,57 @@
         },
         {
           "expected_text": "esh-",
-          "ms": 3,
+          "ms": 2,
           "ok": false,
           "path": "/Content/css",
           "status": 500,
           "title": "Type 'System.Web.Configuration.SessionStateSection' does not inherit from 'System.Configuration.IConfigurationSectionHandler'."
         },
         {
-          "ms": 3,
+          "ms": 2,
           "ok": false,
           "path": "/Images/brand.png",
           "status": 500,
           "title": "Type 'System.Web.Configuration.SessionStateSection' does not inherit from 'System.Configuration.IConfigurationSectionHandler'."
         },
         {
-          "ms": 3,
+          "ms": 14,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 5,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 5,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 5,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 5,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 6,
           "ok": true,
           "path": "/bin_dotnet/eShopLegacyMVC.dll",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 10,
           "ok": false,
           "path": "/logs/W3SVC1/u_ex20261031.0000.txt",
           "status": 500,
