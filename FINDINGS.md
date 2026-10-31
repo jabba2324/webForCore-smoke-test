@@ -1,27 +1,28 @@
 # Findings
 
-One entry per distinct problem found while migrating apps. See CLAUDE.md for the format. Every entry was found
+One entry per distinct problem found while migrating apps. webForCore bugs and guide gaps are raised on
+[jabba2324/webForCore](https://github.com/jabba2324/webForCore/issues); security problems as a draft security advisory. See CLAUDE.md for the format. Every entry was found
 with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 release packages (tag `v0.1.0`,
 `2942b694`), unless the entry says otherwise. Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
 
-| # | Problem | Classification | Apps |
-| --- | --- | --- | --- |
-| [F1](#f1) | .NET Framework libraries get a second `ConfigurationManager` that can't read web.config | webForCore bug | eshop-legacy-mvc, eshop-legacy-webforms |
-| [F2](#f2) | `CacheDependency` on one file under two spellings throws on Linux (bundling) | webForCore bug | eshop-legacy-mvc |
-| [F3](#f3) | `AppDomain.CurrentDomain.BaseDirectory` is `bin_dotnet/`, not the site root | webForCore bug | eshop-legacy-mvc |
-| [F4](#f4) | W3C logs are written inside the site and served over HTTP | webForCore bug (security) | every app using `AddWebForms()` |
-| [F5](#f5) | Third-party packages bring Microsoft's ASP.NET packages back transitively (CS0433) | guide gap | eshop-legacy-mvc |
-| [F6](#f6) | A `lib/net45`-only package with a `build/` folder restores with no assembly | guide gap | eshop-legacy-mvc, eshop-legacy-webforms |
-| [F7](#f7) | Packages that must be upgraded: EF 6.2 → 6.4+, Newtonsoft.Json 12 → 13 | guide gap | eshop-legacy-mvc, eshop-legacy-webforms |
-| [F8](#f8) | `HttpUtility` in app code is CS0433 outside webForCore's repository | webForCore bug | eshop-legacy-webforms |
-| [F9](#f9) | Data controls with `ItemType` need System.Web.DynamicData, which isn't built | documented gap (consequence undocumented) | eshop-legacy-webforms |
+| # | Problem | Classification | Apps | Raised |
+| --- | --- | --- | --- | --- |
+| [F1](#f1) | .NET Framework libraries get a second `ConfigurationManager` that can't read web.config | webForCore bug | eshop-legacy-mvc, eshop-legacy-webforms | [#1](https://github.com/jabba2324/webForCore/issues/1) |
+| [F2](#f2) | `CacheDependency` on one file under two spellings throws on Linux (bundling) | webForCore bug | eshop-legacy-mvc | [#2](https://github.com/jabba2324/webForCore/issues/2) |
+| [F3](#f3) | `AppDomain.CurrentDomain.BaseDirectory` is `bin_dotnet/`, not the site root | webForCore bug | eshop-legacy-mvc | [#3](https://github.com/jabba2324/webForCore/issues/3) |
+| [F4](#f4) | W3C logs are written inside the site and served over HTTP | webForCore bug (security) | every app using `AddWebForms()` | [draft advisory](https://github.com/jabba2324/webForCore/security/advisories/GHSA-vh52-xcrc-hq5h) (private) |
+| [F5](#f5) | Third-party packages bring Microsoft's ASP.NET packages back transitively (CS0433) | guide gap | eshop-legacy-mvc | [#4](https://github.com/jabba2324/webForCore/issues/4) |
+| [F6](#f6) | A `lib/net45`-only package with a `build/` folder restores with no assembly | guide gap | eshop-legacy-mvc, eshop-legacy-webforms | [#5](https://github.com/jabba2324/webForCore/issues/5) |
+| [F7](#f7) | Packages that must be upgraded: EF 6.2 → 6.4+, Newtonsoft.Json 12 → 13 | guide gap | eshop-legacy-mvc, eshop-legacy-webforms | [#6](https://github.com/jabba2324/webForCore/issues/6) |
+| [F8](#f8) | `HttpUtility` in app code is CS0433 outside webForCore's repository | webForCore bug | eshop-legacy-webforms | [#7](https://github.com/jabba2324/webForCore/issues/7) |
+| [F9](#f9) | Data controls with `ItemType` need System.Web.DynamicData, which isn't built | documented gap (consequence undocumented) | eshop-legacy-webforms | [#8](https://github.com/jabba2324/webForCore/issues/8) |
 
 ---
 
 ## F1
 
-**.NET Framework libraries get a second `ConfigurationManager` that can't read web.config.** webForCore bug.
+**.NET Framework libraries get a second `ConfigurationManager` that can't read web.config.** webForCore bug. Raised as [#1](https://github.com/jabba2324/webForCore/issues/1).
 
 - **Apps:** eshop-legacy-mvc, eshop-legacy-webforms (`Microsoft.AspNet.SessionState.SessionStateModule` 1.1.0, which web.config's
   `<system.webServer><modules>` puts in place of the session module). Likely any `net4x` library that calls
@@ -62,7 +63,7 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 
 ## F2
 
-**`CacheDependency` on one file under two spellings throws on Linux.** webForCore bug.
+**`CacheDependency` on one file under two spellings throws on Linux.** webForCore bug. Raised as [#2](https://github.com/jabba2324/webForCore/issues/2).
 
 - **Apps:** eshop-legacy-mvc: `@Styles.Render`/`@Scripts.Render` in `_Layout.cshtml` failed when two first requests
   rendered the bundles at once (`System.Web.Optimization.HttpContextCache.Put` → `MapPathBasedVirtualPathProvider.GetCacheDependency`).
@@ -99,7 +100,7 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 ## F3
 
 **`AppDomain.CurrentDomain.BaseDirectory` is `bin_dotnet/`, not the site root.** webForCore bug (not in
-`docs/NAMESPACES.md` or `docs/IIS-COMPATIBILITY.md`).
+`docs/NAMESPACES.md` or `docs/IIS-COMPATIBILITY.md`). Raised as [#3](https://github.com/jabba2324/webForCore/issues/3).
 
 - **Apps:** eshop-legacy-mvc: `CatalogDBInitializer.ExecuteScript` reads
   `Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Models/Infrastructure/dbo.catalog_hilo.Sequence.sql")`.
@@ -117,7 +118,7 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 
 ## F4
 
-**W3C logs are written inside the site and served over HTTP.** webForCore bug, with security impact.
+**W3C logs are written inside the site and served over HTTP.** webForCore bug, with security impact. Raised as [draft advisory](https://github.com/jabba2324/webForCore/security/advisories/GHSA-vh52-xcrc-hq5h) (private).
 
 - **Apps:** every app whose `Program.cs` calls `builder.Services.AddWebForms()` with the defaults, as
   `docs/MIGRATING.md` section 4 says. Found on eshop-legacy-mvc and confirmed on a minimal site.
@@ -135,7 +136,7 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 
 ## F5
 
-**Third-party packages bring Microsoft's ASP.NET packages back transitively.** Guide gap.
+**Third-party packages bring Microsoft's ASP.NET packages back transitively.** Guide gap. Raised as [#4](https://github.com/jabba2324/webForCore/issues/4).
 
 - **Apps:** eshop-legacy-mvc: `Autofac.Mvc5` 4.0.2 depends on `Microsoft.AspNet.Mvc` 5.1.0 (and through it Razor 3.1,
   WebPages 3.1, Microsoft.Web.Infrastructure 1.0); `Autofac.WebApi2` 6.0.1 on `Microsoft.AspNet.WebApi.Core` 5.2.0 and
@@ -157,7 +158,7 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 
 ## F6
 
-**A `lib/net45`-only package with a `build/` folder restores with no assembly.** Guide gap.
+**A `lib/net45`-only package with a `build/` folder restores with no assembly.** Guide gap. Raised as [#5](https://github.com/jabba2324/webForCore/issues/5).
 
 - **Apps:** eshop-legacy-mvc: `Microsoft.ApplicationInsights.Web` 2.9.1 (`lib/net45/Microsoft.AI.Web.dll`,
   `build/Microsoft.ApplicationInsights.Web.targets`), named by web.config's `ApplicationInsightsWebTracking` module.
@@ -177,7 +178,7 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 
 ## F7
 
-**Packages that must be upgraded.** Guide gap (small).
+**Packages that must be upgraded.** Guide gap (small). Raised as [#6](https://github.com/jabba2324/webForCore/issues/6).
 
 - **Apps:** eshop-legacy-mvc.
 - `EntityFramework` 6.2.0 has only `net40`/`net45` builds; on .NET it needs 6.4 or later (the guide's "EntityFramework
@@ -190,7 +191,7 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 
 ## F8
 
-**`HttpUtility` in app code is CS0433 outside webForCore's repository.** webForCore bug.
+**`HttpUtility` in app code is CS0433 outside webForCore's repository.** webForCore bug. Raised as [#7](https://github.com/jabba2324/webForCore/issues/7).
 
 - **Apps:** eshop-legacy-webforms (`ViewSwitcher.ascx.cs:39`, `HttpUtility.UrlEncode`), the Visual Studio Web Forms
   template's own code. Any compiled code (code-behind, controllers, libraries) that names `HttpUtility`.
@@ -214,7 +215,7 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 ## F9
 
 **Data controls with `ItemType` need System.Web.DynamicData, which isn't built.** Documented gap, but the
-consequence isn't.
+consequence isn't. Raised as [#8](https://github.com/jabba2324/webForCore/issues/8).
 
 - **Apps:** eshop-legacy-webforms: `Default.aspx`'s `<asp:ListView ... ItemType="eShopLegacyWebForms.Models.CatalogItem">`.
 - **Error:** `FileNotFoundException: Could not load file or assembly 'System.Web.DynamicData, Version=4.0.0.0,
