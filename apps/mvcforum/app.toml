@@ -2,15 +2,50 @@
 
 name = "MVCForum"
 repo = "https://github.com/YodasMyDad/mvcforum"
-ref = ""
-site = ""
+ref = "8ce337990e079950113dae594f9407bf04854ed5"
+site = "MVCForum.Website"
+project = "MVCForum.Website/MvcForum.Web.csproj"
 kinds = ["mvc"]
-licence = ""
-status = "candidate"
+licence = "MIT"
+status = "blocked"
+notes = "Builds; every request fails on configSource files in a subfolder (F28). Past it (by hand), relaxedUrlToFileSystemMapping makes every MapPath invalid (F29); past that, every probe passes."
 needs = ["mssql"]
 
 # The first request compiles the site, so it gets 120 s.
-# [[probes]]
-# path = "/"
-# status = 200
-# contains = ""
+# The first request compiles the site and EF migrations create and seed the database (an example category, a
+# "Read Me" topic, an admin), so it gets 120 s.
+[[probes]]
+path = "/"
+contains = "Read Me"
+
+[[probes]]
+path = "/thread/read-me/"
+contains = "Read Me"
+
+[[probes]]
+path = "/cat/example-category/"
+contains = "Example Category"
+
+# Forms.
+[[probes]]
+path = "/members/logon/"
+contains = "Log On"
+
+[[probes]]
+path = "/members/register/"
+contains = "__RequestVerificationToken"
+
+# RSS feed (an MVC action returning XML).
+[[probes]]
+path = "/home/latestrss/"
+contains = "Latest Forum Discussions"
+
+# Web API 2 attribute route: POST only, so a GET is Web API's JSON 405.
+[[probes]]
+path = "/api/TinyMce/UploadImage"
+status = 405
+contains = "does not support http method 'GET'"
+
+[[probes]]
+path = "/Themes/Metro/Content/Styles/Theme.min.css"
+contains = "form-control"
