@@ -1,0 +1,2856 @@
+diff --git a/source/SocialGoal.Core/SocialGoal.Core.csproj b/source/SocialGoal.Core/SocialGoal.Core.csproj
+index 160545d..1ea3905 100644
+--- a/source/SocialGoal.Core/SocialGoal.Core.csproj
++++ b/source/SocialGoal.Core/SocialGoal.Core.csproj
+@@ -1,53 +1,22 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++<Project Sdk="Microsoft.NET.Sdk">
++  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is SocialGoal.Core.csproj.netfx. -->
+   <PropertyGroup>
+-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+-    <ProjectGuid>{B1053A2D-A1EA-412F-BA95-19CE794F8891}</ProjectGuid>
+-    <OutputType>Library</OutputType>
+-    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <TargetFramework>net11.0</TargetFramework>
+     <RootNamespace>SocialGoal.Core</RootNamespace>
+     <AssemblyName>SocialGoal.Core</AssemblyName>
+-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+-    <FileAlignment>512</FileAlignment>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+-    <DebugSymbols>true</DebugSymbols>
+-    <DebugType>full</DebugType>
+-    <Optimize>false</Optimize>
+-    <OutputPath>bin\Debug\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+-    <DebugType>pdbonly</DebugType>
+-    <Optimize>true</Optimize>
+-    <OutputPath>bin\Release\</OutputPath>
+-    <DefineConstants>TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
++    <NoWarn>$(NoWarn);NU1701</NoWarn>
+   </PropertyGroup>
++
+   <ItemGroup>
+-    <Reference Include="System" />
+-    <Reference Include="System.Core" />
+-    <Reference Include="System.Xml.Linq" />
+-    <Reference Include="System.Data.DataSetExtensions" />
+-    <Reference Include="Microsoft.CSharp" />
+-    <Reference Include="System.Data" />
+-    <Reference Include="System.Xml" />
++    <Compile Remove="bin/**;obj/**" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <Compile Include="Common\ValidationResult.cs" />
+-    <Compile Include="Properties\AssemblyInfo.cs" />
++    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.2.0" />
+   </ItemGroup>
+-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+-       Other similar extension points exist, see Microsoft.Common.targets.
+-  <Target Name="BeforeBuild">
+-  </Target>
+-  <Target Name="AfterBuild">
+-  </Target>
+-  -->
+-</Project>
+\ No newline at end of file
++
++</Project>
+diff --git a/source/SocialGoal.Core/SocialGoal.Core.csproj.netfx b/source/SocialGoal.Core/SocialGoal.Core.csproj.netfx
+new file mode 100644
+index 0000000..160545d
+--- /dev/null
++++ b/source/SocialGoal.Core/SocialGoal.Core.csproj.netfx
+@@ -0,0 +1,53 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++  <PropertyGroup>
++    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
++    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
++    <ProjectGuid>{B1053A2D-A1EA-412F-BA95-19CE794F8891}</ProjectGuid>
++    <OutputType>Library</OutputType>
++    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <RootNamespace>SocialGoal.Core</RootNamespace>
++    <AssemblyName>SocialGoal.Core</AssemblyName>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
++    <FileAlignment>512</FileAlignment>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
++    <DebugSymbols>true</DebugSymbols>
++    <DebugType>full</DebugType>
++    <Optimize>false</Optimize>
++    <OutputPath>bin\Debug\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
++    <DebugType>pdbonly</DebugType>
++    <Optimize>true</Optimize>
++    <OutputPath>bin\Release\</OutputPath>
++    <DefineConstants>TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++  </PropertyGroup>
++  <ItemGroup>
++    <Reference Include="System" />
++    <Reference Include="System.Core" />
++    <Reference Include="System.Xml.Linq" />
++    <Reference Include="System.Data.DataSetExtensions" />
++    <Reference Include="Microsoft.CSharp" />
++    <Reference Include="System.Data" />
++    <Reference Include="System.Xml" />
++  </ItemGroup>
++  <ItemGroup>
++    <Compile Include="Common\ValidationResult.cs" />
++    <Compile Include="Properties\AssemblyInfo.cs" />
++  </ItemGroup>
++  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
++  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
++       Other similar extension points exist, see Microsoft.Common.targets.
++  <Target Name="BeforeBuild">
++  </Target>
++  <Target Name="AfterBuild">
++  </Target>
++  -->
++</Project>
+\ No newline at end of file
+diff --git a/source/SocialGoal.Data/SocialGoal.Data.csproj b/source/SocialGoal.Data/SocialGoal.Data.csproj
+index 8c543f6..c32be0a 100644
+--- a/source/SocialGoal.Data/SocialGoal.Data.csproj
++++ b/source/SocialGoal.Data/SocialGoal.Data.csproj
+@@ -1,141 +1,34 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+-  <PropertyGroup>
+-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+-    <ProjectGuid>{23B3D0D9-0F5C-4FD7-BA7E-A9E0C53A86C9}</ProjectGuid>
+-    <OutputType>Library</OutputType>
+-    <AppDesignerFolder>Properties</AppDesignerFolder>
+-    <RootNamespace>SocialGoal.Data</RootNamespace>
+-    <AssemblyName>SocialGoal.Data</AssemblyName>
+-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+-    <FileAlignment>512</FileAlignment>
+-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+-    <RestorePackages>true</RestorePackages>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+-    <DebugSymbols>true</DebugSymbols>
+-    <DebugType>full</DebugType>
+-    <Optimize>false</Optimize>
+-    <OutputPath>bin\Debug\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+-    <DebugType>pdbonly</DebugType>
+-    <Optimize>true</Optimize>
+-    <OutputPath>bin\Release\</OutputPath>
+-    <DefineConstants>TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-  </PropertyGroup>
+-  <ItemGroup>
+-    <Reference Include="EntityFramework">
+-      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.dll</HintPath>
+-    </Reference>
+-    <Reference Include="EntityFramework.SqlServer">
+-      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.AspNet.Identity.Core">
+-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+-    </Reference>
+-    <Reference Include="PagedList">
+-      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System" />
+-    <Reference Include="System.ComponentModel.DataAnnotations" />
+-    <Reference Include="System.Core" />
+-    <Reference Include="System.Xml.Linq" />
+-    <Reference Include="System.Data.DataSetExtensions" />
+-    <Reference Include="Microsoft.CSharp" />
+-    <Reference Include="System.Data" />
+-    <Reference Include="System.Xml" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Compile Include="Configuration\ApplicationUserConfiguration.cs" />
+-    <Compile Include="Configuration\CommentConfiguration.cs" />
+-    <Compile Include="Configuration\CommentUserConfiguration.cs" />
+-    <Compile Include="Configuration\FocusConfiguration.cs" />
+-    <Compile Include="Configuration\FollowRequestConfiguration.cs" />
+-    <Compile Include="Configuration\FollowUserConfiguration.cs" />
+-    <Compile Include="Configuration\GoalConfiguration.cs" />
+-    <Compile Include="Configuration\GoalStatusConfiguration.cs" />
+-    <Compile Include="Configuration\GoalUpdateConfiguration.cs" />
+-    <Compile Include="Configuration\GroupCommentConfiguration.cs" />
+-    <Compile Include="Configuration\GroupCommentUserConfguration.cs" />
+-    <Compile Include="Configuration\GroupConfiguration.cs" />
+-    <Compile Include="Configuration\GroupGoalConfiguration.cs" />
+-    <Compile Include="Configuration\GroupInvitationConfiguration.cs" />
+-    <Compile Include="Configuration\GroupRequestConfiguration.cs" />
+-    <Compile Include="Configuration\SupportInvitationConfiguration.cs" />
+-    <Compile Include="Configuration\UpdateConfiguration.cs" />
+-    <Compile Include="Configuration\UpdateSupportConfiguration.cs" />
+-    <Compile Include="Configuration\GroupUpdateSupportConfiguration.cs" />
+-    <Compile Include="Configuration\GroupUpdateUserConfiguration.cs" />
+-    <Compile Include="Configuration\GroupUserConfiguration.cs" />
+-    <Compile Include="Configuration\MetricConfiguration.cs" />
+-    <Compile Include="Configuration\RegistrationTokenConfiguration.cs" />
+-    <Compile Include="Configuration\SupportConfiguration.cs" />
+-    <Compile Include="Configuration\UserProfileConfiguration.cs" />
+-    <Compile Include="GoalsSampleData.cs" />
+-    <Compile Include="Infrastructure\DatabaseFactory.cs" />
+-    <Compile Include="Infrastructure\Disposable.cs" />
+-    <Compile Include="Infrastructure\IDatabaseFactory.cs" />
+-    <Compile Include="Infrastructure\IRepository.cs" />
+-    <Compile Include="Infrastructure\IUnitOfWork.cs" />
+-    <Compile Include="Infrastructure\Page.cs" />
+-    <Compile Include="Infrastructure\RepositoryBase.cs" />
+-    <Compile Include="Infrastructure\UnitOfWork.cs" />
+-    <Compile Include="Properties\AssemblyInfo.cs" />
+-    <Compile Include="Repository\CommentRepository.cs" />
+-    <Compile Include="Repository\CommentUserRepository.cs" />
+-    <Compile Include="Repository\FocusRepository.cs" />
+-    <Compile Include="Repository\FollowRequestRepository.cs" />
+-    <Compile Include="Repository\FollowUserRepository.cs" />
+-    <Compile Include="Repository\GoalRepository.cs" />
+-    <Compile Include="Repository\GoalStatusRepository.cs" />
+-    <Compile Include="Repository\GroupCommentRepository.cs" />
+-    <Compile Include="Repository\GroupCommentUserRepository.cs" />
+-    <Compile Include="Repository\GroupGoalRepository.cs" />
+-    <Compile Include="Repository\GroupInvitationRepository.cs" />
+-    <Compile Include="Repository\GroupRepository.cs" />
+-    <Compile Include="Repository\GroupRequestRepository.cs" />
+-    <Compile Include="Repository\GroupUpdateRepository.cs" />
+-    <Compile Include="Repository\GroupUpdateSupportRepository.cs" />
+-    <Compile Include="Repository\GroupUpdateUserRepository.cs" />
+-    <Compile Include="Repository\GroupUserRepository.cs" />
+-    <Compile Include="Repository\MetricRepository.cs" />
+-    <Compile Include="Repository\SecurityTokenRepository.cs" />
+-    <Compile Include="Repository\SupportInvitationRepository.cs" />
+-    <Compile Include="Repository\SupportRepository.cs" />
+-    <Compile Include="Repository\UpdateRepository.cs" />
+-    <Compile Include="Repository\UpdateSupportRepository.cs" />
+-    <Compile Include="Repository\UserProfileRepository.cs" />
+-    <Compile Include="Repository\UserRepository.cs" />
+-    <Compile Include="SocialGoalEntities.cs" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <ProjectReference Include="..\SocialGoal.Model\SocialGoal.Model.csproj">
+-      <Project>{4d4923f5-548c-4d13-859d-7f5e9699facd}</Project>
+-      <Name>SocialGoal.Model</Name>
+-    </ProjectReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <None Include="App.config" />
+-    <None Include="packages.config" />
+-  </ItemGroup>
+-  <ItemGroup />
+-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+-       Other similar extension points exist, see Microsoft.Common.targets.
+-  <Target Name="BeforeBuild">
+-  </Target>
+-  <Target Name="AfterBuild">
+-  </Target>
+-  -->
+-</Project>
+\ No newline at end of file
++<Project Sdk="Microsoft.NET.Sdk">
++  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is SocialGoal.Data.csproj.netfx. -->
++  <PropertyGroup>
++    <TargetFramework>net11.0</TargetFramework>
++    <RootNamespace>SocialGoal.Data</RootNamespace>
++    <AssemblyName>SocialGoal.Data</AssemblyName>
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
++    <NoWarn>$(NoWarn);NU1701</NoWarn>
++  </PropertyGroup>
++
++  <ItemGroup>
++    <Compile Remove="bin/**;obj/**" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.2.0" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <!-- The app's own libraries. -->
++    <PackageReference Include="EntityFramework" Version="6.5.1" />
++    <PackageReference Include="PagedList" Version="1.17.0.0" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <ProjectReference Include="../SocialGoal.Model/SocialGoal.Model.csproj" />
++  </ItemGroup>
++
++</Project>
+diff --git a/source/SocialGoal.Data/SocialGoal.Data.csproj.netfx b/source/SocialGoal.Data/SocialGoal.Data.csproj.netfx
+new file mode 100644
+index 0000000..8c543f6
+--- /dev/null
++++ b/source/SocialGoal.Data/SocialGoal.Data.csproj.netfx
+@@ -0,0 +1,141 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++  <PropertyGroup>
++    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
++    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
++    <ProjectGuid>{23B3D0D9-0F5C-4FD7-BA7E-A9E0C53A86C9}</ProjectGuid>
++    <OutputType>Library</OutputType>
++    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <RootNamespace>SocialGoal.Data</RootNamespace>
++    <AssemblyName>SocialGoal.Data</AssemblyName>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
++    <FileAlignment>512</FileAlignment>
++    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
++    <RestorePackages>true</RestorePackages>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
++    <DebugSymbols>true</DebugSymbols>
++    <DebugType>full</DebugType>
++    <Optimize>false</Optimize>
++    <OutputPath>bin\Debug\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
++    <DebugType>pdbonly</DebugType>
++    <Optimize>true</Optimize>
++    <OutputPath>bin\Release\</OutputPath>
++    <DefineConstants>TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++  </PropertyGroup>
++  <ItemGroup>
++    <Reference Include="EntityFramework">
++      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.dll</HintPath>
++    </Reference>
++    <Reference Include="EntityFramework.SqlServer">
++      <HintPath>..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.AspNet.Identity.Core">
++      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
++      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
++    </Reference>
++    <Reference Include="PagedList">
++      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
++    </Reference>
++    <Reference Include="System" />
++    <Reference Include="System.ComponentModel.DataAnnotations" />
++    <Reference Include="System.Core" />
++    <Reference Include="System.Xml.Linq" />
++    <Reference Include="System.Data.DataSetExtensions" />
++    <Reference Include="Microsoft.CSharp" />
++    <Reference Include="System.Data" />
++    <Reference Include="System.Xml" />
++  </ItemGroup>
++  <ItemGroup>
++    <Compile Include="Configuration\ApplicationUserConfiguration.cs" />
++    <Compile Include="Configuration\CommentConfiguration.cs" />
++    <Compile Include="Configuration\CommentUserConfiguration.cs" />
++    <Compile Include="Configuration\FocusConfiguration.cs" />
++    <Compile Include="Configuration\FollowRequestConfiguration.cs" />
++    <Compile Include="Configuration\FollowUserConfiguration.cs" />
++    <Compile Include="Configuration\GoalConfiguration.cs" />
++    <Compile Include="Configuration\GoalStatusConfiguration.cs" />
++    <Compile Include="Configuration\GoalUpdateConfiguration.cs" />
++    <Compile Include="Configuration\GroupCommentConfiguration.cs" />
++    <Compile Include="Configuration\GroupCommentUserConfguration.cs" />
++    <Compile Include="Configuration\GroupConfiguration.cs" />
++    <Compile Include="Configuration\GroupGoalConfiguration.cs" />
++    <Compile Include="Configuration\GroupInvitationConfiguration.cs" />
++    <Compile Include="Configuration\GroupRequestConfiguration.cs" />
++    <Compile Include="Configuration\SupportInvitationConfiguration.cs" />
++    <Compile Include="Configuration\UpdateConfiguration.cs" />
++    <Compile Include="Configuration\UpdateSupportConfiguration.cs" />
++    <Compile Include="Configuration\GroupUpdateSupportConfiguration.cs" />
++    <Compile Include="Configuration\GroupUpdateUserConfiguration.cs" />
++    <Compile Include="Configuration\GroupUserConfiguration.cs" />
++    <Compile Include="Configuration\MetricConfiguration.cs" />
++    <Compile Include="Configuration\RegistrationTokenConfiguration.cs" />
++    <Compile Include="Configuration\SupportConfiguration.cs" />
++    <Compile Include="Configuration\UserProfileConfiguration.cs" />
++    <Compile Include="GoalsSampleData.cs" />
++    <Compile Include="Infrastructure\DatabaseFactory.cs" />
++    <Compile Include="Infrastructure\Disposable.cs" />
++    <Compile Include="Infrastructure\IDatabaseFactory.cs" />
++    <Compile Include="Infrastructure\IRepository.cs" />
++    <Compile Include="Infrastructure\IUnitOfWork.cs" />
++    <Compile Include="Infrastructure\Page.cs" />
++    <Compile Include="Infrastructure\RepositoryBase.cs" />
++    <Compile Include="Infrastructure\UnitOfWork.cs" />
++    <Compile Include="Properties\AssemblyInfo.cs" />
++    <Compile Include="Repository\CommentRepository.cs" />
++    <Compile Include="Repository\CommentUserRepository.cs" />
++    <Compile Include="Repository\FocusRepository.cs" />
++    <Compile Include="Repository\FollowRequestRepository.cs" />
++    <Compile Include="Repository\FollowUserRepository.cs" />
++    <Compile Include="Repository\GoalRepository.cs" />
++    <Compile Include="Repository\GoalStatusRepository.cs" />
++    <Compile Include="Repository\GroupCommentRepository.cs" />
++    <Compile Include="Repository\GroupCommentUserRepository.cs" />
++    <Compile Include="Repository\GroupGoalRepository.cs" />
++    <Compile Include="Repository\GroupInvitationRepository.cs" />
++    <Compile Include="Repository\GroupRepository.cs" />
++    <Compile Include="Repository\GroupRequestRepository.cs" />
++    <Compile Include="Repository\GroupUpdateRepository.cs" />
++    <Compile Include="Repository\GroupUpdateSupportRepository.cs" />
++    <Compile Include="Repository\GroupUpdateUserRepository.cs" />
++    <Compile Include="Repository\GroupUserRepository.cs" />
++    <Compile Include="Repository\MetricRepository.cs" />
++    <Compile Include="Repository\SecurityTokenRepository.cs" />
++    <Compile Include="Repository\SupportInvitationRepository.cs" />
++    <Compile Include="Repository\SupportRepository.cs" />
++    <Compile Include="Repository\UpdateRepository.cs" />
++    <Compile Include="Repository\UpdateSupportRepository.cs" />
++    <Compile Include="Repository\UserProfileRepository.cs" />
++    <Compile Include="Repository\UserRepository.cs" />
++    <Compile Include="SocialGoalEntities.cs" />
++  </ItemGroup>
++  <ItemGroup>
++    <ProjectReference Include="..\SocialGoal.Model\SocialGoal.Model.csproj">
++      <Project>{4d4923f5-548c-4d13-859d-7f5e9699facd}</Project>
++      <Name>SocialGoal.Model</Name>
++    </ProjectReference>
++  </ItemGroup>
++  <ItemGroup>
++    <None Include="App.config" />
++    <None Include="packages.config" />
++  </ItemGroup>
++  <ItemGroup />
++  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
++  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
++       Other similar extension points exist, see Microsoft.Common.targets.
++  <Target Name="BeforeBuild">
++  </Target>
++  <Target Name="AfterBuild">
++  </Target>
++  -->
++</Project>
+\ No newline at end of file
+diff --git a/source/SocialGoal.Data/packages.config b/source/SocialGoal.Data/packages.config
+deleted file mode 100644
+index 6b006cb..0000000
+--- a/source/SocialGoal.Data/packages.config
++++ /dev/null
+@@ -1,5 +0,0 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<packages>
+-  <package id="EntityFramework" version="6.0.1" targetFramework="net45" />
+-  <package id="PagedList" version="1.17.0.0" targetFramework="net45" />
+-</packages>
+\ No newline at end of file
+diff --git a/source/SocialGoal.Model/SocialGoal.Model.csproj b/source/SocialGoal.Model/SocialGoal.Model.csproj
+index 58b74b4..290b6c6 100644
+--- a/source/SocialGoal.Model/SocialGoal.Model.csproj
++++ b/source/SocialGoal.Model/SocialGoal.Model.csproj
+@@ -1,96 +1,28 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++<Project Sdk="Microsoft.NET.Sdk">
++  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is SocialGoal.Model.csproj.netfx. -->
+   <PropertyGroup>
+-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+-    <ProjectGuid>{4D4923F5-548C-4D13-859D-7F5E9699FACD}</ProjectGuid>
+-    <OutputType>Library</OutputType>
+-    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <TargetFramework>net11.0</TargetFramework>
+     <RootNamespace>SocialGoal.Model</RootNamespace>
+     <AssemblyName>SocialGoal.Model</AssemblyName>
+-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+-    <FileAlignment>512</FileAlignment>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+-    <DebugSymbols>true</DebugSymbols>
+-    <DebugType>full</DebugType>
+-    <Optimize>false</Optimize>
+-    <OutputPath>bin\Debug\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+-    <DebugType>pdbonly</DebugType>
+-    <Optimize>true</Optimize>
+-    <OutputPath>bin\Release\</OutputPath>
+-    <DefineConstants>TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
++    <NoWarn>$(NoWarn);NU1701</NoWarn>
+   </PropertyGroup>
++
+   <ItemGroup>
+-    <Reference Include="Microsoft.AspNet.Identity.Core">
+-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System" />
+-    <Reference Include="System.ComponentModel.DataAnnotations" />
+-    <Reference Include="System.Core" />
+-    <Reference Include="System.Web" />
+-    <Reference Include="System.Xml.Linq" />
+-    <Reference Include="System.Data.DataSetExtensions" />
+-    <Reference Include="Microsoft.CSharp" />
+-    <Reference Include="System.Data" />
+-    <Reference Include="System.Xml" />
++    <Compile Remove="bin/**;obj/**" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <Compile Include="Models\ApplicationUser.cs" />
+-    <Compile Include="Models\Comment.cs" />
+-    <Compile Include="Models\CommentUser.cs" />
+-    <Compile Include="Models\Focus.cs" />
+-    <Compile Include="Models\FollowRequest.cs" />
+-    <Compile Include="Models\FollowUser.cs" />
+-    <Compile Include="Models\Goal.cs" />
+-    <Compile Include="Models\GoalStatus.cs" />
+-    <Compile Include="Models\GoalUpdate.cs" />
+-    <Compile Include="Models\Group.cs" />
+-    <Compile Include="Models\GroupComment.cs" />
+-    <Compile Include="Models\GroupCommentUser.cs" />
+-    <Compile Include="Models\GroupGoal.cs" />
+-    <Compile Include="Models\GroupInvitation.cs" />
+-    <Compile Include="Models\GroupRequest.cs" />
+-    <Compile Include="Models\GroupUpdate.cs" />
+-    <Compile Include="Models\GroupUpdateSupport.cs" />
+-    <Compile Include="Models\GroupUpdateUser.cs" />
+-    <Compile Include="Models\GroupUser.cs" />
+-    <Compile Include="Models\Metric.cs" />
+-    <Compile Include="Models\NotificationType.cs" />
+-    <Compile Include="Models\ProfilePic.cs" />
+-    <Compile Include="Models\RegistrationToken.cs" />
+-    <Compile Include="Models\SecurityToken.cs" />
+-    <Compile Include="Models\Support.cs" />
+-    <Compile Include="Models\SupportInvitation.cs" />
+-    <Compile Include="Models\Update.cs" />
+-    <Compile Include="Models\UpdateSupport.cs" />
+-    <Compile Include="Models\User.cs" />
+-    <Compile Include="Models\UserProfile.cs" />
+-    <Compile Include="Properties\AssemblyInfo.cs" />
++    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.2.0" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <ProjectReference Include="..\SocialGoal.Core\SocialGoal.Core.csproj">
+-      <Project>{b1053a2d-a1ea-412f-ba95-19ce794f8891}</Project>
+-      <Name>SocialGoal.Core</Name>
+-    </ProjectReference>
++    <ProjectReference Include="../SocialGoal.Core/SocialGoal.Core.csproj" />
+   </ItemGroup>
+-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+-       Other similar extension points exist, see Microsoft.Common.targets.
+-  <Target Name="BeforeBuild">
+-  </Target>
+-  <Target Name="AfterBuild">
+-  </Target>
+-  -->
+-</Project>
+\ No newline at end of file
++
++</Project>
+diff --git a/source/SocialGoal.Model/SocialGoal.Model.csproj.netfx b/source/SocialGoal.Model/SocialGoal.Model.csproj.netfx
+new file mode 100644
+index 0000000..58b74b4
+--- /dev/null
++++ b/source/SocialGoal.Model/SocialGoal.Model.csproj.netfx
+@@ -0,0 +1,96 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++  <PropertyGroup>
++    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
++    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
++    <ProjectGuid>{4D4923F5-548C-4D13-859D-7F5E9699FACD}</ProjectGuid>
++    <OutputType>Library</OutputType>
++    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <RootNamespace>SocialGoal.Model</RootNamespace>
++    <AssemblyName>SocialGoal.Model</AssemblyName>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
++    <FileAlignment>512</FileAlignment>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
++    <DebugSymbols>true</DebugSymbols>
++    <DebugType>full</DebugType>
++    <Optimize>false</Optimize>
++    <OutputPath>bin\Debug\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
++    <DebugType>pdbonly</DebugType>
++    <Optimize>true</Optimize>
++    <OutputPath>bin\Release\</OutputPath>
++    <DefineConstants>TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++  </PropertyGroup>
++  <ItemGroup>
++    <Reference Include="Microsoft.AspNet.Identity.Core">
++      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
++      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
++    </Reference>
++    <Reference Include="System" />
++    <Reference Include="System.ComponentModel.DataAnnotations" />
++    <Reference Include="System.Core" />
++    <Reference Include="System.Web" />
++    <Reference Include="System.Xml.Linq" />
++    <Reference Include="System.Data.DataSetExtensions" />
++    <Reference Include="Microsoft.CSharp" />
++    <Reference Include="System.Data" />
++    <Reference Include="System.Xml" />
++  </ItemGroup>
++  <ItemGroup>
++    <Compile Include="Models\ApplicationUser.cs" />
++    <Compile Include="Models\Comment.cs" />
++    <Compile Include="Models\CommentUser.cs" />
++    <Compile Include="Models\Focus.cs" />
++    <Compile Include="Models\FollowRequest.cs" />
++    <Compile Include="Models\FollowUser.cs" />
++    <Compile Include="Models\Goal.cs" />
++    <Compile Include="Models\GoalStatus.cs" />
++    <Compile Include="Models\GoalUpdate.cs" />
++    <Compile Include="Models\Group.cs" />
++    <Compile Include="Models\GroupComment.cs" />
++    <Compile Include="Models\GroupCommentUser.cs" />
++    <Compile Include="Models\GroupGoal.cs" />
++    <Compile Include="Models\GroupInvitation.cs" />
++    <Compile Include="Models\GroupRequest.cs" />
++    <Compile Include="Models\GroupUpdate.cs" />
++    <Compile Include="Models\GroupUpdateSupport.cs" />
++    <Compile Include="Models\GroupUpdateUser.cs" />
++    <Compile Include="Models\GroupUser.cs" />
++    <Compile Include="Models\Metric.cs" />
++    <Compile Include="Models\NotificationType.cs" />
++    <Compile Include="Models\ProfilePic.cs" />
++    <Compile Include="Models\RegistrationToken.cs" />
++    <Compile Include="Models\SecurityToken.cs" />
++    <Compile Include="Models\Support.cs" />
++    <Compile Include="Models\SupportInvitation.cs" />
++    <Compile Include="Models\Update.cs" />
++    <Compile Include="Models\UpdateSupport.cs" />
++    <Compile Include="Models\User.cs" />
++    <Compile Include="Models\UserProfile.cs" />
++    <Compile Include="Properties\AssemblyInfo.cs" />
++  </ItemGroup>
++  <ItemGroup>
++    <ProjectReference Include="..\SocialGoal.Core\SocialGoal.Core.csproj">
++      <Project>{b1053a2d-a1ea-412f-ba95-19ce794f8891}</Project>
++      <Name>SocialGoal.Core</Name>
++    </ProjectReference>
++  </ItemGroup>
++  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
++  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
++       Other similar extension points exist, see Microsoft.Common.targets.
++  <Target Name="BeforeBuild">
++  </Target>
++  <Target Name="AfterBuild">
++  </Target>
++  -->
++</Project>
+\ No newline at end of file
+diff --git a/source/SocialGoal.Service/SocialGoal.Service.csproj b/source/SocialGoal.Service/SocialGoal.Service.csproj
+index 124c094..222fcb0 100644
+--- a/source/SocialGoal.Service/SocialGoal.Service.csproj
++++ b/source/SocialGoal.Service/SocialGoal.Service.csproj
+@@ -1,124 +1,36 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+-  <PropertyGroup>
+-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+-    <ProjectGuid>{BFBAB8EE-BE97-4467-837E-09F142F1BF44}</ProjectGuid>
+-    <OutputType>Library</OutputType>
+-    <AppDesignerFolder>Properties</AppDesignerFolder>
+-    <RootNamespace>SocialGoal.Service</RootNamespace>
+-    <AssemblyName>SocialGoal.Service</AssemblyName>
+-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+-    <FileAlignment>512</FileAlignment>
+-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+-    <RestorePackages>true</RestorePackages>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+-    <DebugSymbols>true</DebugSymbols>
+-    <DebugType>full</DebugType>
+-    <Optimize>false</Optimize>
+-    <OutputPath>bin\Debug\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+-    <DebugType>pdbonly</DebugType>
+-    <Optimize>true</Optimize>
+-    <OutputPath>bin\Release\</OutputPath>
+-    <DefineConstants>TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-  </PropertyGroup>
+-  <ItemGroup>
+-    <Reference Include="Microsoft.AspNet.Identity.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <SpecificVersion>False</SpecificVersion>
+-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <SpecificVersion>False</SpecificVersion>
+-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+-    </Reference>
+-    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+-      <SpecificVersion>False</SpecificVersion>
+-      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System" />
+-    <Reference Include="System.Core" />
+-    <Reference Include="System.Xml.Linq" />
+-    <Reference Include="System.Data.DataSetExtensions" />
+-    <Reference Include="Microsoft.CSharp" />
+-    <Reference Include="System.Data" />
+-    <Reference Include="System.Xml" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Compile Include="CommentService.cs" />
+-    <Compile Include="CommentUserService.cs" />
+-    <Compile Include="Enums.cs" />
+-    <Compile Include="FocusService.cs" />
+-    <Compile Include="FollowRequestService.cs" />
+-    <Compile Include="FollowUserService.cs" />
+-    <Compile Include="GoalService.cs" />
+-    <Compile Include="GoalStatusService.cs" />
+-    <Compile Include="GroupCommentService.cs" />
+-    <Compile Include="GroupCommentUserService.cs" />
+-    <Compile Include="GroupGoalService.cs" />
+-    <Compile Include="GroupInvitationService.cs" />
+-    <Compile Include="GroupRequestService.cs" />
+-    <Compile Include="GroupService.cs" />
+-    <Compile Include="GroupUpdateServices.cs" />
+-    <Compile Include="GroupUpdateSupportService.cs" />
+-    <Compile Include="GroupUpdateUserService.cs" />
+-    <Compile Include="GroupUserService.cs" />
+-    <Compile Include="MetricService.cs" />
+-    <Compile Include="Properties\AssemblyInfo.cs" />
+-    <Compile Include="Properties\Resources.Designer.cs">
+-      <AutoGen>True</AutoGen>
+-      <DesignTime>True</DesignTime>
+-      <DependentUpon>Resources.resx</DependentUpon>
+-    </Compile>
+-    <Compile Include="SecurityTockenService.cs" />
+-    <Compile Include="SupportInvitationService.cs" />
+-    <Compile Include="SupportService.cs" />
+-    <Compile Include="UpdateService.cs" />
+-    <Compile Include="UpdateSupportService.cs" />
+-    <Compile Include="UserProfileService.cs" />
+-    <Compile Include="UserService.cs" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <ProjectReference Include="..\SocialGoal.Core\SocialGoal.Core.csproj">
+-      <Project>{b1053a2d-a1ea-412f-ba95-19ce794f8891}</Project>
+-      <Name>SocialGoal.Core</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\SocialGoal.Data\SocialGoal.Data.csproj">
+-      <Project>{23b3d0d9-0f5c-4fd7-ba7e-a9e0c53a86c9}</Project>
+-      <Name>SocialGoal.Data</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\SocialGoal.Model\SocialGoal.Model.csproj">
+-      <Project>{4d4923f5-548c-4d13-859d-7f5e9699facd}</Project>
+-      <Name>SocialGoal.Model</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\SocialGoal.Web.Core\SocialGoal.Web.Core.csproj">
+-      <Project>{ad4d8636-776d-4d8d-834f-0fdd132591f8}</Project>
+-      <Name>SocialGoal.Web.Core</Name>
+-    </ProjectReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="Properties\Resources.resx">
+-      <Generator>ResXFileCodeGenerator</Generator>
+-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+-    </EmbeddedResource>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <None Include="packages.config" />
+-  </ItemGroup>
+-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+-       Other similar extension points exist, see Microsoft.Common.targets.
+-  <Target Name="BeforeBuild">
+-  </Target>
+-  <Target Name="AfterBuild">
+-  </Target>
+-  -->
+-</Project>
+\ No newline at end of file
++<Project Sdk="Microsoft.NET.Sdk">
++  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is SocialGoal.Service.csproj.netfx. -->
++  <PropertyGroup>
++    <TargetFramework>net11.0</TargetFramework>
++    <RootNamespace>SocialGoal.Service</RootNamespace>
++    <AssemblyName>SocialGoal.Service</AssemblyName>
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
++    <NoWarn>$(NoWarn);NU1701</NoWarn>
++  </PropertyGroup>
++
++  <ItemGroup>
++    <Compile Remove="bin/**;obj/**" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.2.0" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <!-- The app's own libraries. -->
++    <PackageReference Include="PagedList" Version="1.17.0.0" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <ProjectReference Include="../SocialGoal.Core/SocialGoal.Core.csproj" />
++    <ProjectReference Include="../SocialGoal.Data/SocialGoal.Data.csproj" />
++    <ProjectReference Include="../SocialGoal.Model/SocialGoal.Model.csproj" />
++    <ProjectReference Include="../SocialGoal.Web.Core/SocialGoal.Web.Core.csproj" />
++  </ItemGroup>
++
++</Project>
+diff --git a/source/SocialGoal.Service/SocialGoal.Service.csproj.netfx b/source/SocialGoal.Service/SocialGoal.Service.csproj.netfx
+new file mode 100644
+index 0000000..124c094
+--- /dev/null
++++ b/source/SocialGoal.Service/SocialGoal.Service.csproj.netfx
+@@ -0,0 +1,124 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++  <PropertyGroup>
++    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
++    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
++    <ProjectGuid>{BFBAB8EE-BE97-4467-837E-09F142F1BF44}</ProjectGuid>
++    <OutputType>Library</OutputType>
++    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <RootNamespace>SocialGoal.Service</RootNamespace>
++    <AssemblyName>SocialGoal.Service</AssemblyName>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
++    <FileAlignment>512</FileAlignment>
++    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
++    <RestorePackages>true</RestorePackages>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
++    <DebugSymbols>true</DebugSymbols>
++    <DebugType>full</DebugType>
++    <Optimize>false</Optimize>
++    <OutputPath>bin\Debug\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
++    <DebugType>pdbonly</DebugType>
++    <Optimize>true</Optimize>
++    <OutputPath>bin\Release\</OutputPath>
++    <DefineConstants>TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++  </PropertyGroup>
++  <ItemGroup>
++    <Reference Include="Microsoft.AspNet.Identity.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <SpecificVersion>False</SpecificVersion>
++      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <SpecificVersion>False</SpecificVersion>
++      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
++    </Reference>
++    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
++      <SpecificVersion>False</SpecificVersion>
++      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
++    </Reference>
++    <Reference Include="System" />
++    <Reference Include="System.Core" />
++    <Reference Include="System.Xml.Linq" />
++    <Reference Include="System.Data.DataSetExtensions" />
++    <Reference Include="Microsoft.CSharp" />
++    <Reference Include="System.Data" />
++    <Reference Include="System.Xml" />
++  </ItemGroup>
++  <ItemGroup>
++    <Compile Include="CommentService.cs" />
++    <Compile Include="CommentUserService.cs" />
++    <Compile Include="Enums.cs" />
++    <Compile Include="FocusService.cs" />
++    <Compile Include="FollowRequestService.cs" />
++    <Compile Include="FollowUserService.cs" />
++    <Compile Include="GoalService.cs" />
++    <Compile Include="GoalStatusService.cs" />
++    <Compile Include="GroupCommentService.cs" />
++    <Compile Include="GroupCommentUserService.cs" />
++    <Compile Include="GroupGoalService.cs" />
++    <Compile Include="GroupInvitationService.cs" />
++    <Compile Include="GroupRequestService.cs" />
++    <Compile Include="GroupService.cs" />
++    <Compile Include="GroupUpdateServices.cs" />
++    <Compile Include="GroupUpdateSupportService.cs" />
++    <Compile Include="GroupUpdateUserService.cs" />
++    <Compile Include="GroupUserService.cs" />
++    <Compile Include="MetricService.cs" />
++    <Compile Include="Properties\AssemblyInfo.cs" />
++    <Compile Include="Properties\Resources.Designer.cs">
++      <AutoGen>True</AutoGen>
++      <DesignTime>True</DesignTime>
++      <DependentUpon>Resources.resx</DependentUpon>
++    </Compile>
++    <Compile Include="SecurityTockenService.cs" />
++    <Compile Include="SupportInvitationService.cs" />
++    <Compile Include="SupportService.cs" />
++    <Compile Include="UpdateService.cs" />
++    <Compile Include="UpdateSupportService.cs" />
++    <Compile Include="UserProfileService.cs" />
++    <Compile Include="UserService.cs" />
++  </ItemGroup>
++  <ItemGroup>
++    <ProjectReference Include="..\SocialGoal.Core\SocialGoal.Core.csproj">
++      <Project>{b1053a2d-a1ea-412f-ba95-19ce794f8891}</Project>
++      <Name>SocialGoal.Core</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\SocialGoal.Data\SocialGoal.Data.csproj">
++      <Project>{23b3d0d9-0f5c-4fd7-ba7e-a9e0c53a86c9}</Project>
++      <Name>SocialGoal.Data</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\SocialGoal.Model\SocialGoal.Model.csproj">
++      <Project>{4d4923f5-548c-4d13-859d-7f5e9699facd}</Project>
++      <Name>SocialGoal.Model</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\SocialGoal.Web.Core\SocialGoal.Web.Core.csproj">
++      <Project>{ad4d8636-776d-4d8d-834f-0fdd132591f8}</Project>
++      <Name>SocialGoal.Web.Core</Name>
++    </ProjectReference>
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="Properties\Resources.resx">
++      <Generator>ResXFileCodeGenerator</Generator>
++      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
++    </EmbeddedResource>
++  </ItemGroup>
++  <ItemGroup>
++    <None Include="packages.config" />
++  </ItemGroup>
++  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
++  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
++       Other similar extension points exist, see Microsoft.Common.targets.
++  <Target Name="BeforeBuild">
++  </Target>
++  <Target Name="AfterBuild">
++  </Target>
++  -->
++</Project>
+\ No newline at end of file
+diff --git a/source/SocialGoal.Service/packages.config b/source/SocialGoal.Service/packages.config
+deleted file mode 100644
+index 8d1d009..0000000
+--- a/source/SocialGoal.Service/packages.config
++++ /dev/null
+@@ -1,4 +0,0 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<packages>
+-  <package id="PagedList" version="1.17.0.0" targetFramework="net45" />
+-</packages>
+\ No newline at end of file
+diff --git a/source/SocialGoal.Web.Core/SocialGoal.Web.Core.csproj b/source/SocialGoal.Web.Core/SocialGoal.Web.Core.csproj
+index 93f35fa..b4c8e09 100644
+--- a/source/SocialGoal.Web.Core/SocialGoal.Web.Core.csproj
++++ b/source/SocialGoal.Web.Core/SocialGoal.Web.Core.csproj
+@@ -1,108 +1,34 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+-  <PropertyGroup>
+-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+-    <ProjectGuid>{AD4D8636-776D-4D8D-834F-0FDD132591F8}</ProjectGuid>
+-    <OutputType>Library</OutputType>
+-    <AppDesignerFolder>Properties</AppDesignerFolder>
+-    <RootNamespace>SocialGoal.Web.Core</RootNamespace>
+-    <AssemblyName>SocialGoal.Web.Core</AssemblyName>
+-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+-    <FileAlignment>512</FileAlignment>
+-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+-    <RestorePackages>true</RestorePackages>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+-    <DebugSymbols>true</DebugSymbols>
+-    <DebugType>full</DebugType>
+-    <Optimize>false</Optimize>
+-    <OutputPath>bin\Debug\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+-    <DebugType>pdbonly</DebugType>
+-    <Optimize>true</Optimize>
+-    <OutputPath>bin\Release\</OutputPath>
+-    <DefineConstants>TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-  </PropertyGroup>
+-  <ItemGroup>
+-    <Reference Include="AutoMapper">
+-      <HintPath>..\packages\AutoMapper.3.1.1-ci1000\lib\net40\AutoMapper.dll</HintPath>
+-    </Reference>
+-    <Reference Include="AutoMapper.Net4">
+-      <HintPath>..\packages\AutoMapper.3.1.1-ci1000\lib\net40\AutoMapper.Net4.dll</HintPath>
+-    </Reference>
+-    <Reference Include="PagedList">
+-      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System" />
+-    <Reference Include="System.Core" />
+-    <Reference Include="System.Web" />
+-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <SpecificVersion>False</SpecificVersion>
+-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <SpecificVersion>False</SpecificVersion>
+-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Xml.Linq" />
+-    <Reference Include="System.Data.DataSetExtensions" />
+-    <Reference Include="Microsoft.CSharp" />
+-    <Reference Include="System.Data" />
+-    <Reference Include="System.Xml" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Compile Include="ActionFilters\AntiForgeryTokenFilterProvider .cs" />
+-    <Compile Include="ActionFilters\CompressResponseAttribute.cs" />
+-    <Compile Include="ActionFilters\SocialGoalAuthorizeAttribute.cs" />
+-    <Compile Include="Authentication\DefaultFormsAuthentication.cs" />
+-    <Compile Include="Authentication\IFormsAuthentication.cs" />
+-    <Compile Include="Authentication\UserAuthenticationTicketBuilder.cs" />
+-    <Compile Include="AutoMapperConverters\PagedListConverter.cs" />
+-    <Compile Include="Extensions\SelectListEnumExtensions.cs" />
+-    <Compile Include="Helpers\BaseHtmlHelper.cs" />
+-    <Compile Include="Extensions\ControllerExtensions.cs" />
+-    <Compile Include="Extensions\HtmlExtensions.cs" />
+-    <Compile Include="Extensions\HtmlHelperExtensions.cs" />
+-    <Compile Include="Extensions\SelectListExtensions.cs" />
+-    <Compile Include="Helpers\UserHtmlHelper.cs" />
+-    <Compile Include="Models\Role.cs" />
+-    <Compile Include="Models\SocialGoalUser.cs" />
+-    <Compile Include="Models\UserInfo.cs" />
+-    <Compile Include="Properties\AssemblyInfo.cs" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <ProjectReference Include="..\SocialGoal.Core\SocialGoal.Core.csproj">
+-      <Project>{b1053a2d-a1ea-412f-ba95-19ce794f8891}</Project>
+-      <Name>SocialGoal.Core</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\SocialGoal.Model\SocialGoal.Model.csproj">
+-      <Project>{4d4923f5-548c-4d13-859d-7f5e9699facd}</Project>
+-      <Name>SocialGoal.Model</Name>
+-    </ProjectReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <None Include="packages.config" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Content Include="..\packages\AutoMapper.3.1.1-ci1000\lib\net40\AutoMapper.Net4.dll">
+-      <Link>AutoMapper.Net4.dll</Link>
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-  </ItemGroup>
+-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+-       Other similar extension points exist, see Microsoft.Common.targets.
+-  <Target Name="BeforeBuild">
+-  </Target>
+-  <Target Name="AfterBuild">
+-  </Target>
+-  -->
+-</Project>
+\ No newline at end of file
++<Project Sdk="Microsoft.NET.Sdk">
++  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is SocialGoal.Web.Core.csproj.netfx. -->
++  <PropertyGroup>
++    <TargetFramework>net11.0</TargetFramework>
++    <RootNamespace>SocialGoal.Web.Core</RootNamespace>
++    <AssemblyName>SocialGoal.Web.Core</AssemblyName>
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
++    <NoWarn>$(NoWarn);NU1701</NoWarn>
++  </PropertyGroup>
++
++  <ItemGroup>
++    <Compile Remove="bin/**;obj/**" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.2.0" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <!-- The app's own libraries. -->
++    <PackageReference Include="AutoMapper" Version="3.1.1-ci1000" />
++    <PackageReference Include="PagedList" Version="1.17.0.0" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <ProjectReference Include="../SocialGoal.Core/SocialGoal.Core.csproj" />
++    <ProjectReference Include="../SocialGoal.Model/SocialGoal.Model.csproj" />
++  </ItemGroup>
++
++</Project>
+diff --git a/source/SocialGoal.Web.Core/SocialGoal.Web.Core.csproj.netfx b/source/SocialGoal.Web.Core/SocialGoal.Web.Core.csproj.netfx
+new file mode 100644
+index 0000000..93f35fa
+--- /dev/null
++++ b/source/SocialGoal.Web.Core/SocialGoal.Web.Core.csproj.netfx
+@@ -0,0 +1,108 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++  <PropertyGroup>
++    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
++    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
++    <ProjectGuid>{AD4D8636-776D-4D8D-834F-0FDD132591F8}</ProjectGuid>
++    <OutputType>Library</OutputType>
++    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <RootNamespace>SocialGoal.Web.Core</RootNamespace>
++    <AssemblyName>SocialGoal.Web.Core</AssemblyName>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
++    <FileAlignment>512</FileAlignment>
++    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
++    <RestorePackages>true</RestorePackages>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
++    <DebugSymbols>true</DebugSymbols>
++    <DebugType>full</DebugType>
++    <Optimize>false</Optimize>
++    <OutputPath>bin\Debug\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
++    <DebugType>pdbonly</DebugType>
++    <Optimize>true</Optimize>
++    <OutputPath>bin\Release\</OutputPath>
++    <DefineConstants>TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++  </PropertyGroup>
++  <ItemGroup>
++    <Reference Include="AutoMapper">
++      <HintPath>..\packages\AutoMapper.3.1.1-ci1000\lib\net40\AutoMapper.dll</HintPath>
++    </Reference>
++    <Reference Include="AutoMapper.Net4">
++      <HintPath>..\packages\AutoMapper.3.1.1-ci1000\lib\net40\AutoMapper.Net4.dll</HintPath>
++    </Reference>
++    <Reference Include="PagedList">
++      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
++    </Reference>
++    <Reference Include="System" />
++    <Reference Include="System.Core" />
++    <Reference Include="System.Web" />
++    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <SpecificVersion>False</SpecificVersion>
++      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <SpecificVersion>False</SpecificVersion>
++      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Xml.Linq" />
++    <Reference Include="System.Data.DataSetExtensions" />
++    <Reference Include="Microsoft.CSharp" />
++    <Reference Include="System.Data" />
++    <Reference Include="System.Xml" />
++  </ItemGroup>
++  <ItemGroup>
++    <Compile Include="ActionFilters\AntiForgeryTokenFilterProvider .cs" />
++    <Compile Include="ActionFilters\CompressResponseAttribute.cs" />
++    <Compile Include="ActionFilters\SocialGoalAuthorizeAttribute.cs" />
++    <Compile Include="Authentication\DefaultFormsAuthentication.cs" />
++    <Compile Include="Authentication\IFormsAuthentication.cs" />
++    <Compile Include="Authentication\UserAuthenticationTicketBuilder.cs" />
++    <Compile Include="AutoMapperConverters\PagedListConverter.cs" />
++    <Compile Include="Extensions\SelectListEnumExtensions.cs" />
++    <Compile Include="Helpers\BaseHtmlHelper.cs" />
++    <Compile Include="Extensions\ControllerExtensions.cs" />
++    <Compile Include="Extensions\HtmlExtensions.cs" />
++    <Compile Include="Extensions\HtmlHelperExtensions.cs" />
++    <Compile Include="Extensions\SelectListExtensions.cs" />
++    <Compile Include="Helpers\UserHtmlHelper.cs" />
++    <Compile Include="Models\Role.cs" />
++    <Compile Include="Models\SocialGoalUser.cs" />
++    <Compile Include="Models\UserInfo.cs" />
++    <Compile Include="Properties\AssemblyInfo.cs" />
++  </ItemGroup>
++  <ItemGroup>
++    <ProjectReference Include="..\SocialGoal.Core\SocialGoal.Core.csproj">
++      <Project>{b1053a2d-a1ea-412f-ba95-19ce794f8891}</Project>
++      <Name>SocialGoal.Core</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\SocialGoal.Model\SocialGoal.Model.csproj">
++      <Project>{4d4923f5-548c-4d13-859d-7f5e9699facd}</Project>
++      <Name>SocialGoal.Model</Name>
++    </ProjectReference>
++  </ItemGroup>
++  <ItemGroup>
++    <None Include="packages.config" />
++  </ItemGroup>
++  <ItemGroup>
++    <Content Include="..\packages\AutoMapper.3.1.1-ci1000\lib\net40\AutoMapper.Net4.dll">
++      <Link>AutoMapper.Net4.dll</Link>
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++  </ItemGroup>
++  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
++  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
++       Other similar extension points exist, see Microsoft.Common.targets.
++  <Target Name="BeforeBuild">
++  </Target>
++  <Target Name="AfterBuild">
++  </Target>
++  -->
++</Project>
+\ No newline at end of file
+diff --git a/source/SocialGoal.Web.Core/packages.config b/source/SocialGoal.Web.Core/packages.config
+deleted file mode 100644
+index 0127141..0000000
+--- a/source/SocialGoal.Web.Core/packages.config
++++ /dev/null
+@@ -1,5 +0,0 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<packages>
+-  <package id="AutoMapper" version="3.1.1-ci1000" targetFramework="net45" />
+-  <package id="PagedList" version="1.17.0.0" targetFramework="net45" />
+-</packages>
+\ No newline at end of file
+diff --git a/source/SocialGoal/Program.cs b/source/SocialGoal/Program.cs
+new file mode 100644
+index 0000000..1425049
+--- /dev/null
++++ b/source/SocialGoal/Program.cs
+@@ -0,0 +1,25 @@
++using Microsoft.AspNetCore.Builder;
++using Microsoft.Extensions.DependencyInjection;
++using WebFormsForCore.Hosting.IIS;
++
++namespace SocialGoal
++{
++    // webForCore host (docs/MIGRATING.md section 4). The app uses session state.
++    public class Program
++    {
++        public static void Main(string[] args)
++        {
++            var builder = WebApplication.CreateBuilder(args);
++            builder.Services.AddWebForms();
++            builder.Services.AddDistributedMemoryCache();
++            builder.Services.AddSession();
++
++            var app = builder.Build();
++            app.UseSession();
++            app.UseWebForms(o => o
++                .HandleAllRequestsWithWebForms()
++                .UseAspNetCoreSessionProvider());
++            app.Run();
++        }
++    }
++}
+diff --git a/source/SocialGoal/SocialGoal.Web.csproj b/source/SocialGoal/SocialGoal.Web.csproj
+index 4a2e6b1..4811bd5 100644
+--- a/source/SocialGoal/SocialGoal.Web.csproj
++++ b/source/SocialGoal/SocialGoal.Web.csproj
+@@ -1,692 +1,82 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+-  <PropertyGroup>
+-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+-    <ProductVersion>
+-    </ProductVersion>
+-    <SchemaVersion>2.0</SchemaVersion>
+-    <ProjectGuid>{51E018C1-D2C2-499A-BDE9-B73E01E43FE6}</ProjectGuid>
+-    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+-    <OutputType>Library</OutputType>
+-    <AppDesignerFolder>Properties</AppDesignerFolder>
+-    <RootNamespace>SocialGoal</RootNamespace>
+-    <AssemblyName>SocialGoal</AssemblyName>
+-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+-    <MvcBuildViews>false</MvcBuildViews>
+-    <UseIISExpress>true</UseIISExpress>
+-    <IISExpressSSLPort />
+-    <IISExpressAnonymousAuthentication />
+-    <IISExpressWindowsAuthentication />
+-    <IISExpressUseClassicPipelineMode />
+-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+-    <RestorePackages>true</RestorePackages>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+-    <DebugSymbols>true</DebugSymbols>
+-    <DebugType>full</DebugType>
+-    <Optimize>false</Optimize>
+-    <OutputPath>bin\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+-    <DebugType>pdbonly</DebugType>
+-    <Optimize>true</Optimize>
+-    <OutputPath>bin\</OutputPath>
+-    <DefineConstants>TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-  </PropertyGroup>
+-  <ItemGroup>
+-    <Reference Include="Autofac">
+-      <HintPath>..\packages\Autofac.3.1.5\lib\net40\Autofac.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Autofac.Integration.Mvc">
+-      <HintPath>..\packages\Autofac.Mvc5.3.0.0\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+-    </Reference>
+-    <Reference Include="AutoMapper">
+-      <HintPath>..\packages\AutoMapper.3.1.1-ci1000\lib\net40\AutoMapper.dll</HintPath>
+-    </Reference>
+-    <Reference Include="AutoMapper.Net4">
+-      <HintPath>..\packages\AutoMapper.3.1.1-ci1000\lib\net40\AutoMapper.Net4.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Elmah">
+-      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Elmah.Mvc">
+-      <HintPath>..\packages\Elmah.MVC.2.1.1\lib\net40\Elmah.Mvc.dll</HintPath>
+-    </Reference>
+-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+-      <SpecificVersion>False</SpecificVersion>
+-      <HintPath>..\packages\EntityFramework.6.0.2-beta1\lib\net45\EntityFramework.dll</HintPath>
+-    </Reference>
+-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+-      <SpecificVersion>False</SpecificVersion>
+-      <HintPath>..\packages\EntityFramework.6.0.2-beta1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.CSharp" />
+-    <Reference Include="Mvc.Mailer">
+-      <HintPath>..\packages\MvcMailer.4.5\lib\45\Mvc.Mailer.dll</HintPath>
+-    </Reference>
+-    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+-      <SpecificVersion>False</SpecificVersion>
+-      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+-    </Reference>
+-    <Reference Include="PagedList.Mvc">
+-      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System" />
+-    <Reference Include="System.Data" />
+-    <Reference Include="System.Drawing" />
+-    <Reference Include="System.Web.DynamicData" />
+-    <Reference Include="System.Web.Entity" />
+-    <Reference Include="System.Web.ApplicationServices" />
+-    <Reference Include="System.ComponentModel.DataAnnotations" />
+-    <Reference Include="System.Core" />
+-    <Reference Include="System.Data.DataSetExtensions" />
+-    <Reference Include="System.Xml.Linq" />
+-    <Reference Include="System.Web" />
+-    <Reference Include="System.Web.Extensions" />
+-    <Reference Include="System.Web.Abstractions" />
+-    <Reference Include="System.Web.Routing" />
+-    <Reference Include="System.Xml" />
+-    <Reference Include="System.Configuration" />
+-    <Reference Include="System.Web.Services" />
+-    <Reference Include="System.EnterpriseServices" />
+-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Net.Http">
+-    </Reference>
+-    <Reference Include="System.Net.Http.WebRequest">
+-    </Reference>
+-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.Optimization">
+-      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Newtonsoft.Json">
+-      <Private>True</Private>
+-      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
+-    </Reference>
+-    <Reference Include="WebGrease">
+-      <Private>True</Private>
+-      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Antlr3.Runtime">
+-      <Private>True</Private>
+-      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+-    </Reference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Reference Include="Microsoft.AspNet.Identity.Core">
+-      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.AspNet.Identity.Owin">
+-      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.1.0.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+-      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Owin">
+-      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.Owin">
+-      <HintPath>..\packages\Microsoft.Owin.2.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+-      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.Owin.Security">
+-      <HintPath>..\packages\Microsoft.Owin.Security.2.0.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.Owin.Security.Facebook">
+-      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.2.0.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.Owin.Security.Cookies">
+-      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.0.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.Owin.Security.OAuth">
+-      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.0.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.Owin.Security.Google">
+-      <HintPath>..\packages\Microsoft.Owin.Security.Google.2.0.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.Owin.Security.Twitter">
+-      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.2.0.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+-      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.2.0.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+-    </Reference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Compile Include="App_Start\Bootstrapper.cs" />
+-    <Compile Include="App_Start\BundleConfig.cs" />
+-    <Compile Include="App_Start\FilterConfig.cs" />
+-    <Compile Include="App_Start\RouteConfig.cs" />
+-    <Compile Include="App_Start\Startup.Auth.cs" />
+-    <Compile Include="Controllers\AccountController.cs" />
+-    <Compile Include="Controllers\SearchController.cs" />
+-    <Compile Include="Controllers\NotificationController.cs" />
+-    <Compile Include="Controllers\GroupController.cs" />
+-    <Compile Include="Controllers\GoalController.cs" />
+-    <Compile Include="Controllers\EmailRequestController.cs" />
+-    <Compile Include="Controllers\HomeController.cs" />
+-    <Compile Include="Global.asax.cs">
+-      <DependentUpon>Global.asax</DependentUpon>
+-    </Compile>
+-    <Compile Include="Helpers\SocialGoalSessionFacade.cs" />
+-    <Compile Include="Mailers\IUserMailer.cs" />
+-    <Compile Include="Mailers\UserMailer.cs" />
+-    <Compile Include="Mappings\AutoMapperConfiguration.cs" />
+-    <Compile Include="Mappings\DomainToViewModelMappingProfile.cs" />
+-    <Compile Include="Mappings\ViewModelToDomainMappingProfile.cs" />
+-    <Compile Include="Models\AccountViewModels.cs" />
+-    <Compile Include="Models\IdentityModels.cs" />
+-    <Compile Include="Properties\AssemblyInfo.cs" />
+-    <Compile Include="Properties\Resources.Designer.cs">
+-      <AutoGen>True</AutoGen>
+-      <DesignTime>True</DesignTime>
+-      <DependentUpon>Resources.resx</DependentUpon>
+-    </Compile>
+-    <Compile Include="Services\CreateNotificationList.cs" />
+-    <Compile Include="Startup.cs" />
+-    <Compile Include="ViewModels\ChangePasswordFormModel.cs" />
+-    <Compile Include="ViewModels\CommentFormModel.cs" />
+-    <Compile Include="ViewModels\CommentsViewModel.cs" />
+-    <Compile Include="ViewModels\EmailFormModel.cs" />
+-    <Compile Include="ViewModels\FocusFormModel.cs" />
+-    <Compile Include="ViewModels\FocusViewModel.cs" />
+-    <Compile Include="ViewModels\FollowersViewModel.cs" />
+-    <Compile Include="ViewModels\FollowingViewModel.cs" />
+-    <Compile Include="ViewModels\FollowRequestFormModel.cs" />
+-    <Compile Include="ViewModels\FollowRequestViewModel.cs" />
+-    <Compile Include="ViewModels\GoalFormModel.cs" />
+-    <Compile Include="ViewModels\GoalListViewModel.cs" />
+-    <Compile Include="ViewModels\GoalsPageViewModel.cs" />
+-    <Compile Include="ViewModels\GoalSupporterViewModel.cs" />
+-    <Compile Include="ViewModels\GoalViewModel.cs" />
+-    <Compile Include="ViewModels\GroupCommentFormModel.cs" />
+-    <Compile Include="ViewModels\GroupCommentViewModel.cs" />
+-    <Compile Include="ViewModels\GroupFormModel.cs" />
+-    <Compile Include="ViewModels\GroupGoalFormModel.cs" />
+-    <Compile Include="ViewModels\GroupGoalViewModel.cs" />
+-    <Compile Include="ViewModels\GroupMemberViewModel.cs" />
+-    <Compile Include="ViewModels\GroupRequestFormModel.cs" />
+-    <Compile Include="ViewModels\GroupRequestViewModel.cs" />
+-    <Compile Include="ViewModels\GroupsItemViewModel.cs" />
+-    <Compile Include="ViewModels\GroupsPageViewModel.cs" />
+-    <Compile Include="ViewModels\GroupUpdateFormModel.cs" />
+-    <Compile Include="ViewModels\GroupUpdateListViewModel.cs" />
+-    <Compile Include="ViewModels\GroupUpdateSupportersViewModel.cs" />
+-    <Compile Include="ViewModels\GroupUpdateViewModel.cs" />
+-    <Compile Include="ViewModels\GroupViewModel.cs" />
+-    <Compile Include="ViewModels\HomeViewModel.cs" />
+-    <Compile Include="ViewModels\InviteEmailFormModel.cs" />
+-    <Compile Include="ViewModels\InviteUserFormModel.cs" />
+-    <Compile Include="ViewModels\MemberViewModel.cs" />
+-    <Compile Include="ViewModels\NotificationsViewModel.cs" />
+-    <Compile Include="ViewModels\NotificationViewModel.cs" />
+-    <Compile Include="ViewModels\SearchViewModel.cs" />
+-    <Compile Include="ViewModels\UpdateFormModel.cs" />
+-    <Compile Include="ViewModels\UpdateListViewModel.cs" />
+-    <Compile Include="ViewModels\UpdateSupportersViewModel.cs" />
+-    <Compile Include="ViewModels\UpdateViewModel.cs" />
+-    <Compile Include="ViewModels\UploadImageViewModel.cs" />
+-    <Compile Include="ViewModels\UserFormModel.cs" />
+-    <Compile Include="ViewModels\UserProfileFormModel.cs" />
+-    <Compile Include="ViewModels\UserProfileViewModel.cs" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Content Include="..\packages\AutoMapper.3.1.1-ci1000\lib\net40\AutoMapper.Net4.dll">
+-      <Link>AutoMapper.Net4.dll</Link>
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Content\bootstrap-responsive.css" />
+-    <Content Include="Content\bootstrap-responsive.min.css" />
+-    <Content Include="Content\bootstrap.css" />
+-    <Content Include="Content\bootstrap.min.css" />
+-    <Content Include="Content\calendar.gif" />
+-    <Content Include="Content\CustomStyles.css" />
+-    <Content Include="Content\HomePage.css" />
+-    <Content Include="Content\images\facebook-avatar.png" />
+-    <Content Include="Content\images\SonataCoveSoftwareLong.png" />
+-    <Content Include="Content\images\ui-bg_flat_55_999999_40x100.png" />
+-    <Content Include="Content\images\ui-bg_flat_75_aaaaaa_40x100.png" />
+-    <Content Include="Content\images\ui-bg_glass_45_0078ae_1x400.png" />
+-    <Content Include="Content\images\ui-bg_glass_55_f8da4e_1x400.png" />
+-    <Content Include="Content\images\ui-bg_glass_75_79c9ec_1x400.png" />
+-    <Content Include="Content\images\ui-bg_gloss-wave_45_e14f1c_500x100.png" />
+-    <Content Include="Content\images\ui-bg_gloss-wave_50_6eac2c_500x100.png" />
+-    <Content Include="Content\images\ui-bg_gloss-wave_75_2191c0_500x100.png" />
+-    <Content Include="Content\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+-    <Content Include="Content\images\ui-icons_0078ae_256x240.png" />
+-    <Content Include="Content\images\ui-icons_056b93_256x240.png" />
+-    <Content Include="Content\images\ui-icons_d8e7f3_256x240.png" />
+-    <Content Include="Content\images\ui-icons_e0fdff_256x240.png" />
+-    <Content Include="Content\images\ui-icons_f5e175_256x240.png" />
+-    <Content Include="Content\images\ui-icons_f7a50d_256x240.png" />
+-    <Content Include="Content\images\ui-icons_fcd113_256x240.png" />
+-    <Content Include="Content\jqModal.css" />
+-    <Content Include="Content\jquery-ui-1.8.21.custom.css" />
+-    <Content Include="Content\jquery.jqplot.min.css" />
+-    <Content Include="Content\js\bootstrap.js" />
+-    <Content Include="Content\js\bootstrap.min.js" />
+-    <Content Include="Content\PagedList.css" />
+-    <Content Include="Content\ProfilePics\3cad5400-6a85-4b49-b682-4e6c8ee002ef.png" />
+-    <Content Include="Content\ProfilePics\dfb48ede-6a9c-432c-93e2-8a9ecff986c5.png" />
+-    <Content Include="Content\ProfilePics\f6e2bce8-7b5c-4cd7-a2ac-104f2fc75f83.png" />
+-    <Content Include="Content\ProfilePics\facebook-avatar.png" />
+-    <Content Include="Content\Site.css" />
+-    <Content Include="Content\templatemo_329_blue_urban\about.html" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\facebook-avatar.png" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\goal-setting-target.jpg" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\Logout.html" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_body.jpg" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_buton.png" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_content.jpg" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_date.jpg" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_footer.jpg" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_header.jpg" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_header11.jpg" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_image_01.jpg" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_image_02.jpg" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_image_03.jpg" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_image_04.jpg" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_image_05.jpg" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_image_06.jpg" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_image_07.jpg" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_image_08.jpg" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_learn_btn.png" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_learn_btn_hover.png" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_list.png" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_menu.png" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_menu_hover.png" />
+-    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_middle.jpg" />
+-    <Content Include="Content\templatemo_329_blue_urban\index.html" />
+-    <Content Include="Content\templatemo_329_blue_urban\news.html" />
+-    <Content Include="Content\templatemo_329_blue_urban\templatemo_style.css" />
+-    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+-    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+-    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+-    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+-    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+-    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+-    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+-    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+-    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+-    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+-    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+-    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+-    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+-    <Content Include="Content\themes\base\jquery-ui.css" />
+-    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+-    <Content Include="Content\themes\base\jquery.ui.all.css" />
+-    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+-    <Content Include="Content\themes\base\jquery.ui.base.css" />
+-    <Content Include="Content\themes\base\jquery.ui.button.css" />
+-    <Content Include="Content\themes\base\jquery.ui.core.css" />
+-    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+-    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+-    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+-    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+-    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+-    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+-    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+-    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+-    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+-    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+-    <Content Include="Content\themes\ImageArea.css" />
+-    <Content Include="Content\themes\MainPage.css" />
+-    <Content Include="Content\themes\PageLayout.css" />
+-    <Content Include="Content\themes\Site.css" />
+-    <Content Include="favicon.ico" />
+-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+-    <Content Include="Global.asax" />
+-    <Content Include="Images\accent.png" />
+-    <Content Include="Images\ajax-loader-small.gif" />
+-    <Content Include="Images\aspNetHome.png" />
+-    <Content Include="Images\bullet.png" />
+-    <Content Include="Images\facebook.png" />
+-    <Content Include="Images\findHosting.png" />
+-    <Content Include="Images\heroAccent.png" />
+-    <Content Include="Images\NuGetGallery.png" />
+-    <Content Include="Images\orderedList0.png" />
+-    <Content Include="Images\orderedList1.png" />
+-    <Content Include="Images\orderedList2.png" />
+-    <Content Include="Images\orderedList3.png" />
+-    <Content Include="Images\orderedList4.png" />
+-    <Content Include="Images\orderedList5.png" />
+-    <Content Include="Images\orderedList6.png" />
+-    <Content Include="Images\orderedList7.png" />
+-    <Content Include="Images\orderedList8.png" />
+-    <Content Include="Images\orderedList9.png" />
+-    <Content Include="Images\orderedListOne.png" />
+-    <Content Include="Images\orderedListThree.png" />
+-    <Content Include="Images\orderedListTwo.png" />
+-    <Content Include="Images\replacement people.jpg" />
+-    <Content Include="Images\twitter.png" />
+-    <Content Include="Images\windowsLive.png" />
+-    <Content Include="img\glyphicons-halflings-white.png" />
+-    <Content Include="img\glyphicons-halflings.png" />
+-    <Content Include="Scripts\AjaxLogin.js" />
+-    <Content Include="Scripts\bootstrap-alert.js" />
+-    <Content Include="Scripts\bootstrap-collapse.js" />
+-    <Content Include="Scripts\bootstrap-dropdown.js" />
+-    <Content Include="Scripts\bootstrap-modal.js" />
+-    <Content Include="Scripts\bootstrap-popover.js" />
+-    <Content Include="Scripts\bootstrap-scrollspy.js" />
+-    <Content Include="Scripts\bootstrap-tab.js" />
+-    <Content Include="Scripts\bootstrap-transition.js" />
+-    <Content Include="Scripts\handlebars-1.0.rc.1.js" />
+-    <Content Include="Scripts\jqDnR.js" />
+-    <Content Include="Scripts\jqModal.js" />
+-    <Content Include="Scripts\jqplot.barRenderer.min.js" />
+-    <Content Include="Scripts\jqplot.canvasAxisTickRenderer.min.js" />
+-    <Content Include="Scripts\jqplot.canvasTextRenderer.min.js" />
+-    <Content Include="Scripts\jqplot.categoryAxisRenderer.min.js" />
+-    <Content Include="Scripts\jqplot.dateAxisRenderer.min.js" />
+-    <Content Include="Scripts\jqplot.highlighter.min.js" />
+-    <Content Include="Scripts\jqplot.ohlcRenderer.min.js" />
+-    <Content Include="Scripts\jqplot.pointLabels.min.js" />
+-    <Content Include="Scripts\jquery-1.2.6.pack.js" />
+-    <Content Include="Content\less\accordion.less" />
+-    <Content Include="Content\less\alerts.less" />
+-    <Content Include="Content\less\bootstrap.less" />
+-    <Content Include="Content\less\breadcrumbs.less" />
+-    <Content Include="Content\less\button-groups.less" />
+-    <Content Include="Content\less\buttons.less" />
+-    <Content Include="Content\less\carousel.less" />
+-    <Content Include="Content\less\close.less" />
+-    <Content Include="Content\less\code.less" />
+-    <Content Include="Content\less\component-animations.less" />
+-    <Content Include="Content\less\dropdowns.less" />
+-    <Content Include="Content\less\forms.less" />
+-    <Content Include="Content\less\grid.less" />
+-    <Content Include="Content\less\hero-unit.less" />
+-    <Content Include="Content\less\labels.less" />
+-    <Content Include="Content\less\layouts.less" />
+-    <Content Include="Content\less\mixins.less" />
+-    <Content Include="Content\less\modals.less" />
+-    <Content Include="Content\less\navbar.less" />
+-    <Content Include="Content\less\navs.less" />
+-    <Content Include="Content\less\pager.less" />
+-    <Content Include="Content\less\pagination.less" />
+-    <Content Include="Content\less\popovers.less" />
+-    <Content Include="Content\less\progress-bars.less" />
+-    <Content Include="Content\less\reset.less" />
+-    <Content Include="Content\less\responsive.less" />
+-    <Content Include="Content\less\scaffolding.less" />
+-    <Content Include="Content\less\sprites.less" />
+-    <Content Include="Content\less\tables.less" />
+-    <Content Include="Content\less\thumbnails.less" />
+-    <Content Include="Content\less\tooltip.less" />
+-    <Content Include="Content\less\type.less" />
+-    <Content Include="Content\less\utilities.less" />
+-    <Content Include="Content\less\variables.less" />
+-    <Content Include="Content\less\wells.less" />
+-    <None Include="Scripts\jquery-1.6.2-vsdoc.js" />
+-    <Content Include="Scripts\jquery-1.6.2.js" />
+-    <Content Include="Scripts\jquery-1.6.2.min.js" />
+-    <None Include="Scripts\jquery-1.7.1-vsdoc.js" />
+-    <Content Include="Scripts\jquery-1.7.1.js" />
+-    <Content Include="Scripts\jquery-1.7.1.min.js" />
+-    <Content Include="Scripts\jquery-1.7.2.min.js" />
+-    <Content Include="Scripts\jquery-latest.js" />
+-    <Content Include="Scripts\jquery-ui-1.8.11.js" />
+-    <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
+-    <Content Include="Scripts\jquery-ui-1.8.20.js" />
+-    <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+-    <Content Include="Scripts\jquery-ui-1.8.21.custom.min.js" />
+-    <Content Include="Scripts\jquery.autocomplete.js" />
+-    <Content Include="Scripts\jquery.color.js" />
+-    <Content Include="Scripts\jquery.imgareaselect.js" />
+-    <Content Include="Scripts\jquery.Jcrop.js" />
+-    <Content Include="Scripts\jquery.Jcrop.min.js" />
+-    <Content Include="Scripts\jquery.jqplot.min.js" />
+-    <Content Include="Scripts\jquery.nicescroll.min.js" />
+-    <Content Include="Scripts\jquery.pjax.js" />
+-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+-    <None Include="Scripts\jquery.validate-vsdoc.js" />
+-    <Content Include="Scripts\jquery.validate.js" />
+-    <Content Include="Scripts\jquery.validate.min.js" />
+-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+-    <Content Include="Scripts\knockout-2.0.0.debug.js" />
+-    <Content Include="Scripts\knockout-2.0.0.js" />
+-    <Content Include="Scripts\knockout-2.1.0.debug.js" />
+-    <Content Include="Scripts\knockout-2.1.0.js" />
+-    <Content Include="Scripts\modernizr-2.0.6-development-only.js" />
+-    <Content Include="Scripts\modernizr-2.5.3.js" />
+-    <None Include="Scripts\_references.js" />
+-    <Content Include="Templates\Templates.htm" />
+-    <Content Include="Web.config">
+-      <SubType>Designer</SubType>
+-    </Content>
+-    <Content Include="Web.Debug.config">
+-      <DependentUpon>Web.config</DependentUpon>
+-    </Content>
+-    <Content Include="Web.Release.config">
+-      <DependentUpon>Web.config</DependentUpon>
+-    </Content>
+-    <Content Include="Views\Web.config" />
+-    <Content Include="Views\_ViewStart.cshtml" />
+-    <Content Include="Views\Shared\Error.cshtml" />
+-    <Content Include="Views\Shared\_Layout.cshtml" />
+-    <Content Include="Views\Home\About.cshtml" />
+-    <Content Include="Views\Home\Contact.cshtml" />
+-    <Content Include="Views\Home\Index.cshtml" />
+-    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
+-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+-    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
+-    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+-    <Content Include="Views\Account\Login.cshtml" />
+-    <Content Include="Views\Account\Manage.cshtml" />
+-    <Content Include="Views\Account\Register.cshtml" />
+-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+-    <Content Include="Views\Goal\Create.cshtml" />
+-    <Content Include="Views\Goal\Delete.cshtml" />
+-    <Content Include="Views\Goal\Edit.cshtml" />
+-    <Content Include="Views\Goal\FollowedGoal.cshtml" />
+-    <Content Include="Views\Goal\Index.cshtml" />
+-    <Content Include="Views\Goal\InviteUser.cshtml" />
+-    <Content Include="Views\Goal\ListOfGoals.cshtml" />
+-    <Content Include="Views\Goal\MyGoal.cshtml" />
+-    <Content Include="Views\Goal\Reportpage.cshtml" />
+-    <Content Include="Views\Goal\Supporters.cshtml" />
+-    <Content Include="Views\Goal\SupportersOfUpdate.cshtml" />
+-    <Content Include="Views\Goal\_CommentView.cshtml" />
+-    <Content Include="Views\Goal\_DeleteUpdate.cshtml" />
+-    <Content Include="Views\Goal\_EditUpdate.cshtml" />
+-    <Content Include="Views\Goal\_FollowedGoals.cshtml" />
+-    <Content Include="Views\Goal\_Goalslist.cshtml" />
+-    <Content Include="Views\Goal\_MyGoalsView.cshtml" />
+-    <Content Include="Views\Goal\_SupportInvite.cshtml" />
+-    <Content Include="Views\Goal\_UpdateView.cshtml" />
+-    <Content Include="Views\Group\CreateFocus.cshtml" />
+-    <Content Include="Views\Group\CreateGoal.cshtml" />
+-    <Content Include="Views\Group\CreateGroup.cshtml" />
+-    <Content Include="Views\Group\DeleteFocus.cshtml" />
+-    <Content Include="Views\Group\DeleteGoal.cshtml" />
+-    <Content Include="Views\Group\EditFocus.cshtml" />
+-    <Content Include="Views\Group\EditGoal.cshtml" />
+-    <Content Include="Views\Group\Focus.cshtml" />
+-    <Content Include="Views\Group\FollowedGroups.cshtml" />
+-    <Content Include="Views\Group\Following.cshtml" />
+-    <Content Include="Views\Group\GroupGoal.cshtml" />
+-    <Content Include="Views\Group\Header.cshtml" />
+-    <Content Include="Views\Group\Index.cshtml" />
+-    <Content Include="Views\Group\InviteUser.cshtml" />
+-    <Content Include="Views\Group\JoinedUsers.cshtml" />
+-    <Content Include="Views\Group\Members.cshtml" />
+-    <Content Include="Views\Group\MyGroups.cshtml" />
+-    <Content Include="Views\Group\ReportPage.cshtml" />
+-    <Content Include="Views\Group\SupportersOfUpdate.cshtml" />
+-    <Content Include="Views\Group\_CommentView.cshtml" />
+-    <Content Include="Views\Group\_DeleteGroup.cshtml" />
+-    <Content Include="Views\Group\_DeleteUpdate.cshtml" />
+-    <Content Include="Views\Group\_EditGroup.cshtml" />
+-    <Content Include="Views\Group\_EditUpdate.cshtml" />
+-    <Content Include="Views\Group\_GroupsTableRows.cshtml" />
+-    <Content Include="Views\Group\_GroupView.cshtml" />
+-    <Content Include="Views\Group\_InviteUsers.cshtml" />
+-    <Content Include="Views\Group\_MembersToSearch.cshtml" />
+-    <Content Include="Views\Group\_RequestsView.cshtml" />
+-    <Content Include="Views\Group\_UpdateView.cshtml" />
+-    <Content Include="Views\Home\Notification.cshtml" />
+-    <Content Include="Views\Notification\Index.cshtml" />
+-    <Content Include="Views\Notification\_NotificationList.cshtml" />
+-    <Content Include="Views\Search\SearchResult.cshtml" />
+-    <Content Include="Views\Shared\_GoalLayout.cshtml" />
+-    <Content Include="Views\Shared\_Header.cshtml" />
+-    <Content Include="Views\Shared\_HomeLayout.cshtml" />
+-    <Content Include="Views\Shared\_PageLayout.cshtml" />
+-    <Content Include="Views\Shared\_RegisterPartial.cshtml" />
+-    <Content Include="Views\UserMailer\Invite.cshtml" />
+-    <Content Include="Views\UserMailer\InviteNewUser.cshtml" />
+-    <Content Include="Views\UserMailer\PasswordReset.cshtml" />
+-    <Content Include="Views\UserMailer\Support.cshtml" />
+-    <Content Include="Views\UserMailer\SupportGoal.cshtml" />
+-    <Content Include="Views\UserMailer\Welcome.cshtml" />
+-    <Content Include="Views\UserMailer\_Layout.cshtml" />
+-    <Content Include="Views\Account\EditBasicInfo.cshtml" />
+-    <Content Include="Views\Account\EditPersonalInfo.cshtml" />
+-    <Content Include="Views\Account\EditProfile.cshtml" />
+-    <Content Include="Views\Account\FollowerUsers.cshtml" />
+-    <Content Include="Views\Account\FollowingUsers.cshtml" />
+-    <Content Include="Views\Account\ImageUpload.cshtml" />
+-    <Content Include="Views\Account\UserProfile.cshtml" />
+-    <Content Include="Views\Account\_FollowersView.cshtml" />
+-    <Content Include="Views\Account\_FollowingsView.cshtml" />
+-    <Content Include="Views\Account\AccessDenied.cshtml" />
+-    <Content Include="Views\Group\_GroupsTable.cshtml" />
+-    <Content Include="Views\Group\ListOfGroups.cshtml" />
+-    <Content Include="Views\Shared\_AlertInfo.cshtml" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Folder Include="App_Data\" />
+-    <Folder Include="Scripts\FunctionScripts\" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+-    <Content Include="packages.config" />
+-    <None Include="Project_Readme.html" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <ProjectReference Include="..\SocialGoal.Core\SocialGoal.Core.csproj">
+-      <Project>{b1053a2d-a1ea-412f-ba95-19ce794f8891}</Project>
+-      <Name>SocialGoal.Core</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\SocialGoal.Data\SocialGoal.Data.csproj">
+-      <Project>{23b3d0d9-0f5c-4fd7-ba7e-a9e0c53a86c9}</Project>
+-      <Name>SocialGoal.Data</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\SocialGoal.Model\SocialGoal.Model.csproj">
+-      <Project>{4d4923f5-548c-4d13-859d-7f5e9699facd}</Project>
+-      <Name>SocialGoal.Model</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\SocialGoal.Service\SocialGoal.Service.csproj">
+-      <Project>{bfbab8ee-be97-4467-837e-09f142f1bf44}</Project>
+-      <Name>SocialGoal.Service</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\SocialGoal.Web.Core\SocialGoal.Web.Core.csproj">
+-      <Project>{ad4d8636-776d-4d8d-834f-0fdd132591f8}</Project>
+-      <Name>SocialGoal.Web.Core</Name>
+-    </ProjectReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="Properties\Resources.resx">
+-      <Generator>ResXFileCodeGenerator</Generator>
+-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+-    </EmbeddedResource>
+-  </ItemGroup>
+-  <PropertyGroup>
+-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+-  </PropertyGroup>
+-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+-  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+-  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+-    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+-  </Target>
+-  <ProjectExtensions>
+-    <VisualStudio>
+-      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+-        <WebProjectProperties>
+-          <UseIIS>True</UseIIS>
+-          <AutoAssignPort>True</AutoAssignPort>
+-          <DevelopmentServerPort>5002</DevelopmentServerPort>
+-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+-          <IISUrl>http://localhost:5002/</IISUrl>
+-          <NTLMAuthentication>False</NTLMAuthentication>
+-          <UseCustomServer>False</UseCustomServer>
+-          <CustomServerUrl>
+-          </CustomServerUrl>
+-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+-        </WebProjectProperties>
+-      </FlavorProperties>
+-    </VisualStudio>
+-  </ProjectExtensions>
+-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+-       Other similar extension points exist, see Microsoft.Common.targets.
+-  <Target Name="BeforeBuild">
+-  </Target>
+-  <Target Name="AfterBuild">
+-  </Target> -->
+-</Project>
+\ No newline at end of file
++<Project Sdk="Microsoft.NET.Sdk.Web">
++  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is SocialGoal.Web.csproj.netfx. -->
++  <PropertyGroup>
++    <TargetFramework>net11.0</TargetFramework>
++    <OutputType>Exe</OutputType>
++    <RootNamespace>SocialGoal</RootNamespace>
++    <AssemblyName>SocialGoal</AssemblyName>
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
++    <OutputPath>bin_dotnet</OutputPath>
++    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
++    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
++    <GenerateDependencyFile>true</GenerateDependencyFile>
++    <NoWarn>$(NoWarn);NU1701</NoWarn>
++    <PredefinedCulturesOnly>true</PredefinedCulturesOnly>
++    <EnableDefaultRazorGenerateItems>false</EnableDefaultRazorGenerateItems>
++    <RazorCompileOnBuild>false</RazorCompileOnBuild>
++    <RazorCompileOnPublish>false</RazorCompileOnPublish>
++  </PropertyGroup>
++
++  <ItemGroup>
++    <Compile Remove="App_Code/**;bin_dotnet/**;obj/**" />
++    <Content Remove="bin_dotnet/**" />
++    <None Remove="bin_dotnet/**" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <!-- webForCore 0.2.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Helpers" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.2.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.2.0" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <!-- The app's own libraries. -->
++    <PackageReference Include="Autofac" Version="3.1.5" />
++    <PackageReference Include="Autofac.Mvc5" Version="3.0.0" />
++    <PackageReference Include="AutoMapper" Version="3.1.1-ci1000" />
++    <PackageReference Include="bootstrap" Version="3.0.0" />
++    <PackageReference Include="elmah.corelibrary" Version="1.2.2" />
++    <PackageReference Include="Elmah.MVC" Version="2.1.1" />
++    <PackageReference Include="EntityFramework" Version="6.5.1" />
++    <PackageReference Include="jQuery" Version="1.10.2" />
++    <PackageReference Include="jQuery.Validation" Version="1.11.1" />
++    <PackageReference Include="Microsoft.jQuery.Unobtrusive.Validation" Version="3.0.0" />
++    <PackageReference Include="Modernizr" Version="2.6.2" />
++    <PackageReference Include="MvcMailer" Version="4.5" />
++    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
++    <PackageReference Include="PagedList" Version="1.17.0.0" />
++    <PackageReference Include="PagedList.Mvc" Version="4.5.0.0" />
++    <PackageReference Include="Respond" Version="1.2.0" />
++    <PackageReference Include="T4Scaffolding.Core" Version="1.0.0" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <ProjectReference Include="../SocialGoal.Core/SocialGoal.Core.csproj" />
++    <ProjectReference Include="../SocialGoal.Data/SocialGoal.Data.csproj" />
++    <ProjectReference Include="../SocialGoal.Model/SocialGoal.Model.csproj" />
++    <ProjectReference Include="../SocialGoal.Service/SocialGoal.Service.csproj" />
++    <ProjectReference Include="../SocialGoal.Web.Core/SocialGoal.Web.Core.csproj" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <!-- Katana providers webForCore doesn't lift, kept at the app's version; their Katana dependencies excluded
++         so webForCore's Microsoft.Owin is the only one (docs/MIGRATING.md). -->
++    <PackageReference Include="Microsoft.Owin.Security.Facebook" Version="2.0.0" />
++    <PackageReference Include="Microsoft.Owin.Security.Google" Version="2.0.0" />
++    <PackageReference Include="Microsoft.Owin.Security.MicrosoftAccount" Version="2.0.0" />
++    <PackageReference Include="Microsoft.Owin.Security.Twitter" Version="2.0.0" />
++    <PackageReference Include="Microsoft.Owin" Version="2.0.0" ExcludeAssets="all" />
++    <PackageReference Include="Microsoft.Owin.Security" Version="2.0.0" ExcludeAssets="all" />
++  </ItemGroup>
++</Project>
+diff --git a/source/SocialGoal/SocialGoal.Web.csproj.netfx b/source/SocialGoal/SocialGoal.Web.csproj.netfx
+new file mode 100644
+index 0000000..4a2e6b1
+--- /dev/null
++++ b/source/SocialGoal/SocialGoal.Web.csproj.netfx
+@@ -0,0 +1,692 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++  <PropertyGroup>
++    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
++    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
++    <ProductVersion>
++    </ProductVersion>
++    <SchemaVersion>2.0</SchemaVersion>
++    <ProjectGuid>{51E018C1-D2C2-499A-BDE9-B73E01E43FE6}</ProjectGuid>
++    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
++    <OutputType>Library</OutputType>
++    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <RootNamespace>SocialGoal</RootNamespace>
++    <AssemblyName>SocialGoal</AssemblyName>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
++    <MvcBuildViews>false</MvcBuildViews>
++    <UseIISExpress>true</UseIISExpress>
++    <IISExpressSSLPort />
++    <IISExpressAnonymousAuthentication />
++    <IISExpressWindowsAuthentication />
++    <IISExpressUseClassicPipelineMode />
++    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
++    <RestorePackages>true</RestorePackages>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
++    <DebugSymbols>true</DebugSymbols>
++    <DebugType>full</DebugType>
++    <Optimize>false</Optimize>
++    <OutputPath>bin\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
++    <DebugType>pdbonly</DebugType>
++    <Optimize>true</Optimize>
++    <OutputPath>bin\</OutputPath>
++    <DefineConstants>TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++  </PropertyGroup>
++  <ItemGroup>
++    <Reference Include="Autofac">
++      <HintPath>..\packages\Autofac.3.1.5\lib\net40\Autofac.dll</HintPath>
++    </Reference>
++    <Reference Include="Autofac.Integration.Mvc">
++      <HintPath>..\packages\Autofac.Mvc5.3.0.0\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
++    </Reference>
++    <Reference Include="AutoMapper">
++      <HintPath>..\packages\AutoMapper.3.1.1-ci1000\lib\net40\AutoMapper.dll</HintPath>
++    </Reference>
++    <Reference Include="AutoMapper.Net4">
++      <HintPath>..\packages\AutoMapper.3.1.1-ci1000\lib\net40\AutoMapper.Net4.dll</HintPath>
++    </Reference>
++    <Reference Include="Elmah">
++      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
++    </Reference>
++    <Reference Include="Elmah.Mvc">
++      <HintPath>..\packages\Elmah.MVC.2.1.1\lib\net40\Elmah.Mvc.dll</HintPath>
++    </Reference>
++    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
++      <SpecificVersion>False</SpecificVersion>
++      <HintPath>..\packages\EntityFramework.6.0.2-beta1\lib\net45\EntityFramework.dll</HintPath>
++    </Reference>
++    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
++      <SpecificVersion>False</SpecificVersion>
++      <HintPath>..\packages\EntityFramework.6.0.2-beta1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.CSharp" />
++    <Reference Include="Mvc.Mailer">
++      <HintPath>..\packages\MvcMailer.4.5\lib\45\Mvc.Mailer.dll</HintPath>
++    </Reference>
++    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
++      <SpecificVersion>False</SpecificVersion>
++      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
++    </Reference>
++    <Reference Include="PagedList.Mvc">
++      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
++    </Reference>
++    <Reference Include="System" />
++    <Reference Include="System.Data" />
++    <Reference Include="System.Drawing" />
++    <Reference Include="System.Web.DynamicData" />
++    <Reference Include="System.Web.Entity" />
++    <Reference Include="System.Web.ApplicationServices" />
++    <Reference Include="System.ComponentModel.DataAnnotations" />
++    <Reference Include="System.Core" />
++    <Reference Include="System.Data.DataSetExtensions" />
++    <Reference Include="System.Xml.Linq" />
++    <Reference Include="System.Web" />
++    <Reference Include="System.Web.Extensions" />
++    <Reference Include="System.Web.Abstractions" />
++    <Reference Include="System.Web.Routing" />
++    <Reference Include="System.Xml" />
++    <Reference Include="System.Configuration" />
++    <Reference Include="System.Web.Services" />
++    <Reference Include="System.EnterpriseServices" />
++    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Net.Http">
++    </Reference>
++    <Reference Include="System.Net.Http.WebRequest">
++    </Reference>
++    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.Helpers.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.0.0\lib\net45\System.Web.Mvc.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.Optimization">
++      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.1\lib\net40\System.Web.Optimization.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.0.0\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
++    </Reference>
++    <Reference Include="Newtonsoft.Json">
++      <Private>True</Private>
++      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
++    </Reference>
++    <Reference Include="WebGrease">
++      <Private>True</Private>
++      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
++    </Reference>
++    <Reference Include="Antlr3.Runtime">
++      <Private>True</Private>
++      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
++    </Reference>
++  </ItemGroup>
++  <ItemGroup>
++    <Reference Include="Microsoft.AspNet.Identity.Core">
++      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.1.0.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.AspNet.Identity.Owin">
++      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.1.0.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
++      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.1.0.0\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
++    </Reference>
++    <Reference Include="Owin">
++      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.Owin">
++      <HintPath>..\packages\Microsoft.Owin.2.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.Owin.Host.SystemWeb">
++      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.2.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.Owin.Security">
++      <HintPath>..\packages\Microsoft.Owin.Security.2.0.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.Owin.Security.Facebook">
++      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.2.0.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.Owin.Security.Cookies">
++      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.0.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.Owin.Security.OAuth">
++      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.0.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.Owin.Security.Google">
++      <HintPath>..\packages\Microsoft.Owin.Security.Google.2.0.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.Owin.Security.Twitter">
++      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.2.0.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
++      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.2.0.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
++    </Reference>
++  </ItemGroup>
++  <ItemGroup>
++    <Compile Include="App_Start\Bootstrapper.cs" />
++    <Compile Include="App_Start\BundleConfig.cs" />
++    <Compile Include="App_Start\FilterConfig.cs" />
++    <Compile Include="App_Start\RouteConfig.cs" />
++    <Compile Include="App_Start\Startup.Auth.cs" />
++    <Compile Include="Controllers\AccountController.cs" />
++    <Compile Include="Controllers\SearchController.cs" />
++    <Compile Include="Controllers\NotificationController.cs" />
++    <Compile Include="Controllers\GroupController.cs" />
++    <Compile Include="Controllers\GoalController.cs" />
++    <Compile Include="Controllers\EmailRequestController.cs" />
++    <Compile Include="Controllers\HomeController.cs" />
++    <Compile Include="Global.asax.cs">
++      <DependentUpon>Global.asax</DependentUpon>
++    </Compile>
++    <Compile Include="Helpers\SocialGoalSessionFacade.cs" />
++    <Compile Include="Mailers\IUserMailer.cs" />
++    <Compile Include="Mailers\UserMailer.cs" />
++    <Compile Include="Mappings\AutoMapperConfiguration.cs" />
++    <Compile Include="Mappings\DomainToViewModelMappingProfile.cs" />
++    <Compile Include="Mappings\ViewModelToDomainMappingProfile.cs" />
++    <Compile Include="Models\AccountViewModels.cs" />
++    <Compile Include="Models\IdentityModels.cs" />
++    <Compile Include="Properties\AssemblyInfo.cs" />
++    <Compile Include="Properties\Resources.Designer.cs">
++      <AutoGen>True</AutoGen>
++      <DesignTime>True</DesignTime>
++      <DependentUpon>Resources.resx</DependentUpon>
++    </Compile>
++    <Compile Include="Services\CreateNotificationList.cs" />
++    <Compile Include="Startup.cs" />
++    <Compile Include="ViewModels\ChangePasswordFormModel.cs" />
++    <Compile Include="ViewModels\CommentFormModel.cs" />
++    <Compile Include="ViewModels\CommentsViewModel.cs" />
++    <Compile Include="ViewModels\EmailFormModel.cs" />
++    <Compile Include="ViewModels\FocusFormModel.cs" />
++    <Compile Include="ViewModels\FocusViewModel.cs" />
++    <Compile Include="ViewModels\FollowersViewModel.cs" />
++    <Compile Include="ViewModels\FollowingViewModel.cs" />
++    <Compile Include="ViewModels\FollowRequestFormModel.cs" />
++    <Compile Include="ViewModels\FollowRequestViewModel.cs" />
++    <Compile Include="ViewModels\GoalFormModel.cs" />
++    <Compile Include="ViewModels\GoalListViewModel.cs" />
++    <Compile Include="ViewModels\GoalsPageViewModel.cs" />
++    <Compile Include="ViewModels\GoalSupporterViewModel.cs" />
++    <Compile Include="ViewModels\GoalViewModel.cs" />
++    <Compile Include="ViewModels\GroupCommentFormModel.cs" />
++    <Compile Include="ViewModels\GroupCommentViewModel.cs" />
++    <Compile Include="ViewModels\GroupFormModel.cs" />
++    <Compile Include="ViewModels\GroupGoalFormModel.cs" />
++    <Compile Include="ViewModels\GroupGoalViewModel.cs" />
++    <Compile Include="ViewModels\GroupMemberViewModel.cs" />
++    <Compile Include="ViewModels\GroupRequestFormModel.cs" />
++    <Compile Include="ViewModels\GroupRequestViewModel.cs" />
++    <Compile Include="ViewModels\GroupsItemViewModel.cs" />
++    <Compile Include="ViewModels\GroupsPageViewModel.cs" />
++    <Compile Include="ViewModels\GroupUpdateFormModel.cs" />
++    <Compile Include="ViewModels\GroupUpdateListViewModel.cs" />
++    <Compile Include="ViewModels\GroupUpdateSupportersViewModel.cs" />
++    <Compile Include="ViewModels\GroupUpdateViewModel.cs" />
++    <Compile Include="ViewModels\GroupViewModel.cs" />
++    <Compile Include="ViewModels\HomeViewModel.cs" />
++    <Compile Include="ViewModels\InviteEmailFormModel.cs" />
++    <Compile Include="ViewModels\InviteUserFormModel.cs" />
++    <Compile Include="ViewModels\MemberViewModel.cs" />
++    <Compile Include="ViewModels\NotificationsViewModel.cs" />
++    <Compile Include="ViewModels\NotificationViewModel.cs" />
++    <Compile Include="ViewModels\SearchViewModel.cs" />
++    <Compile Include="ViewModels\UpdateFormModel.cs" />
++    <Compile Include="ViewModels\UpdateListViewModel.cs" />
++    <Compile Include="ViewModels\UpdateSupportersViewModel.cs" />
++    <Compile Include="ViewModels\UpdateViewModel.cs" />
++    <Compile Include="ViewModels\UploadImageViewModel.cs" />
++    <Compile Include="ViewModels\UserFormModel.cs" />
++    <Compile Include="ViewModels\UserProfileFormModel.cs" />
++    <Compile Include="ViewModels\UserProfileViewModel.cs" />
++  </ItemGroup>
++  <ItemGroup>
++    <Content Include="..\packages\AutoMapper.3.1.1-ci1000\lib\net40\AutoMapper.Net4.dll">
++      <Link>AutoMapper.Net4.dll</Link>
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Content\bootstrap-responsive.css" />
++    <Content Include="Content\bootstrap-responsive.min.css" />
++    <Content Include="Content\bootstrap.css" />
++    <Content Include="Content\bootstrap.min.css" />
++    <Content Include="Content\calendar.gif" />
++    <Content Include="Content\CustomStyles.css" />
++    <Content Include="Content\HomePage.css" />
++    <Content Include="Content\images\facebook-avatar.png" />
++    <Content Include="Content\images\SonataCoveSoftwareLong.png" />
++    <Content Include="Content\images\ui-bg_flat_55_999999_40x100.png" />
++    <Content Include="Content\images\ui-bg_flat_75_aaaaaa_40x100.png" />
++    <Content Include="Content\images\ui-bg_glass_45_0078ae_1x400.png" />
++    <Content Include="Content\images\ui-bg_glass_55_f8da4e_1x400.png" />
++    <Content Include="Content\images\ui-bg_glass_75_79c9ec_1x400.png" />
++    <Content Include="Content\images\ui-bg_gloss-wave_45_e14f1c_500x100.png" />
++    <Content Include="Content\images\ui-bg_gloss-wave_50_6eac2c_500x100.png" />
++    <Content Include="Content\images\ui-bg_gloss-wave_75_2191c0_500x100.png" />
++    <Content Include="Content\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
++    <Content Include="Content\images\ui-icons_0078ae_256x240.png" />
++    <Content Include="Content\images\ui-icons_056b93_256x240.png" />
++    <Content Include="Content\images\ui-icons_d8e7f3_256x240.png" />
++    <Content Include="Content\images\ui-icons_e0fdff_256x240.png" />
++    <Content Include="Content\images\ui-icons_f5e175_256x240.png" />
++    <Content Include="Content\images\ui-icons_f7a50d_256x240.png" />
++    <Content Include="Content\images\ui-icons_fcd113_256x240.png" />
++    <Content Include="Content\jqModal.css" />
++    <Content Include="Content\jquery-ui-1.8.21.custom.css" />
++    <Content Include="Content\jquery.jqplot.min.css" />
++    <Content Include="Content\js\bootstrap.js" />
++    <Content Include="Content\js\bootstrap.min.js" />
++    <Content Include="Content\PagedList.css" />
++    <Content Include="Content\ProfilePics\3cad5400-6a85-4b49-b682-4e6c8ee002ef.png" />
++    <Content Include="Content\ProfilePics\dfb48ede-6a9c-432c-93e2-8a9ecff986c5.png" />
++    <Content Include="Content\ProfilePics\f6e2bce8-7b5c-4cd7-a2ac-104f2fc75f83.png" />
++    <Content Include="Content\ProfilePics\facebook-avatar.png" />
++    <Content Include="Content\Site.css" />
++    <Content Include="Content\templatemo_329_blue_urban\about.html" />
++    <Content Include="Content\templatemo_329_blue_urban\images\facebook-avatar.png" />
++    <Content Include="Content\templatemo_329_blue_urban\images\goal-setting-target.jpg" />
++    <Content Include="Content\templatemo_329_blue_urban\images\Logout.html" />
++    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_body.jpg" />
++    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_buton.png" />
++    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_content.jpg" />
++    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_date.jpg" />
++    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_footer.jpg" />
++    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_header.jpg" />
++    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_header11.jpg" />
++    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_image_01.jpg" />
++    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_image_02.jpg" />
++    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_image_03.jpg" />
++    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_image_04.jpg" />
++    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_image_05.jpg" />
++    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_image_06.jpg" />
++    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_image_07.jpg" />
++    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_image_08.jpg" />
++    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_learn_btn.png" />
++    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_learn_btn_hover.png" />
++    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_list.png" />
++    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_menu.png" />
++    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_menu_hover.png" />
++    <Content Include="Content\templatemo_329_blue_urban\images\templatemo_middle.jpg" />
++    <Content Include="Content\templatemo_329_blue_urban\index.html" />
++    <Content Include="Content\templatemo_329_blue_urban\news.html" />
++    <Content Include="Content\templatemo_329_blue_urban\templatemo_style.css" />
++    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
++    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
++    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
++    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
++    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
++    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
++    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
++    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
++    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
++    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
++    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
++    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
++    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
++    <Content Include="Content\themes\base\jquery-ui.css" />
++    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
++    <Content Include="Content\themes\base\jquery.ui.all.css" />
++    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
++    <Content Include="Content\themes\base\jquery.ui.base.css" />
++    <Content Include="Content\themes\base\jquery.ui.button.css" />
++    <Content Include="Content\themes\base\jquery.ui.core.css" />
++    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
++    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
++    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
++    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
++    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
++    <Content Include="Content\themes\base\jquery.ui.slider.css" />
++    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
++    <Content Include="Content\themes\base\jquery.ui.theme.css" />
++    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
++    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
++    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
++    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
++    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
++    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
++    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
++    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
++    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
++    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
++    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
++    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
++    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
++    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
++    <Content Include="Content\themes\ImageArea.css" />
++    <Content Include="Content\themes\MainPage.css" />
++    <Content Include="Content\themes\PageLayout.css" />
++    <Content Include="Content\themes\Site.css" />
++    <Content Include="favicon.ico" />
++    <Content Include="fonts\glyphicons-halflings-regular.svg" />
++    <Content Include="Global.asax" />
++    <Content Include="Images\accent.png" />
++    <Content Include="Images\ajax-loader-small.gif" />
++    <Content Include="Images\aspNetHome.png" />
++    <Content Include="Images\bullet.png" />
++    <Content Include="Images\facebook.png" />
++    <Content Include="Images\findHosting.png" />
++    <Content Include="Images\heroAccent.png" />
++    <Content Include="Images\NuGetGallery.png" />
++    <Content Include="Images\orderedList0.png" />
++    <Content Include="Images\orderedList1.png" />
++    <Content Include="Images\orderedList2.png" />
++    <Content Include="Images\orderedList3.png" />
++    <Content Include="Images\orderedList4.png" />
++    <Content Include="Images\orderedList5.png" />
++    <Content Include="Images\orderedList6.png" />
++    <Content Include="Images\orderedList7.png" />
++    <Content Include="Images\orderedList8.png" />
++    <Content Include="Images\orderedList9.png" />
++    <Content Include="Images\orderedListOne.png" />
++    <Content Include="Images\orderedListThree.png" />
++    <Content Include="Images\orderedListTwo.png" />
++    <Content Include="Images\replacement people.jpg" />
++    <Content Include="Images\twitter.png" />
++    <Content Include="Images\windowsLive.png" />
++    <Content Include="img\glyphicons-halflings-white.png" />
++    <Content Include="img\glyphicons-halflings.png" />
++    <Content Include="Scripts\AjaxLogin.js" />
++    <Content Include="Scripts\bootstrap-alert.js" />
++    <Content Include="Scripts\bootstrap-collapse.js" />
++    <Content Include="Scripts\bootstrap-dropdown.js" />
++    <Content Include="Scripts\bootstrap-modal.js" />
++    <Content Include="Scripts\bootstrap-popover.js" />
++    <Content Include="Scripts\bootstrap-scrollspy.js" />
++    <Content Include="Scripts\bootstrap-tab.js" />
++    <Content Include="Scripts\bootstrap-transition.js" />
++    <Content Include="Scripts\handlebars-1.0.rc.1.js" />
++    <Content Include="Scripts\jqDnR.js" />
++    <Content Include="Scripts\jqModal.js" />
++    <Content Include="Scripts\jqplot.barRenderer.min.js" />
++    <Content Include="Scripts\jqplot.canvasAxisTickRenderer.min.js" />
++    <Content Include="Scripts\jqplot.canvasTextRenderer.min.js" />
++    <Content Include="Scripts\jqplot.categoryAxisRenderer.min.js" />
++    <Content Include="Scripts\jqplot.dateAxisRenderer.min.js" />
++    <Content Include="Scripts\jqplot.highlighter.min.js" />
++    <Content Include="Scripts\jqplot.ohlcRenderer.min.js" />
++    <Content Include="Scripts\jqplot.pointLabels.min.js" />
++    <Content Include="Scripts\jquery-1.2.6.pack.js" />
++    <Content Include="Content\less\accordion.less" />
++    <Content Include="Content\less\alerts.less" />
++    <Content Include="Content\less\bootstrap.less" />
++    <Content Include="Content\less\breadcrumbs.less" />
++    <Content Include="Content\less\button-groups.less" />
++    <Content Include="Content\less\buttons.less" />
++    <Content Include="Content\less\carousel.less" />
++    <Content Include="Content\less\close.less" />
++    <Content Include="Content\less\code.less" />
++    <Content Include="Content\less\component-animations.less" />
++    <Content Include="Content\less\dropdowns.less" />
++    <Content Include="Content\less\forms.less" />
++    <Content Include="Content\less\grid.less" />
++    <Content Include="Content\less\hero-unit.less" />
++    <Content Include="Content\less\labels.less" />
++    <Content Include="Content\less\layouts.less" />
++    <Content Include="Content\less\mixins.less" />
++    <Content Include="Content\less\modals.less" />
++    <Content Include="Content\less\navbar.less" />
++    <Content Include="Content\less\navs.less" />
++    <Content Include="Content\less\pager.less" />
++    <Content Include="Content\less\pagination.less" />
++    <Content Include="Content\less\popovers.less" />
++    <Content Include="Content\less\progress-bars.less" />
++    <Content Include="Content\less\reset.less" />
++    <Content Include="Content\less\responsive.less" />
++    <Content Include="Content\less\scaffolding.less" />
++    <Content Include="Content\less\sprites.less" />
++    <Content Include="Content\less\tables.less" />
++    <Content Include="Content\less\thumbnails.less" />
++    <Content Include="Content\less\tooltip.less" />
++    <Content Include="Content\less\type.less" />
++    <Content Include="Content\less\utilities.less" />
++    <Content Include="Content\less\variables.less" />
++    <Content Include="Content\less\wells.less" />
++    <None Include="Scripts\jquery-1.6.2-vsdoc.js" />
++    <Content Include="Scripts\jquery-1.6.2.js" />
++    <Content Include="Scripts\jquery-1.6.2.min.js" />
++    <None Include="Scripts\jquery-1.7.1-vsdoc.js" />
++    <Content Include="Scripts\jquery-1.7.1.js" />
++    <Content Include="Scripts\jquery-1.7.1.min.js" />
++    <Content Include="Scripts\jquery-1.7.2.min.js" />
++    <Content Include="Scripts\jquery-latest.js" />
++    <Content Include="Scripts\jquery-ui-1.8.11.js" />
++    <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
++    <Content Include="Scripts\jquery-ui-1.8.20.js" />
++    <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
++    <Content Include="Scripts\jquery-ui-1.8.21.custom.min.js" />
++    <Content Include="Scripts\jquery.autocomplete.js" />
++    <Content Include="Scripts\jquery.color.js" />
++    <Content Include="Scripts\jquery.imgareaselect.js" />
++    <Content Include="Scripts\jquery.Jcrop.js" />
++    <Content Include="Scripts\jquery.Jcrop.min.js" />
++    <Content Include="Scripts\jquery.jqplot.min.js" />
++    <Content Include="Scripts\jquery.nicescroll.min.js" />
++    <Content Include="Scripts\jquery.pjax.js" />
++    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
++    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
++    <None Include="Scripts\jquery.validate-vsdoc.js" />
++    <Content Include="Scripts\jquery.validate.js" />
++    <Content Include="Scripts\jquery.validate.min.js" />
++    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
++    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
++    <Content Include="Scripts\knockout-2.0.0.debug.js" />
++    <Content Include="Scripts\knockout-2.0.0.js" />
++    <Content Include="Scripts\knockout-2.1.0.debug.js" />
++    <Content Include="Scripts\knockout-2.1.0.js" />
++    <Content Include="Scripts\modernizr-2.0.6-development-only.js" />
++    <Content Include="Scripts\modernizr-2.5.3.js" />
++    <None Include="Scripts\_references.js" />
++    <Content Include="Templates\Templates.htm" />
++    <Content Include="Web.config">
++      <SubType>Designer</SubType>
++    </Content>
++    <Content Include="Web.Debug.config">
++      <DependentUpon>Web.config</DependentUpon>
++    </Content>
++    <Content Include="Web.Release.config">
++      <DependentUpon>Web.config</DependentUpon>
++    </Content>
++    <Content Include="Views\Web.config" />
++    <Content Include="Views\_ViewStart.cshtml" />
++    <Content Include="Views\Shared\Error.cshtml" />
++    <Content Include="Views\Shared\_Layout.cshtml" />
++    <Content Include="Views\Home\About.cshtml" />
++    <Content Include="Views\Home\Contact.cshtml" />
++    <Content Include="Views\Home\Index.cshtml" />
++    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
++    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
++    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
++    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
++    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
++    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
++    <Content Include="Views\Account\Login.cshtml" />
++    <Content Include="Views\Account\Manage.cshtml" />
++    <Content Include="Views\Account\Register.cshtml" />
++    <Content Include="Views\Shared\_LoginPartial.cshtml" />
++    <Content Include="Views\Goal\Create.cshtml" />
++    <Content Include="Views\Goal\Delete.cshtml" />
++    <Content Include="Views\Goal\Edit.cshtml" />
++    <Content Include="Views\Goal\FollowedGoal.cshtml" />
++    <Content Include="Views\Goal\Index.cshtml" />
++    <Content Include="Views\Goal\InviteUser.cshtml" />
++    <Content Include="Views\Goal\ListOfGoals.cshtml" />
++    <Content Include="Views\Goal\MyGoal.cshtml" />
++    <Content Include="Views\Goal\Reportpage.cshtml" />
++    <Content Include="Views\Goal\Supporters.cshtml" />
++    <Content Include="Views\Goal\SupportersOfUpdate.cshtml" />
++    <Content Include="Views\Goal\_CommentView.cshtml" />
++    <Content Include="Views\Goal\_DeleteUpdate.cshtml" />
++    <Content Include="Views\Goal\_EditUpdate.cshtml" />
++    <Content Include="Views\Goal\_FollowedGoals.cshtml" />
++    <Content Include="Views\Goal\_Goalslist.cshtml" />
++    <Content Include="Views\Goal\_MyGoalsView.cshtml" />
++    <Content Include="Views\Goal\_SupportInvite.cshtml" />
++    <Content Include="Views\Goal\_UpdateView.cshtml" />
++    <Content Include="Views\Group\CreateFocus.cshtml" />
++    <Content Include="Views\Group\CreateGoal.cshtml" />
++    <Content Include="Views\Group\CreateGroup.cshtml" />
++    <Content Include="Views\Group\DeleteFocus.cshtml" />
++    <Content Include="Views\Group\DeleteGoal.cshtml" />
++    <Content Include="Views\Group\EditFocus.cshtml" />
++    <Content Include="Views\Group\EditGoal.cshtml" />
++    <Content Include="Views\Group\Focus.cshtml" />
++    <Content Include="Views\Group\FollowedGroups.cshtml" />
++    <Content Include="Views\Group\Following.cshtml" />
++    <Content Include="Views\Group\GroupGoal.cshtml" />
++    <Content Include="Views\Group\Header.cshtml" />
++    <Content Include="Views\Group\Index.cshtml" />
++    <Content Include="Views\Group\InviteUser.cshtml" />
++    <Content Include="Views\Group\JoinedUsers.cshtml" />
++    <Content Include="Views\Group\Members.cshtml" />
++    <Content Include="Views\Group\MyGroups.cshtml" />
++    <Content Include="Views\Group\ReportPage.cshtml" />
++    <Content Include="Views\Group\SupportersOfUpdate.cshtml" />
++    <Content Include="Views\Group\_CommentView.cshtml" />
++    <Content Include="Views\Group\_DeleteGroup.cshtml" />
++    <Content Include="Views\Group\_DeleteUpdate.cshtml" />
++    <Content Include="Views\Group\_EditGroup.cshtml" />
++    <Content Include="Views\Group\_EditUpdate.cshtml" />
++    <Content Include="Views\Group\_GroupsTableRows.cshtml" />
++    <Content Include="Views\Group\_GroupView.cshtml" />
++    <Content Include="Views\Group\_InviteUsers.cshtml" />
++    <Content Include="Views\Group\_MembersToSearch.cshtml" />
++    <Content Include="Views\Group\_RequestsView.cshtml" />
++    <Content Include="Views\Group\_UpdateView.cshtml" />
++    <Content Include="Views\Home\Notification.cshtml" />
++    <Content Include="Views\Notification\Index.cshtml" />
++    <Content Include="Views\Notification\_NotificationList.cshtml" />
++    <Content Include="Views\Search\SearchResult.cshtml" />
++    <Content Include="Views\Shared\_GoalLayout.cshtml" />
++    <Content Include="Views\Shared\_Header.cshtml" />
++    <Content Include="Views\Shared\_HomeLayout.cshtml" />
++    <Content Include="Views\Shared\_PageLayout.cshtml" />
++    <Content Include="Views\Shared\_RegisterPartial.cshtml" />
++    <Content Include="Views\UserMailer\Invite.cshtml" />
++    <Content Include="Views\UserMailer\InviteNewUser.cshtml" />
++    <Content Include="Views\UserMailer\PasswordReset.cshtml" />
++    <Content Include="Views\UserMailer\Support.cshtml" />
++    <Content Include="Views\UserMailer\SupportGoal.cshtml" />
++    <Content Include="Views\UserMailer\Welcome.cshtml" />
++    <Content Include="Views\UserMailer\_Layout.cshtml" />
++    <Content Include="Views\Account\EditBasicInfo.cshtml" />
++    <Content Include="Views\Account\EditPersonalInfo.cshtml" />
++    <Content Include="Views\Account\EditProfile.cshtml" />
++    <Content Include="Views\Account\FollowerUsers.cshtml" />
++    <Content Include="Views\Account\FollowingUsers.cshtml" />
++    <Content Include="Views\Account\ImageUpload.cshtml" />
++    <Content Include="Views\Account\UserProfile.cshtml" />
++    <Content Include="Views\Account\_FollowersView.cshtml" />
++    <Content Include="Views\Account\_FollowingsView.cshtml" />
++    <Content Include="Views\Account\AccessDenied.cshtml" />
++    <Content Include="Views\Group\_GroupsTable.cshtml" />
++    <Content Include="Views\Group\ListOfGroups.cshtml" />
++    <Content Include="Views\Shared\_AlertInfo.cshtml" />
++  </ItemGroup>
++  <ItemGroup>
++    <Folder Include="App_Data\" />
++    <Folder Include="Scripts\FunctionScripts\" />
++  </ItemGroup>
++  <ItemGroup>
++    <Content Include="fonts\glyphicons-halflings-regular.woff" />
++    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
++    <Content Include="fonts\glyphicons-halflings-regular.eot" />
++    <Content Include="packages.config" />
++    <None Include="Project_Readme.html" />
++  </ItemGroup>
++  <ItemGroup>
++    <ProjectReference Include="..\SocialGoal.Core\SocialGoal.Core.csproj">
++      <Project>{b1053a2d-a1ea-412f-ba95-19ce794f8891}</Project>
++      <Name>SocialGoal.Core</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\SocialGoal.Data\SocialGoal.Data.csproj">
++      <Project>{23b3d0d9-0f5c-4fd7-ba7e-a9e0c53a86c9}</Project>
++      <Name>SocialGoal.Data</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\SocialGoal.Model\SocialGoal.Model.csproj">
++      <Project>{4d4923f5-548c-4d13-859d-7f5e9699facd}</Project>
++      <Name>SocialGoal.Model</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\SocialGoal.Service\SocialGoal.Service.csproj">
++      <Project>{bfbab8ee-be97-4467-837e-09f142f1bf44}</Project>
++      <Name>SocialGoal.Service</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\SocialGoal.Web.Core\SocialGoal.Web.Core.csproj">
++      <Project>{ad4d8636-776d-4d8d-834f-0fdd132591f8}</Project>
++      <Name>SocialGoal.Web.Core</Name>
++    </ProjectReference>
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="Properties\Resources.resx">
++      <Generator>ResXFileCodeGenerator</Generator>
++      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
++    </EmbeddedResource>
++  </ItemGroup>
++  <PropertyGroup>
++    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
++    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
++  </PropertyGroup>
++  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
++  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
++  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
++  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
++    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
++  </Target>
++  <ProjectExtensions>
++    <VisualStudio>
++      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
++        <WebProjectProperties>
++          <UseIIS>True</UseIIS>
++          <AutoAssignPort>True</AutoAssignPort>
++          <DevelopmentServerPort>5002</DevelopmentServerPort>
++          <DevelopmentServerVPath>/</DevelopmentServerVPath>
++          <IISUrl>http://localhost:5002/</IISUrl>
++          <NTLMAuthentication>False</NTLMAuthentication>
++          <UseCustomServer>False</UseCustomServer>
++          <CustomServerUrl>
++          </CustomServerUrl>
++          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
++        </WebProjectProperties>
++      </FlavorProperties>
++    </VisualStudio>
++  </ProjectExtensions>
++  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
++       Other similar extension points exist, see Microsoft.Common.targets.
++  <Target Name="BeforeBuild">
++  </Target>
++  <Target Name="AfterBuild">
++  </Target> -->
++</Project>
+\ No newline at end of file
+diff --git a/source/SocialGoal/Web.config b/source/SocialGoal/Web.config
+index aafaf33..588f28d 100644
+--- a/source/SocialGoal/Web.config
++++ b/source/SocialGoal/Web.config
+@@ -1,4 +1,4 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
++<?xml version="1.0" encoding="utf-8"?>
+ <!--
+   For more information on how to configure your ASP.NET application, please visit
+   http://go.microsoft.com/fwlink/?LinkId=301880
+@@ -14,7 +14,7 @@
+       <section name="errorFilter" requirePermission="false" type="Elmah.ErrorFilterSectionHandler, Elmah" />
+     </sectionGroup></configSections>
+   <connectionStrings>
+-   	  <add name="SocialGoalEntities" connectionString="Data Source=.\;Initial Catalog=SocialGoal;Integrated Security=True" providerName="System.Data.SqlClient" />
++   	  <add name="SocialGoalEntities" connectionString="Data Source=127.0.0.1,14330;Initial Catalog=SocialGoal;User ID=sa;Password=Smoke_test_1234;TrustServerCertificate=True;MultipleActiveResultSets=True" providerName="System.Data.SqlClient" />
+   </connectionStrings>
+   <appSettings>
+     <add key="webpages:Version" value="3.0.0.0" />
+diff --git a/source/SocialGoal/packages.config b/source/SocialGoal/packages.config
+deleted file mode 100644
+index 676a4d3..0000000
+--- a/source/SocialGoal/packages.config
++++ /dev/null
+@@ -1,40 +0,0 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<packages>
+-  <package id="Antlr" version="3.4.1.9004" targetFramework="net45" />
+-  <package id="Autofac" version="3.1.5" targetFramework="net45" />
+-  <package id="Autofac.Mvc5" version="3.0.0" targetFramework="net45" />
+-  <package id="AutoMapper" version="3.1.1-ci1000" targetFramework="net45" />
+-  <package id="bootstrap" version="3.0.0" targetFramework="net45" />
+-  <package id="elmah.corelibrary" version="1.2.2" targetFramework="net45" />
+-  <package id="Elmah.MVC" version="2.1.1" targetFramework="net45" />
+-  <package id="EntityFramework" version="6.0.2-beta1" targetFramework="net45" />
+-  <package id="jQuery" version="1.10.2" targetFramework="net45" />
+-  <package id="jQuery.Validation" version="1.11.1" targetFramework="net45" />
+-  <package id="Microsoft.AspNet.Identity.Core" version="1.0.0" targetFramework="net45" />
+-  <package id="Microsoft.AspNet.Identity.EntityFramework" version="1.0.0" targetFramework="net45" />
+-  <package id="Microsoft.AspNet.Identity.Owin" version="1.0.0" targetFramework="net45" />
+-  <package id="Microsoft.AspNet.Mvc" version="5.0.0" targetFramework="net45" />
+-  <package id="Microsoft.AspNet.Razor" version="3.0.0" targetFramework="net45" />
+-  <package id="Microsoft.AspNet.Web.Optimization" version="1.1.1" targetFramework="net45" />
+-  <package id="Microsoft.AspNet.WebPages" version="3.0.0" targetFramework="net45" />
+-  <package id="Microsoft.jQuery.Unobtrusive.Validation" version="3.0.0" targetFramework="net45" />
+-  <package id="Microsoft.Owin" version="2.0.0" targetFramework="net45" />
+-  <package id="Microsoft.Owin.Host.SystemWeb" version="2.0.0" targetFramework="net45" />
+-  <package id="Microsoft.Owin.Security" version="2.0.0" targetFramework="net45" />
+-  <package id="Microsoft.Owin.Security.Cookies" version="2.0.0" targetFramework="net45" />
+-  <package id="Microsoft.Owin.Security.Facebook" version="2.0.0" targetFramework="net45" />
+-  <package id="Microsoft.Owin.Security.Google" version="2.0.0" targetFramework="net45" />
+-  <package id="Microsoft.Owin.Security.MicrosoftAccount" version="2.0.0" targetFramework="net45" />
+-  <package id="Microsoft.Owin.Security.OAuth" version="2.0.0" targetFramework="net45" />
+-  <package id="Microsoft.Owin.Security.Twitter" version="2.0.0" targetFramework="net45" />
+-  <package id="Microsoft.Web.Infrastructure" version="1.0.0.0" targetFramework="net45" />
+-  <package id="Modernizr" version="2.6.2" targetFramework="net45" />
+-  <package id="MvcMailer" version="4.5" targetFramework="net45" />
+-  <package id="Newtonsoft.Json" version="5.0.6" targetFramework="net45" />
+-  <package id="Owin" version="1.0" targetFramework="net45" />
+-  <package id="PagedList" version="1.17.0.0" targetFramework="net45" />
+-  <package id="PagedList.Mvc" version="4.5.0.0" targetFramework="net45" />
+-  <package id="Respond" version="1.2.0" targetFramework="net45" />
+-  <package id="T4Scaffolding.Core" version="1.0.0" targetFramework="net45" />
+-  <package id="WebGrease" version="1.5.2" targetFramework="net45" />
+-</packages>
+\ No newline at end of file
