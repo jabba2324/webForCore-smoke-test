@@ -5,7 +5,7 @@ One entry per distinct problem found while migrating apps. webForCore bugs and g
 pre-release and not recommended for production). See CLAUDE.md for the format. Every entry was found
 with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 release packages (tag `v0.1.0`,
 `2942b694`), unless the entry says otherwise. F16 onwards were found in round 2, on the released 0.2.0 packages
-(tag `v0.2.0`, `1c92215`), where F1–F15 are fixed or documented. Repro sites are small enough to paste: a `Program.cs` as in
+(tag `v0.2.0`, `1c92215`), where F1–F15 are fixed or documented. F16–F21 and F24 are fixed in [jabba2324/webForCore#24](https://github.com/jabba2324/webForCore/pull/24), checked against the apps. Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
 
 | # | Problem | Classification | Apps | Raised |
@@ -35,6 +35,7 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 | [F22](#f22) | AutoMapper before 12 doesn't run on .NET 11 | app/environment | realocate, socialgoal | - |
 | [F23](#f23) | `recaptcha` 1.0.5's lib folders aren't framework names (NU1202) | app/environment | roadkill | - |
 | [F24](#f24) | A transitive Microsoft.AspNet.Razor replaces webForCore's in the output with no build error | webForCore bug | bonobo-git-server, applicant-tracking, realocate, roadkill | [#23](https://github.com/jabba2324/webForCore/issues/23) |
+| [F25](#f25) | StructureMap 4.0's .NET Framework build needs `AppDomainSetup.PrivateBinPath` | app/environment | roadkill | - |
 ---
 
 ## F1
@@ -590,3 +591,18 @@ then fails. webForCore bug (F5's documented step is the workaround). Raised as [
   (`Microsoft.AspNet.Mvc`, `.Razor`, `.WebPages`, `.WebApi.*`, `.Web.Optimization`, `Microsoft.Web.Infrastructure`, the
   Katana packages it lifts, ...) when they arrive transitively, as 0.2.0 already does for the framework `HttpUtility`
   (F8). That would make F5's manual step unnecessary too.
+
+## F25
+
+**StructureMap 4.0's .NET Framework build needs `AppDomainSetup.PrivateBinPath`.** App/environment. Found on the
+packages of jabba2324/webForCore#24 (it was behind F19 and F20).
+
+- **Apps:** roadkill (`structuremap` 4.0.0.315, through `StructureMap.MVC5` and `structuremap.web`).
+- **Error:** every request, from Roadkill's WebActivatorEx start method:
+  ```
+  MissingMethodException: Method not found: 'System.String System.AppDomainSetup.get_PrivateBinPath()'.
+     at StructureMap.Graph.AssemblyFinder.FindBinPath()
+     at StructureMap.Graph.AssemblyScannerExtensions.AssembliesFromApplicationBaseDirectory(IAssemblyScanner scanner, ...)
+  ```
+  .NET's `AppDomainSetup` has no `PrivateBinPath`. The `lib/net40` StructureMap is built for .NET Framework.
+- **Next step:** a StructureMap version with a .NET Standard build, or scanning with `AssembliesFromPath(HttpRuntime.BinDirectory)`.
