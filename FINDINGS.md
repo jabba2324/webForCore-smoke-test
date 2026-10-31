@@ -17,10 +17,10 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 | [F7](#f7) | Packages that must be upgraded: EF 6.2 → 6.4+, Newtonsoft.Json 12 → 13 | guide gap | eshop-legacy-mvc, eshop-legacy-webforms | [#6](https://github.com/jabba2324/webForCore/issues/6) |
 | [F8](#f8) | `HttpUtility` in app code is CS0433 outside webForCore's repository | webForCore bug | eshop-legacy-webforms | [#7](https://github.com/jabba2324/webForCore/issues/7) |
 | [F9](#f9) | Data controls with `ItemType` need System.Web.DynamicData, which isn't built | documented gap (consequence undocumented) | eshop-legacy-webforms | [#8](https://github.com/jabba2324/webForCore/issues/8) |
-| [F10](#f10) | .NET Framework assemblies that are NuGet packages on .NET (System.ServiceModel.Syndication) | guide gap | miniblog | |
-| [F11](#f11) | One URL Rewrite feature ASP.NET Core lacks (Wildcard syntax, `{CACHE_URL}`) drops every rule, failing open | webForCore bug | miniblog | |
-| [F12](#f12) | A rewrite to a query-only URL (`?slug={R:1}`) is a bare 500 (`IndexOutOfRangeException`) | webForCore bug | miniblog | |
-| [F13](#f13) | `<handlers>` entries whose `path` starts with `/` never match | webForCore bug | miniblog | |
+| [F10](#f10) | .NET Framework assemblies that are NuGet packages on .NET (System.ServiceModel.Syndication) | guide gap | miniblog | [#9](https://github.com/jabba2324/webForCore/issues/9) |
+| [F11](#f11) | One URL Rewrite feature ASP.NET Core lacks (Wildcard syntax, `{CACHE_URL}`) drops every rule, failing open | webForCore bug | miniblog | [#10](https://github.com/jabba2324/webForCore/issues/10) |
+| [F12](#f12) | A rewrite to a query-only URL (`?slug={R:1}`) is a bare 500 (`IndexOutOfRangeException`) | webForCore bug | miniblog | [#11](https://github.com/jabba2324/webForCore/issues/11) |
+| [F13](#f13) | `<handlers>` entries whose `path` starts with `/` never match | webForCore bug | miniblog | [#12](https://github.com/jabba2324/webForCore/issues/12) |
 
 ---
 
@@ -238,7 +238,7 @@ consequence isn't. Raised as [#8](https://github.com/jabba2324/webForCore/issues
 
 ## F10
 
-**.NET Framework assemblies that are NuGet packages on .NET.** Guide gap.
+**.NET Framework assemblies that are NuGet packages on .NET.** Guide gap. Raised as [#9](https://github.com/jabba2324/webForCore/issues/9).
 
 - **Apps:** miniblog: `app_code/handlers/FeedHandler.cs` uses `System.ServiceModel.Syndication` (`SyndicationFeed`,
   `Rss20FeedFormatter`).
@@ -256,7 +256,7 @@ consequence isn't. Raised as [#8](https://github.com/jabba2324/webForCore/issues
 
 ## F11
 
-**One URL Rewrite feature ASP.NET Core lacks drops every rule, failing open.** webForCore bug.
+**One URL Rewrite feature ASP.NET Core lacks drops every rule, failing open.** webForCore bug. Raised as [#10](https://github.com/jabba2324/webForCore/issues/10).
 
 - **Apps:** miniblog. Its first rule is IIS's own "Remove WWW" template:
   ```xml
@@ -289,7 +289,7 @@ consequence isn't. Raised as [#8](https://github.com/jabba2324/webForCore/issues
 
 ## F12
 
-**A rewrite to a query-only URL is a bare 500.** webForCore bug.
+**A rewrite to a query-only URL is a bare 500.** webForCore bug. Raised as [#11](https://github.com/jabba2324/webForCore/issues/11).
 
 - **Apps:** miniblog: `<action type="Rewrite" url="?slug={R:1}" />` for `^post/(.*)`, and the same for paging and
   categories. On IIS the rewritten URL is resolved against the site root, so `/post/test-1` runs `/?slug=test-1`
@@ -304,7 +304,7 @@ consequence isn't. Raised as [#8](https://github.com/jabba2324/webForCore/issues
 
 ## F13
 
-**`<handlers>` entries whose `path` starts with `/` never match.** webForCore bug.
+**`<handlers>` entries whose `path` starts with `/` never match.** webForCore bug. Raised as [#12](https://github.com/jabba2324/webForCore/issues/12).
 
 - **Apps:** miniblog: `path="/comment.ashx"` (comment posting), `path="/post.ashx"`, `path="/metaweblog"` (Windows Live
   Writer / XML-RPC) and `path="/feed/*"` (RSS and Atom) are all 404. `path="*.css"` and `path="*.js"` in the same
