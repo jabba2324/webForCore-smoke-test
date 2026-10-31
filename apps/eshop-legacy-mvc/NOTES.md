@@ -1,6 +1,6 @@
 # eShopLegacyMVC (eShopModernizing): migration notes
 
-Status: blocked (webForCore bug F1). Source: https://github.com/dotnet-architecture/eShopModernizing at `63bc9ec4`
+Status: migrated (webForCore 0.2.0, all probes pass).
 (the last commit; the repo is archived). webForCore 0.1.0, from its GitHub release packages (first migrated
 against the source at `4ec57209`, which the release differs from only in packaging; every result below was
 repeated on the packages).
@@ -85,7 +85,15 @@ fails in `SessionStateModuleAsync.Init` with `Type 'System.Web.Configuration.Ses
   in `Controller`. Not probed.
 - `GET /logs/W3SVC1/u_ex<date>.0000.txt` returned the W3C log ([F4](../../FINDINGS.md#f4)).
 
+### Round 2: webForCore 0.2.0
+
+All 15 probes pass on the released 0.2.0 packages (the overlay's `PackageReference`s moved from 0.1.0 to 0.2.0). The round-1 failures above were fixed in webForCore PR #16 and are kept as the record of round 1.
+
+Overlay change for 0.2.0: `CatalogDBInitializer.ExecuteScript` builds the script path from `HttpRuntime.AppDomainAppPath` instead of `AppDomain.CurrentDomain.BaseDirectory`, which on webForCore is the host's output folder (`bin_dotnet/`), not the site root (#3, now documented in `docs/MIGRATING.md`). The SQL Server seed now runs and the catalog comes from the database.
+
 ## Open problems
+
+Round 1 (webForCore 0.1.0); the webForCore bugs below are fixed in 0.2.0 (PR #16) and kept for the record.
 
 - [F1](../../FINDINGS.md#f1) (webForCore bug): `ConfigurationManager` from .NET Framework libraries doesn't see
   web.config. Blocks every request.

@@ -1,9 +1,9 @@
 info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
       User profile is available. Using '~/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application 11d98311 (start 1, in a PseudoAppDomain).
+      Started application 82b7461a (start 1, in a PseudoAppDomain).
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://127.0.0.1:51655
+      Now listening on: http://127.0.0.1:47897
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
@@ -11,72 +11,68 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Content root path: <repo>/apps/eshop-legacy-mvc/src/eShopLegacyMVCSolution/src/eShopLegacyMVC
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:51655/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:47897/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:51655/Catalog/Details/1 - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:47897/Catalog/Details/1 - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:47897/ - 200 14462 text/html;+charset=utf-8 17991.6149ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:47897/Catalog/Details/1 - 200 3271 text/html;+charset=utf-8 98.1478ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:51655/Catalog/Create - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:47897/Catalog/Create - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:47897/Catalog/Create - 200 7836 text/html;+charset=utf-8 147.1202ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:51655/items/1/pic - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:47897/items/1/pic - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:51655/ - 500 8243 text/html;+charset=utf-8 784.3911ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:51655/Catalog/Details/1 - 500 8243 text/html;+charset=utf-8 12.2859ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:51655/Catalog/Create - 500 8243 text/html;+charset=utf-8 7.2104ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:51655/items/1/pic - 500 8243 text/html;+charset=utf-8 2.0125ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:47897/items/1/pic - 200 151640 image/png 25.9482ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:51655/api/brands - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:47897/api/brands - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:51655/api/brands - 500 8243 text/html;+charset=utf-8 1.5919ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:47897/api/brands - 200 138 application/json;+charset=utf-8 191.3213ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:51655/api/brands/1 - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:47897/api/brands/1 - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:51655/api/brands/1 - 500 8243 text/html;+charset=utf-8 1.4641ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:47897/api/brands/1 - 200 24 application/json;+charset=utf-8 30.0986ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:51655/Content/base.css - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:47897/Content/base.css - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:51655/Content/base.css - 500 8243 text/html;+charset=utf-8 5.1784ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:47897/Content/base.css - 200 912 text/css 73.7250ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:51655/Content/css - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:47897/Content/css - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:51655/Content/css - 500 8243 text/html;+charset=utf-8 1.5588ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:47897/Content/css - 200 199898 text/css;+charset=utf-8 14.6507ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:51655/Images/brand.png - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:47897/Images/brand.png - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:51655/Images/brand.png - 500 8243 text/html;+charset=utf-8 1.7588ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:47897/Images/brand.png - 200 4023 image/png 2.0653ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:51655/web.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:47897/web.config - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:51655/web.config - 404 252 text/html 11.9096ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:47897/web.config - 404 252 text/html 2.1254ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:51655/App_Data/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:47897/App_Data/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:51655/App_Data/ - 404 252 text/html 2.8607ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:47897/App_Data/ - 404 252 text/html 0.4166ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:51655/Global.asax.cs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:47897/Global.asax.cs - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:51655/Global.asax.cs - 404 215 text/html 2.8693ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:47897/Global.asax.cs - 404 215 text/html 0.4192ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:51655/obj/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:47897/obj/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:51655/obj/ - 404 252 text/html 2.7263ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:47897/obj/ - 404 252 text/html 0.3398ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:51655/packages.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:47897/packages.config - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:51655/packages.config - 404 215 text/html 3.0665ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:47897/packages.config - 404 215 text/html 0.2805ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:51655/bin_dotnet/eShopLegacyMVC.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:47897/bin_dotnet/eShopLegacyMVC.dll - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:51655/bin_dotnet/eShopLegacyMVC.dll - 404 252 text/html 3.6286ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:51655/logs/W3SVC1/u_ex20261031.0000.txt - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:51655/logs/W3SVC1/u_ex20261031.0000.txt - 500 8243 text/html;+charset=utf-8 8.1983ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:47897/bin_dotnet/eShopLegacyMVC.dll - 404 252 text/html 0.8287ms
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application 11d98311 (start 1) is shutting down.
+      Application 82b7461a (start 1) is shutting down.
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application 11d98311 (start 1) is unloading.
+      Application 82b7461a (start 1) is unloading.

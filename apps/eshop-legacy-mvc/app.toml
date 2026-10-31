@@ -7,8 +7,8 @@ site = "eShopLegacyMVCSolution/src/eShopLegacyMVC"
 project = "eShopLegacyMVCSolution/src/eShopLegacyMVC/eShopLegacyMVC.csproj"
 kinds = ["mvc", "webapi"]
 licence = "MIT"
-status = "blocked"
-notes = "Builds; every request fails in SessionStateModuleAsync on webForCore bug F1. With that module removed and mock data, all page kinds work; the SQL Server seed hits F3."
+status = "migrated"
+notes = "webForCore 0.2.0: passes all 15 probes with the round-1 overlay moved to the 0.2.0 packages plus the changes in NOTES.md (round 2)."
 
 needs = ["mssql"]
 
