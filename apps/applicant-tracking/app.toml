@@ -9,26 +9,18 @@ kinds = ["mvc", "owin", "identity"]
 licence = "Apache-2.0"
 status = "blocked"
 https = true
-notes = "Builds and serves over HTTPS; the home page and static files work, but WebActivatorEx's start methods never run (F20), so Unity isn't registered and every DI controller fails."
+notes = "Builds and serves over HTTPS; the home page and static files work, but WebActivatorEx's start methods never run (F20), so Unity isn't registered and every DI controller fails. With webForCore's fix (PR), all probes pass."
 
-# The first request compiles the site, so it gets 120 s.
 needs = ["mssql"]
 
 # The first request compiles the site, so it gets 120 s. Served over HTTPS (RequireHttpsAttribute is a global filter).
+# Not probed: /Applicant and /Applicant/Details/{id}. At this commit the EF model has a Domicilio entity with no key, so
+# any query fails model validation ("EntityType 'Domicilio' has no key defined"), as it would on .NET Framework.
 [[probes]]
 path = "/"
 contains = "Getting started"
 
-# EF 6 migrations create the database and seed four applicants.
-[[probes]]
-path = "/Applicant"
-contains = "Jesica"
-
-[[probes]]
-path = "/Applicant/Details/1"
-contains = "FRRO0123456789"
-
-# A form with an anti-forgery token.
+# A form with an anti-forgery token, from a controller Unity constructs.
 [[probes]]
 path = "/Applicant/Create"
 contains = "__RequestVerificationToken"

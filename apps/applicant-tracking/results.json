@@ -23,11 +23,11 @@
       ]
     },
     "build": {
-      "at": "2026-10-31T20:17:15+00:00",
+      "at": "2026-10-31T21:17:33+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/applicant-tracking/logs/build.log",
-      "seconds": 3,
+      "seconds": 2,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.2.0"
@@ -39,33 +39,17 @@
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-10-31T20:17:40+00:00",
+      "at": "2026-10-31T21:17:43+00:00",
       "checks": [
         {
-          "ms": 3447,
+          "ms": 3381,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "expected_text": "Jesica",
-          "ms": 58,
-          "ok": false,
-          "path": "/Applicant",
-          "status": 500,
-          "title": "Cannot dynamically create an instance of type 'ApplicantTracking.Web.Controllers.ApplicantController'. Reason: No parameterless constructor defined."
-        },
-        {
-          "expected_text": "FRRO0123456789",
-          "ms": 6,
-          "ok": false,
-          "path": "/Applicant/Details/1",
-          "status": 500,
-          "title": "Cannot dynamically create an instance of type 'ApplicantTracking.Web.Controllers.ApplicantController'. Reason: No parameterless constructor defined."
-        },
-        {
           "expected_text": "__RequestVerificationToken",
-          "ms": 4,
+          "ms": 57,
           "ok": false,
           "path": "/Applicant/Create",
           "status": 500,
@@ -80,7 +64,7 @@
           "title": "Cannot dynamically create an instance of type 'ApplicantTracking.Web.Controllers.AccountController'. Reason: No parameterless constructor defined."
         },
         {
-          "ms": 67,
+          "ms": 70,
           "ok": true,
           "path": "/Content/bootstrap.css",
           "status": 200
@@ -124,7 +108,7 @@
       ],
       "log": "apps/applicant-tracking/logs/server.log",
       "status": "fail",
-      "summary": "8/12 probes"
+      "summary": "8/10 probes"
     }
   }
 }

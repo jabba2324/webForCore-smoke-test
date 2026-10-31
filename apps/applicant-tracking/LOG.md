@@ -16,3 +16,6 @@ Appended by `scripts/wfc.py`, one line per stage run.
 - 2026-10-31T20:04:40+00:00 **smoke**: fail (8/12 probes)
 - 2026-10-31T20:17:15+00:00 **build**: pass
 - 2026-10-31T20:17:40+00:00 **smoke**: fail (8/12 probes)
+- 2026-10-31T21:17:23+00:00 **smoke**: fail (server exited with 150)
+- 2026-10-31T21:17:33+00:00 **build**: pass
+- 2026-10-31T21:17:43+00:00 **smoke**: fail (8/10 probes)
