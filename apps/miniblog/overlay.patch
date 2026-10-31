@@ -1,6 +1,6 @@
 diff --git a/Website/MiniBlog.csproj b/Website/MiniBlog.csproj
 new file mode 100644
-index 0000000..3c5821b
+index 0000000..3a9ab02
 --- /dev/null
 +++ b/Website/MiniBlog.csproj
 @@ -0,0 +1,47 @@
@@ -32,10 +32,10 @@ index 0000000..3c5821b
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.1.0 packages: the "Always" set, Web Pages and Helpers. -->
-+    <PackageReference Include="webForCore" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Razor" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.Helpers" Version="0.1.0" />
++    <PackageReference Include="webForCore" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Razor" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Helpers" Version="0.2.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -94,3 +94,24 @@ index be254c2..0000000
 -  <package id="xmlrpcnet-server" version="3.0.0.266" targetFramework="net45" />
 -</packages>
 \ No newline at end of file
+diff --git a/logs/Website/W3SVC1/u_ex20261031.0000.txt b/logs/Website/W3SVC1/u_ex20261031.0000.txt
+new file mode 100644
+index 0000000..d55d913
+--- /dev/null
++++ b/logs/Website/W3SVC1/u_ex20261031.0000.txt
+@@ -0,0 +1,15 @@
++#Version: 1.0
++#Start-Date: 2026-10-31 19:37:23
++#Fields: date time c-ip cs-username s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status time-taken cs(User-Agent) cs(Referer)
++2026-10-31 19:37:20 127.0.0.1 - 127.0.0.1 56133 GET / - 200 1705.16 webForCore-smoke-test -
++2026-10-31 19:37:22 127.0.0.1 - 127.0.0.1 56133 GET /post/test-1 - 200 22.0479 webForCore-smoke-test -
++2026-10-31 19:37:22 127.0.0.1 - 127.0.0.1 56133 GET /category/Chrome - 200 9.0227 webForCore-smoke-test -
++2026-10-31 19:37:22 127.0.0.1 - 127.0.0.1 56133 GET /feed/rss/ - 200 43.2483 webForCore-smoke-test -
++2026-10-31 19:37:22 127.0.0.1 - 127.0.0.1 56133 GET /robots.txt - 200 84.3437 webForCore-smoke-test -
++2026-10-31 19:37:22 127.0.0.1 - 127.0.0.1 56133 GET /sitemap.xml - 200 2.9011 webForCore-smoke-test -
++2026-10-31 19:37:22 127.0.0.1 - 127.0.0.1 56133 GET /views/login.cshtml - 200 97.8766 webForCore-smoke-test -
++2026-10-31 19:37:22 127.0.0.1 - 127.0.0.1 56133 GET /metaweblog - 200 59.0377 webForCore-smoke-test -
++2026-10-31 19:37:22 127.0.0.1 - 127.0.0.1 56133 GET /views/robots/rsd - 200 3.1046 webForCore-smoke-test -
++2026-10-31 19:37:22 127.0.0.1 - 127.0.0.1 56133 GET /themes/OneColumn/site.css - 200 115.0331 webForCore-smoke-test -
++2026-10-31 19:37:22 127.0.0.1 - 127.0.0.1 56133 GET /posts/9fa751db-c036-435b-97e3-bd6373b0991b.xml - 403 2.6394 webForCore-smoke-test -
++2026-10-31 19:37:22 127.0.0.1 - 127.0.0.1 56133 GET /no-such-page - 404 60.0477 webForCore-smoke-test -

@@ -10,8 +10,8 @@ remove = ["Website/bin/*.refresh", "Website/bin/*.xml", "Website/bin/AjaxMin.dll
           "Website/bin/WebMarkupMin.Core.dll", "Website/bin/[Ss]ystem.[Ww]eb.*", "Website/bin/[Mm]icrosoft.[Ww]eb.[Ii]nfrastructure.dll"]
 kinds = ["webpages"]
 licence = "Apache-2.0"
-status = "blocked"
-notes = "Web Pages site (no project file before). Pages, app_code, forms login and minification work; every URL Rewrite rule is dropped (F11, fail-open: posts/*.xml served), query-only rewrites crash (F12), handlers mapped with a leading / are 404 (F13)."
+status = "migrated"
+notes = "webForCore 0.2.0: passes all 18 probes with the round-1 overlay moved to the 0.2.0 packages."
 
 # The first request compiles the site, so it gets 120 s.
 [[probes]]
