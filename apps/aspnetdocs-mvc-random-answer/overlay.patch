@@ -1,5 +1,5 @@
 diff --git a/aspnet/mvc/overview/deployment/docker-aspnetmvc/samples/MVCRandomAnswerGenerator/MVCRandomAnswerGenerator/MVCRandomAnswerGenerator.csproj b/aspnet/mvc/overview/deployment/docker-aspnetmvc/samples/MVCRandomAnswerGenerator/MVCRandomAnswerGenerator/MVCRandomAnswerGenerator.csproj
-index ea55ba18d..5dd3fb341 100644
+index ea55ba18d..00f2fb029 100644
 --- a/aspnet/mvc/overview/deployment/docker-aspnetmvc/samples/MVCRandomAnswerGenerator/MVCRandomAnswerGenerator/MVCRandomAnswerGenerator.csproj
 +++ b/aspnet/mvc/overview/deployment/docker-aspnetmvc/samples/MVCRandomAnswerGenerator/MVCRandomAnswerGenerator/MVCRandomAnswerGenerator.csproj
 @@ -1,215 +1,48 @@
@@ -190,11 +190,11 @@ index ea55ba18d..5dd3fb341 100644
    <ItemGroup>
 -    <Folder Include="App_Data\" />
 +    <!-- webForCore 0.1.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.Helpers" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.1.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.1.0" />
++    <PackageReference Include="webForCore" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Helpers" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.2.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.2.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -548,3 +548,14 @@ index d24302ce9..000000000
 -  <package id="WebGrease" version="1.6.0" targetFramework="net452" />
 -</packages>
 \ No newline at end of file
+diff --git a/aspnet/mvc/overview/deployment/docker-aspnetmvc/samples/MVCRandomAnswerGenerator/logs/MVCRandomAnswerGenerator/W3SVC1/u_ex20261031.0000.txt b/aspnet/mvc/overview/deployment/docker-aspnetmvc/samples/MVCRandomAnswerGenerator/logs/MVCRandomAnswerGenerator/W3SVC1/u_ex20261031.0000.txt
+new file mode 100644
+index 000000000..fbaecab0e
+--- /dev/null
++++ b/aspnet/mvc/overview/deployment/docker-aspnetmvc/samples/MVCRandomAnswerGenerator/logs/MVCRandomAnswerGenerator/W3SVC1/u_ex20261031.0000.txt
+@@ -0,0 +1,5 @@
++#Version: 1.0
++#Start-Date: 2026-10-31 19:35:10
++#Fields: date time c-ip cs-username s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status time-taken cs(User-Agent) cs(Referer)
++2026-10-31 19:35:06 127.0.0.1 - 127.0.0.1 38851 GET / - 200 3154.1208 webForCore-smoke-test -
++2026-10-31 19:35:09 127.0.0.1 - 127.0.0.1 38851 GET /Home/About - 200 15.9934 webForCore-smoke-test -

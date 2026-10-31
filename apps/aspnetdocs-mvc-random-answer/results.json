@@ -17,26 +17,26 @@
       ]
     },
     "build": {
-      "at": "2026-10-31T10:54:32+00:00",
+      "at": "2026-10-31T19:35:02+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/aspnetdocs-mvc-random-answer/logs/build.log",
       "seconds": 1,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.1.0"
+      "webforcore": "packages 0.2.0"
     },
     "fetch": {
-      "at": "2026-10-31T10:54:18+00:00",
+      "at": "2026-10-31T19:34:04+00:00",
       "commit": "546ffe728556a60591b93ab4fcbd4437f71e2449",
-      "overlay": false,
+      "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-10-31T10:56:04+00:00",
+      "at": "2026-10-31T19:35:11+00:00",
       "checks": [
         {
-          "ms": 3162,
+          "ms": 3207,
           "ok": true,
           "path": "/",
           "status": 200
@@ -48,52 +48,45 @@
           "status": 200
         },
         {
-          "ms": 7,
+          "ms": 4,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 1,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 1,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 1,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 5,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/MVCRandomAnswerGenerator.dll",
           "status": 404
-        },
-        {
-          "ms": 96,
-          "ok": false,
-          "path": "/logs/W3SVC1/u_ex20261031.0000.txt",
-          "status": 200,
-          "title": "#Version: 1.0\n#Start-Date: 2026-10-31 10:56:03\n#Fields: date time c-ip cs-username s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status time-taken cs(User-Agent) cs(Referer)\n2026-10-31 10:55:59 127.0.0.1 - 127.0.0.1 41259 GET / - 200 3109.8832 webForCore-smoke-test -\n2026-10-31 10:56:02 127.0.0."
         }
       ],
       "log": "apps/aspnetdocs-mvc-random-answer/logs/server.log",
-      "status": "fail",
-      "summary": "8/9 probes"
+      "status": "pass",
+      "summary": "8/8 probes"
     }
   }
 }
