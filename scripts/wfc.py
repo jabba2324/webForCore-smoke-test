@@ -395,8 +395,10 @@ def smoke(app):
         time.sleep(1.5)
         w3c = sorted((site / "logs").glob("W3SVC*/*.txt"))
         w3c = [f"/{w3c[0].relative_to(site).as_posix()}"] if w3c else []
-        for path in FORBIDDEN + [f"/bin_dotnet/{dll.name}"] + w3c:
+        for path in FORBIDDEN + [f"/bin_dotnet/{dll.name}"]:
             checks.append(run_probe(base, {"path": path, "status": 404, "forbidden": True}, timeout=30))
+        for path in w3c:  # an app that answers every URL itself (OWIN) may return 200: what matters is the log's content
+            checks.append(run_probe(base, {"path": path, "status": 404, "forbidden": True, "absent": "#Fields:"}, timeout=30))
     finally:
         server.terminate()
         try:
@@ -418,6 +420,8 @@ def run_probe(base, probe, timeout):
     except Exception as ex:  # noqa: BLE001 - a probe reports any failure
         return {"path": path, "ok": False, "error": f"{type(ex).__name__}: {ex}"}
     ok = status == probe.get("status", 200) or bool(probe.get("forbidden") and status in (403, 404))
+    if probe.get("absent"):
+        ok = probe["absent"] not in body
     if ok and probe.get("contains") and probe["contains"] not in body:
         ok = False
     check = {"path": path, "ok": ok, "status": status, "ms": round((time.time() - t) * 1000)}
