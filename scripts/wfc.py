@@ -62,6 +62,11 @@ BLOCKERS = [
     ("com-plus", r"System\.EnterpriseServices|Transaction=\""),
     ("dpapi-config", r"DataProtectionConfigurationProvider"),
 ]
+# Not blockers, but code to change (docs/NAMESPACES.md): listed by assess without blocking.
+NOTICES = [
+    ("binaryformatter", r"(?<!Formatters\.Binary\.)\bnew BinaryFormatter\b|System\.Runtime\.Serialization\.Formatters\.Binary"),
+    ("smtpclient-config", r"new SmtpClient\(\s*\)"),
+]
 SCANNED = {".cs", ".vb", ".aspx", ".ascx", ".master", ".asax", ".ashx", ".asmx", ".cshtml", ".vbhtml", ".config", ".svc"}
 
 # Framework detection from packages.config / csproj references.
@@ -236,18 +241,37 @@ def save_overlay(app):
 
 # --- assess --------------------------------------------------------------------------------------
 
+def referenced_projects(proj, seen=None):
+    """The folders of the projects a project references, transitively (a class library's blockers block the site)."""
+    seen = seen if seen is not None else set()
+    text = proj.read_text(errors="replace") if proj.exists() else ""
+    netfx = proj.with_name(proj.name + ".netfx")  # the original project, if already converted
+    text += netfx.read_text(errors="replace") if netfx.exists() else ""
+    for ref in re.findall(r'<ProjectReference\s+Include="([^"$]+)"', text):
+        target = (proj.parent / ref.replace("\\", "/")).resolve()
+        if target.exists() and target not in seen:
+            seen.add(target)
+            referenced_projects(target, seen)
+    return seen
+
+
 def assess(app):
     root = site_dir(app)
     if not root.exists():
         return record(app["id"], "assess", "fail", summary=f"no folder {root.relative_to(ROOT)}")
-    hits = {name: [] for name, _ in BLOCKERS}
+    hits = {name: [] for name, _ in BLOCKERS + NOTICES}
     kinds = set()
     target_frameworks = set()
     refs_text = []
-    for p in root.rglob("*"):
+    proj = project_file(app)
+    libraries = sorted({t.parent for t in referenced_projects(proj)} - {root}) if proj else []
+    files = [(root, p) for p in root.rglob("*")] + [(lib, p) for lib in libraries for p in lib.rglob("*")]
+    for base, p in files:
         if not p.is_file() or any(part in {"bin", "obj", "bin_dotnet", "packages", "node_modules", ".git"} for part in p.parts):
             continue
-        rel = str(p.relative_to(root))
+        if p.name == "machine.config" and p.parent.name == "App_Data":  # webForCore extracts its own here at run time
+            continue
+        rel = str(p.relative_to(root if base == root else checkout(app)))
         if p.suffix.lower() == ".aspx":
             kinds.add("webforms")
         if p.name == "packages.config" or p.suffix == ".csproj" or p.name.endswith(".csproj.netfx"):
@@ -259,7 +283,7 @@ def assess(app):
                 text = p.read_text(errors="replace")
             except OSError:
                 continue
-            for name, pattern in BLOCKERS:
+            for name, pattern in BLOCKERS + NOTICES:
                 for m in re.finditer(pattern, text):
                     line = text.count("\n", 0, m.start()) + 1
                     hits[name].append(f"{rel}:{line}")
@@ -268,8 +292,10 @@ def assess(app):
         if kind != "webforms" and re.search(pattern, joined):
             kinds.add(kind)
     hits = {k: v[:20] + ([f"... {len(v) - 20} more"] if len(v) > 20 else []) for k, v in hits.items() if v}
+    notices = {k: hits.pop(k) for k, _ in NOTICES if k in hits}
     status = "blocked" if hits else "pass"
     return record(app["id"], "assess", status, kinds=sorted(kinds), target_frameworks=sorted(target_frameworks),
+                  libraries=[str(lib.relative_to(checkout(app))) for lib in libraries], notices=notices,
                   blockers=hits, summary=", ".join(sorted(hits)) or "no blockers found")
 
 
