@@ -12,7 +12,7 @@ Coverage and accurate findings matter more than a green table.
 
 ## The loop, per app
 
-Each app is a folder, `apps/<id>/` (see README.md). Nothing goes at the top level except the runner, the services,
+Each app is a folder, `apps/<id>/` (see README.md). Nothing goes at the top level except the runner (and `scripts/convert.py`), the services,
 `FINDINGS.md` and the generated `RESULTS.md`; never add a top-level project or solution.
 
 1. **Verify `apps/<id>/app.toml`** before anything else: the repo exists, the licence is open source, the web project

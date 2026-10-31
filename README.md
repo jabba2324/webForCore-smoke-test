@@ -61,6 +61,10 @@ reapplies the overlay.
 
 ## Migrating an app
 
+`scripts/convert.py <web project>.csproj [--lib <library>.csproj]` does the mechanical part of Phase 2 (the SDK
+project, webForCore's packages, `Program.cs`, `<system.codedom>`) and prints what it changed; check it and note it
+in `NOTES.md`.
+
 Follow webForCore's `docs/AGENT-MIGRATION.md` in the checkout, with the package route (`docs/MIGRATING.md`
 section 1). Reference the packages by version; the runner adds `.packages/` as a restore source, so the patches
 need no `nuget.config` and work on any machine:
