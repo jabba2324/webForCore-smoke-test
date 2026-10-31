@@ -35,10 +35,10 @@ Each app is a folder, `apps/<id>/` (see README.md). Nothing goes at the top leve
 
 webForCore ships only Microsoft assemblies. Builds of third-party libraries for it are in
 [webForCore-thirdparty](https://github.com/jabba2324/webForCore-thirdparty), for this test bed: an app that uses one
-of them references the package from there, downloaded into the same package folder as webForCore's:
+of them references the package from there, downloaded into the folder `scripts/wfc.py packages` puts webForCore's in:
 
 ```bash
-gh release download --repo jabba2324/webForCore-thirdparty --pattern '*.nupkg' --dir packages/v<webForCore version> --skip-existing
+gh release download --repo jabba2324/webForCore-thirdparty --pattern '*.nupkg' --dir .packages/v<webForCore version> --skip-existing
 ```
 
 | The app uses | Reference | Without it |
