@@ -7,8 +7,8 @@ site = "CMSAdmin"
 project = "CMSAdmin/CMSAdminMVC.csproj"
 kinds = ["mvc", "owin", "identity", "webforms"]
 licence = "MIT"
-status = "verified"
-notes = "Actively maintained MVC 5 CMS (2026); .NET 4.5 with plugin web projects (Northwind, PhotoGallery, ...). Needs SQL Server."
+status = "blocked"
+notes = "Blocked: its data layer is LINQ to SQL (CarrotCMS.dbml and the plugins' .dbml files). webForCore recommends EF 6; that rewrite is the app's, not pursued here."
 
 # The first request compiles the site, so it gets 120 s.
 # [[probes]]
