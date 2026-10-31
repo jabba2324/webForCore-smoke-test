@@ -5,7 +5,7 @@ One entry per distinct problem found while migrating apps. webForCore bugs and g
 pre-release and not recommended for production). See CLAUDE.md for the format. Every entry was found
 with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 release packages (tag `v0.1.0`,
 `2942b694`), unless the entry says otherwise. F16 onwards were found in round 2, on the released 0.2.0 packages
-(tag `v0.2.0`, `1c92215`), where F1–F15 are fixed or documented. F16–F21 and F24 are fixed in [jabba2324/webForCore#24](https://github.com/jabba2324/webForCore/pull/24), checked against the apps. Repro sites are small enough to paste: a `Program.cs` as in
+(tag `v0.2.0`, `1c92215`), where F1–F15 are fixed or documented. F16–F21 and F24 are fixed in [jabba2324/webForCore#24](https://github.com/jabba2324/webForCore/pull/24) (released in 0.3.0), checked against the apps. Round 3 ran on 0.4.0, with webForCore-thirdparty 0.4.0 for WebActivatorEx (CLAUDE.md); F25 onwards were found there. Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
 
 | # | Problem | Classification | Apps | Raised |
@@ -35,7 +35,9 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 | [F22](#f22) | AutoMapper before 12 doesn't run on .NET 11 | app/environment | realocate, socialgoal | - |
 | [F23](#f23) | `recaptcha` 1.0.5's lib folders aren't framework names (NU1202) | app/environment | roadkill | - |
 | [F24](#f24) | A transitive Microsoft.AspNet.Razor replaces webForCore's in the output with no build error | webForCore bug | bonobo-git-server, applicant-tracking, realocate, roadkill | [#23](https://github.com/jabba2324/webForCore/issues/23) |
-| [F25](#f25) | StructureMap 4.0's .NET Framework build needs `AppDomainSetup.PrivateBinPath` | app/environment | roadkill | - |
+| [F25](#f25) | .NET Framework builds of StructureMap 4.0 and NLog 4.2 need `AppDomainSetup` members .NET lacks; their .NET Standard builds work | app/environment | roadkill | - |
+| [F26](#f26) | OpenOrderFramework's Identity seed deadlocks on a fresh database (EF 6 initialization lock + `AsyncHelper.RunSync`) | app/environment | open-order-framework | - |
+| [F27](#f27) | LightSpeed (closed-source ORM) needs `AppDomain.DefineDynamicAssembly` | app/environment | roadkill | - |
 ---
 
 ## F1
@@ -605,4 +607,44 @@ packages of jabba2324/webForCore#24 (it was behind F19 and F20).
      at StructureMap.Graph.AssemblyScannerExtensions.AssembliesFromApplicationBaseDirectory(IAssemblyScanner scanner, ...)
   ```
   .NET's `AppDomainSetup` has no `PrivateBinPath`. The `lib/net40` StructureMap is built for .NET Framework.
-- **Next step:** a StructureMap version with a .NET Standard build, or scanning with `AssembliesFromPath(HttpRuntime.BinDirectory)`.
+- **What worked (round 3):** `structuremap` 4.0.0.315 → 4.7.1, which has a .NET Standard 2.0 build (no code change).
+  The next library had the same kind of problem: NLog 4.2.0's `LogManager` needs `AppDomainSetup.ConfigurationFile`
+  (`TypeInitializationException`); NLog 4.7.15 has a .NET Standard build. Both are what `docs/MIGRATING.md` section 3
+  already says ("preferring versions that target .NET Standard or .NET"), so no guide gap.
+
+## F26
+
+**OpenOrderFramework's Identity seed deadlocks on a fresh database.** App/environment. Found on 0.4.0 (in round 2 it
+looked like a slow first request).
+
+- **Apps:** open-order-framework.
+- **Symptom:** against an empty database every request times out. The database is created, and the next start of the
+  app works: its initializer finds the model up to date and doesn't seed.
+- **Cause** (managed stacks from `dotnet-stack`; SQL Server showed no blocked sessions):
+  - The layout's `ShoppingCart.GetCount()` starts EF 6's database initialization for `ApplicationDbContext` and holds
+    its lock (`LazyInternalContext.InitializeDatabaseAction` → `RetryAction.PerformAction`).
+  - `ApplicationDbInitializer.Seed` → `InitializeIdentityForEF` uses the OWIN context's `RoleManager`, which has
+    another `ApplicationDbContext`.
+  - `RoleManager.FindByName` is Identity's `AsyncHelper.RunSync`, which runs `FindByNameAsync` on a thread-pool thread.
+    That thread waits for the same initialization lock (`Monitor.Enter`), held by the request thread, which waits for it.
+- **Why not webForCore:** none of it is webForCore code, and EF 6 and Identity run the same logic on .NET Framework. Not
+  confirmed on .NET Framework (none here). The app's own workflow creates the database with `Update-Database`
+  (Migrations), which doesn't run this seed. The smoke test creates it on the first run, so a run against a fresh
+  database fails and the next passes.
+
+## F27
+
+**LightSpeed, Roadkill's ORM, needs `AppDomain.DefineDynamicAssembly`.** App/environment. Found on 0.4.0 (it was behind
+F19, F20 and F25).
+
+- **Apps:** roadkill.
+- **Error:** every page:
+  ```
+  MissingMethodException: Method not found: 'System.Reflection.Emit.AssemblyBuilder
+  System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName, System.Reflection.Emit.AssemblyBuilderAccess)'.
+  [TypeInitializationException: The type initializer for 'ActiveSharp.PropertyMapping.OffsetUtil' threw an exception.]
+     at Mindscape.LightSpeed.Entity.GetInferredFieldName(TField&)
+  ```
+- **Why it stops there:** LightSpeed (Mindscape, 2012) is closed source, checked into the app's `lib/` as .NET
+  Framework DLLs, and is Roadkill's data layer for every SQL database; the only other backend is MongoDB, on an old
+  driver. .NET has `AssemblyBuilder.DefineDynamicAssembly` instead, but the DLLs can't be rebuilt.
