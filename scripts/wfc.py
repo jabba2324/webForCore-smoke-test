@@ -395,8 +395,12 @@ def smoke(app):
         time.sleep(1.5)
         w3c = sorted((site / "logs").glob("W3SVC*/*.txt"))
         w3c = [f"/{w3c[0].relative_to(site).as_posix()}"] if w3c else []
+        # An app whose error handler answers 200 with its own "not found" page sets [forbidden."<path>"] in app.toml,
+        # e.g. { status = 200, absent = "<package " }: what matters is that the file's content isn't served.
+        overrides = app.get("forbidden", {})
         for path in FORBIDDEN + [f"/bin_dotnet/{dll.name}"]:
-            checks.append(run_probe(base, {"path": path, "status": 404, "forbidden": True}, timeout=30))
+            probe = {"path": path, "status": 404, "forbidden": True, **overrides.get(path, {})}
+            checks.append(run_probe(base, probe, timeout=30))
         for path in w3c:  # an app that answers every URL itself (OWIN) may return 200: what matters is the log's content
             checks.append(run_probe(base, {"path": path, "status": 404, "forbidden": True, "absent": "#Fields:"}, timeout=30))
     finally:
