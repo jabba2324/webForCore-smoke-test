@@ -49,6 +49,11 @@ webForCore 0.2.0's F1 fix (`System.Configuration` per domain) doesn't cover. [F1
   webForCore; see ReaLocate). [F22](../../FINDINGS.md#f22) Moving this app from AutoMapper 3's static `Mapper` API to 12 is
   a rewrite of its mapping code, so it stops here.
 
+### With webForCore's fixes ([jabba2324/webForCore#24](https://github.com/jabba2324/webForCore/pull/24))
+
+On the PR's packages, ELMAH's sections load (#19) and the Google provider starts (#18): `/Account/Login` and the CSS
+pass. `/` fails on AutoMapper 3.1 ([F22](../../FINDINGS.md#f22), app/environment), as found by hand above.
+
 ## Open problems
 
 - [F18](../../FINDINGS.md#f18) (webForCore bug): configuration types referenced through `System.dll` reach the host's
