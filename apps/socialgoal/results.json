@@ -26,7 +26,7 @@
       ]
     },
     "build": {
-      "at": "2026-10-31T20:17:22+00:00",
+      "at": "2026-10-31T21:13:56+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/socialgoal/logs/build.log",
@@ -36,16 +36,16 @@
       "webforcore": "packages 0.2.0"
     },
     "fetch": {
-      "at": "2026-10-31T19:34:37+00:00",
+      "at": "2026-10-31T21:14:08+00:00",
       "commit": "42cfdb48c5a450793c19c0503ea0ce786eb8e46a",
-      "overlay": false,
+      "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-10-31T20:17:53+00:00",
+      "at": "2026-10-31T21:14:04+00:00",
       "checks": [
         {
-          "ms": 1139,
+          "ms": 1223,
           "ok": false,
           "path": "/",
           "status": 500,
@@ -59,44 +59,44 @@
           "title": "Configuration Error"
         },
         {
-          "ms": 6,
+          "ms": 7,
           "ok": false,
           "path": "/Content/bootstrap.css",
           "status": 500,
           "title": "Configuration Error"
         },
         {
-          "ms": 15,
+          "ms": 13,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 6,
+          "ms": 4,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 5,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 4,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 4,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 6,
           "ok": true,
           "path": "/bin_dotnet/SocialGoal.dll",
           "status": 404
