@@ -42,7 +42,7 @@ Each app goes through four stages:
 Apps reference webForCore's NuGet packages, which are attached to its GitHub releases (not on nuget.org).
 `scripts/wfc.py packages` downloads a release into `.packages/v<version>/` (needs `gh`), and builds restore from
 there, together with webForCore-thirdparty's release (WebActivatorEx and AjaxControlToolkit built for webForCore; see
-CLAUDE.md). `WEBFORCORE_VERSION` and `THIRDPARTY_VERSION` pick the releases (default 0.4.0 for both). An app migrated against webForCore's source instead
+CLAUDE.md). `WEBFORCORE_VERSION` and `THIRDPARTY_VERSION` pick the releases (default 0.5.0 and 0.4.1). An app migrated against webForCore's source instead
 refers to it through `$(WEBFORCORE_DIR)` (default `../webForCore`).
 
 ```sh
@@ -71,8 +71,8 @@ section 1). Reference the packages by version; the runner adds `.packages/` as a
 need no `nuget.config` and work on any machine:
 
 ```xml
-<PackageReference Include="webForCore" Version="0.4.0" />
-<PackageReference Include="webForCore.Web.Mvc" Version="0.4.0" />
+<PackageReference Include="webForCore" Version="0.5.0" />
+<PackageReference Include="webForCore.Web.Mvc" Version="0.5.0" />
 ```
 
 Change only what the platform needs, as the guide says. A workaround in the app for a webForCore bug doesn't count

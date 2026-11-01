@@ -4,7 +4,7 @@
     scripts/convert.py apps/<id>/src/<web project>.csproj [--lib apps/<id>/src/<library>.csproj]...
 
 - copies each project to <name>.csproj.netfx (once) and rewrites it as an SDK-style net11.0 project;
-- adds the webForCore packages for the frameworks it references ($WEBFORCORE_VERSION, default 0.4.0); keeps the app's
+- adds the webForCore packages for the frameworks it references ($WEBFORCORE_VERSION, default 0.5.0); keeps the app's
   other packages (from packages.config or PackageReference), drops Microsoft's ASP.NET packages and the System.*
   packages that are part of .NET, and raises the versions webForCore forces (FINDINGS.md F7); keeps HintPath
   references outside packages/;
@@ -14,14 +14,14 @@
 It prints what it did, for NOTES.md. It is a starting point, not the whole migration: check its output, then build.
 It keeps the Katana providers webForCore doesn't provide (Google, Facebook, WsFederation, ...); webForCore's own
 Katana packages win over their dependencies (0.3.0). For WebActivatorEx and AjaxControlToolkit it adds the builds from
-webForCore-thirdparty ($THIRDPARTY_VERSION, default 0.4.0; CLAUDE.md). It doesn't handle lib/net45 assemblies NuGet
+webForCore-thirdparty ($THIRDPARTY_VERSION, default 0.4.1; CLAUDE.md). It doesn't handle lib/net45 assemblies NuGet
 skips (F6), connection strings or Linux paths.
 Standard library only (Python 3.11+)."""
 import re, shutil, sys
 from pathlib import Path
 
-WFC = __import__("os").environ.get("WEBFORCORE_VERSION", "0.4.0")
-THIRDPARTY = __import__("os").environ.get("THIRDPARTY_VERSION", "0.4.0")
+WFC = __import__("os").environ.get("WEBFORCORE_VERSION", "0.5.0")
+THIRDPARTY = __import__("os").environ.get("THIRDPARTY_VERSION", "0.4.1")
 # webForCore-thirdparty's builds: (regex over references and packages, its package). The original package is kept
 # (packages such as Unity.Mvc bring it anyway); the build wins the conflict.
 THIRDPARTY_PACKAGES = [(r"WebActivatorEx", "webForCore.WebActivatorEx"), (r"AjaxControlToolkit", "webForCore.AjaxControlToolkit")]
@@ -47,9 +47,9 @@ FRAMEWORKS = [  # (regex over references and packages, webForCore package)
     (r"System\.Web\.Http\.Owin|Microsoft\.AspNet\.WebApi\.Owin", "webForCore.Web.Http.Owin"),
     (r"System\.Web\.Http\.Cors|Microsoft\.AspNet\.WebApi\.Cors", "webForCore.Web.Http.Cors"),
     (r"System\.Web\.Cors\b|Microsoft\.AspNet\.Cors\b", "webForCore.Web.Cors"),
-    # Microsoft.AspNet.WebPages (which Microsoft.AspNet.Mvc depends on) contains System.Web.Helpers; webForCore.Web.Mvc
-    # doesn't bring webForCore.Web.Helpers, and web.configs list it.
-    (r"System\.Web\.Helpers\b|Microsoft\.AspNet\.WebPages\b|Microsoft\.AspNet\.Mvc\b", "webForCore.Web.Helpers"),
+    # Microsoft.AspNet.WebPages contains System.Web.Helpers. webForCore.Web.Mvc brings webForCore.Web.Helpers since 0.5.0
+    # (webForCore#28), so it's added only for projects without MVC (below).
+    (r"System\.Web\.Helpers\b|Microsoft\.AspNet\.WebPages\b", "webForCore.Web.Helpers"),
     (r"System\.Web\.WebPages\.Razor|Microsoft\.AspNet\.WebPages\b", "webForCore.Web.WebPages.Razor"),
     (r"System\.Web\.WebPages\.Deployment", "webForCore.Web.WebPages.Deployment"),
     (r"System\.Web\.Optimization\b|Microsoft\.AspNet\.Web\.Optimization\b", "webForCore.Web.Optimization"),
@@ -132,8 +132,8 @@ def convert(proj, web):
     refs = re.findall(r'<Reference\s+Include="([^"]+)"', old)
     everything = "\n".join(refs + list(pkgs))
     wfc = ["webForCore"] + [p for pat, p in FRAMEWORKS if re.search(pat, everything)]
-    if "webForCore.Web.Mvc" in wfc:  # MVC brings Razor and Web Pages
-        wfc = [p for p in wfc if p not in ("webForCore.Web.WebPages.Razor",)]
+    if "webForCore.Web.Mvc" in wfc:  # MVC brings Razor, Web Pages and (since 0.5.0) System.Web.Helpers
+        wfc = [p for p in wfc if p not in ("webForCore.Web.WebPages.Razor", "webForCore.Web.Helpers")]
     kept, dropped = [], []
     for name, ver in sorted(pkgs.items(), key=lambda kv: kv[0].lower()):
         if DROP.match(name) and not KEEP_MS.match(name) and not KATANA_KEEP.match(name):

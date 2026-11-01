@@ -4,7 +4,7 @@ migrated projects against webForCore, run them on Kestrel and probe them.
 
 Standard library only (Python 3.11+, for tomllib).
 
-    scripts/wfc.py packages [--version 0.4.0]  # download webForCore's (and webForCore-thirdparty's) release packages into .packages/
+    scripts/wfc.py packages [--version 0.5.0]  # download webForCore's (and webForCore-thirdparty's) release packages into .packages/
     scripts/wfc.py list
     scripts/wfc.py fetch <id>... | --all [--reset]
     scripts/wfc.py assess <id>... | --all
@@ -45,11 +45,11 @@ WEBFORCORE = Path(os.environ.get("WEBFORCORE_DIR", ROOT.parent / "webForCore")).
 # builds restore from it (apps reference the packages, docs/MIGRATING.md section 1). WEBFORCORE_DIR is only needed by
 # apps still migrated against webForCore's source.
 WEBFORCORE_REPO = "jabba2324/webForCore"
-WEBFORCORE_VERSION = os.environ.get("WEBFORCORE_VERSION", "0.4.0")
+WEBFORCORE_VERSION = os.environ.get("WEBFORCORE_VERSION", "0.5.0")
 # Builds of third-party libraries for webForCore (WebActivatorEx, AjaxControlToolkit; CLAUDE.md), from
 # webForCore-thirdparty's releases, go in the same folder.
 THIRDPARTY_REPO = "jabba2324/webForCore-thirdparty"
-THIRDPARTY_VERSION = os.environ.get("THIRDPARTY_VERSION", "0.4.0")
+THIRDPARTY_VERSION = os.environ.get("THIRDPARTY_VERSION", "0.4.1")
 THIRDPARTY_PACKAGES = ("webForCore.WebActivatorEx", "webForCore.AjaxControlToolkit")
 PACKAGES = ROOT / ".packages"
 
@@ -511,7 +511,7 @@ def main():
     p.add_argument("ids", nargs="*")
     p.add_argument("--all", action="store_true")
     p.add_argument("--reset", action="store_true", help="fetch: discard the checkout's changes and reapply the overlay")
-    p.add_argument("--version", help="packages: the webForCore release (default: $WEBFORCORE_VERSION or 0.4.0; webForCore-thirdparty: $THIRDPARTY_VERSION or 0.4.0)")
+    p.add_argument("--version", help="packages: the webForCore release (default: $WEBFORCORE_VERSION or 0.5.0; webForCore-thirdparty: $THIRDPARTY_VERSION or 0.4.1)")
     a = p.parse_args()
     if a.command == "packages":
         global WEBFORCORE_VERSION
