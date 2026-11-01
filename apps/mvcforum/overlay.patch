@@ -1,5 +1,5 @@
 diff --git a/MVCForum.Core/MvcForum.Core.csproj b/MVCForum.Core/MvcForum.Core.csproj
-index a55cd71..c534539 100644
+index a55cd71..b7beecd 100644
 --- a/MVCForum.Core/MvcForum.Core.csproj
 +++ b/MVCForum.Core/MvcForum.Core.csproj
 @@ -1,448 +1,71 @@
@@ -333,13 +333,13 @@ index a55cd71..c534539 100644
    <ItemGroup>
 -    <None Include="app.config" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.4.0" />
++    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.5.0" />
 +    <!-- On .NET Framework this library referenced System.Web only (SystemWebPackage), so the membership types System.Web
 +         forwards to System.Web.ApplicationServices weren't visible, and its own MembershipUser and MembershipCreateStatus
 +         weren't ambiguous with System.Web.Security's (CS0104). The webForCore package references
 +         System.Web.ApplicationServices; keep it out of this project's compilation as it was. -->
-+    <PackageReference Include="webForCore.Web.ApplicationServices" Version="0.4.0" ExcludeAssets="compile" />
++    <PackageReference Include="webForCore.Web.ApplicationServices" Version="0.5.0" ExcludeAssets="compile" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -974,10 +974,10 @@ index 0000000..9977b23
 @@ -0,0 +1 @@
 +MvcForum.Plugins builds into this folder on .NET Framework (a post-build step); empty here.
 diff --git a/MVCForum.Website/MvcForum.Web.csproj b/MVCForum.Website/MvcForum.Web.csproj
-index 031d0c5..87f947e 100644
+index 031d0c5..9c7a4f9 100644
 --- a/MVCForum.Website/MvcForum.Web.csproj
 +++ b/MVCForum.Website/MvcForum.Web.csproj
-@@ -1,1534 +1,102 @@
+@@ -1,1534 +1,100 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -2538,14 +2538,12 @@ index 031d0c5..87f947e 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.4.0" />
-+    <!-- System.Web.Helpers (web.config lists it): on .NET Framework it came with Microsoft.AspNet.Mvc, through Microsoft.AspNet.WebPages. -->
-+    <PackageReference Include="webForCore.Web.Helpers" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.4.0" />
-+    <PackageReference Include="webForCore.WebGrease" Version="0.4.0" />
++    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.5.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.5.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.5.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.5.0" />
++    <PackageReference Include="webForCore.WebGrease" Version="0.5.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -2607,7 +2605,7 @@ index 031d0c5..87f947e 100644
 +  <ItemGroup>
 +    <!-- webForCore-thirdparty 0.4.0: WebActivatorEx's start methods run (the original package's never do,
 +         webForCore#21); it wins over the original that the app's packages bring. -->
-+    <PackageReference Include="webForCore.WebActivatorEx" Version="0.4.0" />
++    <PackageReference Include="webForCore.WebActivatorEx" Version="0.4.1" />
 +  </ItemGroup>
 +
 +</Project>

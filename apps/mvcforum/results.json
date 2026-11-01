@@ -22,14 +22,14 @@
       ]
     },
     "build": {
-      "at": "2026-10-31T23:57:15+00:00",
+      "at": "2026-11-01T10:04:58+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/mvcforum/logs/build.log",
       "seconds": 2,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.4.0, webForCore-thirdparty 0.4.0"
+      "webforcore": "packages 0.5.0, webForCore-thirdparty 0.4.1"
     },
     "fetch": {
       "at": "2026-10-31T23:56:57+00:00",
@@ -38,112 +38,96 @@
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-10-31T23:57:18+00:00",
+      "at": "2026-11-01T10:10:24+00:00",
       "checks": [
         {
-          "expected_text": "Read Me",
-          "ms": 450,
-          "ok": false,
+          "ms": 23937,
+          "ok": true,
           "path": "/",
-          "status": 500,
-          "title": "Configuration Error"
+          "status": 200
         },
         {
-          "expected_text": "Read Me",
-          "ms": 14,
-          "ok": false,
+          "ms": 693,
+          "ok": true,
           "path": "/thread/read-me/",
-          "status": 500,
-          "title": "Configuration Error"
+          "status": 200
         },
         {
-          "expected_text": "Example Category",
-          "ms": 4,
-          "ok": false,
+          "ms": 278,
+          "ok": true,
           "path": "/cat/example-category/",
-          "status": 500,
-          "title": "Configuration Error"
+          "status": 200
         },
         {
-          "expected_text": "Log On",
-          "ms": 2,
-          "ok": false,
+          "ms": 131,
+          "ok": true,
           "path": "/members/logon/",
-          "status": 500,
-          "title": "Configuration Error"
+          "status": 200
         },
         {
-          "expected_text": "__RequestVerificationToken",
-          "ms": 3,
-          "ok": false,
+          "ms": 68,
+          "ok": true,
           "path": "/members/register/",
-          "status": 500,
-          "title": "Configuration Error"
+          "status": 200
         },
         {
-          "expected_text": "Latest Forum Discussions",
-          "ms": 3,
-          "ok": false,
+          "ms": 187,
+          "ok": true,
           "path": "/home/latestrss/",
-          "status": 500,
-          "title": "Configuration Error"
+          "status": 200
         },
         {
-          "expected_text": "does not support http method 'GET'",
-          "ms": 2,
-          "ok": false,
+          "ms": 95,
+          "ok": true,
           "path": "/api/TinyMce/UploadImage",
-          "status": 500,
-          "title": "Configuration Error"
+          "status": 405
         },
         {
-          "expected_text": "form-control",
-          "ms": 7,
-          "ok": false,
+          "ms": 37,
+          "ok": true,
           "path": "/Themes/Metro/Content/Styles/Theme.min.css",
-          "status": 500,
-          "title": "Configuration Error"
+          "status": 200
         },
         {
-          "ms": 13,
+          "ms": 6,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 5,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 1,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 1,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 1,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 7,
+          "ms": 3,
           "ok": true,
           "path": "/bin_dotnet/MvcForum.Web.dll",
           "status": 404
         }
       ],
       "log": "apps/mvcforum/logs/server.log",
-      "status": "fail",
-      "summary": "6/14 probes"
+      "status": "pass",
+      "summary": "14/14 probes"
     }
   }
 }

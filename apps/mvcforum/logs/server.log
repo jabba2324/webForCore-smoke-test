@@ -3,7 +3,7 @@ info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
       Started application f7af100 (start 1, in a PseudoAppDomain).
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://127.0.0.1:50959
+      Now listening on: http://127.0.0.1:52435
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
@@ -11,61 +11,69 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Content root path: <repo>/apps/mvcforum/src/MVCForum.Website
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:50959/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:52435/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:50959/thread/read-me/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:52435/thread/read-me/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:52435/ - 200 12544 text/html;+charset=utf-8 23881.2747ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:50959/cat/example-category/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:52435/cat/example-category/ - - -
+info: Microsoft.AspNetCore.Session.DistributedSession[3]
+      Session started; Key:56e40769-0faa-d322-62ed-7eaaf3c743a0, Id:c54823fc-945e-857f-6bf8-a12d0fdb4b13
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:50959/ - 500 4948 text/html;+charset=utf-8 390.5887ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:52435/thread/read-me/ - 200 14612 text/html;+charset=utf-8 694.8800ms
+info: Microsoft.AspNetCore.Session.DistributedSession[3]
+      Session started; Key:16148bc4-8a9c-0d24-b0d1-4098855eae93, Id:1b838da9-4972-a0ee-81c3-4a070cbb7271
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:50959/thread/read-me/ - 500 4887 text/html;+charset=utf-8 15.3472ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:50959/cat/example-category/ - 500 4887 text/html;+charset=utf-8 3.3504ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:52435/cat/example-category/ - 200 11857 text/html;+charset=utf-8 276.6026ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:50959/members/logon/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:52435/members/logon/ - - -
+info: Microsoft.AspNetCore.Session.DistributedSession[3]
+      Session started; Key:b3164066-f5d0-38e2-1e4a-5a6cd2cb31b2, Id:dfdc72a6-47e8-69d6-5b0f-7f55a5297f51
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:50959/members/logon/ - 500 4887 text/html;+charset=utf-8 1.4830ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:52435/members/logon/ - 200 10076 text/html;+charset=utf-8 130.0530ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:50959/members/register/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:52435/members/register/ - - -
+info: Microsoft.AspNetCore.Session.DistributedSession[3]
+      Session started; Key:e0070cb0-cd92-c653-41a1-3fc2250c4cef, Id:0b39eb4b-8fb5-2b65-0e8a-8560691b11cd
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:50959/members/register/ - 500 4887 text/html;+charset=utf-8 1.4329ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:52435/members/register/ - 200 10863 text/html;+charset=utf-8 66.7840ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:50959/home/latestrss/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:52435/home/latestrss/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:50959/home/latestrss/ - 500 4887 text/html;+charset=utf-8 1.9036ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:52435/home/latestrss/ - 200 2164 text/xml 186.0142ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:50959/api/TinyMce/UploadImage - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:50959/api/TinyMce/UploadImage - 500 4887 text/html;+charset=utf-8 1.5178ms
+      Request starting HTTP/1.1 GET http://127.0.0.1:52435/api/TinyMce/UploadImage - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:50959/Themes/Metro/Content/Styles/Theme.min.css - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:52435/Themes/Metro/Content/Styles/Theme.min.css - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:50959/Themes/Metro/Content/Styles/Theme.min.css - 500 4887 text/html;+charset=utf-8 6.6317ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:52435/api/TinyMce/UploadImage - 405 72 application/json;+charset=utf-8 101.2880ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:52435/Themes/Metro/Content/Styles/Theme.min.css - 200 39409 text/css 36.3052ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:50959/web.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:52435/web.config - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:50959/web.config - 404 252 text/html 11.4076ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:52435/web.config - 404 252 text/html 5.2067ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:50959/App_Data/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:52435/App_Data/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:50959/App_Data/ - 404 252 text/html 2.2016ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:52435/App_Data/ - 404 252 text/html 0.5963ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:50959/Global.asax.cs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:52435/Global.asax.cs - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:50959/Global.asax.cs - 404 215 text/html 1.9404ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:52435/Global.asax.cs - 404 215 text/html 0.8037ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:50959/obj/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:52435/obj/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:50959/obj/ - 404 252 text/html 1.9244ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:52435/obj/ - 404 252 text/html 0.4835ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:50959/packages.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:52435/packages.config - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:50959/packages.config - 404 215 text/html 1.8309ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:52435/packages.config - 404 215 text/html 0.5105ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:50959/bin_dotnet/MvcForum.Web.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:52435/bin_dotnet/MvcForum.Web.dll - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:50959/bin_dotnet/MvcForum.Web.dll - 404 252 text/html 4.1487ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:52435/bin_dotnet/MvcForum.Web.dll - 404 252 text/html 2.1621ms
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
