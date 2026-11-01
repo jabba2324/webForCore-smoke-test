@@ -30,33 +30,33 @@
       ]
     },
     "build": {
-      "at": "2026-10-31T23:38:13+00:00",
+      "at": "2026-11-01T01:48:21+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/roadkill/logs/build.log",
-      "seconds": 4,
+      "seconds": 3,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.4.0, webForCore-thirdparty 0.4.0"
     },
     "fetch": {
-      "at": "2026-10-31T23:40:38+00:00",
+      "at": "2026-11-01T01:47:28+00:00",
       "commit": "1061add4a727c55793234e0a92f146c6f1db62cf",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-10-31T23:38:19+00:00",
+      "at": "2026-11-01T01:48:27+00:00",
       "checks": [
         {
-          "ms": 2715,
+          "ms": 2633,
           "ok": false,
           "path": "/",
           "status": 500,
           "title": "Method not found: 'System.Reflection.Emit.AssemblyBuilder System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName, System.Reflection.Emit.AssemblyBuilderAccess)'."
         },
         {
-          "ms": 48,
+          "ms": 51,
           "ok": false,
           "path": "/User/Login",
           "status": 500,
@@ -76,7 +76,7 @@
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 5,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
@@ -100,7 +100,7 @@
           "status": 404
         },
         {
-          "ms": 8,
+          "ms": 5,
           "ok": true,
           "path": "/bin_dotnet/Roadkill.Web.dll",
           "status": 404

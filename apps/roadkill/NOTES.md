@@ -46,6 +46,11 @@ plus `Roadkill.Core` and `Roadkill.Plugins`.
    docker exec -i services-mssql-1 /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P Smoke_test_1234 -d Roadkill < src/lib/Test-databases/roadkill-sqlserver.sql
    ```
 
+6. Round 3b correction: `Roadkill.Core`'s six schema scripts (`Database/Schema/{SqlServer,Postgres,...}/*.sql`), embedded
+   resources, are kept in the project. `scripts/convert.py` had dropped every non-`.resx` `<EmbeddedResource>` (the SDK
+   globs only `.resx`); the converter now keeps them. Roadkill's installer needs them. The database here is loaded with
+   `sqlcmd` and the app stops at LightSpeed first (F27), so the results don't change.
+
 ## Smoke
 
 Probes: the home page, the log-in page and a static CSS file (no text checks yet: no page has rendered).

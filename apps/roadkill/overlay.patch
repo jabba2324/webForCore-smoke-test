@@ -1,8 +1,8 @@
 diff --git a/src/Roadkill.Core/Roadkill.Core.csproj b/src/Roadkill.Core/Roadkill.Core.csproj
-index 5987c72..4973dd1 100644
+index 5987c72..a51bbdf 100644
 --- a/src/Roadkill.Core/Roadkill.Core.csproj
 +++ b/src/Roadkill.Core/Roadkill.Core.csproj
-@@ -1,639 +1,77 @@
+@@ -1,639 +1,87 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <PropertyGroup>
@@ -659,6 +659,16 @@ index 5987c72..4973dd1 100644
 +  <ItemGroup>
 +    <Compile Remove="bin/**;obj/**" />
 +    <Compile Remove="Mvc/Setup/Bundles.cs" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <!-- Embedded resources (the SDK only globs .resx). -->
++    <EmbeddedResource Include="Database/Schema/Postgres/Create.sql" />
++    <EmbeddedResource Include="Database/Schema/Postgres/Drop.sql" />
++    <EmbeddedResource Include="Database/Schema/SqlServer/Create.sql" />
++    <EmbeddedResource Include="Database/Schema/SqlServer/Drop.sql" />
++    <EmbeddedResource Include="Database/Schema/MySql/Create.sql" />
++    <EmbeddedResource Include="Database/Schema/MySql/Drop.sql" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
