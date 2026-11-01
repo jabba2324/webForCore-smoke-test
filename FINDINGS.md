@@ -5,7 +5,7 @@ One entry per distinct problem found while migrating apps. webForCore bugs and g
 pre-release and not recommended for production). See CLAUDE.md for the format. Every entry was found
 with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 release packages (tag `v0.1.0`,
 `2942b694`), unless the entry says otherwise. F16 onwards were found in round 2, on the released 0.2.0 packages
-(tag `v0.2.0`, `1c92215`), where F1–F15 are fixed or documented. F16–F21 and F24 are fixed in [jabba2324/webForCore#24](https://github.com/jabba2324/webForCore/pull/24), checked against the apps. Repro sites are small enough to paste: a `Program.cs` as in
+(tag `v0.2.0`, `1c92215`), where F1–F15 are fixed or documented. F16–F21 and F24 are fixed in [jabba2324/webForCore#24](https://github.com/jabba2324/webForCore/pull/24) (released in 0.3.0), checked against the apps. Round 3 ran on 0.4.0, with webForCore-thirdparty 0.4.0 for WebActivatorEx (CLAUDE.md); F25 onwards were found there. F28–F33 are fixed or documented in [jabba2324/webForCore#32](https://github.com/jabba2324/webForCore/pull/32), checked against the apps. Round 3b (subtext, funnelweb, mojoportal) also ran on 0.4.0, with webForCore-thirdparty 0.4.0 and the unreleased `webForCore.WebActivator` 0.4.1 ([jabba2324/webForCore-thirdparty#1](https://github.com/jabba2324/webForCore-thirdparty/pull/1)); F35 onwards were found there. F35 and F38 are fixed in #32 too, and F36, F37, F41 and F42 documented there, checked against the apps. Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
 
 | # | Problem | Classification | Apps | Raised |
@@ -35,7 +35,26 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 | [F22](#f22) | AutoMapper before 12 doesn't run on .NET 11 | app/environment | realocate, socialgoal | - |
 | [F23](#f23) | `recaptcha` 1.0.5's lib folders aren't framework names (NU1202) | app/environment | roadkill | - |
 | [F24](#f24) | A transitive Microsoft.AspNet.Razor replaces webForCore's in the output with no build error | webForCore bug | bonobo-git-server, applicant-tracking, realocate, roadkill | [#23](https://github.com/jabba2324/webForCore/issues/23) |
-| [F25](#f25) | StructureMap 4.0's .NET Framework build needs `AppDomainSetup.PrivateBinPath` | app/environment | roadkill | - |
+| [F25](#f25) | .NET Framework builds of StructureMap 4.0 and NLog 4.2 need `AppDomainSetup` members .NET lacks; their .NET Standard builds work | app/environment | roadkill | - |
+| [F26](#f26) | OpenOrderFramework's Identity seed deadlocks on a fresh database (EF 6 initialization lock + `AsyncHelper.RunSync`) | app/environment | open-order-framework | - |
+| [F27](#f27) | LightSpeed (closed-source ORM) needs `AppDomain.DefineDynamicAssembly` | app/environment | roadkill | - |
+| [F28](#f28) | A `configSource` in a subfolder can't be loaded on Linux (`\` isn't a separator; `/` is rejected) | webForCore bug | mvcforum | [#26](https://github.com/jabba2324/webForCore/issues/26) |
+| [F29](#f29) | `relaxedUrlToFileSystemMapping="true"` makes every `MapPath` return `NOT_A_VALID_FILESYSTEM_PATH` | webForCore bug | mvcforum | [#27](https://github.com/jabba2324/webForCore/issues/27) |
+| [F30](#f30) | `webForCore.Web.Mvc` doesn't bring System.Web.Helpers, which Microsoft.AspNet.Mvc did | webForCore bug | mvcforum | [#28](https://github.com/jabba2324/webForCore/issues/28) |
+| [F31](#f31) | System.Web.ApplicationServices is visible to every project: a library's own `MembershipUser` is ambiguous | guide gap | mvcforum | [#29](https://github.com/jabba2324/webForCore/issues/29) |
+| [F32](#f32) | More versions webForCore requires: Humanizer.Core 2.14.1, System.* packages at 11.0 | guide gap | aspnet-mvc5-starter, mvcforum | [#30](https://github.com/jabba2324/webForCore/issues/30) |
+| [F33](#f33) | Some packages' .NET Standard builds have less than their net45 builds (WindowsAzure.Storage, Hangfire 1.6) | guide gap | aspnet-mvc5-starter, mvcforum | [#31](https://github.com/jabba2324/webForCore/issues/31) |
+| [F34](#f34) | Build-time tools that don't run on Linux or the .NET 11 SDK (BuildWebCompiler, LibMan.Build 2.0) | app/environment | mvcforum, aspnet-mvc5-starter | - |
+| [F35](#f35) | `WsiProfiles`/`SoapBindingUse` in app code are CS0433: the System.Web.Services.Description package (from CoreWCF) has them too | webForCore bug | subtext, mojoportal | [#34](https://github.com/jabba2324/webForCore/issues/34) |
+| [F36](#f36) | A `.resx` with non-string resources needs System.Resources.Extensions (MSB3822) | guide gap | subtext | [#36](https://github.com/jabba2324/webForCore/issues/36) |
+| [F37](#f37) | `<compilation><assemblies>` lists .NET Framework assemblies .NET doesn't have (System.Design, System.Data.Linq) | guide gap | subtext, mojoportal | [#37](https://github.com/jabba2324/webForCore/issues/37) |
+| [F38](#f38) | Types a shared-framework facade forwards to the app's assemblies (System.Data's SqlClient) are a second copy: MissingMethodException | webForCore bug | subtext | [#35](https://github.com/jabba2324/webForCore/issues/35) |
+| [F39](#f39) | NHibernate 3.3 doesn't run on .NET (proxy validation, `SqlCommandSet` by reflection) | app/environment | funnelweb | - |
+| [F40](#f40) | `Assembly.Load("App_GlobalResources")` (Visual Studio's resource designer code) can't work: .NET requires the simple name to match | webForCore bug | mojoportal | [#33](https://github.com/jabba2324/webForCore/issues/33) |
+| [F41](#f41) | WebActivator 1.x has WebActivatorEx's problem (#21), and the guide names only WebActivatorEx | guide gap | subtext | [#38](https://github.com/jabba2324/webForCore/issues/38) |
+| [F42](#f42) | SDK-style project references are transitive: NU1605 from versions pinned per project, a namespace that hides a type (CS0118) | guide gap | funnelweb, mojoportal | [#39](https://github.com/jabba2324/webForCore/issues/39) |
+| [F43](#f43) | Projects that deploy into the site with Windows `xcopy` post-build events | app/environment | mojoportal | - |
+| [F44](#f44) | DotNetOpenAuth 3.x reflects on .NET Framework's private `UriParser` fields | app/environment | subtext | - |
 ---
 
 ## F1
@@ -605,4 +624,330 @@ packages of jabba2324/webForCore#24 (it was behind F19 and F20).
      at StructureMap.Graph.AssemblyScannerExtensions.AssembliesFromApplicationBaseDirectory(IAssemblyScanner scanner, ...)
   ```
   .NET's `AppDomainSetup` has no `PrivateBinPath`. The `lib/net40` StructureMap is built for .NET Framework.
-- **Next step:** a StructureMap version with a .NET Standard build, or scanning with `AssembliesFromPath(HttpRuntime.BinDirectory)`.
+- **What worked (round 3):** `structuremap` 4.0.0.315 → 4.7.1, which has a .NET Standard 2.0 build (no code change).
+  The next library had the same kind of problem: NLog 4.2.0's `LogManager` needs `AppDomainSetup.ConfigurationFile`
+  (`TypeInitializationException`); NLog 4.7.15 has a .NET Standard build. Both are what `docs/MIGRATING.md` section 3
+  already says ("preferring versions that target .NET Standard or .NET"), so no guide gap.
+
+## F26
+
+**OpenOrderFramework's Identity seed deadlocks on a fresh database.** App/environment. Found on 0.4.0 (in round 2 it
+looked like a slow first request).
+
+- **Apps:** open-order-framework.
+- **Symptom:** against an empty database every request times out. The database is created, and the next start of the
+  app works: its initializer finds the model up to date and doesn't seed.
+- **Cause** (managed stacks from `dotnet-stack`; SQL Server showed no blocked sessions):
+  - The layout's `ShoppingCart.GetCount()` starts EF 6's database initialization for `ApplicationDbContext` and holds
+    its lock (`LazyInternalContext.InitializeDatabaseAction` → `RetryAction.PerformAction`).
+  - `ApplicationDbInitializer.Seed` → `InitializeIdentityForEF` uses the OWIN context's `RoleManager`, which has
+    another `ApplicationDbContext`.
+  - `RoleManager.FindByName` is Identity's `AsyncHelper.RunSync`, which runs `FindByNameAsync` on a thread-pool thread.
+    That thread waits for the same initialization lock (`Monitor.Enter`), held by the request thread, which waits for it.
+- **Why not webForCore:** none of it is webForCore code, and EF 6 and Identity run the same logic on .NET Framework. Not
+  confirmed on .NET Framework (none here). The app's own workflow creates the database with `Update-Database`
+  (Migrations), which doesn't run this seed. The smoke test creates it on the first run, so a run against a fresh
+  database fails and the next passes.
+
+## F27
+
+**LightSpeed, Roadkill's ORM, needs `AppDomain.DefineDynamicAssembly`.** App/environment. Found on 0.4.0 (it was behind
+F19, F20 and F25).
+
+- **Apps:** roadkill.
+- **Error:** every page:
+  ```
+  MissingMethodException: Method not found: 'System.Reflection.Emit.AssemblyBuilder
+  System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName, System.Reflection.Emit.AssemblyBuilderAccess)'.
+  [TypeInitializationException: The type initializer for 'ActiveSharp.PropertyMapping.OffsetUtil' threw an exception.]
+     at Mindscape.LightSpeed.Entity.GetInferredFieldName(TField&)
+  ```
+- **Why it stops there:** LightSpeed (Mindscape, 2012) is closed source, checked into the app's `lib/` as .NET
+  Framework DLLs, and is Roadkill's data layer for every SQL database; the only other backend is MongoDB, on an old
+  driver. .NET has `AssemblyBuilder.DefineDynamicAssembly` instead, but the DLLs can't be rebuilt.
+
+## F28
+
+**A `configSource` in a subfolder can't be loaded on Linux.** webForCore bug. Raised as [#26](https://github.com/jabba2324/webForCore/issues/26). Found on 0.4.0.
+
+- **Apps:** mvcforum (ImageProcessor's `<security configSource="Config\imageprocessor\security.config"/>`, and `cache`,
+  `processing`). Splitting sections into a `Config\` folder is common (ImageProcessor, Umbraco, connection strings and
+  app settings in their own files).
+- **Error:** every request: `Configuration Error. Unable to open configSource file 'Config\imageprocessor\processing.config'.`
+- **Cause:** `InternalConfigHost.StaticGetStreamNameForConfigSource` (the System.Configuration port) does
+  `Path.Combine(dirStream, configSource)`. On Linux `\` isn't a directory separator, so the result names a file called
+  `Config\imageprocessor\processing.config` in the site folder. Writing the path with `/` doesn't help: System.Configuration
+  rejects it, as on .NET Framework (`The configSource attribute must be a relative physical path, so the '/' character is
+  not allowed`). So on Linux no `configSource` file can be in a subfolder. The client host already does
+  `configSource.Replace('\\', '/')` (`ClientConfigurationHost.cs:355`); the web host doesn't.
+- **Repro:** a site whose web.config has `<appSettings configSource="Config\app.config" />` and a `Config/app.config`
+  with `<appSettings><add key="k" value="v"/></appSettings>`; any request is a Configuration Error.
+- **Suggested fix:** in `StaticGetStreamNameForConfigSource`, treat `\` as the directory separator when combining on a
+  non-Windows OS (the validation that rejects `/` stays, as on .NET Framework).
+
+## F29
+
+**`relaxedUrlToFileSystemMapping="true"` makes every `MapPath` return `NOT_A_VALID_FILESYSTEM_PATH` on Linux.**
+webForCore bug. Raised as [#27](https://github.com/jabba2324/webForCore/issues/27). Found on 0.4.0.
+
+- **Apps:** mvcforum (`<httpRuntime relaxedUrlToFileSystemMapping="true" ...>`, common in apps that allow special
+  characters in URLs).
+- **Error:** `HostingEnvironment.MapPath("~/App_Data/forum.config")` returns `<site>/NOT_A_VALID_FILESYSTEM_PATH`, so
+  `Could not find file '<site>/NOT_A_VALID_FILESYSTEM_PATH'` from the app's `XmlDocument.Load`, in its EF seed (every
+  request).
+- **Cause:** with the setting on, `HttpRuntime.GetRelaxedMapPathResult` replaces a mapped path that contains any of
+  `s_InvalidPhysicalPathChars` with that placeholder. The list, from .NET Framework, is
+  `{ '/', '?', '*', '<', '>', '|', '"' }`. On Windows a physical path has no `/`; on Linux every physical path does.
+- **Repro:** a site with `<httpRuntime relaxedUrlToFileSystemMapping="true" />` and a page that writes
+  `Server.MapPath("~/x.txt")`: it prints `<site>/NOT_A_VALID_FILESYSTEM_PATH`.
+- **Suggested fix:** leave `/` out of `s_InvalidPhysicalPathChars` when the directory separator is `/`.
+
+## F30
+
+**`webForCore.Web.Mvc` doesn't bring System.Web.Helpers, which Microsoft.AspNet.Mvc did.** webForCore bug (packaging).
+Found on 0.4.0.
+
+- **Apps:** mvcforum (web.config `<add assembly="System.Web.Helpers, Version=3.0.0.0, ..."/>`).
+- **Error:** `Configuration Error. Could not load file or assembly 'System.Web.Helpers, Version=3.0.0.0'`.
+- **Cause:** on .NET Framework, `Microsoft.AspNet.Mvc` depends on `Microsoft.AspNet.WebPages`, which contains
+  `System.Web.Helpers.dll`, so every MVC 5 app has it (WebGrid, Chart, Crypto, Json). webForCore has it as a separate
+  package, `webForCore.Web.Helpers`, which `webForCore.Web.Mvc` doesn't depend on; `docs/MIGRATING.md` section 3 maps
+  packages one to one and doesn't say an MVC app needs it.
+- **Repro:** an MVC site referencing `webForCore` and `webForCore.Web.Mvc`, with System.Web.Helpers in web.config's
+  `<compilation><assemblies>` (or a view using `@using System.Web.Helpers` / `WebGrid`).
+- **What worked:** `<PackageReference Include="webForCore.Web.Helpers" Version="0.4.0" />`.
+- **Suggested fix:** make `webForCore.Web.Mvc` depend on `webForCore.Web.Helpers`, as Microsoft.AspNet.Mvc's graph does.
+
+## F31
+
+**System.Web.ApplicationServices is visible to every project, so a library's own `MembershipUser` becomes ambiguous.**
+Guide gap. Raised as [#29](https://github.com/jabba2324/webForCore/issues/29). Found on 0.4.0.
+
+- **Apps:** mvcforum (`MVCForum.Core` defines `MembershipUser` and `MembershipCreateStatus` and has
+  `using System.Web.Security;`).
+- **Error:** 35 × `CS0104: 'MembershipUser' is an ambiguous reference between 'MvcForum.Core.Models.Entities.MembershipUser'
+  and 'System.Web.Security.MembershipUser'`.
+- **Cause:** on .NET Framework the library compiled against `System.Web` only (here through the `SystemWebPackage`
+  package; a plain `<Reference Include="System.Web" />` is the same). `System.Web` forwards the membership types
+  (`MembershipUser`, `MembershipCreateStatus`, `MembershipProvider`, `Roles`, ...) to `System.Web.ApplicationServices`,
+  and forwarded types aren't visible without that reference. The `webForCore` package brings
+  `System.Web.ApplicationServices` to every project.
+- **What worked:** in that library,
+  `<PackageReference Include="webForCore.Web.ApplicationServices" Version="0.4.0" ExcludeAssets="compile" />`.
+- **Suggested fix:** say this in `docs/MIGRATING.md`, or have the targets leave `System.Web.ApplicationServices` out of
+  a project's compile references unless it asks for it, as on .NET Framework.
+
+## F32
+
+**More versions webForCore requires: Humanizer.Core 2.14.1 and the System.* packages at 11.0.** Guide gap (extends
+F7, #6). Raised as [#30](https://github.com/jabba2324/webForCore/issues/30). Found on 0.4.0.
+
+- **Apps:** aspnet-mvc5-starter (`Humanizer.Core` 2.6.2), mvcforum (`System.Configuration.ConfigurationManager` and
+  `System.Runtime.Caching` 4.5.0-preview1).
+- **Error:** `NU1605: Detected package downgrade: Humanizer.Core from 2.14.1 to 2.6.2 ... webForCore 0.4.0 ->
+  webForCore.Compilers 0.4.0 -> Microsoft.CodeAnalysis 5.9.0 -> Humanizer.Core (>= 2.14.1)`, and the same for
+  `System.Runtime.Caching` and `System.Configuration.ConfigurationManager` from 11.0.0-rc.3.
+- **What the guide says:** `docs/MIGRATING.md`'s "Versions webForCore requires" lists Newtonsoft.Json 13.0.4,
+  Microsoft.IdentityModel.Tokens 8.19.1 and EntityFramework 6.4+.
+- **What worked:** Humanizer.Core raised to 2.14.1; the two System.* references removed (webForCore brings them).
+  `scripts/convert.py` now does both.
+
+## F33
+
+**Some packages' .NET Standard builds have less than their `net45` builds, and NuGet picks the .NET Standard one.**
+Guide gap. Raised as [#31](https://github.com/jabba2324/webForCore/issues/31). Found on 0.4.0.
+
+- **Apps:**
+  - aspnet-mvc5-starter: WindowsAzure.Storage 9.3.3's `netstandard1.3` build has no synchronous blob methods (`Exists`,
+    `OpenRead`, `UploadFromStream`, `GetPermissions`, ...): CS1061.
+  - mvcforum: Hangfire.Core 1.6.17's `netstandard1.3` build has no OWIN extensions (`app.UseHangfireServer`): CS1929.
+  - mvcforum: Hangfire.SqlServer 1.6.17's can't resolve a connection string name from web.config, so
+    `UseSqlServerStorage("MVCForumContext")` throws `Format of the initialization string does not conform to
+    specification` at start-up.
+- **What the guide says:** `docs/MIGRATING.md` section 3: "Keep other NuGet packages, preferring versions that target
+  .NET Standard or .NET". Here the same version's .NET Standard build is the problem.
+- **What worked:** restore the package for its path only and reference its `net45` DLL (as for F6), in every project
+  that gets it, the web project included:
+  ```xml
+  <PackageReference Include="Hangfire.Core" Version="1.6.17" GeneratePathProperty="true" ExcludeAssets="compile;runtime" />
+  <Reference Include="Hangfire.Core" HintPath="$(PkgHangfire_Core)/lib/net45/Hangfire.Core.dll" />
+  ```
+- **Suggested fix:** a bullet in `docs/MIGRATING.md`'s "Packages that need more than a reference".
+
+## F34
+
+**Build-time tools that don't run on Linux or the .NET 11 SDK.** App/environment. Found on 0.4.0.
+
+- **Apps:**
+  - mvcforum: BuildWebCompiler 1.11 (Sass/LESS at build time) starts `cmd.exe`. Removed; its output is checked in.
+  - aspnet-mvc5-starter: Microsoft.Web.LibraryManager.Build 2.0.48's restore task fails to load its providers by
+    reflection (`MSB4018 ... Dependencies.GetProvidersFromReflection`). LibMan.Build 3.0.114 works and restores the client
+    libraries from cdnjs at build time.
+- Also seen: MVCForum's plugins project copies its output into `App_Data/Plugins` in a post-build step; the folder is
+  created empty instead.
+
+## F35
+
+**`WsiProfiles` and `SoapBindingUse` in app code are CS0433.** webForCore bug. Raised as
+[#34](https://github.com/jabba2324/webForCore/issues/34). Found on 0.4.0. Fixed in #32.
+
+- **Apps:**
+  - mojoportal: its `.ashx` handlers, from Visual Studio's generic handler template
+    (`[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]`).
+  - subtext: its Web Reference proxy (`SoapBindingUse.Literal`).
+- **Error:** `error CS0433: The type 'WsiProfiles' exists in both 'System.Web.Services.Description, Version=8.1.2.0, ...'
+  and 'System.Web.Services, Version=11.0.0.0, ...'`.
+- **Cause:** webForCore's System.Web.Services has the `System.Web.Services.Description` namespace, as on .NET Framework.
+  CoreWCF, which System.Web.Extensions' WCF client support uses, depends on the System.Web.Services.Description
+  package. That package's compile reference defines the same types.
+- **Repro:** a site referencing `webForCore` and `webForCore.Web.Services`, with a class in the project marked
+  `[WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]`.
+- **Fix (#32):** `webForCore.WebStack.targets` drops the package's compile reference wherever webForCore's
+  System.Web.Services is referenced. The package smoke test compiles such a handler. Both apps build on the fix
+  branch's packages.
+
+## F36
+
+**A `.resx` with non-string resources needs System.Resources.Extensions.** Guide gap. Raised as
+[#36](https://github.com/jabba2324/webForCore/issues/36). Found on 0.4.0.
+
+- **Apps:** subtext (`Subtext.Web`'s resources include images).
+- **Error:** `error MSB3822: Non-string resources require the System.Resources.Extensions assembly at runtime, but it
+  was not found in this project's references.`
+- **Cause:** SDK-style projects on .NET embed non-string resources pre-serialized, which needs the
+  System.Resources.Extensions package. `docs/MIGRATING.md` doesn't mention it.
+- **What worked:** `<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>` and
+  `<PackageReference Include="System.Resources.Extensions" Version="11.0.0-rc.3.26522.148" />`.
+
+## F37
+
+**web.config's `<compilation><assemblies>` lists .NET Framework assemblies that .NET doesn't have.** Guide gap. Raised
+as [#37](https://github.com/jabba2324/webForCore/issues/37). Found on 0.4.0.
+
+- **Apps:** subtext (`System.Design, Version=4.0.0.0`), mojoportal (`System.Data.Linq, Version=4.0.0.0`).
+- **Error:** every page: `Configuration Error ... Could not load file or assembly 'System.Design, Version=4.0.0.0,
+  Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'. The system cannot find the file specified.`
+- **Cause:** `docs/NAMESPACES.md` lists both assemblies as not on .NET. The guide doesn't say an `<add assembly>` entry
+  for one is a Configuration Error even when no page uses it. The apps' pages don't use either.
+- **What worked:** removing the entries.
+
+## F38
+
+**Types that a shared-framework facade forwards to one of the app's assemblies are a second copy.** webForCore bug.
+Raised as [#35](https://github.com/jabba2324/webForCore/issues/35). Found on 0.4.0. Fixed in #32.
+
+- **Apps:** subtext. `Microsoft.ApplicationBlocks.Data.dll`, the checked-in .NET Framework 1.1 data access block,
+  references `SqlDataReader` in `System.Data, Version=1.0.5000.0`.
+- **Error:** every request: `MissingMethodException: Method not found: 'System.Data.SqlClient.SqlDataReader
+  Microsoft.ApplicationBlocks.Data.SqlHelper.ExecuteReader(System.String, System.Data.CommandType, System.String)'`.
+  The same call works in a plain .NET 11 console app.
+- **Cause:** this is the PseudoAppDomain's problem from #1 and #19. On .NET, `System.Data.dll` is a shared-framework
+  facade that forwards the SqlClient types to `System.Data.SqlClient`, which the app deploys (package 4.9.1). The facade
+  is loaded in the default context, so its forwards resolve there, to a second `System.Data.SqlClient`. The app's own
+  code gets the domain's copy. There are more such facades:
+  - System.Data: SqlClient, OleDb and Odbc;
+  - System.Drawing: System.Drawing.Common;
+  - System.ServiceModel.Web: syndication;
+  - System.Core and System: PerformanceCounter;
+  - others.
+
+  A scan of the shared framework's assemblies finds 29 forwards to assemblies outside it.
+- **Repro:** in a site referencing `webForCore`,
+  `Type.GetType("System.Data.SqlClient.SqlDataReader, System.Data, Version=4.0.0.0, Culture=neutral,
+  PublicKeyToken=b77a5c561934e089") == typeof(System.Data.SqlClient.SqlDataReader)` is `false`.
+- **Fix (#32):** the PseudoAppDomain loads into the domain any shared-framework assembly whose forwards go to an
+  assembly the app deploys. Forwards to the shared framework still resolve to the shared copy. With the fix, Subtext's
+  install wizard, home page, posts, archives, contact form, RSS and MVC routes work: 15 of 16 probes pass; the log-in
+  page is F44.
+
+## F39
+
+**NHibernate 3.3 doesn't run on .NET.** App/environment. Found on 0.4.0.
+
+- **Apps:** funnelweb (NHibernate 3.3.1, FluentNHibernate 1.3).
+- **Errors:**
+  - `The following types may not be used as proxies: FunnelWeb.Model.Authentication.Role: method MemberwiseClone
+    should be 'public/protected virtual' or 'protected internal virtual'`, for every entity. On .NET,
+    `Object.MemberwiseClone` is `protected internal`. On .NET Framework it is `protected`.
+  - With the proxy check off, `NHibernate.AdoNet.SqlClientSqlCommandSet..ctor` throws `ArgumentNullException`. It finds
+    the internal `System.Data.SqlClient.SqlCommandSet` by reflection in System.Data, which on .NET is a facade.
+- **What would work:** NHibernate 5.1+ (it runs on .NET) and FluentNHibernate 3, an upgrade of the app's data layer.
+  With webForCore 0.4.0, FunnelWeb's installer (the Admin area: log-in, connection test, 32 upgrade scripts) works.
+
+## F40
+
+**`Assembly.Load("App_GlobalResources")` can't work on .NET.** webForCore bug. Raised as
+[#33](https://github.com/jabba2324/webForCore/issues/33). Found on 0.4.0. Not fixed.
+
+- **Apps:** mojoportal. Its `App_GlobalResources/*.Designer.cs`, Visual Studio's generated code, does
+  `new ResourceManager("Resources.Resource", Assembly.Load("App_GlobalResources"))`.
+- **Error:** in `Application_Start` and every page: `Could not load file or assembly 'App_GlobalResources,
+  Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.`
+- **Cause:** ASP.NET compiles App_Code and App_GlobalResources to assemblies with random names
+  (`App_GlobalResources.abcd1234`). It answers `AssemblyResolve` for the fixed name from `_assemblyResolveMapping`
+  (VSWhidbey 276776). On .NET, the event gets the display name (`App_GlobalResources, Culture=neutral,
+  PublicKeyToken=null`), so the mapping isn't found. Matching the simple name doesn't help either: .NET refuses an
+  assembly whose simple name differs from the one requested ("Resolved assembly's simple name must be the same as of
+  the requested assembly"). In the PseudoAppDomain the runtime reports "Resolving to a collectible assembly is not
+  supported". The first error reproduces without webForCore: in an `AssemblyLoadContext`, a `Resolving` handler
+  that answers `Assembly.Load("Target")` with an assembly named `Target.x1` gets it.
+- **Workaround that shows it:** `<compilation optimizeCompilations="true">` gives top-level assemblies their fixed
+  names (`BuildManager.GenerateRandomAssemblyName`). With it, mojoPortal's Setup installs its schema and site on SQL
+  Server, and the home page, log-in, register, MVC file manager, Web API (JSON 401), handlers and static files all
+  work. Not in the overlay.
+- **Suggested fix:** on .NET, compile App_Code and App_GlobalResources to their fixed simple names (each domain is its
+  own load context). They would go in a per-build folder, so a domain that is still unloading keeps its file.
+
+## F41
+
+**WebActivator 1.x has the same problem as WebActivatorEx (#21).** Guide gap. Raised as
+[#38](https://github.com/jabba2324/webForCore/issues/38). Found on 0.4.0.
+
+- **Apps:** subtext. Its Ninject bootstrapper, `App_Start/NinjectMVC3.cs`, uses
+  `[assembly: WebActivator.PreApplicationStartMethod(...)]`. It is WebActivator 1.5, the package before WebActivatorEx
+  2.0; NuGet's MVC 3 era packages (Ninject.MVC3, ...) bring it.
+- **Cause:** as #21: its start methods are never run, so the container isn't set up. `docs/MIGRATING.md` and
+  webForCore-thirdparty cover WebActivatorEx only.
+- **What worked:** `webForCore.WebActivator` 0.4.1, a build of WebActivator 1.5 for webForCore, added to
+  webForCore-thirdparty in [jabba2324/webForCore-thirdparty#1](https://github.com/jabba2324/webForCore-thirdparty/pull/1).
+  Its smoke test fails without the package and passes with it, on webForCore 0.3.0 and 0.4.0. Calling
+  `WebActivator.ActivationManager`'s methods from `Application_Start` is the workaround without it.
+
+## F42
+
+**SDK-style project references are transitive.** Guide gap. Raised as
+[#39](https://github.com/jabba2324/webForCore/issues/39). Found on 0.4.0.
+
+- **Apps:**
+  - funnelweb: the web project pins `Iesi.Collections` 3.2.0.4000 in packages.config, and the `FunnelWeb` library pins
+    3.3.2.4000. Restore fails with `NU1605: Detected package downgrade: Iesi.Collections from 3.3.2.4000 to 3.2.0.4000.
+    FunnelWeb.Web -> FunnelWeb -> Iesi.Collections (>= 3.3.2.4000)`.
+  - mojoportal: `mojoPortal.Features.UI` references `mojoPortal.Features.Business`, which references the data layer
+    `mojoPortal.Features.Data.MSSQL`. In Features.UI the data layer's namespace `mojoPortal.MediaPlayer` then hides the
+    `MediaPlayer` class: `error CS0118: 'MediaPlayer' is a namespace but is used like a type`.
+- **Cause:** on .NET Framework a project saw only the projects and packages it referenced directly. In SDK-style
+  projects, references flow to the projects that reference them.
+- **What worked:** raising the web project's version to the library's (FunnelWeb), and `PrivateAssets="all"` on
+  the data layer's `ProjectReference` (mojoPortal).
+
+## F43
+
+**Projects that deploy themselves into the site with Windows `xcopy` post-build events.** App/environment. Found on
+0.4.0.
+
+- **Apps:** mojoportal. `mojoPortal.Features.UI` (blog, forums, galleries, ...) is a separate web project. Its
+  post-build event copies its assemblies, `.aspx`/`.ascx`/`.ashx` files, resources and setup scripts into `Web`, with
+  62 `xcopy` lines. Without them the default theme's skin fails (`Could not load file or assembly
+  'mojoPortal.Features.UI'`).
+- **What worked:** the same copies as an MSBuild target (`Web\bin` becomes `bin_dotnet`), and `also_build` in
+  app.toml to build the feature projects after the site.
+
+## F44
+
+**DotNetOpenAuth 3.x reflects on .NET Framework's private `UriParser` fields.** App/environment. Found on 0.4.0.
+
+- **Apps:** subtext (its log-in page has DotNetOpenAuth 3.4's `OpenIdLogin` control).
+- **Error:** `TypeInitializationException: The type initializer for 'DotNetOpenAuth.OpenId.UriIdentifier' threw an
+  exception`, from a `NullReferenceException` in `UriIdentifier.NonPathCompressingUriParser.Initialize`.
+- **Cause:** DotNetOpenAuth sets private fields of `UriParser` by reflection, and they don't exist on .NET.
+  DotNetOpenAuth is unmaintained and has no .NET build. OpenID 2.0 itself is obsolete.

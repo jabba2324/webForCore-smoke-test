@@ -1,0 +1,149 @@
+{
+  "id": "mvcforum",
+  "stages": {
+    "assess": {
+      "at": "2026-10-31T23:42:20+00:00",
+      "blockers": {},
+      "kinds": [
+        "ef6",
+        "mvc",
+        "owin",
+        "webapi",
+        "webpages"
+      ],
+      "libraries": [
+        "MVCForum.Core"
+      ],
+      "notices": {},
+      "status": "pass",
+      "summary": "no blockers found",
+      "target_frameworks": [
+        "v4.7.1"
+      ]
+    },
+    "build": {
+      "at": "2026-10-31T23:57:15+00:00",
+      "error_count": 0,
+      "errors": [],
+      "log": "apps/mvcforum/logs/build.log",
+      "seconds": 2,
+      "status": "pass",
+      "summary": null,
+      "webforcore": "packages 0.4.0, webForCore-thirdparty 0.4.0"
+    },
+    "fetch": {
+      "at": "2026-10-31T23:56:57+00:00",
+      "commit": "8ce337990e079950113dae594f9407bf04854ed5",
+      "overlay": true,
+      "status": "pass"
+    },
+    "smoke": {
+      "at": "2026-10-31T23:57:18+00:00",
+      "checks": [
+        {
+          "expected_text": "Read Me",
+          "ms": 450,
+          "ok": false,
+          "path": "/",
+          "status": 500,
+          "title": "Configuration Error"
+        },
+        {
+          "expected_text": "Read Me",
+          "ms": 14,
+          "ok": false,
+          "path": "/thread/read-me/",
+          "status": 500,
+          "title": "Configuration Error"
+        },
+        {
+          "expected_text": "Example Category",
+          "ms": 4,
+          "ok": false,
+          "path": "/cat/example-category/",
+          "status": 500,
+          "title": "Configuration Error"
+        },
+        {
+          "expected_text": "Log On",
+          "ms": 2,
+          "ok": false,
+          "path": "/members/logon/",
+          "status": 500,
+          "title": "Configuration Error"
+        },
+        {
+          "expected_text": "__RequestVerificationToken",
+          "ms": 3,
+          "ok": false,
+          "path": "/members/register/",
+          "status": 500,
+          "title": "Configuration Error"
+        },
+        {
+          "expected_text": "Latest Forum Discussions",
+          "ms": 3,
+          "ok": false,
+          "path": "/home/latestrss/",
+          "status": 500,
+          "title": "Configuration Error"
+        },
+        {
+          "expected_text": "does not support http method 'GET'",
+          "ms": 2,
+          "ok": false,
+          "path": "/api/TinyMce/UploadImage",
+          "status": 500,
+          "title": "Configuration Error"
+        },
+        {
+          "expected_text": "form-control",
+          "ms": 7,
+          "ok": false,
+          "path": "/Themes/Metro/Content/Styles/Theme.min.css",
+          "status": 500,
+          "title": "Configuration Error"
+        },
+        {
+          "ms": 13,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 5,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/packages.config",
+          "status": 404
+        },
+        {
+          "ms": 7,
+          "ok": true,
+          "path": "/bin_dotnet/MvcForum.Web.dll",
+          "status": 404
+        }
+      ],
+      "log": "apps/mvcforum/logs/server.log",
+      "status": "fail",
+      "summary": "6/14 probes"
+    }
+  }
+}

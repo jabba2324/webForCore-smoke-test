@@ -37,11 +37,119 @@
         "v4.7.1"
       ]
     },
+    "build": {
+      "at": "2026-10-31T23:57:26+00:00",
+      "error_count": 0,
+      "errors": [],
+      "log": "apps/aspnet-mvc5-starter/logs/build.log",
+      "seconds": 7,
+      "status": "pass",
+      "summary": null,
+      "webforcore": "packages 0.4.0"
+    },
     "fetch": {
-      "at": "2026-10-31T19:34:46+00:00",
+      "at": "2026-10-31T23:56:57+00:00",
       "commit": "885be06e42b575e6532204ce51ee63242f207708",
-      "overlay": false,
+      "overlay": true,
       "status": "pass"
+    },
+    "smoke": {
+      "at": "2026-10-31T23:57:47+00:00",
+      "checks": [
+        {
+          "ms": 14910,
+          "ok": true,
+          "path": "/",
+          "status": 200
+        },
+        {
+          "ms": 31,
+          "ok": true,
+          "path": "/features/",
+          "status": 302
+        },
+        {
+          "ms": 329,
+          "ok": true,
+          "path": "/features/overview/",
+          "status": 200
+        },
+        {
+          "ms": 274,
+          "ok": true,
+          "path": "/users/account/login/",
+          "status": 200
+        },
+        {
+          "ms": 22,
+          "ok": true,
+          "path": "/users/account/signup/",
+          "status": 200
+        },
+        {
+          "ms": 25,
+          "ok": true,
+          "path": "/management/",
+          "status": 302
+        },
+        {
+          "ms": 73,
+          "ok": true,
+          "path": "/Assets/vendor/bootstrap/css/bootstrap.min.css",
+          "status": 200
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/Assets/stylesheet/app.css",
+          "status": 200
+        },
+        {
+          "ms": 51,
+          "ok": true,
+          "path": "/signalr/hubs",
+          "status": 200
+        },
+        {
+          "ms": 3,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 1,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 1,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 1,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "ms": 1,
+          "ok": true,
+          "path": "/packages.config",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/bin_dotnet/Sarto.App.UI.Mvc5.dll",
+          "status": 404
+        }
+      ],
+      "log": "apps/aspnet-mvc5-starter/logs/server.log",
+      "status": "pass",
+      "summary": "15/15 probes"
     }
   }
 }

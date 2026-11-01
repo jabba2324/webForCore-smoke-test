@@ -1,6 +1,6 @@
 # OpenOrderFramework: migration notes
 
-Status: blocked (F17: Katana's Google provider needs System.Net.Http.WebRequest). Source:
+Status: migrated (webForCore 0.4.0, all probes pass).
 https://github.com/lbacaj/OpenOrderFramework at `a6e25736`. Found by searching GitHub on 2026-10-31; the repo, licence
 (MIT), web project and its `<TargetFrameworkVersion>` were checked through the GitHub API. webForCore 0.2.0 packages.
 
@@ -50,6 +50,20 @@ behaviour on an empty catalogue.
 
 On the PR's packages, all 12 probes pass: the `System.Net.Http.WebRequest` the Google provider needs is in the
 "Always" set (#18).
+
+### Round 3: webForCore 0.4.0
+
+All 12 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0, and its 2 `ExcludeAssets` references for transitive Microsoft packages were removed: webForCore's packages override them since 0.3.0 (webForCore#23).
+
+On a fresh database the first requests hang. The app's seed deadlocks; it's the app's own (F26):
+- `ApplicationDbInitializer.Seed` runs inside EF 6's initialization lock, taken by the layout's
+  `ShoppingCart.GetCount()`.
+- `InitializeIdentityForEF` then uses the OWIN context's `RoleManager`/`UserManager`, whose `ApplicationDbContext` is
+  another instance.
+- Identity's `AsyncHelper.RunSync` runs `FindByNameAsync` on a thread-pool thread, which waits on the same lock.
+
+Seen with `dotnet-stack`; SQL Server showed nothing blocked. Once the database exists, all 12 probes pass. The app's own
+workflow creates the database with `Update-Database`, which doesn't run that seed.
 
 ## Open problems
 

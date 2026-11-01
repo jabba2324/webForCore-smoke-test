@@ -1,6 +1,6 @@
 # ASP.NET samples: Web API BSONSample: migration notes
 
-Status: migrated (webForCore 0.2.0, all probes pass).
+Status: migrated (webForCore 0.4.0, all probes pass).
 (`LICENSE.txt`). Split out of the `aspnet-samples` entry. webForCore 0.1.0 packages (0.2.0 from round 2).
 
 ## Assessment
@@ -20,6 +20,10 @@ Not run: the build fails with `CS0433: The type 'HttpUtility' exists in both 'Sy
 ### Round 2: webForCore 0.2.0
 
 All 7 probes pass on the released 0.2.0 packages (the overlay's `PackageReference`s moved from 0.1.0 to 0.2.0). The round-1 failures above were fixed in webForCore PR #16 and are kept as the record of round 1.
+
+### Round 3: webForCore 0.4.0
+
+All 7 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0.
 
 ## Open problems
 

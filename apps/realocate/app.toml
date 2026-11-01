@@ -8,7 +8,7 @@ project = "ReaLocate.Source/Web/ReaLocate.Web/ReaLocate.Web.csproj"
 kinds = ["mvc", "owin", "signalr", "identity"]
 licence = "MIT"
 status = "migrated"
-notes = "webForCore 0.2.0: passes all 13 probes (Identity, OWIN cookies, EF 6 migrations, AutoMapper ProjectTo, SignalR hub proxy). Glimpse removed (F21), AutoMapper 4.2 -> 12 (F22)."
+notes = "webForCore 0.4.0: passes all 13 probes."
 
 # The first request compiles the site, so it gets 120 s.
 needs = ["mssql"]

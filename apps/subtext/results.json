@@ -1,0 +1,55 @@
+{
+  "id": "subtext",
+  "stages": {
+    "assess": {
+      "at": "2026-11-01T01:35:36+00:00",
+      "blockers": {},
+      "kinds": [
+        "mvc",
+        "webforms",
+        "webpages"
+      ],
+      "libraries": [
+        "src/Subtext.Extensibility",
+        "src/Subtext.Framework",
+        "src/Subtext.Providers.BlogEntryEditor.CKEditor",
+        "src/Subtext.Providers.BlogEntryEditor.FCKeditor"
+      ],
+      "notices": {
+        "binaryformatter": [
+          "src/Subtext.Framework/Util/SerializationHelper.cs:50",
+          "src/Subtext.Framework/Util/SerializationHelper.cs:65"
+        ]
+      },
+      "status": "pass",
+      "summary": "no blockers found",
+      "target_frameworks": [
+        "v3.5",
+        "v4.0"
+      ]
+    },
+    "build": {
+      "at": "2026-11-01T01:48:53+00:00",
+      "error_count": 1,
+      "errors": [
+        "error CS0433: The type 'SoapBindingUse' exists in both 'System.Web.Services.Description, Version=8.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' and 'System.Web.Services, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' "
+      ],
+      "log": "apps/subtext/logs/build.log",
+      "seconds": 3,
+      "status": "fail",
+      "summary": "1 distinct errors",
+      "webforcore": "packages 0.4.0"
+    },
+    "fetch": {
+      "at": "2026-11-01T01:47:28+00:00",
+      "commit": "87a2d90dae02022471cd52aa5f3004f778cc4c0b",
+      "overlay": true,
+      "status": "pass"
+    },
+    "smoke": {
+      "at": "2026-11-01T01:48:53+00:00",
+      "status": "skip",
+      "summary": "not built (apps/subtext/src/src/Subtext.Web/bin_dotnet/Subtext.Web.dll missing)"
+    }
+  }
+}

@@ -5,13 +5,53 @@ repo = "https://github.com/i7MEDIA/mojoportal"
 ref = "31b4fb1efd121dba2aab58af5ad6b0f30161259e"
 site = "Web"
 project = "Web/mojoPortal.Web.csproj"
+# The features deploy themselves into Web (their post-build events, as MSBuild copies in the overlay).
+also_build = ["mojoPortal.Features.Data.MSSQL/mojoPortal.Features.Data.MSSQL.csproj", "mojoPortal.Features.UI/mojoPortal.Features.UI.csproj"]
+generated = ["Web/Data/HelpFiles/**"]
 kinds = ["webforms", "mvc", "webapi"]
 licence = "EPL-1.0"
-status = "verified"
-notes = "Large, maintained (2026) Web Forms CMS (131 .aspx) with MVC and Web API; .NET 4.8.1. Supports SQL Server, MySQL, PostgreSQL, SQLite."
+status = "blocked"
+notes = "Blocked on 0.4.0 by F35 (CS0433 in its .ashx handlers, fixed in jabba2324/webForCore#32), then F40 (Assembly.Load(\"App_GlobalResources\"), webForCore#33, not fixed). With optimizeCompilations=\"true\" (not in the overlay) Setup installs on SQL Server and all 9 probes pass. Features deploy via also_build."
 
-# The first request compiles the site, so it gets 120 s.
-# [[probes]]
-# path = "/"
-# status = 200
-# contains = ""
+# The first request compiles the site, so it gets 120 s. The probes need the compose SQL Server with an empty
+# "mojoportal" database (see NOTES.md); the Setup page installs the schema and the default site on the first run.
+[[probes]]
+path = "/Setup/Default.aspx"
+contains = "Your installation is up to date"
+
+[[probes]]
+path = "/"
+contains = "Welcome to mojoPortal!"
+
+# Web Forms with a login control (a form).
+[[probes]]
+path = "/Secure/Login.aspx"
+contains = "LoginCtrl_Password"
+
+[[probes]]
+path = "/Secure/Register.aspx"
+contains = "__VIEWSTATE"
+
+# MVC (the file manager's controller).
+[[probes]]
+path = "/FileManager"
+contains = "File Management"
+
+# Web API: an [Authorize] controller answers with JSON.
+[[probes]]
+path = "/api/UserProfile/Property/FirstName"
+status = 401
+contains = "Authorization has been denied for this request."
+
+# Generic handlers (.ashx).
+[[probes]]
+path = "/csshandler.ashx?s=1&skin=framework"
+contains = "Bootstrap v3.3.7"
+
+[[probes]]
+path = "/SearchEngineInfo.ashx"
+contains = "mojoPortal Site Search"
+
+# A static file from the skin.
+[[probes]]
+path = "/Data/Sites/1/skins/framework/img/favicons/favicon-16x16.png"

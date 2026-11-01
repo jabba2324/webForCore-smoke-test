@@ -3,7 +3,7 @@ info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
       Started application b9fbe115 (start 1, in a PseudoAppDomain).
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://127.0.0.1:34737
+      Now listening on: http://127.0.0.1:57379
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
@@ -11,53 +11,63 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Content root path: <repo>/apps/open-order-framework/src/OpenOrderFramework
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:34737/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:57379/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:34737/Store - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:57379/Store - - -
+info: Microsoft.AspNetCore.Session.DistributedSession[3]
+      Session started; Key:5d721972-ce0d-1351-1b98-b9309b1bf16f, Id:831cc117-9608-75e6-b4d7-11b8e54927ef
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:34737/ - 500 7251 text/html;+charset=utf-8 882.2875ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:57379/ - 200 3799 text/html;+charset=utf-8 4823.9673ms
+info: Microsoft.AspNetCore.Session.DistributedSession[3]
+      Session started; Key:d3457303-a4ae-4aec-58e3-d6ec5b2efb36, Id:72cd237f-6e38-c666-5796-cc7ba0a882b6
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:34737/Store - 500 6960 text/html;+charset=utf-8 13.2604ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:57379/Store - 200 3166 text/html;+charset=utf-8 119.9748ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:34737/ShoppingCart - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:57379/ShoppingCart - - -
+info: Microsoft.AspNetCore.Session.DistributedSession[3]
+      Session started; Key:a62cdc97-01c7-d20e-26de-1e955ffd73bb, Id:68eafcdb-6537-e2aa-639b-e788881fd15b
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:34737/ShoppingCart - 500 6960 text/html;+charset=utf-8 9.4885ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:57379/ShoppingCart - 200 4488 text/html;+charset=utf-8 138.7794ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:34737/Account/Login - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:57379/Account/Login - - -
+info: Microsoft.AspNetCore.Session.DistributedSession[3]
+      Session started; Key:75745775-44a2-79dc-2d1f-3336efcae2e8, Id:e6184260-e874-75d6-b839-6eb4d3109e8e
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:34737/Account/Login - 500 6960 text/html;+charset=utf-8 9.3703ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:57379/Account/Login - 200 7333 text/html;+charset=utf-8 236.4568ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:34737/Account/Register - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:57379/Account/Register - - -
+info: Microsoft.AspNetCore.Session.DistributedSession[3]
+      Session started; Key:0d39b3fd-8476-8e0f-8f83-b1306b2e11aa, Id:bfda3491-ede9-86ba-2dbf-c67049c16a92
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:34737/Account/Register - 500 6960 text/html;+charset=utf-8 9.3416ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:57379/Account/Register - 200 5078 text/html;+charset=utf-8 25.3935ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:34737/Content/Site.css - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:57379/Content/Site.css - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:34737/Content/Site.css - 500 6960 text/html;+charset=utf-8 12.9755ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:57379/Content/Site.css - 200 685 text/css 57.5679ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:34737/web.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:57379/web.config - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:34737/web.config - 404 252 text/html 5.9672ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:57379/web.config - 404 252 text/html 11.0983ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:34737/App_Data/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:57379/App_Data/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:34737/App_Data/ - 404 252 text/html 0.6657ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:57379/App_Data/ - 404 252 text/html 2.1156ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:34737/Global.asax.cs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:57379/Global.asax.cs - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:34737/Global.asax.cs - 404 215 text/html 0.5613ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:57379/Global.asax.cs - 404 215 text/html 1.9314ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:34737/obj/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:57379/obj/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:34737/obj/ - 404 252 text/html 0.5501ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:57379/obj/ - 404 252 text/html 1.8763ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:34737/packages.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:57379/packages.config - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:34737/packages.config - 404 215 text/html 0.5170ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:57379/packages.config - 404 215 text/html 1.8688ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:34737/bin_dotnet/OpenOrderFramework.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:57379/bin_dotnet/OpenOrderFramework.dll - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:34737/bin_dotnet/OpenOrderFramework.dll - 404 252 text/html 1.0285ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:57379/bin_dotnet/OpenOrderFramework.dll - 404 252 text/html 2.8021ms
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]

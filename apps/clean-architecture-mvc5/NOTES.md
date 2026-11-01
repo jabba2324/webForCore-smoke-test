@@ -1,6 +1,6 @@
 # Clean Architecture in ASP.NET MVC 5: migration notes
 
-Status: migrated (webForCore 0.2.0, all probes pass).
+Status: migrated (webForCore 0.4.0, all probes pass).
 `5cbeba34` (master, 2018). BSD-3-Clause. webForCore 0.1.0 packages (0.2.0 from round 2).
 
 ## Assessment
@@ -44,6 +44,10 @@ compared with IIS), so the site's CSS isn't served on either. Not counted as a f
 ### Round 2: webForCore 0.2.0
 
 All 11 probes pass on the released 0.2.0 packages (the overlay's `PackageReference`s moved from 0.1.0 to 0.2.0). The round-1 failures above were fixed in webForCore PR #16 and are kept as the record of round 1.
+
+### Round 3: webForCore 0.4.0
+
+All 11 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0.
 
 ## Open problems
 

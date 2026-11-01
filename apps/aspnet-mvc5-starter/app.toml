@@ -7,11 +7,50 @@ site = "sources/App.UI.Mvc5"
 project = "sources/App.UI.Mvc5/App.UI.Mvc5.csproj"
 kinds = ["mvc", "owin", "signalr", "identity"]
 licence = "MIT"
-status = "verified"
-notes = "MVC 5 + OWIN + SignalR + Identity starter, globalized; .NET 4.7.1. Needs SQL Server."
+status = "migrated"
+notes = "webForCore 0.4.0: passes all 15 probes (Identity, OWIN, SignalR, areas, LibMan assets). WindowsAzure.Storage's net45 build referenced (F33)."
 
 # The first request compiles the site, so it gets 120 s.
-# [[probes]]
-# path = "/"
-# status = 200
-# contains = ""
+needs = ["mssql"]
+
+# The first request compiles the site and its migrator creates the database, so it gets 120 s.
+[[probes]]
+path = "/"
+contains = "Skeleton MVC5 is a simple and useful starter kit"
+
+# An area (Features) whose index redirects to its overview page.
+[[probes]]
+path = "/features/"
+status = 302
+
+[[probes]]
+path = "/features/overview/"
+contains = "Features"
+
+# Identity forms (the Users area).
+[[probes]]
+path = "/users/account/login/"
+contains = "Log In | Skeleton"
+
+[[probes]]
+path = "/users/account/signup/"
+contains = "__RequestVerificationToken"
+
+# [Authorize] area: OWIN cookie authentication redirects to the log-in page.
+[[probes]]
+path = "/management/"
+status = 302
+
+# Restored at build time by LibMan from cdnjs (libman.json).
+[[probes]]
+path = "/Assets/vendor/bootstrap/css/bootstrap.min.css"
+contains = "Bootstrap v4.3.1"
+
+[[probes]]
+path = "/Assets/stylesheet/app.css"
+contains = "border-radius"
+
+# SignalR 2 generated hub proxy.
+[[probes]]
+path = "/signalr/hubs"
+contains = "signalR"

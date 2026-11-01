@@ -20,62 +20,62 @@
       ]
     },
     "build": {
-      "at": "2026-10-31T19:34:36+00:00",
+      "at": "2026-10-31T23:19:10+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/aspnetdocs-mvcmovie/logs/build.log",
-      "seconds": 5,
+      "seconds": 1,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.2.0"
+      "webforcore": "packages 0.4.0"
     },
     "fetch": {
-      "at": "2026-10-31T19:34:04+00:00",
+      "at": "2026-10-31T23:40:36+00:00",
       "commit": "546ffe728556a60591b93ab4fcbd4437f71e2449",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-10-31T19:35:01+00:00",
+      "at": "2026-10-31T23:19:35+00:00",
       "checks": [
         {
-          "ms": 3675,
+          "ms": 3732,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 13826,
+          "ms": 13705,
           "ok": true,
           "path": "/Movies",
           "status": 200
         },
         {
-          "ms": 293,
+          "ms": 302,
           "ok": true,
           "path": "/HelloWorld/Welcome?name=Scott&numTimes=4",
           "status": 200
         },
         {
-          "ms": 319,
+          "ms": 320,
           "ok": true,
           "path": "/Account/Register",
           "status": 200
         },
         {
-          "ms": 61,
+          "ms": 60,
           "ok": true,
           "path": "/Content/Site.css",
           "status": 200
         },
         {
-          "ms": 3,
+          "ms": 4,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
@@ -93,13 +93,13 @@
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/MvcMovie.dll",
           "status": 404

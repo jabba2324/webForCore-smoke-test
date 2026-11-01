@@ -1,6 +1,6 @@
 # eShopLegacyMVC (eShopModernizing): migration notes
 
-Status: migrated (webForCore 0.2.0, all probes pass).
+Status: migrated (webForCore 0.4.0, all probes pass).
 (the last commit; the repo is archived). webForCore 0.1.0, from its GitHub release packages (first migrated
 against the source at `4ec57209`, which the release differs from only in packaging; every result below was
 repeated on the packages).
@@ -90,6 +90,10 @@ fails in `SessionStateModuleAsync.Init` with `Type 'System.Web.Configuration.Ses
 All 15 probes pass on the released 0.2.0 packages (the overlay's `PackageReference`s moved from 0.1.0 to 0.2.0). The round-1 failures above were fixed in webForCore PR #16 and are kept as the record of round 1.
 
 Overlay change for 0.2.0: `CatalogDBInitializer.ExecuteScript` builds the script path from `HttpRuntime.AppDomainAppPath` instead of `AppDomain.CurrentDomain.BaseDirectory`, which on webForCore is the host's output folder (`bin_dotnet/`), not the site root (#3, now documented in `docs/MIGRATING.md`). The SQL Server seed now runs and the catalog comes from the database.
+
+### Round 3: webForCore 0.4.0
+
+All 15 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0, and its 6 `ExcludeAssets` references for transitive Microsoft packages were removed: webForCore's packages override them since 0.3.0 (webForCore#23).
 
 ## Open problems
 

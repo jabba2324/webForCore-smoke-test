@@ -1,6 +1,6 @@
 # Bonobo Git Server: migration notes
 
-Status: migrated (webForCore 0.2.0, all probes pass).
+Status: migrated (webForCore 0.4.0, all probes pass).
 (master, 2021). MIT. webForCore 0.1.0 packages (0.2.0 from round 2).
 
 ## Assessment
@@ -61,6 +61,13 @@ Nothing runs past that point, so SQLite (1.0.104 has no .NET build; 1.0.119 woul
 All 9 probes pass on the released 0.2.0 packages (the overlay's `PackageReference`s moved from 0.1.0 to 0.2.0). The round-1 failures above were fixed in webForCore PR #16 and are kept as the record of round 1.
 
 Overlay changes for 0.2.0: System.Data.SQLite 1.0.104 → 1.0.119 (1.0.104 ships only the Windows `SQLite.Interop.dll`; 1.0.119 has `runtimes/linux-x64/native`), `System.Data.SQLite.Linq` dropped (merged into the main package); `Microsoft.AspNet.Mvc`, `.WebPages` and `.Razor` 3.2.7 referenced with `ExcludeAssets="all"` because Unity.Mvc pulls them in and their `System.Web.Razor` 3.0 replaced webForCore's (MissingMethodException in `MvcCSharpRazorCodeGenerator.SetBaseType`; `docs/MIGRATING.md`, "Packages that need more than a reference"). The SQLite database is created by `AutomaticUpdater` on the first request and the log-on page renders. `/packages.config` answers 200 with the app's own "404 Page Not Found" page: web.config clears requestFiltering's `fileExtensions`/`hiddenSegments`, and `Application_Error` calls `Response.Clear()` (which resets the status to 200, as on .NET Framework) before rendering `Home/PageNotFound`. The file is not served; the probe is overridden in `app.toml` to check that. Repository hosting over HTTP and LibGit2Sharp are still untested.
+
+### Round 3: webForCore 0.4.0
+
+All 9 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0, and its 5 `ExcludeAssets` references for transitive Microsoft packages were removed: webForCore's packages override them since 0.3.0 (webForCore#23).
+
+`webForCore.WebActivatorEx` (webForCore-thirdparty 0.4.0) added to the web project for its `UnityMvcActivator` (Bonobo also sets
+the resolver from `Global.asax`, so it passed without it).
 
 ## Open problems
 

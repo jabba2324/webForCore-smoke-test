@@ -4,7 +4,7 @@ migrated projects against webForCore, run them on Kestrel and probe them.
 
 Standard library only (Python 3.11+, for tomllib).
 
-    scripts/wfc.py packages [--version 0.2.0]  # download webForCore's release packages into .packages/
+    scripts/wfc.py packages [--version 0.4.0]  # download webForCore's (and webForCore-thirdparty's) release packages into .packages/
     scripts/wfc.py list
     scripts/wfc.py fetch <id>... | --all [--reset]
     scripts/wfc.py assess <id>... | --all
@@ -45,15 +45,21 @@ WEBFORCORE = Path(os.environ.get("WEBFORCORE_DIR", ROOT.parent / "webForCore")).
 # builds restore from it (apps reference the packages, docs/MIGRATING.md section 1). WEBFORCORE_DIR is only needed by
 # apps still migrated against webForCore's source.
 WEBFORCORE_REPO = "jabba2324/webForCore"
-WEBFORCORE_VERSION = os.environ.get("WEBFORCORE_VERSION", "0.2.0")
+WEBFORCORE_VERSION = os.environ.get("WEBFORCORE_VERSION", "0.4.0")
+# Builds of third-party libraries for webForCore (WebActivatorEx, AjaxControlToolkit; CLAUDE.md), from
+# webForCore-thirdparty's releases, go in the same folder.
+THIRDPARTY_REPO = "jabba2324/webForCore-thirdparty"
+THIRDPARTY_VERSION = os.environ.get("THIRDPARTY_VERSION", "0.4.0")
+THIRDPARTY_PACKAGES = ("webForCore.WebActivatorEx", "webForCore.AjaxControlToolkit")
 PACKAGES = ROOT / ".packages"
 
 # Phase 0 of webForCore's docs/AGENT-MIGRATION.md.
 BLOCKERS = [
     ("windows-auth", r'mode="Windows"|WindowsIdentity|WindowsPrincipal|<identity\s+impersonate'),
-    ("wcf-hosting", r"ServiceHost\b|<services>"),
+    ("wcf-hosting", r"ServiceHost\b|<system\.serviceModel>(?:(?!</system\.serviceModel>)[\s\S])*?<services>"),
     ("linq-to-sql", r"System\.Data\.Linq|LinqDataSource"),
-    ("ef-objectcontext", r"\bObjectContext\b|EntityDataSource"),
+    # EF 1-4's ObjectContext (System.Data.Objects); EF 6's (System.Data.Entity.Core.Objects) runs on .NET.
+    ("ef-objectcontext", r"System\.Data\.Objects\b|EntityDataSource"),
     ("web-references", r"App_WebReferences"),
     ("windows-only", r"Microsoft\.Win32\.Registry|\[ComImport\]|Marshal\.GetActiveObject|System\.Messaging|Microsoft\.Office\.Interop"),
     ("metafiles", r"\bMetafile\b"),
@@ -119,15 +125,20 @@ def package_source():
 def download_packages():
     dest = package_source()
     dest.mkdir(parents=True, exist_ok=True)
-    for attempt in range(3):  # release asset downloads fail with 503 now and then
-        r = subprocess.run(["gh", "release", "download", f"v{WEBFORCORE_VERSION}", "--repo", WEBFORCORE_REPO,
-                            "--pattern", "*.nupkg", "--dir", str(dest), "--skip-existing"], capture_output=True, text=True)
-        if r.returncode == 0:
-            break
-        time.sleep(5)
+    ok = True
+    for repo, version in ((WEBFORCORE_REPO, WEBFORCORE_VERSION), (THIRDPARTY_REPO, THIRDPARTY_VERSION)):
+        for attempt in range(3):  # release asset downloads fail with 503 now and then
+            r = subprocess.run(["gh", "release", "download", f"v{version}", "--repo", repo,
+                                "--pattern", "*.nupkg", "--dir", str(dest), "--skip-existing"], capture_output=True, text=True)
+            if r.returncode == 0:
+                break
+            time.sleep(5)
+        if r.returncode:
+            print(f"{repo} v{version}: {r.stderr.strip()[:200]}")
+            ok = False
     count = len(list(dest.glob("*.nupkg")))
-    print(f"{dest.relative_to(ROOT)}: {count} packages" + (f" (last error: {r.stderr.strip()[:200]})" if r.returncode else ""))
-    return r.returncode == 0
+    print(f"{dest.relative_to(ROOT)}: {count} packages (webForCore {WEBFORCORE_VERSION}, webForCore-thirdparty {THIRDPARTY_VERSION})")
+    return ok
 
 
 def webforcore_used(proj):
@@ -135,7 +146,12 @@ def webforcore_used(proj):
     if "$(WEBFORCORE_DIR)" in proj.read_text(errors="replace"):
         commit = git("rev-parse", "--short=12", "HEAD", cwd=WEBFORCORE, check=False).stdout.strip()
         return f"source {commit}"
-    return f"packages {WEBFORCORE_VERSION}"
+    used = f"packages {WEBFORCORE_VERSION}"
+    # The web project or one of the solution's libraries (beside it, or one folder up).
+    projects = {proj, *proj.parent.parent.rglob("*.csproj")}
+    if any(f'Include="{p}' in f.read_text(errors="replace") for f in projects for p in THIRDPARTY_PACKAGES):
+        used += f", webForCore-thirdparty {THIRDPARTY_VERSION}"
+    return used
 
 
 def now():
@@ -226,7 +242,7 @@ def save_overlay(app):
     # Build output and files webForCore generates at run time aren't part of the migration. The apps' own
     # .gitignore files predate bin_dotnet.
     generated = [":(exclude,glob)**/bin_dotnet/**", ":(exclude,glob)**/obj/**", ":(exclude,glob)**/App_Data/machine.config",
-                 ":(exclude,glob)**/logs/W3SVC*/**", ":(exclude,glob)**/logs/*/W3SVC*/**"] + [f":(exclude,glob){p}" for p in app.get("remove", [])]
+                 ":(exclude,glob)**/logs/W3SVC*/**", ":(exclude,glob)**/logs/*/W3SVC*/**"] + [f":(exclude,glob){p}" for p in app.get("remove", []) + app.get("generated", [])]
     git("reset", "-q", cwd=dest, check=False)  # drops intent-to-add entries from an earlier save
     # Deletions must stay unstaged, or they drop out of the diff.
     git("add", "-N", "--ignore-removal", "--", ".", *generated, cwd=dest)
@@ -242,6 +258,20 @@ def save_overlay(app):
 
 # --- assess --------------------------------------------------------------------------------------
 
+def case_insensitive(base, rel):
+    """base/rel with each segment in its case on disk, as Windows resolves it (Subtext's Subtext.Framework.csproj is
+    SubText.Framework.csproj)."""
+    cur = base
+    for seg in rel.split("/"):
+        if seg in ("", "."):
+            continue
+        if seg == ".." or (cur / seg).exists() or not cur.is_dir():
+            cur = (cur / seg).resolve() if seg == ".." else cur / seg
+            continue
+        cur = cur / next((c.name for c in cur.iterdir() if c.name.lower() == seg.lower()), seg)
+    return cur.resolve()
+
+
 def referenced_projects(proj, seen=None):
     """The folders of the projects a project references, transitively (a class library's blockers block the site)."""
     seen = seen if seen is not None else set()
@@ -249,7 +279,7 @@ def referenced_projects(proj, seen=None):
     netfx = proj.with_name(proj.name + ".netfx")  # the original project, if already converted
     text += netfx.read_text(errors="replace") if netfx.exists() else ""
     for ref in re.findall(r'<ProjectReference\s+Include="([^"$]+)"', text):
-        target = (proj.parent / ref.replace("\\", "/")).resolve()
+        target = case_insensitive(proj.parent, ref.replace("\\", "/"))
         if target.exists() and target not in seen:
             seen.add(target)
             referenced_projects(target, seen)
@@ -284,6 +314,8 @@ def assess(app):
                 text = p.read_text(errors="replace")
             except OSError:
                 continue
+            if p.suffix.lower() == ".config":  # commented-out settings (mojoPortal's <authentication mode="Windows">)
+                text = re.sub(r"<!--.*?-->", lambda c: "\n" * c.group(0).count("\n"), text, flags=re.S)
             for name, pattern in BLOCKERS + NOTICES:
                 for m in re.finditer(pattern, text):
                     line = text.count("\n", 0, m.start()) + 1
@@ -324,9 +356,14 @@ def build(app):
     log = logs_dir(app["id"]) / "build.log"
     t = time.time()
     with log.open("w") as f:
-        r = subprocess.run(["dotnet", "build", str(proj), "-c", "Release", "-nologo", "-clp:ErrorsOnly;Summary",
-                            f"-p:RestoreAdditionalProjectSources={package_source()}"],
-                           cwd=proj.parent, env=env(), stdout=f, stderr=subprocess.STDOUT)
+        # also_build: projects built after the web project, that deploy themselves into the site (mojoPortal's features)
+        for p in [proj] + [checkout(app) / extra for extra in app.get("also_build", [])]:
+            f.flush()
+            r = subprocess.run(["dotnet", "build", str(p), "-c", "Release", "-nologo", "-clp:ErrorsOnly;Summary",
+                                f"-p:RestoreAdditionalProjectSources={package_source()}"],
+                               cwd=p.parent, env=env(), stdout=f, stderr=subprocess.STDOUT)
+            if r.returncode != 0:
+                break
     text = scrub(log)
     errors = sorted(set(re.findall(r"error [A-Z]+\d+: [^\[\n]+", text)))
     return record(app["id"], "build", "pass" if r.returncode == 0 else "fail", seconds=round(time.time() - t),
@@ -474,7 +511,7 @@ def main():
     p.add_argument("ids", nargs="*")
     p.add_argument("--all", action="store_true")
     p.add_argument("--reset", action="store_true", help="fetch: discard the checkout's changes and reapply the overlay")
-    p.add_argument("--version", help="packages: the webForCore release (default: $WEBFORCORE_VERSION or 0.2.0)")
+    p.add_argument("--version", help="packages: the webForCore release (default: $WEBFORCORE_VERSION or 0.4.0; webForCore-thirdparty: $THIRDPARTY_VERSION or 0.4.0)")
     a = p.parse_args()
     if a.command == "packages":
         global WEBFORCORE_VERSION
