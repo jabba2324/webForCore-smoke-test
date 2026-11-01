@@ -1,7 +1,7 @@
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
       Started application b165a6cf (start 1, in a PseudoAppDomain).
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://127.0.0.1:37491
+      Now listening on: http://127.0.0.1:58127
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
@@ -9,7 +9,7 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Content root path: <repo>/apps/subtext/src/src/Subtext.Web
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:37491/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:58127/ - - -
 log4net:ERROR XmlHierarchyConfigurator: Cannot find Property [connectionStringName] to set object on [log4net.Appender.AdoNetAppender]
 log4net:ERROR [AdoNetAppender] Could not open database connection []
 System.InvalidOperationException: The ConnectionString property has not been initialized.
@@ -19,67 +19,67 @@ System.InvalidOperationException: The ConnectionString property has not been ini
    at System.Data.SqlClient.SqlConnection.Open()
    at log4net.Appender.AdoNetAppender.InitializeDatabaseConnection()
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:37491/archive/2026/11/01/welcome-to-subtext.aspx - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:58127/archive/2026/11/01/welcome-to-subtext.aspx - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:37491/ - 200 9231 text/html;+charset=utf-8 3690.7969ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:58127/ - 200 9240 text/html;+charset=utf-8 1602.8819ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:37491/archive/2026/11/01/welcome-to-subtext.aspx - 200 14066 text/html;+charset=utf-8 223.7000ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:58127/archive/2026/11/01/welcome-to-subtext.aspx - 200 14074 text/html;+charset=utf-8 253.9637ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:37491/archives.aspx - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:58127/archives.aspx - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:37491/archives.aspx - 200 7353 text/html;+charset=utf-8 9.1648ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:58127/archives.aspx - 200 7353 text/html;+charset=utf-8 12.1543ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:37491/contact.aspx - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:58127/contact.aspx - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:37491/contact.aspx - 200 7950 text/html;+charset=utf-8 7.2268ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:58127/contact.aspx - 200 7958 text/html;+charset=utf-8 6.7167ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:37491/login.aspx - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:58127/login.aspx - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:37491/login.aspx - 500 7098 text/html;+charset=utf-8 145.4821ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:58127/login.aspx - 500 7098 text/html;+charset=utf-8 144.1698ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:37491/admin/default.aspx - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:58127/admin/default.aspx - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:37491/admin/default.aspx - 302 - text/html 1068.3731ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:58127/admin/default.aspx - 302 - text/html 5018.7439ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:37491/rss.aspx - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:58127/rss.aspx - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:37491/rss.aspx - 200 3711 text/xml;+charset=utf-8 61.1234ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:58127/rss.aspx - 200 3711 text/xml;+charset=utf-8 52.7208ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:37491/wlwmanifest.xml.ashx - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:58127/wlwmanifest.xml.ashx - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:37491/wlwmanifest.xml.ashx - 200 1026 text/xml;+charset=utf-8 513.2902ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:58127/wlwmanifest.xml.ashx - 200 1026 text/xml;+charset=utf-8 526.6157ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:37491/opensearchdesc.xml.ashx - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:58127/opensearchdesc.xml.ashx - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:37491/opensearchdesc.xml.ashx - 200 378 application/opensearchdescription+xml;+charset=utf-8 6.4953ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:58127/opensearchdesc.xml.ashx - 200 378 application/opensearchdescription+xml;+charset=utf-8 5.6687ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:37491/css/lightbox.css - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:58127/css/lightbox.css - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:37491/css/lightbox.css - 200 2805 text/css 45.7584ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:58127/css/lightbox.css - 200 2805 text/css 42.1953ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:37491/web.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:58127/web.config - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:37491/web.config - 404 - - 20.1915ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:58127/web.config - 404 - - 21.3043ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:37491/App_Data/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:58127/App_Data/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:37491/App_Data/ - 404 - - 4.4793ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:58127/App_Data/ - 404 - - 2.8723ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:37491/Global.asax.cs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:58127/Global.asax.cs - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:37491/Global.asax.cs - 404 - - 2.5097ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:58127/Global.asax.cs - 404 - - 3.0951ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:37491/obj/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:58127/obj/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:37491/obj/ - 404 - - 2.2950ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:58127/obj/ - 404 - - 4.0925ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:37491/packages.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:58127/packages.config - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:37491/packages.config - 404 - - 2.0848ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:58127/packages.config - 404 - - 2.9735ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:37491/bin_dotnet/Subtext.Web.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:58127/bin_dotnet/Subtext.Web.dll - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:37491/bin_dotnet/Subtext.Web.dll - 404 - - 2.7340ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:58127/bin_dotnet/Subtext.Web.dll - 404 - - 4.6198ms
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
