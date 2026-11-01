@@ -87,12 +87,14 @@ as a pass: note it in `NOTES.md` and `FINDINGS.md`, and fix webForCore instead.
 | `ref` | Pinned commit (preferred) or tag; `overlay.patch` applies to exactly this |
 | `site` | The web project's folder in the checkout (the one with `web.config`) |
 | `project` | The web project file in the checkout, converted in place by the overlay (default: the `.csproj` in `site`) |
+| `also_build` | Further project files in the checkout, built after `project` (projects that deploy themselves into the site, as mojoPortal's features do) |
 | `kinds` | `webforms`, `mvc`, `webapi`, `webpages`, `owin`, `signalr`, `identity` |
 | `licence` | SPDX id, or the project's own licence name |
 | `status` | `candidate` (listed, unchecked), `verified` (repo, ref, licence and paths checked), `migrating`, `migrated` (builds and passes its probes), `blocked` (needs something webForCore doesn't provide), `rejected` (not a fit; kept so it isn't added again) |
 | `needs` | Services from `services/compose.yml`: `mssql`, `mysql`, `postgres` |
 | `env` | Extra environment for the server process (a table) |
 | `remove` | Globs of files `fetch` deletes before applying the overlay, kept out of the patch (the app's checked-in DLLs) |
+| `generated` | Globs of files the build or the app writes into the checkout, kept out of the patch (mojoPortal's features copy themselves into the site) |
 | `https` | `true` to serve the app over HTTPS with the .NET development certificate (`dotnet dev-certs https`), for apps with `RequireHttpsAttribute` |
 | `[[probes]]` | `path`, `status` (default 200), `contains` (text that proves the page rendered), `absent` (text that must not be in the response) |
 | `[forbidden."<path>"]` | Overrides for one of the paths that must not be served (`/web.config`, `/packages.config`, ...), for an app whose error handler answers 200 with its own page: `status`, `absent`, `contains` |

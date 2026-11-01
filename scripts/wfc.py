@@ -242,7 +242,7 @@ def save_overlay(app):
     # Build output and files webForCore generates at run time aren't part of the migration. The apps' own
     # .gitignore files predate bin_dotnet.
     generated = [":(exclude,glob)**/bin_dotnet/**", ":(exclude,glob)**/obj/**", ":(exclude,glob)**/App_Data/machine.config",
-                 ":(exclude,glob)**/logs/W3SVC*/**", ":(exclude,glob)**/logs/*/W3SVC*/**"] + [f":(exclude,glob){p}" for p in app.get("remove", [])]
+                 ":(exclude,glob)**/logs/W3SVC*/**", ":(exclude,glob)**/logs/*/W3SVC*/**"] + [f":(exclude,glob){p}" for p in app.get("remove", []) + app.get("generated", [])]
     git("reset", "-q", cwd=dest, check=False)  # drops intent-to-add entries from an earlier save
     # Deletions must stay unstaged, or they drop out of the diff.
     git("add", "-N", "--ignore-removal", "--", ".", *generated, cwd=dest)
@@ -258,6 +258,20 @@ def save_overlay(app):
 
 # --- assess --------------------------------------------------------------------------------------
 
+def case_insensitive(base, rel):
+    """base/rel with each segment in its case on disk, as Windows resolves it (Subtext's Subtext.Framework.csproj is
+    SubText.Framework.csproj)."""
+    cur = base
+    for seg in rel.split("/"):
+        if seg in ("", "."):
+            continue
+        if seg == ".." or (cur / seg).exists() or not cur.is_dir():
+            cur = (cur / seg).resolve() if seg == ".." else cur / seg
+            continue
+        cur = cur / next((c.name for c in cur.iterdir() if c.name.lower() == seg.lower()), seg)
+    return cur.resolve()
+
+
 def referenced_projects(proj, seen=None):
     """The folders of the projects a project references, transitively (a class library's blockers block the site)."""
     seen = seen if seen is not None else set()
@@ -265,7 +279,7 @@ def referenced_projects(proj, seen=None):
     netfx = proj.with_name(proj.name + ".netfx")  # the original project, if already converted
     text += netfx.read_text(errors="replace") if netfx.exists() else ""
     for ref in re.findall(r'<ProjectReference\s+Include="([^"$]+)"', text):
-        target = (proj.parent / ref.replace("\\", "/")).resolve()
+        target = case_insensitive(proj.parent, ref.replace("\\", "/"))
         if target.exists() and target not in seen:
             seen.add(target)
             referenced_projects(target, seen)
@@ -300,6 +314,8 @@ def assess(app):
                 text = p.read_text(errors="replace")
             except OSError:
                 continue
+            if p.suffix.lower() == ".config":  # commented-out settings (mojoPortal's <authentication mode="Windows">)
+                text = re.sub(r"<!--.*?-->", lambda c: "\n" * c.group(0).count("\n"), text, flags=re.S)
             for name, pattern in BLOCKERS + NOTICES:
                 for m in re.finditer(pattern, text):
                     line = text.count("\n", 0, m.start()) + 1
@@ -340,9 +356,14 @@ def build(app):
     log = logs_dir(app["id"]) / "build.log"
     t = time.time()
     with log.open("w") as f:
-        r = subprocess.run(["dotnet", "build", str(proj), "-c", "Release", "-nologo", "-clp:ErrorsOnly;Summary",
-                            f"-p:RestoreAdditionalProjectSources={package_source()}"],
-                           cwd=proj.parent, env=env(), stdout=f, stderr=subprocess.STDOUT)
+        # also_build: projects built after the web project, that deploy themselves into the site (mojoPortal's features)
+        for p in [proj] + [checkout(app) / extra for extra in app.get("also_build", [])]:
+            f.flush()
+            r = subprocess.run(["dotnet", "build", str(p), "-c", "Release", "-nologo", "-clp:ErrorsOnly;Summary",
+                                f"-p:RestoreAdditionalProjectSources={package_source()}"],
+                               cwd=p.parent, env=env(), stdout=f, stderr=subprocess.STDOUT)
+            if r.returncode != 0:
+                break
     text = scrub(log)
     errors = sorted(set(re.findall(r"error [A-Z]+\d+: [^\[\n]+", text)))
     return record(app["id"], "build", "pass" if r.returncode == 0 else "fail", seconds=round(time.time() - t),
