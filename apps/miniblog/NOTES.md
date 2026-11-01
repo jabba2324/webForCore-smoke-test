@@ -38,6 +38,8 @@ web.config is unchanged.
 
 ## Smoke
 
+- **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 18/18 probes.
+
 Probes: the home page, a post (`/post/<slug>`, a rewrite), a category, the RSS feed (a handler), robots.txt and
 sitemap.xml (rewrites to `.cshtml`), the login page, the RSD view, `/metaweblog` (XML-RPC handler), a theme CSS file
 (through `MinifyHandler`), `posts/*.xml` (must be 403), and a missing page (404).

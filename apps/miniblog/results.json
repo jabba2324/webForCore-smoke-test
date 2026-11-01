@@ -16,14 +16,14 @@
       "target_frameworks": []
     },
     "build": {
-      "at": "2026-10-31T23:21:53+00:00",
+      "at": "2026-11-01T10:04:31+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/miniblog/logs/build.log",
       "seconds": 0,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.4.0"
+      "webforcore": "packages 0.5.0"
     },
     "fetch": {
       "at": "2026-10-31T23:40:38+00:00",
@@ -32,34 +32,34 @@
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-10-31T23:22:02+00:00",
+      "at": "2026-11-01T10:09:44+00:00",
       "checks": [
         {
-          "ms": 1751,
+          "ms": 1778,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 21,
+          "ms": 24,
           "ok": true,
           "path": "/post/test-1",
           "status": 200
         },
         {
-          "ms": 9,
+          "ms": 10,
           "ok": true,
           "path": "/category/Chrome",
           "status": 200
         },
         {
-          "ms": 38,
+          "ms": 45,
           "ok": true,
           "path": "/feed/rss/",
           "status": 200
         },
         {
-          "ms": 83,
+          "ms": 92,
           "ok": true,
           "path": "/robots.txt",
           "status": 200
@@ -71,7 +71,7 @@
           "status": 200
         },
         {
-          "ms": 125,
+          "ms": 138,
           "ok": true,
           "path": "/views/login.cshtml",
           "status": 200
@@ -83,13 +83,13 @@
           "status": 200
         },
         {
-          "ms": 4,
+          "ms": 3,
           "ok": true,
           "path": "/views/robots/rsd",
           "status": 200
         },
         {
-          "ms": 120,
+          "ms": 118,
           "ok": true,
           "path": "/themes/OneColumn/site.css",
           "status": 200
@@ -101,19 +101,19 @@
           "status": 403
         },
         {
-          "ms": 62,
+          "ms": 53,
           "ok": true,
           "path": "/no-such-page",
           "status": 404
         },
         {
-          "ms": 7,
+          "ms": 4,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
@@ -137,7 +137,7 @@
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 3,
           "ok": true,
           "path": "/bin_dotnet/MiniBlog.dll",
           "status": 404
