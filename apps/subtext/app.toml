@@ -7,11 +7,54 @@ site = "src/Subtext.Web"
 project = "src/Subtext.Web/SubText.Web.csproj"
 kinds = ["webforms", "mvc"]
 licence = "MIT"
-status = "verified"
-notes = "Blog engine, Web Forms (57 .aspx) with MVC; targets .NET 4.0, so it may lack httpRuntime targetFramework 4.5. Archived. Needs SQL Server."
+status = "blocked"
+notes = "Blocked on 0.4.0 by F35 (CS0433, Web Reference proxy), then F38 (SqlClient through the System.Data facade, MissingMethodException). Both fixed in jabba2324/webForCore#32: on its packages the install wizard runs and 15/16 checks pass; the log-in page's DotNetOpenAuth fails (F44). Uses webForCore-thirdparty's WebActivator 1.x build (thirdparty#1, unreleased)."
 
-# The first request compiles the site, so it gets 120 s.
-# [[probes]]
-# path = "/"
-# status = 200
-# contains = ""
+# The first request compiles the site, so it gets 120 s. The probes need the compose SQL Server with a "SubtextData"
+# database that Subtext's install wizard has set up (three postbacks; NOTES.md): on an empty database every page
+# redirects to /install/default.aspx.
+[[probes]]
+path = "/"
+contains = "Welcome to Subtext!"
+
+# A blog post (Subtext's URL routing to a Web Forms page).
+[[probes]]
+path = "/archive/2026/11/01/welcome-to-subtext.aspx"
+contains = "Welcome to Subtext!"
+
+[[probes]]
+path = "/archives.aspx"
+contains = "Archives"
+
+# A form (the contact form, Web Forms).
+[[probes]]
+path = "/contact.aspx"
+contains = "Contact Form"
+
+# The log-in form: DotNetOpenAuth's OpenID control fails on .NET (F44, app/environment).
+[[probes]]
+path = "/login.aspx"
+contains = "Sign In with OpenID"
+
+# Forms authentication sends the admin pages to the log-in page.
+[[probes]]
+path = "/admin/default.aspx"
+status = 302
+
+# RSS (an IHttpHandler) and MVC controllers routed to .ashx URLs.
+[[probes]]
+path = "/rss.aspx"
+contains = "<rss version=\"2.0\""
+
+[[probes]]
+path = "/wlwmanifest.xml.ashx"
+contains = "<supportsSlug>Yes</supportsSlug>"
+
+[[probes]]
+path = "/opensearchdesc.xml.ashx"
+contains = "OpenSearchDescription"
+
+# A static file.
+[[probes]]
+path = "/css/lightbox.css"
+contains = "#lightbox"
