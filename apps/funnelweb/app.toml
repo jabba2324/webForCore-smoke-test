@@ -7,11 +7,26 @@ site = "src/FunnelWeb.Web"
 project = "src/FunnelWeb.Web/FunnelWeb.Web.csproj"
 kinds = ["mvc"]
 licence = "BSD-3-Clause"
-status = "verified"
-notes = "MVC blog engine; targets .NET 4.0 (MVC 3/4 era: check the MVC version before migrating). NHibernate, SQL Server or SQLite."
+status = "blocked"
+notes = "Blocked on its NHibernate 3.3 (F39, app/environment): its installer, log-in and upgrade (MVC) work on 0.4.0, 9/10 checks; the blog's NHibernate proxies don't. Needs SQL Server."
 
-# The first request compiles the site, so it gets 120 s.
-# [[probes]]
-# path = "/"
-# status = 200
-# contains = ""
+# The first request compiles the site, so it gets 120 s. The probes need the compose SQL Server with a "FunnelWeb"
+# database that FunnelWeb's upgrader has set up (log in as test/test, then /admin/install's "Upgrade"; NOTES.md).
+# The blog: NHibernate 3.3's proxies don't work on .NET (F39, app/environment).
+[[probes]]
+path = "/"
+contains = "My FunnelWeb Site"
+
+# MVC (the Admin area's log-in form).
+[[probes]]
+path = "/admin/login"
+contains = "To administer this site, log in using the form below."
+
+# Forms authentication sends the installer to the log-in page.
+[[probes]]
+path = "/admin/install"
+status = 302
+
+# A static file.
+[[probes]]
+path = "/Content/Images/external.png"

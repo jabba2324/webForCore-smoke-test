@@ -1,0 +1,2389 @@
+diff --git a/src/FunnelWeb.Extensions.CommentNotification/FunnelWeb.Extensions.CommentNotification.csproj b/src/FunnelWeb.Extensions.CommentNotification/FunnelWeb.Extensions.CommentNotification.csproj
+index 7095bac..6cea422 100644
+--- a/src/FunnelWeb.Extensions.CommentNotification/FunnelWeb.Extensions.CommentNotification.csproj
++++ b/src/FunnelWeb.Extensions.CommentNotification/FunnelWeb.Extensions.CommentNotification.csproj
+@@ -1,83 +1,34 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++<Project Sdk="Microsoft.NET.Sdk">
++  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is FunnelWeb.Extensions.CommentNotification.csproj.netfx. -->
+   <PropertyGroup>
+-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+-    <ProductVersion>8.0.30703</ProductVersion>
+-    <SchemaVersion>2.0</SchemaVersion>
+-    <ProjectGuid>{5C5EFCF0-454D-42E0-AA89-7F69FB5457BA}</ProjectGuid>
+-    <RestorePackages>true</RestorePackages>
+-    <OutputType>Library</OutputType>
+-    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <TargetFramework>net11.0</TargetFramework>
+     <RootNamespace>FunnelWeb.Extensions.CommentNotification</RootNamespace>
+     <AssemblyName>FunnelWeb.Extensions.CommentNotification</AssemblyName>
+-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+-    <FileAlignment>512</FileAlignment>
+-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+-    <DebugSymbols>true</DebugSymbols>
+-    <DebugType>full</DebugType>
+-    <Optimize>false</Optimize>
+-    <OutputPath>bin\Debug\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+-    <DebugType>pdbonly</DebugType>
+-    <Optimize>true</Optimize>
+-    <OutputPath>bin\Release\</OutputPath>
+-    <DefineConstants>TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
++    <NoWarn>$(NoWarn);NU1701</NoWarn>
+   </PropertyGroup>
++
+   <ItemGroup>
+-    <Reference Include="Autofac">
+-      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Autofac.Configuration">
+-      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.Configuration.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System" />
+-    <Reference Include="System.ComponentModel.Composition" />
+-    <Reference Include="System.Core" />
+-    <Reference Include="System.Web" />
+-    <Reference Include="System.Xml.Linq" />
+-    <Reference Include="Microsoft.CSharp" />
+-    <Reference Include="System.Data" />
+-    <Reference Include="System.Xml" />
++    <Compile Remove="bin/**;obj/**" />
++    <Compile Include="../Information/SolutionInfo.cs" Link="SolutionInfo.cs" />
++    <Compile Include="../Information/VersionInfo.cs" Link="VersionInfo.cs" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <Compile Include="..\Information\SolutionInfo.cs">
+-      <Link>Properties\SolutionInfo.cs</Link>
+-    </Compile>
+-    <Compile Include="..\Information\VersionInfo.cs">
+-      <Link>Properties\VersionInfo.cs</Link>
+-    </Compile>
+-    <Compile Include="CommentPostedListener.cs" />
+-    <Compile Include="Extension.cs" />
+-    <Compile Include="Properties\AssemblyInfo.cs" />
++    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.4.0" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <ProjectReference Include="..\FunnelWeb\FunnelWeb.csproj">
+-      <Project>{3E448C45-F459-45D7-950C-5ABEF926513D}</Project>
+-      <Name>FunnelWeb</Name>
+-    </ProjectReference>
++    <!-- The app's own libraries. -->
++    <PackageReference Include="Autofac" Version="2.6.3.862" />
++    <PackageReference Include="System.ComponentModel.Composition" Version="11.0.0-rc.3.26522.148" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <None Include="packages.config" />
++    <ProjectReference Include="../FunnelWeb/FunnelWeb.csproj" />
+   </ItemGroup>
+-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+-  <PropertyGroup>
+-    <PostBuildEvent>xcopy "$(TargetPath)" "$(SolutionDir)FunnelWeb.Web\bin\Extensions\" /R /S /Y</PostBuildEvent>
+-  </PropertyGroup>
+-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+-       Other similar extension points exist, see Microsoft.Common.targets.
+-  <Target Name="BeforeBuild">
+-  </Target>
+-  <Target Name="AfterBuild">
+-  </Target>
+-  -->
+-</Project>
+\ No newline at end of file
++
++</Project>
+diff --git a/src/FunnelWeb.Extensions.CommentNotification/FunnelWeb.Extensions.CommentNotification.csproj.netfx b/src/FunnelWeb.Extensions.CommentNotification/FunnelWeb.Extensions.CommentNotification.csproj.netfx
+new file mode 100644
+index 0000000..7095bac
+--- /dev/null
++++ b/src/FunnelWeb.Extensions.CommentNotification/FunnelWeb.Extensions.CommentNotification.csproj.netfx
+@@ -0,0 +1,83 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <PropertyGroup>
++    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
++    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
++    <ProductVersion>8.0.30703</ProductVersion>
++    <SchemaVersion>2.0</SchemaVersion>
++    <ProjectGuid>{5C5EFCF0-454D-42E0-AA89-7F69FB5457BA}</ProjectGuid>
++    <RestorePackages>true</RestorePackages>
++    <OutputType>Library</OutputType>
++    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <RootNamespace>FunnelWeb.Extensions.CommentNotification</RootNamespace>
++    <AssemblyName>FunnelWeb.Extensions.CommentNotification</AssemblyName>
++    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
++    <FileAlignment>512</FileAlignment>
++    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
++    <DebugSymbols>true</DebugSymbols>
++    <DebugType>full</DebugType>
++    <Optimize>false</Optimize>
++    <OutputPath>bin\Debug\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
++    <DebugType>pdbonly</DebugType>
++    <Optimize>true</Optimize>
++    <OutputPath>bin\Release\</OutputPath>
++    <DefineConstants>TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++  </PropertyGroup>
++  <ItemGroup>
++    <Reference Include="Autofac">
++      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.dll</HintPath>
++    </Reference>
++    <Reference Include="Autofac.Configuration">
++      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.Configuration.dll</HintPath>
++    </Reference>
++    <Reference Include="System" />
++    <Reference Include="System.ComponentModel.Composition" />
++    <Reference Include="System.Core" />
++    <Reference Include="System.Web" />
++    <Reference Include="System.Xml.Linq" />
++    <Reference Include="Microsoft.CSharp" />
++    <Reference Include="System.Data" />
++    <Reference Include="System.Xml" />
++  </ItemGroup>
++  <ItemGroup>
++    <Compile Include="..\Information\SolutionInfo.cs">
++      <Link>Properties\SolutionInfo.cs</Link>
++    </Compile>
++    <Compile Include="..\Information\VersionInfo.cs">
++      <Link>Properties\VersionInfo.cs</Link>
++    </Compile>
++    <Compile Include="CommentPostedListener.cs" />
++    <Compile Include="Extension.cs" />
++    <Compile Include="Properties\AssemblyInfo.cs" />
++  </ItemGroup>
++  <ItemGroup>
++    <ProjectReference Include="..\FunnelWeb\FunnelWeb.csproj">
++      <Project>{3E448C45-F459-45D7-950C-5ABEF926513D}</Project>
++      <Name>FunnelWeb</Name>
++    </ProjectReference>
++  </ItemGroup>
++  <ItemGroup>
++    <None Include="packages.config" />
++  </ItemGroup>
++  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
++  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
++  <PropertyGroup>
++    <PostBuildEvent>xcopy "$(TargetPath)" "$(SolutionDir)FunnelWeb.Web\bin\Extensions\" /R /S /Y</PostBuildEvent>
++  </PropertyGroup>
++  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
++       Other similar extension points exist, see Microsoft.Common.targets.
++  <Target Name="BeforeBuild">
++  </Target>
++  <Target Name="AfterBuild">
++  </Target>
++  -->
++</Project>
+\ No newline at end of file
+diff --git a/src/FunnelWeb.Extensions.CommentNotification/packages.config b/src/FunnelWeb.Extensions.CommentNotification/packages.config.netfx
+similarity index 100%
+rename from src/FunnelWeb.Extensions.CommentNotification/packages.config
+rename to src/FunnelWeb.Extensions.CommentNotification/packages.config.netfx
+diff --git a/src/FunnelWeb.Web/FunnelWeb.Web.csproj b/src/FunnelWeb.Web/FunnelWeb.Web.csproj
+index d3312f3..9bac6d8 100644
+--- a/src/FunnelWeb.Web/FunnelWeb.Web.csproj
++++ b/src/FunnelWeb.Web/FunnelWeb.Web.csproj
+@@ -1,565 +1,78 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++<Project Sdk="Microsoft.NET.Sdk.Web">
++  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is FunnelWeb.Web.csproj.netfx. -->
+   <PropertyGroup>
+-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+-    <ProductVersion>
+-    </ProductVersion>
+-    <SchemaVersion>2.0</SchemaVersion>
+-    <ProjectGuid>{64FAABD6-F45B-4ED1-A3AD-6989C1934405}</ProjectGuid>
+-    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+-    <OutputType>Library</OutputType>
+-    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <TargetFramework>net11.0</TargetFramework>
++    <OutputType>Exe</OutputType>
+     <RootNamespace>FunnelWeb.Web</RootNamespace>
+     <AssemblyName>FunnelWeb.Web</AssemblyName>
+-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+-    <MvcBuildViews>false</MvcBuildViews>
+-    <UseIISExpress>true</UseIISExpress>
+-    <IISExpressSSLPort />
+-    <IISExpressAnonymousAuthentication />
+-    <IISExpressWindowsAuthentication />
+-    <IISExpressUseClassicPipelineMode />
+-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+-    <RestorePackages>true</RestorePackages>
+-    <TargetFrameworkProfile />
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
++    <OutputPath>bin_dotnet</OutputPath>
++    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
++    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
++    <GenerateDependencyFile>true</GenerateDependencyFile>
++    <NoWarn>$(NoWarn);NU1701</NoWarn>
++    <PredefinedCulturesOnly>true</PredefinedCulturesOnly>
++    <EnableDefaultRazorGenerateItems>false</EnableDefaultRazorGenerateItems>
++    <RazorCompileOnBuild>false</RazorCompileOnBuild>
++    <RazorCompileOnPublish>false</RazorCompileOnPublish>
+   </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+-    <DebugSymbols>true</DebugSymbols>
+-    <DebugType>full</DebugType>
+-    <Optimize>false</Optimize>
+-    <OutputPath>bin\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+-    <DebugType>pdbonly</DebugType>
+-    <Optimize>true</Optimize>
+-    <OutputPath>bin\</OutputPath>
+-    <DefineConstants>TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-  </PropertyGroup>
+-  <ItemGroup>
+-    <Reference Include="Antlr3.Runtime">
+-      <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Autofac">
+-      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Autofac.Configuration">
+-      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.Configuration.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Autofac.Integration.Mvc">
+-      <HintPath>..\packages\Autofac.Mvc4.2.6.2.859\lib\NET40\Autofac.Integration.Mvc.dll</HintPath>
+-    </Reference>
+-    <Reference Include="CookComputing.XmlRpcServerV2">
+-      <HintPath>..\packages\xmlrpcnet-server.3.0.0.266\lib\net20\CookComputing.XmlRpcServerV2.dll</HintPath>
+-    </Reference>
+-    <Reference Include="CookComputing.XmlRpcV2">
+-      <HintPath>..\packages\xmlrpcnet.3.0.0.266\lib\net20\CookComputing.XmlRpcV2.dll</HintPath>
+-    </Reference>
+-    <Reference Include="DbUp">
+-      <HintPath>..\packages\dbup.2.0.113\lib\NET35\DbUp.dll</HintPath>
+-    </Reference>
+-    <Reference Include="DbUp.SqlCe">
+-      <HintPath>..\packages\dbup-sqlce.2.0.113\lib\NET35\DbUp.SqlCe.dll</HintPath>
+-    </Reference>
+-    <Reference Include="FluentNHibernate">
+-      <HintPath>..\packages\FluentNHibernate.1.3.0.733\lib\FluentNHibernate.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Iesi.Collections">
+-      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Joel.Net.Akismet">
+-      <HintPath>..\..\lib\Akismet\Joel.Net.Akismet.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.CSharp" />
+-    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <SpecificVersion>False</SpecificVersion>
+-      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.1.7.0.3\lib\net35-full\Microsoft.WindowsAzure.Configuration.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\packages\WindowsAzure.Storage.1.7.0.0\lib\net35-full\Microsoft.WindowsAzure.StorageClient.dll</HintPath>
+-    </Reference>
+-    <Reference Include="MiniProfiler, Version=2.0.2.0, Culture=neutral, PublicKeyToken=b44f9351044011a3, processorArchitecture=MSIL">
+-      <SpecificVersion>False</SpecificVersion>
+-      <HintPath>..\packages\MiniProfiler.2.0.2\lib\net40\MiniProfiler.dll</HintPath>
+-    </Reference>
+-    <Reference Include="NHibernate">
+-      <HintPath>..\packages\NHibernate.3.3.2.4000\lib\Net35\NHibernate.dll</HintPath>
+-    </Reference>
+-    <Reference Include="NHibernate.SqlAzure">
+-      <HintPath>..\packages\NHibernate.SqlAzure.0.9.11\lib\NET40\NHibernate.SqlAzure.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System" />
+-    <Reference Include="System.ComponentModel.Composition" />
+-    <Reference Include="System.Data" />
+-    <Reference Include="System.Data.DataSetExtensions" />
+-    <Reference Include="System.Data.Services.Client" />
+-    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Drawing" />
+-    <Reference Include="System.ServiceModel" />
+-    <Reference Include="System.Web.DynamicData" />
+-    <Reference Include="System.Web.Entity" />
+-    <Reference Include="System.Web.ApplicationServices" />
+-    <Reference Include="System.ComponentModel.DataAnnotations" />
+-    <Reference Include="System.Web.Extensions" />
+-    <Reference Include="System.Web" />
+-    <Reference Include="System.Web.Abstractions" />
+-    <Reference Include="System.Web.Optimization">
+-      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.Routing" />
+-    <Reference Include="System.Xml" />
+-    <Reference Include="System.Configuration" />
+-    <Reference Include="System.Web.Services" />
+-    <Reference Include="System.EnterpriseServices" />
+-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Net.Http">
+-    </Reference>
+-    <Reference Include="System.Net.Http.WebRequest">
+-    </Reference>
+-    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Xml.Linq" />
+-    <Reference Include="WebGrease">
+-      <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
+-    </Reference>
+-  </ItemGroup>
++
+   <ItemGroup>
+-    <Compile Include="..\Information\SolutionInfo.cs">
+-      <Link>Properties\SolutionInfo.cs</Link>
+-    </Compile>
+-    <Compile Include="..\Information\VersionInfo.cs">
+-      <Link>Properties\VersionInfo.cs</Link>
+-    </Compile>
+-    <Compile Include="Application\Authentication\AuthenticationModule.cs" />
+-    <Compile Include="Application\Authentication\FunnelWebRoleProvider.cs" />
+-    <Compile Include="Application\CacheStaticFilesHttpModule.cs" />
+-    <Compile Include="Application\Extensibility.cs" />
+-    <Compile Include="Application\Extensions\WebViewPageExtensions.cs" />
+-    <Compile Include="Application\Extensions\MarkupExtensions.cs" />
+-    <Compile Include="Application\Extensions\MobileExtensions.cs" />
+-    <Compile Include="Application\Extensions\ViewDataDictionaryExtensions.cs" />
+-    <Compile Include="Application\ForceLowercaseUrlHttpModule.cs" />
+-    <Compile Include="Application\Markup\ContentRenderer.cs" />
+-    <Compile Include="Application\Markup\HtmlFormatter.cs" />
+-    <Compile Include="Application\Markup\IContentEnricher.cs" />
+-    <Compile Include="Application\Markup\IContentFormatter.cs" />
+-    <Compile Include="Application\Markup\IContentRenderer.cs" />
+-    <Compile Include="Application\Markup\InputSanitizer.cs" />
+-    <Compile Include="Application\Markup\MacroEnricher.cs" />
+-    <Compile Include="Application\Markup\Macros\IMacroExecutor.cs" />
+-    <Compile Include="Application\Markup\Macros\MacroView.cs" />
+-    <Compile Include="Application\Markup\Macros\RazorMacroExecutor.cs" />
+-    <Compile Include="Application\Markup\MarkdownFormatter.cs" />
+-    <Compile Include="Application\Markup\MarkdownNetByBrianJeremy.cs" />
+-    <Compile Include="Application\Markup\MarkupModule.cs" />
+-    <Compile Include="Application\MetaWeblog\IMetaWeblog.cs" />
+-    <Compile Include="Application\MetaWeblog\MetaWeblog.cs" />
+-    <Compile Include="Application\MetaWeblog\MetaWeblogRouteHandler.cs" />
+-    <Compile Include="Application\MetaWeblog\MetaWeblogSettings.cs" />
+-    <Compile Include="Application\MetaWeblog\Structs.cs" />
+-    <Compile Include="Application\Mime\MimeSupportModule.cs" />
+-    <Compile Include="Application\Mime\RegistryMimeTypeLookup.cs" />
+-    <Compile Include="Application\Mvc\ActionResults\FeedResult.cs" />
+-    <Compile Include="Application\Mvc\ActionResults\PageTemplateActionResult.cs" />
+-    <Compile Include="Application\Mvc\ActionResults\XmlActionResult.cs" />
+-    <Compile Include="Application\Mvc\Binders\ArrayBinder.cs" />
+-    <Compile Include="Application\Mvc\Binders\BindersModule.cs" />
+-    <Compile Include="Application\Mvc\Binders\EntryRevisionBinder.cs" />
+-    <Compile Include="Application\Mvc\Binders\ImplicitAssignmentBinder.cs" />
+-    <Compile Include="Application\Mvc\Binders\UploadBinder.cs" />
+-    <Compile Include="Application\Mvc\ViewBundleRegistrar.cs" />
+-    <Compile Include="Application\Mvc\FileUpload.cs" />
+-    <Compile Include="Application\Mvc\FunnelWebControllerFactory.cs" />
+-    <Compile Include="Application\Mvc\FunnelWebViewEngine.cs" />
+-    <Compile Include="Application\Mvc\HtmlHelperExtensions.cs" />
+-    <Compile Include="Application\Mvc\HyphenatedRouteHandler.cs" />
+-    <Compile Include="Application\Mvc\LowercaseRoute.cs" />
+-    <Compile Include="Application\Mvc\MvcExtensions.cs" />
+-    <Compile Include="Application\Mvc\NotFromValuesListConstraint.cs" />
+-    <Compile Include="Application\Mvc\RedirectRoute.cs" />
+-    <Compile Include="Application\Mvc\RegexRoutes.cs" />
+-    <Compile Include="Application\Mvc\RouteCollectionExtension.cs" />
+-    <Compile Include="Application\Mvc\UrlHelperExtension.cs" />
+-    <Compile Include="Application\Mvc\ValidUrlAttribute.cs" />
+-    <Compile Include="Application\Mvc\WebAbstractionsModule.cs" />
+-    <Compile Include="Application\Pingbacks\PingbackHandler.cs" />
+-    <Compile Include="Application\Pingbacks\XmlRpcFaultException.cs" />
+-    <Compile Include="Application\Pingbacks\XmlRpcHandler.cs" />
+-    <Compile Include="Application\RequireUpdatedDatabaseHttpModule.cs" />
+-    <Compile Include="Application\Spam\AkismetSpamChecker.cs" />
+-    <Compile Include="Application\Spam\ISpamChecker.cs" />
+-    <Compile Include="Application\Spam\SpamModule.cs" />
+-    <Compile Include="Application\Themes\IThemeProvider.cs" />
+-    <Compile Include="Application\Themes\ThemeProvider.cs" />
+-    <Compile Include="Application\Themes\ThemesModule.cs" />
+-    <Compile Include="App_Start\BundleConfig.cs" />
+-    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+-    <Compile Include="Areas\Admin\BundleConfig.cs" />
+-    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+-    <Compile Include="Areas\Admin\Controllers\InstallController.cs" />
+-    <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+-    <Compile Include="Areas\Admin\Controllers\SqlAuthenticationController.cs" />
+-    <Compile Include="Areas\Admin\Controllers\UploadController.cs" />
+-    <Compile Include="Areas\Admin\Controllers\WikiAdminController.cs" />
+-    <Compile Include="Areas\Admin\RouteConfig.cs" />
+-    <Compile Include="Areas\Admin\Views\Admin\BlogMLImportModel.cs" />
+-    <Compile Include="Areas\Admin\Views\Admin\CommentsModel.cs" />
+-    <Compile Include="Areas\Admin\Views\Admin\IndexModel.cs" />
+-    <Compile Include="Areas\Admin\Views\Admin\PageListModel.cs" />
+-    <Compile Include="Areas\Admin\Views\Admin\PingbacksModel.cs" />
+-    <Compile Include="Areas\Admin\Views\Admin\TaskModel.cs" />
+-    <Compile Include="Areas\Admin\Views\Admin\TasksModel.cs" />
+-    <Compile Include="Areas\Admin\Views\Install\ExtensionVersion.cs" />
+-    <Compile Include="Areas\Admin\Views\Install\IndexModel.cs" />
+-    <Compile Include="Areas\Admin\Views\Install\UpgradeModel.cs" />
+-    <Compile Include="Areas\Admin\Views\Login\LoginModel.cs" />
+-    <Compile Include="Areas\Admin\Views\SqlAuthentication\AddRoleModel.cs" />
+-    <Compile Include="Areas\Admin\Views\SqlAuthentication\IndexModel.cs" />
+-    <Compile Include="Areas\Admin\Views\SqlAuthentication\NewUser.cs" />
+-    <Compile Include="Areas\Admin\Views\SqlAuthentication\SetupModel.cs" />
+-    <Compile Include="Areas\Admin\Views\Upload\IndexModel.cs" />
+-    <Compile Include="Controllers\FeedController.cs" />
+-    <Compile Include="Controllers\MetaWeblogController.cs" />
+-    <Compile Include="Controllers\ResourceController.cs" />
+-    <Compile Include="Controllers\TagController.cs" />
+-    <Compile Include="Controllers\TaggedController.cs" />
+-    <Compile Include="Controllers\WikiController.cs" />
+-    <Compile Include="Global.asax.cs">
+-      <DependentUpon>Global.asax</DependentUpon>
+-    </Compile>
+-    <Compile Include="Models\Paginator.cs" />
+-    <Compile Include="Properties\AssemblyInfo.cs" />
+-    <Compile Include="Views\Wiki\PageModel.cs" />
+-    <Compile Include="Views\Wiki\RecentModel.cs" />
+-    <Compile Include="Views\Wiki\RevisionsModel.cs" />
+-    <Compile Include="Views\Wiki\SearchModel.cs" />
+-    <Compile Include="Views\Wiki\SiteMapModel.cs" />
++    <Compile Remove="App_Code/**;bin_dotnet/**;obj/**" />
++    <Content Remove="bin_dotnet/**" />
++    <None Remove="bin_dotnet/**" />
++    <Compile Remove="Application/RequireUpgradeFilter.cs" />
++    <Compile Include="../Information/SolutionInfo.cs" Link="SolutionInfo.cs" />
++    <Compile Include="../Information/VersionInfo.cs" Link="VersionInfo.cs" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <Compile Include="App_Start\FilterConfig.cs" />
+-    <Compile Include="App_Start\RouteConfig.cs" />
+-    <EmbeddedResource Include="Application\MetaWeblog\wlwmanifest.xml" />
+-    <Content Include="Areas\Admin\Scripts\Views\WikiAdmin\Edit.js" />
+-    <Content Include="Content\Images\Busy.gif" />
+-    <Content Include="Content\Images\editorbuttons.png" />
+-    <Content Include="Content\Images\external.png" />
+-    <Content Include="Content\Images\fail.png" />
+-    <Content Include="Content\Images\FileTypes\bmp.png" />
+-    <Content Include="Content\Images\FileTypes\cs.png" />
+-    <Content Include="Content\Images\FileTypes\csproj.png" />
+-    <Content Include="Content\Images\FileTypes\default.png" />
+-    <Content Include="Content\Images\FileTypes\dir.png" />
+-    <Content Include="Content\Images\FileTypes\doc.png" />
+-    <Content Include="Content\Images\FileTypes\Document.png" />
+-    <Content Include="Content\Images\FileTypes\docx.png" />
+-    <Content Include="Content\Images\FileTypes\gif.png" />
+-    <Content Include="Content\Images\FileTypes\Installer.png" />
+-    <Content Include="Content\Images\FileTypes\jpg.png" />
+-    <Content Include="Content\Images\FileTypes\Link.png" />
+-    <Content Include="Content\Images\FileTypes\png.png" />
+-    <Content Include="Content\Images\FileTypes\pps.png" />
+-    <Content Include="Content\Images\FileTypes\ppsx.png" />
+-    <Content Include="Content\Images\FileTypes\ppt.png" />
+-    <Content Include="Content\Images\FileTypes\pptx.png" />
+-    <Content Include="Content\Images\FileTypes\rar.png" />
+-    <Content Include="Content\Images\FileTypes\sln.png" />
+-    <Content Include="Content\Images\FileTypes\tar.png" />
+-    <Content Include="Content\Images\FileTypes\xls.png" />
+-    <Content Include="Content\Images\FileTypes\xlsx.png" />
+-    <Content Include="Content\Images\FileTypes\Zip.png" />
+-    <Content Include="Content\Images\success.png" />
+-    <Content Include="Content\Images\title.png" />
+-    <Content Include="Content\Images\transparent.gif" />
+-    <Content Include="Content\Prettify\prettify.css" />
+-    <Content Include="Content\Prettify\Themes\desert.css" />
+-    <Content Include="Content\Prettify\Themes\sons-of-obsidian.css" />
+-    <Content Include="Content\Prettify\Themes\sunburst.css" />
+-    <Content Include="Content\Resources\favicon.ico" />
+-    <Content Include="Content\Resources\favicon.png" />
+-    <Content Include="Content\Resources\Humans.txt" />
+-    <Content Include="Content\Resources\Robots.txt" />
+-    <Content Include="Content\Resources\Status.html" />
+-    <Content Include="Content\themes\base\Admin.css" />
+-    <Content Include="Content\themes\base\Base.css" />
+-    <Content Include="Content\themes\base\images\del_sprite_tagComplete.png" />
+-    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+-    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+-    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+-    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+-    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+-    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+-    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+-    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+-    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+-    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+-    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+-    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+-    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+-    <Content Include="Content\themes\base\jquery-ui.css" />
+-    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+-    <Content Include="Content\themes\base\jquery.ui.all.css" />
+-    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+-    <Content Include="Content\themes\base\jquery.ui.base.css" />
+-    <Content Include="Content\themes\base\jquery.ui.button.css" />
+-    <Content Include="Content\themes\base\jquery.ui.core.css" />
+-    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+-    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+-    <Content Include="Content\themes\base\jquery.ui.menu.css" />
+-    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+-    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+-    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+-    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+-    <Content Include="Content\themes\base\jquery.ui.spinner.css" />
+-    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+-    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+-    <Content Include="Content\themes\base\jquery.ui.tooltip.css" />
+-    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+-    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+-    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.menu.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.spinner.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+-    <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
+-    <Content Include="Content\themes\base\Mobile.css" />
+-    <Content Include="Content\themes\base\TagEditor.css" />
+-    <Content Include="Global.asax" />
+-    <Content Include="Scripts\disqus-count.js" />
+-    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+-    <Content Include="Scripts\jquery-1.8.2.js" />
+-    <Content Include="Scripts\jquery-1.8.2.min.js" />
+-    <None Include="Scripts\jquery.validate-vsdoc.js" />
+-    <Content Include="Scripts\jquery-ui-1.9.0.js" />
+-    <Content Include="Scripts\jquery-ui-1.9.0.min.js" />
+-    <Content Include="Scripts\jquery.validate.js" />
+-    <Content Include="Scripts\jquery.validate.min.js" />
+-    <Content Include="Scripts\jsdate.js" />
+-    <Content Include="Scripts\Prettify\lang-apollo.js" />
+-    <Content Include="Scripts\Prettify\lang-clj.js" />
+-    <Content Include="Scripts\Prettify\lang-css.js" />
+-    <Content Include="Scripts\Prettify\lang-go.js" />
+-    <Content Include="Scripts\Prettify\lang-hs.js" />
+-    <Content Include="Scripts\Prettify\lang-lisp.js" />
+-    <Content Include="Scripts\Prettify\lang-lua.js" />
+-    <Content Include="Scripts\Prettify\lang-ml.js" />
+-    <Content Include="Scripts\Prettify\lang-n.js" />
+-    <Content Include="Scripts\Prettify\lang-proto.js" />
+-    <Content Include="Scripts\Prettify\lang-scala.js" />
+-    <Content Include="Scripts\Prettify\lang-sql.js" />
+-    <Content Include="Scripts\Prettify\lang-tex.js" />
+-    <Content Include="Scripts\Prettify\lang-vb.js" />
+-    <Content Include="Scripts\Prettify\lang-vhdl.js" />
+-    <Content Include="Scripts\Prettify\lang-wiki.js" />
+-    <Content Include="Scripts\Prettify\lang-xq.js" />
+-    <Content Include="Scripts\Prettify\lang-yaml.js" />
+-    <Content Include="Scripts\Prettify\prettify.js" />
+-    <Content Include="Scripts\showdown.js" />
+-    <Content Include="Scripts\showdown.min.js" />
+-    <Content Include="Scripts\site.js" />
+-    <Content Include="Scripts\taggy.js" />
+-    <Content Include="Scripts\wmd.js" />
+-    <Content Include="Themes\AaronPowell\Content\Styles\Theme.css" />
+-    <Content Include="Themes\Clean\Content\Styles\Theme.css" />
+-    <Content Include="Themes\Default\Content\Styles\Theme.css" />
+-    <Content Include="Themes\Evolve\Content\Images\background.png" />
+-    <Content Include="Themes\Evolve\Content\Styles\Theme.css" />
+-    <Content Include="Themes\MattHamilton\Content\Styles\Theme.css" />
+-    <Content Include="Themes\MattHamilton\Content\Styles\Title.png" />
+-    <Content Include="Themes\Official\Content\Images\header.png" />
+-    <Content Include="Themes\Official\Content\Styles\Theme.css" />
+-    <Content Include="Themes\Pastel\Content\Styles\Bar.png" />
+-    <Content Include="Themes\Pastel\Content\Styles\Theme.css" />
+-    <Content Include="Themes\RainbowAfro\Content\Styles\Bar.png" />
+-    <Content Include="Themes\RainbowAfro\Content\Styles\Header.jpg" />
+-    <Content Include="Themes\RainbowAfro\Content\Styles\Theme.css" />
+-    <Content Include="Themes\Twitter\Content\Styles\Background.png" />
+-    <Content Include="Themes\Twitter\Content\Styles\Bar.png" />
+-    <Content Include="Themes\Twitter\Content\Styles\Theme.css" />
+-    <Content Include="Web.config" />
+-    <Content Include="Views\Web.config" />
+-    <Content Include="Macros\TwitterStream.cshtml" />
+-    <Content Include="Views\Shared\_Disqus.cshtml" />
+-    <Content Include="Views\Shared\_EditComments.cshtml" />
+-    <Content Include="Views\Shared\_EntryTools.cshtml" />
+-    <Content Include="Views\Shared\_Mobile.cshtml" />
+-    <Content Include="Views\Shared\_PrivateEntryNotification.cshtml" />
+-    <Content Include="Views\Shared\_Public.cshtml" />
+-    <Content Include="Views\Shared\DisplayTemplates\Comment.cshtml" />
+-    <Content Include="Views\Shared\DisplayTemplates\Comments.cshtml" />
+-    <Content Include="Views\Shared\DisplayTemplates\EntrySummaries.cshtml" />
+-    <Content Include="Views\Shared\DisplayTemplates\EntrySummary.cshtml" />
+-    <Content Include="Views\Shared\DisplayTemplates\FacebookLike.cshtml" />
+-    <Content Include="Views\Shared\DisplayTemplates\Paginator.cshtml" />
+-    <Content Include="Views\Shared\DisplayTemplates\Pingbacks.cshtml" />
+-    <Content Include="Views\Shared\DisplayTemplates\PublishedDate.cshtml" />
+-    <Content Include="Views\Shared\DisplayTemplates\TagsList.cshtml" />
+-    <Content Include="Views\Shared\EditorTemplates\Markdown.cshtml" />
+-    <Content Include="Views\Shared\EditorTemplates\Tags.cshtml" />
+-    <Content Include="Views\Shared\PageTemplates\Default.cshtml" />
+-    <Content Include="Views\Tagged\Index.cshtml" />
+-    <Content Include="Views\Wiki\Page.cshtml" />
+-    <Content Include="Views\Wiki\Pingbacks.cshtml" />
+-    <Content Include="Views\Wiki\Recent.cshtml" />
+-    <Content Include="Views\Wiki\Revisions.cshtml" />
+-    <Content Include="Views\Wiki\Search.cshtml" />
+-    <Content Include="Views\Wiki\SiteMap.cshtml" />
+-    <Content Include="Views\_ViewStart.cshtml" />
+-    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+-    <Content Include="Areas\Admin\Views\Admin\BlogMLImport.cshtml" />
+-    <Content Include="Areas\Admin\Views\Admin\Comments.cshtml" />
+-    <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
+-    <Content Include="Areas\Admin\Views\Admin\PageList.cshtml" />
+-    <Content Include="Areas\Admin\Views\Admin\Pingbacks.cshtml" />
+-    <Content Include="Areas\Admin\Views\Admin\Settings.cshtml" />
+-    <Content Include="Areas\Admin\Views\Admin\Task.cshtml" />
+-    <Content Include="Areas\Admin\Views\Admin\Tasks.cshtml" />
+-    <Content Include="Areas\Admin\Views\Install\Index.cshtml" />
+-    <Content Include="Areas\Admin\Views\Install\UpgradeReport.cshtml" />
+-    <Content Include="Areas\Admin\Views\Login\Login.cshtml" />
+-    <Content Include="Areas\Admin\Views\Shared\_Private.cshtml" />
+-    <Content Include="Areas\Admin\Views\SqlAuthentication\AddRole.cshtml" />
+-    <Content Include="Areas\Admin\Views\SqlAuthentication\Index.cshtml" />
+-    <Content Include="Areas\Admin\Views\SqlAuthentication\NewAccount.cshtml" />
+-    <Content Include="Areas\Admin\Views\SqlAuthentication\Setup.cshtml" />
+-    <Content Include="Areas\Admin\Views\Upload\Index.cshtml" />
+-    <Content Include="Areas\Admin\Views\Web.config">
+-      <SubType>Designer</SubType>
+-    </Content>
+-    <Content Include="Areas\Admin\Views\WikiAdmin\Edit.cshtml" />
+-    <Content Include="My.config">
+-      <SubType>Designer</SubType>
+-    </Content>
+-    <None Include="Web.Debug.config">
+-      <DependentUpon>Web.config</DependentUpon>
+-    </None>
+-    <None Include="Web.Release.config">
+-      <DependentUpon>Web.config</DependentUpon>
+-    </None>
+-    <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
+-    <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
+-    <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
+-    <None Include="_bin_deployableAssemblies\x86\sqlceer40EN.dll" />
+-    <None Include="_bin_deployableAssemblies\x86\sqlcecompact40.dll" />
+-    <None Include="_bin_deployableAssemblies\x86\sqlceca40.dll" />
+-    <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\README_ENU.txt" />
+-    <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\msvcr90.dll" />
+-    <None Include="_bin_deployableAssemblies\amd64\sqlcese40.dll" />
+-    <None Include="_bin_deployableAssemblies\amd64\sqlceqp40.dll" />
+-    <None Include="_bin_deployableAssemblies\amd64\sqlceme40.dll" />
+-    <None Include="_bin_deployableAssemblies\amd64\sqlceer40EN.dll" />
+-    <None Include="_bin_deployableAssemblies\amd64\sqlcecompact40.dll" />
+-    <None Include="_bin_deployableAssemblies\amd64\sqlceca40.dll" />
+-    <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\README_ENU.txt" />
+-    <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\msvcr90.dll" />
+-    <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
++    <!-- Embedded resources (the SDK only globs .resx). -->
++    <EmbeddedResource Include="Application/MetaWeblog/wlwmanifest.xml" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <Folder Include="App_Data\" />
+-    <Folder Include="Scripts\Views\" />
++    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.Helpers" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.4.0" />
++    <PackageReference Include="webForCore.WebGrease" Version="0.4.0" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <Content Include="packages.config" />
++    <!-- The app's own libraries. -->
++    <PackageReference Include="Autofac" Version="2.6.3.862" />
++    <PackageReference Include="Autofac.Mvc4" Version="2.6.2.859" />
++    <PackageReference Include="dbup" Version="2.0.113" />
++    <PackageReference Include="dbup-sqlce" Version="2.0.113" />
++    <PackageReference Include="FluentNHibernate" Version="1.3.0.733" />
++    <PackageReference Include="Iesi.Collections" Version="3.3.2.4000" /> <!-- 3.2.0 in packages.config; FunnelWeb.csproj has 3.3.2 (NU1605 with PackageReference) -->
++    <PackageReference Include="jQuery" Version="1.8.2" />
++    <PackageReference Include="jQuery.UI.Combined" Version="1.9.0" />
++    <PackageReference Include="jQuery.Validation" Version="1.10.0" />
++    <PackageReference Include="Microsoft.SqlServer.Compact" Version="4.0.8876.1" />
++    <PackageReference Include="Microsoft.WindowsAzure.ConfigurationManager" Version="1.7.0.3" />
++    <PackageReference Include="MiniProfiler" Version="2.0.2" />
++    <PackageReference Include="NHibernate" Version="3.3.2.4000" />
++    <PackageReference Include="NHibernate.SqlAzure" Version="0.9.11" />
++    <PackageReference Include="Prettify" Version="1.1.6.2011" />
++    <PackageReference Include="showdown" Version="0.9" />
++    <PackageReference Include="SqlServerCompact" Version="4.0.8854.1" />
++    <PackageReference Include="WindowsAzure.Storage" Version="1.7.0.0" />
++    <PackageReference Include="xmlrpcnet" Version="3.0.0.266" />
++    <PackageReference Include="xmlrpcnet-server" Version="3.0.0.266" />
++    <PackageReference Include="System.ComponentModel.Composition" Version="11.0.0-rc.3.26522.148" />
++    <PackageReference Include="System.ServiceModel.Syndication" Version="11.0.0-rc.3.26522.148" />
++    <Reference Include="Joel.Net.Akismet" HintPath="../../lib/Akismet/Joel.Net.Akismet.dll" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
++    <ProjectReference Include="../FunnelWeb.Extensions.CommentNotification/FunnelWeb.Extensions.CommentNotification.csproj" />
++    <ProjectReference Include="../FunnelWeb/FunnelWeb.csproj" />
+   </ItemGroup>
+-  <ItemGroup>
+-    <ProjectReference Include="..\FunnelWeb.Extensions.CommentNotification\FunnelWeb.Extensions.CommentNotification.csproj">
+-      <Project>{5c5efcf0-454d-42e0-aa89-7f69fb5457ba}</Project>
+-      <Name>FunnelWeb.Extensions.CommentNotification</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\FunnelWeb\FunnelWeb.csproj">
+-      <Project>{3e448c45-f459-45d7-950c-5abef926513d}</Project>
+-      <Name>FunnelWeb</Name>
+-    </ProjectReference>
+-  </ItemGroup>
+-  <PropertyGroup>
+-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+-  </PropertyGroup>
+-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+-  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+-  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+-    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+-  </Target>
+-  <ProjectExtensions>
+-    <VisualStudio>
+-      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+-        <WebProjectProperties>
+-          <UseIIS>True</UseIIS>
+-          <AutoAssignPort>True</AutoAssignPort>
+-          <DevelopmentServerPort>8471</DevelopmentServerPort>
+-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+-          <IISUrl>http://localhost:54860/</IISUrl>
+-          <NTLMAuthentication>False</NTLMAuthentication>
+-          <UseCustomServer>False</UseCustomServer>
+-          <CustomServerUrl>
+-          </CustomServerUrl>
+-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+-        </WebProjectProperties>
+-      </FlavorProperties>
+-    </VisualStudio>
+-  </ProjectExtensions>
+-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+-       Other similar extension points exist, see Microsoft.Common.targets.
+-  <Target Name="BeforeBuild">
+-  </Target>
+-  <Target Name="AfterBuild">
+-  </Target> -->
+-</Project>
+\ No newline at end of file
++
++</Project>
+diff --git a/src/FunnelWeb.Web/FunnelWeb.Web.csproj.netfx b/src/FunnelWeb.Web/FunnelWeb.Web.csproj.netfx
+new file mode 100644
+index 0000000..d3312f3
+--- /dev/null
++++ b/src/FunnelWeb.Web/FunnelWeb.Web.csproj.netfx
+@@ -0,0 +1,565 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++  <PropertyGroup>
++    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
++    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
++    <ProductVersion>
++    </ProductVersion>
++    <SchemaVersion>2.0</SchemaVersion>
++    <ProjectGuid>{64FAABD6-F45B-4ED1-A3AD-6989C1934405}</ProjectGuid>
++    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
++    <OutputType>Library</OutputType>
++    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <RootNamespace>FunnelWeb.Web</RootNamespace>
++    <AssemblyName>FunnelWeb.Web</AssemblyName>
++    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
++    <MvcBuildViews>false</MvcBuildViews>
++    <UseIISExpress>true</UseIISExpress>
++    <IISExpressSSLPort />
++    <IISExpressAnonymousAuthentication />
++    <IISExpressWindowsAuthentication />
++    <IISExpressUseClassicPipelineMode />
++    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
++    <RestorePackages>true</RestorePackages>
++    <TargetFrameworkProfile />
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
++    <DebugSymbols>true</DebugSymbols>
++    <DebugType>full</DebugType>
++    <Optimize>false</Optimize>
++    <OutputPath>bin\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
++    <DebugType>pdbonly</DebugType>
++    <Optimize>true</Optimize>
++    <OutputPath>bin\</OutputPath>
++    <DefineConstants>TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++  </PropertyGroup>
++  <ItemGroup>
++    <Reference Include="Antlr3.Runtime">
++      <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
++    </Reference>
++    <Reference Include="Autofac">
++      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.dll</HintPath>
++    </Reference>
++    <Reference Include="Autofac.Configuration">
++      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.Configuration.dll</HintPath>
++    </Reference>
++    <Reference Include="Autofac.Integration.Mvc">
++      <HintPath>..\packages\Autofac.Mvc4.2.6.2.859\lib\NET40\Autofac.Integration.Mvc.dll</HintPath>
++    </Reference>
++    <Reference Include="CookComputing.XmlRpcServerV2">
++      <HintPath>..\packages\xmlrpcnet-server.3.0.0.266\lib\net20\CookComputing.XmlRpcServerV2.dll</HintPath>
++    </Reference>
++    <Reference Include="CookComputing.XmlRpcV2">
++      <HintPath>..\packages\xmlrpcnet.3.0.0.266\lib\net20\CookComputing.XmlRpcV2.dll</HintPath>
++    </Reference>
++    <Reference Include="DbUp">
++      <HintPath>..\packages\dbup.2.0.113\lib\NET35\DbUp.dll</HintPath>
++    </Reference>
++    <Reference Include="DbUp.SqlCe">
++      <HintPath>..\packages\dbup-sqlce.2.0.113\lib\NET35\DbUp.SqlCe.dll</HintPath>
++    </Reference>
++    <Reference Include="FluentNHibernate">
++      <HintPath>..\packages\FluentNHibernate.1.3.0.733\lib\FluentNHibernate.dll</HintPath>
++    </Reference>
++    <Reference Include="Iesi.Collections">
++      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
++    </Reference>
++    <Reference Include="Joel.Net.Akismet">
++      <HintPath>..\..\lib\Akismet\Joel.Net.Akismet.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.CSharp" />
++    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <SpecificVersion>False</SpecificVersion>
++      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.1.7.0.3\lib\net35-full\Microsoft.WindowsAzure.Configuration.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\packages\WindowsAzure.Storage.1.7.0.0\lib\net35-full\Microsoft.WindowsAzure.StorageClient.dll</HintPath>
++    </Reference>
++    <Reference Include="MiniProfiler, Version=2.0.2.0, Culture=neutral, PublicKeyToken=b44f9351044011a3, processorArchitecture=MSIL">
++      <SpecificVersion>False</SpecificVersion>
++      <HintPath>..\packages\MiniProfiler.2.0.2\lib\net40\MiniProfiler.dll</HintPath>
++    </Reference>
++    <Reference Include="NHibernate">
++      <HintPath>..\packages\NHibernate.3.3.2.4000\lib\Net35\NHibernate.dll</HintPath>
++    </Reference>
++    <Reference Include="NHibernate.SqlAzure">
++      <HintPath>..\packages\NHibernate.SqlAzure.0.9.11\lib\NET40\NHibernate.SqlAzure.dll</HintPath>
++    </Reference>
++    <Reference Include="System" />
++    <Reference Include="System.ComponentModel.Composition" />
++    <Reference Include="System.Data" />
++    <Reference Include="System.Data.DataSetExtensions" />
++    <Reference Include="System.Data.Services.Client" />
++    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Drawing" />
++    <Reference Include="System.ServiceModel" />
++    <Reference Include="System.Web.DynamicData" />
++    <Reference Include="System.Web.Entity" />
++    <Reference Include="System.Web.ApplicationServices" />
++    <Reference Include="System.ComponentModel.DataAnnotations" />
++    <Reference Include="System.Web.Extensions" />
++    <Reference Include="System.Web" />
++    <Reference Include="System.Web.Abstractions" />
++    <Reference Include="System.Web.Optimization">
++      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.Routing" />
++    <Reference Include="System.Xml" />
++    <Reference Include="System.Configuration" />
++    <Reference Include="System.Web.Services" />
++    <Reference Include="System.EnterpriseServices" />
++    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Net.Http">
++    </Reference>
++    <Reference Include="System.Net.Http.WebRequest">
++    </Reference>
++    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Xml.Linq" />
++    <Reference Include="WebGrease">
++      <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
++    </Reference>
++  </ItemGroup>
++  <ItemGroup>
++    <Compile Include="..\Information\SolutionInfo.cs">
++      <Link>Properties\SolutionInfo.cs</Link>
++    </Compile>
++    <Compile Include="..\Information\VersionInfo.cs">
++      <Link>Properties\VersionInfo.cs</Link>
++    </Compile>
++    <Compile Include="Application\Authentication\AuthenticationModule.cs" />
++    <Compile Include="Application\Authentication\FunnelWebRoleProvider.cs" />
++    <Compile Include="Application\CacheStaticFilesHttpModule.cs" />
++    <Compile Include="Application\Extensibility.cs" />
++    <Compile Include="Application\Extensions\WebViewPageExtensions.cs" />
++    <Compile Include="Application\Extensions\MarkupExtensions.cs" />
++    <Compile Include="Application\Extensions\MobileExtensions.cs" />
++    <Compile Include="Application\Extensions\ViewDataDictionaryExtensions.cs" />
++    <Compile Include="Application\ForceLowercaseUrlHttpModule.cs" />
++    <Compile Include="Application\Markup\ContentRenderer.cs" />
++    <Compile Include="Application\Markup\HtmlFormatter.cs" />
++    <Compile Include="Application\Markup\IContentEnricher.cs" />
++    <Compile Include="Application\Markup\IContentFormatter.cs" />
++    <Compile Include="Application\Markup\IContentRenderer.cs" />
++    <Compile Include="Application\Markup\InputSanitizer.cs" />
++    <Compile Include="Application\Markup\MacroEnricher.cs" />
++    <Compile Include="Application\Markup\Macros\IMacroExecutor.cs" />
++    <Compile Include="Application\Markup\Macros\MacroView.cs" />
++    <Compile Include="Application\Markup\Macros\RazorMacroExecutor.cs" />
++    <Compile Include="Application\Markup\MarkdownFormatter.cs" />
++    <Compile Include="Application\Markup\MarkdownNetByBrianJeremy.cs" />
++    <Compile Include="Application\Markup\MarkupModule.cs" />
++    <Compile Include="Application\MetaWeblog\IMetaWeblog.cs" />
++    <Compile Include="Application\MetaWeblog\MetaWeblog.cs" />
++    <Compile Include="Application\MetaWeblog\MetaWeblogRouteHandler.cs" />
++    <Compile Include="Application\MetaWeblog\MetaWeblogSettings.cs" />
++    <Compile Include="Application\MetaWeblog\Structs.cs" />
++    <Compile Include="Application\Mime\MimeSupportModule.cs" />
++    <Compile Include="Application\Mime\RegistryMimeTypeLookup.cs" />
++    <Compile Include="Application\Mvc\ActionResults\FeedResult.cs" />
++    <Compile Include="Application\Mvc\ActionResults\PageTemplateActionResult.cs" />
++    <Compile Include="Application\Mvc\ActionResults\XmlActionResult.cs" />
++    <Compile Include="Application\Mvc\Binders\ArrayBinder.cs" />
++    <Compile Include="Application\Mvc\Binders\BindersModule.cs" />
++    <Compile Include="Application\Mvc\Binders\EntryRevisionBinder.cs" />
++    <Compile Include="Application\Mvc\Binders\ImplicitAssignmentBinder.cs" />
++    <Compile Include="Application\Mvc\Binders\UploadBinder.cs" />
++    <Compile Include="Application\Mvc\ViewBundleRegistrar.cs" />
++    <Compile Include="Application\Mvc\FileUpload.cs" />
++    <Compile Include="Application\Mvc\FunnelWebControllerFactory.cs" />
++    <Compile Include="Application\Mvc\FunnelWebViewEngine.cs" />
++    <Compile Include="Application\Mvc\HtmlHelperExtensions.cs" />
++    <Compile Include="Application\Mvc\HyphenatedRouteHandler.cs" />
++    <Compile Include="Application\Mvc\LowercaseRoute.cs" />
++    <Compile Include="Application\Mvc\MvcExtensions.cs" />
++    <Compile Include="Application\Mvc\NotFromValuesListConstraint.cs" />
++    <Compile Include="Application\Mvc\RedirectRoute.cs" />
++    <Compile Include="Application\Mvc\RegexRoutes.cs" />
++    <Compile Include="Application\Mvc\RouteCollectionExtension.cs" />
++    <Compile Include="Application\Mvc\UrlHelperExtension.cs" />
++    <Compile Include="Application\Mvc\ValidUrlAttribute.cs" />
++    <Compile Include="Application\Mvc\WebAbstractionsModule.cs" />
++    <Compile Include="Application\Pingbacks\PingbackHandler.cs" />
++    <Compile Include="Application\Pingbacks\XmlRpcFaultException.cs" />
++    <Compile Include="Application\Pingbacks\XmlRpcHandler.cs" />
++    <Compile Include="Application\RequireUpdatedDatabaseHttpModule.cs" />
++    <Compile Include="Application\Spam\AkismetSpamChecker.cs" />
++    <Compile Include="Application\Spam\ISpamChecker.cs" />
++    <Compile Include="Application\Spam\SpamModule.cs" />
++    <Compile Include="Application\Themes\IThemeProvider.cs" />
++    <Compile Include="Application\Themes\ThemeProvider.cs" />
++    <Compile Include="Application\Themes\ThemesModule.cs" />
++    <Compile Include="App_Start\BundleConfig.cs" />
++    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
++    <Compile Include="Areas\Admin\BundleConfig.cs" />
++    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
++    <Compile Include="Areas\Admin\Controllers\InstallController.cs" />
++    <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
++    <Compile Include="Areas\Admin\Controllers\SqlAuthenticationController.cs" />
++    <Compile Include="Areas\Admin\Controllers\UploadController.cs" />
++    <Compile Include="Areas\Admin\Controllers\WikiAdminController.cs" />
++    <Compile Include="Areas\Admin\RouteConfig.cs" />
++    <Compile Include="Areas\Admin\Views\Admin\BlogMLImportModel.cs" />
++    <Compile Include="Areas\Admin\Views\Admin\CommentsModel.cs" />
++    <Compile Include="Areas\Admin\Views\Admin\IndexModel.cs" />
++    <Compile Include="Areas\Admin\Views\Admin\PageListModel.cs" />
++    <Compile Include="Areas\Admin\Views\Admin\PingbacksModel.cs" />
++    <Compile Include="Areas\Admin\Views\Admin\TaskModel.cs" />
++    <Compile Include="Areas\Admin\Views\Admin\TasksModel.cs" />
++    <Compile Include="Areas\Admin\Views\Install\ExtensionVersion.cs" />
++    <Compile Include="Areas\Admin\Views\Install\IndexModel.cs" />
++    <Compile Include="Areas\Admin\Views\Install\UpgradeModel.cs" />
++    <Compile Include="Areas\Admin\Views\Login\LoginModel.cs" />
++    <Compile Include="Areas\Admin\Views\SqlAuthentication\AddRoleModel.cs" />
++    <Compile Include="Areas\Admin\Views\SqlAuthentication\IndexModel.cs" />
++    <Compile Include="Areas\Admin\Views\SqlAuthentication\NewUser.cs" />
++    <Compile Include="Areas\Admin\Views\SqlAuthentication\SetupModel.cs" />
++    <Compile Include="Areas\Admin\Views\Upload\IndexModel.cs" />
++    <Compile Include="Controllers\FeedController.cs" />
++    <Compile Include="Controllers\MetaWeblogController.cs" />
++    <Compile Include="Controllers\ResourceController.cs" />
++    <Compile Include="Controllers\TagController.cs" />
++    <Compile Include="Controllers\TaggedController.cs" />
++    <Compile Include="Controllers\WikiController.cs" />
++    <Compile Include="Global.asax.cs">
++      <DependentUpon>Global.asax</DependentUpon>
++    </Compile>
++    <Compile Include="Models\Paginator.cs" />
++    <Compile Include="Properties\AssemblyInfo.cs" />
++    <Compile Include="Views\Wiki\PageModel.cs" />
++    <Compile Include="Views\Wiki\RecentModel.cs" />
++    <Compile Include="Views\Wiki\RevisionsModel.cs" />
++    <Compile Include="Views\Wiki\SearchModel.cs" />
++    <Compile Include="Views\Wiki\SiteMapModel.cs" />
++  </ItemGroup>
++  <ItemGroup>
++    <Compile Include="App_Start\FilterConfig.cs" />
++    <Compile Include="App_Start\RouteConfig.cs" />
++    <EmbeddedResource Include="Application\MetaWeblog\wlwmanifest.xml" />
++    <Content Include="Areas\Admin\Scripts\Views\WikiAdmin\Edit.js" />
++    <Content Include="Content\Images\Busy.gif" />
++    <Content Include="Content\Images\editorbuttons.png" />
++    <Content Include="Content\Images\external.png" />
++    <Content Include="Content\Images\fail.png" />
++    <Content Include="Content\Images\FileTypes\bmp.png" />
++    <Content Include="Content\Images\FileTypes\cs.png" />
++    <Content Include="Content\Images\FileTypes\csproj.png" />
++    <Content Include="Content\Images\FileTypes\default.png" />
++    <Content Include="Content\Images\FileTypes\dir.png" />
++    <Content Include="Content\Images\FileTypes\doc.png" />
++    <Content Include="Content\Images\FileTypes\Document.png" />
++    <Content Include="Content\Images\FileTypes\docx.png" />
++    <Content Include="Content\Images\FileTypes\gif.png" />
++    <Content Include="Content\Images\FileTypes\Installer.png" />
++    <Content Include="Content\Images\FileTypes\jpg.png" />
++    <Content Include="Content\Images\FileTypes\Link.png" />
++    <Content Include="Content\Images\FileTypes\png.png" />
++    <Content Include="Content\Images\FileTypes\pps.png" />
++    <Content Include="Content\Images\FileTypes\ppsx.png" />
++    <Content Include="Content\Images\FileTypes\ppt.png" />
++    <Content Include="Content\Images\FileTypes\pptx.png" />
++    <Content Include="Content\Images\FileTypes\rar.png" />
++    <Content Include="Content\Images\FileTypes\sln.png" />
++    <Content Include="Content\Images\FileTypes\tar.png" />
++    <Content Include="Content\Images\FileTypes\xls.png" />
++    <Content Include="Content\Images\FileTypes\xlsx.png" />
++    <Content Include="Content\Images\FileTypes\Zip.png" />
++    <Content Include="Content\Images\success.png" />
++    <Content Include="Content\Images\title.png" />
++    <Content Include="Content\Images\transparent.gif" />
++    <Content Include="Content\Prettify\prettify.css" />
++    <Content Include="Content\Prettify\Themes\desert.css" />
++    <Content Include="Content\Prettify\Themes\sons-of-obsidian.css" />
++    <Content Include="Content\Prettify\Themes\sunburst.css" />
++    <Content Include="Content\Resources\favicon.ico" />
++    <Content Include="Content\Resources\favicon.png" />
++    <Content Include="Content\Resources\Humans.txt" />
++    <Content Include="Content\Resources\Robots.txt" />
++    <Content Include="Content\Resources\Status.html" />
++    <Content Include="Content\themes\base\Admin.css" />
++    <Content Include="Content\themes\base\Base.css" />
++    <Content Include="Content\themes\base\images\del_sprite_tagComplete.png" />
++    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
++    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
++    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
++    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
++    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
++    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
++    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
++    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
++    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
++    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
++    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
++    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
++    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
++    <Content Include="Content\themes\base\jquery-ui.css" />
++    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
++    <Content Include="Content\themes\base\jquery.ui.all.css" />
++    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
++    <Content Include="Content\themes\base\jquery.ui.base.css" />
++    <Content Include="Content\themes\base\jquery.ui.button.css" />
++    <Content Include="Content\themes\base\jquery.ui.core.css" />
++    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
++    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
++    <Content Include="Content\themes\base\jquery.ui.menu.css" />
++    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
++    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
++    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
++    <Content Include="Content\themes\base\jquery.ui.slider.css" />
++    <Content Include="Content\themes\base\jquery.ui.spinner.css" />
++    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
++    <Content Include="Content\themes\base\jquery.ui.theme.css" />
++    <Content Include="Content\themes\base\jquery.ui.tooltip.css" />
++    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
++    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
++    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
++    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
++    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
++    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
++    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
++    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
++    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
++    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
++    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
++    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
++    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
++    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.menu.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.spinner.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
++    <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
++    <Content Include="Content\themes\base\Mobile.css" />
++    <Content Include="Content\themes\base\TagEditor.css" />
++    <Content Include="Global.asax" />
++    <Content Include="Scripts\disqus-count.js" />
++    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
++    <Content Include="Scripts\jquery-1.8.2.js" />
++    <Content Include="Scripts\jquery-1.8.2.min.js" />
++    <None Include="Scripts\jquery.validate-vsdoc.js" />
++    <Content Include="Scripts\jquery-ui-1.9.0.js" />
++    <Content Include="Scripts\jquery-ui-1.9.0.min.js" />
++    <Content Include="Scripts\jquery.validate.js" />
++    <Content Include="Scripts\jquery.validate.min.js" />
++    <Content Include="Scripts\jsdate.js" />
++    <Content Include="Scripts\Prettify\lang-apollo.js" />
++    <Content Include="Scripts\Prettify\lang-clj.js" />
++    <Content Include="Scripts\Prettify\lang-css.js" />
++    <Content Include="Scripts\Prettify\lang-go.js" />
++    <Content Include="Scripts\Prettify\lang-hs.js" />
++    <Content Include="Scripts\Prettify\lang-lisp.js" />
++    <Content Include="Scripts\Prettify\lang-lua.js" />
++    <Content Include="Scripts\Prettify\lang-ml.js" />
++    <Content Include="Scripts\Prettify\lang-n.js" />
++    <Content Include="Scripts\Prettify\lang-proto.js" />
++    <Content Include="Scripts\Prettify\lang-scala.js" />
++    <Content Include="Scripts\Prettify\lang-sql.js" />
++    <Content Include="Scripts\Prettify\lang-tex.js" />
++    <Content Include="Scripts\Prettify\lang-vb.js" />
++    <Content Include="Scripts\Prettify\lang-vhdl.js" />
++    <Content Include="Scripts\Prettify\lang-wiki.js" />
++    <Content Include="Scripts\Prettify\lang-xq.js" />
++    <Content Include="Scripts\Prettify\lang-yaml.js" />
++    <Content Include="Scripts\Prettify\prettify.js" />
++    <Content Include="Scripts\showdown.js" />
++    <Content Include="Scripts\showdown.min.js" />
++    <Content Include="Scripts\site.js" />
++    <Content Include="Scripts\taggy.js" />
++    <Content Include="Scripts\wmd.js" />
++    <Content Include="Themes\AaronPowell\Content\Styles\Theme.css" />
++    <Content Include="Themes\Clean\Content\Styles\Theme.css" />
++    <Content Include="Themes\Default\Content\Styles\Theme.css" />
++    <Content Include="Themes\Evolve\Content\Images\background.png" />
++    <Content Include="Themes\Evolve\Content\Styles\Theme.css" />
++    <Content Include="Themes\MattHamilton\Content\Styles\Theme.css" />
++    <Content Include="Themes\MattHamilton\Content\Styles\Title.png" />
++    <Content Include="Themes\Official\Content\Images\header.png" />
++    <Content Include="Themes\Official\Content\Styles\Theme.css" />
++    <Content Include="Themes\Pastel\Content\Styles\Bar.png" />
++    <Content Include="Themes\Pastel\Content\Styles\Theme.css" />
++    <Content Include="Themes\RainbowAfro\Content\Styles\Bar.png" />
++    <Content Include="Themes\RainbowAfro\Content\Styles\Header.jpg" />
++    <Content Include="Themes\RainbowAfro\Content\Styles\Theme.css" />
++    <Content Include="Themes\Twitter\Content\Styles\Background.png" />
++    <Content Include="Themes\Twitter\Content\Styles\Bar.png" />
++    <Content Include="Themes\Twitter\Content\Styles\Theme.css" />
++    <Content Include="Web.config" />
++    <Content Include="Views\Web.config" />
++    <Content Include="Macros\TwitterStream.cshtml" />
++    <Content Include="Views\Shared\_Disqus.cshtml" />
++    <Content Include="Views\Shared\_EditComments.cshtml" />
++    <Content Include="Views\Shared\_EntryTools.cshtml" />
++    <Content Include="Views\Shared\_Mobile.cshtml" />
++    <Content Include="Views\Shared\_PrivateEntryNotification.cshtml" />
++    <Content Include="Views\Shared\_Public.cshtml" />
++    <Content Include="Views\Shared\DisplayTemplates\Comment.cshtml" />
++    <Content Include="Views\Shared\DisplayTemplates\Comments.cshtml" />
++    <Content Include="Views\Shared\DisplayTemplates\EntrySummaries.cshtml" />
++    <Content Include="Views\Shared\DisplayTemplates\EntrySummary.cshtml" />
++    <Content Include="Views\Shared\DisplayTemplates\FacebookLike.cshtml" />
++    <Content Include="Views\Shared\DisplayTemplates\Paginator.cshtml" />
++    <Content Include="Views\Shared\DisplayTemplates\Pingbacks.cshtml" />
++    <Content Include="Views\Shared\DisplayTemplates\PublishedDate.cshtml" />
++    <Content Include="Views\Shared\DisplayTemplates\TagsList.cshtml" />
++    <Content Include="Views\Shared\EditorTemplates\Markdown.cshtml" />
++    <Content Include="Views\Shared\EditorTemplates\Tags.cshtml" />
++    <Content Include="Views\Shared\PageTemplates\Default.cshtml" />
++    <Content Include="Views\Tagged\Index.cshtml" />
++    <Content Include="Views\Wiki\Page.cshtml" />
++    <Content Include="Views\Wiki\Pingbacks.cshtml" />
++    <Content Include="Views\Wiki\Recent.cshtml" />
++    <Content Include="Views\Wiki\Revisions.cshtml" />
++    <Content Include="Views\Wiki\Search.cshtml" />
++    <Content Include="Views\Wiki\SiteMap.cshtml" />
++    <Content Include="Views\_ViewStart.cshtml" />
++    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
++    <Content Include="Areas\Admin\Views\Admin\BlogMLImport.cshtml" />
++    <Content Include="Areas\Admin\Views\Admin\Comments.cshtml" />
++    <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
++    <Content Include="Areas\Admin\Views\Admin\PageList.cshtml" />
++    <Content Include="Areas\Admin\Views\Admin\Pingbacks.cshtml" />
++    <Content Include="Areas\Admin\Views\Admin\Settings.cshtml" />
++    <Content Include="Areas\Admin\Views\Admin\Task.cshtml" />
++    <Content Include="Areas\Admin\Views\Admin\Tasks.cshtml" />
++    <Content Include="Areas\Admin\Views\Install\Index.cshtml" />
++    <Content Include="Areas\Admin\Views\Install\UpgradeReport.cshtml" />
++    <Content Include="Areas\Admin\Views\Login\Login.cshtml" />
++    <Content Include="Areas\Admin\Views\Shared\_Private.cshtml" />
++    <Content Include="Areas\Admin\Views\SqlAuthentication\AddRole.cshtml" />
++    <Content Include="Areas\Admin\Views\SqlAuthentication\Index.cshtml" />
++    <Content Include="Areas\Admin\Views\SqlAuthentication\NewAccount.cshtml" />
++    <Content Include="Areas\Admin\Views\SqlAuthentication\Setup.cshtml" />
++    <Content Include="Areas\Admin\Views\Upload\Index.cshtml" />
++    <Content Include="Areas\Admin\Views\Web.config">
++      <SubType>Designer</SubType>
++    </Content>
++    <Content Include="Areas\Admin\Views\WikiAdmin\Edit.cshtml" />
++    <Content Include="My.config">
++      <SubType>Designer</SubType>
++    </Content>
++    <None Include="Web.Debug.config">
++      <DependentUpon>Web.config</DependentUpon>
++    </None>
++    <None Include="Web.Release.config">
++      <DependentUpon>Web.config</DependentUpon>
++    </None>
++    <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
++    <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
++    <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
++    <None Include="_bin_deployableAssemblies\x86\sqlceer40EN.dll" />
++    <None Include="_bin_deployableAssemblies\x86\sqlcecompact40.dll" />
++    <None Include="_bin_deployableAssemblies\x86\sqlceca40.dll" />
++    <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\README_ENU.txt" />
++    <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\msvcr90.dll" />
++    <None Include="_bin_deployableAssemblies\amd64\sqlcese40.dll" />
++    <None Include="_bin_deployableAssemblies\amd64\sqlceqp40.dll" />
++    <None Include="_bin_deployableAssemblies\amd64\sqlceme40.dll" />
++    <None Include="_bin_deployableAssemblies\amd64\sqlceer40EN.dll" />
++    <None Include="_bin_deployableAssemblies\amd64\sqlcecompact40.dll" />
++    <None Include="_bin_deployableAssemblies\amd64\sqlceca40.dll" />
++    <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\README_ENU.txt" />
++    <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\msvcr90.dll" />
++    <None Include="_bin_deployableAssemblies\x86\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
++  </ItemGroup>
++  <ItemGroup>
++    <Folder Include="App_Data\" />
++    <Folder Include="Scripts\Views\" />
++  </ItemGroup>
++  <ItemGroup>
++    <Content Include="packages.config" />
++  </ItemGroup>
++  <ItemGroup>
++    <None Include="_bin_deployableAssemblies\amd64\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" />
++  </ItemGroup>
++  <ItemGroup>
++    <ProjectReference Include="..\FunnelWeb.Extensions.CommentNotification\FunnelWeb.Extensions.CommentNotification.csproj">
++      <Project>{5c5efcf0-454d-42e0-aa89-7f69fb5457ba}</Project>
++      <Name>FunnelWeb.Extensions.CommentNotification</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\FunnelWeb\FunnelWeb.csproj">
++      <Project>{3e448c45-f459-45d7-950c-5abef926513d}</Project>
++      <Name>FunnelWeb</Name>
++    </ProjectReference>
++  </ItemGroup>
++  <PropertyGroup>
++    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
++    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
++  </PropertyGroup>
++  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
++  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
++  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
++  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
++    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
++  </Target>
++  <ProjectExtensions>
++    <VisualStudio>
++      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
++        <WebProjectProperties>
++          <UseIIS>True</UseIIS>
++          <AutoAssignPort>True</AutoAssignPort>
++          <DevelopmentServerPort>8471</DevelopmentServerPort>
++          <DevelopmentServerVPath>/</DevelopmentServerVPath>
++          <IISUrl>http://localhost:54860/</IISUrl>
++          <NTLMAuthentication>False</NTLMAuthentication>
++          <UseCustomServer>False</UseCustomServer>
++          <CustomServerUrl>
++          </CustomServerUrl>
++          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
++        </WebProjectProperties>
++      </FlavorProperties>
++    </VisualStudio>
++  </ProjectExtensions>
++  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
++  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
++       Other similar extension points exist, see Microsoft.Common.targets.
++  <Target Name="BeforeBuild">
++  </Target>
++  <Target Name="AfterBuild">
++  </Target> -->
++</Project>
+\ No newline at end of file
+diff --git a/src/FunnelWeb.Web/My.config b/src/FunnelWeb.Web/My.config
+index 32db905..b0a7b75 100644
+--- a/src/FunnelWeb.Web/My.config
++++ b/src/FunnelWeb.Web/My.config
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <funnelweb xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+-  <setting key="funnelweb.configuration.database.connection" value="database=FunnelWeb;server=.\SQLEXPRESS;trusted_connection=true;" />
++  <setting key="funnelweb.configuration.database.connection" value="Data Source=127.0.0.1,14330;Initial Catalog=FunnelWeb;User ID=sa;Password=Smoke_test_1234;TrustServerCertificate=True" />
+   <setting key="funnelweb.configuration.database.schema" value="dbo" />
+   <setting key="funnelweb.configuration.authentication.username" value="test" />
+   <setting key="funnelweb.configuration.authentication.password" value="test" />
+diff --git a/src/FunnelWeb.Web/Program.cs b/src/FunnelWeb.Web/Program.cs
+new file mode 100644
+index 0000000..effd94b
+--- /dev/null
++++ b/src/FunnelWeb.Web/Program.cs
+@@ -0,0 +1,21 @@
++using Microsoft.AspNetCore.Builder;
++using Microsoft.Extensions.DependencyInjection;
++using WebFormsForCore.Hosting.IIS;
++
++namespace FunnelWeb.Web
++{
++    // webForCore host (docs/MIGRATING.md section 4).
++    public class Program
++    {
++        public static void Main(string[] args)
++        {
++            var builder = WebApplication.CreateBuilder(args);
++            builder.Services.AddWebForms();
++
++            var app = builder.Build();
++            app.UseWebForms(o => o
++                .HandleAllRequestsWithWebForms());
++            app.Run();
++        }
++    }
++}
+diff --git a/src/FunnelWeb.Web/packages.config b/src/FunnelWeb.Web/packages.config.netfx
+similarity index 100%
+rename from src/FunnelWeb.Web/packages.config
+rename to src/FunnelWeb.Web/packages.config.netfx
+diff --git a/src/FunnelWeb/DatabaseDeployer/FunnelWebScriptProvider.cs b/src/FunnelWeb/DatabaseDeployer/FunnelWebScriptProvider.cs
+index 5073429..985dc0f 100644
+--- a/src/FunnelWeb/DatabaseDeployer/FunnelWebScriptProvider.cs
++++ b/src/FunnelWeb/DatabaseDeployer/FunnelWebScriptProvider.cs
+@@ -11,11 +11,11 @@ namespace FunnelWeb.DatabaseDeployer
+ {
+     public class FunnelWebScriptProvider : IScriptProvider
+     {
+-        private readonly _Assembly assembly;
++        private readonly System.Reflection.Assembly assembly; // webForCore: .NET has no System.Runtime.InteropServices._Assembly
+         private readonly Func<string, bool> filter;
+         private readonly string databaseProviderName;
+ 
+-        public FunnelWebScriptProvider(_Assembly assembly, Func<string, bool> filter, string databaseProviderName)
++        public FunnelWebScriptProvider(System.Reflection.Assembly assembly, Func<string, bool> filter, string databaseProviderName)
+         {
+             this.assembly = assembly;
+             this.filter = filter;
+diff --git a/src/FunnelWeb/FunnelWeb.csproj b/src/FunnelWeb/FunnelWeb.csproj
+index 1e5f1bf..dfe4dc8 100644
+--- a/src/FunnelWeb/FunnelWeb.csproj
++++ b/src/FunnelWeb/FunnelWeb.csproj
+@@ -1,405 +1,93 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++<Project Sdk="Microsoft.NET.Sdk">
++  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is FunnelWeb.csproj.netfx. -->
+   <PropertyGroup>
+-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+-    <ProductVersion>8.0.30703</ProductVersion>
+-    <SchemaVersion>2.0</SchemaVersion>
+-    <RestorePackages>true</RestorePackages>
+-    <ProjectGuid>{3E448C45-F459-45D7-950C-5ABEF926513D}</ProjectGuid>
+-    <OutputType>Library</OutputType>
+-    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <TargetFramework>net11.0</TargetFramework>
+     <RootNamespace>FunnelWeb</RootNamespace>
+     <AssemblyName>FunnelWeb</AssemblyName>
+-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+-    <FileAlignment>512</FileAlignment>
+-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
++    <NoWarn>$(NoWarn);NU1701</NoWarn>
+   </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+-    <DebugSymbols>true</DebugSymbols>
+-    <DebugType>full</DebugType>
+-    <Optimize>false</Optimize>
+-    <OutputPath>bin\Debug\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+-    <DebugType>pdbonly</DebugType>
+-    <Optimize>true</Optimize>
+-    <OutputPath>bin\Release\</OutputPath>
+-    <DefineConstants>TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-  </PropertyGroup>
+-  <ItemGroup>
+-    <Reference Include="Autofac">
+-      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Autofac.Configuration">
+-      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.Configuration.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Autofac.Integration.Mvc">
+-      <HintPath>..\packages\Autofac.Mvc3.2.6.3.862\lib\NET40\Autofac.Integration.Mvc.dll</HintPath>
+-    </Reference>
+-    <Reference Include="BlogML, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+-      <HintPath>..\packages\blogml.2.2.0\lib\BlogML.dll</HintPath>
+-    </Reference>
+-    <Reference Include="DbUp, Version=2.0.113.12853, Culture=neutral, PublicKeyToken=4b419c53bdfd4cbf, processorArchitecture=MSIL">
+-      <SpecificVersion>False</SpecificVersion>
+-      <HintPath>..\packages\dbup.2.0.113\lib\NET35\DbUp.dll</HintPath>
+-    </Reference>
+-    <Reference Include="DbUp.SqlCe, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+-      <SpecificVersion>False</SpecificVersion>
+-      <HintPath>..\packages\dbup-sqlce.2.0.113\lib\NET35\DbUp.SqlCe.dll</HintPath>
+-    </Reference>
+-    <Reference Include="FluentNHibernate, Version=1.3.0.733, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+-      <SpecificVersion>False</SpecificVersion>
+-      <HintPath>..\packages\FluentNHibernate.1.3.0.733\lib\FluentNHibernate.dll</HintPath>
+-    </Reference>
+-    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+-      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+-      <SpecificVersion>False</SpecificVersion>
+-      <HintPath>..\packages\Iesi.Collections.3.3.2.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <SpecificVersion>False</SpecificVersion>
+-      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.1.7.0.3\lib\net35-full\Microsoft.WindowsAzure.Configuration.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+-    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\packages\WindowsAzure.Storage.1.7.0.0\lib\net35-full\Microsoft.WindowsAzure.StorageClient.dll</HintPath>
+-    </Reference>
+-    <Reference Include="MiniProfiler">
+-      <HintPath>..\packages\MiniProfiler.2.0.2\lib\net40\MiniProfiler.dll</HintPath>
+-    </Reference>
+-    <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+-      <SpecificVersion>False</SpecificVersion>
+-      <HintPath>..\packages\NHibernate.3.3.2.4000\lib\Net35\NHibernate.dll</HintPath>
+-    </Reference>
+-    <Reference Include="NHibernate.Validator, Version=1.3.2.4000, Culture=neutral, PublicKeyToken=70154e18752585bd, processorArchitecture=MSIL">
+-      <SpecificVersion>False</SpecificVersion>
+-      <HintPath>..\packages\NHibernate.Validator.1.3.2.4000\lib\Net35\NHibernate.Validator.dll</HintPath>
+-    </Reference>
+-    <Reference Include="NHibernate.Validator.Specific, Version=1.3.2.4000, Culture=neutral, PublicKeyToken=70154e18752585bd, processorArchitecture=MSIL">
+-      <SpecificVersion>False</SpecificVersion>
+-      <HintPath>..\packages\NHibernate.Validator.1.3.2.4000\lib\Net35\NHibernate.Validator.Specific.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System" />
+-    <Reference Include="System.ComponentModel.Composition" />
+-    <Reference Include="System.ComponentModel.DataAnnotations" />
+-    <Reference Include="System.configuration" />
+-    <Reference Include="System.Core" />
+-    <Reference Include="System.Data.Services.Client" />
+-    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+-      <Private>True</Private>
+-      <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web" />
+-    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+-    <Reference Include="System.Xml.Linq" />
+-    <Reference Include="Microsoft.CSharp" />
+-    <Reference Include="System.Data" />
+-    <Reference Include="System.Xml" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Compile Include="..\Information\SolutionInfo.cs">
+-      <Link>Properties\SolutionInfo.cs</Link>
+-    </Compile>
+-    <Compile Include="..\Information\VersionInfo.cs">
+-      <Link>Properties\VersionInfo.cs</Link>
+-    </Compile>
+-    <Compile Include="Authentication\IFunnelWebMembership.cs" />
+-    <Compile Include="Authentication\Internal\FormsAuthenticator.cs" />
+-    <Compile Include="Authentication\Internal\FormsRoleProvider.cs" />
+-    <Compile Include="Authentication\IAuthenticator.cs" />
+-    <Compile Include="Authentication\Internal\FormsFunnelWebMembership.cs" />
+-    <Compile Include="Authentication\Internal\SqlFunnelWebMembership.cs" />
+-    <Compile Include="Authentication\Internal\SqlAuthenticator.cs" />
+-    <Compile Include="Authentication\Internal\SqlRoleProvider.cs" />
+-    <Compile Include="Authentication\IRoleProvider.cs" />
+-    <Compile Include="DatabaseDeployer\ApplicationDatabase.cs" />
+-    <Compile Include="DatabaseDeployer\DatabaseModule.cs" />
+-    <Compile Include="DatabaseDeployer\DatabaseUpgradeDetector.cs" />
+-    <Compile Include="DatabaseDeployer\FunnelWebScriptProvider.cs" />
+-    <Compile Include="DatabaseDeployer\IApplicationDatabase.cs" />
+-    <Compile Include="DatabaseDeployer\IConnectionStringSettings.cs" />
+-    <Compile Include="DatabaseDeployer\IDatabaseUpgradeDetector.cs" />
+-    <Compile Include="DatabaseDeployer\Infrastructure\FunnelWebJournal.cs" />
+-    <Compile Include="DatabaseDeployer\Infrastructure\FunnelWebNHibernateExtensions.cs" />
+-    <Compile Include="DatabaseDeployer\ScriptedExtension.cs" />
+-    <Compile Include="Eventing\EventingModule.cs" />
+-    <Compile Include="Eventing\INotifier.cs" />
+-    <Compile Include="ExtensionsModule.cs" />
+-    <Compile Include="Filters\FunnelWebRequestAttribute.cs" />
+-    <Compile Include="FunnelWebExtensionAttribute.cs" />
+-    <Compile Include="FunnelWebExtensionLoadException.asax.cs" />
+-    <Compile Include="Providers\Database\IDatabaseProvider.cs" />
+-    <Compile Include="Providers\Database\SqlCeDatabaseProvider.cs" />
+-    <Compile Include="Providers\Database\SqlCe\FunnelWebCe40Dialect.cs" />
+-    <Compile Include="Providers\Database\SqlCe\FunnelWebSqlServerCeDriver.cs" />
+-    <Compile Include="Providers\Database\SqlDatabaseProvider.cs" />
+-    <Compile Include="Providers\Database\Sql\ProfiledClientBatchingBatcherFactory.cs" />
+-    <Compile Include="Providers\Database\Sql\ProfiledSqlClientBatchingBatcher.cs" />
+-    <Compile Include="Providers\Database\Sql\ProfiledSqlClientBatchingBatcherFactory.cs" />
+-    <Compile Include="Providers\Database\Sql\ProfiledSqlClientDriver.cs" />
+-    <Compile Include="Providers\Database\Sql\ProfiledSqlDbCommand.cs" />
+-    <Compile Include="Providers\Database\Sql\ProfiledSqlDbConnection.cs" />
+-    <Compile Include="Providers\Database\Sql\ProfiledSqlDbTransaction.cs" />
+-    <Compile Include="Providers\File\AzureBlobFileRepository.cs" />
+-    <Compile Include="Providers\File\FileRepository.cs" />
+-    <Compile Include="Providers\File\FileRepositoryBase.cs" />
+-    <Compile Include="Providers\File\IFileRepository.cs" />
+-    <Compile Include="Providers\InternalProviderRegistrationModule.cs" />
+-    <Compile Include="Providers\IProviderInfo.cs" />
+-    <Compile Include="Providers\ProviderInfo.cs" />
+-    <Compile Include="Providers\ProviderMetaData.cs" />
+-    <Compile Include="Utilities\IMimeTypeLookup.cs" />
+-    <Compile Include="Utilities\StringExtensions.cs" />
+-    <Compile Include="Settings\AppHarborSettings.cs" />
+-    <Compile Include="Settings\IAppHarborSettings.cs" />
+-    <Compile Include="Utilities\HttpRequestExtensions.cs" />
+-    <Compile Include="IFunnelWebExtension.cs" />
+-    <Compile Include="IFunnelWebExtensionMetaData.cs" />
+-    <Compile Include="IRequireDatabaseScripts.cs" />
+-    <Compile Include="Model\Authentication\Mappings\RoleMapping.cs" />
+-    <Compile Include="Model\Authentication\Mappings\UserMapping.cs" />
+-    <Compile Include="Model\Authentication\Role.cs" />
+-    <Compile Include="Model\Authentication\User.cs" />
+-    <Compile Include="Model\EntryRevision.cs" />
+-    <Compile Include="Model\Mappings\RevisionFilter.cs" />
+-    <Compile Include="Model\EntrySummary.cs" />
+-    <Compile Include="Model\Strings\EnforcedStringLengthAttribute.cs" />
+-    <Compile Include="Mvc\HintSize.cs" />
+-    <Compile Include="Mvc\HintSizeAttribute.cs" />
+-    <Compile Include="Repositories\Filters.cs" />
+-    <Compile Include="Repositories\PagedResult.cs" />
+-    <Compile Include="Repositories\Projections\EntrySummaryProjections.cs" />
+-    <Compile Include="Repositories\Alias.cs" />
+-    <Compile Include="Repositories\EntriesSortColumn.cs" />
+-    <Compile Include="Repositories\ICommand.cs" />
+-    <Compile Include="Repositories\IQuery.cs" />
+-    <Compile Include="Repositories\IRepository.cs" />
+-    <Compile Include="Repositories\NHibernateRepository.cs" />
+-    <Compile Include="Repositories\Projections\EntryRevisionProjections.cs" />
+-    <Compile Include="Repositories\Queries\EntryByNameQuery.cs" />
+-    <Compile Include="Repositories\Queries\EntryByNameAndRevisionQuery.cs" />
+-    <Compile Include="Repositories\Queries\FullTextSearchEntriesQuery.cs" />
+-    <Compile Include="Repositories\Queries\GetAllCommentsQuery.cs" />
+-    <Compile Include="Repositories\Queries\GetCommentsQuery.cs" />
+-    <Compile Include="Repositories\Queries\GetEntriesByTagQuery.cs" />
+-    <Compile Include="Repositories\Queries\GetEntriesQuery.cs" />
+-    <Compile Include="Repositories\IPagedQuery.cs" />
+-    <Compile Include="Repositories\Queries\GetFullEntriesQuery.cs" />
+-    <Compile Include="Repositories\Queries\GetEntryWithPingbacksQuery.cs" />
+-    <Compile Include="Repositories\Queries\GetSpamQuery.cs" />
+-    <Compile Include="Repositories\Queries\SimpleSearchEntriesQuery.cs" />
+-    <Compile Include="Repositories\Queries\SearchTagsByNameQuery.cs" />
+-    <Compile Include="Repositories\Queries\SwitchingSearchEntriesQuery.cs" />
+-    <Compile Include="RoutableFunnelWebExtension.cs" />
+-    <Compile Include="Settings\IConfigSettings.cs" />
+-    <Compile Include="Settings\ISettings.cs" />
+-    <Compile Include="Settings\SettingsModule.cs" />
+-    <Compile Include="Settings\SqlAuthenticationSettings.cs" />
+-    <Compile Include="Settings\XmlConfigSettings.cs" />
+-    <Compile Include="Tasks\TaskModule.cs" />
+-    <Compile Include="Tasks\ITask.cs" />
+-    <Compile Include="Tasks\ITaskExecutor.cs" />
+-    <Compile Include="Model\Mappings\TaskStateMapping.cs" />
+-    <Compile Include="Tasks\BlogMLImport.cs" />
+-    <Compile Include="Model\Repositories\Internal\TaskStateRepository.cs" />
+-    <Compile Include="Model\Repositories\ITaskStateRepository.cs" />
+-    <Compile Include="Tasks\TaskExecutor.cs" />
+-    <Compile Include="Model\TaskState.cs" />
+-    <Compile Include="Model\Tag.cs" />
+-    <Compile Include="Model\Comment.cs" />
+-    <Compile Include="Model\Entry.cs" />
+-    <Compile Include="Model\EntryStatus.cs" />
+-    <Compile Include="Model\FileItem.cs" />
+-    <Compile Include="Model\Formats.cs" />
+-    <Compile Include="Model\Mappings\CommentMapping.cs" />
+-    <Compile Include="Model\Mappings\EntryMapping.cs" />
+-    <Compile Include="Model\Mappings\TagMapping.cs" />
+-    <Compile Include="Model\Mappings\PingbackMapping.cs" />
+-    <Compile Include="Model\Mappings\RedirectMapping.cs" />
+-    <Compile Include="Model\Mappings\RevisionMapping.cs" />
+-    <Compile Include="Model\Mappings\SettingMapping.cs" />
+-    <Compile Include="Model\Mappings\UserTypes\PageNameUserType.cs" />
+-    <Compile Include="Model\Pingback.cs" />
+-    <Compile Include="Model\Redirect.cs" />
+-    <Compile Include="Model\Repositories\IAdminRepository.cs" />
+-    <Compile Include="Model\Repositories\Internal\AdminRepository.cs" />
+-    <Compile Include="Model\Repositories\RepositoriesModule.cs" />
+-    <Compile Include="Model\Revision.cs" />
+-    <Compile Include="Model\Setting.cs" />
+-    <Compile Include="Model\Strings\EnforcedString.cs" />
+-    <Compile Include="Model\Strings\PageName.cs" />
+-    <Compile Include="Model\TaskStatus.cs" />
+-    <Compile Include="Tasks\TaskStep.cs" />
+-    <Compile Include="Properties\AssemblyInfo.cs" />
+-    <Compile Include="Settings\ConnectionStringSettings.cs" />
+-    <Compile Include="Settings\ISettingsProvider.cs" />
+-    <Compile Include="Settings\FunnelWebSettings.cs" />
+-    <Compile Include="Settings\SettingsProvider.cs" />
+-    <Compile Include="Settings\SettingStorageAttribute.cs" />
+-    <Compile Include="Settings\StorageLocation.cs" />
+-    <Compile Include="Utilities\NumericExtensions.cs" />
+-    <Compile Include="Utilities\StreamExtensions.cs" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <None Include="app.config">
+-      <SubType>Designer</SubType>
+-    </None>
+-    <None Include="packages.config" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0001.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0002.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0003.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0004.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0005.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0006.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0007.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0008.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0009.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0010.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0011.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0012.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0013.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0014.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0015.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0016.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0017.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0018.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0019.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0020.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0021.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0022.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0023.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0024.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0025.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0026.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0027.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0028.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0001_sqlce.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0008_sqlce.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0010_sqlce.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0016_sqlce.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0020_sqlce.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0022_sqlce.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0023_sqlce.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0026_sqlce.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0021_sqlce.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0029.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0024_sqlce.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0025_sqlce.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0027_sqlce.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0030.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0031.sql" />
+-  </ItemGroup>
+-  <ItemGroup>
+-    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0032.sql" />
+-  </ItemGroup>
+-  <ItemGroup />
+-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+-  <PropertyGroup>
+-  </PropertyGroup>
+-  <PropertyGroup>
+-    <PostBuildEvent>
+-    </PostBuildEvent>
+-  </PropertyGroup>
+-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+-       Other similar extension points exist, see Microsoft.Common.targets.
+-  <Target Name="BeforeBuild">
+-  </Target>
+-  <Target Name="AfterBuild">
+-  </Target>
+-  -->
+-</Project>
+\ No newline at end of file
++
++  <ItemGroup>
++    <Compile Remove="bin/**;obj/**" />
++    <Compile Include="../Information/SolutionInfo.cs" Link="SolutionInfo.cs" />
++    <Compile Include="../Information/VersionInfo.cs" Link="VersionInfo.cs" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <!-- Embedded resources (the SDK only globs .resx). -->
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0001.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0002.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0003.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0004.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0005.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0006.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0007.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0008.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0009.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0010.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0011.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0012.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0013.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0014.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0015.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0016.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0017.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0018.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0019.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0020.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0021.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0022.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0023.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0024.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0025.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0026.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0027.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0028.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0001_sqlce.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0008_sqlce.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0010_sqlce.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0016_sqlce.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0020_sqlce.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0022_sqlce.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0023_sqlce.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0026_sqlce.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0021_sqlce.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0029.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0024_sqlce.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0025_sqlce.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0027_sqlce.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0030.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0031.sql" />
++    <EmbeddedResource Include="DatabaseDeployer/Scripts/Script0032.sql" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.4.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.4.0" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <!-- The app's own libraries. -->
++    <PackageReference Include="Autofac" Version="2.6.3.862" />
++    <PackageReference Include="Autofac.Mvc3" Version="2.6.3.862" />
++    <PackageReference Include="blogml" Version="2.2.0" />
++    <PackageReference Include="dbup" Version="2.0.113" />
++    <PackageReference Include="dbup-sqlce" Version="2.0.113" />
++    <PackageReference Include="FluentNHibernate" Version="1.3.0.733" />
++    <PackageReference Include="Iesi.Collections" Version="3.3.2.4000" />
++    <PackageReference Include="Microsoft.SqlServer.Compact" Version="4.0.8876.1" />
++    <PackageReference Include="Microsoft.WindowsAzure.ConfigurationManager" Version="1.7.0.3" />
++    <PackageReference Include="MiniProfiler" Version="2.0.2" />
++    <PackageReference Include="NHibernate" Version="3.3.2.4000" />
++    <PackageReference Include="NHibernate.Validator" Version="1.3.2.4000" />
++    <PackageReference Include="SharpZipLib" Version="0.86.0" />
++    <PackageReference Include="SqlServerCompact" Version="4.0.8854.1" />
++    <PackageReference Include="WindowsAzure.Storage" Version="1.7.0.0" />
++    <PackageReference Include="System.ComponentModel.Composition" Version="11.0.0-rc.3.26522.148" />
++  </ItemGroup>
++
++</Project>
+diff --git a/src/FunnelWeb/FunnelWeb.csproj.netfx b/src/FunnelWeb/FunnelWeb.csproj.netfx
+new file mode 100644
+index 0000000..1e5f1bf
+--- /dev/null
++++ b/src/FunnelWeb/FunnelWeb.csproj.netfx
+@@ -0,0 +1,405 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <PropertyGroup>
++    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
++    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
++    <ProductVersion>8.0.30703</ProductVersion>
++    <SchemaVersion>2.0</SchemaVersion>
++    <RestorePackages>true</RestorePackages>
++    <ProjectGuid>{3E448C45-F459-45D7-950C-5ABEF926513D}</ProjectGuid>
++    <OutputType>Library</OutputType>
++    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <RootNamespace>FunnelWeb</RootNamespace>
++    <AssemblyName>FunnelWeb</AssemblyName>
++    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
++    <FileAlignment>512</FileAlignment>
++    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
++    <DebugSymbols>true</DebugSymbols>
++    <DebugType>full</DebugType>
++    <Optimize>false</Optimize>
++    <OutputPath>bin\Debug\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
++    <DebugType>pdbonly</DebugType>
++    <Optimize>true</Optimize>
++    <OutputPath>bin\Release\</OutputPath>
++    <DefineConstants>TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++  </PropertyGroup>
++  <ItemGroup>
++    <Reference Include="Autofac">
++      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.dll</HintPath>
++    </Reference>
++    <Reference Include="Autofac.Configuration">
++      <HintPath>..\packages\Autofac.2.6.3.862\lib\NET40\Autofac.Configuration.dll</HintPath>
++    </Reference>
++    <Reference Include="Autofac.Integration.Mvc">
++      <HintPath>..\packages\Autofac.Mvc3.2.6.3.862\lib\NET40\Autofac.Integration.Mvc.dll</HintPath>
++    </Reference>
++    <Reference Include="BlogML, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
++      <HintPath>..\packages\blogml.2.2.0\lib\BlogML.dll</HintPath>
++    </Reference>
++    <Reference Include="DbUp, Version=2.0.113.12853, Culture=neutral, PublicKeyToken=4b419c53bdfd4cbf, processorArchitecture=MSIL">
++      <SpecificVersion>False</SpecificVersion>
++      <HintPath>..\packages\dbup.2.0.113\lib\NET35\DbUp.dll</HintPath>
++    </Reference>
++    <Reference Include="DbUp.SqlCe, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
++      <SpecificVersion>False</SpecificVersion>
++      <HintPath>..\packages\dbup-sqlce.2.0.113\lib\NET35\DbUp.SqlCe.dll</HintPath>
++    </Reference>
++    <Reference Include="FluentNHibernate, Version=1.3.0.733, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
++      <SpecificVersion>False</SpecificVersion>
++      <HintPath>..\packages\FluentNHibernate.1.3.0.733\lib\FluentNHibernate.dll</HintPath>
++    </Reference>
++    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
++      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
++    </Reference>
++    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
++      <SpecificVersion>False</SpecificVersion>
++      <HintPath>..\packages\Iesi.Collections.3.3.2.4000\lib\Net35\Iesi.Collections.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <SpecificVersion>False</SpecificVersion>
++      <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.1.7.0.3\lib\net35-full\Microsoft.WindowsAzure.Configuration.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.WindowsAzure.ServiceRuntime, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
++    <Reference Include="Microsoft.WindowsAzure.StorageClient, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\packages\WindowsAzure.Storage.1.7.0.0\lib\net35-full\Microsoft.WindowsAzure.StorageClient.dll</HintPath>
++    </Reference>
++    <Reference Include="MiniProfiler">
++      <HintPath>..\packages\MiniProfiler.2.0.2\lib\net40\MiniProfiler.dll</HintPath>
++    </Reference>
++    <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
++      <SpecificVersion>False</SpecificVersion>
++      <HintPath>..\packages\NHibernate.3.3.2.4000\lib\Net35\NHibernate.dll</HintPath>
++    </Reference>
++    <Reference Include="NHibernate.Validator, Version=1.3.2.4000, Culture=neutral, PublicKeyToken=70154e18752585bd, processorArchitecture=MSIL">
++      <SpecificVersion>False</SpecificVersion>
++      <HintPath>..\packages\NHibernate.Validator.1.3.2.4000\lib\Net35\NHibernate.Validator.dll</HintPath>
++    </Reference>
++    <Reference Include="NHibernate.Validator.Specific, Version=1.3.2.4000, Culture=neutral, PublicKeyToken=70154e18752585bd, processorArchitecture=MSIL">
++      <SpecificVersion>False</SpecificVersion>
++      <HintPath>..\packages\NHibernate.Validator.1.3.2.4000\lib\Net35\NHibernate.Validator.Specific.dll</HintPath>
++    </Reference>
++    <Reference Include="System" />
++    <Reference Include="System.ComponentModel.Composition" />
++    <Reference Include="System.ComponentModel.DataAnnotations" />
++    <Reference Include="System.configuration" />
++    <Reference Include="System.Core" />
++    <Reference Include="System.Data.Services.Client" />
++    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
++      <Private>True</Private>
++      <HintPath>..\packages\Microsoft.SqlServer.Compact.4.0.8876.1\lib\net40\System.Data.SqlServerCe.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web" />
++    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
++    <Reference Include="System.Xml.Linq" />
++    <Reference Include="Microsoft.CSharp" />
++    <Reference Include="System.Data" />
++    <Reference Include="System.Xml" />
++  </ItemGroup>
++  <ItemGroup>
++    <Compile Include="..\Information\SolutionInfo.cs">
++      <Link>Properties\SolutionInfo.cs</Link>
++    </Compile>
++    <Compile Include="..\Information\VersionInfo.cs">
++      <Link>Properties\VersionInfo.cs</Link>
++    </Compile>
++    <Compile Include="Authentication\IFunnelWebMembership.cs" />
++    <Compile Include="Authentication\Internal\FormsAuthenticator.cs" />
++    <Compile Include="Authentication\Internal\FormsRoleProvider.cs" />
++    <Compile Include="Authentication\IAuthenticator.cs" />
++    <Compile Include="Authentication\Internal\FormsFunnelWebMembership.cs" />
++    <Compile Include="Authentication\Internal\SqlFunnelWebMembership.cs" />
++    <Compile Include="Authentication\Internal\SqlAuthenticator.cs" />
++    <Compile Include="Authentication\Internal\SqlRoleProvider.cs" />
++    <Compile Include="Authentication\IRoleProvider.cs" />
++    <Compile Include="DatabaseDeployer\ApplicationDatabase.cs" />
++    <Compile Include="DatabaseDeployer\DatabaseModule.cs" />
++    <Compile Include="DatabaseDeployer\DatabaseUpgradeDetector.cs" />
++    <Compile Include="DatabaseDeployer\FunnelWebScriptProvider.cs" />
++    <Compile Include="DatabaseDeployer\IApplicationDatabase.cs" />
++    <Compile Include="DatabaseDeployer\IConnectionStringSettings.cs" />
++    <Compile Include="DatabaseDeployer\IDatabaseUpgradeDetector.cs" />
++    <Compile Include="DatabaseDeployer\Infrastructure\FunnelWebJournal.cs" />
++    <Compile Include="DatabaseDeployer\Infrastructure\FunnelWebNHibernateExtensions.cs" />
++    <Compile Include="DatabaseDeployer\ScriptedExtension.cs" />
++    <Compile Include="Eventing\EventingModule.cs" />
++    <Compile Include="Eventing\INotifier.cs" />
++    <Compile Include="ExtensionsModule.cs" />
++    <Compile Include="Filters\FunnelWebRequestAttribute.cs" />
++    <Compile Include="FunnelWebExtensionAttribute.cs" />
++    <Compile Include="FunnelWebExtensionLoadException.asax.cs" />
++    <Compile Include="Providers\Database\IDatabaseProvider.cs" />
++    <Compile Include="Providers\Database\SqlCeDatabaseProvider.cs" />
++    <Compile Include="Providers\Database\SqlCe\FunnelWebCe40Dialect.cs" />
++    <Compile Include="Providers\Database\SqlCe\FunnelWebSqlServerCeDriver.cs" />
++    <Compile Include="Providers\Database\SqlDatabaseProvider.cs" />
++    <Compile Include="Providers\Database\Sql\ProfiledClientBatchingBatcherFactory.cs" />
++    <Compile Include="Providers\Database\Sql\ProfiledSqlClientBatchingBatcher.cs" />
++    <Compile Include="Providers\Database\Sql\ProfiledSqlClientBatchingBatcherFactory.cs" />
++    <Compile Include="Providers\Database\Sql\ProfiledSqlClientDriver.cs" />
++    <Compile Include="Providers\Database\Sql\ProfiledSqlDbCommand.cs" />
++    <Compile Include="Providers\Database\Sql\ProfiledSqlDbConnection.cs" />
++    <Compile Include="Providers\Database\Sql\ProfiledSqlDbTransaction.cs" />
++    <Compile Include="Providers\File\AzureBlobFileRepository.cs" />
++    <Compile Include="Providers\File\FileRepository.cs" />
++    <Compile Include="Providers\File\FileRepositoryBase.cs" />
++    <Compile Include="Providers\File\IFileRepository.cs" />
++    <Compile Include="Providers\InternalProviderRegistrationModule.cs" />
++    <Compile Include="Providers\IProviderInfo.cs" />
++    <Compile Include="Providers\ProviderInfo.cs" />
++    <Compile Include="Providers\ProviderMetaData.cs" />
++    <Compile Include="Utilities\IMimeTypeLookup.cs" />
++    <Compile Include="Utilities\StringExtensions.cs" />
++    <Compile Include="Settings\AppHarborSettings.cs" />
++    <Compile Include="Settings\IAppHarborSettings.cs" />
++    <Compile Include="Utilities\HttpRequestExtensions.cs" />
++    <Compile Include="IFunnelWebExtension.cs" />
++    <Compile Include="IFunnelWebExtensionMetaData.cs" />
++    <Compile Include="IRequireDatabaseScripts.cs" />
++    <Compile Include="Model\Authentication\Mappings\RoleMapping.cs" />
++    <Compile Include="Model\Authentication\Mappings\UserMapping.cs" />
++    <Compile Include="Model\Authentication\Role.cs" />
++    <Compile Include="Model\Authentication\User.cs" />
++    <Compile Include="Model\EntryRevision.cs" />
++    <Compile Include="Model\Mappings\RevisionFilter.cs" />
++    <Compile Include="Model\EntrySummary.cs" />
++    <Compile Include="Model\Strings\EnforcedStringLengthAttribute.cs" />
++    <Compile Include="Mvc\HintSize.cs" />
++    <Compile Include="Mvc\HintSizeAttribute.cs" />
++    <Compile Include="Repositories\Filters.cs" />
++    <Compile Include="Repositories\PagedResult.cs" />
++    <Compile Include="Repositories\Projections\EntrySummaryProjections.cs" />
++    <Compile Include="Repositories\Alias.cs" />
++    <Compile Include="Repositories\EntriesSortColumn.cs" />
++    <Compile Include="Repositories\ICommand.cs" />
++    <Compile Include="Repositories\IQuery.cs" />
++    <Compile Include="Repositories\IRepository.cs" />
++    <Compile Include="Repositories\NHibernateRepository.cs" />
++    <Compile Include="Repositories\Projections\EntryRevisionProjections.cs" />
++    <Compile Include="Repositories\Queries\EntryByNameQuery.cs" />
++    <Compile Include="Repositories\Queries\EntryByNameAndRevisionQuery.cs" />
++    <Compile Include="Repositories\Queries\FullTextSearchEntriesQuery.cs" />
++    <Compile Include="Repositories\Queries\GetAllCommentsQuery.cs" />
++    <Compile Include="Repositories\Queries\GetCommentsQuery.cs" />
++    <Compile Include="Repositories\Queries\GetEntriesByTagQuery.cs" />
++    <Compile Include="Repositories\Queries\GetEntriesQuery.cs" />
++    <Compile Include="Repositories\IPagedQuery.cs" />
++    <Compile Include="Repositories\Queries\GetFullEntriesQuery.cs" />
++    <Compile Include="Repositories\Queries\GetEntryWithPingbacksQuery.cs" />
++    <Compile Include="Repositories\Queries\GetSpamQuery.cs" />
++    <Compile Include="Repositories\Queries\SimpleSearchEntriesQuery.cs" />
++    <Compile Include="Repositories\Queries\SearchTagsByNameQuery.cs" />
++    <Compile Include="Repositories\Queries\SwitchingSearchEntriesQuery.cs" />
++    <Compile Include="RoutableFunnelWebExtension.cs" />
++    <Compile Include="Settings\IConfigSettings.cs" />
++    <Compile Include="Settings\ISettings.cs" />
++    <Compile Include="Settings\SettingsModule.cs" />
++    <Compile Include="Settings\SqlAuthenticationSettings.cs" />
++    <Compile Include="Settings\XmlConfigSettings.cs" />
++    <Compile Include="Tasks\TaskModule.cs" />
++    <Compile Include="Tasks\ITask.cs" />
++    <Compile Include="Tasks\ITaskExecutor.cs" />
++    <Compile Include="Model\Mappings\TaskStateMapping.cs" />
++    <Compile Include="Tasks\BlogMLImport.cs" />
++    <Compile Include="Model\Repositories\Internal\TaskStateRepository.cs" />
++    <Compile Include="Model\Repositories\ITaskStateRepository.cs" />
++    <Compile Include="Tasks\TaskExecutor.cs" />
++    <Compile Include="Model\TaskState.cs" />
++    <Compile Include="Model\Tag.cs" />
++    <Compile Include="Model\Comment.cs" />
++    <Compile Include="Model\Entry.cs" />
++    <Compile Include="Model\EntryStatus.cs" />
++    <Compile Include="Model\FileItem.cs" />
++    <Compile Include="Model\Formats.cs" />
++    <Compile Include="Model\Mappings\CommentMapping.cs" />
++    <Compile Include="Model\Mappings\EntryMapping.cs" />
++    <Compile Include="Model\Mappings\TagMapping.cs" />
++    <Compile Include="Model\Mappings\PingbackMapping.cs" />
++    <Compile Include="Model\Mappings\RedirectMapping.cs" />
++    <Compile Include="Model\Mappings\RevisionMapping.cs" />
++    <Compile Include="Model\Mappings\SettingMapping.cs" />
++    <Compile Include="Model\Mappings\UserTypes\PageNameUserType.cs" />
++    <Compile Include="Model\Pingback.cs" />
++    <Compile Include="Model\Redirect.cs" />
++    <Compile Include="Model\Repositories\IAdminRepository.cs" />
++    <Compile Include="Model\Repositories\Internal\AdminRepository.cs" />
++    <Compile Include="Model\Repositories\RepositoriesModule.cs" />
++    <Compile Include="Model\Revision.cs" />
++    <Compile Include="Model\Setting.cs" />
++    <Compile Include="Model\Strings\EnforcedString.cs" />
++    <Compile Include="Model\Strings\PageName.cs" />
++    <Compile Include="Model\TaskStatus.cs" />
++    <Compile Include="Tasks\TaskStep.cs" />
++    <Compile Include="Properties\AssemblyInfo.cs" />
++    <Compile Include="Settings\ConnectionStringSettings.cs" />
++    <Compile Include="Settings\ISettingsProvider.cs" />
++    <Compile Include="Settings\FunnelWebSettings.cs" />
++    <Compile Include="Settings\SettingsProvider.cs" />
++    <Compile Include="Settings\SettingStorageAttribute.cs" />
++    <Compile Include="Settings\StorageLocation.cs" />
++    <Compile Include="Utilities\NumericExtensions.cs" />
++    <Compile Include="Utilities\StreamExtensions.cs" />
++  </ItemGroup>
++  <ItemGroup>
++    <None Include="app.config">
++      <SubType>Designer</SubType>
++    </None>
++    <None Include="packages.config" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0001.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0002.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0003.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0004.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0005.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0006.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0007.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0008.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0009.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0010.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0011.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0012.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0013.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0014.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0015.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0016.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0017.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0018.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0019.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0020.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0021.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0022.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0023.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0024.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0025.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0026.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0027.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0028.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0001_sqlce.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0008_sqlce.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0010_sqlce.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0016_sqlce.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0020_sqlce.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0022_sqlce.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0023_sqlce.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0026_sqlce.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0021_sqlce.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0029.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0024_sqlce.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0025_sqlce.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0027_sqlce.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0030.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0031.sql" />
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="DatabaseDeployer\Scripts\Script0032.sql" />
++  </ItemGroup>
++  <ItemGroup />
++  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
++  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
++  <PropertyGroup>
++  </PropertyGroup>
++  <PropertyGroup>
++    <PostBuildEvent>
++    </PostBuildEvent>
++  </PropertyGroup>
++  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
++       Other similar extension points exist, see Microsoft.Common.targets.
++  <Target Name="BeforeBuild">
++  </Target>
++  <Target Name="AfterBuild">
++  </Target>
++  -->
++</Project>
+\ No newline at end of file
+diff --git a/src/FunnelWeb/packages.config b/src/FunnelWeb/packages.config.netfx
+similarity index 100%
+rename from src/FunnelWeb/packages.config
+rename to src/FunnelWeb/packages.config.netfx
