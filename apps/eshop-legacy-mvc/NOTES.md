@@ -57,6 +57,8 @@ Not changed, though they fail: the `SessionStateModuleAsync` registration in `<s
 
 ## Smoke
 
+- **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 15/15 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28).
+
 Probes: the catalog list (`/`), an MVC details page, the Create form (anti-forgery token), the picture action
 (attribute route `items/{id}/pic`), Web API `GET /api/brands` and `/api/brands/1` (JSON), a static CSS file, the CSS
 bundle and a static PNG.

@@ -10,7 +10,7 @@ index 607fc48..e4a2847 100644
  namespace eShopLegacy.Utilities
  {
 diff --git a/eShopLegacyMVCSolution/eShopLegacy.Utilities/eShopLegacy.Utilities.csproj b/eShopLegacyMVCSolution/eShopLegacy.Utilities/eShopLegacy.Utilities.csproj
-index efb378f..cc24d2d 100644
+index efb378f..b745374 100644
 --- a/eShopLegacyMVCSolution/eShopLegacy.Utilities/eShopLegacy.Utilities.csproj
 +++ b/eShopLegacyMVCSolution/eShopLegacy.Utilities/eShopLegacy.Utilities.csproj
 @@ -1,48 +1,15 @@
@@ -66,7 +66,7 @@ index efb378f..cc24d2d 100644
 -    <Compile Include="Serializing.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- BinaryFormatter: .NET 11's throws; webForCore's port replaces it (docs/NAMESPACES.md). From the 0.1.0 release. -->
-+    <PackageReference Include="webForCore.Serialization.Formatters" Version="0.4.0" />
++    <PackageReference Include="webForCore.Serialization.Formatters" Version="0.5.0" />
    </ItemGroup>
 -  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 -</Project>
@@ -223,10 +223,10 @@ index dffd8ca..7232b90 100644
  </configuration>
 \ No newline at end of file
 diff --git a/eShopLegacyMVCSolution/src/eShopLegacyMVC/eShopLegacyMVC.csproj b/eShopLegacyMVCSolution/src/eShopLegacyMVC/eShopLegacyMVC.csproj
-index 503535d..cc64130 100644
+index 503535d..adb3dfe 100644
 --- a/eShopLegacyMVCSolution/src/eShopLegacyMVC/eShopLegacyMVC.csproj
 +++ b/eShopLegacyMVCSolution/src/eShopLegacyMVC/eShopLegacyMVC.csproj
-@@ -1,573 +1,59 @@
+@@ -1,573 +1,58 @@
 -<?xml version="1.0" encoding="utf-8"?>
 -<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
@@ -826,11 +826,10 @@ index 503535d..cc64130 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set; then MVC, Web API and bundling. -->
-+    <PackageReference Include="webForCore" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Helpers" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.4.0" />
++    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.5.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.5.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.5.0" />
 +    <ProjectReference Include="../../eShopLegacy.Utilities/eShopLegacy.Utilities.csproj" />
 +  </ItemGroup>
 +
