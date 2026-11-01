@@ -4,10 +4,11 @@ name = "YAF.NET 2.x"
 repo = "https://github.com/YAFNET/YAFNET"
 ref = "7435be389709e493854b09cdc622115e537544b8"
 site = "yafsrc/YetAnotherForum.NET"
+project = "yafsrc/YetAnotherForum.NET/YAF.csproj"
 kinds = ["webforms"]
 licence = "Apache-2.0"
-status = "candidate"
-notes = "Forum, Web Forms. master is ASP.NET Core now; pinned to tag v2.31.16. The web project path and its web.config (shipped as *.config templates) still need checking."
+status = "blocked"
+notes = "Blocked: its vendored ServiceStack 5.9 fork only works as .NET Framework code (F49: the NET472 path needs AppDomain.DefineDynamicAssembly, the .NET Standard path was trimmed); C# 11 ref safety in ServiceStack.Text (F48)."
 
 # The first request compiles the site, so it gets 120 s.
 # [[probes]]

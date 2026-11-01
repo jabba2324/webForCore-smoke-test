@@ -1,0 +1,11 @@
+<repo>/apps/yafnet-2/src/yafsrc/ServiceStack/ServiceStack.Text/PclExport.cs(35,17): error CS0246: The type or namespace name 'NetStandardPclExport' could not be found (are you missing a using directive or an assembly reference?) [<repo>/apps/yafnet-2/src/yafsrc/ServiceStack/ServiceStack.Text/ServiceStack.Text.csproj]
+<repo>/apps/yafnet-2/src/yafsrc/ServiceStack/ServiceStack.Text/Json/JsonTypeSerializer.cs(388,50): error CS8168: Cannot return local 'i' by reference because it is not a ref local [<repo>/apps/yafnet-2/src/yafsrc/ServiceStack/ServiceStack.Text/ServiceStack.Text.csproj]
+<repo>/apps/yafnet-2/src/yafsrc/ServiceStack/ServiceStack.Text/Json/JsonTypeSerializer.cs(388,20): error CS8347: Cannot use a result of 'JsonTypeSerializer.UnescapeJsonString(ReadOnlySpan<char>, ref int)' in this context because it may expose variables referenced by parameter 'index' outside of their declaration scope [<repo>/apps/yafnet-2/src/yafsrc/ServiceStack/ServiceStack.Text/ServiceStack.Text.csproj]
+<repo>/apps/yafnet-2/src/yafsrc/ServiceStack/ServiceStack.Text/Json/JsonTypeSerializer.cs(435,78): error CS8168: Cannot return local 'ignore' by reference because it is not a ref local [<repo>/apps/yafnet-2/src/yafsrc/ServiceStack/ServiceStack.Text/ServiceStack.Text.csproj]
+<repo>/apps/yafnet-2/src/yafsrc/ServiceStack/ServiceStack.Text/Json/JsonTypeSerializer.cs(435,20): error CS8347: Cannot use a result of 'JsonTypeSerializer.UnescapeJsString(ReadOnlySpan<char>, char, bool, ref int)' in this context because it may expose variables referenced by parameter 'index' outside of their declaration scope [<repo>/apps/yafnet-2/src/yafsrc/ServiceStack/ServiceStack.Text/ServiceStack.Text.csproj]
+
+Build FAILED.
+    2259 Warning(s)
+    5 Error(s)
+
+Time Elapsed 00:00:05.35
