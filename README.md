@@ -2,7 +2,7 @@
 
 A test bed for [webForCore](https://github.com/jabba2324/webForCore): it takes real open-source ASP.NET 4.x
 applications (MVC 5, Web API 2, Web Forms, Web Pages, OWIN, SignalR 2), migrates each one to .NET 11 with webForCore
-following its migration guide, then builds it, runs it on Kestrel and probes it over HTTP.
+following its migration guide, then builds it, runs it on Kestrel and probes it over HTTP, on Linux and on Windows.
 
 webForCore's own suites are Microsoft's and Mono's unit tests. This repo asks a different question: does an app
 somebody actually shipped run, and what breaks when it doesn't? Each failure is either a bug in webForCore, a
@@ -18,8 +18,8 @@ There's no top-level project or solution: each app is a folder of its own under 
 | `NOTES.md` | The migration notes: the assessment, every change made and why, the smoke results, open problems |
 | `LOG.md` | One line per stage run, with its result, appended by the runner |
 | `overlay.patch` | The migration, as a patch on the pinned commit |
-| `results.json` | The latest result of each stage, in detail |
-| `logs/` | The latest build and server logs |
+| `results.json` | The latest result of each stage on Linux, in detail (`results.windows.json`: on Windows) |
+| `logs/` | The latest build and server logs on Linux (`logs.windows/`: on Windows) |
 | `src/` | The checkout (not committed) |
 
 At the top level: `scripts/wfc.py` (the runner, Python 3.11+, standard library only), `services/compose.yml` (SQL
@@ -59,6 +59,34 @@ scripts/wfc.py report                    # RESULTS.md
 
 `fetch` leaves an existing checkout alone, so unsaved migration work isn't lost. `fetch --reset` discards it and
 reapplies the overlay.
+
+## Windows
+
+Every round runs on Linux and on Windows; `RESULTS.md` has a build and a smoke column for each. Migrations are done
+once (on Linux), and the same overlay is built and smoked on both. `scripts/wfc.py windows <command> <id>...` (or
+`--all`) runs `fetch`, `build`, `smoke` or `run` on a Windows machine over SSH. It works in four steps:
+
+1. It copies the scripts, the apps' folders (without `src/`) and this release's packages there.
+2. It runs the same `wfc.py` there. On Windows, results go to `results.windows.json` and `logs.windows/`, and LOG.md
+   lines say `(windows)`.
+3. It copies those back.
+4. For `smoke` and `run`, if `WFC_WINDOWS_DB` is set, it maps `127.0.0.1:14330` there to that address with
+   `netsh portproxy`. This is the SQL Server from `services/compose.yml`, which the overlays' connection strings name.
+
+The Windows machine needs OpenSSH (with PowerShell as the shell is fine), the .NET 11 SDK, Python 3.11+ and git.
+Settings come from the environment, so nothing machine-specific is committed:
+
+| Variable | |
+| --- | --- |
+| `WFC_WINDOWS_HOST` | `user@host` for ssh (required) |
+| `WFC_WINDOWS_PORT` | ssh port (default 22) |
+| `WFC_WINDOWS_KEY` | ssh identity file |
+| `WFC_WINDOWS_DIR` | the copy's folder there (default `C:/wfc-smoke`) |
+| `WFC_WINDOWS_DB` | `host:port` at which the Windows machine reaches the compose SQL Server |
+
+A Windows VM in a container (dockur/windows) reaches other containers through its own: put the SQL Server container on
+the same Docker network as the VM's container, not on the compose network. Its default subnet can clash with the
+guest's.
 
 ## Migrating an app
 

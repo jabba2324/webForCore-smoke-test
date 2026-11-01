@@ -12,7 +12,11 @@ Standard library only (Python 3.11+, for tomllib).
     scripts/wfc.py smoke <id>...
     scripts/wfc.py run <id>... | --all        # fetch, build and smoke
     scripts/wfc.py save-overlay <id>         # the app checkout's changes -> apps/<id>/overlay.patch
-    scripts/wfc.py report                    # apps/*/results.json -> RESULTS.md
+    scripts/wfc.py report                    # apps/*/results.json (and results.windows.json) -> RESULTS.md
+    scripts/wfc.py windows <command> <id>... # the same command on the Windows VM (see README.md)
+
+Every round runs on Linux and Windows. On Windows the results go to results.windows.json and logs.windows/, and LOG.md
+lines say (windows).
 """
 
 import argparse
@@ -24,6 +28,8 @@ import socket
 import subprocess
 import sys
 import time
+import tarfile
+import tempfile
 import tomllib
 import urllib.error
 import urllib.request
@@ -36,8 +42,8 @@ APPS = ROOT / "apps"
 #   NOTES.md        the migration notes: assessment, every change and why, open problems
 #   LOG.md          one line per stage run, appended by this script
 #   overlay.patch   the migration, as a patch on the pinned commit
-#   results.json    the latest result of each stage
-#   logs/           the latest build and server logs
+#   results.json    the latest result of each stage (Linux; results.windows.json on Windows)
+#   logs/           the latest build and server logs (logs.windows/ on Windows)
 #   src/            the checkout (not committed)
 
 WEBFORCORE = Path(os.environ.get("WEBFORCORE_DIR", ROOT.parent / "webForCore")).resolve()
@@ -52,6 +58,9 @@ THIRDPARTY_REPO = "jabba2324/webForCore-thirdparty"
 THIRDPARTY_VERSION = os.environ.get("THIRDPARTY_VERSION", "0.4.1")
 THIRDPARTY_PACKAGES = ("webForCore.WebActivatorEx", "webForCore.AjaxControlToolkit")
 PACKAGES = ROOT / ".packages"
+# The OS this run is on. Linux keeps the original file names; Windows' results sit beside them.
+PLATFORM = "windows" if os.name == "nt" else "linux"
+SUFFIX = "" if PLATFORM == "linux" else ".windows"
 
 # Phase 0 of webForCore's docs/AGENT-MIGRATION.md.
 BLOCKERS = [
@@ -104,7 +113,7 @@ def app_dir(app_id):
 
 
 def logs_dir(app_id):
-    d = app_dir(app_id) / "logs"
+    d = app_dir(app_id) / f"logs{SUFFIX}"
     d.mkdir(exist_ok=True)
     return d
 
@@ -162,15 +171,16 @@ def scrub(log):
     """Logs are committed, so this machine's paths become placeholders."""
     text = log.read_text(errors="replace")
     # Longest first: the repo's path can start with webForCore's (../webForCore-smoke-test).
-    pairs = ((str(WEBFORCORE), "$WEBFORCORE_DIR"), (str(ROOT), "<repo>"), (str(Path.home()), "~"))
+    pairs = [(str(WEBFORCORE), "$WEBFORCORE_DIR"), (str(ROOT), "<repo>"), (str(Path.home()), "~")]
+    pairs += [(a.replace("\\", "/"), b) for a, b in pairs if "\\" in a]  # Windows paths, also written with /
     for path, name in sorted(pairs, key=lambda p: -len(p[0])):
         text = text.replace(path, name)
     log.write_text(text)
     return text
 
 
-def load_result(app_id):
-    p = app_dir(app_id) / "results.json"
+def load_result(app_id, platform=PLATFORM):
+    p = app_dir(app_id) / f"results{'' if platform == 'linux' else '.' + platform}.json"
     return json.loads(p.read_text()) if p.exists() else {"id": app_id, "stages": {}}
 
 
@@ -178,21 +188,24 @@ def record(app_id, stage, status, **details):
     """status: pass | fail | blocked | skip"""
     r = load_result(app_id)
     r["stages"][stage] = {"status": status, "at": now(), **details}
-    (app_dir(app_id) / "results.json").write_text(json.dumps(r, indent=2, sort_keys=True) + "\n")
-    line = f"- {now()} **{stage}**: {status}" + (f" ({details['summary']})" if details.get("summary") else "")
+    (app_dir(app_id) / f"results{SUFFIX}.json").write_text(json.dumps(r, indent=2, sort_keys=True) + "\n")
+    where = "" if PLATFORM == "linux" else f" ({PLATFORM})"
+    line = f"- {now()} **{stage}**{where}: {status}" + (f" ({details['summary']})" if details.get("summary") else "")
     if details.get("commit"):
         line += f" at `{details['commit'][:12]}`"
     log = app_dir(app_id) / "LOG.md"
     if not log.exists():
         log.write_text(f"# {app_id}: run log\n\nAppended by `scripts/wfc.py`, one line per stage run.\n\n")
-    with log.open("a") as f:
+    with log.open("a", newline="\n") as f:
         f.write(line + "\n")
-    print(f"[{app_id}] {stage}: {status}" + (f" ({details.get('summary')})" if details.get("summary") else ""))
+    print(f"[{app_id}] {stage}{where}: {status}" + (f" ({details.get('summary')})" if details.get("summary") else ""))
     return status
 
 
 def git(*args, cwd=None, check=True):
-    return subprocess.run(["git", *args], cwd=cwd, check=check, capture_output=True, text=True)
+    # Files as committed (overlays are byte-for-byte patches) and Windows paths over 260 characters (mojoPortal).
+    return subprocess.run(["git", "-c", "core.autocrlf=false", "-c", "core.longpaths=true", *args], cwd=cwd, check=check,
+                          capture_output=True, text=True)
 
 
 def checkout(app):
@@ -247,7 +260,8 @@ def save_overlay(app):
     # Deletions must stay unstaged, or they drop out of the diff.
     git("add", "-N", "--ignore-removal", "--", ".", *generated, cwd=dest)
     # As bytes: the apps' files with CRLF line endings must keep them, or the patch no longer applies to the checkout.
-    diff = subprocess.run(["git", "diff", "--binary", "--", ".", *generated], cwd=dest, check=True, capture_output=True).stdout
+    diff = subprocess.run(["git", "-c", "core.autocrlf=false", "diff", "--binary", "--", ".", *generated], cwd=dest, check=True,
+                          capture_output=True).stdout
     p = app_dir(app["id"]) / "overlay.patch"
     if diff:
         p.write_bytes(diff)
@@ -484,31 +498,156 @@ def run_probe(base, probe, timeout):
 # --- report --------------------------------------------------------------------------------------
 
 STAGES = ["fetch", "assess", "build", "smoke"]
+PLATFORMS = ["linux", "windows"]
 ICON = {"pass": "pass", "fail": "**fail**", "blocked": "blocked", "skip": "–", None: ""}
+
+
+def platform_cells(app_id, platform):
+    s = load_result(app_id, platform)["stages"]
+    build, smoke = s.get("build", {}), s.get("smoke", {})
+    probes = smoke.get("summary", "") if smoke.get("status") in ("pass", "fail") else ""
+    return [ICON.get(build.get("status")), ICON.get(smoke.get("status")) + (f" {probes}" if probes else "")]
 
 
 def report(apps):
     rows = []
     for app in apps.values():
-        r = load_result(app["id"])
-        s = r["stages"]
-        cells = [ICON.get(s.get(st, {}).get("status")) for st in STAGES]
-        smoke_summary = s.get("smoke", {}).get("summary", "")
+        s = load_result(app["id"], "linux")["stages"]
+        cells = [ICON.get(s.get(st, {}).get("status")) for st in ("fetch", "assess")]
+        for platform in PLATFORMS:
+            cells += platform_cells(app["id"], platform)
         kinds = ", ".join(s.get("assess", {}).get("kinds", app.get("kinds", [])))
-        rows.append(f"| [{app['name']}](apps/{app['id']}/NOTES.md) | {kinds} | " + " | ".join(cells) + f" | {smoke_summary} | {app.get('status', '')} |")
-    out = ["# Results", "", f"Generated by `scripts/wfc.py report` on {now()[:10]}. Each app's notes, log and results are in `apps/<id>/`.", "",
-           "| App | Kinds | Fetch | Assess | Build | Smoke | Probes | Catalog status |",
-           "| --- | --- | --- | --- | --- | --- | --- | --- |", *rows, ""]
+        rows.append(f"| [{app['name']}](apps/{app['id']}/NOTES.md) | {kinds} | " + " | ".join(cells) + f" | {app.get('status', '')} |")
+    out = ["# Results", "",
+           f"Generated by `scripts/wfc.py report` on {now()[:10]}. Each app's notes, log and results are in `apps/<id>/`. "
+           "Build and smoke run on Linux and on Windows (`results.json`, `results.windows.json`); smoke cells give the "
+           "checks that passed (the app's probes and the forbidden paths).", "",
+           "| App | Kinds | Fetch | Assess | Linux build | Linux smoke | Windows build | Windows smoke | Catalog status |",
+           "| --- | --- | --- | --- | --- | --- | --- | --- | --- |", *rows, ""]
     (ROOT / "RESULTS.md").write_text("\n".join(out))
     print(f"wrote RESULTS.md ({len(rows)} apps)")
+
+
+# --- windows -------------------------------------------------------------------------------------
+# The same commands on a Windows machine over SSH (README.md, "Windows"): the scripts, the apps' folders (not src/) and
+# the release packages are copied there, wfc.py runs there, and results.windows.json, logs.windows/ and LOG.md come
+# back. Settings come from the environment, so nothing machine-specific is committed:
+#   WFC_WINDOWS_HOST   user@host for ssh (required)
+#   WFC_WINDOWS_PORT   ssh port (default 22)
+#   WFC_WINDOWS_KEY    ssh identity file (optional)
+#   WFC_WINDOWS_DIR    the copy's folder there (default C:/wfc-smoke)
+#   WFC_WINDOWS_DB     host:port the Windows machine reaches services/compose.yml's SQL Server at; mapped there to
+#                      127.0.0.1:14330, as the overlays' connection strings have it (netsh portproxy). Optional.
+
+def win_ssh_args():
+    host = os.environ.get("WFC_WINDOWS_HOST")
+    if not host:
+        sys.exit("windows: set WFC_WINDOWS_HOST (user@host), and WFC_WINDOWS_PORT / WFC_WINDOWS_KEY as needed (README.md)")
+    args = ["-p", os.environ.get("WFC_WINDOWS_PORT", "22"), "-o", "BatchMode=yes", "-o", "ServerAliveInterval=30"]
+    if os.environ.get("WFC_WINDOWS_KEY"):
+        args += ["-i", os.environ["WFC_WINDOWS_KEY"]]
+    return host, args
+
+
+def win_dir():
+    return os.environ.get("WFC_WINDOWS_DIR", "C:/wfc-smoke")
+
+
+def win_ps(script, check=True, capture=False):
+    """Runs a PowerShell script there (sent on stdin, so nothing needs quoting)."""
+    host, args = win_ssh_args()
+    r = subprocess.run(["ssh", *args, host, "powershell -NoProfile -ExecutionPolicy Bypass -Command -"], input=script,
+                       text=True, capture_output=capture)
+    if check and r.returncode:
+        sys.exit(f"windows: remote command failed ({r.returncode})" + (f": {r.stderr[-500:]}" if capture else ""))
+    return r
+
+
+def win_scp(src, dest):
+    host, args = win_ssh_args()
+    args = ["-P" if a == "-p" else a for a in args]
+    subprocess.run(["scp", "-q", *args, *[str(x).replace("@HOST:", f"{host}:") for x in (src, dest)]], check=True)
+
+
+def win_push(ids):
+    """The scripts, the apps' folders without src/, and this release's packages."""
+    with tempfile.TemporaryDirectory() as tmp:
+        tar = Path(tmp) / "wfc.tar"
+        with tarfile.open(tar, "w") as t:
+            for f in ["scripts", "services", "README.md"]:
+                t.add(ROOT / f, arcname=f)
+            for app_id in ids:
+                for f in app_dir(app_id).iterdir():
+                    if f.name != "src":
+                        t.add(f, arcname=f"apps/{app_id}/{f.name}")
+        d = win_dir()
+        win_ps(f"New-Item -ItemType Directory -Force '{d}' | Out-Null")
+        win_scp(tar, f"@HOST:{d}/wfc.tar")
+        pkgs = package_source()
+        have = win_ps(f"if (Test-Path '{d}/.packages/v{WEBFORCORE_VERSION}') {{ (Get-ChildItem '{d}/.packages/v{WEBFORCORE_VERSION}' -Filter *.nupkg).Count }} else {{ 0 }}",
+                      capture=True).stdout.strip()
+        if have != str(len(list(pkgs.glob("*.nupkg")))):
+            ptar = Path(tmp) / "packages.tar"
+            with tarfile.open(ptar, "w") as t:
+                for f in pkgs.glob("*.nupkg"):
+                    t.add(f, arcname=f".packages/{pkgs.name}/{f.name}")
+            win_scp(ptar, f"@HOST:{d}/packages.tar")
+            win_ps(f"Set-Location '{d}'; tar -xf packages.tar; Remove-Item packages.tar")
+        win_ps(f"Set-Location '{d}'; tar -xf wfc.tar; Remove-Item wfc.tar")
+
+
+def win_pull(ids):
+    d = win_dir()
+    names = " ".join(f"apps/{i}/results.windows.json apps/{i}/logs.windows apps/{i}/LOG.md" for i in ids)
+    win_ps(f"Set-Location '{d}'; $f = @(); foreach ($n in '{names}'.Split(' ')) {{ if (Test-Path $n) {{ $f += $n }} }}; "
+           "tar -cf back.tar $f")
+    with tempfile.TemporaryDirectory() as tmp:
+        win_scp(f"@HOST:{d}/back.tar", Path(tmp) / "back.tar")
+        with tarfile.open(Path(tmp) / "back.tar") as t:
+            t.extractall(tmp, filter="data")
+        for app_id in ids:
+            src = Path(tmp) / "apps" / app_id
+            if (src / "results.windows.json").exists():
+                (app_dir(app_id) / "results.windows.json").write_bytes((src / "results.windows.json").read_bytes())
+            if (src / "logs.windows").exists():
+                dest = app_dir(app_id) / "logs.windows"
+                dest.mkdir(exist_ok=True)
+                for f in (src / "logs.windows").iterdir():
+                    (dest / f.name).write_bytes(f.read_bytes())
+            # LOG.md went there as it is here; the Windows run appended to it.
+            remote, local = src / "LOG.md", app_dir(app_id) / "LOG.md"
+            if remote.exists():
+                r, l = remote.read_bytes(), local.read_bytes() if local.exists() else b""
+                local.write_bytes(r if r.startswith(l) else l + r[len(l):] if len(r) > len(l) else l)
+    win_ps(f"Remove-Item '{d}/back.tar'", check=False)
+
+
+def win_db():
+    db = os.environ.get("WFC_WINDOWS_DB")
+    if not db:
+        return
+    host, port = db.rsplit(":", 1)
+    win_ps("netsh interface portproxy delete v4tov4 listenaddress=127.0.0.1 listenport=14330 | Out-Null; "
+           f"netsh interface portproxy add v4tov4 listenaddress=127.0.0.1 listenport=14330 connectaddress={host} connectport={port}")
+
+
+def windows(command, ids, reset):
+    win_push(ids)
+    if command in ("smoke", "run"):
+        win_db()
+    flags = (" --reset" if reset else "")
+    e = f"$env:WEBFORCORE_VERSION='{WEBFORCORE_VERSION}'; $env:THIRDPARTY_VERSION='{THIRDPARTY_VERSION}'; "
+    r = win_ps(f"{e}Set-Location '{win_dir()}'; python scripts/wfc.py {command}{flags} {' '.join(ids)}", check=False)
+    win_pull(ids)
+    return r.returncode
 
 
 # --- main ----------------------------------------------------------------------------------------
 
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("command", choices=["packages", "list", "fetch", "assess", "build", "smoke", "run", "save-overlay", "report"])
-    p.add_argument("ids", nargs="*")
+    p.add_argument("command", choices=["packages", "list", "fetch", "assess", "build", "smoke", "run", "save-overlay", "report", "windows"])
+    p.add_argument("ids", nargs="*", help="app ids; for windows, the command first (fetch, build, smoke, run)")
     p.add_argument("--all", action="store_true")
     p.add_argument("--reset", action="store_true", help="fetch: discard the checkout's changes and reapply the overlay")
     p.add_argument("--version", help="packages: the webForCore release (default: $WEBFORCORE_VERSION or 0.5.0; webForCore-thirdparty: $THIRDPARTY_VERSION or 0.4.1)")
@@ -525,6 +664,15 @@ def main():
         return
     if a.command == "report":
         return report(apps)
+    if a.command == "windows":
+        if not a.ids or a.ids[0] not in ("fetch", "build", "smoke", "run"):
+            sys.exit("windows: give a command (fetch, build, smoke, run) and app ids or --all")
+        sub, wids = a.ids[0], a.ids[1:]
+        wids = [i for i, app in apps.items() if (APPS / i / "overlay.patch").exists()] if a.all else wids
+        unknown = [i for i in wids if i not in apps]
+        if unknown or not wids:
+            sys.exit(f"unknown app(s): {', '.join(unknown)}" if unknown else "give app ids or --all")
+        sys.exit(windows(sub, wids, a.reset))
     ids = list(apps) if a.all else a.ids
     unknown = [i for i in ids if i not in apps]
     if unknown or not ids:
