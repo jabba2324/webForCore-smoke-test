@@ -15,6 +15,8 @@ session state). EntityFramework 6.1.1 → 6.5.1 ([F7](../../FINDINGS.md#f7)). we
 
 ## Smoke
 
+- **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 8/8 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28).
+
 **8 of 9 pass**: the index page and the Create form render (the enum dropdown shows the `[Display]` names: Zéro, Un, Duex, ...); EF creates the database on SQL Server. By hand: `POST /Home/Create` with `Enum1=1&FlagsEnum=2` returns 302 and the row is listed. The only failure is the served W3C log ([F4](../../FINDINGS.md#f4)).
 
 ### Round 2: webForCore 0.2.0

@@ -37,6 +37,8 @@ Server store, a migrator, and infrastructure for Azure storage, Cloudinary, file
 
 ## Smoke
 
+- **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 15/15 probes.
+
 Probes:
 - the home page;
 - an area index (302 to its overview) and the overview;

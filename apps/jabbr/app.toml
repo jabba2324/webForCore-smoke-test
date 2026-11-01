@@ -2,16 +2,28 @@
 
 name = "JabbR"
 repo = "https://github.com/JabbR/JabbR"
-ref = ""
+ref = "eb5b4e2f1e5bdbb1ea91230f1884716170a6976d"
 site = "JabbR"
+project = "JabbR/JabbR.csproj"
 kinds = ["signalr", "owin"]
 licence = "MIT"
-status = "candidate"
+status = "blocked"
 needs = ["mssql"]
-notes = "SignalR chat. Pages are Nancy, not MVC: check Nancy runs on .NET 11 before going far."
+notes = "Blocked: on 0.5.0 CS1705 against SignalR.Core 0.0.0.0 (F46, webForCore#40, fixed in webForCore#44); past it, Nancy 0.20 needs AppDomainSetup.PrivateBinPathProbe (F50, app/environment). Ninject 3.0 -> 3.3.6 for AppDomain.Evidence."
 
-# The first request compiles the site, so it gets 120 s.
-# [[probes]]
-# path = "/"
-# status = 200
-# contains = ""
+# The first request compiles the site, so it gets 120 s. The probes need the compose SQL Server; EF's migrations
+# create the JabbR database. Pages are Nancy modules on OWIN; /signalr is SignalR 2.
+[[probes]]
+path = "/"
+contains = "JabbR"
+
+[[probes]]
+path = "/account/login"
+contains = "password"
+
+[[probes]]
+path = "/signalr/hubs"
+contains = "$.hubConnection"
+
+[[probes]]
+path = "/Content/images/big-logo.png"

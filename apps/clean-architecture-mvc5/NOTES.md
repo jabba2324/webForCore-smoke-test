@@ -28,6 +28,8 @@ No change to the app's code or web.config (it has no `<system.codedom>`).
 
 ## Smoke
 
+- **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 11/11 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28).
+
 Probes: the home page, the products list and a product, the contact page, and a view file requested directly (must be
 404).
 

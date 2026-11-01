@@ -1,8 +1,8 @@
 diff --git a/samples/aspnet/WebApi/BSONSample/BSONSample/BSONSample.csproj b/samples/aspnet/WebApi/BSONSample/BSONSample/BSONSample.csproj
-index b153f84..770f2bd 100644
+index b153f84..6c6d098 100644
 --- a/samples/aspnet/WebApi/BSONSample/BSONSample/BSONSample.csproj
 +++ b/samples/aspnet/WebApi/BSONSample/BSONSample/BSONSample.csproj
-@@ -1,269 +1,48 @@
+@@ -1,269 +1,47 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -196,12 +196,11 @@ index b153f84..770f2bd 100644
 -    <Compile Include="Models\MyDataContext.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Helpers" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.4.0" />
++    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.5.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.5.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.5.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.5.0" />
    </ItemGroup>
 +
    <ItemGroup>

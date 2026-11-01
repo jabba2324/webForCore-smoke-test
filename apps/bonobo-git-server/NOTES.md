@@ -46,6 +46,8 @@ Status: migrated (webForCore 0.4.0, all probes pass).
 
 ## Smoke
 
+- **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 9/9 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28); webForCore-thirdparty's WebActivatorEx at 0.4.1.
+
 Probes: the logon page, `/` (redirects to the logon page), a static CSS file.
 
 **Exploration past F8** (not committed: webForCore's `WebForCoreDropFrameworkHttpUtility` target copied into the

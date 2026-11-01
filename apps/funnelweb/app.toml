@@ -8,7 +8,7 @@ project = "src/FunnelWeb.Web/FunnelWeb.Web.csproj"
 kinds = ["mvc"]
 licence = "BSD-3-Clause"
 status = "blocked"
-notes = "Blocked on its NHibernate 3.3 (F39, app/environment): its installer, log-in and upgrade (MVC) work on 0.4.0, 9/10 checks; the blog's NHibernate proxies don't. Needs SQL Server."
+notes = "Blocked on its NHibernate 3.3 (F39, app/environment): its installer, log-in and upgrade (MVC) work, 9/10 checks on 0.4.0 and 0.5.0; the blog's NHibernate proxies don't. Needs SQL Server."
 
 # The first request compiles the site, so it gets 120 s. The probes need the compose SQL Server with a "FunnelWeb"
 # database that FunnelWeb's upgrader has set up (log in as test/test, then /admin/install's "Upgrade"; NOTES.md).

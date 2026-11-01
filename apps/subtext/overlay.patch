@@ -1,5 +1,5 @@
 diff --git a/src/Subtext.Extensibility/Subtext.Extensibility.csproj b/src/Subtext.Extensibility/Subtext.Extensibility.csproj
-index c08e08d6..0a88a589 100644
+index c08e08d6..6bba4f58 100644
 --- a/src/Subtext.Extensibility/Subtext.Extensibility.csproj
 +++ b/src/Subtext.Extensibility/Subtext.Extensibility.csproj
 @@ -1,215 +1,34 @@
@@ -210,7 +210,7 @@ index c08e08d6..0a88a589 100644
 -      <DependentUpon>Resources.resx</DependentUpon>
 -    </Compile>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.4.0" />
++    <PackageReference Include="webForCore" Version="0.5.0" />
    </ItemGroup>
 -  <ItemGroup>
 -    <EmbeddedResource Include="Properties\Resources.resx">
@@ -469,7 +469,7 @@ index 00000000..c08e08d6
 +</Project>
 \ No newline at end of file
 diff --git a/src/Subtext.Framework/SubText.Framework.csproj b/src/Subtext.Framework/SubText.Framework.csproj
-index c0129afd..9659124e 100644
+index c0129afd..9b2189f9 100644
 --- a/src/Subtext.Framework/SubText.Framework.csproj
 +++ b/src/Subtext.Framework/SubText.Framework.csproj
 @@ -1,856 +1,68 @@
@@ -1324,9 +1324,9 @@ index c0129afd..9659124e 100644
 -    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
 -    <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Serialization.Formatters" Version="0.4.0" />
++    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.5.0" />
++    <PackageReference Include="webForCore.Serialization.Formatters" Version="0.5.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -2278,7 +2278,7 @@ index 4f4ca441..00000000
 -</packages>
 \ No newline at end of file
 diff --git a/src/Subtext.Providers.BlogEntryEditor.CKEditor/Subtext.Providers.BlogEntryEditor.CKEditor.csproj b/src/Subtext.Providers.BlogEntryEditor.CKEditor/Subtext.Providers.BlogEntryEditor.CKEditor.csproj
-index 6e707430..d3de629d 100644
+index 6e707430..9c4beabe 100644
 --- a/src/Subtext.Providers.BlogEntryEditor.CKEditor/Subtext.Providers.BlogEntryEditor.CKEditor.csproj
 +++ b/src/Subtext.Providers.BlogEntryEditor.CKEditor/Subtext.Providers.BlogEntryEditor.CKEditor.csproj
 @@ -1,75 +1,28 @@
@@ -2355,7 +2355,7 @@ index 6e707430..d3de629d 100644
 -    <Compile Include="CKEBlogEntryEditorProvider.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.4.0" />
++    <PackageReference Include="webForCore" Version="0.5.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -2459,7 +2459,7 @@ index 00000000..6e707430
 +</Project>
 \ No newline at end of file
 diff --git a/src/Subtext.Providers.BlogEntryEditor.FCKeditor/Subtext.Providers.BlogEntryEditor.FCKeditor.csproj b/src/Subtext.Providers.BlogEntryEditor.FCKeditor/Subtext.Providers.BlogEntryEditor.FCKeditor.csproj
-index 6737046b..10b677a6 100644
+index 6737046b..71df8d1e 100644
 --- a/src/Subtext.Providers.BlogEntryEditor.FCKeditor/Subtext.Providers.BlogEntryEditor.FCKeditor.csproj
 +++ b/src/Subtext.Providers.BlogEntryEditor.FCKeditor/Subtext.Providers.BlogEntryEditor.FCKeditor.csproj
 @@ -1,232 +1,36 @@
@@ -2680,7 +2680,7 @@ index 6737046b..10b677a6 100644
 -      <SubType>Designer</SubType>
 -    </EmbeddedResource>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.4.0" />
++    <PackageReference Include="webForCore" Version="0.5.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -2972,87 +2972,6 @@ index 57104842..00000000
 -  <package id="Ninject" version="2.2.1.4" />
 -</packages>
 \ No newline at end of file
-diff --git a/src/Subtext.Web/App_Data/_0.cfs b/src/Subtext.Web/App_Data/_0.cfs
-new file mode 100644
-index 0000000000000000000000000000000000000000..47852c0fd51afdab1b36c9b51c2a29ab6127420b
-GIT binary patch
-literal 1379
-zcmZ8g-EJF282!%d>^e>w(vSkBaN#0;T2P8}!+j&7DiTSf5P`U&YwyIFc6VplosDB;
-zBrbUXu6O|6h6ms+cmRaa_sy8LjAidR-*<NQ^XxfW6xQ$A_v1(Y`Z6&5$@H?W0##oK
-zZGVXLMGzN}`ao|Y{e@}WuJ8SoY16K|e~8%HDE^D-W#I!&z6msnlSvSFM5G@OrTN75
-z9?(T)YangCot7D;Q+I7zK({9MptLZh@c<l1o5Fe^y~(Sl1nEm-3LvpH|GKsUlGarq
-z{k-oyNSC&L!JT>r8dUi#|IyY^ik}7pXgj;|itjXvbZzDxNH_V+fCinJdh2S1<jT!~
-z%ob*n^HhFO8X)T@-rRVov}s(+&+>++7}&~`rt1Lh8aw5GmCMX}!IV_r0ID;f^xAfo
-z|KGf|-Y7~Iu2%_KD560Zx2J4w%BidH&uX>W+04#d=Z_1d7uJ_1(TA>BB>EzsbxC$u
-zy4i7ot>f;jpOm({G6e=_{p8Es8w{Sbu5XSDY_RM!ugvY?QSIA>Kme5Ce~T0;fWNP-
-zP?W_lQ7QbU7=-uz@_KrHvReMstd`5=l12v#+k3<0&4-`8{ptJfy)pb~|HF-)d-u0@
-zv+a*R_+<FbgH6Kjowo-1Zu)5J&aK^dc{|W*wfZ}5%uoB7h;9?nCUIxALqvC3ml9>q
-zHW&eW-^y{Bk$0o7!x`Ss=+<~VK9J9Ne6T@#7e^;&PtPBpe>Xb(>gkiw>En~5A>9in
-zZT7v}kH^2CizSUr6PA8usLx*;Dtjgh&7%fq%h8Fs1qFXIj22f=S#WtMiqS<1Cl#@~
-z6oTVJkxef}_I&`ZtpaGBfDnKn=L|$uJ(JQp2~0Q)(uI*rj07Z4MnT131jN}0Tl^Of
-zR$jR|_tzl_8*xqq#i%fjX^|}?Fd|rIMu@~lP)JTFa(EbVex#zhFi1#|v|^B0C0T;v
-gILYAA9|P{`i?%l@qgZ9%ylxTB!pjVbG{z9XzdvsXr~m)}
-
-literal 0
-HcmV?d00001
-
-diff --git a/src/Subtext.Web/App_Data/_1.cfs b/src/Subtext.Web/App_Data/_1.cfs
-new file mode 100644
-index 0000000000000000000000000000000000000000..1d16fa86f63a8d7d41ebb4e41ba7fc3bf7b595c2
-GIT binary patch
-literal 2255
-zcmY+FZF3Yw5XZY`X6G&!o&<qt`4D_4sZx-ntOTD*NfD_O0uf?SSR!opCYOQTonv;E
-zBO26C<A?B_-$1{Q<yqY`dk6bwduDpNdwc%BokfVxANs+{#qji58vaScy}F7+Jj<)L
-zi9_{wbl!`@-e)u%`?R<B7w;X0xY~a^IuFzEJPm7~BKJRu&S`J|Yj(CaITyU@p8$Z0
-zQ}g$K)9Lj1KySMyYz;Bnv7t0lZMflqR6F^ok$R(aqpcw>ZZ+HOZfTo+GsNC@yL&Yc
-z27A}MYsXtd?33HgyfP;iHtXOI*qlzM|E7dL0Ko46Z~_1Zpda$ILIB9}VP$K9h?%ra
-z5GWL?eUlGq3T4?iHbiato%vvkl1xy$r5mv&i@X*n20{ljaz1+Y_r0rKazRzv;xR|i
-zuBuEO$d+nc8n#5Q9{D`999hc7a(byk@<ioLPQ?kxhK4r@g?-xuZ+BZ>z@97GE;1-H
-zv>X{lC}O#L#>A+|Sx|aoxFXR~^#a5weygIU#y$J_)951|^#)PR`vuxoW9MU*tlo3J
-zA`hXOkaGqx2;L3bB5+HD0QJblR)Z?dUfihduJM6eCPW=uBw}BsNZ$P_w{^(l2&MB}
-zlMt~a)NL8;I39|u%_NrY#)gj-l^+^UbJz>}#!qY$9meUCP<vbDbZSD2%sny%R|e8I
-z(G&TFDz7Mskf==&tmCGk+;<ZejkKX_Rb{B3Lbkpj1NGPxb}!08x4XeS;|#sUvFCIb
-z3s+GLkrjoBNri|X2_%7}MN4rJl`3aWAswZ2v2%T&*Nsi05g1d737;$Iw(fQ!@&Ti0
-zI3%d2mik6TH%T{{E88ej5R>?2+S?GQt3rT0a4l6M(Np6<KkNel_E0ELJH9m;F%oA5
-zkbPwJ((2mE%B7V{E30doW_nF*2AvJ)i75+Lu??W^bZ9E(5+jt6NF*FFv6w&{FooD5
-zh;#lDeAtnfu$wa%ft%6BsHqueGstj8Si+0hLSV2^V%Z@j+8PNalAdeF2#gU4w+S6U
-zGkP$g({b}6G#H6VxM0T$gMvf}BZ6~2A{<P{3=3o?5EzI=!yE+!=0JB4U?L#O9|0TL
-z2|uY`vE(u7U6R;Y>DbAfGPB0jO9IEFZkBe^HASgRQZxz?sE5uy#<`G5#YhsK>6gSC
-zl^bP?tXWKgO=?Y2Mb@d7=#_xE-ezKh)9YI1Uwn0P<E+XS2B$@~cx>&*H&-qPcz*Qg
-z!uryYSH7P-Hupb1e!~3r`7h$TpEe(<2S<MWwExYkJ3rfZNB5q*b$)4KVW7{w)?B=v
-zonKr#v##Zbcl(3W{)6oPKsi~xaq6Ab-g{qOegC6}XV&XOefa>7E)B9{7hV?`T|{&Z
-z0cOzAf_UmKvtX8kTfP&Uc}~9!P#;e1Y~I+ub^FTgd&?W&-nzDY^U96Q1vnWoG8clo
-zknkd$gus8)&D%GohtI3&;o;$7mzNe_xG1TX`9%p+x}O1H2|*E=2m^kRB|riHR>_{v
-ac2;_TNtfhJTLfL4-5Ni<7X*Ut7XAn3qqUL%
-
-literal 0
-HcmV?d00001
-
-diff --git a/src/Subtext.Web/App_Data/segments.gen b/src/Subtext.Web/App_Data/segments.gen
-new file mode 100644
-index 0000000000000000000000000000000000000000..e9fa6008becd133f1cac4c5cec7f4311c6576acc
-GIT binary patch
-literal 20
-QcmezW|NlP*2w;ZM07=&b0ssI2
-
-literal 0
-HcmV?d00001
-
-diff --git a/src/Subtext.Web/App_Data/segments_3 b/src/Subtext.Web/App_Data/segments_3
-new file mode 100644
-index 0000000000000000000000000000000000000000..ab8f5039c8e9ff978f5a52d3fdc284e6f1abb27b
-GIT binary patch
-literal 316
-zcmezW|NnOe1}l|ikB_`!U|?VZVWxNk1_lPk|40DLVPpUaGcYi)vlZu;7A2>$rsb3t
-zXYl2eCa315>XoGy6=&w>u^Z`G>KW-7G36Jt`ef#nR<P$6>m?Q?XE1Q(7sC|shvsEg
-rD46RR=@}a885tPxWF?j*!Xz2Ep}f45{2~UXc*8;D8W=cn;!q6$<{EI*
-
-literal 0
-HcmV?d00001
-
-diff --git a/src/Subtext.Web/App_Data/write.lock b/src/Subtext.Web/App_Data/write.lock
-new file mode 100644
-index 00000000..e69de29b
 diff --git a/src/Subtext.Web/Program.cs b/src/Subtext.Web/Program.cs
 new file mode 100644
 index 00000000..062dce66
@@ -3081,7 +3000,7 @@ index 00000000..062dce66
 +    }
 +}
 diff --git a/src/Subtext.Web/SubText.Web.csproj b/src/Subtext.Web/SubText.Web.csproj
-index eecb3c26..aff54b5b 100644
+index eecb3c26..6f3db869 100644
 --- a/src/Subtext.Web/SubText.Web.csproj
 +++ b/src/Subtext.Web/SubText.Web.csproj
 @@ -1,2555 +1,76 @@
@@ -4073,8 +3992,8 @@ index eecb3c26..aff54b5b 100644
 -    <Content Include="Skins\_System\Controls\AggRecentPosts.ascx" />
 -    <Content Include="transform.txt" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.4.0" />
++    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.5.0" />
 +    <PackageReference Include="System.Resources.Extensions" Version="11.0.0-rc.3.26522.148" />
    </ItemGroup>
 +

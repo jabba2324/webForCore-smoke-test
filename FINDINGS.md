@@ -5,7 +5,7 @@ One entry per distinct problem found while migrating apps. webForCore bugs and g
 pre-release and not recommended for production). See CLAUDE.md for the format. Every entry was found
 with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 release packages (tag `v0.1.0`,
 `2942b694`), unless the entry says otherwise. F16 onwards were found in round 2, on the released 0.2.0 packages
-(tag `v0.2.0`, `1c92215`), where F1–F15 are fixed or documented. F16–F21 and F24 are fixed in [jabba2324/webForCore#24](https://github.com/jabba2324/webForCore/pull/24) (released in 0.3.0), checked against the apps. Round 3 ran on 0.4.0, with webForCore-thirdparty 0.4.0 for WebActivatorEx (CLAUDE.md); F25 onwards were found there. F28–F33 are fixed or documented in [jabba2324/webForCore#32](https://github.com/jabba2324/webForCore/pull/32), checked against the apps. Round 3b (subtext, funnelweb, mojoportal) also ran on 0.4.0, with webForCore-thirdparty 0.4.0 and the unreleased `webForCore.WebActivator` 0.4.1 ([jabba2324/webForCore-thirdparty#1](https://github.com/jabba2324/webForCore-thirdparty/pull/1)); F35 onwards were found there. F35 and F38 are fixed in #32 too, and F36, F37, F41 and F42 documented there, checked against the apps. Repro sites are small enough to paste: a `Program.cs` as in
+(tag `v0.2.0`, `1c92215`), where F1–F15 are fixed or documented. F16–F21 and F24 are fixed in [jabba2324/webForCore#24](https://github.com/jabba2324/webForCore/pull/24) (released in 0.3.0), checked against the apps. Round 3 ran on 0.4.0, with webForCore-thirdparty 0.4.0 for WebActivatorEx (CLAUDE.md); F25 onwards were found there. F28–F33 are fixed or documented in [jabba2324/webForCore#32](https://github.com/jabba2324/webForCore/pull/32), checked against the apps. Round 3b (subtext, funnelweb, mojoportal) also ran on 0.4.0, with webForCore-thirdparty 0.4.0 and the unreleased `webForCore.WebActivator` 0.4.1 ([jabba2324/webForCore-thirdparty#1](https://github.com/jabba2324/webForCore-thirdparty/pull/1)); F35 onwards were found there. F35 and F38 are fixed in #32 too, and F36, F37, F41 and F42 documented there, checked against the apps. Round 4 ran on the released 0.5.0 packages (#32 merged), with webForCore-thirdparty 0.4.1: all 24 migrated apps build, the fixes hold in every app that needed them (MVCForum and Subtext with no workarounds, no explicit `webForCore.Web.Helpers`), and there are no new findings. F40 (#33) is 0.5.0's known issue. Round 4's new candidates (jabbr, opserver-mvc5, yafnet-2) found F45 onwards; F46 is fixed and F45, F48 documented in [jabba2324/webForCore#44](https://github.com/jabba2324/webForCore/pull/44). Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
 
 | # | Problem | Classification | Apps | Raised |
@@ -55,6 +55,12 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 | [F42](#f42) | SDK-style project references are transitive: NU1605 from versions pinned per project, a namespace that hides a type (CS0118) | guide gap | funnelweb, mojoportal | [#39](https://github.com/jabba2324/webForCore/issues/39) |
 | [F43](#f43) | Projects that deploy into the site with Windows `xcopy` post-build events | app/environment | mojoportal | - |
 | [F44](#f44) | DotNetOpenAuth 3.x reflects on .NET Framework's private `UriParser` fields | app/environment | subtext | - |
+| [F45](#f45) | Every package webForCore depends on is a version floor: System.Data.SqlClient 4.9.1, System.DirectoryServices 11.0 (NU1605) | guide gap | opserver-mvc5, yafnet-2 | [#42](https://github.com/jabba2324/webForCore/issues/42) |
+| [F46](#f46) | webForCore's SignalR and System.Web.DataVisualization assemblies are 0.0.0.0: libraries built against Microsoft's are CS1705 | webForCore bug | jabbr | [#40](https://github.com/jabba2324/webForCore/issues/40) |
+| [F47](#f47) | `GetTypes()` on System.Data.SqlClient 4.9.1 throws on .NET 11: apps that scan all assemblies fail | webForCore bug (dependency) | opserver-mvc5 | [#41](https://github.com/jabba2324/webForCore/issues/41) |
+| [F48](#f48) | The C# version: C# 14's span conversions and C# 11's ref safety break code written for older C# | guide gap | yafnet-2 | [#43](https://github.com/jabba2324/webForCore/issues/43) |
+| [F49](#f49) | YAF.NET's vendored ServiceStack 5.9 fork only works as .NET Framework code | app/environment | yafnet-2 | - |
+| [F50](#f50) | Nancy 0.20 needs `AppDomainSetup.PrivateBinPathProbe` | app/environment | jabbr | - |
 ---
 
 ## F1
@@ -951,3 +957,89 @@ Raised as [#35](https://github.com/jabba2324/webForCore/issues/35). Found on 0.4
   exception`, from a `NullReferenceException` in `UriIdentifier.NonPathCompressingUriParser.Initialize`.
 - **Cause:** DotNetOpenAuth sets private fields of `UriParser` by reflection, and they don't exist on .NET.
   DotNetOpenAuth is unmaintained and has no .NET build. OpenID 2.0 itself is obsolete.
+
+## F45
+
+**Every package webForCore depends on is a floor for the application's reference to it.** Guide gap (extends F7 and F32).
+Raised as [#42](https://github.com/jabba2324/webForCore/issues/42). Found on 0.5.0. Documented in #44.
+
+- **Apps:** yafnet-2 (ServiceStack.OrmLite.SqlServer has System.Data.SqlClient 4.8.1), opserver-mvc5 (Opserver.Core has
+  System.DirectoryServices 4.5.0).
+- **Error:** `NU1605: Detected package downgrade: System.Data.SqlClient from 4.9.1 to 4.8.1 ... webForCore 0.5.0 ->
+  webForCore.Web.Extensions 0.5.0 -> System.Data.SqlClient (>= 4.9.1)`; the same for System.DirectoryServices from
+  `webForCore.Web.Services` (>= 11.0.0-rc.3).
+- **What worked:** raising the references. `scripts/convert.py` does it now.
+
+## F46
+
+**webForCore's SignalR and System.Web.DataVisualization assemblies have version 0.0.0.0.** webForCore bug. Raised as
+[#40](https://github.com/jabba2324/webForCore/issues/40). Found on 0.5.0. Fixed in #44.
+
+- **Apps:** jabbr. It keeps Microsoft's SignalR SQL Server and Service Bus scale-out packages, which webForCore doesn't
+  lift.
+- **Error:** `CS1705: Assembly 'Microsoft.AspNet.SignalR.SqlServer' ... uses 'Microsoft.AspNet.SignalR.Core,
+  Version=2.4.3.0' which has a higher version than referenced assembly 'Microsoft.AspNet.SignalR.Core' with identity
+  '..., Version=0.0.0.0'`. At run time it wouldn't bind either.
+- **Cause:**
+  - SignalR.Core, SystemWeb and Client: KoreBuild generated SignalR's version attributes, and the lift turns off the
+    SDK's generation.
+  - System.Web.DataVisualization: Microsoft's `AssemblyInfo.cs` applies the version only `#if VS_BUILD`.
+  - Every other replaced assembly has Microsoft's version or higher (checked across the 0.5.0 packages).
+- **Fix (#44):**
+  - `lift_aspnet.py` stamps SignalR 2.4.3.0;
+  - a webForCore file stamps DataVisualization 4.0.0.0;
+  - `tools/ci/package-smoke-mvc` compiles a call into Microsoft's SQL Server scale-out and checks the versions. It fails
+    on 0.5.0 with CS1705.
+  - With it JabbR builds; it then stops at F50.
+
+## F47
+
+**`GetTypes()` on System.Data.SqlClient 4.9.1 throws on .NET 11.** webForCore bug (its dependency). Raised as
+[#41](https://github.com/jabba2324/webForCore/issues/41). Found on 0.5.0. Not fixed: the fix is a choice for webForCore.
+
+- **Apps:** opserver-mvc5. It builds its tabs by scanning every loaded assembly's types. Any app that scans all
+  assemblies is affected: DI registration, AutoMapper profiles, MEF, plugin loaders.
+- **Error:** `ReflectionTypeLoadException ... Could not load type 'SqlGuidCaster' from assembly 'System.Data.SqlClient,
+  Version=4.6.1.6' because it contains an object field at offset 0 that is incorrectly aligned or overlapped by a
+  non-object field`.
+- **Cause:** the package's Unix build has a type .NET 11's runtime refuses to load.
+  - It reproduces in a .NET 11 console app with no webForCore.
+  - Guid columns read and write fine.
+  - webForCore depends on the package (as on .NET Framework), so every webForCore app has it.
+- **What showed it:** with Opserver's scan catching the exception (exploration only), the app works, its SQL Server
+  dashboard included.
+
+## F48
+
+**The C# version code was written for.** Guide gap. Raised as [#43](https://github.com/jabba2324/webForCore/issues/43).
+Found on 0.5.0. Documented in #44.
+
+- **Apps:** yafnet-2 (its vendored ServiceStack.Text).
+- **Errors:**
+  - net11.0 defaults to the newest C#, and C# 14's first-class span conversions give
+    `CS0029: Cannot implicitly convert type 'System.ReadOnlySpan<char>' to 'string'`, CS1503 and CS1929.
+  - C# 11's ref-safety rules, which apply on .NET 7+ whatever the language version, give
+    `CS8347 ... may expose variables referenced by parameter 'index' outside of their declaration scope` and CS8168.
+- **What worked:** `<LangVersion>` pinned (7.3 if the project set none, 13 for "latest") fixes the first.
+  `scripts/convert.py` does it for SDK-style projects. The second needs `scoped` in the source.
+
+## F49
+
+**YAF.NET's vendored ServiceStack 5.9 fork only works as .NET Framework code.** App/environment. Found on 0.5.0.
+
+- **Apps:** yafnet-2.
+- **Cause:** ServiceStack picks its platform with `#if NET472` / `NETCORE2_1` / `NETSTANDARD`.
+  - The `NET472` path YAF.NET ran needs `AppDomain.DefineDynamicAssembly` (`PclExport.Net45.cs:964`), as Roadkill's
+    LightSpeed does (F27).
+  - The .NET Standard and .NET Core paths call `LicenseUtils`, which YAF.NET removed from its fork.
+  - On net11.0 neither symbol is defined: `CS0246: The type or namespace name 'NetStandardPclExport' could not be found`.
+
+## F50
+
+**Nancy 0.20 needs `AppDomainSetup.PrivateBinPathProbe`.** App/environment. Found on 0.5.0.
+
+- **Apps:** jabbr (pages are Nancy 0.20 modules).
+- **Error:** at start-up, `MissingMethodException: Method not found: 'System.String
+  System.AppDomainSetup.get_PrivateBinPathProbe()'`, from `Nancy.Bootstrapper.AppDomainAssemblyTypeScanner`.
+- **Cause:** Nancy 0.20 is .NET Framework only. Nancy 2.x has a .NET Standard build, but moving JabbR's modules to its API
+  is a port, not a migration. Ninject 3.0 had the same kind of problem (`AppDomain.Evidence`); 3.3.6 fixed it.

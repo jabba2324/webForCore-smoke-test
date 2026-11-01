@@ -1,0 +1,119 @@
+{
+  "id": "opserver-mvc5",
+  "stages": {
+    "assess": {
+      "at": "2026-11-01T10:44:58+00:00",
+      "blockers": {
+        "ef-objectcontext": [
+          "Helpers/Utils.cs:380",
+          "Helpers/Utils.cs:381",
+          "Helpers/Utils.cs:382"
+        ],
+        "linq-to-sql": [
+          "Helpers/Utils.cs:376",
+          "Helpers/Utils.cs:377",
+          "Helpers/Utils.cs:378",
+          "Helpers/Utils.cs:379"
+        ]
+      },
+      "kinds": [
+        "mvc"
+      ],
+      "libraries": [
+        "Opserver.Core"
+      ],
+      "notices": {},
+      "status": "blocked",
+      "summary": "ef-objectcontext, linq-to-sql",
+      "target_frameworks": [
+        "v4.6.1"
+      ]
+    },
+    "build": {
+      "at": "2026-11-01T11:10:24+00:00",
+      "error_count": 0,
+      "errors": [],
+      "log": "apps/opserver-mvc5/logs/build.log",
+      "seconds": 2,
+      "status": "pass",
+      "summary": null,
+      "webforcore": "packages 0.5.0"
+    },
+    "fetch": {
+      "at": "2026-11-01T10:44:48+00:00",
+      "commit": "ed57f51d26a061e75359c1a3245786b795ae93b7",
+      "overlay": false,
+      "status": "pass"
+    },
+    "smoke": {
+      "at": "2026-11-01T11:10:33+00:00",
+      "checks": [
+        {
+          "expected_text": "placeholder=\"Username\"",
+          "ms": 1490,
+          "ok": false,
+          "path": "/login",
+          "status": 500,
+          "title": "Unable to load one or more of the requested types.<br>Could not load type 'SqlGuidCaster' from assembly 'System.Data.SqlClient, Version=4.6.1.6, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' because it contains an object field at offset 0 that is incorrectly aligned or overlapped by a non-object"
+        },
+        {
+          "ms": 124,
+          "ok": true,
+          "path": "/",
+          "status": 302
+        },
+        {
+          "ms": 12,
+          "ok": true,
+          "path": "/dashboard",
+          "status": 302
+        },
+        {
+          "ms": 57,
+          "ok": true,
+          "path": "/Content/js/Scripts.js",
+          "status": 200
+        },
+        {
+          "ms": 12,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 5,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 5,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/packages.config",
+          "status": 404
+        },
+        {
+          "ms": 9,
+          "ok": true,
+          "path": "/bin_dotnet/StackExchange.Opserver.dll",
+          "status": 404
+        }
+      ],
+      "log": "apps/opserver-mvc5/logs/server.log",
+      "status": "fail",
+      "summary": "9/10 probes"
+    }
+  }
+}

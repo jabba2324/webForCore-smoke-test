@@ -20,7 +20,7 @@ Each app is a folder, `apps/<id>/` (see README.md). Nothing goes at the top leve
    `status` to `verified`, or `rejected` with the reason in `notes`.
 2. `scripts/wfc.py fetch <id>` and `scripts/wfc.py assess <id>`. Write the assessment in `apps/<id>/NOTES.md`.
 3. Migrate in `apps/<id>/src/` following `docs/AGENT-MIGRATION.md`, against webForCore's release packages
-   (`PackageReference Include="webForCore" Version="0.4.0"` and the framework packages; `scripts/wfc.py packages`
+   (`PackageReference Include="webForCore" Version="0.5.0"` and the framework packages; `scripts/wfc.py packages`
    downloads them), not its source. Keep changes minimal; don't modernise the app. Record each change and its
    reason in `NOTES.md` as you go, not afterwards.
 4. `scripts/wfc.py build <id>` and `scripts/wfc.py smoke <id>`. Add `[[probes]]` to `app.toml` for each kind of page the
@@ -36,7 +36,7 @@ Each app is a folder, `apps/<id>/` (see README.md). Nothing goes at the top leve
 webForCore ships only Microsoft assemblies. Builds of third-party libraries for it are in
 [webForCore-thirdparty](https://github.com/jabba2324/webForCore-thirdparty), for this test bed: an app that uses one
 of them references the package from there. `scripts/wfc.py packages` downloads its release (`THIRDPARTY_VERSION`,
-default 0.4.0) into the same folder as webForCore's; by hand:
+default 0.4.1) into the same folder as webForCore's; by hand:
 
 ```bash
 gh release download --repo jabba2324/webForCore-thirdparty --pattern '*.nupkg' --dir .packages/v<webForCore version> --skip-existing
@@ -45,6 +45,7 @@ gh release download --repo jabba2324/webForCore-thirdparty --pattern '*.nupkg' -
 | The app uses | Reference | Without it |
 | --- | --- | --- |
 | WebActivatorEx (directly, or through Unity.Mvc, Ninject.MVC, StructureMap.MVC, ...) | `webForCore.WebActivatorEx` | Its start methods never run (webForCore#21): the DI container is never set up, "No parameterless constructor defined" |
+| WebActivator 1.x (Ninject.MVC3 2.x and other MVC 3-era packages) | `webForCore.WebActivator` (0.4.1+) | Its start methods never run either (webForCore#38) |
 | AjaxControlToolkit | `webForCore.AjaxControlToolkit` (+ `.StaticResources`, `.HtmlEditor.Sanitizer`) | Not provided by webForCore; the original package is built for .NET Framework |
 
 Record in the app's `NOTES.md` which webForCore-thirdparty version it used. webForCore's own guide gives the

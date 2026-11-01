@@ -1,8 +1,8 @@
 diff --git a/Bonobo.Git.Server/Bonobo.Git.Server.csproj b/Bonobo.Git.Server/Bonobo.Git.Server.csproj
-index ad78e85..07337e1 100644
+index ad78e85..9d9573b 100644
 --- a/Bonobo.Git.Server/Bonobo.Git.Server.csproj
 +++ b/Bonobo.Git.Server/Bonobo.Git.Server.csproj
-@@ -1,775 +1,81 @@
+@@ -1,775 +1,80 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
@@ -685,13 +685,12 @@ index ad78e85..07337e1 100644
 -      <SubType>Designer</SubType>
 -    </None>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Helpers" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.4.0" />
++    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.5.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.5.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.5.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.5.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.5.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -782,7 +781,7 @@ index ad78e85..07337e1 100644
 -    <EmbeddedResource Include="App_GlobalResources\Resources.zh-TW.resx" />
 +    <!-- webForCore-thirdparty 0.4.0: WebActivatorEx's start methods run (the original package's never do,
 +         webForCore#21); it wins over the original that the app's packages bring. -->
-+    <PackageReference Include="webForCore.WebActivatorEx" Version="0.4.0" />
++    <PackageReference Include="webForCore.WebActivatorEx" Version="0.4.1" />
    </ItemGroup>
 -  <ItemGroup>
 -    <Folder Include="App_Data\Recovery\" />

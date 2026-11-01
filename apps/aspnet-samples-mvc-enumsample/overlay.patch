@@ -1,8 +1,8 @@
 diff --git a/samples/aspnet/MVC/EnumSample/EnumSample/EnumSample.csproj b/samples/aspnet/MVC/EnumSample/EnumSample/EnumSample.csproj
-index 22bff01..4937424 100644
+index 22bff01..45ca549 100644
 --- a/samples/aspnet/MVC/EnumSample/EnumSample/EnumSample.csproj
 +++ b/samples/aspnet/MVC/EnumSample/EnumSample/EnumSample.csproj
-@@ -1,195 +1,47 @@
+@@ -1,195 +1,46 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -169,10 +169,9 @@ index 22bff01..4937424 100644
 -    <Compile Include="Models\MyDataContext.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Helpers" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.4.0" />
++    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.5.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.5.0" />
    </ItemGroup>
 +
    <ItemGroup>

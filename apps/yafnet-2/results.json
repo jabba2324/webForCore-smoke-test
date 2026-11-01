@@ -1,0 +1,94 @@
+{
+  "id": "yafnet-2",
+  "stages": {
+    "assess": {
+      "at": "2026-11-01T10:45:01+00:00",
+      "blockers": {
+        "linq-to-sql": [
+          "yafsrc/ServiceStack/ServiceStack.OrmLite/Dapper/SqlMapper.cs:326",
+          "yafsrc/YAF.Types/Models/Activity.cs:27",
+          "yafsrc/YAF.Types/Models/FavoriteTopic.cs:27",
+          "yafsrc/YAF.Types/Models/Group.cs:27",
+          "yafsrc/YAF.Types/Models/GroupMedal.cs:27",
+          "yafsrc/YAF.Types/Models/IgnoreUser.cs:27",
+          "yafsrc/YAF.Types/Models/Message.cs:28",
+          "yafsrc/YAF.Types/Models/MessageHistory.cs:27",
+          "yafsrc/YAF.Types/Models/MessageReported.cs:27",
+          "yafsrc/YAF.Types/Models/MessageReportedAudit.cs:27",
+          "yafsrc/YAF.Types/Models/NntpForum.cs:27",
+          "yafsrc/YAF.Types/Models/NntpServer.cs:27",
+          "yafsrc/YAF.Types/Models/NntpTopic.cs:27",
+          "yafsrc/YAF.Types/Models/PMessage.cs:27",
+          "yafsrc/YAF.Types/Models/Poll.cs:27",
+          "yafsrc/YAF.Types/Models/PollGroupCluster.cs:27",
+          "yafsrc/YAF.Types/Models/ReputationVote.cs:27",
+          "yafsrc/YAF.Types/Models/User.cs:28",
+          "yafsrc/YAF.Types/Models/UserGroup.cs:27",
+          "yafsrc/YAF.Types/Models/UserMedal.cs:27",
+          "... 2 more"
+        ],
+        "windows-auth": [
+          "yafsrc/YAF.Core/Tasks/IntermittentBackgroundTask.cs:45",
+          "yafsrc/YAF.Core/Tasks/IntermittentBackgroundTask.cs:75"
+        ]
+      },
+      "kinds": [
+        "webapi",
+        "webforms"
+      ],
+      "libraries": [
+        "yafsrc/Lucene.Net/Lucene.Net",
+        "yafsrc/Lucene.Net/Lucene.Net.Analysis.Common",
+        "yafsrc/Lucene.Net/Lucene.Net.Highlighter",
+        "yafsrc/Lucene.Net/Lucene.Net.Queries",
+        "yafsrc/Lucene.Net/Lucene.Net.QueryParser",
+        "yafsrc/ServiceStack/ServiceStack.Common",
+        "yafsrc/ServiceStack/ServiceStack.Interfaces",
+        "yafsrc/ServiceStack/ServiceStack.OrmLite",
+        "yafsrc/ServiceStack/ServiceStack.OrmLite.SqlServer",
+        "yafsrc/ServiceStack/ServiceStack.Text",
+        "yafsrc/YAF.Configuration",
+        "yafsrc/YAF.Core",
+        "yafsrc/YAF.Data.MsSql",
+        "yafsrc/YAF.Providers",
+        "yafsrc/YAF.Types",
+        "yafsrc/YAF.UrlRewriter",
+        "yafsrc/YAF.Utils",
+        "yafsrc/YAF.Web"
+      ],
+      "notices": {},
+      "status": "blocked",
+      "summary": "linq-to-sql, windows-auth",
+      "target_frameworks": [
+        "v4.7.2"
+      ]
+    },
+    "build": {
+      "at": "2026-11-01T11:10:38+00:00",
+      "error_count": 5,
+      "errors": [
+        "error CS0246: The type or namespace name 'NetStandardPclExport' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS8168: Cannot return local 'i' by reference because it is not a ref local ",
+        "error CS8168: Cannot return local 'ignore' by reference because it is not a ref local ",
+        "error CS8347: Cannot use a result of 'JsonTypeSerializer.UnescapeJsString(ReadOnlySpan<char>, char, bool, ref int)' in this context because it may expose variables referenced by parameter 'index' outside of their declaration scope ",
+        "error CS8347: Cannot use a result of 'JsonTypeSerializer.UnescapeJsonString(ReadOnlySpan<char>, ref int)' in this context because it may expose variables referenced by parameter 'index' outside of their declaration scope "
+      ],
+      "log": "apps/yafnet-2/logs/build.log",
+      "seconds": 6,
+      "status": "fail",
+      "summary": "5 distinct errors",
+      "webforcore": "packages 0.5.0"
+    },
+    "fetch": {
+      "at": "2026-11-01T10:44:57+00:00",
+      "commit": "7435be389709e493854b09cdc622115e537544b8",
+      "overlay": false,
+      "status": "pass"
+    },
+    "smoke": {
+      "at": "2026-11-01T11:10:38+00:00",
+      "status": "skip",
+      "summary": "not built (apps/yafnet-2/src/yafsrc/YetAnotherForum.NET/bin_dotnet/YAF.dll missing)"
+    }
+  }
+}

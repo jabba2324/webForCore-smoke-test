@@ -27,14 +27,14 @@
       ]
     },
     "build": {
-      "at": "2026-10-31T23:21:18+00:00",
+      "at": "2026-11-01T10:04:25+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/eshop-legacy-mvc/logs/build.log",
       "seconds": 1,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.4.0"
+      "webforcore": "packages 0.5.0"
     },
     "fetch": {
       "at": "2026-10-31T23:40:38+00:00",
@@ -43,34 +43,34 @@
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-10-31T23:21:43+00:00",
+      "at": "2026-11-01T10:09:15+00:00",
       "checks": [
         {
-          "ms": 17945,
+          "ms": 17990,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 102,
+          "ms": 99,
           "ok": true,
           "path": "/Catalog/Details/1",
           "status": 200
         },
         {
-          "ms": 157,
+          "ms": 159,
           "ok": true,
           "path": "/Catalog/Create",
           "status": 200
         },
         {
-          "ms": 33,
+          "ms": 29,
           "ok": true,
           "path": "/items/1/pic",
           "status": 200
         },
         {
-          "ms": 209,
+          "ms": 186,
           "ok": true,
           "path": "/api/brands",
           "status": 200
@@ -130,7 +130,7 @@
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/eShopLegacyMVC.dll",
           "status": 404

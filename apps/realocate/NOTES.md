@@ -45,6 +45,8 @@ no notices.
 
 ## Smoke
 
+- **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 13/13 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28).
+
 Probes: log-in and register pages, the paged listing (`/Home/GetAllRealEstatesList`: EF 6 query through AutoMapper's
 `ProjectTo`), an `[Authorize]` controller (302 to the log-in page from OWIN cookie authentication), the SignalR chat
 page and the generated hub proxy (`/signalr/hubs`), and a static CSS file.

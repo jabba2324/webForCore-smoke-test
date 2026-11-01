@@ -37,6 +37,8 @@ from its GitHub release packages (first migrated against the source at `4ec57209
 
 ## Smoke
 
+- **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 14/14 probes.
+
 Probes: the catalog list (`/`, ListView with `ItemType`), the paged route `/Default/index/1/size/10`, the details page
 route, the Create form (`__VIEWSTATE`), `/About`, a static CSS file, the `~/bundles/MsAjaxJs` bundle and a static PNG.
 

@@ -1,5 +1,5 @@
 diff --git a/source/SocialGoal.Core/SocialGoal.Core.csproj b/source/SocialGoal.Core/SocialGoal.Core.csproj
-index 160545d..d394d23 100644
+index 160545d..d7f558f 100644
 --- a/source/SocialGoal.Core/SocialGoal.Core.csproj
 +++ b/source/SocialGoal.Core/SocialGoal.Core.csproj
 @@ -1,53 +1,22 @@
@@ -57,7 +57,7 @@ index 160545d..d394d23 100644
 -    <Compile Include="Common\ValidationResult.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.4.0" />
++    <PackageReference Include="webForCore" Version="0.5.0" />
    </ItemGroup>
 -  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 -  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -132,7 +132,7 @@ index 0000000..160545d
 +</Project>
 \ No newline at end of file
 diff --git a/source/SocialGoal.Data/SocialGoal.Data.csproj b/source/SocialGoal.Data/SocialGoal.Data.csproj
-index 8c543f6..1292599 100644
+index 8c543f6..98f0af6 100644
 --- a/source/SocialGoal.Data/SocialGoal.Data.csproj
 +++ b/source/SocialGoal.Data/SocialGoal.Data.csproj
 @@ -1,141 +1,34 @@
@@ -296,9 +296,9 @@ index 8c543f6..1292599 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.4.0" />
++    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.5.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.5.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -473,7 +473,7 @@ index 6b006cb..0000000
 -</packages>
 \ No newline at end of file
 diff --git a/source/SocialGoal.Model/SocialGoal.Model.csproj b/source/SocialGoal.Model/SocialGoal.Model.csproj
-index 58b74b4..88b1ee8 100644
+index 58b74b4..69174e2 100644
 --- a/source/SocialGoal.Model/SocialGoal.Model.csproj
 +++ b/source/SocialGoal.Model/SocialGoal.Model.csproj
 @@ -1,96 +1,28 @@
@@ -568,9 +568,9 @@ index 58b74b4..88b1ee8 100644
 -    <Compile Include="Models\UserProfile.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.4.0" />
++    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.5.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.5.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -696,7 +696,7 @@ index 0000000..58b74b4
 +</Project>
 \ No newline at end of file
 diff --git a/source/SocialGoal.Service/SocialGoal.Service.csproj b/source/SocialGoal.Service/SocialGoal.Service.csproj
-index 124c094..8497934 100644
+index 124c094..f52d505 100644
 --- a/source/SocialGoal.Service/SocialGoal.Service.csproj
 +++ b/source/SocialGoal.Service/SocialGoal.Service.csproj
 @@ -1,124 +1,36 @@
@@ -843,9 +843,9 @@ index 124c094..8497934 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.4.0" />
++    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.5.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.5.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -1004,7 +1004,7 @@ index 8d1d009..0000000
 -</packages>
 \ No newline at end of file
 diff --git a/source/SocialGoal.Web.Core/SocialGoal.Web.Core.csproj b/source/SocialGoal.Web.Core/SocialGoal.Web.Core.csproj
-index 93f35fa..12c5192 100644
+index 93f35fa..ba72910 100644
 --- a/source/SocialGoal.Web.Core/SocialGoal.Web.Core.csproj
 +++ b/source/SocialGoal.Web.Core/SocialGoal.Web.Core.csproj
 @@ -1,108 +1,34 @@
@@ -1135,8 +1135,8 @@ index 93f35fa..12c5192 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.4.0" />
++    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.5.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -1310,10 +1310,10 @@ index 0000000..1425049
 +    }
 +}
 diff --git a/source/SocialGoal/SocialGoal.Web.csproj b/source/SocialGoal/SocialGoal.Web.csproj
-index 4a2e6b1..c2922e3 100644
+index 4a2e6b1..0f9d43f 100644
 --- a/source/SocialGoal/SocialGoal.Web.csproj
 +++ b/source/SocialGoal/SocialGoal.Web.csproj
-@@ -1,692 +1,80 @@
+@@ -1,692 +1,79 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -2036,17 +2036,16 @@ index 4a2e6b1..c2922e3 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Helpers" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.4.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.4.0" />
++    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.5.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.5.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.5.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.5.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.5.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.5.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.5.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.5.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.5.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>

@@ -5,10 +5,12 @@ repo = "https://github.com/haacked/Subtext"
 ref = "87a2d90dae02022471cd52aa5f3004f778cc4c0b"
 site = "src/Subtext.Web"
 project = "src/Subtext.Web/SubText.Web.csproj"
+# The search index Subtext writes at run time.
+generated = ["src/Subtext.Web/App_Data/**"]
 kinds = ["webforms", "mvc"]
 licence = "MIT"
 status = "blocked"
-notes = "Blocked on 0.4.0 by F35 (CS0433, Web Reference proxy), then F38 (SqlClient through the System.Data facade, MissingMethodException). Both fixed in jabba2324/webForCore#32: on its packages the install wizard runs and 15/16 checks pass; the log-in page's DotNetOpenAuth fails (F44). Uses webForCore-thirdparty's WebActivator 1.x build (thirdparty#1, unreleased)."
+notes = "On 0.5.0 it builds and the install wizard runs: 15/16 checks; the log-in page's DotNetOpenAuth fails (F44, app/environment). F35 and F38, which blocked it on 0.4.0, are fixed in 0.5.0. Uses webForCore-thirdparty's WebActivator 1.x build (0.4.1)."
 
 # The first request compiles the site, so it gets 120 s. The probes need the compose SQL Server with a "SubtextData"
 # database that Subtext's install wizard has set up (three postbacks; NOTES.md): on an empty database every page
