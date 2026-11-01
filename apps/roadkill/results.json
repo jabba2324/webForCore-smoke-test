@@ -30,14 +30,14 @@
       ]
     },
     "build": {
-      "at": "2026-11-01T01:48:21+00:00",
+      "at": "2026-11-01T10:05:10+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/roadkill/logs/build.log",
       "seconds": 3,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.4.0, webForCore-thirdparty 0.4.0"
+      "webforcore": "packages 0.5.0, webForCore-thirdparty 0.4.1"
     },
     "fetch": {
       "at": "2026-11-01T01:47:28+00:00",
@@ -46,61 +46,59 @@
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-01T01:48:27+00:00",
+      "at": "2026-11-01T10:15:20+00:00",
       "checks": [
         {
-          "ms": 2633,
+          "ms": 2701,
           "ok": false,
           "path": "/",
           "status": 500,
           "title": "Method not found: 'System.Reflection.Emit.AssemblyBuilder System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName, System.Reflection.Emit.AssemblyBuilderAccess)'."
         },
         {
-          "ms": 51,
-          "ok": false,
+          "ms": 4931,
+          "ok": true,
           "path": "/User/Login",
-          "status": 500,
-          "title": "The view 'Login' or its master was not found or no view engine supports the searched locations. The following locations were searched:<br>~/Views/User/Login.cshtml<br>~/Views/User/Login.vbhtml<br>~/Views/Shared/Login.cshtml<br>~/Views/Shared/Login.vbhtml<br>~/Plugins/Login.cshtml"
+          "status": 200
         },
         {
-          "ms": 11,
-          "ok": false,
+          "ms": 45,
+          "ok": true,
           "path": "/Assets/CSS/roadkill.css",
-          "status": 404,
-          "title": "The resource cannot be found."
+          "status": 200
         },
         {
-          "ms": 12,
+          "ms": 3,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 5,
+          "ms": 1,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 1,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 1,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 1,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 5,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/Roadkill.Web.dll",
           "status": 404
@@ -108,7 +106,7 @@
       ],
       "log": "apps/roadkill/logs/server.log",
       "status": "fail",
-      "summary": "6/9 probes"
+      "summary": "8/9 probes"
     }
   }
 }
