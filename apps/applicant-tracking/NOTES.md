@@ -33,6 +33,8 @@ seed), Unity 5 through `Unity.Mvc` and WebActivatorEx, .NET Framework 4.6.2. Web
 
 ## Smoke
 
+- **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 10/10 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28); webForCore-thirdparty's WebActivatorEx at 0.4.1.
+
 Probes: the home page, the Create form (anti-forgery token, from a controller Unity constructs), the log-in page and a
 static CSS file. (The applicant list and details pages were probed at first; see below for why they no longer are.)
 
