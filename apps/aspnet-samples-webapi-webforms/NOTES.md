@@ -15,6 +15,8 @@ session state). EntityFramework 6.0.0 → 6.5.1 ([F7](../../FINDINGS.md#f7)). Mi
 
 ## Smoke
 
+- **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 7/7 probes.
+
 Not run: the build fails with `CS0433` on `HttpUtility` in the template's `ViewSwitcher.ascx.cs` ([F8](../../FINDINGS.md#f8)), as in eshop-legacy-webforms. No probes yet.
 
 ### Round 2: webForCore 0.2.0
