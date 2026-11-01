@@ -1,0 +1,72 @@
+{
+  "id": "mojoportal",
+  "stages": {
+    "assess": {
+      "at": "2026-11-01T01:35:50+00:00",
+      "blockers": {
+        "wcf-hosting": [
+          "Components/mojoServiceHost.cs:22",
+          "Components/mojoServiceHost.cs:22",
+          "Components/mojoServiceHost.cs:24",
+          "Components/mojoServiceHostFactory.cs:30",
+          "Components/mojoServiceHostFactory.cs:30",
+          "Components/mojoServiceHostFactory.cs:32",
+          "Components/mojoServiceHostFactory.cs:32",
+          "Components/mojoServiceHostFactory.cs:46",
+          "Components/mojoServiceHostFactory.cs:46",
+          "Components/mojoServiceHostFactory.cs:47",
+          "Components/mojoServiceHostFactory.cs:50",
+          "Components/mojoServiceHostFactory.cs:50",
+          "Components/mojoServiceHostFactory.cs:51",
+          "Services/AuthenticationService.svc:1",
+          "Services/RoleService.svc:1"
+        ]
+      },
+      "kinds": [
+        "mvc",
+        "webapi",
+        "webforms",
+        "webpages"
+      ],
+      "libraries": [
+        "Brettle.Web.NeatHtml",
+        "mojoPortal.Business",
+        "mojoPortal.Business.WebHelpers",
+        "mojoPortal.Core",
+        "mojoPortal.Data.MSSQL",
+        "mojoPortal.Web.Controls",
+        "mojoPortal.Web.Editor",
+        "mojoPortal.Web.Framework"
+      ],
+      "notices": {},
+      "status": "blocked",
+      "summary": "wcf-hosting",
+      "target_frameworks": [
+        "v4.8.1"
+      ]
+    },
+    "build": {
+      "at": "2026-11-01T01:48:59+00:00",
+      "error_count": 1,
+      "errors": [
+        "error CS0433: The type 'WsiProfiles' exists in both 'System.Web.Services.Description, Version=8.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' and 'System.Web.Services, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' "
+      ],
+      "log": "apps/mojoportal/logs/build.log",
+      "seconds": 6,
+      "status": "fail",
+      "summary": "1 distinct errors",
+      "webforcore": "packages 0.4.0"
+    },
+    "fetch": {
+      "at": "2026-11-01T01:47:27+00:00",
+      "commit": "31b4fb1efd121dba2aab58af5ad6b0f30161259e",
+      "overlay": true,
+      "status": "pass"
+    },
+    "smoke": {
+      "at": "2026-11-01T01:48:59+00:00",
+      "status": "skip",
+      "summary": "not built (apps/mojoportal/src/Web/bin_dotnet/mojoPortal.Web.dll missing)"
+    }
+  }
+}
