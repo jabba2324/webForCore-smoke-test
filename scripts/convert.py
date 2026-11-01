@@ -32,9 +32,18 @@ DROP = re.compile(r"(?i)^(Microsoft\.AspNet\.(Mvc|Razor|WebPages|WebApi.*|Web\.O
 KEEP_MS = re.compile(r"(?i)^Microsoft\.AspNet\.(FriendlyUrls.*|ScriptManager.*|TelemetryCorrelation|SessionState.*|Providers.*)$")
 # Katana packages webForCore doesn't lift (docs/MIGRATING.md, "Katana packages webForCore doesn't lift"): kept.
 KATANA_KEEP = re.compile(r"(?i)^Microsoft\.Owin\.Security\.(Facebook|Google|MicrosoftAccount|Twitter|WsFederation|Jwt|OpenIdConnect|ActiveDirectory)$")
+# Other Katana and SignalR packages webForCore doesn't ship (JabbR: Owin Diagnostics, FileSystems and StaticFiles;
+# SignalR's SQL Server and Service Bus scale-out), kept at the versions webForCore lifted (Katana 4.2.3, SignalR 2.4.3;
+# docs/NAMESPACES.md), so their own dependencies are webForCore's.
+OWIN_SIGNALR_KEEP = {"microsoft.owin.diagnostics": "4.2.3", "microsoft.owin.filesystems": "4.2.3", "microsoft.owin.staticfiles": "4.2.3",
+                     "microsoft.owin.selfhost": "4.2.3", "microsoft.aspnet.signalr.sqlserver": "2.4.3",
+                     "microsoft.aspnet.signalr.servicebus": "2.4.3", "microsoft.aspnet.signalr.redis": "2.4.3"}
 # Versions webForCore's packages need (NU1605 below them): its Web API (Newtonsoft.Json), EF 6's first .NET build, and
 # Roslyn in webForCore.Compilers (Humanizer.Core).
-MIN_VERSIONS = {"newtonsoft.json": "13.0.4", "entityframework": "6.5.1", "humanizer.core": "2.14.1"}
+MIN_VERSIONS = {"newtonsoft.json": "13.0.4", "entityframework": "6.5.1", "humanizer.core": "2.14.1",
+                # packages webForCore depends on: its versions are the floor (NU1605 below them; FINDINGS F45)
+                "system.data.sqlclient": "4.9.1", "system.directoryservices": "11.0.0-rc.3.26522.148",
+                "system.directoryservices.accountmanagement": "11.0.0-rc.3.26522.148"}
 # .NET Framework assemblies that are NuGet packages on .NET (docs/MIGRATING.md, #9): a <Reference> to one becomes a
 # PackageReference at the .NET version webForCore is built with.
 NET_PACKAGES_VERSION = "11.0.0-rc.3.26522.148"
@@ -100,6 +109,46 @@ def real_case(base, rel):
     return "/".join(parts)
 
 
+def convert_sdk_in_place(proj, old, wfc, kept, dropped, pkgs, report):
+    """An SDK-style project that targets only .NET Framework: net11.0; framework references (no HintPath) and the
+    Microsoft packages webForCore replaces removed; package versions raised; webForCore's packages added."""
+    first = re.search(r"<TargetFrameworks?>[^<]+</TargetFrameworks?>", old)
+    new = old[:first.start()] + "\x00" + old[first.end():]
+    new = re.sub(r"\s*<TargetFrameworks?>[^<]+</TargetFrameworks?>", "", new)  # any others
+    new = new.replace("\x00", "<TargetFramework>net11.0</TargetFramework>")
+    # The C# it was written for. net11.0 defaults to the newest; C# 14's first-class span conversions change overload
+    # resolution in code written for older C# (ServiceStack.Text: CS0029/CS1503 on ReadOnlySpan<char>). Unset (a .NET
+    # Framework project's default, C# 7.3) stays 7.3; "latest"/"preview"/"default", here or in a Directory.Build.props,
+    # becomes 13, the last version before that change. (C# 11's ref-safety rules apply on net7.0+ whatever the version.)
+    props_files = [f for f in [proj.parent / "Directory.Build.props", proj.parent.parent / "Directory.Build.props"] if f.exists()]
+    lang = re.findall(r"<LangVersion>([^<]+)</LangVersion>", old + "".join(f.read_text(errors="replace") for f in props_files))
+    pin = "7.3" if not lang else ("13.0" if lang[-1].strip().lower() in ("latest", "preview", "default", "latestmajor") else None)
+    if pin:
+        new = re.sub(r"<LangVersion>[^<]+</LangVersion>", "", new)
+        new = re.sub(r"(<TargetFramework>net11.0</TargetFramework>)", lambda m: m.group(1) + f"\n    <LangVersion>{pin}</LangVersion>", new, count=1)
+        report.append(f"LangVersion {pin} ({lang[-1] if lang else 'unset'} before)")
+    new = re.sub(r"\s*<Reference\s+Include=\"[^\"]+\"\s*/>", "", new)
+    new = re.sub(r"\s*<Reference\s+Include=\"[^\"]+\"\s*>(?:(?!<HintPath>).)*?</Reference>", "", new, flags=re.S)
+    for name in dropped:
+        new = re.sub(r'\s*<PackageReference\s+Include="' + re.escape(name) + r'"[^>]*?(/>|>.*?</PackageReference>)', "", new, flags=re.S)
+    versions = dict(kept)
+    for name, ver in pkgs.items():
+        if name in versions and versions[name] != ver:
+            new = re.sub(r'(<PackageReference\s+Include="' + re.escape(name) + r'"\s+Version=")[^"]*"', lambda m: m.group(1) + versions[name] + '"', new)
+    added = [(n, v) for n, v in kept if n not in pkgs]
+    props = "\n    <ImplicitUsings>disable</ImplicitUsings>\n    <Nullable>disable</Nullable>\n    <NoWarn>$(NoWarn);NU1701</NoWarn>"
+    new = re.sub(r"(<TargetFramework>net11.0</TargetFramework>)", lambda m: m.group(1) + props, new, count=1)
+    group = ["  <ItemGroup>", f"    <!-- Migrated to webForCore (.NET 11) in place; the .NET Framework project is {proj.name}.netfx. -->",
+             *[f'    <PackageReference Include="{p}" Version="{WFC}" />' for p in wfc],
+             *[f'    <PackageReference Include="{n}" Version="{v}" />' for n, v in added], "  </ItemGroup>"]
+    new = new.replace("</Project>", "\n".join(group) + "\n</Project>", 1)
+    proj.write_text(new)
+    print(f"== {proj.name}: SDK-style, edited in place: webForCore {', '.join(wfc)}")
+    print(f"   dropped: {', '.join(dropped) or '-'}; added: {', '.join(f'{n} {v}' for n, v in added) or '-'}")
+    for r in report:
+        print("   note:", r)
+
+
 def convert(proj, web):
     report = []
     netfx = proj.with_name(proj.name + ".netfx")
@@ -107,6 +156,16 @@ def convert(proj, web):
         shutil.copy(proj, netfx)
     old = netfx.read_text(encoding="utf-8-sig", errors="replace")
     d = proj.parent
+    # Already SDK-style. With a .NET target (Opserver.Core: net461;netstandard2.0) it's left as it is: .NET uses that
+    # target. With only .NET Framework targets (YAF.NET's libraries: net472) it's edited in place, below.
+    sdk = bool(re.match(r"\s*<Project\s+Sdk=", old))
+    if sdk:
+        tfms = ";".join(re.findall(r"<TargetFrameworks?>([^<]+)</TargetFrameworks?>", old))
+        if re.search(r"netstandard|netcoreapp|net[5-9]\.|net1\d\.", tfms):
+            if proj.read_text(encoding="utf-8-sig", errors="replace") != old:
+                shutil.copy(netfx, proj)
+            print(f"== {proj.name}: already SDK-style with a .NET target ({tfms}), left as it is")
+            return
     asm = re.search(r"<AssemblyName>([^<]+)<", old)
     ns = re.search(r"<RootNamespace>([^<]+)<", old)
     names = "".join(f"\n    <{t}>{m.group(1)}</{t}>" for t, m in (("RootNamespace", ns), ("AssemblyName", asm)) if m)
@@ -136,10 +195,15 @@ def convert(proj, web):
         wfc = [p for p in wfc if p not in ("webForCore.Web.WebPages.Razor", "webForCore.Web.Helpers")]
     kept, dropped = [], []
     for name, ver in sorted(pkgs.items(), key=lambda kv: kv[0].lower()):
+        low = name.lower()
+        if low in OWIN_SIGNALR_KEEP:
+            if version_key(ver) != version_key(OWIN_SIGNALR_KEEP[low]):
+                report.append(f"{name} {ver} -> {OWIN_SIGNALR_KEEP[low]} (not in webForCore; the version it lifted)")
+            kept.append((name, OWIN_SIGNALR_KEEP[low]))
+            continue
         if DROP.match(name) and not KEEP_MS.match(name) and not KATANA_KEEP.match(name):
             dropped.append(name)
             continue
-        low = name.lower()
         # The IdentityModel packages move together (Tokens 8.19.1 through webForCore's CoreWCF client support).
         if (low.startswith("microsoft.identitymodel.") or low == "system.identitymodel.tokens.jwt") and version_key(ver) < version_key("8.19.1"):
             report.append(f"{name} {ver} -> 8.19.1")
@@ -188,6 +252,9 @@ def convert(proj, web):
         ref = real_case(d, inc.group(1).replace("\\", "/"))
         if ref not in projrefs:
             projrefs.append(ref)
+    if sdk and not web:
+        convert_sdk_in_place(proj, old, wfc, kept, dropped, pkgs, report)
+        return
     props = (WEB_PROPS if web else LIB_PROPS).format(names=names, asminfo=asminfo, razor=RAZOR if web and list(d.rglob("*.cshtml")) else "")
     out = [f'<Project Sdk="Microsoft.NET.Sdk{".Web" if web else ""}">',
            f"  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is {netfx.name}. -->",
