@@ -2,15 +2,29 @@
 
 name = "Opserver (before its ASP.NET Core port)"
 repo = "https://github.com/opserver/Opserver"
-ref = ""
+ref = "ed57f51d26a061e75359c1a3245786b795ae93b7"
 site = "Opserver"
+project = "Opserver/Opserver.csproj"
 kinds = ["mvc"]
 licence = "MIT"
-status = "candidate"
-notes = "Pin a commit from before the move to ASP.NET Core."
+status = "blocked"
+notes = "Blocked on 0.5.0 by F47 (System.Data.SqlClient 4.9.1's GetTypes() throws on .NET 11; webForCore#41): its tab scan fails on every page. With the scan skipping those types (not in the overlay) the log-in, MVC pages and SQL Server dashboard work. 9/10 checks."
 
-# The first request compiles the site, so it gets 120 s.
-# [[probes]]
-# path = "/"
-# status = 200
-# contains = ""
+# The first request compiles the site, so it gets 120 s. Config/SecuritySettings.config (provider "alladmin", the
+# example's "everyone") and Config/SQLSettings.json (the compose SQL Server) are in the overlay. Every page but the
+# log-in page needs a log-in (a POST), so the probes see redirects there.
+[[probes]]
+path = "/login"
+contains = "placeholder=\"Username\""
+
+[[probes]]
+path = "/"
+status = 302
+
+[[probes]]
+path = "/dashboard"
+status = 302
+
+[[probes]]
+path = "/Content/js/Scripts.js"
+contains = "Status"
