@@ -101,6 +101,12 @@ So a `configSource` in a subfolder can't work on Linux at all. [F28](../../FINDI
   - `/api/TinyMce/UploadImage` answers Web API's 405 JSON;
   - the theme CSS is served.
 
+### With webForCore's fixes ([jabba2324/webForCore#32](https://github.com/jabba2324/webForCore/pull/32))
+
+On the PR's packages, all 14 probes pass with the overlay as committed, and with its explicit `webForCore.Web.Helpers`
+reference removed. The `Config\imageprocessor\*.config` sections load (#26), `MapPath` works with
+`relaxedUrlToFileSystemMapping="true"` (#27), and `webForCore.Web.Mvc` brings System.Web.Helpers (#28).
+
 ## Open problems
 
 - [F28](../../FINDINGS.md#f28) (webForCore bug): `configSource` in a subfolder can't be loaded on Linux. Blocks every request.
