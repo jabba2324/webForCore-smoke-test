@@ -22,6 +22,8 @@ The MVC 5 tutorial's finished app: `MoviesController` over EF 6.1.3 code first w
 
 ## Smoke
 
+- **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 11/11 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28).
+
 **11 of 12 pass**: the home page, `/Movies` (EF creates the database from the migrations, including the `.resx`
 snapshots), `/HelloWorld/Welcome?name=Scott&numTimes=4`, the Register form and `Site.css`. Only the served W3C log
 fails ([F4](../../FINDINGS.md#f4)).
