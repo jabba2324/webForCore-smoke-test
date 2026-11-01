@@ -13,6 +13,8 @@ Converter: `MVCRandomAnswerGenerator.csproj` → `.csproj.netfx`; SDK project wi
 
 ## Smoke
 
+- **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 8/8 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28).
+
 **8 of 9 pass**: the home page (layout, bundles) and About. Only the served W3C log fails ([F4](../../FINDINGS.md#f4)).
 
 ### Round 2: webForCore 0.2.0
