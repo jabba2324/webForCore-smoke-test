@@ -46,16 +46,14 @@
       ]
     },
     "build": {
-      "at": "2026-11-01T01:48:59+00:00",
-      "error_count": 1,
-      "errors": [
-        "error CS0433: The type 'WsiProfiles' exists in both 'System.Web.Services.Description, Version=8.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' and 'System.Web.Services, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' "
-      ],
+      "at": "2026-11-01T10:04:56+00:00",
+      "error_count": 0,
+      "errors": [],
       "log": "apps/mojoportal/logs/build.log",
-      "seconds": 6,
-      "status": "fail",
-      "summary": "1 distinct errors",
-      "webforcore": "packages 0.4.0"
+      "seconds": 25,
+      "status": "pass",
+      "summary": null,
+      "webforcore": "packages 0.5.0"
     },
     "fetch": {
       "at": "2026-11-01T01:47:27+00:00",
@@ -64,9 +62,116 @@
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-01T01:48:59+00:00",
-      "status": "skip",
-      "summary": "not built (apps/mojoportal/src/Web/bin_dotnet/mojoPortal.Web.dll missing)"
+      "at": "2026-11-01T10:16:58+00:00",
+      "checks": [
+        {
+          "expected_text": "Your installation is up to date",
+          "ms": 623,
+          "ok": false,
+          "path": "/Setup/Default.aspx",
+          "status": 500,
+          "title": "Could not load file or assembly 'App_GlobalResources, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
+        },
+        {
+          "expected_text": "Welcome to mojoPortal!",
+          "ms": 3634,
+          "ok": false,
+          "path": "/",
+          "status": 500,
+          "title": "Could not load file or assembly 'App_GlobalResources, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
+        },
+        {
+          "expected_text": "LoginCtrl_Password",
+          "ms": 361,
+          "ok": false,
+          "path": "/Secure/Login.aspx",
+          "status": 500,
+          "title": "Could not load file or assembly 'App_GlobalResources, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
+        },
+        {
+          "expected_text": "__VIEWSTATE",
+          "ms": 23,
+          "ok": false,
+          "path": "/Secure/Register.aspx",
+          "status": 500,
+          "title": "Could not load file or assembly 'App_GlobalResources, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
+        },
+        {
+          "expected_text": "File Management",
+          "ms": 50,
+          "ok": false,
+          "path": "/FileManager",
+          "status": 200,
+          "title": ""
+        },
+        {
+          "expected_text": "Authorization has been denied for this request.",
+          "ms": 8,
+          "ok": false,
+          "path": "/api/UserProfile/Property/FirstName",
+          "status": 200,
+          "title": ""
+        },
+        {
+          "ms": 46,
+          "ok": true,
+          "path": "/csshandler.ashx?s=1&skin=framework",
+          "status": 200
+        },
+        {
+          "expected_text": "mojoPortal Site Search",
+          "ms": 15,
+          "ok": false,
+          "path": "/SearchEngineInfo.ashx",
+          "status": 500,
+          "title": "Could not load file or assembly 'App_GlobalResources, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
+        },
+        {
+          "ms": 34,
+          "ok": true,
+          "path": "/Data/Sites/1/skins/framework/img/favicons/favicon-16x16.png",
+          "status": 200
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 3,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/packages.config",
+          "status": 404
+        },
+        {
+          "ms": 3,
+          "ok": true,
+          "path": "/bin_dotnet/mojoPortal.Web.dll",
+          "status": 404
+        }
+      ],
+      "log": "apps/mojoportal/logs/server.log",
+      "status": "fail",
+      "summary": "8/15 probes"
     }
   }
 }

@@ -23,3 +23,7 @@ Appended by `scripts/wfc.py`, one line per stage run.
 - 2026-11-01T01:48:18+00:00 **smoke**: fail (6/15 probes)
 - 2026-11-01T01:48:59+00:00 **build**: fail (1 distinct errors)
 - 2026-11-01T01:48:59+00:00 **smoke**: skip (not built (apps/mojoportal/src/Web/bin_dotnet/mojoPortal.Web.dll missing))
+- 2026-11-01T10:04:56+00:00 **build**: pass
+- 2026-11-01T10:09:53+00:00 **smoke**: fail (6/15 probes)
+- 2026-11-01T10:16:45+00:00 **smoke**: pass (15/15 probes)
+- 2026-11-01T10:16:58+00:00 **smoke**: fail (8/15 probes)

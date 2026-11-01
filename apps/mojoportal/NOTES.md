@@ -61,6 +61,8 @@ Go, without the WCF services.
 
 ## Smoke
 
+- **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 8/15 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28); it builds (F35 fixed); every page still fails on `Assembly.Load("App_GlobalResources")` (F40, #33, the release's known issue). With `optimizeCompilations="true"` all 15 checks pass on the released packages (not in the overlay).
+
 The probes cover:
 - Setup;
 - the home page;
