@@ -29,6 +29,8 @@ Data, Model, Service, Web.Core). `scripts/wfc.py assess`: no blockers, no notice
 
 ## Smoke
 
+- **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 8/9 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28); unchanged: AutoMapper 3 (F22).
+
 Probes: the home page, the log-in page and a static CSS file (no text checks yet: no page has rendered).
 
 **As committed: 0 of 3 app probes pass; the 6 forbidden paths return 404.** Every request is a Configuration Error:
