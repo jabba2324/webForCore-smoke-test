@@ -35,6 +35,8 @@ samples package), .NET Framework 4.5.1, one web project. `scripts/wfc.py assess`
 
 ## Smoke
 
+- **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 12/12 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28); passes once its database exists; on the fresh database the first run hit its own seed deadlock (F26).
+
 Probes: the home page, the store (genres), the cart, log-in and register (anti-forgery token) and a static CSS file.
 
 **As committed: 0 of 6 app probes pass; the 6 forbidden paths return 404.** Every request, static files included, fails
