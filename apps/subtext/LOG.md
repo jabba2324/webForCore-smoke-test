@@ -30,3 +30,8 @@ Appended by `scripts/wfc.py`, one line per stage run.
 - 2026-11-01T01:48:53+00:00 **smoke**: skip (not built (apps/subtext/src/src/Subtext.Web/bin_dotnet/Subtext.Web.dll missing))
 - 2026-11-01T10:05:22+00:00 **build**: pass
 - 2026-11-01T10:15:42+00:00 **smoke**: fail (15/16 probes)
+- 2026-11-01T23:29:47+00:00 **build**: pass
+- 2026-11-01T23:41:02+00:00 **smoke**: fail (15/16 probes)
+- 2026-11-02T00:03:14+00:00 **fetch** (windows): pass at `87a2d90dae02`
+- 2026-11-02T00:03:20+00:00 **build** (windows): pass
+- 2026-11-02T00:03:40+00:00 **smoke** (windows): fail (15/16 probes)
