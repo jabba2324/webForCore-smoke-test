@@ -1,0 +1,91 @@
+{
+  "id": "opserver-mvc5",
+  "stages": {
+    "build": {
+      "at": "2026-11-02T00:01:37+00:00",
+      "error_count": 0,
+      "errors": [],
+      "log": "apps\\opserver-mvc5\\logs.windows\\build.log",
+      "seconds": 4,
+      "status": "pass",
+      "summary": null,
+      "webforcore": "packages 0.6.0"
+    },
+    "fetch": {
+      "at": "2026-11-02T00:01:33+00:00",
+      "commit": "ed57f51d26a061e75359c1a3245786b795ae93b7",
+      "overlay": true,
+      "status": "pass"
+    },
+    "smoke": {
+      "at": "2026-11-02T00:01:51+00:00",
+      "checks": [
+        {
+          "expected_text": "placeholder=\"Username\"",
+          "ms": 2009,
+          "ok": false,
+          "path": "/login",
+          "status": 500,
+          "title": "Unable to load one or more of the requested types.<br>Could not load type 'SqlGuidCaster' from assembly 'System.Data.SqlClient, Version=4.6.1.6, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a' because it contains an object field at offset 0 that is incorrectly aligned or overlapped by a non-object"
+        },
+        {
+          "ms": 145,
+          "ok": true,
+          "path": "/",
+          "status": 302
+        },
+        {
+          "ms": 12,
+          "ok": true,
+          "path": "/dashboard",
+          "status": 302
+        },
+        {
+          "ms": 58,
+          "ok": true,
+          "path": "/Content/js/Scripts.js",
+          "status": 200
+        },
+        {
+          "ms": 23,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 3,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 12,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "ms": 13,
+          "ok": true,
+          "path": "/packages.config",
+          "status": 404
+        },
+        {
+          "ms": 20,
+          "ok": true,
+          "path": "/bin_dotnet/StackExchange.Opserver.dll",
+          "status": 404
+        }
+      ],
+      "log": "apps\\opserver-mvc5\\logs.windows\\server.log",
+      "status": "fail",
+      "summary": "9/10 probes"
+    }
+  }
+}

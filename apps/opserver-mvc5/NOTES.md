@@ -42,6 +42,7 @@ The probes cover the log-in page, two pages that need a log-in (redirects) and a
   - the MVC pages;
   - `/about`;
   - the SQL Server dashboard, live against the compose server, with version, uptime and CPU.
+- **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 9/10 probes on Linux and on Windows; `/login` still fails in `GetTypes()` on System.Data.SqlClient 4.9.1 (F47, #41, 0.6.0's known issue).
 
 ## Open problems
 
