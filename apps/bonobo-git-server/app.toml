@@ -7,7 +7,7 @@ site = "Bonobo.Git.Server"
 kinds = ["mvc"]
 licence = "MIT"
 status = "migrated"
-notes = "webForCore 0.4.0: passes all 9 probes (with webForCore-thirdparty 0.4.0's WebActivatorEx)."
+notes = "webForCore 0.6.0: all 9 probes on Linux; on Windows 6/9: its SQLite database is created in bin_dotnet (F52, webForCore#50), which restarts it, and the restart leaves it serving 503 (F51, webForCore#49). With webForCore-thirdparty's WebActivatorEx."
 
 # The first request compiles the site, so it gets 120 s.
 [[probes]]
