@@ -1,0 +1,89 @@
+{
+  "id": "aspnetdocs-productsapp",
+  "stages": {
+    "build": {
+      "at": "2026-11-01T23:57:18+00:00",
+      "error_count": 0,
+      "errors": [],
+      "log": "apps\\aspnetdocs-productsapp\\logs.windows\\build.log",
+      "seconds": 1,
+      "status": "pass",
+      "summary": null,
+      "webforcore": "packages 0.6.0"
+    },
+    "fetch": {
+      "at": "2026-11-01T23:57:17+00:00",
+      "commit": "546ffe728556a60591b93ab4fcbd4437f71e2449",
+      "overlay": true,
+      "status": "pass"
+    },
+    "smoke": {
+      "at": "2026-11-01T23:57:29+00:00",
+      "checks": [
+        {
+          "ms": 1298,
+          "ok": true,
+          "path": "/api/products",
+          "status": 200
+        },
+        {
+          "ms": 31,
+          "ok": true,
+          "path": "/api/products/2",
+          "status": 200
+        },
+        {
+          "ms": 29,
+          "ok": true,
+          "path": "/api/products?category=Hardware",
+          "status": 200
+        },
+        {
+          "ms": 31,
+          "ok": true,
+          "path": "/api/products/99",
+          "status": 404
+        },
+        {
+          "ms": 28,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 19,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 20,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 7,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "ms": 24,
+          "ok": true,
+          "path": "/packages.config",
+          "status": 404
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/bin_dotnet/ProductsApp.dll",
+          "status": 404
+        }
+      ],
+      "log": "apps\\aspnetdocs-productsapp\\logs.windows\\server.log",
+      "status": "pass",
+      "summary": "10/10 probes"
+    }
+  }
+}
