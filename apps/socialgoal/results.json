@@ -26,14 +26,14 @@
       ]
     },
     "build": {
-      "at": "2026-11-01T10:05:16+00:00",
+      "at": "2026-11-01T23:29:45+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/socialgoal/logs/build.log",
-      "seconds": 6,
+      "seconds": 2,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.5.0"
+      "webforcore": "packages 0.6.0"
     },
     "fetch": {
       "at": "2026-10-31T23:40:38+00:00",
@@ -42,53 +42,53 @@
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-01T10:15:31+00:00",
+      "at": "2026-11-01T23:40:51+00:00",
       "checks": [
         {
-          "ms": 1276,
+          "ms": 1313,
           "ok": false,
           "path": "/",
           "status": 500,
           "title": "The type or method has 3 generic parameter(s), but 1 generic argument(s) were provided. A generic argument must be provided for each generic parameter."
         },
         {
-          "ms": 3462,
+          "ms": 3454,
           "ok": true,
           "path": "/Account/Login",
           "status": 200
         },
         {
-          "ms": 104,
+          "ms": 87,
           "ok": true,
           "path": "/Content/bootstrap.css",
           "status": 200
         },
         {
-          "ms": 3,
+          "ms": 4,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/packages.config",
           "status": 404
