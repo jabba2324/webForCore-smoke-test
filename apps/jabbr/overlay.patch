@@ -38,7 +38,7 @@ index 29dce10..f0bea5d 100644
          {
              context.Response.Redirect(context.RedirectUri);
 diff --git a/JabbR/JabbR.csproj b/JabbR/JabbR.csproj
-index 88f6a37..8501ec0 100644
+index 88f6a37..13b77c7 100644
 --- a/JabbR/JabbR.csproj
 +++ b/JabbR/JabbR.csproj
 @@ -1,1851 +1,85 @@
@@ -1872,11 +1872,11 @@ index 88f6a37..8501ec0 100644
 -      <SubType>Designer</SubType>
 -    </Content>
 +    <!-- webForCore 0.5.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.Http.Owin" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.SignalR.SystemWeb" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.Http.Owin" Version="0.6.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.6.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.6.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.SignalR.SystemWeb" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>

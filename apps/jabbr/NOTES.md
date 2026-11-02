@@ -40,6 +40,7 @@ Round 4, on webForCore 0.5.0 and webForCore-thirdparty 0.4.1.
   `MissingMethodException: Method not found: 'System.String System.AppDomainSetup.get_PrivateBinPathProbe()'`, from
   `Nancy.Bootstrapper.AppDomainAssemblyTypeScanner`. Nancy 0.20 is .NET Framework only. Nancy 2.x runs on .NET Standard,
   but its API changed enough that moving JabbR's modules would be a port (F50, app/environment).
+- **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** it builds (F46 fixed in 0.6.0). 6/10 probes on Linux and on Windows: start-up fails in Nancy 0.20 (F50).
 
 ## Open problems
 

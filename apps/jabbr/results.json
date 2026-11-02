@@ -31,17 +31,14 @@
       ]
     },
     "build": {
-      "at": "2026-11-01T11:10:22+00:00",
-      "error_count": 2,
-      "errors": [
-        "error CS1705: Assembly 'Microsoft.AspNet.SignalR.ServiceBus' with identity 'Microsoft.AspNet.SignalR.ServiceBus, Version=2.4.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' uses 'Microsoft.AspNet.SignalR.Core, Version=2.4.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' which has a higher version than referenced assembly 'Microsoft.AspNet.SignalR.Core' with identity 'Microsoft.AspNet.SignalR.Core, Version=0.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' ",
-        "error CS1705: Assembly 'Microsoft.AspNet.SignalR.SqlServer' with identity 'Microsoft.AspNet.SignalR.SqlServer, Version=2.4.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' uses 'Microsoft.AspNet.SignalR.Core, Version=2.4.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' which has a higher version than referenced assembly 'Microsoft.AspNet.SignalR.Core' with identity 'Microsoft.AspNet.SignalR.Core, Version=0.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35' "
-      ],
+      "at": "2026-11-01T23:29:15+00:00",
+      "error_count": 0,
+      "errors": [],
       "log": "apps/jabbr/logs/build.log",
-      "seconds": 1,
-      "status": "fail",
-      "summary": "2 distinct errors",
-      "webforcore": "packages 0.5.0"
+      "seconds": 2,
+      "status": "pass",
+      "summary": null,
+      "webforcore": "packages 0.6.0"
     },
     "fetch": {
       "at": "2026-11-01T10:44:46+00:00",
@@ -50,9 +47,79 @@
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-01T11:10:22+00:00",
-      "status": "skip",
-      "summary": "not built (apps/jabbr/src/JabbR/bin_dotnet/JabbR.dll missing)"
+      "at": "2026-11-01T23:34:46+00:00",
+      "checks": [
+        {
+          "expected_text": "JabbR",
+          "ms": 16798,
+          "ok": false,
+          "path": "/",
+          "status": 500,
+          "title": "Method not found: 'System.String System.AppDomainSetup.get_PrivateBinPathProbe()'."
+        },
+        {
+          "expected_text": "password",
+          "ms": 345,
+          "ok": false,
+          "path": "/account/login",
+          "status": 500,
+          "title": "Method not found: 'System.String System.AppDomainSetup.get_PrivateBinPathProbe()'."
+        },
+        {
+          "expected_text": "$.hubConnection",
+          "ms": 156,
+          "ok": false,
+          "path": "/signalr/hubs",
+          "status": 500,
+          "title": "Method not found: 'System.String System.AppDomainSetup.get_PrivateBinPathProbe()'."
+        },
+        {
+          "ms": 156,
+          "ok": false,
+          "path": "/Content/images/big-logo.png",
+          "status": 500,
+          "title": "Method not found: 'System.String System.AppDomainSetup.get_PrivateBinPathProbe()'."
+        },
+        {
+          "ms": 3,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 1,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 1,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 1,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "ms": 1,
+          "ok": true,
+          "path": "/packages.config",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/bin_dotnet/JabbR.dll",
+          "status": 404
+        }
+      ],
+      "log": "apps/jabbr/logs/server.log",
+      "status": "fail",
+      "summary": "6/10 probes"
     }
   }
 }
