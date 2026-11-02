@@ -1,0 +1,119 @@
+{
+  "id": "eshop-legacy-mvc",
+  "stages": {
+    "build": {
+      "at": "2026-11-01T23:58:15+00:00",
+      "error_count": 0,
+      "errors": [],
+      "log": "apps\\eshop-legacy-mvc\\logs.windows\\build.log",
+      "seconds": 1,
+      "status": "pass",
+      "summary": null,
+      "webforcore": "packages 0.6.0"
+    },
+    "fetch": {
+      "at": "2026-11-01T23:58:14+00:00",
+      "commit": "63bc9ec4414d7e281dc9f9d7bdcf70030950457d",
+      "overlay": true,
+      "status": "pass"
+    },
+    "smoke": {
+      "at": "2026-11-02T00:05:46+00:00",
+      "checks": [
+        {
+          "ms": 6015,
+          "ok": true,
+          "path": "/",
+          "status": 200
+        },
+        {
+          "ms": 65,
+          "ok": true,
+          "path": "/Catalog/Details/1",
+          "status": 200
+        },
+        {
+          "ms": 173,
+          "ok": true,
+          "path": "/Catalog/Create",
+          "status": 200
+        },
+        {
+          "ms": 73,
+          "ok": true,
+          "path": "/items/1/pic",
+          "status": 200
+        },
+        {
+          "ms": 259,
+          "ok": true,
+          "path": "/api/brands",
+          "status": 200
+        },
+        {
+          "ms": 33,
+          "ok": true,
+          "path": "/api/brands/1",
+          "status": 200
+        },
+        {
+          "ms": 64,
+          "ok": true,
+          "path": "/Content/base.css",
+          "status": 200
+        },
+        {
+          "ms": 38,
+          "ok": true,
+          "path": "/Content/css",
+          "status": 200
+        },
+        {
+          "ms": 16,
+          "ok": true,
+          "path": "/Images/brand.png",
+          "status": 200
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 27,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 1,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "ms": 1,
+          "ok": true,
+          "path": "/packages.config",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/bin_dotnet/eShopLegacyMVC.dll",
+          "status": 404
+        }
+      ],
+      "log": "apps\\eshop-legacy-mvc\\logs.windows\\server.log",
+      "status": "pass",
+      "summary": "15/15 probes"
+    }
+  }
+}

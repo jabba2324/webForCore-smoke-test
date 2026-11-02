@@ -8,7 +8,7 @@ project = "eShopLegacyMVCSolution/src/eShopLegacyMVC/eShopLegacyMVC.csproj"
 kinds = ["mvc", "webapi"]
 licence = "MIT"
 status = "migrated"
-notes = "webForCore 0.4.0: passes all 15 probes."
+notes = "webForCore 0.6.0: passes all 15 probes on Linux and Windows (the CSS bundle is served unminified on both: WebGrease and Bootstrap 4's custom properties, as on .NET Framework)."
 
 needs = ["mssql"]
 
