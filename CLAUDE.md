@@ -20,7 +20,7 @@ Each app is a folder, `apps/<id>/` (see README.md). Nothing goes at the top leve
    `status` to `verified`, or `rejected` with the reason in `notes`.
 2. `scripts/wfc.py fetch <id>` and `scripts/wfc.py assess <id>`. Write the assessment in `apps/<id>/NOTES.md`.
 3. Migrate in `apps/<id>/src/` following `docs/AGENT-MIGRATION.md`, against webForCore's release packages
-   (`PackageReference Include="webForCore" Version="0.5.0"` and the framework packages; `scripts/wfc.py packages`
+   (`PackageReference Include="webForCore" Version="0.6.0"` and the framework packages; `scripts/wfc.py packages`
    downloads them), not its source. Keep changes minimal; don't modernise the app. Record each change and its
    reason in `NOTES.md` as you go, not afterwards.
 4. `scripts/wfc.py build <id>` and `scripts/wfc.py smoke <id>` on Linux, then `scripts/wfc.py windows run <id>` on Windows

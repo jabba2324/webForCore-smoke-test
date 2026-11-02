@@ -4,7 +4,7 @@ migrated projects against webForCore, run them on Kestrel and probe them.
 
 Standard library only (Python 3.11+, for tomllib).
 
-    scripts/wfc.py packages [--version 0.5.0]  # download webForCore's (and webForCore-thirdparty's) release packages into .packages/
+    scripts/wfc.py packages [--version 0.6.0]  # download webForCore's (and webForCore-thirdparty's) release packages into .packages/
     scripts/wfc.py list
     scripts/wfc.py fetch <id>... | --all [--reset]
     scripts/wfc.py assess <id>... | --all
@@ -51,7 +51,7 @@ WEBFORCORE = Path(os.environ.get("WEBFORCORE_DIR", ROOT.parent / "webForCore")).
 # builds restore from it (apps reference the packages, docs/MIGRATING.md section 1). WEBFORCORE_DIR is only needed by
 # apps still migrated against webForCore's source.
 WEBFORCORE_REPO = "jabba2324/webForCore"
-WEBFORCORE_VERSION = os.environ.get("WEBFORCORE_VERSION", "0.5.0")
+WEBFORCORE_VERSION = os.environ.get("WEBFORCORE_VERSION", "0.6.0")
 # Builds of third-party libraries for webForCore (WebActivatorEx, AjaxControlToolkit; CLAUDE.md), from
 # webForCore-thirdparty's releases, go in the same folder.
 THIRDPARTY_REPO = "jabba2324/webForCore-thirdparty"
@@ -406,13 +406,16 @@ _TLS.verify_mode = __import__("ssl").CERT_NONE
 OPENER = urllib.request.build_opener(NoRedirect, urllib.request.HTTPSHandler(context=_TLS))
 
 
+MAX_BODY = 4_000_000  # bytes read per response: bundles are large, and larger on Windows (CRLF line ends)
+
+
 def get(url, timeout):
     req = urllib.request.Request(url, headers={"User-Agent": "webForCore-smoke-test"})
     try:
         with OPENER.open(req, timeout=timeout) as r:
-            return r.status, dict(r.headers), r.read(200_000).decode("utf-8", "replace")
+            return r.status, dict(r.headers), r.read(MAX_BODY).decode("utf-8", "replace")
     except urllib.error.HTTPError as e:
-        return e.code, dict(e.headers), e.read(200_000).decode("utf-8", "replace")
+        return e.code, dict(e.headers), e.read(MAX_BODY).decode("utf-8", "replace")
 
 
 def smoke(app):
@@ -649,8 +652,8 @@ def main():
     p.add_argument("command", choices=["packages", "list", "fetch", "assess", "build", "smoke", "run", "save-overlay", "report", "windows"])
     p.add_argument("ids", nargs="*", help="app ids; for windows, the command first (fetch, build, smoke, run)")
     p.add_argument("--all", action="store_true")
-    p.add_argument("--reset", action="store_true", help="fetch: discard the checkout's changes and reapply the overlay")
-    p.add_argument("--version", help="packages: the webForCore release (default: $WEBFORCORE_VERSION or 0.5.0; webForCore-thirdparty: $THIRDPARTY_VERSION or 0.4.1)")
+    p.add_argument("--reset", action="store_true", help="fetch, run: discard the checkout's changes and reapply the overlay")
+    p.add_argument("--version", help="packages: the webForCore release (default: $WEBFORCORE_VERSION or 0.6.0; webForCore-thirdparty: $THIRDPARTY_VERSION or 0.4.1)")
     a = p.parse_args()
     if a.command == "packages":
         global WEBFORCORE_VERSION
@@ -692,7 +695,7 @@ def main():
         elif a.command == "save-overlay":
             save_overlay(app)
         elif a.command == "run":
-            if fetch(app) == "pass" and build(app) == "pass":
+            if fetch(app, a.reset) == "pass" and build(app) == "pass":
                 smoke(app)
 
 
