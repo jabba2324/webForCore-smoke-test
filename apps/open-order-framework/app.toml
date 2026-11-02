@@ -8,7 +8,7 @@ project = "OpenOrderFramework/OpenOrderFramework.csproj"
 kinds = ["mvc", "owin", "identity"]
 licence = "MIT"
 status = "migrated"
-notes = "webForCore 0.4.0: passes all 12 probes once its database exists; on a fresh database its own Identity seed deadlocks (F26)."
+notes = "webForCore 0.6.0: passes all 12 probes on Linux and Windows once its database exists; on a fresh database its own Identity seed deadlocks (F26)."
 
 # The first request compiles the site, so it gets 120 s.
 needs = ["mssql"]

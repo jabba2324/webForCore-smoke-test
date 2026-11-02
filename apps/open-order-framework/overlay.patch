@@ -11,7 +11,7 @@ index 80f0678..fa45005 100644
  namespace OpenOrderFramework.Controllers
  {
 diff --git a/OpenOrderFramework/OpenOrderFramework.csproj b/OpenOrderFramework/OpenOrderFramework.csproj
-index 888034a..f86760f 100644
+index 888034a..76db676 100644
 --- a/OpenOrderFramework/OpenOrderFramework.csproj
 +++ b/OpenOrderFramework/OpenOrderFramework.csproj
 @@ -1,466 +1,68 @@
@@ -422,16 +422,16 @@ index 888034a..f86760f 100644
    <ItemGroup>
 -    <Folder Include="App_Data\" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.6.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.6.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.6.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.6.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.6.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.6.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>
