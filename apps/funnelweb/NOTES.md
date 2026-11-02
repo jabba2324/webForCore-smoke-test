@@ -37,6 +37,7 @@ Go. NHibernate 3.3 predates .NET and is the risk.
 ## Smoke
 
 - **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 9/10 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28); unchanged: NHibernate 3.3 (F39).
+- **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 9/10 probes on Linux and on Windows; unchanged (NHibernate's proxies).
 
 The probes need the `FunnelWeb` database set up by FunnelWeb's upgrader: log in at `/admin/login` as `test`/`test`
 (My.config), then "Upgrade" on `/admin/install`. It runs 32 scripts. The probes cover the home page, the Admin area's
