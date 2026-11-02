@@ -1,5 +1,5 @@
 diff --git a/sources/App.Identity/App.Identity.csproj b/sources/App.Identity/App.Identity.csproj
-index 730c84c..c8f6743 100644
+index 730c84c..f3a61b9 100644
 --- a/sources/App.Identity/App.Identity.csproj
 +++ b/sources/App.Identity/App.Identity.csproj
 @@ -1,100 +1,39 @@
@@ -77,10 +77,10 @@ index 730c84c..c8f6743 100644
 -    <Compile Include="Repositories\IIdentityRepository.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.6.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.6.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -239,7 +239,7 @@ index 0000000..730c84c
 +</Project>
 \ No newline at end of file
 diff --git a/sources/App.UI.Mvc5/App.UI.Mvc5.csproj b/sources/App.UI.Mvc5/App.UI.Mvc5.csproj
-index 3b582cb..ad3714f 100644
+index 3b582cb..7eb0260 100644
 --- a/sources/App.UI.Mvc5/App.UI.Mvc5.csproj
 +++ b/sources/App.UI.Mvc5/App.UI.Mvc5.csproj
 @@ -1,94 +1,55 @@
@@ -329,16 +329,16 @@ index 3b582cb..ad3714f 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.SignalR.SystemWeb" Version="0.5.0" />
-+    <PackageReference Include="webForCore.WebGrease" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.6.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.6.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.6.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.6.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.6.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.6.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.SignalR.SystemWeb" Version="0.6.0" />
++    <PackageReference Include="webForCore.WebGrease" Version="0.6.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -2379,7 +2379,7 @@ index 37f2c12..e3c3dc7 100644
  		<assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
  			<dependentAssembly>
 diff --git a/sources/Data.Core/Data.Core.csproj b/sources/Data.Core/Data.Core.csproj
-index 2a228db..9be6cdd 100644
+index 2a228db..b23de40 100644
 --- a/sources/Data.Core/Data.Core.csproj
 +++ b/sources/Data.Core/Data.Core.csproj
 @@ -1,68 +1,28 @@
@@ -2449,7 +2449,7 @@ index 2a228db..9be6cdd 100644
 -    <Compile Include="IDbConnectionFactory.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -2546,7 +2546,7 @@ index 0000000..2a228db
 +</Project>
 \ No newline at end of file
 diff --git a/sources/Data.Store.SqlServer/Data.Store.SqlServer.csproj b/sources/Data.Store.SqlServer/Data.Store.SqlServer.csproj
-index da259b5..0eed021 100644
+index da259b5..a4799c0 100644
 --- a/sources/Data.Store.SqlServer/Data.Store.SqlServer.csproj
 +++ b/sources/Data.Store.SqlServer/Data.Store.SqlServer.csproj
 @@ -1,72 +1,34 @@
@@ -2612,7 +2612,7 @@ index da259b5..0eed021 100644
 -    <Compile Include="Infrastructure\SqlConnectionFactory.cs" />
 -    <Compile Include="UsersRepository.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -2725,7 +2725,7 @@ index 0000000..da259b5
 +</Project>
 \ No newline at end of file
 diff --git a/sources/Data.Tools.Migrator/Data.Tools.Migrator.csproj b/sources/Data.Tools.Migrator/Data.Tools.Migrator.csproj
-index 82ade75..30ae46e 100644
+index 82ade75..2712b46 100644
 --- a/sources/Data.Tools.Migrator/Data.Tools.Migrator.csproj
 +++ b/sources/Data.Tools.Migrator/Data.Tools.Migrator.csproj
 @@ -1,119 +1,39 @@
@@ -2810,7 +2810,7 @@ index 82ade75..30ae46e 100644
 -      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 -    </Content>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -3003,7 +3003,7 @@ index 0000000..82ade75
 +</Project>
 \ No newline at end of file
 diff --git a/sources/Domain.Core/Domain.Core.csproj b/sources/Domain.Core/Domain.Core.csproj
-index 3e82448..3d0a4a0 100644
+index 3e82448..21fefd6 100644
 --- a/sources/Domain.Core/Domain.Core.csproj
 +++ b/sources/Domain.Core/Domain.Core.csproj
 @@ -1,94 +1,33 @@
@@ -3099,7 +3099,7 @@ index 3e82448..3d0a4a0 100644
 -      <Name>Shared.Extensions</Name>
 -    </ProjectReference>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -3225,7 +3225,7 @@ index 0000000..3e82448
 +</Project>
 \ No newline at end of file
 diff --git a/sources/Shared.Extensions/Shared.Extensions.csproj b/sources/Shared.Extensions/Shared.Extensions.csproj
-index 68c3c10..f92d73b 100644
+index 68c3c10..deb1d61 100644
 --- a/sources/Shared.Extensions/Shared.Extensions.csproj
 +++ b/sources/Shared.Extensions/Shared.Extensions.csproj
 @@ -1,73 +1,23 @@
@@ -3311,7 +3311,7 @@ index 68c3c10..f92d73b 100644
 -    <Compile Include="TimeSpan\ToLocalizedLabel.cs" />
 -    <Compile Include="TimeSpan\ToTimeZone.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
    </ItemGroup>
 -  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 -</Project>
@@ -3399,7 +3399,7 @@ index 0000000..68c3c10
 +</Project>
 \ No newline at end of file
 diff --git a/sources/Shared.Infrastructure.Azure/Shared.Infrastructure.Azure.csproj b/sources/Shared.Infrastructure.Azure/Shared.Infrastructure.Azure.csproj
-index 99741f1..b969a12 100644
+index 99741f1..3cf7259 100644
 --- a/sources/Shared.Infrastructure.Azure/Shared.Infrastructure.Azure.csproj
 +++ b/sources/Shared.Infrastructure.Azure/Shared.Infrastructure.Azure.csproj
 @@ -1,84 +1,41 @@
@@ -3464,7 +3464,7 @@ index 99741f1..b969a12 100644
 -    <Compile Include="AzureStorageService.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -3609,7 +3609,7 @@ index 0000000..99741f1
 +</Project>
 \ No newline at end of file
 diff --git a/sources/Shared.Infrastructure.Cloudinary/Shared.Infrastructure.Cloudinary.csproj b/sources/Shared.Infrastructure.Cloudinary/Shared.Infrastructure.Cloudinary.csproj
-index d4f3629..4a9793c 100644
+index d4f3629..7a47ddc 100644
 --- a/sources/Shared.Infrastructure.Cloudinary/Shared.Infrastructure.Cloudinary.csproj
 +++ b/sources/Shared.Infrastructure.Cloudinary/Shared.Infrastructure.Cloudinary.csproj
 @@ -1,68 +1,33 @@
@@ -3676,7 +3676,7 @@ index d4f3629..4a9793c 100644
 -    <Compile Include="CloudinaryThumbService.cs" />
 -    <Compile Include="ICloudinaryThumbService.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -3779,7 +3779,7 @@ index 0000000..d4f3629
 +</Project>
 \ No newline at end of file
 diff --git a/sources/Shared.Infrastructure.DynamicImage/Shared.Infrastructure.DynamicImage.csproj b/sources/Shared.Infrastructure.DynamicImage/Shared.Infrastructure.DynamicImage.csproj
-index e347155..148b66a 100644
+index e347155..8f6970e 100644
 --- a/sources/Shared.Infrastructure.DynamicImage/Shared.Infrastructure.DynamicImage.csproj
 +++ b/sources/Shared.Infrastructure.DynamicImage/Shared.Infrastructure.DynamicImage.csproj
 @@ -1,58 +1,27 @@
@@ -3844,7 +3844,7 @@ index e347155..148b66a 100644
 -    <Compile Include="DynamicTextImage.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -3925,7 +3925,7 @@ index 0000000..e347155
 +</Project>
 \ No newline at end of file
 diff --git a/sources/Shared.Infrastructure.FileSystem/Shared.Infrastructure.FileSystem.csproj b/sources/Shared.Infrastructure.FileSystem/Shared.Infrastructure.FileSystem.csproj
-index c396024..97af24c 100644
+index c396024..3af5428 100644
 --- a/sources/Shared.Infrastructure.FileSystem/Shared.Infrastructure.FileSystem.csproj
 +++ b/sources/Shared.Infrastructure.FileSystem/Shared.Infrastructure.FileSystem.csproj
 @@ -1,58 +1,27 @@
@@ -3990,7 +3990,7 @@ index c396024..97af24c 100644
 -    <Compile Include="FileSystemStorageService.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -4071,7 +4071,7 @@ index 0000000..c396024
 +</Project>
 \ No newline at end of file
 diff --git a/sources/Shared.Infrastructure.MailGun/Shared.Infrastructure.MailGun.csproj b/sources/Shared.Infrastructure.MailGun/Shared.Infrastructure.MailGun.csproj
-index 3df9d43..314bb37 100644
+index 3df9d43..db62f60 100644
 --- a/sources/Shared.Infrastructure.MailGun/Shared.Infrastructure.MailGun.csproj
 +++ b/sources/Shared.Infrastructure.MailGun/Shared.Infrastructure.MailGun.csproj
 @@ -1,72 +1,32 @@
@@ -4135,7 +4135,7 @@ index 3df9d43..314bb37 100644
 -    <Compile Include="MailGunApiEmailDispatcherService.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -4248,7 +4248,7 @@ index 0000000..3df9d43
 +</Project>
 \ No newline at end of file
 diff --git a/sources/Shared.Infrastructure.Smtp/Shared.Infrastructure.Smtp.csproj b/sources/Shared.Infrastructure.Smtp/Shared.Infrastructure.Smtp.csproj
-index 6ac360f..a9cd6b5 100644
+index 6ac360f..fe6185a 100644
 --- a/sources/Shared.Infrastructure.Smtp/Shared.Infrastructure.Smtp.csproj
 +++ b/sources/Shared.Infrastructure.Smtp/Shared.Infrastructure.Smtp.csproj
 @@ -1,58 +1,27 @@
@@ -4313,7 +4313,7 @@ index 6ac360f..a9cd6b5 100644
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 -    <Compile Include="SystemNetSmtpEmailDispatcherService.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -4394,7 +4394,7 @@ index 0000000..6ac360f
 +</Project>
 \ No newline at end of file
 diff --git a/sources/Shared.Infrastructure/Shared.Infrastructure.csproj b/sources/Shared.Infrastructure/Shared.Infrastructure.csproj
-index a5645d5..9c0e9f8 100644
+index a5645d5..784afd4 100644
 --- a/sources/Shared.Infrastructure/Shared.Infrastructure.csproj
 +++ b/sources/Shared.Infrastructure/Shared.Infrastructure.csproj
 @@ -1,62 +1,27 @@
@@ -4463,7 +4463,7 @@ index a5645d5..9c0e9f8 100644
 -    <Compile Include="MimeTypeMap.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>
