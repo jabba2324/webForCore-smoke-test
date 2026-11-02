@@ -1,0 +1,27 @@
+{
+  "id": "yafnet-2",
+  "stages": {
+    "build": {
+      "at": "2026-11-02T00:03:46+00:00",
+      "error_count": 5,
+      "errors": [
+        "error CS0246: The type or namespace name 'NetStandardPclExport' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS8168: Cannot return local 'i' by reference because it is not a ref local ",
+        "error CS8168: Cannot return local 'ignore' by reference because it is not a ref local ",
+        "error CS8347: Cannot use a result of 'JsonTypeSerializer.UnescapeJsString(ReadOnlySpan<char>, char, bool, ref int)' in this context because it may expose variables referenced by parameter 'index' outside of their declaration scope ",
+        "error CS8347: Cannot use a result of 'JsonTypeSerializer.UnescapeJsonString(ReadOnlySpan<char>, ref int)' in this context because it may expose variables referenced by parameter 'index' outside of their declaration scope "
+      ],
+      "log": "apps\\yafnet-2\\logs.windows\\build.log",
+      "seconds": 4,
+      "status": "fail",
+      "summary": "5 distinct errors",
+      "webforcore": "packages 0.6.0"
+    },
+    "fetch": {
+      "at": "2026-11-02T00:03:41+00:00",
+      "commit": "7435be389709e493854b09cdc622115e537544b8",
+      "overlay": true,
+      "status": "pass"
+    }
+  }
+}
