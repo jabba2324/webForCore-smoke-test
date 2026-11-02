@@ -5,7 +5,7 @@ One entry per distinct problem found while migrating apps. webForCore bugs and g
 pre-release and not recommended for production). See CLAUDE.md for the format. Every entry was found
 with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 release packages (tag `v0.1.0`,
 `2942b694`), unless the entry says otherwise. F16 onwards were found in round 2, on the released 0.2.0 packages
-(tag `v0.2.0`, `1c92215`), where F1–F15 are fixed or documented. F16–F21 and F24 are fixed in [jabba2324/webForCore#24](https://github.com/jabba2324/webForCore/pull/24) (released in 0.3.0), checked against the apps. Round 3 ran on 0.4.0, with webForCore-thirdparty 0.4.0 for WebActivatorEx (CLAUDE.md); F25 onwards were found there. F28–F33 are fixed or documented in [jabba2324/webForCore#32](https://github.com/jabba2324/webForCore/pull/32), checked against the apps. Round 3b (subtext, funnelweb, mojoportal) also ran on 0.4.0, with webForCore-thirdparty 0.4.0 and the unreleased `webForCore.WebActivator` 0.4.1 ([jabba2324/webForCore-thirdparty#1](https://github.com/jabba2324/webForCore-thirdparty/pull/1)); F35 onwards were found there. F35 and F38 are fixed in #32 too, and F36, F37, F41 and F42 documented there, checked against the apps. Round 4 ran on the released 0.5.0 packages (#32 merged), with webForCore-thirdparty 0.4.1: all 24 migrated apps build, the fixes hold in every app that needed them (MVCForum and Subtext with no workarounds, no explicit `webForCore.Web.Helpers`), and there are no new findings. F40 (#33) is 0.5.0's known issue. Round 4's new candidates (jabbr, opserver-mvc5, yafnet-2) found F45 onwards; F46 is fixed and F45, F48 documented in [jabba2324/webForCore#44](https://github.com/jabba2324/webForCore/pull/44). Repro sites are small enough to paste: a `Program.cs` as in
+(tag `v0.2.0`, `1c92215`), where F1–F15 are fixed or documented. F16–F21 and F24 are fixed in [jabba2324/webForCore#24](https://github.com/jabba2324/webForCore/pull/24) (released in 0.3.0), checked against the apps. Round 3 ran on 0.4.0, with webForCore-thirdparty 0.4.0 for WebActivatorEx (CLAUDE.md); F25 onwards were found there. F28–F33 are fixed or documented in [jabba2324/webForCore#32](https://github.com/jabba2324/webForCore/pull/32), checked against the apps. Round 3b (subtext, funnelweb, mojoportal) also ran on 0.4.0, with webForCore-thirdparty 0.4.0 and the unreleased `webForCore.WebActivator` 0.4.1 ([jabba2324/webForCore-thirdparty#1](https://github.com/jabba2324/webForCore-thirdparty/pull/1)); F35 onwards were found there. F35 and F38 are fixed in #32 too, and F36, F37, F41 and F42 documented there, checked against the apps. Round 4 ran on the released 0.5.0 packages (#32 merged), with webForCore-thirdparty 0.4.1: all 24 migrated apps build, the fixes hold in every app that needed them (MVCForum and Subtext with no workarounds, no explicit `webForCore.Web.Helpers`), and there are no new findings. F40 (#33) is 0.5.0's known issue. Round 4's new candidates (jabbr, opserver-mvc5, yafnet-2) found F45 onwards; F46 is fixed and F45, F48 documented in [jabba2324/webForCore#44](https://github.com/jabba2324/webForCore/pull/44). Round 5 ran on the released 0.6.0 packages (#44 merged), with webForCore-thirdparty 0.4.1, on Linux and, for the first time, on Windows (README.md, "Windows"): every app on both. F46 is fixed (JabbR builds), and the results are the same on both platforms except where F51 is reached; F51 onwards were found there. Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
 
 | # | Problem | Classification | Apps | Raised |
@@ -61,6 +61,9 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 | [F48](#f48) | The C# version: C# 14's span conversions and C# 11's ref safety break code written for older C# | guide gap | yafnet-2 | [#43](https://github.com/jabba2324/webForCore/issues/43) |
 | [F49](#f49) | YAF.NET's vendored ServiceStack 5.9 fork only works as .NET Framework code | app/environment | yafnet-2 | - |
 | [F50](#f50) | Nancy 0.20 needs `AppDomainSetup.PrivateBinPathProbe` | app/environment | jabbr | - |
+| [F51](#f51) | A change while the next start is starting leaves the application dead: 503 for every request | webForCore bug | bonobo-git-server, mojoportal (Windows); any app | [#49](https://github.com/jabba2324/webForCore/issues/49) |
+| [F52](#f52) | AppDomain data `DataDirectory` isn't set: `\|DataDirectory\|` resolves to `bin_dotnet/` | webForCore bug | bonobo-git-server | [#50](https://github.com/jabba2324/webForCore/issues/50) |
+| [F53](#f53) | Linux: a change in `bin` or `App_Code` doesn't restart the application | webForCore bug | any app (seen on aspnetdocs-mvcmovie, miniblog) | [#51](https://github.com/jabba2324/webForCore/issues/51) |
 ---
 
 ## F1
@@ -1043,3 +1046,40 @@ Found on 0.5.0. Documented in #44.
   System.AppDomainSetup.get_PrivateBinPathProbe()'`, from `Nancy.Bootstrapper.AppDomainAssemblyTypeScanner`.
 - **Cause:** Nancy 0.20 is .NET Framework only. Nancy 2.x has a .NET Standard build, but moving JabbR's modules to its API
   is a port, not a migration. Ninject 3.0 had the same kind of problem (`AppDomain.Evidence`); 3.3.6 fixed it.
+
+## F51
+
+**A change while the next start is starting leaves the application dead.** webForCore bug. Raised as
+[#49](https://github.com/jabba2324/webForCore/issues/49). Found on 0.6.0, on Linux and Windows.
+
+- **Apps:** bonobo-git-server and mojoportal on Windows, where the app itself writes into `bin_dotnet` (F52, F3); any app
+  when files keep changing during a restart (a deployment copying a build).
+- **Error:** every request gets `503 Server Too Busy` (`HttpRuntime`'s `_disposingHttpRuntime` check) until the
+  process restarts. The log has `(start 2) is unloading` before `Started application ... (start 2 ...)`, and no
+  start 3. On IIS the application restarts again and recovers.
+- **Repro:** MvcMovie; while its first request runs, change a file in `bin_dotnet` (Windows) or `Web.config` (Linux)
+  every 100 ms for 3 s; later requests are all 503. A single change restarts it cleanly.
+- **Cause (from the source):** the new start's HttpRuntime shuts down inside `AspNetCoreHost.CreateForMiddleware`;
+  `WebFormsMiddleware` neither hears of it nor starts again, and `current ??= StartApplication()` keeps the dead start.
+
+## F52
+
+**AppDomain data `DataDirectory` isn't set.** webForCore bug. Raised as
+[#50](https://github.com/jabba2324/webForCore/issues/50). Found on 0.6.0 (and 0.5.0), on Linux and Windows.
+
+- **Apps:** bonobo-git-server: `Data Source=|DataDirectory|Bonobo.Git.Server.db` (System.Data.SQLite) puts the database
+  in `bin_dotnet/`, not `App_Data/`. On Windows that write is a change in `bin`, and the app then hits F51.
+- **Repro:** `<%= AppDomain.CurrentDomain.GetData("DataDirectory") ?? "(null)" %>` in a page: `(null)`; on IIS
+  `<site>\App_Data`.
+- **Cause:** `HttpRuntime.SetUpDataDirectory` on .NET only calls `ApplicationManager.SetLoadContextData`, which only
+  webForCore's own `SqlConnectionHelper` reads.
+
+## F53
+
+**Linux: a change in `bin` or `App_Code` doesn't restart the application.** webForCore bug. Raised as
+[#51](https://github.com/jabba2324/webForCore/issues/51). Found on 0.6.0 (and 0.5.0).
+
+- **Apps:** any; checked with aspnetdocs-mvcmovie (a new `.dll` in `bin_dotnet`) and miniblog (a new `.cs` in
+  `app_code`). `Web.config` restarts it; on Windows all three do. docs/IIS-COMPATIBILITY.md says they work.
+- **Cause:** `HttpRuntime` starts the bin and critical-directory monitors only `if (OSInfo.IsWindows)`, a guard kept
+  from WebFormsForCore's early Linux work; LIFT.md says file-change notifications are on everywhere on net11.0.
