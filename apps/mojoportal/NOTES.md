@@ -62,6 +62,7 @@ Go, without the WCF services.
 ## Smoke
 
 - **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 8/15 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28); it builds (F35 fixed); every page still fails on `Assembly.Load("App_GlobalResources")` (F40, #33, the release's known issue). With `optimizeCompilations="true"` all 15 checks pass on the released packages (not in the overlay).
+- **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 6/15 probes on Linux and on Windows. The `mojoportal` database is new this round, so every page goes to `/Setup/Default.aspx`, which fails on `Assembly.Load("App_GlobalResources")` (F40, #33, 0.6.0's known issue; round 4's database had the schema, hence its 8/15). On Linux the other pages redirect to setup; on Windows they are 503: log4net's `Data/currentlog.config` is written relative to `BaseDirectory` (`bin_dotnet/`, F3), the change restarts the application, and the next start is shut down while it starts (F51, #49).
 
 The probes cover:
 - Setup;

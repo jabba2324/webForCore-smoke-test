@@ -16,6 +16,7 @@ session state). Newtonsoft.Json 13.0.1 → 13.0.4 ([F7](../../FINDINGS.md#f7)).
 ## Smoke
 
 - **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 8/8 probes.
+- **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 8/8 probes on Linux and on Windows.
 
 **8 of 9 pass**: `GET /Customer/7` returns `<Customer ...><FirstName>Mary</FirstName>...` through the OWIN-hosted Web API (XML, as configured); the only failure is the served W3C log ([F4](../../FINDINGS.md#f4)).
 

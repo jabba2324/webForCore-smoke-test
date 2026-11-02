@@ -58,6 +58,7 @@ Not changed, though they fail: the `SessionStateModuleAsync` registration in `<s
 ## Smoke
 
 - **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 15/15 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28).
+- **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 15/15 probes on Linux and on Windows. `/Content/css` comes back unminified on both (`CSS1062` at Bootstrap 4's `:root` custom properties: WebGrease doesn't parse them, as on .NET Framework); it first failed on Windows only because the runner read 200 KB of each response and CRLF line ends make the bundle 210 KB there (the runner now reads 4 MB).
 
 Probes: the catalog list (`/`), an MVC details page, the Create form (anti-forgery token), the picture action
 (attribute route `items/{id}/pic`), Web API `GET /api/brands` and `/api/brands/1` (JSON), a static CSS file, the CSS

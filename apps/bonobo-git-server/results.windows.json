@@ -1,0 +1,88 @@
+{
+  "id": "bonobo-git-server",
+  "stages": {
+    "build": {
+      "at": "2026-11-01T23:57:32+00:00",
+      "error_count": 0,
+      "errors": [],
+      "log": "apps\\bonobo-git-server\\logs.windows\\build.log",
+      "seconds": 3,
+      "status": "pass",
+      "summary": null,
+      "webforcore": "packages 0.6.0, webForCore-thirdparty 0.4.1"
+    },
+    "fetch": {
+      "at": "2026-11-01T23:57:29+00:00",
+      "commit": "6277ecfe1015b4612795bf8bb0f03ae2dd25b1ad",
+      "overlay": true,
+      "status": "pass"
+    },
+    "smoke": {
+      "at": "2026-11-01T23:57:58+00:00",
+      "checks": [
+        {
+          "ms": 8785,
+          "ok": true,
+          "path": "/Home/LogOn",
+          "status": 200
+        },
+        {
+          "ms": 38,
+          "ok": false,
+          "path": "/",
+          "status": 503,
+          "title": "<html><body>Server Too Busy</body></html>"
+        },
+        {
+          "expected_text": "body",
+          "ms": 9,
+          "ok": false,
+          "path": "/Content/Site.css",
+          "status": 503,
+          "title": "<html><body>Server Too Busy</body></html>"
+        },
+        {
+          "ms": 23,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 3,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 26,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "expected_text": "404 Page Not Found",
+          "ms": 3,
+          "ok": false,
+          "path": "/packages.config",
+          "status": 503,
+          "title": "<html><body>Server Too Busy</body></html>"
+        },
+        {
+          "ms": 18,
+          "ok": true,
+          "path": "/bin_dotnet/Bonobo.Git.Server.dll",
+          "status": 404
+        }
+      ],
+      "log": "apps\\bonobo-git-server\\logs.windows\\server.log",
+      "status": "fail",
+      "summary": "6/9 probes"
+    }
+  }
+}

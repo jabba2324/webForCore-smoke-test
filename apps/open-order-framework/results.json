@@ -20,14 +20,14 @@
       ]
     },
     "build": {
-      "at": "2026-11-01T10:04:59+00:00",
+      "at": "2026-11-01T23:29:36+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/open-order-framework/logs/build.log",
       "seconds": 1,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.5.0"
+      "webforcore": "packages 0.6.0"
     },
     "fetch": {
       "at": "2026-10-31T23:40:38+00:00",
@@ -36,28 +36,28 @@
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-01T10:16:05+00:00",
+      "at": "2026-11-01T23:43:13+00:00",
       "checks": [
         {
-          "ms": 8779,
+          "ms": 8840,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 256,
+          "ms": 257,
           "ok": true,
           "path": "/Store",
           "status": 200
         },
         {
-          "ms": 142,
+          "ms": 149,
           "ok": true,
           "path": "/ShoppingCart",
           "status": 200
         },
         {
-          "ms": 220,
+          "ms": 240,
           "ok": true,
           "path": "/Account/Login",
           "status": 200
@@ -69,13 +69,13 @@
           "status": 200
         },
         {
-          "ms": 78,
+          "ms": 57,
           "ok": true,
           "path": "/Content/Site.css",
           "status": 200
         },
         {
-          "ms": 14,
+          "ms": 13,
           "ok": true,
           "path": "/web.config",
           "status": 404

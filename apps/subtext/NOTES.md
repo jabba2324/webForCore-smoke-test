@@ -57,6 +57,7 @@ Go, with the SQL Server from `services/compose.yml` and an empty `SubtextData` d
 ## Smoke
 
 - **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 15/16 probes; it builds (F35 fixed) and the SqlClient calls work (F38 fixed); the install wizard runs; the log-in page's DotNetOpenAuth still fails (F44). webForCore-thirdparty's `webForCore.WebActivator` 0.4.1 is released now.
+- **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 15/16 probes on Linux and on Windows; the install wizard runs; unchanged: the log-in page (DotNetOpenAuth).
 
 The probes need `SubtextData` set up by Subtext's install wizard. These are three postbacks:
 1. "Install Now!" on `/install/default.aspx`;

@@ -20,14 +20,14 @@
       ]
     },
     "build": {
-      "at": "2026-11-01T10:04:05+00:00",
+      "at": "2026-11-01T23:28:47+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/aspnetdocs-mvcmovie/logs/build.log",
       "seconds": 1,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.5.0"
+      "webforcore": "packages 0.6.0"
     },
     "fetch": {
       "at": "2026-10-31T23:40:36+00:00",
@@ -36,52 +36,52 @@
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-01T10:06:55+00:00",
+      "at": "2026-11-01T23:31:41+00:00",
       "checks": [
         {
-          "ms": 3653,
+          "ms": 3733,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 13797,
+          "ms": 13678,
           "ok": true,
           "path": "/Movies",
           "status": 200
         },
         {
-          "ms": 301,
+          "ms": 306,
           "ok": true,
           "path": "/HelloWorld/Welcome?name=Scott&numTimes=4",
           "status": 200
         },
         {
-          "ms": 322,
+          "ms": 323,
           "ok": true,
           "path": "/Account/Register",
           "status": 200
         },
         {
-          "ms": 60,
+          "ms": 64,
           "ok": true,
           "path": "/Content/Site.css",
           "status": 200
         },
         {
-          "ms": 3,
+          "ms": 4,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 3,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404

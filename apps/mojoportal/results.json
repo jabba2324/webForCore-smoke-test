@@ -46,14 +46,14 @@
       ]
     },
     "build": {
-      "at": "2026-11-01T10:04:56+00:00",
+      "at": "2026-11-01T23:29:32+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/mojoportal/logs/build.log",
-      "seconds": 25,
+      "seconds": 16,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.5.0"
+      "webforcore": "packages 0.6.0"
     },
     "fetch": {
       "at": "2026-11-01T01:47:27+00:00",
@@ -62,11 +62,11 @@
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-01T10:16:58+00:00",
+      "at": "2026-11-01T23:35:05+00:00",
       "checks": [
         {
           "expected_text": "Your installation is up to date",
-          "ms": 623,
+          "ms": 546,
           "ok": false,
           "path": "/Setup/Default.aspx",
           "status": 500,
@@ -74,96 +74,99 @@
         },
         {
           "expected_text": "Welcome to mojoPortal!",
-          "ms": 3634,
+          "ms": 518,
           "ok": false,
           "path": "/",
-          "status": 500,
-          "title": "Could not load file or assembly 'App_GlobalResources, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
+          "status": 302,
+          "title": "Object moved"
         },
         {
           "expected_text": "LoginCtrl_Password",
-          "ms": 361,
+          "ms": 9,
           "ok": false,
           "path": "/Secure/Login.aspx",
-          "status": 500,
-          "title": "Could not load file or assembly 'App_GlobalResources, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
+          "status": 302,
+          "title": "Object moved"
         },
         {
           "expected_text": "__VIEWSTATE",
-          "ms": 23,
+          "ms": 8,
           "ok": false,
           "path": "/Secure/Register.aspx",
-          "status": 500,
-          "title": "Could not load file or assembly 'App_GlobalResources, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
+          "status": 302,
+          "title": "Object moved"
         },
         {
           "expected_text": "File Management",
-          "ms": 50,
+          "ms": 312,
           "ok": false,
           "path": "/FileManager",
-          "status": 200,
-          "title": ""
+          "status": 302,
+          "title": "Object moved"
         },
         {
           "expected_text": "Authorization has been denied for this request.",
-          "ms": 8,
+          "ms": 35,
           "ok": false,
           "path": "/api/UserProfile/Property/FirstName",
-          "status": 200,
-          "title": ""
+          "status": 302,
+          "title": "Object moved"
         },
         {
-          "ms": 46,
-          "ok": true,
+          "expected_text": "Bootstrap v3.3.7",
+          "ms": 8,
+          "ok": false,
           "path": "/csshandler.ashx?s=1&skin=framework",
-          "status": 200
+          "status": 302,
+          "title": "Object moved"
         },
         {
           "expected_text": "mojoPortal Site Search",
-          "ms": 15,
+          "ms": 7,
           "ok": false,
           "path": "/SearchEngineInfo.ashx",
-          "status": 500,
-          "title": "Could not load file or assembly 'App_GlobalResources, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
+          "status": 302,
+          "title": "Object moved"
         },
         {
-          "ms": 34,
-          "ok": true,
+          "ms": 10,
+          "ok": false,
           "path": "/Data/Sites/1/skins/framework/img/favicons/favicon-16x16.png",
-          "status": 200
+          "status": 302,
+          "title": "Object moved"
         },
         {
-          "ms": 4,
+          "ms": 5,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 5,
           "ok": true,
           "path": "/bin_dotnet/mojoPortal.Web.dll",
           "status": 404
@@ -171,7 +174,7 @@
       ],
       "log": "apps/mojoportal/logs/server.log",
       "status": "fail",
-      "summary": "8/15 probes"
+      "summary": "6/15 probes"
     }
   }
 }

@@ -27,14 +27,14 @@
       ]
     },
     "build": {
-      "at": "2026-11-01T10:04:25+00:00",
+      "at": "2026-11-01T23:29:10+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/eshop-legacy-mvc/logs/build.log",
       "seconds": 1,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.5.0"
+      "webforcore": "packages 0.6.0"
     },
     "fetch": {
       "at": "2026-10-31T23:40:38+00:00",
@@ -43,52 +43,52 @@
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-01T10:09:15+00:00",
+      "at": "2026-11-01T23:34:06+00:00",
       "checks": [
         {
-          "ms": 17990,
+          "ms": 18199,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 99,
+          "ms": 103,
           "ok": true,
           "path": "/Catalog/Details/1",
           "status": 200
         },
         {
-          "ms": 159,
+          "ms": 169,
           "ok": true,
           "path": "/Catalog/Create",
           "status": 200
         },
         {
-          "ms": 29,
+          "ms": 35,
           "ok": true,
           "path": "/items/1/pic",
           "status": 200
         },
         {
-          "ms": 186,
+          "ms": 199,
           "ok": true,
           "path": "/api/brands",
           "status": 200
         },
         {
-          "ms": 25,
+          "ms": 26,
           "ok": true,
           "path": "/api/brands/1",
           "status": 200
         },
         {
-          "ms": 62,
+          "ms": 65,
           "ok": true,
           "path": "/Content/base.css",
           "status": 200
         },
         {
-          "ms": 15,
+          "ms": 14,
           "ok": true,
           "path": "/Content/css",
           "status": 200

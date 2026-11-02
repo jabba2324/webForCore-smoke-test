@@ -8,7 +8,7 @@ project = "src/Roadkill.Web/Roadkill.Web.csproj"
 kinds = ["mvc", "webapi", "owin"]
 licence = "MS-PL"
 status = "blocked"
-notes = "Blocked on its closed-source LightSpeed ORM (AppDomain.DefineDynamicAssembly; F27). Got there on 0.4.0 with webForCore-thirdparty's WebActivatorEx, StructureMap 4.7.1 (F25) and NLog 4.7."
+notes = "Blocked on its closed-source LightSpeed ORM (AppDomain.DefineDynamicAssembly; F27): 8/9 on 0.6.0, Linux and Windows. Got there with webForCore-thirdparty's WebActivatorEx, StructureMap 4.7.1 (F25) and NLog 4.7."
 
 # The first request compiles the site, so it gets 120 s.
 needs = ["mssql"]

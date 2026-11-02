@@ -1,5 +1,5 @@
 diff --git a/src/Roadkill.Core/Roadkill.Core.csproj b/src/Roadkill.Core/Roadkill.Core.csproj
-index 5987c72..d929abd 100644
+index 5987c72..87b0b2d 100644
 --- a/src/Roadkill.Core/Roadkill.Core.csproj
 +++ b/src/Roadkill.Core/Roadkill.Core.csproj
 @@ -1,639 +1,86 @@
@@ -673,13 +673,13 @@ index 5987c72..d929abd 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.Http.Owin" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.5.0" />
-+    <PackageReference Include="webForCore.WebGrease" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.Http.Owin" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.6.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.6.0" />
++    <PackageReference Include="webForCore.WebGrease" Version="0.6.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -1433,7 +1433,7 @@ index 80bff34..0000000
 -</packages>
 \ No newline at end of file
 diff --git a/src/Roadkill.Plugins/Roadkill.Plugins.csproj b/src/Roadkill.Plugins/Roadkill.Plugins.csproj
-index 3eab60a..e673d24 100644
+index 3eab60a..e208b16 100644
 --- a/src/Roadkill.Plugins/Roadkill.Plugins.csproj
 +++ b/src/Roadkill.Plugins/Roadkill.Plugins.csproj
 @@ -1,116 +1,35 @@
@@ -1543,9 +1543,9 @@ index 3eab60a..e673d24 100644
 -    <Compile Include="Text\BuiltIn\ToC\TocPlugin.cs" />
 -    <Compile Include="Text\BuiltIn\ToC\Tree.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -1744,7 +1744,7 @@ index 0000000..a809f98
 +    }
 +}
 diff --git a/src/Roadkill.Web/Roadkill.Web.csproj b/src/Roadkill.Web/Roadkill.Web.csproj
-index 00fdc71..88e345d 100644
+index 00fdc71..e5a1ac7 100644
 --- a/src/Roadkill.Web/Roadkill.Web.csproj
 +++ b/src/Roadkill.Web/Roadkill.Web.csproj
 @@ -1,763 +1,62 @@
@@ -2542,11 +2542,11 @@ index 00fdc71..88e345d 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.6.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.6.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>

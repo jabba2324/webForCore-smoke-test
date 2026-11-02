@@ -97,7 +97,7 @@ index 0000000..9a92f00
 +<!-- Smoke test: the example's "global access for everyone" (no Active Directory here). -->
 +<SecuritySettings provider="alladmin" />
 diff --git a/Opserver/Opserver.csproj b/Opserver/Opserver.csproj
-index ae39b67..5eb177c 100644
+index ae39b67..43495c8 100644
 --- a/Opserver/Opserver.csproj
 +++ b/Opserver/Opserver.csproj
 @@ -1,709 +1,47 @@
@@ -797,10 +797,10 @@ index ae39b67..5eb177c 100644
 -      <DependentUpon>HAProxy.cshtml</DependentUpon>
 -    </Content>
 +    <!-- webForCore 0.5.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.5.0" />
-+    <PackageReference Include="webForCore.WebGrease" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.6.0" />
++    <PackageReference Include="webForCore.WebGrease" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>

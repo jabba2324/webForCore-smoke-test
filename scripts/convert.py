@@ -4,7 +4,7 @@
     scripts/convert.py apps/<id>/src/<web project>.csproj [--lib apps/<id>/src/<library>.csproj]...
 
 - copies each project to <name>.csproj.netfx (once) and rewrites it as an SDK-style net11.0 project;
-- adds the webForCore packages for the frameworks it references ($WEBFORCORE_VERSION, default 0.5.0); keeps the app's
+- adds the webForCore packages for the frameworks it references ($WEBFORCORE_VERSION, default 0.6.0); keeps the app's
   other packages (from packages.config or PackageReference), drops Microsoft's ASP.NET packages and the System.*
   packages that are part of .NET, and raises the versions webForCore forces (FINDINGS.md F7); keeps HintPath
   references outside packages/;
@@ -20,7 +20,7 @@ Standard library only (Python 3.11+)."""
 import re, shutil, sys
 from pathlib import Path
 
-WFC = __import__("os").environ.get("WEBFORCORE_VERSION", "0.5.0")
+WFC = __import__("os").environ.get("WEBFORCORE_VERSION", "0.6.0")
 THIRDPARTY = __import__("os").environ.get("THIRDPARTY_VERSION", "0.4.1")
 # webForCore-thirdparty's builds: (regex over references and packages, its package). The original package is kept
 # (packages such as Unity.Mvc bring it anyway); the build wins the conflict.

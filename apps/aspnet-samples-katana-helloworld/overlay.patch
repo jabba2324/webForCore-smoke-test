@@ -1,5 +1,5 @@
 diff --git a/samples/aspnet/Katana/HelloWorld/HelloWorld.csproj b/samples/aspnet/Katana/HelloWorld/HelloWorld.csproj
-index 29eece0..f462759 100644
+index 29eece0..0d6fc2d 100644
 --- a/samples/aspnet/Katana/HelloWorld/HelloWorld.csproj
 +++ b/samples/aspnet/Katana/HelloWorld/HelloWorld.csproj
 @@ -1,120 +1,31 @@
@@ -104,8 +104,8 @@ index 29eece0..f462759 100644
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 -    <Compile Include="Startup.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.6.0" />
    </ItemGroup>
 -  <ItemGroup>
 -    <Content Include="packages.config" />

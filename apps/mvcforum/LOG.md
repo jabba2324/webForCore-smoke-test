@@ -21,3 +21,8 @@ Appended by `scripts/wfc.py`, one line per stage run.
 - 2026-10-31T23:57:18+00:00 **smoke**: fail (6/14 probes)
 - 2026-11-01T10:04:58+00:00 **build**: pass
 - 2026-11-01T10:10:24+00:00 **smoke**: pass (14/14 probes)
+- 2026-11-01T23:29:35+00:00 **build**: pass
+- 2026-11-01T23:35:36+00:00 **smoke**: pass (14/14 probes)
+- 2026-11-02T00:00:35+00:00 **fetch** (windows): pass at `8ce337990e07`
+- 2026-11-02T00:00:39+00:00 **build** (windows): pass
+- 2026-11-02T00:01:08+00:00 **smoke** (windows): pass (14/14 probes)
