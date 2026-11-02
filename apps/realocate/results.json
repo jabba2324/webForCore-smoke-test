@@ -28,14 +28,14 @@
       ]
     },
     "build": {
-      "at": "2026-11-01T10:05:06+00:00",
+      "at": "2026-11-01T23:29:40+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/realocate/logs/build.log",
-      "seconds": 7,
+      "seconds": 2,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.5.0"
+      "webforcore": "packages 0.6.0"
     },
     "fetch": {
       "at": "2026-10-31T23:40:38+00:00",
@@ -44,64 +44,64 @@
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-01T10:15:09+00:00",
+      "at": "2026-11-01T23:40:30+00:00",
       "checks": [
         {
-          "ms": 5629,
+          "ms": 5509,
           "ok": true,
           "path": "/Account/Login",
           "status": 200
         },
         {
-          "ms": 32,
+          "ms": 39,
           "ok": true,
           "path": "/Account/Register",
           "status": 200
         },
         {
-          "ms": 15354,
+          "ms": 16082,
           "ok": true,
           "path": "/Home/GetAllRealEstatesList",
           "status": 200
         },
         {
-          "ms": 47,
+          "ms": 49,
           "ok": true,
           "path": "/Agencies/CreateAgency",
           "status": 302
         },
         {
-          "ms": 7,
+          "ms": 8,
           "ok": true,
           "path": "/Home/Chat",
           "status": 200
         },
         {
-          "ms": 156,
+          "ms": 140,
           "ok": true,
           "path": "/signalr/hubs",
           "status": 200
         },
         {
-          "ms": 72,
+          "ms": 67,
           "ok": true,
           "path": "/Content/Site.css",
           "status": 200
         },
         {
-          "ms": 3,
+          "ms": 6,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
@@ -119,7 +119,7 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 14,
           "ok": true,
           "path": "/bin_dotnet/ReaLocate.Web.dll",
           "status": 404
