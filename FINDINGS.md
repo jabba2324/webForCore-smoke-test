@@ -5,7 +5,15 @@ One entry per distinct problem found while migrating apps. webForCore bugs and g
 pre-release and not recommended for production). See CLAUDE.md for the format. Every entry was found
 with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 release packages (tag `v0.1.0`,
 `2942b694`), unless the entry says otherwise. F16 onwards were found in round 2, on the released 0.2.0 packages
-(tag `v0.2.0`, `1c92215`), where F1–F15 are fixed or documented. F16–F21 and F24 are fixed in [jabba2324/webForCore#24](https://github.com/jabba2324/webForCore/pull/24) (released in 0.3.0), checked against the apps. Round 3 ran on 0.4.0, with webForCore-thirdparty 0.4.0 for WebActivatorEx (CLAUDE.md); F25 onwards were found there. F28–F33 are fixed or documented in [jabba2324/webForCore#32](https://github.com/jabba2324/webForCore/pull/32), checked against the apps. Round 3b (subtext, funnelweb, mojoportal) also ran on 0.4.0, with webForCore-thirdparty 0.4.0 and the unreleased `webForCore.WebActivator` 0.4.1 ([jabba2324/webForCore-thirdparty#1](https://github.com/jabba2324/webForCore-thirdparty/pull/1)); F35 onwards were found there. F35 and F38 are fixed in #32 too, and F36, F37, F41 and F42 documented there, checked against the apps. Round 4 ran on the released 0.5.0 packages (#32 merged), with webForCore-thirdparty 0.4.1: all 24 migrated apps build, the fixes hold in every app that needed them (MVCForum and Subtext with no workarounds, no explicit `webForCore.Web.Helpers`), and there are no new findings. F40 (#33) is 0.5.0's known issue. Round 4's new candidates (jabbr, opserver-mvc5, yafnet-2) found F45 onwards; F46 is fixed and F45, F48 documented in [jabba2324/webForCore#44](https://github.com/jabba2324/webForCore/pull/44). Round 5 ran on the released 0.6.0 packages (#44 merged), with webForCore-thirdparty 0.4.1, on Linux and, for the first time, on Windows (README.md, "Windows"): every app on both. F46 is fixed (JabbR builds), and the results are the same on both platforms except where F51 is reached; F51 onwards were found there. Repro sites are small enough to paste: a `Program.cs` as in
+(tag `v0.2.0`, `1c92215`), where F1–F15 are fixed or documented. F16–F21 and F24 are fixed in [jabba2324/webForCore#24](https://github.com/jabba2324/webForCore/pull/24) (released in 0.3.0), checked against the apps. Round 3 ran on 0.4.0, with webForCore-thirdparty 0.4.0 for WebActivatorEx (CLAUDE.md); F25 onwards were found there. F28–F33 are fixed or documented in [jabba2324/webForCore#32](https://github.com/jabba2324/webForCore/pull/32), checked against the apps. Round 3b (subtext, funnelweb, mojoportal) also ran on 0.4.0, with webForCore-thirdparty 0.4.0 and the unreleased `webForCore.WebActivator` 0.4.1 ([jabba2324/webForCore-thirdparty#1](https://github.com/jabba2324/webForCore-thirdparty/pull/1)); F35 onwards were found there. F35 and F38 are fixed in #32 too, and F36, F37, F41 and F42 documented there, checked against the apps. Round 4 ran on the released 0.5.0 packages (#32 merged), with webForCore-thirdparty 0.4.1: all 24 migrated apps build, the fixes hold in every app that needed them (MVCForum and Subtext with no workarounds, no explicit `webForCore.Web.Helpers`), and there are no new findings. F40 (#33) is 0.5.0's known issue. Round 4's new candidates (jabbr, opserver-mvc5, yafnet-2) found F45 onwards; F46 is fixed and F45, F48 documented in [jabba2324/webForCore#44](https://github.com/jabba2324/webForCore/pull/44). Round 5 ran on the released 0.6.0 packages (#44 merged), with webForCore-thirdparty 0.4.1, on Linux and, for the first time, on Windows (README.md, "Windows"): every app on both. F46 is fixed (JabbR builds), and the results are the same on both platforms except where F51 is reached; F51 onwards were found there. Round 6 ran on the released 0.7.0 packages, on Linux and Windows:
+- **The release:** .NET 10 LTS; every app runs as a worker process under `webforcore-host`; System.Drawing comes from drawingForCore 0.2.0.
+- **Third-party packages:** webForCore-thirdparty 0.5.0, the first built for net10.0 (F55 explains why 0.4.1 couldn't be used).
+- **Results:** they match round 5 on both platforms, apart from one new probe: `webforcore-host.dll` isn't served.
+- **What 0.7.0 fixed:** F51 and F52, so bonobo-git-server passes on Windows too.
+- **What's new:** F54 is the one new problem webForCore can act on; F54 onwards were found in this round.
+- **The feeds:** miniblog also restores from the NuGet feeds alone (webForCore#53 step 5).
+
+Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
 
 | # | Problem | Classification | Apps | Raised |
@@ -64,6 +72,9 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 | [F51](#f51) | A change while the next start is starting leaves the application dead: 503 for every request | webForCore bug | bonobo-git-server, mojoportal (Windows); any app | [#49](https://github.com/jabba2324/webForCore/issues/49) |
 | [F52](#f52) | AppDomain data `DataDirectory` isn't set: `\|DataDirectory\|` resolves to `bin_dotnet/` | webForCore bug | bonobo-git-server | [#50](https://github.com/jabba2324/webForCore/issues/50) |
 | [F53](#f53) | Linux: a change in `bin` or `App_Code` doesn't restart the application | webForCore bug | any app (seen on aspnetdocs-mvcmovie, miniblog) | [#51](https://github.com/jabba2324/webForCore/issues/51) |
+| [F54](#f54) | .NET 10 prunes fewer framework packages than .NET 11: NU1605 downgrades (System.ComponentModel.Annotations; Microsoft.Extensions.\* in class libraries) | guide gap | mvcforum, yafnet-2 | [#62](https://github.com/jabba2324/webForCore/issues/62) |
+| [F55](#f55) | webForCore-thirdparty 0.4.x (net11.0 only) restores on .NET 10 with no error and no assembly: the original WebActivatorEx runs | app/environment (fixed in webForCore-thirdparty 0.5.0) | applicant-tracking (bonobo-git-server, mvcforum, roadkill, subtext would have) | - |
+| [F56](#f56) | An app's repository is gone from GitHub (devbridge/BetterCMS), and a clone of one waited for credentials | app/environment | better-cms (and prodinner, already rejected for it) | - |
 ---
 
 ## F1
@@ -1083,3 +1094,56 @@ Found on 0.5.0. Documented in #44.
   `app_code`). `Web.config` restarts it; on Windows all three do. docs/IIS-COMPATIBILITY.md says they work.
 - **Cause:** `HttpRuntime` starts the bin and critical-directory monitors only `if (OSInfo.IsWindows)`, a guard kept
   from WebFormsForCore's early Linux work; LIFT.md says file-change notifications are on everywhere on net11.0.
+
+## F54
+
+**.NET 10 prunes fewer framework packages than .NET 11, so restores fail with NU1605 package downgrades.** Guide
+gap. Raised as [#62](https://github.com/jabba2324/webForCore/issues/62). Found in round 6, on 0.7.0 (.NET 10), on
+Linux and Windows.
+
+- **Apps:**
+  - mvcforum: `System.ComponentModel.Annotations from 5.0.0 to 4.4.1`.
+  - yafnet-2: `Microsoft.Extensions.Primitives from 8.0.0 to 5.0.1` and `.Configuration.Abstractions from 8.0.0 to
+    5.0.0`, in its Lucene.Net class libraries.
+  - Both restored on 0.6.0 (.NET 11).
+- **Cause:** the SDK prunes package references that the framework provides, as listed in the targeting packs'
+  `PackageOverrides.txt`. The lists differ between the two versions:
+  - .NET 11's Microsoft.NETCore.App covers System.ComponentModel.Annotations up to 5.0.0. .NET 10's covers it only up
+    to 4.3.0, so MVCForum's 4.4.1 pin now conflicts with EntityFramework 6.5.1's `>= 5.0.0`.
+  - .NET 11's Microsoft.NETCore.App also covers Microsoft.Extensions.\*. On .NET 10 they are only in
+    Microsoft.AspNetCore.App. So a plain `Microsoft.NET.Sdk` class library that references `webForCore` gets their
+    8.0.0 packages (through webForCore.Web.Extensions → CoreWCF.Http 1.9.1), and those conflict with its older pins.
+  - webForCore.Web's nuspec declares the AspNetCore framework reference, but pruning only uses the project's own
+    `FrameworkReference` items.
+- **Repro:** net10.0 class libraries with `webForCore` 0.7.0:
+  - adding `Microsoft.Extensions.Primitives` 5.0.1 fails;
+  - adding `EntityFramework` 6.5.1 and `System.ComponentModel.Annotations` 4.4.1 fails;
+  - the first with `<FrameworkReference Include="Microsoft.AspNetCore.App" />` added restores.
+- **Fix in the app:** mvcforum references Annotations 5.0.0 and passes 15/15. That's the guide step the issue
+  proposes. yafnet-2 stays blocked on F48 and F49 regardless.
+
+## F55
+
+**webForCore-thirdparty 0.4.x targets only net11.0, and on .NET 10 it restores with no error and no assembly.**
+App/environment; fixed in webForCore-thirdparty 0.5.0 (net10.0, built against webForCore 0.7.0). Found in round 6.
+
+- **Apps:** applicant-tracking ran the original WebActivatorEx 2.2.0 (net40), whose start methods don't run (F20).
+  Its probes don't depend on them, so it still passed. bonobo-git-server, mvcforum, roadkill and subtext reference
+  the same packages and would have done the same.
+- **Cause:** the packages' TFM-less `buildTransitive/` targets make NuGet treat them as compatible with net10.0, so
+  there's no NU1202. Their `lib/net11.0` assembly is simply not used. The original package of the same assembly,
+  which Unity.Mvc and similar packages bring, is then the only one in the build.
+- **Now:** round 6 uses webForCore-thirdparty 0.5.0, and applicant-tracking's output has `lib/net10.0/WebActivatorEx.dll`.
+
+## F56
+
+**An app's repository is gone from GitHub, and a clone of it waited for credentials.** App/environment. Found in
+round 6.
+
+- **Apps:**
+  - better-cms: `devbridge/BetterCMS`, not migrated yet. It is now rejected.
+  - prodinner: `omuleanu/ProDinner` was already rejected for this. Its clone was still attempted, because the run
+    named it.
+- **What happens:** the page is 404 and the git endpoint answers 401. git then asks for credentials, through
+  `SSH_ASKPASS` (a desktop dialog) where that's set, so the clone waited for hours. The runner now gives git no
+  prompt of either kind, and has a stall timeout, so such a clone fails in seconds.

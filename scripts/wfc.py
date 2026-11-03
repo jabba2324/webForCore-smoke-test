@@ -4,7 +4,7 @@ migrated projects against webForCore, run them on Kestrel and probe them.
 
 Standard library only (Python 3.11+, for tomllib).
 
-    scripts/wfc.py packages [--version 0.6.0]  # download webForCore's (and webForCore-thirdparty's) release packages into .packages/
+    scripts/wfc.py packages [--version 0.7.0]  # download webForCore's (and webForCore-thirdparty's) release packages into .packages/
     scripts/wfc.py list
     scripts/wfc.py fetch <id>... | --all [--reset]
     scripts/wfc.py assess <id>... | --all
@@ -51,12 +51,16 @@ WEBFORCORE = Path(os.environ.get("WEBFORCORE_DIR", ROOT.parent / "webForCore")).
 # builds restore from it (apps reference the packages, docs/MIGRATING.md section 1). WEBFORCORE_DIR is only needed by
 # apps still migrated against webForCore's source.
 WEBFORCORE_REPO = "jabba2324/webForCore"
-WEBFORCORE_VERSION = os.environ.get("WEBFORCORE_VERSION", "0.6.0")
+WEBFORCORE_VERSION = os.environ.get("WEBFORCORE_VERSION", "0.7.0")
 # Builds of third-party libraries for webForCore (WebActivatorEx, AjaxControlToolkit; CLAUDE.md), from
 # webForCore-thirdparty's releases, go in the same folder.
 THIRDPARTY_REPO = "jabba2324/webForCore-thirdparty"
-THIRDPARTY_VERSION = os.environ.get("THIRDPARTY_VERSION", "0.4.1")
+THIRDPARTY_VERSION = os.environ.get("THIRDPARTY_VERSION", "0.5.0")
 THIRDPARTY_PACKAGES = ("webForCore.WebActivatorEx", "webForCore.AjaxControlToolkit")
+# System.Drawing, which the webForCore package depends on from 0.7.0 (drawingForCore and drawingForCore.Common), goes
+# there too.
+DRAWING_REPO = "jabba2324/drawingForCore"
+DRAWING_VERSION = os.environ.get("DRAWING_VERSION", "0.2.0")
 PACKAGES = ROOT / ".packages"
 # The OS this run is on. Linux keeps the original file names; Windows' results sit beside them.
 PLATFORM = "windows" if os.name == "nt" else "linux"
@@ -135,7 +139,8 @@ def download_packages():
     dest = package_source()
     dest.mkdir(parents=True, exist_ok=True)
     ok = True
-    for repo, version in ((WEBFORCORE_REPO, WEBFORCORE_VERSION), (THIRDPARTY_REPO, THIRDPARTY_VERSION)):
+    for repo, version in ((WEBFORCORE_REPO, WEBFORCORE_VERSION), (THIRDPARTY_REPO, THIRDPARTY_VERSION),
+                          (DRAWING_REPO, DRAWING_VERSION)):
         for attempt in range(3):  # release asset downloads fail with 503 now and then
             r = subprocess.run(["gh", "release", "download", f"v{version}", "--repo", repo,
                                 "--pattern", "*.nupkg", "--dir", str(dest), "--skip-existing"], capture_output=True, text=True)
@@ -146,7 +151,7 @@ def download_packages():
             print(f"{repo} v{version}: {r.stderr.strip()[:200]}")
             ok = False
     count = len(list(dest.glob("*.nupkg")))
-    print(f"{dest.relative_to(ROOT)}: {count} packages (webForCore {WEBFORCORE_VERSION}, webForCore-thirdparty {THIRDPARTY_VERSION})")
+    print(f"{dest.relative_to(ROOT)}: {count} packages (webForCore {WEBFORCORE_VERSION}, webForCore-thirdparty {THIRDPARTY_VERSION}, drawingForCore {DRAWING_VERSION})")
     return ok
 
 
@@ -172,6 +177,8 @@ def scrub(log):
     text = log.read_text(errors="replace")
     # Longest first: the repo's path can start with webForCore's (../webForCore-smoke-test).
     pairs = [(str(WEBFORCORE), "$WEBFORCORE_DIR"), (str(ROOT), "<repo>"), (str(Path.home()), "~")]
+    if CHECKOUTS:
+        pairs.append((str(CHECKOUTS), "$WFC_CHECKOUTS"))
     pairs += [(a.replace("\\", "/"), b) for a, b in pairs if "\\" in a]  # Windows paths, also written with /
     for path, name in sorted(pairs, key=lambda p: -len(p[0])):
         text = text.replace(path, name)
@@ -203,13 +210,31 @@ def record(app_id, stage, status, **details):
 
 
 def git(*args, cwd=None, check=True):
-    # Files as committed (overlays are byte-for-byte patches) and Windows paths over 260 characters (mojoPortal).
-    return subprocess.run(["git", "-c", "core.autocrlf=false", "-c", "core.longpaths=true", *args], cwd=cwd, check=check,
-                          capture_output=True, text=True)
+    # Files as committed (overlays are byte-for-byte patches) and Windows paths over 260 characters (mojoPortal). A
+    # transfer slower than 1 KB/s for 2 minutes fails rather than hanging the run, and so does a repository that's gone:
+    # GitHub answers 401, and git asked for a username, in a desktop dialog when SSH_ASKPASS is set (KDE's ksshaskpass),
+    # so BetterCMS's clone waited for hours. No prompt of either kind, so it fails.
+    quiet = {k: v for k, v in os.environ.items() if k not in ("SSH_ASKPASS", "GIT_ASKPASS")}
+    return subprocess.run(["git", "-c", "core.autocrlf=false", "-c", "core.longpaths=true", "-c", "core.askPass=",
+                           "-c", "http.lowSpeedLimit=1000", "-c", "http.lowSpeedTime=120", *args], cwd=cwd, check=check,
+                          capture_output=True, text=True,
+                          env={**quiet, "GIT_TERMINAL_PROMPT": "0", "GCM_INTERACTIVE": "never"})
+
+
+# WFC_CHECKOUTS: a folder for the apps' checkouts (<folder>/<id>) instead of apps/<id>/src, e.g. on another disk: the
+# big apps are hundreds of thousands of files, and their builds gigabytes.
+CHECKOUTS = Path(os.environ["WFC_CHECKOUTS"]).resolve() if os.environ.get("WFC_CHECKOUTS") else None
 
 
 def checkout(app):
-    return app_dir(app["id"]) / "src"
+    return CHECKOUTS / app["id"] if CHECKOUTS else app_dir(app["id"]) / "src"
+
+
+def shown(path):
+    """A path for the record: relative to the repo, or to WFC_CHECKOUTS."""
+    if CHECKOUTS and path.is_relative_to(CHECKOUTS):
+        return f"$WFC_CHECKOUTS/{path.relative_to(CHECKOUTS).as_posix()}"
+    return str(path.relative_to(ROOT))
 
 
 def site_dir(app):
@@ -303,7 +328,7 @@ def referenced_projects(proj, seen=None):
 def assess(app):
     root = site_dir(app)
     if not root.exists():
-        return record(app["id"], "assess", "fail", summary=f"no folder {root.relative_to(ROOT)}")
+        return record(app["id"], "assess", "fail", summary=f"no folder {shown(root)}")
     hits = {name: [] for name, _ in BLOCKERS + NOTICES}
     kinds = set()
     target_frameworks = set()
@@ -373,7 +398,10 @@ def build(app):
         # also_build: projects built after the web project, that deploy themselves into the site (mojoPortal's features)
         for p in [proj] + [checkout(app) / extra for extra in app.get("also_build", [])]:
             f.flush()
+            # One MSBuild node, no compiler server, nothing left running after it: slower, but a big solution's build
+            # doesn't take the memory the app, its database and the Windows VM need (a run was stopped for low memory).
             r = subprocess.run(["dotnet", "build", str(p), "-c", "Release", "-nologo", "-clp:ErrorsOnly;Summary",
+                                "-m:1", "-nodeReuse:false", "-p:UseSharedCompilation=false",
                                 f"-p:RestoreAdditionalProjectSources={package_source()}"],
                                cwd=p.parent, env=env(), stdout=f, stderr=subprocess.STDOUT)
             if r.returncode != 0:
@@ -425,7 +453,7 @@ def smoke(app):
     site = proj.parent
     dll = site / "bin_dotnet" / f"{assembly_name(proj)}.dll"
     if not dll.exists():
-        return record(app["id"], "smoke", "skip", summary=f"not built ({dll.relative_to(ROOT)} missing)")
+        return record(app["id"], "smoke", "skip", summary=f"not built ({shown(dll)} missing)")
     port = free_port()
     base = f"{'https' if app.get('https') else 'http'}://127.0.0.1:{port}"
     log = logs_dir(app["id"]) / "server.log"
@@ -651,7 +679,9 @@ def windows(command, ids, reset):
     if command in ("smoke", "run"):
         win_db()
     flags = (" --reset" if reset else "")
-    e = f"$env:WEBFORCORE_VERSION='{WEBFORCORE_VERSION}'; $env:THIRDPARTY_VERSION='{THIRDPARTY_VERSION}'; "
+    # PYTHONUNBUFFERED: each stage's line comes back as it finishes, not all at the end (a long run looked hung).
+    e = (f"$env:PYTHONUNBUFFERED='1'; $env:WEBFORCORE_VERSION='{WEBFORCORE_VERSION}'; "
+         f"$env:THIRDPARTY_VERSION='{THIRDPARTY_VERSION}'; $env:DRAWING_VERSION='{DRAWING_VERSION}'; ")
     r = win_ps(f"{e}Set-Location '{win_dir()}'; python scripts/wfc.py {command}{flags} {' '.join(ids)}", check=False)
     win_pull(ids)
     return r.returncode
@@ -665,7 +695,7 @@ def main():
     p.add_argument("ids", nargs="*", help="app ids; for windows, the command first (fetch, build, smoke, run)")
     p.add_argument("--all", action="store_true")
     p.add_argument("--reset", action="store_true", help="fetch, run: discard the checkout's changes and reapply the overlay")
-    p.add_argument("--version", help="packages: the webForCore release (default: $WEBFORCORE_VERSION or 0.6.0; webForCore-thirdparty: $THIRDPARTY_VERSION or 0.4.1)")
+    p.add_argument("--version", help="packages: the webForCore release (default: $WEBFORCORE_VERSION or 0.7.0; webForCore-thirdparty: $THIRDPARTY_VERSION or 0.5.0)")
     a = p.parse_args()
     if a.command == "packages":
         global WEBFORCORE_VERSION
