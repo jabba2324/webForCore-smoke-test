@@ -113,6 +113,7 @@ Go, with SQL Server.
   home page probe gets a 302 to `/install/` (F64). Every other probe passes on the uninstalled site.
 - **With the runner's `json` setup steps** (added for this app): from a new database, `build`, `setup` (9/10 steps,
   the `may_fail` one catching F59) and `smoke` pass 16/16 on Linux.
+- **Second CI run (PR #14), with the fixes:** 16/16 on Linux and on Windows.
 - **First CI run (PR #14):** 16/16 on Windows; 14/16 on Linux, where the runner's `C` locale left the back office
   without its text (F67) and the log-in step was caught by the F59 restart. With the culture set and the log-in's
   `retries`, 16/16 locally under `LANG=C`, from a fresh checkout and database.
