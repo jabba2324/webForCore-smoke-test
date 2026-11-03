@@ -18,70 +18,76 @@
       ]
     },
     "build": {
-      "at": "2026-11-01T23:29:07+00:00",
+      "at": "2026-11-03T01:30:56+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/aspnet-samples-webapi-webforms/logs/build.log",
-      "seconds": 0,
+      "seconds": 1,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.6.0"
+      "webforcore": "packages 0.7.0"
     },
     "fetch": {
-      "at": "2026-10-31T23:40:37+00:00",
+      "at": "2026-11-03T01:30:55+00:00",
       "commit": "f7d4a776327df09c13b39489b122209c5d04693b",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-01T23:33:14+00:00",
+      "at": "2026-11-03T01:31:00+00:00",
       "checks": [
         {
-          "ms": 2105,
+          "ms": 7,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 17,
+          "ms": 18,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 6,
+          "ms": 8,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 6,
+          "ms": 7,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 5,
+          "ms": 7,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 5,
+          "ms": 7,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 7,
+          "ms": 9,
           "ok": true,
           "path": "/bin_dotnet/WebForm.dll",
+          "status": 404
+        },
+        {
+          "ms": 8,
+          "ok": true,
+          "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404
         }
       ],
       "log": "apps/aspnet-samples-webapi-webforms/logs/server.log",
       "status": "pass",
-      "summary": "7/7 probes"
+      "summary": "8/8 probes"
     }
   }
 }
