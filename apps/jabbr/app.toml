@@ -9,7 +9,7 @@ kinds = ["signalr", "owin"]
 licence = "MIT"
 status = "blocked"
 needs = ["mssql"]
-notes = "Blocked: it builds on 0.6.0 (F46 fixed); Nancy 0.20 needs AppDomainSetup.PrivateBinPathProbe (F50, app/environment): 6/10, Linux and Windows. Ninject 3.0 -> 3.3.6."
+notes = "Blocked: Nancy 0.20 needs AppDomainSetup.PrivateBinPathProbe (F50, app/environment): 7/11 probes on Linux and Windows on webForCore 0.7.0 (.NET 10, under webforcore-host). Ninject 3.0 -> 3.3.6."
 
 # The first request compiles the site, so it gets 120 s. The probes need the compose SQL Server; EF's migrations
 # create the JabbR database. Pages are Nancy modules on OWIN; /signalr is SignalR 2.

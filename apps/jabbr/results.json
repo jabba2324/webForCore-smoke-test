@@ -31,81 +31,81 @@
       ]
     },
     "build": {
-      "at": "2026-11-01T23:29:15+00:00",
+      "at": "2026-11-03T12:14:50+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/jabbr/logs/build.log",
-      "seconds": 2,
+      "seconds": 3,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.6.0"
+      "webforcore": "packages 0.7.0"
     },
     "fetch": {
-      "at": "2026-11-01T10:44:46+00:00",
+      "at": "2026-11-03T12:14:47+00:00",
       "commit": "eb5b4e2f1e5bdbb1ea91230f1884716170a6976d",
-      "overlay": false,
+      "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-01T23:34:46+00:00",
+      "at": "2026-11-03T12:15:06+00:00",
       "checks": [
         {
           "expected_text": "JabbR",
-          "ms": 16798,
+          "ms": 155,
           "ok": false,
           "path": "/",
           "status": 500,
-          "title": "Method not found: 'System.String System.AppDomainSetup.get_PrivateBinPathProbe()'."
+          "title": "Could not load file or assembly 'Nancy, Version=0.21.1.0, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
         },
         {
           "expected_text": "password",
-          "ms": 345,
+          "ms": 106,
           "ok": false,
           "path": "/account/login",
           "status": 500,
-          "title": "Method not found: 'System.String System.AppDomainSetup.get_PrivateBinPathProbe()'."
+          "title": "Could not load file or assembly 'Nancy, Version=0.21.1.0, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
         },
         {
           "expected_text": "$.hubConnection",
-          "ms": 156,
+          "ms": 99,
           "ok": false,
           "path": "/signalr/hubs",
           "status": 500,
-          "title": "Method not found: 'System.String System.AppDomainSetup.get_PrivateBinPathProbe()'."
+          "title": "Could not load file or assembly 'Nancy, Version=0.21.1.0, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
         },
         {
-          "ms": 156,
+          "ms": 103,
           "ok": false,
           "path": "/Content/images/big-logo.png",
           "status": 500,
-          "title": "Method not found: 'System.String System.AppDomainSetup.get_PrivateBinPathProbe()'."
+          "title": "Could not load file or assembly 'Nancy, Version=0.21.1.0, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
         },
         {
-          "ms": 3,
+          "ms": 5,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/packages.config",
           "status": 404
@@ -115,11 +115,17 @@
           "ok": true,
           "path": "/bin_dotnet/JabbR.dll",
           "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
+          "status": 404
         }
       ],
       "log": "apps/jabbr/logs/server.log",
       "status": "fail",
-      "summary": "6/10 probes"
+      "summary": "7/11 probes"
     }
   }
 }
