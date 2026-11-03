@@ -12,6 +12,7 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 - **What 0.7.0 fixed:** F51 and F52, so bonobo-git-server passes on Windows too.
 - **What's new:** F54 is the one new problem webForCore can act on; F54 onwards were found in this round.
 - **The feeds:** miniblog also restores from the NuGet feeds alone (webForCore#53 step 5).
+- **Umbraco 6** (a new app, migrated on 0.7.0, on Linux so far): F57–F64.
 
 Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
@@ -75,6 +76,14 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F54](#f54) | .NET 10 prunes fewer framework packages than .NET 11: NU1605 downgrades (System.ComponentModel.Annotations; Microsoft.Extensions.\* in class libraries) | guide gap | mvcforum, yafnet-2 | [#62](https://github.com/xforcore/webForCore/issues/62) |
 | [F55](#f55) | webForCore-thirdparty 0.4.x (net11.0 only) restores on .NET 10 with no error and no assembly: the original WebActivatorEx runs | app/environment (fixed in webForCore-thirdparty 0.5.0) | applicant-tracking (bonobo-git-server, mvcforum, roadkill, subtext would have) | - |
 | [F56](#f56) | An app's repository is gone from GitHub (devbridge/BetterCMS), and a clone of one waited for credentials | app/environment | better-cms (and prodinner, already rejected for it) | - |
+| [F57](#f57) | `<trust level="Medium">` (any partial trust level) is a Configuration Error, though the docs say trust levels are ignored | webForCore bug | umbraco-6 | [#87](https://github.com/xforcore/webForCore/issues/87) |
+| [F58](#f58) | `<system.codedom>` naming `Microsoft.CSharp.CSharpCodeProvider`: `InvalidCastException` on every page | webForCore bug | umbraco-6 | [#88](https://github.com/xforcore/webForCore/issues/88) |
+| [F59](#f59) | Recycling for an `App_Code` change: a request the old worker is still compiling fails with CS0006 | webForCore bug | umbraco-6 | [#89](https://github.com/xforcore/webForCore/issues/89) |
+| [F60](#f60) | Files without a BOM are read as UTF-8, not the ANSI code page: Windows-1252 characters become U+FFFD | webForCore bug | umbraco-6 | [#90](https://github.com/xforcore/webForCore/issues/90) |
+| [F61](#f61) | Code or configuration that loads assemblies from `~/bin` must follow `bin_dotnet` | guide gap | umbraco-6 | [#91](https://github.com/xforcore/webForCore/issues/91) |
+| [F62](#f62) | Linux: `Uri.TryCreate("/path", UriKind.Absolute)` succeeds and `Path.VolumeSeparatorChar` is `/` | guide gap | umbraco-6 | [#92](https://github.com/xforcore/webForCore/issues/92) |
+| [F63](#f63) | Calls that become ambiguous on .NET 10 (CS0121): the app's own `DistinctBy`, empty `params` calls | guide gap | umbraco-6 | [#93](https://github.com/xforcore/webForCore/issues/93) |
+| [F64](#f64) | Umbraco 6 on Linux: Windows file names, packages only on its MyGet feed, an installer that needs a JSON POST | app/environment | umbraco-6 | - |
 ---
 
 ## F1
@@ -1151,3 +1160,122 @@ round 6.
 - **What happens:** the page is 404 and the git endpoint answers 401. git then asks for credentials, through
   `SSH_ASKPASS` (a desktop dialog) where that's set, so the clone waited for hours. The runner now gives git no
   prompt of either kind, and has a stall timeout, so such a clone fails in seconds.
+
+## F57
+
+**`<trust level="Medium">` (any partial trust level) is a Configuration Error, though the docs say trust levels are
+ignored.** webForCore bug. Raised as [#87](https://github.com/xforcore/webForCore/issues/87). Found on 0.7.0, on Linux.
+
+- **Apps:** umbraco-6: its development `web.Template.config` has `<trust level="Medium" originUrl=".*"/>`. The release
+  transform (`web.Template.Release.config`) removes it, and the migration builds `Web.config` with that transform, so the
+  probes don't reach it.
+- **Error:** every request: `Parser Error Message: Unable to read the security policy file for trust level 'Medium'.`
+- **Docs:** `docs/NAMESPACES.md`: "Code Access Security, partial trust | Trust levels, CAS attributes | Ignored:
+  everything runs in full trust".
+- **Cause:** `HttpRuntime.SetTrustLevel` / `ApplicationManager.GetPartialTrustPolicyLevel` still look for the level's
+  policy file (`web_mediumtrust.config`), which webForCore doesn't ship.
+- **Repro:** the package `Program.cs`, any `Default.aspx`, and `<system.web><trust level="Medium" /></system.web>`.
+
+## F58
+
+**A `<system.codedom>` compiler naming `Microsoft.CSharp.CSharpCodeProvider` fails every page.** webForCore bug.
+Raised as [#88](https://github.com/xforcore/webForCore/issues/88). Found on 0.7.0, on Linux.
+
+- **Apps:** umbraco-6: `web.Template.config` has the .NET 3.5/4.0 template's entry, `Microsoft.CSharp.CSharpCodeProvider,
+  System, Version=2.0.0.0` with `CompilerVersion` `v4.0`.
+- **Error:** `InvalidCastException: Unable to cast object of type 'Microsoft.CSharp.CSharpCodeProvider' to type
+  'WebFormsForCore.CodeDom.Compiler.CodeDomProvider'`, on every page that compiles.
+- **Cause:** `CompilationUtil.CreateCodeDomProvider*` casts the configured type to webForCore's own `CodeDomProvider`.
+- **Docs:** the guide says to remove the `Microsoft.CodeDom.Providers.DotNetCompilerPlatform` entries only.
+  `scripts/convert.py` removes any `<system.codedom>`, which hides this in apps whose `web.config` is in the
+  repository; Umbraco's is made from a template at build, so the migration removes it from the template.
+
+## F59
+
+**Recycling for an `App_Code` change: a request the old worker is still compiling fails with CS0006.** webForCore
+bug. Raised as [#89](https://github.com/xforcore/webForCore/issues/89). Found on 0.7.0, on Linux, under `webforcore-host`.
+
+- **Apps:** umbraco-6, in its install (3 times out of 3): the wizard's last step writes `web.config`; the next start
+  (the first configured one) creates `~/App_Code` in `Application_Start`; the host recycles that worker
+  (`CodeDirChangeOrDirectoryRename`) and starts the next while the first still compiles `/umbraco/login.aspx`.
+- **Error:** that request: 500, `CS0006: Metadata file '/tmp/Temporary_ASP.NET_Files-1000/root/<hash>/App_global.asax.<x>.dll'
+  could not be found`. The next request works.
+- **Cause (most likely):** the new worker's start, finding the code directories changed, removes the shared
+  compilation folder's assemblies that the old worker's compilation references. `docs/MIGRATING.md` section 8 says no
+  request fails in a recycle.
+- **In the app:** a `may_fail` request after the wizard's last step absorbs it, so setup's later steps work.
+
+## F60
+
+**Files without a BOM are read as UTF-8, not the ANSI code page as on .NET Framework.** webForCore bug (or a
+difference to document). Raised as [#90](https://github.com/xforcore/webForCore/issues/90). Found on 0.7.0; it's the
+same on Windows (`Encoding.Default` is UTF-8 on .NET everywhere).
+
+- **Apps:** umbraco-6: `install/steps/theend.ascx` is Windows-1252 (`You’re`, byte `0x92`), and renders as `You�re done`.
+- **Cause:** with no `<globalization fileEncoding>`, `GlobalizationSection.FileEncoding` is `Encoding.Default`: the
+  ANSI code page on .NET Framework, UTF-8 on .NET.
+- **Repro:** a Windows-1252 `Default.aspx` without a BOM containing `’` or `é`.
+- **Probes:** none depend on it (the setup step checks `done...now what?`).
+
+## F61
+
+**Code or configuration that loads assemblies from `~/bin` must follow `bin_dotnet`.** Guide gap. Raised as
+[#91](https://github.com/xforcore/webForCore/issues/91). Found on 0.7.0, on Linux.
+
+- **Apps:** umbraco-6: the back office's create dialogs load their task classes with
+  `Assembly.LoadFrom(MapPath("~/bin/umbraco.dll"))`, so creating a document type failed with `FileNotFoundException:
+  Could not load file or assembly '<site>/bin/umbraco.dll'`.
+- **Fix in the app:** Umbraco's own setting, `<add key="umbracoBinDirectory" value="~/bin_dotnet" />`.
+- **Guide:** section 2 makes the output `bin_dotnet`, but nothing says that `~/bin` paths in the app must follow it
+  (`HttpRuntime.BinDirectory`).
+
+## F62
+
+**Linux: `Uri.TryCreate("/path", UriKind.Absolute)` succeeds and `Path.VolumeSeparatorChar` is `/`.** Guide gap
+(.NET's behaviour on Unix, not webForCore's). Raised as [#92](https://github.com/xforcore/webForCore/issues/92). Found on
+0.7.0, on Linux.
+
+- **Apps:** umbraco-6:
+  - the back office's log-in page checks `redir` with `Uri.TryCreate(url, UriKind.Absolute, ...)`. On Linux
+    `/umbraco/Default.aspx` is a `file:` URI with no host, so every redirected log-in threw "There was attempt to
+    redirect to '/umbraco/Default.aspx' which is another domain": `/umbraco/` ended in a 500;
+  - `IOHelper.MapPath` took `path[1] == Path.VolumeSeparatorChar` as "already mapped", so every `~/...` path came back
+    unmapped: the back office's language files weren't found (`[login]` for "Login") and Umbraco wrote its folders
+    under one named `~` in the site.
+- **Fix in the app:** `absoluteUri.IsFile == false` in the first; the second checks for `:` and, on Linux, for the
+  site's folder.
+- **Guide:** section 6 lists case-sensitive paths and `/`, not these.
+
+## F63
+
+**Calls that become ambiguous on .NET 10 (CS0121).** Guide gap. Raised as
+[#93](https://github.com/xforcore/webForCore/issues/93). Found on 0.7.0.
+
+- **Apps:** umbraco-6:
+  - `umbraco.cms`'s `ContentType.cs` calls Umbraco.Core's own `DistinctBy`, which .NET 6's `Enumerable.DistinctBy`
+    now matches too (`CS0121 ... 'System.Linq.Enumerable.DistinctBy' and 'Umbraco.Core.EnumerableExtensions.DistinctBy'`);
+  - `SqlCEHelper.cs` calls `ExecuteReader("...")` and `ExecuteNonQuery("...")` with no parameters, between
+    `params IParameter[]` and `params P[]` overloads: the Visual Studio 2012/2013 compiler resolved them, Roslyn doesn't.
+- **Fix in the app:** qualify the call (`EnumerableExtensions.DistinctBy(list, ...)`); pass `new IParameter[0]`.
+  `<LangVersion>7.3</LangVersion>` helps with neither.
+
+## F64
+
+**Umbraco 6 on Linux: Windows file names, packages only on its MyGet feed, an installer that needs a JSON POST.**
+App/environment. Found on 0.7.0, on Linux.
+
+- **Apps:** umbraco-6.
+- **Windows file names** (each fixed in the app's code or files, `NOTES.md`):
+  - the `.resx` files' linked SQL scripts (`sql\total.sql` for `Sql/Total.sql`, and so on): `MSB3103`;
+  - `web.config` in code for the site's `Web.config` (the installer's connection string handling: `FileNotFoundException`)
+    and the `Views` folder's `Web.config`;
+  - log4net's configuration and log file, backslashed paths relative to `AppDomain.BaseDirectory` (`bin_dotnet`,
+    documented): no log was written.
+- **Packages:** `log4net-mediumtrust`, `SqlServerCE`, `Tidy.Net`, `uGoLive`, `UrlRewritingNet.UrlRewriter` and
+  `Microsoft.Web.Helpers` 1.0 aren't on nuget.org (`NU1101`), only on Umbraco's MyGet feed, which its
+  `.nuget/NuGet.targets` names. The overlay adds a `src/NuGet.Config` with it; a build depends on that feed staying up.
+- **SQL CE 4** (its embedded database option) is Windows-native; the migration uses SQL Server.
+- **Its install wizard's database step** is an ASP.NET AJAX page method, `InstallerRestService.aspx/Install`, which
+  takes only a JSON POST. The runner's `[setup]` steps send forms, so setup stops there and the site stays uninstalled:
+  the home page probe fails (1 of 16). With a JSON step (tested with a copy of the runner's `web_steps` that sends
+  one), setup completes and all 16 pass.
