@@ -39,6 +39,7 @@ from its GitHub release packages (first migrated against the source at `4ec57209
 
 - **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 14/14 probes.
 - **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 14/14 probes on Linux and on Windows.
+- **Round 6 (webForCore 0.7.0 on .NET 10, webForCore-thirdparty 0.5.0; under webforcore-host; Linux and Windows):** 15/15 probes on Linux and Windows.
 
 Probes: the catalog list (`/`, ListView with `ItemType`), the paged route `/Default/index/1/size/10`, the details page
 route, the Create form (`__VIEWSTATE`), `/About`, a static CSS file, the `~/bundles/MsAjaxJs` bundle and a static PNG.

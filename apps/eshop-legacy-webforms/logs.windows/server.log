@@ -1,68 +1,222 @@
-info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[63]
-      User profile is available. Using '~\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
-info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application 50be0ef7 (start 1, in a PseudoAppDomain).
+info: WebFormsForCore.Host.WorkerPool[0]
+      Started worker 1 (process 7060) for <repo>\apps\eshop-legacy-webforms\src\eShopLegacyWebFormsSolution\src\eShopLegacyWebForms\bin_dotnet\eShopLegacyWebForms.dll: the host started.
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://127.0.0.1:63250
+      Now listening on: http://127.0.0.1:55982
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
       Content root path: <repo>\apps\eshop-legacy-webforms\src\eShopLegacyWebFormsSolution\src\eShopLegacyWebForms
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[63]
+      User profile is available. Using '~\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63250/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/ - - -
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application 50be0ef7 in process 7060 (worker 1 of webforcore-host).
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:~\AppData\Local\Temp\webforcore-epje3ggu.0t2\worker-1.sock
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 1 (process 7060) is serving (1.7 s after it started).
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: <repo>\apps\eshop-legacy-webforms\src\eShopLegacyWebFormsSolution\src\eShopLegacyWebForms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63250/Default/index/1/size/10 - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63250/Default.aspx - 200 28934 text/html;+charset=utf-8 3553.2040ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63250/Default/index/1/size/10 - 200 10139 text/html;+charset=utf-8 23.2046ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/Default.aspx - 200 28934 text/html;+charset=utf-8 1968.5609ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63250/Catalog/Details/1 - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63250/Catalog/Details/1 - 200 5069 text/html;+charset=utf-8 256.9881ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/ - 200 28934 text/html;+charset=utf-8 3408.7152ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63250/Catalog/Create - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63250/Catalog/Create - 200 7712 text/html;+charset=utf-8 87.6012ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/Default.aspx - 200 28934 text/html;+charset=utf-8 5.8583ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/ - 200 28934 text/html;+charset=utf-8 7.9569ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63250/About.aspx - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63250/About.aspx - 200 3025 text/html;+charset=utf-8 8.4994ms
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/Default/index/1/size/10 - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/Default/index/1/size/10 HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63250/Content/site.css - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/Default/index/1/size/10 - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63250/Content/site.css - 200 4094 text/css 45.5376ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/Default/index/1/size/10 - 200 10139 text/html;+charset=utf-8 9.9045ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/Default/index/1/size/10 - 200 10139 text/html;+charset=utf-8 11.1310ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63250/bundles/MsAjaxJs - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63250/bundles/MsAjaxJs - 200 145442 text/javascript;+charset=utf-8 18.9888ms
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/Catalog/Details/1 - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/Catalog/Details/1 HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63250/Pics/1.png - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/Catalog/Details/1 - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63250/Pics/1.png - 200 151640 image/png 6.0091ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/Catalog/Details/1 - 200 5069 text/html;+charset=utf-8 365.2917ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/Catalog/Details/1 - 200 5069 text/html;+charset=utf-8 366.3885ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63250/web.config - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63250/web.config - 404 252 text/html 3.1042ms
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/Catalog/Create - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/Catalog/Create HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63250/App_Data/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/Catalog/Create - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63250/App_Data/ - 404 252 text/html 0.7028ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/Catalog/Create - 200 7712 text/html;+charset=utf-8 42.3441ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/Catalog/Create - 200 7712 text/html;+charset=utf-8 43.1532ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63250/Global.asax.cs - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63250/Global.asax.cs - 404 215 text/html 0.5341ms
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/About.aspx - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/About.aspx HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63250/obj/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/About.aspx - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63250/obj/ - 404 252 text/html 0.5586ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/About.aspx - 200 3025 text/html;+charset=utf-8 8.3251ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/About.aspx - 200 3025 text/html;+charset=utf-8 9.0532ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63250/packages.config - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63250/packages.config - 404 215 text/html 0.4936ms
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/Content/site.css - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/Content/site.css HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63250/bin_dotnet/eShopLegacyWebForms.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/Content/site.css - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63250/bin_dotnet/eShopLegacyWebForms.dll - 404 252 text/html 1.9216ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/Content/site.css - 200 4094 text/css 19.2916ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/Content/site.css - 200 4094 text/css 19.9271ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/bundles/MsAjaxJs - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/bundles/MsAjaxJs HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/bundles/MsAjaxJs - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/bundles/MsAjaxJs - 200 145442 text/javascript;+charset=utf-8 8.1244ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/bundles/MsAjaxJs - 200 145442 text/javascript;+charset=utf-8 13.9703ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/Pics/1.png - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/Pics/1.png HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/Pics/1.png - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/Pics/1.png - 200 151640 image/png 7.0495ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/Pics/1.png - 200 151640 image/png 7.9305ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/web.config - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/web.config HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/web.config - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 404.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/web.config - 404 252 text/html 8.5124ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/web.config - 404 252 text/html 7.6344ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/App_Data/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/App_Data/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/App_Data/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/App_Data/ - 404 252 text/html 1.3847ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 404.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/App_Data/ - 404 252 text/html 2.3743ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/Global.asax.cs - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/Global.asax.cs HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/Global.asax.cs - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/Global.asax.cs - 404 215 text/html 1.1281ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 404.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/Global.asax.cs - 404 215 text/html 2.0534ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/obj/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/obj/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/obj/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/obj/ - 404 252 text/html 1.1390ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 404.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/obj/ - 404 252 text/html 1.9712ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/packages.config - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/packages.config HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/packages.config - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/packages.config - 404 215 text/html 0.9167ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 404.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/packages.config - 404 215 text/html 1.6415ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/bin_dotnet/eShopLegacyWebForms.dll - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/bin_dotnet/eShopLegacyWebForms.dll HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/bin_dotnet/eShopLegacyWebForms.dll - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/bin_dotnet/eShopLegacyWebForms.dll - 404 252 text/html 3.3752ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 404.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/bin_dotnet/eShopLegacyWebForms.dll - 404 252 text/html 4.1909ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/bin_dotnet/webforcore-host/webforcore-host.dll - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/bin_dotnet/webforcore-host/webforcore-host.dll HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:55982/bin_dotnet/webforcore-host/webforcore-host.dll - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 1.1803ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 404.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:55982/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 1.9261ms
+info: WebFormsForCore.Hosting.WorkerProcess.WorkerLifetime[0]
+      Worker 1: the host closed its connection: stopping.
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Application 50be0ef7 is shutting down (HostingEnvironment).
