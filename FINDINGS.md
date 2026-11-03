@@ -40,7 +40,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F19](#f19) | `System.Web.Abstractions`/`System.Web.Routing` 4.0.0.0 in web.config can't be loaded | webForCore bug | roadkill | [#20](https://github.com/xforcore/webForCore/issues/20) |
 | [F20](#f20) | `Assembly.LoadFrom` returns the default context's copy; WebActivatorEx start methods never run | webForCore bug | applicant-tracking, roadkill | [#21](https://github.com/xforcore/webForCore/issues/21) |
 | [F21](#f21) | Glimpse doesn't run on .NET | guide gap | realocate | [#22](https://github.com/xforcore/webForCore/issues/22) |
-| [F22](#f22) | AutoMapper before 12 doesn't run on .NET 11 | app/environment | realocate, socialgoal | - |
+| [F22](#f22) | AutoMapper before 12 doesn't run on .NET 11 or .NET 10 | app/environment | realocate, socialgoal | - |
 | [F23](#f23) | `recaptcha` 1.0.5's lib folders aren't framework names (NU1202) | app/environment | roadkill | - |
 | [F24](#f24) | A transitive Microsoft.AspNet.Razor replaces webForCore's in the output with no build error | webForCore bug | bonobo-git-server, applicant-tracking, realocate, roadkill | [#23](https://github.com/xforcore/webForCore/issues/23) |
 | [F25](#f25) | .NET Framework builds of StructureMap 4.0 and NLog 4.2 need `AppDomainSetup` members .NET lacks; their .NET Standard builds work | app/environment | roadkill | - |
@@ -65,7 +65,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F44](#f44) | DotNetOpenAuth 3.x reflects on .NET Framework's private `UriParser` fields | app/environment | subtext | - |
 | [F45](#f45) | Every package webForCore depends on is a version floor: System.Data.SqlClient 4.9.1, System.DirectoryServices 11.0 (NU1605) | guide gap | opserver-mvc5, yafnet-2 | [#42](https://github.com/xforcore/webForCore/issues/42) |
 | [F46](#f46) | webForCore's SignalR and System.Web.DataVisualization assemblies are 0.0.0.0: libraries built against Microsoft's are CS1705 | webForCore bug | jabbr | [#40](https://github.com/xforcore/webForCore/issues/40) |
-| [F47](#f47) | `GetTypes()` on System.Data.SqlClient 4.9.1 throws on .NET 11: apps that scan all assemblies fail | webForCore bug (dependency) | opserver-mvc5 | [#41](https://github.com/xforcore/webForCore/issues/41) |
+| [F47](#f47) | `GetTypes()` on System.Data.SqlClient 4.9.1 throws on .NET 11 and .NET 10: apps that scan all assemblies fail | webForCore bug (dependency) | opserver-mvc5 | [#41](https://github.com/xforcore/webForCore/issues/41) |
 | [F48](#f48) | The C# version: C# 14's span conversions and C# 11's ref safety break code written for older C# | guide gap | yafnet-2 | [#43](https://github.com/xforcore/webForCore/issues/43) |
 | [F49](#f49) | YAF.NET's vendored ServiceStack 5.9 fork only works as .NET Framework code | app/environment | yafnet-2 | - |
 | [F50](#f50) | Nancy 0.20 needs `AppDomainSetup.PrivateBinPathProbe` | app/environment | jabbr | - |
@@ -592,6 +592,8 @@ console app). Found on 0.2.0.
   `string Name` and `int NameLength`. It throws; with AutoMapper 12.0.1 it works.
 - **Note:** AutoMapper 12 has a different configuration API from 3–4 (no static `Mapper`, `IMapperConfiguration` is
   `IMapperConfigurationExpression`). A line in `docs/MIGRATING.md`'s package list would save the search.
+- **.NET 10 (round 6):** unchanged. socialgoal (AutoMapper 3.1) fails the same way, and the repro on .NET 10.0.14
+  fails with AutoMapper 4.2.0 and 11.0.1 and works with 12.0.1.
 
 ## F23
 
@@ -1022,6 +1024,8 @@ Raised as [#42](https://github.com/xforcore/webForCore/issues/42). Found on 0.5.
   - webForCore depends on the package (as on .NET Framework), so every webForCore app has it.
 - **What showed it:** with Opserver's scan catching the exception (exploration only), the app works, its SQL Server
   dashboard included.
+- **.NET 10 (round 6):** unchanged. opserver-mvc5 fails the same probe, and `GetTypes()` throws the same
+  `SqlGuidCaster` error in a .NET 10.0.14 console app.
 
 ## F48
 

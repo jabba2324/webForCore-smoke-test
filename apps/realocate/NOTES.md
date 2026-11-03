@@ -66,5 +66,5 @@ All 13 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0, and its 4 
 
 ## Open problems
 
-- [F22](../../FINDINGS.md#f22) (app/environment): AutoMapper before 12 doesn't run on .NET 11. Upgraded.
+- [F22](../../FINDINGS.md#f22) (app/environment): AutoMapper before 12 doesn't run on .NET 11 or .NET 10. Upgraded.
 - [F21](../../FINDINGS.md#f21) (guide gap): Glimpse doesn't run on .NET. Removed.
