@@ -16,3 +16,8 @@ Appended by `scripts/wfc.py`, one line per stage run.
 - 2026-11-01T11:09:50+00:00 **build**: pass
 - 2026-11-01T11:10:22+00:00 **build**: fail (2 distinct errors)
 - 2026-11-01T11:10:22+00:00 **smoke**: skip (not built (apps/jabbr/src/JabbR/bin_dotnet/JabbR.dll missing))
+- 2026-11-01T23:29:15+00:00 **build**: pass
+- 2026-11-01T23:34:46+00:00 **smoke**: fail (6/10 probes)
+- 2026-11-01T23:59:15+00:00 **fetch** (windows): pass at `eb5b4e2f1e5b`
+- 2026-11-01T23:59:17+00:00 **build** (windows): pass
+- 2026-11-01T23:59:31+00:00 **smoke** (windows): fail (6/10 probes)

@@ -72,6 +72,7 @@ migrations and a seed, Unity, Hangfire, ImageProcessor, SquishIt, .NET Framework
 ## Smoke
 
 - **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 14/14 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28); it passes with no workarounds: its `configSource`s written with `\`, `relaxedUrlToFileSystemMapping="true"` (#26, #27).
+- **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 14/14 probes on Linux and on Windows.
 
 Probes:
 - the home page, a topic and a category (from the seed);

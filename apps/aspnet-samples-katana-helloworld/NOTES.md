@@ -16,6 +16,7 @@ session state).
 ## Smoke
 
 - **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 8/8 probes.
+- **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 8/8 probes on Linux and on Windows.
 
 **9 of 9 pass**: `/` and any other path return `Hello World` from the OWIN pipeline (the `OwinStartup` discovery and `Microsoft.Owin.Host.SystemWeb` work); the forbidden paths are 404 (the W3C log path gets the app's own `Hello World`, not the log).
 

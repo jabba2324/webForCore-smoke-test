@@ -14,6 +14,7 @@ Converter: `ProductsApp.csproj` → `.csproj.netfx`; SDK project with the `webFo
 ## Smoke
 
 - **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 10/10 probes.
+- **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 10/10 probes on Linux and on Windows.
 
 **10 of 11 pass**: `GET /api/products` (JSON list), `/api/products/2`, `/api/products?category=Hardware` (action selection by query string) and `/api/products/99` (404 from `HttpResponseException`). Only the served W3C log fails ([F4](../../FINDINGS.md#f4)).
 

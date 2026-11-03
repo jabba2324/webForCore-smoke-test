@@ -8,7 +8,7 @@ project = "Opserver/Opserver.csproj"
 kinds = ["mvc"]
 licence = "MIT"
 status = "blocked"
-notes = "Blocked on 0.5.0 by F47 (System.Data.SqlClient 4.9.1's GetTypes() throws on .NET 11; webForCore#41): its tab scan fails on every page. With the scan skipping those types (not in the overlay) the log-in, MVC pages and SQL Server dashboard work. 9/10 checks."
+notes = "Blocked by F47 (System.Data.SqlClient 4.9.1's GetTypes() throws on .NET 11; webForCore#41, 0.6.0's known issue): 9/10 on 0.6.0, Linux and Windows. With the scan skipping those types (not in the overlay) it works."
 
 # The first request compiles the site, so it gets 120 s. Config/SecuritySettings.config (provider "alladmin", the
 # example's "everyone") and Config/SQLSettings.json (the compose SQL Server) are in the overlay. Every page but the

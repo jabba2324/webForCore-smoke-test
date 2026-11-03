@@ -16,6 +16,7 @@ session state). EntityFramework 6.0.2 → 6.5.1 ([F7](../../FINDINGS.md#f7)).
 ## Smoke
 
 - **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 7/7 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28).
+- **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 7/7 probes on Linux and on Windows.
 
 Not run: the build fails with `CS0433: The type 'HttpUtility' exists in both 'System.Web.HttpUtility' and 'System.Web'`, from the HelpPage area's code ([F8](../../FINDINGS.md#f8)). No probes yet.
 

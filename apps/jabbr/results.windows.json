@@ -1,0 +1,96 @@
+{
+  "id": "jabbr",
+  "stages": {
+    "build": {
+      "at": "2026-11-01T23:59:17+00:00",
+      "error_count": 0,
+      "errors": [],
+      "log": "apps\\jabbr\\logs.windows\\build.log",
+      "seconds": 2,
+      "status": "pass",
+      "summary": null,
+      "webforcore": "packages 0.6.0"
+    },
+    "fetch": {
+      "at": "2026-11-01T23:59:15+00:00",
+      "commit": "eb5b4e2f1e5bdbb1ea91230f1884716170a6976d",
+      "overlay": true,
+      "status": "pass"
+    },
+    "smoke": {
+      "at": "2026-11-01T23:59:31+00:00",
+      "checks": [
+        {
+          "expected_text": "JabbR",
+          "ms": 6017,
+          "ok": false,
+          "path": "/",
+          "status": 500,
+          "title": "Method not found: 'System.String System.AppDomainSetup.get_PrivateBinPathProbe()'."
+        },
+        {
+          "expected_text": "password",
+          "ms": 249,
+          "ok": false,
+          "path": "/account/login",
+          "status": 500,
+          "title": "Method not found: 'System.String System.AppDomainSetup.get_PrivateBinPathProbe()'."
+        },
+        {
+          "expected_text": "$.hubConnection",
+          "ms": 122,
+          "ok": false,
+          "path": "/signalr/hubs",
+          "status": 500,
+          "title": "Method not found: 'System.String System.AppDomainSetup.get_PrivateBinPathProbe()'."
+        },
+        {
+          "ms": 135,
+          "ok": false,
+          "path": "/Content/images/big-logo.png",
+          "status": 500,
+          "title": "Method not found: 'System.String System.AppDomainSetup.get_PrivateBinPathProbe()'."
+        },
+        {
+          "ms": 27,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 14,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 17,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 16,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "ms": 15,
+          "ok": true,
+          "path": "/packages.config",
+          "status": 404
+        },
+        {
+          "ms": 31,
+          "ok": true,
+          "path": "/bin_dotnet/JabbR.dll",
+          "status": 404
+        }
+      ],
+      "log": "apps\\jabbr\\logs.windows\\server.log",
+      "status": "fail",
+      "summary": "6/10 probes"
+    }
+  }
+}

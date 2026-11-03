@@ -1,0 +1,136 @@
+{
+  "id": "mojoportal",
+  "stages": {
+    "build": {
+      "at": "2026-11-02T00:00:13+00:00",
+      "error_count": 0,
+      "errors": [],
+      "log": "apps\\mojoportal\\logs.windows\\build.log",
+      "seconds": 25,
+      "status": "pass",
+      "summary": null,
+      "webforcore": "packages 0.6.0"
+    },
+    "fetch": {
+      "at": "2026-11-01T23:59:48+00:00",
+      "commit": "31b4fb1efd121dba2aab58af5ad6b0f30161259e",
+      "overlay": true,
+      "status": "pass"
+    },
+    "smoke": {
+      "at": "2026-11-02T00:00:34+00:00",
+      "checks": [
+        {
+          "expected_text": "Your installation is up to date",
+          "ms": 748,
+          "ok": false,
+          "path": "/Setup/Default.aspx",
+          "status": 500,
+          "title": "Could not load file or assembly 'App_GlobalResources, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified."
+        },
+        {
+          "expected_text": "Welcome to mojoPortal!",
+          "ms": 881,
+          "ok": false,
+          "path": "/",
+          "status": 503,
+          "title": "<html><body>Server Too Busy</body></html>"
+        },
+        {
+          "expected_text": "LoginCtrl_Password",
+          "ms": 28,
+          "ok": false,
+          "path": "/Secure/Login.aspx",
+          "status": 503,
+          "title": "<html><body>Server Too Busy</body></html>"
+        },
+        {
+          "expected_text": "__VIEWSTATE",
+          "ms": 3,
+          "ok": false,
+          "path": "/Secure/Register.aspx",
+          "status": 503,
+          "title": "<html><body>Server Too Busy</body></html>"
+        },
+        {
+          "expected_text": "File Management",
+          "ms": 6,
+          "ok": false,
+          "path": "/FileManager",
+          "status": 503,
+          "title": "<html><body>Server Too Busy</body></html>"
+        },
+        {
+          "expected_text": "Authorization has been denied for this request.",
+          "ms": 3,
+          "ok": false,
+          "path": "/api/UserProfile/Property/FirstName",
+          "status": 503,
+          "title": "<html><body>Server Too Busy</body></html>"
+        },
+        {
+          "expected_text": "Bootstrap v3.3.7",
+          "ms": 18,
+          "ok": false,
+          "path": "/csshandler.ashx?s=1&skin=framework",
+          "status": 503,
+          "title": "<html><body>Server Too Busy</body></html>"
+        },
+        {
+          "expected_text": "mojoPortal Site Search",
+          "ms": 3,
+          "ok": false,
+          "path": "/SearchEngineInfo.ashx",
+          "status": 503,
+          "title": "<html><body>Server Too Busy</body></html>"
+        },
+        {
+          "ms": 4,
+          "ok": false,
+          "path": "/Data/Sites/1/skins/framework/img/favicons/favicon-16x16.png",
+          "status": 503,
+          "title": "<html><body>Server Too Busy</body></html>"
+        },
+        {
+          "ms": 18,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 11,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 10,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "ms": 31,
+          "ok": true,
+          "path": "/packages.config",
+          "status": 404
+        },
+        {
+          "ms": 86,
+          "ok": true,
+          "path": "/bin_dotnet/mojoPortal.Web.dll",
+          "status": 404
+        }
+      ],
+      "log": "apps\\mojoportal\\logs.windows\\server.log",
+      "status": "fail",
+      "summary": "6/15 probes"
+    }
+  }
+}

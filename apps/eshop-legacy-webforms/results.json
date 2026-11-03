@@ -17,14 +17,14 @@
       ]
     },
     "build": {
-      "at": "2026-11-01T10:04:27+00:00",
+      "at": "2026-11-01T23:29:11+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/eshop-legacy-webforms/logs/build.log",
       "seconds": 1,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.5.0"
+      "webforcore": "packages 0.6.0"
     },
     "fetch": {
       "at": "2026-10-31T23:40:38+00:00",
@@ -33,88 +33,88 @@
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-01T10:09:24+00:00",
+      "at": "2026-11-01T23:34:15+00:00",
       "checks": [
         {
-          "ms": 2892,
+          "ms": 3012,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 18,
+          "ms": 19,
           "ok": true,
           "path": "/Default/index/1/size/10",
           "status": 200
         },
         {
-          "ms": 223,
+          "ms": 211,
           "ok": true,
           "path": "/Catalog/Details/1",
           "status": 200
         },
         {
-          "ms": 78,
+          "ms": 74,
           "ok": true,
           "path": "/Catalog/Create",
           "status": 200
         },
         {
-          "ms": 7,
+          "ms": 6,
           "ok": true,
           "path": "/About.aspx",
           "status": 200
         },
         {
-          "ms": 41,
+          "ms": 48,
           "ok": true,
           "path": "/Content/site.css",
           "status": 200
         },
         {
-          "ms": 19,
+          "ms": 21,
           "ok": true,
           "path": "/bundles/MsAjaxJs",
           "status": 200
         },
         {
-          "ms": 5,
+          "ms": 10,
           "ok": true,
           "path": "/Pics/1.png",
           "status": 200
         },
         {
-          "ms": 3,
+          "ms": 10,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 5,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 5,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 5,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 5,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 8,
           "ok": true,
           "path": "/bin_dotnet/eShopLegacyWebForms.dll",
           "status": 404

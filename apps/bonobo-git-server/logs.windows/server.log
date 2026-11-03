@@ -1,0 +1,56 @@
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[63]
+      User profile is available. Using '~\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application 686c3650 (start 1, in a PseudoAppDomain).
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://127.0.0.1:63184
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: <repo>\apps\bonobo-git-server\src\Bonobo.Git.Server
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:63184/Home/LogOn - - -
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Application 686c3650 (start 1) is shutting down.
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Application 686c3650 (start 2) is unloading.
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application 686c3650 (start 2, in a PseudoAppDomain).
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:63184/ - - -
+info: Microsoft.AspNetCore.Session.DistributedSession[3]
+      Session started; Key:5a83b2fd-b186-888a-21e1-60432e09c69f, Id:607de9d8-156f-79a3-07a4-f48ef60de40d
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:63184/Home/LogOn - 200 4321 text/html;+charset=utf-8 8773.3022ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:63184/Content/Site.css - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:63184/ - 503 - text/html;+charset=utf-8 41.3371ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:63184/Content/Site.css - 503 - text/html;+charset=utf-8 7.6310ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:63184/web.config - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:63184/web.config - 404 319 text/html 3.4777ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:63184/App_Data/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:63184/App_Data/ - 404 213 text/html 1.5355ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:63184/Global.asax.cs - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:63184/Global.asax.cs - 404 319 text/html 1.2117ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:63184/obj/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:63184/obj/ - 404 252 text/html 0.7551ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:63184/packages.config - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:63184/packages.config - 503 - text/html;+charset=utf-8 1.3768ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:63184/bin_dotnet/Bonobo.Git.Server.dll - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:63184/bin_dotnet/Bonobo.Git.Server.dll - 404 252 text/html 16.6131ms

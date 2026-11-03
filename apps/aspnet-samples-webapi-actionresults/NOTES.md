@@ -16,6 +16,7 @@ session state). Newtonsoft.Json 13.0.1 → 13.0.4 ([F7](../../FINDINGS.md#f7)).
 ## Smoke
 
 - **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 10/10 probes.
+- **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 10/10 probes on Linux and on Windows.
 
 **10 of 11 pass**: `/text` (`Hello, world!`), `/file` (the XML download), `/product/2` and `/product/99` (404 from `NotFound()`); the only failure is the served W3C log ([F4](../../FINDINGS.md#f4)).
 

@@ -8,7 +8,7 @@ project = "yafsrc/YetAnotherForum.NET/YAF.csproj"
 kinds = ["webforms"]
 licence = "Apache-2.0"
 status = "blocked"
-notes = "Blocked: its vendored ServiceStack 5.9 fork only works as .NET Framework code (F49: the NET472 path needs AppDomain.DefineDynamicAssembly, the .NET Standard path was trimmed); C# 11 ref safety in ServiceStack.Text (F48)."
+notes = "Blocked: its vendored ServiceStack 5.9 fork only works as .NET Framework code (F49), and C# 11 ref safety (F48); the build fails on 0.6.0, Linux and Windows."
 
 # The first request compiles the site, so it gets 120 s.
 # [[probes]]

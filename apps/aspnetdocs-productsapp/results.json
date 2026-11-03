@@ -16,14 +16,14 @@
       ]
     },
     "build": {
-      "at": "2026-11-01T10:04:08+00:00",
+      "at": "2026-11-01T23:28:50+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/aspnetdocs-productsapp/logs/build.log",
       "seconds": 1,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.5.0"
+      "webforcore": "packages 0.6.0"
     },
     "fetch": {
       "at": "2026-10-31T23:40:37+00:00",
@@ -32,16 +32,16 @@
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-01T10:07:11+00:00",
+      "at": "2026-11-01T23:31:58+00:00",
       "checks": [
         {
-          "ms": 1073,
+          "ms": 1074,
           "ok": true,
           "path": "/api/products",
           "status": 200
         },
         {
-          "ms": 25,
+          "ms": 27,
           "ok": true,
           "path": "/api/products/2",
           "status": 200
@@ -59,7 +59,7 @@
           "status": 404
         },
         {
-          "ms": 8,
+          "ms": 4,
           "ok": true,
           "path": "/web.config",
           "status": 404
@@ -89,7 +89,7 @@
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/ProductsApp.dll",
           "status": 404

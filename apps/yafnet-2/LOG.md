@@ -13,3 +13,7 @@ Appended by `scripts/wfc.py`, one line per stage run.
 - 2026-11-01T10:53:39+00:00 **build**: fail (5 distinct errors)
 - 2026-11-01T11:10:38+00:00 **build**: fail (5 distinct errors)
 - 2026-11-01T11:10:38+00:00 **smoke**: skip (not built (apps/yafnet-2/src/yafsrc/YetAnotherForum.NET/bin_dotnet/YAF.dll missing))
+- 2026-11-01T23:29:51+00:00 **build**: fail (5 distinct errors)
+- 2026-11-01T23:41:02+00:00 **smoke**: skip (not built (apps/yafnet-2/src/yafsrc/YetAnotherForum.NET/bin_dotnet/YAF.dll missing))
+- 2026-11-02T00:03:41+00:00 **fetch** (windows): pass at `7435be389709`
+- 2026-11-02T00:03:46+00:00 **build** (windows): fail (5 distinct errors)

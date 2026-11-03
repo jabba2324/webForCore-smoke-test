@@ -47,6 +47,7 @@ Status: migrated (webForCore 0.4.0, all probes pass).
 ## Smoke
 
 - **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 9/9 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28); webForCore-thirdparty's WebActivatorEx at 0.4.1.
+- **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 9/9 probes on Linux; 6/9 on Windows. The SQLite database is created in `bin_dotnet/`, not `App_Data/`, on both (F52, #50). On Windows that is a change in `bin`: the first request restarts the application, the next start is shut down while it starts, and every page is then 503 Server Too Busy (F51, #49).
 
 Probes: the logon page, `/` (redirects to the logon page), a static CSS file.
 

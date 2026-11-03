@@ -54,6 +54,7 @@ plus `Roadkill.Core` and `Roadkill.Plugins`.
 ## Smoke
 
 - **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 8/9 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28); unchanged: LightSpeed (F27).
+- **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 8/9 probes on Linux and on Windows; unchanged: LightSpeed's `AppDomain.DefineDynamicAssembly` (F27).
 
 Probes: the home page, the log-in page and a static CSS file (no text checks yet: no page has rendered).
 

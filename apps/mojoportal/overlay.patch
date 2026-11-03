@@ -1,5 +1,5 @@
 diff --git a/Brettle.Web.NeatHtml/Brettle.Web.NeatHtml.csproj b/Brettle.Web.NeatHtml/Brettle.Web.NeatHtml.csproj
-index 6d59c6fc..702a8bbc 100644
+index 6d59c6fc..b7aa77c9 100644
 --- a/Brettle.Web.NeatHtml/Brettle.Web.NeatHtml.csproj
 +++ b/Brettle.Web.NeatHtml/Brettle.Web.NeatHtml.csproj
 @@ -1,306 +1,23 @@
@@ -183,7 +183,7 @@ index 6d59c6fc..702a8bbc 100644
 -      <SubType>Designer</SubType>
 -    </Content>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
    </ItemGroup>
 -  <ItemGroup>
 -    <Content Include="NeatHtml\schema\xhtml-inlstyle-1.xsd">
@@ -3346,7 +3346,7 @@ index f8e128b0..9e79800c 100644
 +  </runtime>
 +</configuration>
 diff --git a/Web/mojoPortal.Web.csproj b/Web/mojoPortal.Web.csproj
-index 7fe10832..eb6004de 100644
+index 7fe10832..5f8e9a5e 100644
 --- a/Web/mojoPortal.Web.csproj
 +++ b/Web/mojoPortal.Web.csproj
 @@ -1,3075 +1,116 @@
@@ -6468,12 +6468,12 @@ index 7fe10832..eb6004de 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.5.0" />
-+    <PackageReference Include="webForCore.WebGrease" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.6.0" />
++    <PackageReference Include="webForCore.WebGrease" Version="0.6.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -9629,7 +9629,7 @@ similarity index 100%
 rename from Web/packages.config
 rename to Web/packages.config.netfx
 diff --git a/mojoPortal.Business.WebHelpers/mojoPortal.Business.WebHelpers.csproj b/mojoPortal.Business.WebHelpers/mojoPortal.Business.WebHelpers.csproj
-index 32c06179..b1b2ea2c 100644
+index 32c06179..b8d53dc9 100644
 --- a/mojoPortal.Business.WebHelpers/mojoPortal.Business.WebHelpers.csproj
 +++ b/mojoPortal.Business.WebHelpers/mojoPortal.Business.WebHelpers.csproj
 @@ -1,261 +1,36 @@
@@ -9848,7 +9848,7 @@ index 32c06179..b1b2ea2c 100644
 -      <Name>mojoPortal.Web.Framework</Name>
 -    </ProjectReference>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -10188,7 +10188,7 @@ index 00000000..32c06179
 +</Project>
 \ No newline at end of file
 diff --git a/mojoPortal.Business/mojoPortal.Business.csproj b/mojoPortal.Business/mojoPortal.Business.csproj
-index 30efb8b6..35ed658b 100644
+index 30efb8b6..7b041142 100644
 --- a/mojoPortal.Business/mojoPortal.Business.csproj
 +++ b/mojoPortal.Business/mojoPortal.Business.csproj
 @@ -1,407 +1,40 @@
@@ -10559,7 +10559,7 @@ index 30efb8b6..35ed658b 100644
 -      <Name>mojoPortal.Data.SQLite</Name>
 -    </ProjectReference>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -11044,7 +11044,7 @@ index 00000000..30efb8b6
 +</Project>
 \ No newline at end of file
 diff --git a/mojoPortal.Core/mojoPortal.Core.csproj b/mojoPortal.Core/mojoPortal.Core.csproj
-index 42746447..0aa32333 100644
+index 42746447..fd09b743 100644
 --- a/mojoPortal.Core/mojoPortal.Core.csproj
 +++ b/mojoPortal.Core/mojoPortal.Core.csproj
 @@ -1,119 +1,31 @@
@@ -11173,7 +11173,7 @@ index 42746447..0aa32333 100644
 -      <Version>4.6.2</Version>
 -    </PackageReference>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -11316,7 +11316,7 @@ index 00000000..42746447
 +</Project>
 \ No newline at end of file
 diff --git a/mojoPortal.Data.MSSQL/mojoPortal.Data.MSSQL.csproj b/mojoPortal.Data.MSSQL/mojoPortal.Data.MSSQL.csproj
-index 266848b5..48bfa5f4 100644
+index 266848b5..ed601bfd 100644
 --- a/mojoPortal.Data.MSSQL/mojoPortal.Data.MSSQL.csproj
 +++ b/mojoPortal.Data.MSSQL/mojoPortal.Data.MSSQL.csproj
 @@ -1,158 +1,28 @@
@@ -11498,7 +11498,7 @@ index 266848b5..48bfa5f4 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -11673,7 +11673,7 @@ index 00000000..266848b5
 +</Project>
 \ No newline at end of file
 diff --git a/mojoPortal.Features.Business/mojoPortal.Features.Business.csproj b/mojoPortal.Features.Business/mojoPortal.Features.Business.csproj
-index eab63b96..c477e0a4 100644
+index eab63b96..04be62c6 100644
 --- a/mojoPortal.Features.Business/mojoPortal.Features.Business.csproj
 +++ b/mojoPortal.Features.Business/mojoPortal.Features.Business.csproj
 @@ -1,247 +1,37 @@
@@ -11944,7 +11944,7 @@ index eab63b96..c477e0a4 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -12217,7 +12217,7 @@ index 00000000..eab63b96
 +</Project>
 \ No newline at end of file
 diff --git a/mojoPortal.Features.Data.MSSQL/mojoPortal.Features.Data.MSSQL.csproj b/mojoPortal.Features.Data.MSSQL/mojoPortal.Features.Data.MSSQL.csproj
-index aeaca7ff..2a15908f 100644
+index aeaca7ff..5d4eabaf 100644
 --- a/mojoPortal.Features.Data.MSSQL/mojoPortal.Features.Data.MSSQL.csproj
 +++ b/mojoPortal.Features.Data.MSSQL/mojoPortal.Features.Data.MSSQL.csproj
 @@ -1,88 +1,33 @@
@@ -12297,7 +12297,7 @@ index aeaca7ff..2a15908f 100644
 -    <Compile Include="Survey\DBSurveyPage.cs" />
 -    <Compile Include="Survey\DBSurveyResponse.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -12428,7 +12428,7 @@ index 00000000..aeaca7ff
 +</Project>
 \ No newline at end of file
 diff --git a/mojoPortal.Features.UI/mojoPortal.Features.UI.csproj b/mojoPortal.Features.UI/mojoPortal.Features.UI.csproj
-index 4aa8e711..43207682 100644
+index 4aa8e711..c29f1e48 100644
 --- a/mojoPortal.Features.UI/mojoPortal.Features.UI.csproj
 +++ b/mojoPortal.Features.UI/mojoPortal.Features.UI.csproj
 @@ -1,2127 +1,175 @@
@@ -14581,10 +14581,10 @@ index 4aa8e711..43207682 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.5.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.6.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.6.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -16874,7 +16874,7 @@ similarity index 100%
 rename from mojoPortal.Features.UI/packages.config
 rename to mojoPortal.Features.UI/packages.config.netfx
 diff --git a/mojoPortal.Web.Controls/mojoPortal.Web.Controls.csproj b/mojoPortal.Web.Controls/mojoPortal.Web.Controls.csproj
-index 7c415313..88f1da6d 100644
+index 7c415313..add24e91 100644
 --- a/mojoPortal.Web.Controls/mojoPortal.Web.Controls.csproj
 +++ b/mojoPortal.Web.Controls/mojoPortal.Web.Controls.csproj
 @@ -1,268 +1,34 @@
@@ -17126,7 +17126,7 @@ index 7c415313..88f1da6d 100644
    <ItemGroup>
 -    <Content Include="Gravatar\Gravatar.bmp" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -17446,7 +17446,7 @@ index 00000000..7c415313
 +</Project>
 \ No newline at end of file
 diff --git a/mojoPortal.Web.Editor/mojoPortal.Web.Editor.csproj b/mojoPortal.Web.Editor/mojoPortal.Web.Editor.csproj
-index 2945d873..2d1cd428 100644
+index 2945d873..47340ee8 100644
 --- a/mojoPortal.Web.Editor/mojoPortal.Web.Editor.csproj
 +++ b/mojoPortal.Web.Editor/mojoPortal.Web.Editor.csproj
 @@ -1,158 +1,34 @@
@@ -17593,7 +17593,7 @@ index 2945d873..2d1cd428 100644
 -    <Compile Include="TextArea\TextAreaProvider.cs" />
 -    <Compile Include="ToolBarEnum.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -17797,7 +17797,7 @@ index 00000000..2945d873
 +</Project>
 \ No newline at end of file
 diff --git a/mojoPortal.Web.Framework/mojoPortal.Web.Framework.csproj b/mojoPortal.Web.Framework/mojoPortal.Web.Framework.csproj
-index b58a88f2..31afffc0 100644
+index b58a88f2..bdcef273 100644
 --- a/mojoPortal.Web.Framework/mojoPortal.Web.Framework.csproj
 +++ b/mojoPortal.Web.Framework/mojoPortal.Web.Framework.csproj
 @@ -1,219 +1,37 @@
@@ -17969,7 +17969,7 @@ index b58a88f2..31afffc0 100644
    <ItemGroup>
 -    <None Include="app.config" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.5.0" />
++    <PackageReference Include="webForCore" Version="0.6.0" />
    </ItemGroup>
 +
    <ItemGroup>

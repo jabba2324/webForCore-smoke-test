@@ -39,6 +39,7 @@ web.config is unchanged.
 ## Smoke
 
 - **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 18/18 probes.
+- **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 18/18 probes on Linux and on Windows. On Linux a new `.cs` in `app_code` doesn't restart it, `Web.config` does (F53).
 
 Probes: the home page, a post (`/post/<slug>`, a rewrite), a category, the RSS feed (a handler), robots.txt and
 sitemap.xml (rewrites to `.cshtml`), the login page, the RSD view, `/metaweblog` (XML-RPC handler), a theme CSS file
