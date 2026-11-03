@@ -55,6 +55,7 @@ plus `Roadkill.Core` and `Roadkill.Plugins`.
 
 - **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 8/9 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28); unchanged: LightSpeed (F27).
 - **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 8/9 probes on Linux and on Windows; unchanged: LightSpeed's `AppDomain.DefineDynamicAssembly` (F27).
+- **Round 6 (webForCore 0.7.0 on .NET 10, webForCore-thirdparty 0.5.0; under webforcore-host; Linux and Windows):** 9/10 probes on Linux and Windows. Unchanged: LightSpeed (F27). Its database was reloaded with `sqlcmd` (step 5 above): the round's containers were new.
 
 Probes: the home page, the log-in page and a static CSS file (no text checks yet: no page has rendered).
 
