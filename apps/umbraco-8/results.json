@@ -1,0 +1,40 @@
+{
+  "id": "umbraco-8",
+  "stages": {
+    "build": {
+      "at": "2026-11-03T12:33:59+00:00",
+      "error_count": 18,
+      "errors": [
+        "error MSB4018:    --- End of inner exception stack trace --- ",
+        "error MSB4018:    at Nerdbank.GitVersioning.Managed.GitExtensions.<>c__DisplayClass3_0.<GetVersionHeight>b__0(GitCommit c) ",
+        "error MSB4018:    at Nerdbank.GitVersioning.Managed.GitExtensions.<GetCommitHeight>g__TryCalculateHeight|4_0(GitCommit commit, <>c__DisplayClass4_0&) ",
+        "error MSB4018:    at Nerdbank.GitVersioning.Managed.GitExtensions.CommitMatchesVersion(GitCommit commit, SemanticVersion expectedVersion, Position comparisonPrecision, GitWalkTracker tracker) ",
+        "error MSB4018:    at Nerdbank.GitVersioning.Managed.GitExtensions.GetCommitHeight(GitRepository repository, GitCommit startingCommit, GitWalkTracker tracker, Func`2 continueStepping) ",
+        "error MSB4018:    at Nerdbank.GitVersioning.Managed.GitExtensions.GetHeight(ManagedGitContext context, Func`2 continueStepping) ",
+        "error MSB4018:    at Nerdbank.GitVersioning.Managed.GitExtensions.GetVersionHeight(ManagedGitContext context, Version baseVersion) ",
+        "error MSB4018:    at Nerdbank.GitVersioning.Managed.GitExtensions.GitWalkTracker.GetVersion(GitCommit commit) ",
+        "error MSB4018:    at Nerdbank.GitVersioning.Managed.ManagedGitContext.CalculateVersionHeight(VersionOptions committedVersion, VersionOptions workingVersion) ",
+        "error MSB4018:    at Nerdbank.GitVersioning.Managed.ManagedVersionFile.GetVersion(GitCommit commit, String repoRelativeProjectDirectory, Dictionary`2 blobVersionCache, VersionFileRequirements requirements, VersionFileLocations& locations) ",
+        "error MSB4018:    at Nerdbank.GitVersioning.ManagedGit.GitRepository.GetObjectBySha(GitObjectId sha, String objectType) ",
+        "error MSB4018:    at Nerdbank.GitVersioning.Tasks.GetBuildVersion.ExecuteInner() in D:\\a\\Nerdbank.GitVersioning\\Nerdbank.GitVersioning\\src\\Nerdbank.GitVersioning.Tasks\\GetBuildVersion.cs:line 254 ",
+        "error MSB4018:    at Nerdbank.GitVersioning.VersionOracle..ctor(GitContext context, ICloudBuild cloudBuild, Nullable`1 overrideVersionHeightOffset) ",
+        "error MSB4018:    at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args) ",
+        "error MSB4018:    at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr) ",
+        "error MSB4018:  ---> Nerdbank.GitVersioning.GitException: An blob object with SHA b06df7f7f7d795fb82daeb0050466f9e812e1c7e could not be found. ",
+        "error MSB4018: System.InvalidOperationException: Unable to get version from commit: 22452bcde20c2afe599a87d763a6109bd0686874 ",
+        "error MSB4018: The \"Nerdbank.GitVersioning.Tasks.GetBuildVersion\" task failed unexpectedly. "
+      ],
+      "log": "apps/umbraco-8/logs/build.log",
+      "seconds": 4,
+      "status": "fail",
+      "summary": "18 distinct errors",
+      "webforcore": "packages 0.7.0"
+    },
+    "fetch": {
+      "at": "2026-11-03T12:33:55+00:00",
+      "commit": "7008708cc86d0ccab2ef2532e08b5afce3685916",
+      "overlay": false,
+      "status": "pass"
+    }
+  }
+}
