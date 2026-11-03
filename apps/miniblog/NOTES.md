@@ -40,6 +40,7 @@ web.config is unchanged.
 
 - **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 18/18 probes.
 - **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 18/18 probes on Linux and on Windows. On Linux a new `.cs` in `app_code` doesn't restart it, `Web.config` does (F53).
+- **Round 6 (webForCore 0.7.0 on .NET 10, webForCore-thirdparty 0.5.0; under webforcore-host; Linux and Windows):** 19/19 probes on Linux and Windows. Also restored from the NuGet feeds alone (webForCore, drawingForCore, webForCore-thirdparty; an empty package cache, no `.packages/`), built, and served its pages under the host: webForCore#53 step 5.
 
 Probes: the home page, a post (`/post/<slug>`, a rewrite), a category, the RSS feed (a handler), robots.txt and
 sitemap.xml (rewrites to `.cshtml`), the login page, the RSD view, `/metaweblog` (XML-RPC handler), a theme CSS file

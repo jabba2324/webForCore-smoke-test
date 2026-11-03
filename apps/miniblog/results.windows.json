@@ -2,32 +2,32 @@
   "id": "miniblog",
   "stages": {
     "build": {
-      "at": "2026-11-01T23:59:33+00:00",
+      "at": "2026-11-03T12:46:26+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\miniblog\\logs.windows\\build.log",
-      "seconds": 1,
+      "seconds": 6,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.6.0"
+      "webforcore": "packages 0.7.0"
     },
     "fetch": {
-      "at": "2026-11-01T23:59:32+00:00",
+      "at": "2026-11-03T12:46:20+00:00",
       "commit": "7700ea7b713a336657f3540b930c3a2e22c09ef0",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-01T23:59:47+00:00",
+      "at": "2026-11-03T12:46:36+00:00",
       "checks": [
         {
-          "ms": 2062,
+          "ms": 9,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 24,
+          "ms": 14,
           "ok": true,
           "path": "/post/test-1",
           "status": 200
@@ -39,13 +39,13 @@
           "status": 200
         },
         {
-          "ms": 103,
+          "ms": 22,
           "ok": true,
           "path": "/feed/rss/",
           "status": 200
         },
         {
-          "ms": 153,
+          "ms": 221,
           "ok": true,
           "path": "/robots.txt",
           "status": 200
@@ -57,13 +57,13 @@
           "status": 200
         },
         {
-          "ms": 243,
+          "ms": 256,
           "ok": true,
           "path": "/views/login.cshtml",
           "status": 200
         },
         {
-          "ms": 47,
+          "ms": 25,
           "ok": true,
           "path": "/metaweblog",
           "status": 200
@@ -75,31 +75,31 @@
           "status": 200
         },
         {
-          "ms": 135,
+          "ms": 104,
           "ok": true,
           "path": "/themes/OneColumn/site.css",
           "status": 200
         },
         {
-          "ms": 4,
+          "ms": 7,
           "ok": true,
           "path": "/posts/9fa751db-c036-435b-97e3-bd6373b0991b.xml",
           "status": 403
         },
         {
-          "ms": 60,
+          "ms": 24,
           "ok": true,
           "path": "/no-such-page",
           "status": 404
         },
         {
-          "ms": 15,
+          "ms": 5,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 3,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
@@ -111,27 +111,33 @@
           "status": 404
         },
         {
-          "ms": 12,
+          "ms": 2,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 6,
           "ok": true,
           "path": "/bin_dotnet/MiniBlog.dll",
+          "status": 404
+        },
+        {
+          "ms": 3,
+          "ok": true,
+          "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404
         }
       ],
       "log": "apps\\miniblog\\logs.windows\\server.log",
       "status": "pass",
-      "summary": "18/18 probes"
+      "summary": "19/19 probes"
     }
   }
 }
