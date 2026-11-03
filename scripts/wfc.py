@@ -14,12 +14,11 @@ Standard library only (Python 3.11+, for tomllib).
     scripts/wfc.py run <id>... | --all        # fetch, build, setup and smoke
     scripts/wfc.py save-overlay <id>         # the app checkout's changes -> apps/<id>/overlay.patch
     scripts/wfc.py report                    # apps/*/results.json (and results.windows.json) -> RESULTS.md
-    scripts/wfc.py windows <command> <id>... # the same command on the Windows VM (see README.md)
     scripts/wfc.py ci-matrix [<id>...] [--changed-since <ref>]  # the GitHub Actions job list (.github/workflows/smoke.yml)
     scripts/wfc.py ci-result <id>            # a CI job's result against the committed one; stages it for upload
 
-Every round runs on Linux and Windows. On Windows the results go to results.windows.json and logs.windows/, and LOG.md
-lines say (windows).
+Every round runs on Linux and Windows: in CI (README.md, "CI"), or by running this on a Windows machine. On Windows the
+results go to results.windows.json and logs.windows/, and LOG.md lines say (windows).
 """
 
 import argparse
@@ -34,8 +33,6 @@ import socket
 import subprocess
 import sys
 import time
-import tarfile
-import tempfile
 import tomllib
 import urllib.error
 import urllib.parse
@@ -787,129 +784,13 @@ def ci_result(app_id):
     return 1 if worse else 0
 
 
-# --- windows -------------------------------------------------------------------------------------
-# The same commands on a Windows machine over SSH (README.md, "Windows"): the scripts, the apps' folders (not src/) and
-# the release packages are copied there, wfc.py runs there, and results.windows.json, logs.windows/ and LOG.md come
-# back. Settings come from the environment, so nothing machine-specific is committed:
-#   WFC_WINDOWS_HOST   user@host for ssh (required)
-#   WFC_WINDOWS_PORT   ssh port (default 22)
-#   WFC_WINDOWS_KEY    ssh identity file (optional)
-#   WFC_WINDOWS_DIR    the copy's folder there (default C:/wfc-smoke)
-#   WFC_WINDOWS_DB     host:port the Windows machine reaches services/compose.yml's SQL Server at; mapped there to
-#                      127.0.0.1:14330, as the overlays' connection strings have it (netsh portproxy). Optional.
-
-def win_ssh_args():
-    host = os.environ.get("WFC_WINDOWS_HOST")
-    if not host:
-        sys.exit("windows: set WFC_WINDOWS_HOST (user@host), and WFC_WINDOWS_PORT / WFC_WINDOWS_KEY as needed (README.md)")
-    args = ["-p", os.environ.get("WFC_WINDOWS_PORT", "22"), "-o", "BatchMode=yes", "-o", "ServerAliveInterval=30"]
-    if os.environ.get("WFC_WINDOWS_KEY"):
-        args += ["-i", os.environ["WFC_WINDOWS_KEY"]]
-    return host, args
-
-
-def win_dir():
-    return os.environ.get("WFC_WINDOWS_DIR", "C:/wfc-smoke")
-
-
-def win_ps(script, check=True, capture=False):
-    """Runs a PowerShell script there (sent on stdin, so nothing needs quoting)."""
-    host, args = win_ssh_args()
-    r = subprocess.run(["ssh", *args, host, "powershell -NoProfile -ExecutionPolicy Bypass -Command -"], input=script,
-                       text=True, capture_output=capture)
-    if check and r.returncode:
-        sys.exit(f"windows: remote command failed ({r.returncode})" + (f": {r.stderr[-500:]}" if capture else ""))
-    return r
-
-
-def win_scp(src, dest):
-    host, args = win_ssh_args()
-    args = ["-P" if a == "-p" else a for a in args]
-    subprocess.run(["scp", "-q", *args, *[str(x).replace("@HOST:", f"{host}:") for x in (src, dest)]], check=True)
-
-
-def win_push(ids):
-    """The scripts, the apps' folders without src/, and this release's packages."""
-    with tempfile.TemporaryDirectory() as tmp:
-        tar = Path(tmp) / "wfc.tar"
-        with tarfile.open(tar, "w") as t:
-            for f in ["scripts", "services", "README.md"]:
-                t.add(ROOT / f, arcname=f)
-            for app_id in ids:
-                for f in app_dir(app_id).iterdir():
-                    if f.name != "src":
-                        t.add(f, arcname=f"apps/{app_id}/{f.name}")
-        d = win_dir()
-        win_ps(f"New-Item -ItemType Directory -Force '{d}' | Out-Null")
-        win_scp(tar, f"@HOST:{d}/wfc.tar")
-        pkgs = package_source()
-        have = win_ps(f"if (Test-Path '{d}/.packages/v{WEBFORCORE_VERSION}') {{ (Get-ChildItem '{d}/.packages/v{WEBFORCORE_VERSION}' -Filter *.nupkg).Count }} else {{ 0 }}",
-                      capture=True).stdout.strip()
-        if have != str(len(list(pkgs.glob("*.nupkg")))):
-            ptar = Path(tmp) / "packages.tar"
-            with tarfile.open(ptar, "w") as t:
-                for f in pkgs.glob("*.nupkg"):
-                    t.add(f, arcname=f".packages/{pkgs.name}/{f.name}")
-            win_scp(ptar, f"@HOST:{d}/packages.tar")
-            win_ps(f"Set-Location '{d}'; tar -xf packages.tar; Remove-Item packages.tar")
-        win_ps(f"Set-Location '{d}'; tar -xf wfc.tar; Remove-Item wfc.tar")
-
-
-def win_pull(ids):
-    d = win_dir()
-    names = " ".join(f"apps/{i}/results.windows.json apps/{i}/logs.windows apps/{i}/LOG.md" for i in ids)
-    win_ps(f"Set-Location '{d}'; $f = @(); foreach ($n in '{names}'.Split(' ')) {{ if (Test-Path $n) {{ $f += $n }} }}; "
-           "tar -cf back.tar $f")
-    with tempfile.TemporaryDirectory() as tmp:
-        win_scp(f"@HOST:{d}/back.tar", Path(tmp) / "back.tar")
-        with tarfile.open(Path(tmp) / "back.tar") as t:
-            t.extractall(tmp, filter="data")
-        for app_id in ids:
-            src = Path(tmp) / "apps" / app_id
-            if (src / "results.windows.json").exists():
-                (app_dir(app_id) / "results.windows.json").write_bytes((src / "results.windows.json").read_bytes())
-            if (src / "logs.windows").exists():
-                dest = app_dir(app_id) / "logs.windows"
-                dest.mkdir(exist_ok=True)
-                for f in (src / "logs.windows").iterdir():
-                    (dest / f.name).write_bytes(f.read_bytes())
-            # LOG.md went there as it is here; the Windows run appended to it.
-            remote, local = src / "LOG.md", app_dir(app_id) / "LOG.md"
-            if remote.exists():
-                r, l = remote.read_bytes(), local.read_bytes() if local.exists() else b""
-                local.write_bytes(r if r.startswith(l) else l + r[len(l):] if len(r) > len(l) else l)
-    win_ps(f"Remove-Item '{d}/back.tar'", check=False)
-
-
-def win_db():
-    db = os.environ.get("WFC_WINDOWS_DB")
-    if not db:
-        return
-    host, port = db.rsplit(":", 1)
-    win_ps("netsh interface portproxy delete v4tov4 listenaddress=127.0.0.1 listenport=14330 | Out-Null; "
-           f"netsh interface portproxy add v4tov4 listenaddress=127.0.0.1 listenport=14330 connectaddress={host} connectport={port}")
-
-
-def windows(command, ids, reset):
-    win_push(ids)
-    if command in ("smoke", "run"):
-        win_db()
-    flags = (" --reset" if reset else "")
-    # PYTHONUNBUFFERED: each stage's line comes back as it finishes, not all at the end (a long run looked hung).
-    e = (f"$env:PYTHONUNBUFFERED='1'; $env:WEBFORCORE_VERSION='{WEBFORCORE_VERSION}'; "
-         f"$env:THIRDPARTY_VERSION='{THIRDPARTY_VERSION}'; $env:DRAWING_VERSION='{DRAWING_VERSION}'; ")
-    r = win_ps(f"{e}Set-Location '{win_dir()}'; python scripts/wfc.py {command}{flags} {' '.join(ids)}", check=False)
-    win_pull(ids)
-    return r.returncode
-
-
 # --- main ----------------------------------------------------------------------------------------
 
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("command", choices=["packages", "list", "fetch", "assess", "build", "setup", "smoke", "run", "save-overlay", "report",
-                                       "windows", "ci-matrix", "ci-result"])
-    p.add_argument("ids", nargs="*", help="app ids; for windows, the command first (fetch, build, smoke, run)")
+                                       "ci-matrix", "ci-result"])
+    p.add_argument("ids", nargs="*", help="app ids")
     p.add_argument("--all", action="store_true")
     p.add_argument("--reset", action="store_true", help="fetch, run: discard the checkout's changes and reapply the overlay")
     p.add_argument("--changed-since", metavar="REF", help="ci-matrix: only the apps the changes since REF touch")
@@ -932,15 +813,6 @@ def main():
         if unknown:
             sys.exit(f"unknown app(s): {', '.join(unknown)}")
         return ci_matrix(apps, a.ids, a.changed_since)
-    if a.command == "windows":
-        if not a.ids or a.ids[0] not in ("fetch", "build", "smoke", "run"):
-            sys.exit("windows: give a command (fetch, build, smoke, run) and app ids or --all")
-        sub, wids = a.ids[0], a.ids[1:]
-        wids = [i for i, app in apps.items() if (APPS / i / "overlay.patch").exists()] if a.all else wids
-        unknown = [i for i in wids if i not in apps]
-        if unknown or not wids:
-            sys.exit(f"unknown app(s): {', '.join(unknown)}" if unknown else "give app ids or --all")
-        sys.exit(windows(sub, wids, a.reset))
     ids = list(apps) if a.all else a.ids
     unknown = [i for i in ids if i not in apps]
     if unknown or not ids:

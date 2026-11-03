@@ -107,30 +107,12 @@ the round's notes and findings, and the round counts once that run has covered b
 ## Windows
 
 Every round runs on Linux and on Windows; `RESULTS.md` has a build and a smoke column for each. Migrations are done
-once (on Linux), and the same overlay is built and smoked on both. `scripts/wfc.py windows <command> <id>...` (or
-`--all`) runs `fetch`, `build`, `smoke` or `run` on a Windows machine over SSH. It works in four steps:
+once (on Linux), and the same overlay is built and smoked on both. CI's Windows jobs are the usual way (see "CI").
 
-1. It copies the scripts, the apps' folders (without `src/`) and this release's packages there.
-2. It runs the same `wfc.py` there. On Windows, results go to `results.windows.json` and `logs.windows/`, and LOG.md
-   lines say `(windows)`.
-3. It copies those back.
-4. For `smoke` and `run`, if `WFC_WINDOWS_DB` is set, it maps `127.0.0.1:14330` there to that address with
-   `netsh portproxy`. This is the SQL Server from `services/compose.yml`, which the overlays' connection strings name.
-
-The Windows machine needs OpenSSH (with PowerShell as the shell is fine), the .NET 10 SDK, Python 3.11+ and git.
-Settings come from the environment, so nothing machine-specific is committed:
-
-| Variable | |
-| --- | --- |
-| `WFC_WINDOWS_HOST` | `user@host` for ssh (required) |
-| `WFC_WINDOWS_PORT` | ssh port (default 22) |
-| `WFC_WINDOWS_KEY` | ssh identity file |
-| `WFC_WINDOWS_DIR` | the copy's folder there (default `C:/wfc-smoke`) |
-| `WFC_WINDOWS_DB` | `host:port` at which the Windows machine reaches the compose SQL Server |
-
-A Windows VM in a container (dockur/windows) reaches other containers through its own: put the SQL Server container on
-the same Docker network as the VM's container, not on the compose network. Its default subnet can clash with the
-guest's.
+To run on a Windows machine of your own, clone this repo there and use `scripts/wfc.py` as on Linux. It needs the
+.NET 10 SDK, Python 3.11+, git and `gh`. Results go to `results.windows.json` and `logs.windows/`, and LOG.md lines say
+`(windows)`. For apps that need SQL Server, `services/windows-mssql.ps1` installs SQL Server Express where the overlays
+look for it. It's meant for a throwaway machine: it sets a test-only `sa` password.
 
 ## Migrating an app
 
