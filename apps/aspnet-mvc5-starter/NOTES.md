@@ -39,6 +39,7 @@ Server store, a migrator, and infrastructure for Azure storage, Cloudinary, file
 
 - **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 15/15 probes.
 - **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 15/15 probes on Linux and on Windows.
+- **Round 6 (webForCore 0.7.0 on .NET 10, webForCore-thirdparty 0.5.0; under webforcore-host; Linux and Windows):** 16/16 probes on Linux and Windows.
 
 Probes:
 - the home page;
