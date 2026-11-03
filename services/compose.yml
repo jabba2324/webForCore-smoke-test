@@ -1,6 +1,7 @@
 # Databases for apps that need one (catalog "needs"). Start what you need:
-#   docker compose -f services/compose.yml up -d mssql
-# Bound to 127.0.0.1 only. The passwords are test-only values for throwaway containers.
+#   docker compose -f services/compose.yml up -d --wait mssql
+# Bound to 127.0.0.1 only. The passwords are test-only values for throwaway containers. On Windows, where these
+# Linux containers don't run, services/windows-mssql.ps1 sets up a SQL Server the same way.
 services:
   mssql:
     image: mcr.microsoft.com/mssql/server:2022-latest
@@ -8,6 +9,13 @@ services:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: "Smoke_test_1234"
     ports: ["127.0.0.1:14330:1433"]
+    # --wait waits for this: the server takes a while to accept logins after the container starts.
+    healthcheck:
+      test: ["CMD", "/opt/mssql-tools18/bin/sqlcmd", "-C", "-S", "localhost", "-U", "sa", "-P", "Smoke_test_1234", "-Q", "SELECT 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 10s
   mysql:
     image: mysql:8.4
     environment:

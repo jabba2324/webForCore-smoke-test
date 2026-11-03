@@ -12,8 +12,9 @@ Coverage and accurate findings matter more than a green table.
 
 ## The loop, per app
 
-Each app is a folder, `apps/<id>/` (see README.md). Nothing goes at the top level except the runner (and `scripts/convert.py`), the services,
-`FINDINGS.md` and the generated `RESULTS.md`; never add a top-level project or solution.
+Each app is a folder, `apps/<id>/` (see README.md). Nothing goes at the top level except the runner (and `scripts/convert.py`), the services, the CI
+workflow (`.github/workflows/smoke.yml`), `FINDINGS.md` and the generated `RESULTS.md`; never add a top-level project
+or solution.
 
 1. **Verify `apps/<id>/app.toml`** before anything else: the repo exists, the licence is open source, the web project
    targets .NET Framework 4.x with System.Web, and `site`/`project` are right. Pin `ref` to a commit hash. Set
@@ -23,8 +24,8 @@ Each app is a folder, `apps/<id>/` (see README.md). Nothing goes at the top leve
    (`PackageReference Include="webForCore" Version="0.7.0"` and the framework packages; `scripts/wfc.py packages`
    downloads them), not its source. Keep changes minimal; don't modernise the app. Record each change and its
    reason in `NOTES.md` as you go, not afterwards.
-4. `scripts/wfc.py build <id>` and `scripts/wfc.py smoke <id>` on Linux, then `scripts/wfc.py windows run <id>` on Windows
-   (README.md, "Windows"): every round runs on both, and `RESULTS.md` shows both. Add `[[probes]]` to `app.toml` for each kind of page the
+4. `scripts/wfc.py build <id>` and `scripts/wfc.py smoke <id>` on Linux while migrating, then the CI workflow for
+   both platforms (README.md, "CI"): every round runs on Linux and Windows, and `RESULTS.md` shows both. An app whose database needs preparing gets a `[setup]` in `app.toml`, so `setup` (and CI) can do it. Add `[[probes]]` to `app.toml` for each kind of page the
    app has (home page, an MVC action, a Web API route returning JSON, a form, a static file), with `contains` text
    that proves the page rendered.
    Write up the smoke results in `NOTES.md`; the runner appends each run to `LOG.md` and keeps the latest logs in
@@ -90,7 +91,9 @@ webForCore's CONTRIBUTING.md holds every repository in the project to the same r
   as the app already does, is fine.
 - **The runner and scripts: slow, stable and simple beat fast.** Every wait has a timeout and every external call
   fails rather than hangs (git runs with a stall timeout and no credential prompt, for example). No parallelism or
-  caching tricks to save time.
+  caching tricks to save time inside the runner. CI's jobs running side by side is fine: each is one app on its own
+  machine, running the runner as it runs anywhere else.
 - **Report numbers.** Each app's result is probes passed out of the total, per platform, in `RESULTS.md` and in the
   round's PR; a finding says how many apps it affects.
-- **Both platforms.** A round counts once it has run on Linux and on Windows; until then it's in progress.
+- **Both platforms.** A round counts once it has run on Linux and on Windows (in CI, once a run has covered both);
+  until then it's in progress.

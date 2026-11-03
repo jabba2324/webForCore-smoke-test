@@ -13,9 +13,14 @@ kinds = ["webforms", "mvc", "webapi"]
 licence = "EPL-1.0"
 status = "blocked"
 notes = "On webForCore 0.7.0 (.NET 10, under webforcore-host) it builds and setup still fails on Assembly.Load(\"App_GlobalResources\") (F40, webForCore#33), so every page goes to setup: 7/16 on Linux and Windows."
+needs = ["mssql"]
 
 # The first request compiles the site, so it gets 120 s. The probes need the compose SQL Server with an empty
 # "mojoportal" database (see NOTES.md); the Setup page installs the schema and the default site on the first run.
+# An empty database; /Setup/Default.aspx would install the schema, but fails first (NOTES.md).
+[setup]
+databases = ["mojoportal"]
+
 [[probes]]
 path = "/Setup/Default.aspx"
 contains = "Your installation is up to date"

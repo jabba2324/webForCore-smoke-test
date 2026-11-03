@@ -9,29 +9,33 @@ Standard library only (Python 3.11+, for tomllib).
     scripts/wfc.py fetch <id>... | --all [--reset]
     scripts/wfc.py assess <id>... | --all
     scripts/wfc.py build <id>...
+    scripts/wfc.py setup <id>...             # the app's database, as app.toml's [setup] says (once per new database)
     scripts/wfc.py smoke <id>...
-    scripts/wfc.py run <id>... | --all        # fetch, build and smoke
+    scripts/wfc.py run <id>... | --all        # fetch, build, setup and smoke
     scripts/wfc.py save-overlay <id>         # the app checkout's changes -> apps/<id>/overlay.patch
     scripts/wfc.py report                    # apps/*/results.json (and results.windows.json) -> RESULTS.md
-    scripts/wfc.py windows <command> <id>... # the same command on the Windows VM (see README.md)
+    scripts/wfc.py ci-matrix [<id>...] [--changed-since <ref>]  # the GitHub Actions job list (.github/workflows/smoke.yml)
+    scripts/wfc.py ci-result <id>            # a CI job's result against the committed one; stages it for upload
 
-Every round runs on Linux and Windows. On Windows the results go to results.windows.json and logs.windows/, and LOG.md
-lines say (windows).
+Every round runs on Linux and Windows: in CI (README.md, "CI"), or by running this on a Windows machine. On Windows the
+results go to results.windows.json and logs.windows/, and LOG.md lines say (windows).
 """
 
 import argparse
 import datetime
+import html
+import http.cookiejar
 import json
 import os
 import re
+import shutil
 import socket
 import subprocess
 import sys
 import time
-import tarfile
-import tempfile
 import tomllib
 import urllib.error
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -51,16 +55,16 @@ WEBFORCORE = Path(os.environ.get("WEBFORCORE_DIR", ROOT.parent / "webForCore")).
 # builds restore from it (apps reference the packages, docs/MIGRATING.md section 1). WEBFORCORE_DIR is only needed by
 # apps still migrated against webForCore's source.
 WEBFORCORE_REPO = "xforcore/webForCore"
-WEBFORCORE_VERSION = os.environ.get("WEBFORCORE_VERSION", "0.7.0")
+WEBFORCORE_VERSION = os.environ.get("WEBFORCORE_VERSION") or "0.7.0"
 # Builds of third-party libraries for webForCore (WebActivatorEx, AjaxControlToolkit; CLAUDE.md), from
 # webForCore-thirdparty's releases, go in the same folder.
 THIRDPARTY_REPO = "xforcore/webForCore-thirdparty"
-THIRDPARTY_VERSION = os.environ.get("THIRDPARTY_VERSION", "0.5.0")
+THIRDPARTY_VERSION = os.environ.get("THIRDPARTY_VERSION") or "0.5.0"
 THIRDPARTY_PACKAGES = ("webForCore.WebActivatorEx", "webForCore.AjaxControlToolkit")
 # System.Drawing, which the webForCore package depends on from 0.7.0 (drawingForCore and drawingForCore.Common), goes
 # there too.
 DRAWING_REPO = "xforcore/drawingForCore"
-DRAWING_VERSION = os.environ.get("DRAWING_VERSION", "0.2.0")
+DRAWING_VERSION = os.environ.get("DRAWING_VERSION") or "0.2.0"
 PACKAGES = ROOT / ".packages"
 # The OS this run is on. Linux keeps the original file names; Windows' results sit beside them.
 PLATFORM = "windows" if os.name == "nt" else "linux"
@@ -446,50 +450,77 @@ def get(url, timeout):
         return e.code, dict(e.headers), e.read(MAX_BODY).decode("utf-8", "replace")
 
 
-def smoke(app):
-    proj = project_file(app)
-    if not proj or not proj.exists():
-        return record(app["id"], "smoke", "skip", summary="no project")
-    site = proj.parent
-    dll = site / "bin_dotnet" / f"{assembly_name(proj)}.dll"
-    if not dll.exists():
-        return record(app["id"], "smoke", "skip", summary=f"not built ({shown(dll)} missing)")
-    port = free_port()
-    base = f"{'https' if app.get('https') else 'http'}://127.0.0.1:{port}"
-    log = logs_dir(app["id"]) / "server.log"
-    e = env()
-    e.update(app.get("env", {}))
-    with log.open("w") as f:
+class Server:
+    """The built app, started on a free port (smoke and setup). `start()` returns None, or why it couldn't start."""
+
+    def __init__(self, app, stage):
+        self.app = app
+        proj = project_file(app)
+        self.proj = proj if proj and proj.exists() else None
+        self.site = proj.parent if self.proj else None
+        self.dll = self.site / "bin_dotnet" / f"{assembly_name(proj)}.dll" if self.proj else None
         # From webForCore 0.7.0 the application runs as webforcore-host's worker process (webForCore#56), which the
         # webForCore package puts in the output; earlier releases run it directly.
-        host = site / "bin_dotnet" / "webforcore-host" / "webforcore-host.dll"
-        start = host if host.exists() else dll
-        server = subprocess.Popen(["dotnet", str(start.relative_to(site)), "--urls", base], cwd=site, env=e,
-                                  stdout=f, stderr=subprocess.STDOUT)
-    checks = []
-    try:
+        self.host = self.site / "bin_dotnet" / "webforcore-host" / "webforcore-host.dll" if self.proj else None
+        self.log = logs_dir(app["id"]) / ("server.log" if stage == "smoke" else f"{stage}-server.log")
+        self.process = None
+        self.base = None
+
+    def start(self):
+        if not self.proj:
+            return "no project"
+        if not self.dll.exists():
+            return f"not built ({shown(self.dll)} missing)"
+        port = free_port()
+        self.base = f"{'https' if self.app.get('https') else 'http'}://127.0.0.1:{port}"
+        e = env()
+        e.update(self.app.get("env", {}))
+        start = self.host if self.host.exists() else self.dll
+        with self.log.open("w") as f:
+            self.process = subprocess.Popen(["dotnet", str(start.relative_to(self.site)), "--urls", self.base],
+                                            cwd=self.site, env=e, stdout=f, stderr=subprocess.STDOUT)
         deadline = time.time() + 60
-        while time.time() < deadline and server.poll() is None:
+        while time.time() < deadline and self.process.poll() is None:
             try:
                 socket.create_connection(("127.0.0.1", port), timeout=1).close()
                 break
             except OSError:
                 time.sleep(0.5)
-        if server.poll() is not None:
-            return record(app["id"], "smoke", "fail", summary=f"server exited with {server.returncode}",
-                          log_tail=scrub(log)[-3000:])
         # The host answers 503 until its worker serves.
-        while host.exists() and time.time() < deadline + 60 and server.poll() is None:
+        while self.host.exists() and time.time() < deadline + 60 and self.process.poll() is None:
             try:
-                if get(base + "/", timeout=120)[0] != 503:
+                if get(self.base + "/", timeout=120)[0] != 503:
                     break
             except OSError:
                 pass
             time.sleep(1)
+        return f"server exited with {self.process.returncode}" if self.process.poll() is not None else None
+
+    def stop(self):
+        if self.process:
+            self.process.terminate()
+            try:
+                self.process.wait(10)
+            except subprocess.TimeoutExpired:
+                self.process.kill()
+                self.process.wait(10)
+        return scrub(self.log) if self.log.exists() else ""
+
+
+def smoke(app):
+    server = Server(app, "smoke")
+    checks = []
+    try:
+        why = server.start()
+        if why:
+            status = "skip" if server.process is None else "fail"
+            return record(app["id"], "smoke", status, summary=why,
+                          **({"log_tail": server.stop()[-3000:]} if server.process else {}))
+        base, site, dll = server.base, server.site, server.dll
         probes = app.get("probes") or [{"path": "/", "status": 200}]
         for i, probe in enumerate(probes):
             # The first request compiles the site, as on IIS.
-            checks.append(run_probe(base, probe, timeout=120 if i == 0 else 30))
+            checks.append(run_probe(base, probe, timeout=120 if i == 0 else 30, app_id=app["id"]))
         # AddWebForms() writes W3C logs under the site folder by default (FINDINGS.md); they must not be served.
         # The log is flushed every second, and entries not yet flushed are lost when the server stops.
         time.sleep(1.5)
@@ -498,29 +529,34 @@ def smoke(app):
         # An app whose error handler answers 200 with its own "not found" page sets [forbidden."<path>"] in app.toml,
         # e.g. { status = 200, absent = "<package " }: what matters is that the file's content isn't served.
         overrides = app.get("forbidden", {})
-        for path in FORBIDDEN + [f"/bin_dotnet/{dll.name}"] + (["/bin_dotnet/webforcore-host/webforcore-host.dll"] if host.exists() else []):
+        for path in FORBIDDEN + [f"/bin_dotnet/{dll.name}"] + (["/bin_dotnet/webforcore-host/webforcore-host.dll"] if server.host.exists() else []):
             probe = {"path": path, "status": 404, "forbidden": True, **overrides.get(path, {})}
             checks.append(run_probe(base, probe, timeout=30))
         for path in w3c:  # an app that answers every URL itself (OWIN) may return 200: what matters is the log's content
             checks.append(run_probe(base, {"path": path, "status": 404, "forbidden": True, "absent": "#Fields:"}, timeout=30))
     finally:
-        server.terminate()
-        try:
-            server.wait(10)
-        except subprocess.TimeoutExpired:
-            server.kill()
-        scrub(log)
+        server.stop()
     failed = [c for c in checks if not c["ok"]]
     return record(app["id"], "smoke", "fail" if failed else "pass", checks=checks,
                   summary=f"{len(checks) - len(failed)}/{len(checks)} probes",
-                  log=str(log.relative_to(ROOT)))
+                  log=str(server.log.relative_to(ROOT)))
 
 
-def run_probe(base, probe, timeout):
+def probe_url(app_id, path):
+    """A probe's path, with {setup_date} as the date setup last set up the app's database (Subtext's post URLs carry
+    the day its install wizard ran)."""
+    if "{setup_date}" in path:
+        date = load_result(app_id)["stages"].get("setup", {}).get("date") or now()[:10]
+        path = path.replace("{setup_date}", date.replace("-", "/"))
+    return path
+
+
+def run_probe(base, probe, timeout, app_id=None):
     path = probe["path"]
+    url = probe_url(app_id, path) if app_id else path
     t = time.time()
     try:
-        status, headers, body = get(base + path, timeout)
+        status, headers, body = get(base + url, timeout)
     except Exception as ex:  # noqa: BLE001 - a probe reports any failure
         return {"path": path, "ok": False, "error": f"{type(ex).__name__}: {ex}"}
     ok = status == probe.get("status", 200) or bool(probe.get("forbidden") and status in (403, 404))
@@ -536,6 +572,119 @@ def run_probe(base, probe, timeout):
         if probe.get("contains"):
             check["expected_text"] = probe["contains"]
     return check
+
+
+# --- setup ---------------------------------------------------------------------------------------
+# What an app's database needs before the probes mean anything, from app.toml's [setup] (README.md):
+#   databases  SQL Server databases to create, empty, in services/compose.yml's SQL Server
+#   sql_files  scripts in the checkout run against the first of them, when setup has just created it
+#   steps      requests made to the running app, in order, with cookies kept and redirects followed (an install
+#              wizard): {get = path} or {post = path, fields = {...}}, and with button = name (and value) a Web Forms
+#              postback, whose hidden fields come from a GET of the page first. timeout (s, default 120), contains
+#              (text the response must have), may_fail = true (the step's outcome doesn't matter)
+# When every database it lists already exists, the app is set up already and nothing runs. On a database that's gone
+# (`docker compose down`), it runs again.
+
+MSSQL_PASSWORD = "Smoke_test_1234"  # services/compose.yml's test-only value
+
+
+def sqlcmd(*args, script=None):
+    """sqlcmd against services/compose.yml's SQL Server (127.0.0.1:14330): the one on PATH if there is one (the Windows
+    CI job installs it with SQL Server), otherwise the container's own. script: a file to run."""
+    if shutil.which("sqlcmd"):
+        cmd = ["sqlcmd", "-C", "-b", "-S", "127.0.0.1,14330", "-U", "sa", "-P", MSSQL_PASSWORD, *args]
+        stdin = None
+        if script:
+            cmd += ["-i", str(script)]
+    else:
+        cmd = ["docker", "compose", "-f", str(ROOT / "services" / "compose.yml"), "exec", "-T", "mssql",
+               "/opt/mssql-tools18/bin/sqlcmd", "-C", "-b", "-S", "localhost", "-U", "sa", "-P", MSSQL_PASSWORD, *args]
+        stdin = script.read_bytes() if script else None
+    try:
+        r = subprocess.run(cmd, input=stdin, capture_output=True, timeout=600)
+    except subprocess.TimeoutExpired:
+        return 1, "sqlcmd timed out after 600 s"
+    return r.returncode, (r.stdout + r.stderr).decode("utf-8", "replace")
+
+
+def web_steps(base, steps):
+    """Runs [setup] steps against base; returns a list of what each did."""
+    jar = http.cookiejar.CookieJar()
+    opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(jar),
+                                         urllib.request.HTTPSHandler(context=_TLS))
+
+    def request(path, data, timeout):
+        body = urllib.parse.urlencode(data).encode() if data is not None else None
+        req = urllib.request.Request(base + path, data=body, headers={"User-Agent": "webForCore-smoke-test"})
+        try:
+            with opener.open(req, timeout=timeout) as r:
+                return r.status, r.read(MAX_BODY).decode("utf-8", "replace")
+        except urllib.error.HTTPError as e:
+            return e.code, e.read(MAX_BODY).decode("utf-8", "replace")
+
+    done = []
+    for step in steps:
+        path = step.get("get") or step.get("post")
+        timeout = step.get("timeout", 120)
+        try:
+            if "get" in step:
+                status, body = request(path, None, timeout)
+            else:
+                fields = {}
+                if step.get("button"):
+                    _, page = request(path, None, timeout)
+                    fields = {html.unescape(m.group(1)): html.unescape(m.group(2)) for m in
+                              re.finditer(r'<input type="hidden" name="([^"]+)" id="[^"]*" value="([^"]*)"', page)}
+                    fields[step["button"]] = step.get("value", "")
+                fields.update(step.get("fields", {}))
+                status, body = request(path, fields, timeout)
+            ok = status < 400 and step.get("contains", "") in body
+            result = {"step": path, "status": status, "ok": ok}
+        except Exception as ex:  # noqa: BLE001 - a step reports any failure
+            result = {"step": path, "ok": False, "error": f"{type(ex).__name__}: {ex}"}
+        if step.get("may_fail"):
+            result["may_fail"] = True
+        done.append(result)
+        if not result["ok"] and not step.get("may_fail"):
+            break
+    return done
+
+
+def setup(app):
+    s = app.get("setup")
+    if not s:  # not recorded: most apps have no setup stage
+        print(f"[{app['id']}] setup: nothing to set up")
+        return "skip"
+    created = []
+    for db in s.get("databases", []):
+        code, out = sqlcmd("-h", "-1", "-Q", f"SET NOCOUNT ON; IF DB_ID('{db}') IS NULL BEGIN CREATE DATABASE [{db}]; "
+                                             "SELECT 'created' END ELSE SELECT 'exists'")
+        if code:
+            return record(app["id"], "setup", "fail", summary=f"can't create database {db}", error=out[-2000:])
+        if "created" in out:
+            created.append(db)
+    previous = load_result(app["id"])["stages"].get("setup", {})
+    if s.get("databases") and not created:
+        return record(app["id"], "setup", "pass", summary="already set up", date=previous.get("date"))
+    for f in s.get("sql_files", []):
+        code, out = sqlcmd("-d", s["databases"][0], script=checkout(app) / f)
+        if code:
+            return record(app["id"], "setup", "fail", summary=f"{f} failed", error=out[-2000:])
+    steps = []
+    if s.get("steps"):
+        server = Server(app, "setup")
+        try:
+            why = server.start()
+            if why:
+                return record(app["id"], "setup", "fail", summary=why)
+            steps = web_steps(server.base, s["steps"])
+        finally:
+            server.stop()
+    failed = [x for x in steps if not x["ok"] and not x.get("may_fail")]
+    allowed = sum(1 for x in steps if not x["ok"] and x.get("may_fail"))
+    summary = f"{sum(x['ok'] for x in steps)}/{len(steps)} steps" + (f", {allowed} allowed to fail" if allowed else "")
+    return record(app["id"], "setup", "fail" if failed else "pass", date=now()[:10], created=created, steps=steps,
+                  summary=summary if steps else f"created {', '.join(created)}")
 
 
 # --- report --------------------------------------------------------------------------------------
@@ -571,130 +720,80 @@ def report(apps):
     print(f"wrote RESULTS.md ({len(rows)} apps)")
 
 
-# --- windows -------------------------------------------------------------------------------------
-# The same commands on a Windows machine over SSH (README.md, "Windows"): the scripts, the apps' folders (not src/) and
-# the release packages are copied there, wfc.py runs there, and results.windows.json, logs.windows/ and LOG.md come
-# back. Settings come from the environment, so nothing machine-specific is committed:
-#   WFC_WINDOWS_HOST   user@host for ssh (required)
-#   WFC_WINDOWS_PORT   ssh port (default 22)
-#   WFC_WINDOWS_KEY    ssh identity file (optional)
-#   WFC_WINDOWS_DIR    the copy's folder there (default C:/wfc-smoke)
-#   WFC_WINDOWS_DB     host:port the Windows machine reaches services/compose.yml's SQL Server at; mapped there to
-#                      127.0.0.1:14330, as the overlays' connection strings have it (netsh portproxy). Optional.
+# --- ci ------------------------------------------------------------------------------------------
+# .github/workflows/smoke.yml runs each app as its own job, on Linux and on Windows (README.md, "CI").
 
-def win_ssh_args():
-    host = os.environ.get("WFC_WINDOWS_HOST")
-    if not host:
-        sys.exit("windows: set WFC_WINDOWS_HOST (user@host), and WFC_WINDOWS_PORT / WFC_WINDOWS_KEY as needed (README.md)")
-    args = ["-p", os.environ.get("WFC_WINDOWS_PORT", "22"), "-o", "BatchMode=yes", "-o", "ServerAliveInterval=30"]
-    if os.environ.get("WFC_WINDOWS_KEY"):
-        args += ["-i", os.environ["WFC_WINDOWS_KEY"]]
-    return host, args
+CI_RUNNERS = {"linux": "ubuntu-24.04", "windows": "windows-2025"}
+# A change here runs every app; elsewhere outside apps/ (FINDINGS.md, README.md, ...), none.
+CI_SHARED = ("scripts/", "services/", ".github/workflows/smoke.yml")
 
 
-def win_dir():
-    return os.environ.get("WFC_WINDOWS_DIR", "C:/wfc-smoke")
+def ci_matrix(apps, ids, since):
+    """Prints the job list for $GITHUB_OUTPUT: every migrated app (it has an overlay, and isn't rejected) on each
+    platform its [ci] allows; only the given apps, or with since, only the apps the changes since that commit touch."""
+    chosen = [i for i, app in apps.items() if (APPS / i / "overlay.patch").exists() and app.get("status") != "rejected"]
+    if ids:
+        chosen = [i for i in chosen if i in ids]
+    if since:
+        r = git("diff", "--name-only", f"{since}...HEAD", cwd=ROOT, check=False)
+        files = r.stdout.split() if r.returncode == 0 else None  # an unknown commit (a new branch's push): every app
+        if files is not None and not any(f.startswith(CI_SHARED) for f in files):
+            touched = {f.split("/")[1] for f in files if f.startswith("apps/") and f.count("/") >= 2}
+            chosen = [i for i in chosen if i in touched]
+    jobs = [{"app": i, "platform": p, "runner": runner, "needs": " ".join(apps[i].get("needs", []))}
+            for i in chosen for p, runner in CI_RUNNERS.items() if apps[i].get("ci", {}).get(p, True)]
+    print(f"matrix={json.dumps({'include': jobs}, separators=(',', ':'))}")
+    print(f"count={len(jobs)}")
 
 
-def win_ps(script, check=True, capture=False):
-    """Runs a PowerShell script there (sent on stdin, so nothing needs quoting)."""
-    host, args = win_ssh_args()
-    r = subprocess.run(["ssh", *args, host, "powershell -NoProfile -ExecutionPolicy Bypass -Command -"], input=script,
-                       text=True, capture_output=capture)
-    if check and r.returncode:
-        sys.exit(f"windows: remote command failed ({r.returncode})" + (f": {r.stderr[-500:]}" if capture else ""))
-    return r
+def ci_result(app_id):
+    """Compares this run's results with the committed ones, says so in the job's summary, and copies the results and
+    logs to ci-out/ for the job to upload. Exit status 1 if the app does worse: a check that passed fails, or a build
+    that passed fails."""
+    rel = f"apps/{app_id}/results{SUFFIX}.json"
+    new = load_result(app_id)["stages"]
+    r = git("show", f"HEAD:{rel}", cwd=ROOT, check=False)
+    old = json.loads(r.stdout)["stages"] if r.returncode == 0 else {}
 
+    def passed(stages):
+        # The W3C log's file name and Subtext's post URL carry dates.
+        return {re.sub(r"/logs/W3SVC.*", "/logs/W3SVC*", re.sub(r"/\d{4}/\d{2}/\d{2}/", "/{setup_date}/", c["path"]))
+                for c in stages.get("smoke", {}).get("checks", []) if c["ok"]}
 
-def win_scp(src, dest):
-    host, args = win_ssh_args()
-    args = ["-P" if a == "-p" else a for a in args]
-    subprocess.run(["scp", "-q", *args, *[str(x).replace("@HOST:", f"{host}:") for x in (src, dest)]], check=True)
+    def says(stages):
+        build, smoke = stages.get("build", {}).get("status", "not run"), stages.get("smoke", {})
+        return f"build {build}" + (f", {smoke.get('summary')}" if smoke.get("summary") else "")
 
-
-def win_push(ids):
-    """The scripts, the apps' folders without src/, and this release's packages."""
-    with tempfile.TemporaryDirectory() as tmp:
-        tar = Path(tmp) / "wfc.tar"
-        with tarfile.open(tar, "w") as t:
-            for f in ["scripts", "services", "README.md"]:
-                t.add(ROOT / f, arcname=f)
-            for app_id in ids:
-                for f in app_dir(app_id).iterdir():
-                    if f.name != "src":
-                        t.add(f, arcname=f"apps/{app_id}/{f.name}")
-        d = win_dir()
-        win_ps(f"New-Item -ItemType Directory -Force '{d}' | Out-Null")
-        win_scp(tar, f"@HOST:{d}/wfc.tar")
-        pkgs = package_source()
-        have = win_ps(f"if (Test-Path '{d}/.packages/v{WEBFORCORE_VERSION}') {{ (Get-ChildItem '{d}/.packages/v{WEBFORCORE_VERSION}' -Filter *.nupkg).Count }} else {{ 0 }}",
-                      capture=True).stdout.strip()
-        if have != str(len(list(pkgs.glob("*.nupkg")))):
-            ptar = Path(tmp) / "packages.tar"
-            with tarfile.open(ptar, "w") as t:
-                for f in pkgs.glob("*.nupkg"):
-                    t.add(f, arcname=f".packages/{pkgs.name}/{f.name}")
-            win_scp(ptar, f"@HOST:{d}/packages.tar")
-            win_ps(f"Set-Location '{d}'; tar -xf packages.tar; Remove-Item packages.tar")
-        win_ps(f"Set-Location '{d}'; tar -xf wfc.tar; Remove-Item wfc.tar")
-
-
-def win_pull(ids):
-    d = win_dir()
-    names = " ".join(f"apps/{i}/results.windows.json apps/{i}/logs.windows apps/{i}/LOG.md" for i in ids)
-    win_ps(f"Set-Location '{d}'; $f = @(); foreach ($n in '{names}'.Split(' ')) {{ if (Test-Path $n) {{ $f += $n }} }}; "
-           "tar -cf back.tar $f")
-    with tempfile.TemporaryDirectory() as tmp:
-        win_scp(f"@HOST:{d}/back.tar", Path(tmp) / "back.tar")
-        with tarfile.open(Path(tmp) / "back.tar") as t:
-            t.extractall(tmp, filter="data")
-        for app_id in ids:
-            src = Path(tmp) / "apps" / app_id
-            if (src / "results.windows.json").exists():
-                (app_dir(app_id) / "results.windows.json").write_bytes((src / "results.windows.json").read_bytes())
-            if (src / "logs.windows").exists():
-                dest = app_dir(app_id) / "logs.windows"
-                dest.mkdir(exist_ok=True)
-                for f in (src / "logs.windows").iterdir():
-                    (dest / f.name).write_bytes(f.read_bytes())
-            # LOG.md went there as it is here; the Windows run appended to it.
-            remote, local = src / "LOG.md", app_dir(app_id) / "LOG.md"
-            if remote.exists():
-                r, l = remote.read_bytes(), local.read_bytes() if local.exists() else b""
-                local.write_bytes(r if r.startswith(l) else l + r[len(l):] if len(r) > len(l) else l)
-    win_ps(f"Remove-Item '{d}/back.tar'", check=False)
-
-
-def win_db():
-    db = os.environ.get("WFC_WINDOWS_DB")
-    if not db:
-        return
-    host, port = db.rsplit(":", 1)
-    win_ps("netsh interface portproxy delete v4tov4 listenaddress=127.0.0.1 listenport=14330 | Out-Null; "
-           f"netsh interface portproxy add v4tov4 listenaddress=127.0.0.1 listenport=14330 connectaddress={host} connectport={port}")
-
-
-def windows(command, ids, reset):
-    win_push(ids)
-    if command in ("smoke", "run"):
-        win_db()
-    flags = (" --reset" if reset else "")
-    # PYTHONUNBUFFERED: each stage's line comes back as it finishes, not all at the end (a long run looked hung).
-    e = (f"$env:PYTHONUNBUFFERED='1'; $env:WEBFORCORE_VERSION='{WEBFORCORE_VERSION}'; "
-         f"$env:THIRDPARTY_VERSION='{THIRDPARTY_VERSION}'; $env:DRAWING_VERSION='{DRAWING_VERSION}'; ")
-    r = win_ps(f"{e}Set-Location '{win_dir()}'; python scripts/wfc.py {command}{flags} {' '.join(ids)}", check=False)
-    win_pull(ids)
-    return r.returncode
+    lost, gained = sorted(passed(old) - passed(new)), sorted(passed(new) - passed(old))
+    worse = bool(lost) or (old.get("build", {}).get("status") == "pass" and new.get("build", {}).get("status") != "pass")
+    text = f"**{app_id}** ({PLATFORM}): {says(new)}; committed: {says(old) if old else 'none'}"
+    if lost:
+        text += f". **No longer passing:** {', '.join(lost)}"
+    if gained:
+        text += f". Now passing: {', '.join(gained)}"
+    print(text)
+    if os.environ.get("GITHUB_STEP_SUMMARY"):
+        with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as f:
+            f.write(f"- {'❌' if worse else '✅'} {text}\n")
+    out = ROOT / "ci-out" / "apps" / app_id
+    out.mkdir(parents=True, exist_ok=True)
+    if (ROOT / rel).exists():
+        shutil.copy2(ROOT / rel, out)
+    if (app_dir(app_id) / f"logs{SUFFIX}").exists():
+        shutil.copytree(app_dir(app_id) / f"logs{SUFFIX}", out / f"logs{SUFFIX}", dirs_exist_ok=True)
+    return 1 if worse else 0
 
 
 # --- main ----------------------------------------------------------------------------------------
 
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("command", choices=["packages", "list", "fetch", "assess", "build", "smoke", "run", "save-overlay", "report", "windows"])
-    p.add_argument("ids", nargs="*", help="app ids; for windows, the command first (fetch, build, smoke, run)")
+    p.add_argument("command", choices=["packages", "list", "fetch", "assess", "build", "setup", "smoke", "run", "save-overlay", "report",
+                                       "ci-matrix", "ci-result"])
+    p.add_argument("ids", nargs="*", help="app ids")
     p.add_argument("--all", action="store_true")
     p.add_argument("--reset", action="store_true", help="fetch, run: discard the checkout's changes and reapply the overlay")
+    p.add_argument("--changed-since", metavar="REF", help="ci-matrix: only the apps the changes since REF touch")
     p.add_argument("--version", help="packages: the webForCore release (default: $WEBFORCORE_VERSION or 0.7.0; webForCore-thirdparty: $THIRDPARTY_VERSION or 0.5.0)")
     a = p.parse_args()
     if a.command == "packages":
@@ -709,19 +808,17 @@ def main():
         return
     if a.command == "report":
         return report(apps)
-    if a.command == "windows":
-        if not a.ids or a.ids[0] not in ("fetch", "build", "smoke", "run"):
-            sys.exit("windows: give a command (fetch, build, smoke, run) and app ids or --all")
-        sub, wids = a.ids[0], a.ids[1:]
-        wids = [i for i, app in apps.items() if (APPS / i / "overlay.patch").exists()] if a.all else wids
-        unknown = [i for i in wids if i not in apps]
-        if unknown or not wids:
-            sys.exit(f"unknown app(s): {', '.join(unknown)}" if unknown else "give app ids or --all")
-        sys.exit(windows(sub, wids, a.reset))
+    if a.command == "ci-matrix":
+        unknown = [i for i in a.ids if i not in apps]
+        if unknown:
+            sys.exit(f"unknown app(s): {', '.join(unknown)}")
+        return ci_matrix(apps, a.ids, a.changed_since)
     ids = list(apps) if a.all else a.ids
     unknown = [i for i in ids if i not in apps]
     if unknown or not ids:
         sys.exit(f"unknown app(s): {', '.join(unknown)}" if unknown else "give app ids or --all")
+    if a.command == "ci-result":
+        sys.exit(ci_result(ids[0]) if len(ids) == 1 else "ci-result: give one app")
     if a.command in ("build", "run") and not any(package_source().glob("webForCore.Web.*.nupkg")):
         sys.exit(f"no webForCore {WEBFORCORE_VERSION} packages in {package_source().relative_to(ROOT)}: run scripts/wfc.py packages")
     for i in ids:
@@ -732,12 +829,16 @@ def main():
             assess(app)
         elif a.command == "build":
             build(app)
+        elif a.command == "setup":
+            setup(app)
         elif a.command == "smoke":
             smoke(app)
         elif a.command == "save-overlay":
             save_overlay(app)
         elif a.command == "run":
             if fetch(app, a.reset) == "pass" and build(app) == "pass":
+                if app.get("setup"):
+                    setup(app)  # a failed setup still smokes: the probes say what it broke
                 smoke(app)
 
 
