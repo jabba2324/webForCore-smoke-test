@@ -33,3 +33,13 @@ Appended by `scripts/wfc.py`, one line per stage run.
 - 2026-11-03T19:39:33+00:00 **build**: pass
 - 2026-11-03T19:39:49+00:00 **setup**: pass (9/10 steps, 1 allowed to fail)
 - 2026-11-03T19:39:54+00:00 **smoke**: pass (16/16 probes)
+- 2026-11-03T20:38:13+00:00 **fetch**: pass at `026805e4c126`
+- 2026-11-03T20:38:51+00:00 **build**: pass
+- 2026-11-03T20:39:02+00:00 **setup**: fail (5/6 steps)
+- 2026-11-03T20:41:07+00:00 **smoke**: fail (15/16 probes)
+- 2026-11-03T20:44:07+00:00 **setup**: fail (0/1 steps)
+- 2026-11-03T20:46:09+00:00 **smoke**: fail (15/16 probes)
+- 2026-11-03T20:46:33+00:00 **fetch**: pass at `026805e4c126`
+- 2026-11-03T20:47:10+00:00 **build**: pass
+- 2026-11-03T20:47:26+00:00 **setup**: pass (9/10 steps, 1 allowed to fail)
+- 2026-11-03T20:47:31+00:00 **smoke**: pass (16/16 probes)

@@ -8021,7 +8021,7 @@ similarity index 100%
 rename from src/Umbraco.Web.UI/packages.config
 rename to src/Umbraco.Web.UI/packages.config.netfx
 diff --git a/src/Umbraco.Web.UI/web.Template.config b/src/Umbraco.Web.UI/web.Template.config
-index 34a8dca7e1..0d820c378a 100644
+index 34a8dca7e1..0a91b09343 100644
 --- a/src/Umbraco.Web.UI/web.Template.config
 +++ b/src/Umbraco.Web.UI/web.Template.config
 @@ -34,6 +34,8 @@
@@ -8052,10 +8052,12 @@ index 34a8dca7e1..0d820c378a 100644
      <!-- Important: If you're upgrading Umbraco, do not clear the connection string / provider name during your web.config merge. -->
    </connectionStrings>
  
-@@ -86,6 +89,9 @@
+@@ -85,7 +88,10 @@
+     <trust level="Medium" originUrl=".*"/>
      <trace enabled="true" requestLimit="10" pageOutput="false" traceMode="SortByTime" localOnly="true" />
      <sessionState mode="InProc" stateConnectionString="tcpip=127.0.0.1:42424" sqlConnectionString="data source=127.0.0.1;Trusted_Connection=yes" cookieless="false" timeout="20" />
-     <globalization requestEncoding="UTF-8" responseEncoding="UTF-8" />
+-    <globalization requestEncoding="UTF-8" responseEncoding="UTF-8" />
++    <globalization requestEncoding="UTF-8" responseEncoding="UTF-8" culture="en-US" uiCulture="en-US" />
 +    <!-- webForCore: an explicit key (docs/MIGRATING.md section 5); generated for the smoke test, test-only. Without it,
 +         view state and logins don't survive the restart the installer's web.config change causes. -->
 +    <machineKey validationKey="207D146B88E31CC9D981A634A1368270F89D0AB42C40719C3151F5D2A69B25202003082E39E67217104039BCF63F02F2BBB23688DB58F232C70619B16454E050" decryptionKey="BF6D8A1688BD1D1FEE46F4CD7A6159293274BED4172552281A9B9B1CAD57C21F" validation="HMACSHA256" decryption="AES" />

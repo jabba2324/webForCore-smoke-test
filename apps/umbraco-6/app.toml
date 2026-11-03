@@ -49,7 +49,8 @@ get = "/install/default.aspx?installStep=theend"
 contains = "done...now what?"
 
 # Its first configured start creates App_Code and the other folders it uses, which restarts it once more; a request
-# caught by that restart can fail (NOTES.md), so this one only waits for it.
+# caught by that restart fails (F59, NOTES.md). When the restart comes varies, so this request may fail, and the
+# log-in after it runs again until it gets past the restart.
 [[setup.steps]]
 get = "/umbraco/login.aspx"
 may_fail = true
@@ -62,6 +63,7 @@ button = "Button1"
 value = "Login"
 fields = { "lname" = "admin", "passw" = "Smoke_test_1234" }
 contains = "Logout:admin"
+retries = 4
 
 [[setup.steps]]
 post = "/umbraco/create.aspx?nodeId=init&nodeType=initnodeTypes&nodeName=Document%20Types&rnd=1"

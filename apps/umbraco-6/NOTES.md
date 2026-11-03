@@ -69,7 +69,10 @@ Go, with SQL Server.
      `bin_dotnet/` (documented, `docs/MIGRATING.md` section 6), and the `\` didn't work on Linux;
    - an explicit `<machineKey>` (generated, test-only; `docs/MIGRATING.md` section 5): the installer's `web.config`
      write restarts the app in a new worker, and the setup's next postback failed with "Validation of viewstate MAC
-     failed".
+     failed";
+   - `<globalization culture="en-US" uiCulture="en-US">`: on a Linux machine with no locale (GitHub's Ubuntu runners,
+     containers) the culture is the invariant one, Umbraco finds no language file for it, and the back office shows its
+     keys (`[login]`) instead of text, so the log-in failed in CI (F67, guide gap).
 5. `config/log4net.config`: the log file is `../App_Data/Logs/UmbracoTraceLog.txt`, for the same reason (it was
    `App_Data\Logs\...`, relative to `bin_dotnet/`); without it no log was written.
 6. Compile fixes:
@@ -110,7 +113,9 @@ Go, with SQL Server.
   home page probe gets a 302 to `/install/` (F64). Every other probe passes on the uninstalled site.
 - **With the runner's `json` setup steps** (added for this app): from a new database, `build`, `setup` (9/10 steps,
   the `may_fail` one catching F59) and `smoke` pass 16/16 on Linux.
-- Windows: not run yet (CI runs it).
+- **First CI run (PR #14):** 16/16 on Windows; 14/16 on Linux, where the runner's `C` locale left the back office
+  without its text (F67) and the log-in step was caught by the F59 restart. With the culture set and the log-in's
+  `retries`, 16/16 locally under `LANG=C`, from a fresh checkout and database.
 
 The probes cover:
 - the published home page, rendered by Umbraco's `RenderMvcController` with the template's Razor view (MVC);
@@ -137,8 +142,9 @@ Setup notes:
 - The starter kits come from our.umbraco.org, so that step is skipped; the home page is made in the back office
   instead.
 - After the wizard's last step, the next request fails once: the configured start creates `App_Code`, the host
-  recycles, and the old worker's compilation loses its `App_global.asax` assembly (F59, webForCore bug). A `may_fail`
-  request absorbs it.
+  recycles, and the old worker's compilation loses its `App_global.asax` assembly (F59, webForCore bug). When the
+  restart comes varies: a `may_fail` request waits for it, and the log-in after it has `retries` (in the first CI run
+  the restart missed the first and caught the log-in's GET of the form).
 
 Other differences seen:
 - `install/steps/theend.ascx` is Windows-1252 without a BOM: `You’re done` renders `You�re done` (F60, webForCore bug).
@@ -157,6 +163,8 @@ Other differences seen:
 - F59, webForCore bug ([#89](https://github.com/xforcore/webForCore/issues/89)): a request caught by an `App_Code`
   recycle fails with CS0006.
 - F60, webForCore bug ([#90](https://github.com/xforcore/webForCore/issues/90)): ANSI files read as UTF-8.
+- F67, guide gap ([#97](https://github.com/xforcore/webForCore/issues/97)): with no locale the culture is invariant;
+  fixed by setting it in `<globalization>`.
 - F61, F62, F63, guide gaps ([#91](https://github.com/xforcore/webForCore/issues/91),
   [#92](https://github.com/xforcore/webForCore/issues/92), [#93](https://github.com/xforcore/webForCore/issues/93)).
 - F64, app/environment: the MyGet feed, SQL CE, Windows file names, and the install wizard's JSON page method (a

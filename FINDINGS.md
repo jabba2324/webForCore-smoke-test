@@ -12,7 +12,7 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 - **What 0.7.0 fixed:** F51 and F52, so bonobo-git-server passes on Windows too.
 - **What's new:** F54 is the one new problem webForCore can act on; F54 onwards were found in this round.
 - **The feeds:** miniblog also restores from the NuGet feeds alone (webForCore#53 step 5).
-- **Umbraco 6** (a new app, migrated on 0.7.0, on Linux so far): F57–F64.
+- **Umbraco 6** (a new app, migrated on 0.7.0): F57–F64, and F67 from its first CI run (Ubuntu's `C` locale).
 - **Umbraco 7** (a new app, on 0.7.0, on Linux so far): builds, but is blocked at boot by AutoMapper 3.3.1 (F22); F65
   and F66, and more evidence for F37 and F61–F64.
 
@@ -88,6 +88,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F64](#f64) | Umbraco on Linux: Windows file names, packages only on its MyGet feed, an installer that needs a JSON POST | app/environment | umbraco-6, umbraco-7 | - |
 | [F65](#f65) | Linux: named semaphores and events throw `PlatformNotSupportedException` (only named `Mutex` works) | guide gap | umbraco-7 | [#94](https://github.com/xforcore/webForCore/issues/94) |
 | [F66](#f66) | webForCore's `CallContext` doesn't reach prebuilt .NET Framework libraries: Log4Net.Async logs nothing | guide gap | umbraco-7 | [#95](https://github.com/xforcore/webForCore/issues/95) |
+| [F67](#f67) | Linux with no locale (`C`/`POSIX`: CI runners, containers): the culture is invariant, so apps that pick resources by culture find none | guide gap | umbraco-6 | [#97](https://github.com/xforcore/webForCore/issues/97) |
 ---
 
 ## F1
@@ -1340,3 +1341,20 @@ Raised as [#95](https://github.com/xforcore/webForCore/issues/95). Found on 0.7.
 - **Fix in the app:** the root logger writes through the file appender directly (synchronous logging).
 - **Guide:** `docs/NAMESPACES.md` should say the carried types serve code compiled against webForCore, and
   Log4Net.Async belongs in `docs/MIGRATING.md`'s "Libraries that don't run on .NET".
+
+## F67
+
+**Linux with no locale: the culture is invariant, so apps that pick resources or language files by culture find
+none.** Guide gap. Raised as [#97](https://github.com/xforcore/webForCore/issues/97). Found on 0.7.0, in CI on
+GitHub's `ubuntu-24.04` runner (its locale is `C`); it passed on this machine (`en_GB.UTF-8`) and on Windows.
+
+- **Apps:** umbraco-6: the back office's log-in page rendered its language keys (`value="[login]"`, `[username]`), so
+  `[setup]`'s log-in failed and the home page was never made: 14/16 in CI. The same site under `LANG=C LC_ALL=C`
+  locally shows it.
+- **Cause:** .NET on Linux takes the culture from the locale; with none (`C`/`POSIX`) `CurrentCulture` and
+  `CurrentUICulture` are `CultureInfo.InvariantCulture` (name `""`). On .NET Framework under IIS the culture is always
+  a real one.
+- **Fix in the app:** `<globalization culture="en-US" uiCulture="en-US">` in `web.config`, which webForCore honours:
+  16/16 under `LANG=C`. Setting `LANG` for the server would do too.
+- **Guide:** `docs/MIGRATING.md` should say that a Linux server or container without a locale runs with the invariant
+  culture, and to set `<globalization culture uiCulture>` or `LANG`.
