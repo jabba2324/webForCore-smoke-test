@@ -1097,7 +1097,7 @@ Found on 0.5.0. Documented in #44.
 - **Apps:** any; checked with aspnetdocs-mvcmovie (a new `.dll` in `bin_dotnet`) and miniblog (a new `.cs` in
   `app_code`). `Web.config` restarts it; on Windows all three do. docs/IIS-COMPATIBILITY.md says they work.
 - **Cause:** `HttpRuntime` starts the bin and critical-directory monitors only `if (OSInfo.IsWindows)`, a guard kept
-  from WebFormsForCore's early Linux work; LIFT.md says file-change notifications are on everywhere on net11.0.
+  from WebFormsForCore's early Linux work; webForCore's log of the lift said file-change notifications were on everywhere on net11.0.
 
 ## F54
 
