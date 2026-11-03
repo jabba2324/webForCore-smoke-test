@@ -2,12 +2,14 @@
 
 name = "Umbraco 7"
 repo = "https://github.com/umbraco/Umbraco-CMS"
-ref = ""
+# release-7.15.11, the last 7.x release.
+ref = "bd60f4e2cea7ace2984dcfb8e61ef6512ea77c73"
 site = "src/Umbraco.Web.UI"
+project = "src/Umbraco.Web.UI/Umbraco.Web.UI.csproj"
 kinds = ["mvc", "webapi", "webforms"]
 licence = "MIT"
-status = "candidate"
-notes = "Pin the last 7.15.x release tag."
+status = "verified"
+notes = "Pinned to release-7.15.11; verified: MIT, .NET Framework 4.5.2 with System.Web, web project src/Umbraco.Web.UI. Uses AutoMapper 3.3.1 (F22)."
 
 # The first request compiles the site, so it gets 120 s.
 # [[probes]]
