@@ -9,10 +9,25 @@ kinds = ["mvc"]
 licence = "BSD-3-Clause"
 status = "blocked"
 notes = "Blocked on its NHibernate 3.3 (F39, app/environment): its installer, log-in and upgrade (MVC) work, 10/11 probes on Linux and Windows on webForCore 0.7.0 (.NET 10, under webforcore-host); the blog's NHibernate proxies don't. Needs SQL Server."
+needs = ["mssql"]
 
 # The first request compiles the site, so it gets 120 s. The probes need the compose SQL Server with a "FunnelWeb"
 # database that FunnelWeb's upgrader has set up (log in as test/test, then /admin/install's "Upgrade"; NOTES.md).
 # The blog: NHibernate 3.3's proxies don't work on .NET (F39, app/environment).
+# An empty database, then FunnelWeb's upgrader: log in as test/test (My.config), then "Upgrade" (NOTES.md).
+[setup]
+databases = ["FunnelWeb"]
+
+[[setup.steps]]
+post = "/admin/login"
+fields = { Username = "test", Password = "test", DatabaseIssue = "", ReturnUrl = "/admin/install" }
+
+[[setup.steps]]
+get = "/admin/install"
+
+[[setup.steps]]
+post = "/admin/install/upgrade"
+
 [[probes]]
 path = "/"
 contains = "My FunnelWeb Site"
