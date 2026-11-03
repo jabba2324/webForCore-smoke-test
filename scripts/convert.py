@@ -14,14 +14,14 @@
 It prints what it did, for NOTES.md. It is a starting point, not the whole migration: check its output, then build.
 It keeps the Katana providers webForCore doesn't provide (Google, Facebook, WsFederation, ...); webForCore's own
 Katana packages win over their dependencies (0.3.0). For WebActivatorEx and AjaxControlToolkit it adds the builds from
-webForCore-thirdparty ($THIRDPARTY_VERSION, default 0.4.1; CLAUDE.md). It doesn't handle lib/net45 assemblies NuGet
+webForCore-thirdparty ($THIRDPARTY_VERSION, default 0.5.0; CLAUDE.md). It doesn't handle lib/net45 assemblies NuGet
 skips (F6), connection strings or Linux paths.
 Standard library only (Python 3.11+)."""
 import re, shutil, sys
 from pathlib import Path
 
 WFC = __import__("os").environ.get("WEBFORCORE_VERSION", "0.7.0")
-THIRDPARTY = __import__("os").environ.get("THIRDPARTY_VERSION", "0.4.1")
+THIRDPARTY = __import__("os").environ.get("THIRDPARTY_VERSION", "0.5.0")
 # webForCore-thirdparty's builds: (regex over references and packages, its package). The original package is kept
 # (packages such as Unity.Mvc bring it anyway); the build wins the conflict.
 THIRDPARTY_PACKAGES = [(r"WebActivatorEx", "webForCore.WebActivatorEx"), (r"AjaxControlToolkit", "webForCore.AjaxControlToolkit")]

@@ -70,4 +70,4 @@ Unchanged: ELMAH and the Google provider work (0.3.0), and `/` fails on AutoMapp
 - [F18](../../FINDINGS.md#f18) (webForCore bug): configuration types referenced through `System.dll` reach the host's
   ConfigurationManager. Blocks every request.
 - [F17](../../FINDINGS.md#f17) (guide gap): Katana's Google provider needs System.Net.Http.WebRequest.
-- [F22](../../FINDINGS.md#f22) (app/environment): AutoMapper 3.1 doesn't run on .NET 11; the upgrade to 12 is the app's.
+- [F22](../../FINDINGS.md#f22) (app/environment): AutoMapper 3.1 doesn't run on .NET 11 or .NET 10; the upgrade to 12 is the app's.
