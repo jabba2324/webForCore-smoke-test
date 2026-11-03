@@ -210,7 +210,7 @@ index c08e08d6..162e62fa 100644
 -      <DependentUpon>Resources.resx</DependentUpon>
 -    </Compile>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 -  <ItemGroup>
 -    <EmbeddedResource Include="Properties\Resources.resx">
@@ -1324,9 +1324,9 @@ index c0129afd..edf0fe31 100644
 -    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
 -    <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Serialization.Formatters" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.7.0" />
++    <PackageReference Include="webForCore.Serialization.Formatters" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -2355,7 +2355,7 @@ index 6e707430..1f7fb568 100644
 -    <Compile Include="CKEBlogEntryEditorProvider.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -2680,7 +2680,7 @@ index 6737046b..854295b3 100644
 -      <SubType>Designer</SubType>
 -    </EmbeddedResource>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -3992,8 +3992,8 @@ index eecb3c26..13a8f084 100644
 -    <Content Include="Skins\_System\Controls\AggRecentPosts.ascx" />
 -    <Content Include="transform.txt" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.7.0" />
 +    <PackageReference Include="System.Resources.Extensions" Version="10.0.14" />
    </ItemGroup>
 +
@@ -5571,7 +5571,7 @@ index eecb3c26..13a8f084 100644
 -    <WebReferences Include="Web References\" />
 +    <!-- webForCore-thirdparty 0.4.1 (webForCore-thirdparty#1): WebActivator 1.x's start methods run (the original
 +         package's never do, as WebActivatorEx's, webForCore#21); Ninject is set up from App_Start/NinjectMVC3.cs. -->
-+    <PackageReference Include="webForCore.WebActivator" Version="0.4.1" />
++    <PackageReference Include="webForCore.WebActivator" Version="0.5.0" />
    </ItemGroup>
 -  <ItemGroup>
 -    <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
