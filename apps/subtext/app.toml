@@ -11,18 +11,39 @@ kinds = ["webforms", "mvc"]
 licence = "MIT"
 status = "blocked"
 notes = "On webForCore 0.7.0 (.NET 10, under webforcore-host) it builds and the install wizard runs: 16/17 probes on Linux and Windows; the log-in page's DotNetOpenAuth fails (F44, app/environment). Uses webForCore-thirdparty 0.5.0's WebActivator."
+needs = ["mssql"]
 
 # The first request compiles the site, so it gets 120 s. The probes need the compose SQL Server with a "SubtextData"
 # database that Subtext's install wizard has set up (three postbacks; NOTES.md): on an empty database every page
 # redirects to /install/default.aspx.
+# An empty database, then Subtext's install wizard: three postbacks (NOTES.md).
+[setup]
+databases = ["SubtextData"]
+
+[[setup.steps]]
+post = "/install/default.aspx"
+button = "ctl00$Content$btnInstallClick"
+value = "Install Now!"
+
+[[setup.steps]]
+post = "/install/Step02_ConfigureHost.aspx"
+button = "ctl00$Content$btnSave"
+value = "Save"
+fields = { "ctl00$Content$txtUserName" = "smokeadmin", "ctl00$Content$txtEmail" = "admin@example.com", "ctl00$Content$txtPassword" = "Smoke_test_1234", "ctl00$Content$txtConfirmPassword" = "Smoke_test_1234" }
+
+[[setup.steps]]
+post = "/install/Step03_CreateBlog.aspx?email=admin%40example.com"
+button = "ctl00$Content$btnQuickCreate"
+value = "Quick Create"
+
 [[probes]]
 path = "/"
 contains = "Welcome to Subtext!"
 
-# A blog post (Subtext's URL routing to a Web Forms page). The date is the install wizard's run (NOTES.md): the welcome
-# post's only URL is by date, so a new database needs this changed.
+# A blog post (Subtext's URL routing to a Web Forms page). The welcome post's only URL carries the day the install
+# wizard ran, which setup records.
 [[probes]]
-path = "/archive/2026/11/03/welcome-to-subtext.aspx"
+path = "/archive/{setup_date}/welcome-to-subtext.aspx"
 contains = "Welcome to Subtext!"
 
 [[probes]]
