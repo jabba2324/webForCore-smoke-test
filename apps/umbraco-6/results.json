@@ -1,0 +1,70 @@
+{
+  "id": "umbraco-6",
+  "stages": {
+    "assess": {
+      "at": "2026-11-03T18:53:59+00:00",
+      "blockers": {
+        "appdomain-thread-abort": [
+          "src/umbraco.businesslogic/Utils/TypeResolver.cs:65",
+          "src/umbraco.businesslogic/Utils/TypeResolver.cs:66"
+        ],
+        "com-plus": [
+          "src/Umbraco.Web/umbraco.presentation/umbraco/webservices/TreeClientService.asmx.cs:10"
+        ],
+        "windows-auth": [
+          "src/Umbraco.Core/Logging/AsynchronousRollingFileAppender.cs:66",
+          "src/Umbraco.Core/Logging/AsynchronousRollingFileAppender.cs:106",
+          "src/Umbraco.Core/Logging/AsynchronousRollingFileAppender.cs:178",
+          "src/Umbraco.Web/umbraco.presentation/UmbracoRequest.cs:245",
+          "src/umbraco.businesslogic/Utils/fileHelper.cs:25"
+        ]
+      },
+      "kinds": [
+        "mvc",
+        "webapi",
+        "webforms",
+        "webpages"
+      ],
+      "libraries": [
+        "src/SQLCE4Umbraco",
+        "src/Umbraco.Core",
+        "src/Umbraco.Web",
+        "src/UmbracoExamine",
+        "src/umbraco.MacroEngines",
+        "src/umbraco.businesslogic",
+        "src/umbraco.cms",
+        "src/umbraco.controls",
+        "src/umbraco.datalayer",
+        "src/umbraco.editorControls",
+        "src/umbraco.interfaces",
+        "src/umbraco.macroRenderings",
+        "src/umbraco.providers"
+      ],
+      "notices": {
+        "binaryformatter": [
+          "src/Umbraco.Core/ObjectExtensions.cs:11",
+          "src/Umbraco.Core/Models/EntityBase/Entity.cs:6",
+          "src/Umbraco.Core/Models/EntityBase/Entity.cs:262",
+          "src/Umbraco.Web/umbraco.presentation/umbraco/LiveEditing/DefaultLiveEditingContext.cs:9",
+          "src/Umbraco.Web/umbraco.presentation/umbraco/LiveEditing/DefaultLiveEditingContext.cs:127"
+        ],
+        "smtpclient-config": [
+          "src/Umbraco.Core/Services/NotificationService.cs:328",
+          "src/Umbraco.Web/umbraco.presentation/library.cs:1579",
+          "src/umbraco.cms/businesslogic/translation/Translation.cs:64"
+        ]
+      },
+      "status": "blocked",
+      "summary": "appdomain-thread-abort, com-plus, windows-auth",
+      "target_frameworks": [
+        "v4.0"
+      ]
+    },
+    "fetch": {
+      "at": "2026-11-03T18:53:49+00:00",
+      "commit": "026805e4c126a1cb984cb0a25c95872b57ae4ddb",
+      "overlay": false,
+      "status": "pass"
+    }
+  }
+}

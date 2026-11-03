@@ -1,0 +1,18 @@
+# Umbraco 6. Fields are described in README.md.
+
+name = "Umbraco 6"
+repo = "https://github.com/umbraco/Umbraco-CMS"
+# release-6.2.6, the last 6.x release.
+ref = "026805e4c126a1cb984cb0a25c95872b57ae4ddb"
+site = "src/Umbraco.Web.UI"
+project = "src/Umbraco.Web.UI/Umbraco.Web.UI.csproj"
+kinds = ["mvc", "webapi", "webforms"]
+licence = "MIT"
+status = "verified"
+notes = "Pinned to release-6.2.6; verified: MIT, .NET Framework 4.0 with System.Web, web project src/Umbraco.Web.UI."
+
+# The first request compiles the site, so it gets 120 s.
+# [[probes]]
+# path = "/"
+# status = 200
+# contains = ""
