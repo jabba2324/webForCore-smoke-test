@@ -1,7 +1,7 @@
 # webForCore smoke test
 
 A test bed for [webForCore](https://github.com/jabba2324/webForCore): it takes real open-source ASP.NET 4.x
-applications (MVC 5, Web API 2, Web Forms, Web Pages, OWIN, SignalR 2), migrates each one to .NET 11 with webForCore
+applications (MVC 5, Web API 2, Web Forms, Web Pages, OWIN, SignalR 2), migrates each one to .NET 10 with webForCore
 following its migration guide, then builds it, runs it on Kestrel and probes it over HTTP, on Linux and on Windows.
 
 webForCore's own suites are Microsoft's and Mono's unit tests. This repo asks a different question: does an app
@@ -34,7 +34,7 @@ Each app goes through four stages:
 2. **assess**: Phase 0 of webForCore's `docs/AGENT-MIGRATION.md`: which frameworks it uses, its target framework, and
    every blocker (Windows authentication, WCF hosting, LINQ to SQL, ...) with file and line.
 3. **build**: `dotnet build -c Release` of the converted project.
-4. **smoke**: start `bin_dotnet/<App>.dll` on a free port, request the app's probes, and check that
+4. **smoke**: start the app on a free port (under `bin_dotnet/webforcore-host/webforcore-host.dll` from webForCore 0.7.0, as its worker; `bin_dotnet/<App>.dll` before), request the app's probes, and check that
    `web.config`, `App_Data`, `bin_dotnet`, `obj` and source files aren't served.
 
 ## Usage
@@ -42,7 +42,8 @@ Each app goes through four stages:
 Apps reference webForCore's NuGet packages, which are attached to its GitHub releases (not on nuget.org).
 `scripts/wfc.py packages` downloads a release into `.packages/v<version>/` (needs `gh`), and builds restore from
 there, together with webForCore-thirdparty's release (WebActivatorEx and AjaxControlToolkit built for webForCore; see
-CLAUDE.md). `WEBFORCORE_VERSION` and `THIRDPARTY_VERSION` pick the releases (default 0.6.0 and 0.4.1). An app migrated against webForCore's source instead
+CLAUDE.md) and, from webForCore 0.7.0, drawingForCore's (System.Drawing, which the `webForCore` package depends on).
+`WEBFORCORE_VERSION`, `THIRDPARTY_VERSION` and `DRAWING_VERSION` pick the releases (default 0.7.0, 0.5.0 and 0.2.0). An app migrated against webForCore's source instead
 refers to it through `$(WEBFORCORE_DIR)` (default `../webForCore`).
 
 ```sh
@@ -73,7 +74,7 @@ once (on Linux), and the same overlay is built and smoked on both. `scripts/wfc.
 4. For `smoke` and `run`, if `WFC_WINDOWS_DB` is set, it maps `127.0.0.1:14330` there to that address with
    `netsh portproxy`. This is the SQL Server from `services/compose.yml`, which the overlays' connection strings name.
 
-The Windows machine needs OpenSSH (with PowerShell as the shell is fine), the .NET 11 SDK, Python 3.11+ and git.
+The Windows machine needs OpenSSH (with PowerShell as the shell is fine), the .NET 10 SDK, Python 3.11+ and git.
 Settings come from the environment, so nothing machine-specific is committed:
 
 | Variable | |
@@ -99,8 +100,8 @@ section 1). Reference the packages by version; the runner adds `.packages/` as a
 need no `nuget.config` and work on any machine:
 
 ```xml
-<PackageReference Include="webForCore" Version="0.6.0" />
-<PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
+<PackageReference Include="webForCore" Version="0.7.0" />
+<PackageReference Include="webForCore.Web.Mvc" Version="0.7.0" />
 ```
 
 Change only what the platform needs, as the guide says. A workaround in the app for a webForCore bug doesn't count

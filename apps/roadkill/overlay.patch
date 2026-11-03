@@ -644,9 +644,9 @@ index 5987c72..87b0b2d 100644
 -</Project>
 \ No newline at end of file
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is Roadkill.Core.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is Roadkill.Core.csproj.netfx. -->
 +  <PropertyGroup>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
 +    <RootNamespace>Roadkill.Core</RootNamespace>
 +    <AssemblyName>Roadkill.Core</AssemblyName>
 +    <ImplicitUsings>disable</ImplicitUsings>
@@ -673,13 +673,13 @@ index 5987c72..87b0b2d 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Http.Owin" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.6.0" />
-+    <PackageReference Include="webForCore.WebGrease" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Http.Owin" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.7.0" />
++    <PackageReference Include="webForCore.WebGrease" Version="0.7.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -706,7 +706,7 @@ index 5987c72..87b0b2d 100644
 +    <PackageReference Include="NLog" Version="4.7.15" />
 +    <PackageReference Include="Npgsql" Version="3.1.7" />
 +    <!-- recaptcha's lib folders are named ".NetFramework 4.0", which NuGet can't map to a framework (NU1202 on
-+         net11.0): the package is restored only for its path, and the assembly referenced from it. -->
++         net10.0): the package is restored only for its path, and the assembly referenced from it. -->
 +    <PackageReference Include="recaptcha" Version="1.0.5.0" GeneratePathProperty="true" ExcludeAssets="all" />
 +    <Reference Include="Recaptcha" HintPath="$(Pkgrecaptcha)/lib/.NetFramework 4.0/Recaptcha.dll" />
 +    <PackageReference Include="SharpZipLib" Version="0.86.0" />
@@ -1441,14 +1441,14 @@ index 3eab60a..e208b16 100644
 -<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is Roadkill.Plugins.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is Roadkill.Plugins.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 -    <ProjectGuid>{EA201E5C-1FEF-4955-9CE8-F801D05E68CB}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>Roadkill.Plugins</RootNamespace>
      <AssemblyName>Roadkill.Plugins</AssemblyName>
 -    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -1543,9 +1543,9 @@ index 3eab60a..e208b16 100644
 -    <Compile Include="Text\BuiltIn\ToC\TocPlugin.cs" />
 -    <Compile Include="Text\BuiltIn\ToC\Tree.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -2513,9 +2513,9 @@ index 00fdc71..e5a1ac7 100644
 -</Project>
 \ No newline at end of file
 +<Project Sdk="Microsoft.NET.Sdk.Web">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is Roadkill.Web.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is Roadkill.Web.csproj.netfx. -->
 +  <PropertyGroup>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
 +    <OutputType>Exe</OutputType>
 +    <RootNamespace>Roadkill.Web</RootNamespace>
 +    <AssemblyName>Roadkill.Web</AssemblyName>
@@ -2542,11 +2542,11 @@ index 00fdc71..e5a1ac7 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.7.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -2570,7 +2570,7 @@ index 00fdc71..e5a1ac7 100644
 +  <ItemGroup>
 +    <!-- webForCore-thirdparty 0.4.0: WebActivatorEx's start methods run (the original package's never do,
 +         webForCore#21); it wins over the original that the app's packages bring. -->
-+    <PackageReference Include="webForCore.WebActivatorEx" Version="0.4.1" />
++    <PackageReference Include="webForCore.WebActivatorEx" Version="0.5.0" />
 +  </ItemGroup>
 +
 +</Project>

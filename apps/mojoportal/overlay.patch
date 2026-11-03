@@ -7,14 +7,14 @@ index 6d59c6fc..b7aa77c9 100644
 -<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is Brettle.Web.NeatHtml.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is Brettle.Web.NeatHtml.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 -    <ProjectGuid>{D8A4D1E0-3827-4AF6-85B3-564D433495BF}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>Brettle.Web.NeatHtml</RootNamespace>
      <AssemblyName>Brettle.Web.NeatHtml</AssemblyName>
 -    <FileAlignment>512</FileAlignment>
@@ -183,7 +183,7 @@ index 6d59c6fc..b7aa77c9 100644
 -      <SubType>Designer</SubType>
 -    </Content>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 -  <ItemGroup>
 -    <Content Include="NeatHtml\schema\xhtml-inlstyle-1.xsd">
@@ -6427,9 +6427,9 @@ index 7fe10832..5f8e9a5e 100644
 -</Project>
 \ No newline at end of file
 +<Project Sdk="Microsoft.NET.Sdk.Web">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is mojoPortal.Web.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is mojoPortal.Web.csproj.netfx. -->
 +  <PropertyGroup>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
 +    <OutputType>Exe</OutputType>
 +    <RootNamespace>mojoPortal.Web</RootNamespace>
 +    <AssemblyName>mojoPortal.Web</AssemblyName>
@@ -6468,12 +6468,12 @@ index 7fe10832..5f8e9a5e 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.6.0" />
-+    <PackageReference Include="webForCore.WebGrease" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.7.0" />
++    <PackageReference Include="webForCore.WebGrease" Version="0.7.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -6503,7 +6503,7 @@ index 7fe10832..5f8e9a5e 100644
 +    <PackageReference Include="System.Security.AccessControl" Version="6.0.1" />
 +    <PackageReference Include="System.Security.Principal.Windows" Version="5.0.0" />
 +    <PackageReference Include="System.Text.Encoding.CodePages" Version="10.0.2" />
-+    <PackageReference Include="System.DirectoryServices" Version="11.0.0-rc.3.26522.148" />
++    <PackageReference Include="System.DirectoryServices" Version="10.0.14" />
 +    <Reference Include="Argotic.Common" HintPath="../_libs/argotic/Argotic.Common.dll" />
 +    <Reference Include="Argotic.Core" HintPath="../_libs/argotic/Argotic.Core.dll" />
 +    <Reference Include="Argotic.Extensions" HintPath="../_libs/argotic/Argotic.Extensions.dll" />
@@ -9636,7 +9636,7 @@ index 32c06179..b8d53dc9 100644
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="Current">
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is mojoPortal.Business.WebHelpers.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is mojoPortal.Business.WebHelpers.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -9645,7 +9645,7 @@ index 32c06179..b8d53dc9 100644
 -    <ProjectGuid>{4EAD30EC-4F97-4F38-8530-1B7EDDB8FC8E}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>mojoPortal.Business.WebHelpers</RootNamespace>
      <AssemblyName>mojoPortal.Business.WebHelpers</AssemblyName>
 -    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -9848,7 +9848,7 @@ index 32c06179..b8d53dc9 100644
 -      <Name>mojoPortal.Web.Framework</Name>
 -    </ProjectReference>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -10195,7 +10195,7 @@ index 30efb8b6..7b041142 100644
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="Current">
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is mojoPortal.Business.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is mojoPortal.Business.csproj.netfx. -->
    <PropertyGroup>
 -    <ProjectType>Local</ProjectType>
 -    <ProductVersion>9.0.30729</ProductVersion>
@@ -10215,7 +10215,7 @@ index 30efb8b6..7b041142 100644
 -    <DefaultTargetSchema>IE50</DefaultTargetSchema>
 -    <DelaySign>false</DelaySign>
 -    <OutputType>Library</OutputType>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>mojoPortal.Business</RootNamespace>
 -    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
 -    <StartupObject>
@@ -10559,7 +10559,7 @@ index 30efb8b6..7b041142 100644
 -      <Name>mojoPortal.Data.SQLite</Name>
 -    </ProjectReference>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -10570,7 +10570,7 @@ index 30efb8b6..7b041142 100644
 +    <!-- The app's own libraries. -->
 +    <PackageReference Include="log4net" Version="3.3.1" />
 +    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
-+    <PackageReference Include="System.DirectoryServices" Version="11.0.0-rc.3.26522.148" />
++    <PackageReference Include="System.DirectoryServices" Version="10.0.14" />
 +    <Reference Include="Novell.Directory.Ldap" HintPath="../_libs/Novell.Directory.Ldap.dll" />
    </ItemGroup>
 +
@@ -11052,14 +11052,14 @@ index 42746447..fd09b743 100644
 -<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is mojoPortal.Core.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is mojoPortal.Core.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 -    <ProjectGuid>{FEA72210-0415-4133-BDF9-8877683BA832}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>mojoPortal.Core</RootNamespace>
      <AssemblyName>mojoPortal.Core</AssemblyName>
 -    <FileAlignment>512</FileAlignment>
@@ -11173,7 +11173,7 @@ index 42746447..fd09b743 100644
 -      <Version>4.6.2</Version>
 -    </PackageReference>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -11480,9 +11480,9 @@ index 266848b5..ed601bfd 100644
 -</Project>
 \ No newline at end of file
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is mojoPortal.Data.MSSQL.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is mojoPortal.Data.MSSQL.csproj.netfx. -->
 +  <PropertyGroup>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
 +    <RootNamespace>mojoPortal.Data</RootNamespace>
 +    <AssemblyName>mojoPortal.Data</AssemblyName>
 +    <ImplicitUsings>disable</ImplicitUsings>
@@ -11498,7 +11498,7 @@ index 266848b5..ed601bfd 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -11926,9 +11926,9 @@ index eab63b96..04be62c6 100644
 -</Project>
 \ No newline at end of file
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is mojoPortal.Features.Business.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is mojoPortal.Features.Business.csproj.netfx. -->
 +  <PropertyGroup>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
 +    <RootNamespace>mojoPortal.Features.Business</RootNamespace>
 +    <AssemblyName>mojoPortal.Features.Business</AssemblyName>
 +    <ImplicitUsings>disable</ImplicitUsings>
@@ -11944,7 +11944,7 @@ index eab63b96..04be62c6 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -12224,7 +12224,7 @@ index aeaca7ff..5d4eabaf 100644
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is mojoPortal.Features.Data.MSSQL.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is mojoPortal.Features.Data.MSSQL.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -12233,7 +12233,7 @@ index aeaca7ff..5d4eabaf 100644
 -    <ProjectGuid>{2FB266B5-97F0-42EB-9F42-B6A7DE749D29}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>mojoPortal.Features.Data</RootNamespace>
      <AssemblyName>mojoPortal.Features.Data</AssemblyName>
 -    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -12297,7 +12297,7 @@ index aeaca7ff..5d4eabaf 100644
 -    <Compile Include="Survey\DBSurveyPage.cs" />
 -    <Compile Include="Survey\DBSurveyResponse.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -14561,9 +14561,9 @@ index 4aa8e711..c29f1e48 100644
 -</Project>
 \ No newline at end of file
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is mojoPortal.Features.UI.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is mojoPortal.Features.UI.csproj.netfx. -->
 +  <PropertyGroup>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
 +    <RootNamespace>mojoPortal.Features.UI</RootNamespace>
 +    <AssemblyName>mojoPortal.Features.UI</AssemblyName>
 +    <ImplicitUsings>disable</ImplicitUsings>
@@ -14581,10 +14581,10 @@ index 4aa8e711..c29f1e48 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.7.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -16881,7 +16881,7 @@ index 7c415313..add24e91 100644
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="Current">
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is mojoPortal.Web.Controls.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is mojoPortal.Web.Controls.csproj.netfx. -->
    <PropertyGroup>
 -    <ProjectType>Local</ProjectType>
 -    <ProductVersion>9.0.30729</ProductVersion>
@@ -16899,7 +16899,7 @@ index 7c415313..add24e91 100644
 -    <DefaultTargetSchema>IE50</DefaultTargetSchema>
 -    <DelaySign>false</DelaySign>
 -    <OutputType>Library</OutputType>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>mojoPortal.Web.Controls</RootNamespace>
 -    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
 -    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -17126,7 +17126,7 @@ index 7c415313..add24e91 100644
    <ItemGroup>
 -    <Content Include="Gravatar\Gravatar.bmp" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -17453,7 +17453,7 @@ index 2945d873..47340ee8 100644
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="Current">
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is mojoPortal.Web.Editor.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is mojoPortal.Web.Editor.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -17462,7 +17462,7 @@ index 2945d873..47340ee8 100644
 -    <ProjectGuid>{4F6DDA2C-C9B8-45B2-AADA-3FF922317661}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>mojoPortal.Web.Editor</RootNamespace>
      <AssemblyName>mojoPortal.Web.Editor</AssemblyName>
 -    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -17593,7 +17593,7 @@ index 2945d873..47340ee8 100644
 -    <Compile Include="TextArea\TextAreaProvider.cs" />
 -    <Compile Include="ToolBarEnum.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -17804,7 +17804,7 @@ index b58a88f2..bdcef273 100644
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="Current">
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is mojoPortal.Web.Framework.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is mojoPortal.Web.Framework.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -17813,7 +17813,7 @@ index b58a88f2..bdcef273 100644
 -    <ProjectGuid>{E0D12031-BFDD-4069-9024-8B00A2AA6DBC}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>mojoPortal.Web.Framework</RootNamespace>
      <AssemblyName>mojoPortal.Web.Framework</AssemblyName>
 -    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
@@ -17969,7 +17969,7 @@ index b58a88f2..bdcef273 100644
    <ItemGroup>
 -    <None Include="app.config" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>

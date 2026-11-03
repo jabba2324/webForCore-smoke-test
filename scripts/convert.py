@@ -3,8 +3,8 @@
 
     scripts/convert.py apps/<id>/src/<web project>.csproj [--lib apps/<id>/src/<library>.csproj]...
 
-- copies each project to <name>.csproj.netfx (once) and rewrites it as an SDK-style net11.0 project;
-- adds the webForCore packages for the frameworks it references ($WEBFORCORE_VERSION, default 0.6.0); keeps the app's
+- copies each project to <name>.csproj.netfx (once) and rewrites it as an SDK-style net10.0 project;
+- adds the webForCore packages for the frameworks it references ($WEBFORCORE_VERSION, default 0.7.0); keeps the app's
   other packages (from packages.config or PackageReference), drops Microsoft's ASP.NET packages and the System.*
   packages that are part of .NET, and raises the versions webForCore forces (FINDINGS.md F7); keeps HintPath
   references outside packages/;
@@ -20,7 +20,7 @@ Standard library only (Python 3.11+)."""
 import re, shutil, sys
 from pathlib import Path
 
-WFC = __import__("os").environ.get("WEBFORCORE_VERSION", "0.6.0")
+WFC = __import__("os").environ.get("WEBFORCORE_VERSION", "0.7.0")
 THIRDPARTY = __import__("os").environ.get("THIRDPARTY_VERSION", "0.4.1")
 # webForCore-thirdparty's builds: (regex over references and packages, its package). The original package is kept
 # (packages such as Unity.Mvc bring it anyway); the build wins the conflict.
@@ -42,11 +42,11 @@ OWIN_SIGNALR_KEEP = {"microsoft.owin.diagnostics": "4.2.3", "microsoft.owin.file
 # Roslyn in webForCore.Compilers (Humanizer.Core).
 MIN_VERSIONS = {"newtonsoft.json": "13.0.4", "entityframework": "6.5.1", "humanizer.core": "2.14.1",
                 # packages webForCore depends on: its versions are the floor (NU1605 below them; FINDINGS F45)
-                "system.data.sqlclient": "4.9.1", "system.directoryservices": "11.0.0-rc.3.26522.148",
-                "system.directoryservices.accountmanagement": "11.0.0-rc.3.26522.148"}
+                "system.data.sqlclient": "4.9.1", "system.directoryservices": "10.0.14",
+                "system.directoryservices.accountmanagement": "10.0.14"}
 # .NET Framework assemblies that are NuGet packages on .NET (docs/MIGRATING.md, #9): a <Reference> to one becomes a
 # PackageReference at the .NET version webForCore is built with.
-NET_PACKAGES_VERSION = "11.0.0-rc.3.26522.148"
+NET_PACKAGES_VERSION = "10.0.14"
 FRAMEWORK_PACKAGES = ["System.ComponentModel.Composition", "System.ServiceModel.Syndication", "System.Data.OleDb",
                       "System.DirectoryServices", "System.DirectoryServices.AccountManagement", "System.Data.Odbc"]
 FRAMEWORKS = [  # (regex over references and packages, webForCore package)
@@ -74,7 +74,7 @@ FRAMEWORKS = [  # (regex over references and packages, webForCore package)
     (r"System\.Web\.DataVisualization", "webForCore.Web.DataVisualization"),
     (r"(?<![\w.])WebGrease\b", "webForCore.WebGrease"),
 ]
-WEB_PROPS = """    <TargetFramework>net11.0</TargetFramework>
+WEB_PROPS = """    <TargetFramework>net10.0</TargetFramework>
     <OutputType>Exe</OutputType>{names}
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>disable</Nullable>{asminfo}
@@ -84,7 +84,7 @@ WEB_PROPS = """    <TargetFramework>net11.0</TargetFramework>
     <GenerateDependencyFile>true</GenerateDependencyFile>
     <NoWarn>$(NoWarn);NU1701</NoWarn>
     <PredefinedCulturesOnly>true</PredefinedCulturesOnly>{razor}"""
-LIB_PROPS = """    <TargetFramework>net11.0</TargetFramework>{names}
+LIB_PROPS = """    <TargetFramework>net10.0</TargetFramework>{names}
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>disable</Nullable>{asminfo}
     <NoWarn>$(NoWarn);NU1701</NoWarn>"""
@@ -110,13 +110,13 @@ def real_case(base, rel):
 
 
 def convert_sdk_in_place(proj, old, wfc, kept, dropped, pkgs, report):
-    """An SDK-style project that targets only .NET Framework: net11.0; framework references (no HintPath) and the
+    """An SDK-style project that targets only .NET Framework: net10.0; framework references (no HintPath) and the
     Microsoft packages webForCore replaces removed; package versions raised; webForCore's packages added."""
     first = re.search(r"<TargetFrameworks?>[^<]+</TargetFrameworks?>", old)
     new = old[:first.start()] + "\x00" + old[first.end():]
     new = re.sub(r"\s*<TargetFrameworks?>[^<]+</TargetFrameworks?>", "", new)  # any others
-    new = new.replace("\x00", "<TargetFramework>net11.0</TargetFramework>")
-    # The C# it was written for. net11.0 defaults to the newest; C# 14's first-class span conversions change overload
+    new = new.replace("\x00", "<TargetFramework>net10.0</TargetFramework>")
+    # The C# it was written for. net10.0 defaults to the newest; C# 14's first-class span conversions change overload
     # resolution in code written for older C# (ServiceStack.Text: CS0029/CS1503 on ReadOnlySpan<char>). Unset (a .NET
     # Framework project's default, C# 7.3) stays 7.3; "latest"/"preview"/"default", here or in a Directory.Build.props,
     # becomes 13, the last version before that change. (C# 11's ref-safety rules apply on net7.0+ whatever the version.)
@@ -125,7 +125,7 @@ def convert_sdk_in_place(proj, old, wfc, kept, dropped, pkgs, report):
     pin = "7.3" if not lang else ("13.0" if lang[-1].strip().lower() in ("latest", "preview", "default", "latestmajor") else None)
     if pin:
         new = re.sub(r"<LangVersion>[^<]+</LangVersion>", "", new)
-        new = re.sub(r"(<TargetFramework>net11.0</TargetFramework>)", lambda m: m.group(1) + f"\n    <LangVersion>{pin}</LangVersion>", new, count=1)
+        new = re.sub(r"(<TargetFramework>net10.0</TargetFramework>)", lambda m: m.group(1) + f"\n    <LangVersion>{pin}</LangVersion>", new, count=1)
         report.append(f"LangVersion {pin} ({lang[-1] if lang else 'unset'} before)")
     new = re.sub(r"\s*<Reference\s+Include=\"[^\"]+\"\s*/>", "", new)
     new = re.sub(r"\s*<Reference\s+Include=\"[^\"]+\"\s*>(?:(?!<HintPath>).)*?</Reference>", "", new, flags=re.S)
@@ -137,8 +137,8 @@ def convert_sdk_in_place(proj, old, wfc, kept, dropped, pkgs, report):
             new = re.sub(r'(<PackageReference\s+Include="' + re.escape(name) + r'"\s+Version=")[^"]*"', lambda m: m.group(1) + versions[name] + '"', new)
     added = [(n, v) for n, v in kept if n not in pkgs]
     props = "\n    <ImplicitUsings>disable</ImplicitUsings>\n    <Nullable>disable</Nullable>\n    <NoWarn>$(NoWarn);NU1701</NoWarn>"
-    new = re.sub(r"(<TargetFramework>net11.0</TargetFramework>)", lambda m: m.group(1) + props, new, count=1)
-    group = ["  <ItemGroup>", f"    <!-- Migrated to webForCore (.NET 11) in place; the .NET Framework project is {proj.name}.netfx. -->",
+    new = re.sub(r"(<TargetFramework>net10.0</TargetFramework>)", lambda m: m.group(1) + props, new, count=1)
+    group = ["  <ItemGroup>", f"    <!-- Migrated to webForCore (.NET 10) in place; the .NET Framework project is {proj.name}.netfx. -->",
              *[f'    <PackageReference Include="{p}" Version="{WFC}" />' for p in wfc],
              *[f'    <PackageReference Include="{n}" Version="{v}" />' for n, v in added], "  </ItemGroup>"]
     new = new.replace("</Project>", "\n".join(group) + "\n</Project>", 1)
@@ -257,7 +257,7 @@ def convert(proj, web):
         return
     props = (WEB_PROPS if web else LIB_PROPS).format(names=names, asminfo=asminfo, razor=RAZOR if web and list(d.rglob("*.cshtml")) else "")
     out = [f'<Project Sdk="Microsoft.NET.Sdk{".Web" if web else ""}">',
-           f"  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is {netfx.name}. -->",
+           f"  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is {netfx.name}. -->",
            "  <PropertyGroup>", props, "  </PropertyGroup>", ""]
     items = ['    <Compile Remove="App_Code/**;bin_dotnet/**;obj/**" />'] if web else ['    <Compile Remove="bin/**;obj/**" />']
     if web:

@@ -2,68 +2,68 @@
   "id": "mvcforum",
   "stages": {
     "build": {
-      "at": "2026-11-02T00:00:39+00:00",
+      "at": "2026-11-03T12:49:10+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\mvcforum\\logs.windows\\build.log",
-      "seconds": 5,
+      "seconds": 17,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.6.0, webForCore-thirdparty 0.4.1"
+      "webforcore": "packages 0.7.0, webForCore-thirdparty 0.5.0"
     },
     "fetch": {
-      "at": "2026-11-02T00:00:35+00:00",
+      "at": "2026-11-03T12:48:54+00:00",
       "commit": "8ce337990e079950113dae594f9407bf04854ed5",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-02T00:01:08+00:00",
+      "at": "2026-11-03T12:49:33+00:00",
       "checks": [
         {
-          "ms": 13439,
+          "ms": 155,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 988,
+          "ms": 767,
           "ok": true,
           "path": "/thread/read-me/",
           "status": 200
         },
         {
-          "ms": 250,
+          "ms": 295,
           "ok": true,
           "path": "/cat/example-category/",
           "status": 200
         },
         {
-          "ms": 169,
+          "ms": 117,
           "ok": true,
           "path": "/members/logon/",
           "status": 200
         },
         {
-          "ms": 107,
+          "ms": 67,
           "ok": true,
           "path": "/members/register/",
           "status": 200
         },
         {
-          "ms": 208,
+          "ms": 138,
           "ok": true,
           "path": "/home/latestrss/",
           "status": 200
         },
         {
-          "ms": 141,
+          "ms": 51,
           "ok": true,
           "path": "/api/TinyMce/UploadImage",
           "status": 405
         },
         {
-          "ms": 53,
+          "ms": 36,
           "ok": true,
           "path": "/Themes/Metro/Content/Styles/Theme.min.css",
           "status": 200
@@ -75,7 +75,7 @@
           "status": 404
         },
         {
-          "ms": 13,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
@@ -87,7 +87,7 @@
           "status": 404
         },
         {
-          "ms": 14,
+          "ms": 2,
           "ok": true,
           "path": "/obj/",
           "status": 404
@@ -103,11 +103,17 @@
           "ok": true,
           "path": "/bin_dotnet/MvcForum.Web.dll",
           "status": 404
+        },
+        {
+          "ms": 3,
+          "ok": true,
+          "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
+          "status": 404
         }
       ],
       "log": "apps\\mvcforum\\logs.windows\\server.log",
       "status": "pass",
-      "summary": "14/14 probes"
+      "summary": "15/15 probes"
     }
   }
 }

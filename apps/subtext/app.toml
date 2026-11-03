@@ -10,7 +10,7 @@ generated = ["src/Subtext.Web/App_Data/**"]
 kinds = ["webforms", "mvc"]
 licence = "MIT"
 status = "blocked"
-notes = "On 0.6.0 (Linux and Windows) it builds and the install wizard runs: 15/16 checks; the log-in page's DotNetOpenAuth fails (F44, app/environment). Uses webForCore-thirdparty's WebActivator."
+notes = "On webForCore 0.7.0 (.NET 10, under webforcore-host) it builds and the install wizard runs: 16/17 probes on Linux and Windows; the log-in page's DotNetOpenAuth fails (F44, app/environment). Uses webForCore-thirdparty 0.5.0's WebActivator."
 
 # The first request compiles the site, so it gets 120 s. The probes need the compose SQL Server with a "SubtextData"
 # database that Subtext's install wizard has set up (three postbacks; NOTES.md): on an empty database every page
@@ -19,9 +19,10 @@ notes = "On 0.6.0 (Linux and Windows) it builds and the install wizard runs: 15/
 path = "/"
 contains = "Welcome to Subtext!"
 
-# A blog post (Subtext's URL routing to a Web Forms page).
+# A blog post (Subtext's URL routing to a Web Forms page). The date is the install wizard's run (NOTES.md): the welcome
+# post's only URL is by date, so a new database needs this changed.
 [[probes]]
-path = "/archive/2026/11/01/welcome-to-subtext.aspx"
+path = "/archive/2026/11/03/welcome-to-subtext.aspx"
 contains = "Welcome to Subtext!"
 
 [[probes]]

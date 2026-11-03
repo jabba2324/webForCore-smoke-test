@@ -32,3 +32,11 @@ Appended by `scripts/wfc.py`, one line per stage run.
 - 2026-11-01T23:59:48+00:00 **fetch** (windows): pass at `31b4fb1efd12`
 - 2026-11-02T00:00:13+00:00 **build** (windows): pass
 - 2026-11-02T00:00:34+00:00 **smoke** (windows): fail (6/15 probes)
+- 2026-11-03T01:33:49+00:00 **fetch**: fail (no ref 31b4fb1efd121dba2aab58af5ad6b0f30161259e)
+- 2026-11-03T01:36:22+00:00 **fetch**: fail (no ref 31b4fb1efd121dba2aab58af5ad6b0f30161259e)
+- 2026-11-03T12:15:23+00:00 **fetch**: pass at `31b4fb1efd12`
+- 2026-11-03T12:15:47+00:00 **build**: pass
+- 2026-11-03T12:16:18+00:00 **smoke**: fail (7/16 probes)
+- 2026-11-03T12:46:37+00:00 **fetch** (windows): pass at `31b4fb1efd12`
+- 2026-11-03T12:48:03+00:00 **build** (windows): pass
+- 2026-11-03T12:48:53+00:00 **smoke** (windows): fail (7/16 probes)

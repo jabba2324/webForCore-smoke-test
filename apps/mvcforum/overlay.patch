@@ -1,12 +1,12 @@
 diff --git a/MVCForum.Core/MvcForum.Core.csproj b/MVCForum.Core/MvcForum.Core.csproj
-index a55cd71..addbd00 100644
+index a55cd71..e2f7929 100644
 --- a/MVCForum.Core/MvcForum.Core.csproj
 +++ b/MVCForum.Core/MvcForum.Core.csproj
 @@ -1,448 +1,71 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is MvcForum.Core.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is MvcForum.Core.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -15,7 +15,7 @@ index a55cd71..addbd00 100644
 -    <ProjectGuid>{20AD3D3C-153E-47AC-BA9C-3E4DB876990E}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>MvcForum.Core</RootNamespace>
      <AssemblyName>MvcForum.Core</AssemblyName>
 -    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
@@ -333,13 +333,13 @@ index a55cd71..addbd00 100644
    <ItemGroup>
 -    <None Include="app.config" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.7.0" />
 +    <!-- On .NET Framework this library referenced System.Web only (SystemWebPackage), so the membership types System.Web
 +         forwards to System.Web.ApplicationServices weren't visible, and its own MembershipUser and MembershipCreateStatus
 +         weren't ambiguous with System.Web.Security's (CS0104). The webForCore package references
 +         System.Web.ApplicationServices; keep it out of this project's compilation as it was. -->
-+    <PackageReference Include="webForCore.Web.ApplicationServices" Version="0.6.0" ExcludeAssets="compile" />
++    <PackageReference Include="webForCore.Web.ApplicationServices" Version="0.7.0" ExcludeAssets="compile" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -450,7 +450,7 @@ index a55cd71..addbd00 100644
 +    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 +    <PackageReference Include="Skybrud.Social" Version="0.9.6" />
 +    <PackageReference Include="Skybrud.Social.Microsoft" Version="1.0.0-beta1" />
-+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.1" />
++    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
 +    <PackageReference Include="System.Data.Common" Version="4.3.0" />
 +    <PackageReference Include="System.Xml.XDocument" Version="4.3.0" />
 +    <PackageReference Include="SystemWebPackage" Version="1.0.0" />
@@ -974,7 +974,7 @@ index 0000000..9977b23
 @@ -0,0 +1 @@
 +MvcForum.Plugins builds into this folder on .NET Framework (a post-build step); empty here.
 diff --git a/MVCForum.Website/MvcForum.Web.csproj b/MVCForum.Website/MvcForum.Web.csproj
-index 031d0c5..e4c208e 100644
+index 031d0c5..b4a5e41 100644
 --- a/MVCForum.Website/MvcForum.Web.csproj
 +++ b/MVCForum.Website/MvcForum.Web.csproj
 @@ -1,1534 +1,100 @@
@@ -982,7 +982,7 @@ index 031d0c5..e4c208e 100644
 -<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk.Web">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is MvcForum.Web.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is MvcForum.Web.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -993,7 +993,7 @@ index 031d0c5..e4c208e 100644
 -    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
 +    <OutputType>Exe</OutputType>
      <RootNamespace>MvcForum.Web</RootNamespace>
      <AssemblyName>MvcForum.Web</AssemblyName>
@@ -2538,12 +2538,12 @@ index 031d0c5..e4c208e 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.6.0" />
-+    <PackageReference Include="webForCore.WebGrease" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.7.0" />
++    <PackageReference Include="webForCore.WebGrease" Version="0.7.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -2575,7 +2575,7 @@ index 031d0c5..e4c208e 100644
 +    <PackageReference Include="SquishIt.AspNet" Version="1.0.0" />
 +    <PackageReference Include="SquishIt.Framework" Version="1.0.0" />
 +    <PackageReference Include="SquishIt.Mvc" Version="1.0.0" />
-+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.1" />
++    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
 +    <PackageReference Include="System.Data.Common" Version="4.3.0" />
 +    <PackageReference Include="System.Drawing.Common" Version="4.5.0-preview1-25914-04" />
 +    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
@@ -2605,7 +2605,7 @@ index 031d0c5..e4c208e 100644
 +  <ItemGroup>
 +    <!-- webForCore-thirdparty 0.4.0: WebActivatorEx's start methods run (the original package's never do,
 +         webForCore#21); it wins over the original that the app's packages bring. -->
-+    <PackageReference Include="webForCore.WebActivatorEx" Version="0.4.1" />
++    <PackageReference Include="webForCore.WebActivatorEx" Version="0.5.0" />
 +  </ItemGroup>
 +
 +</Project>

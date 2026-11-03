@@ -5,10 +5,10 @@ index 0000000..888ba12
 +++ b/Website/MiniBlog.csproj
 @@ -0,0 +1,47 @@
 +<Project Sdk="Microsoft.NET.Sdk.Web">
-+  <!-- Migrated to webForCore (.NET 11). MiniBlog was a Visual Studio web site (no project file); this project hosts it.
++  <!-- Migrated to webForCore (.NET 10). MiniBlog was a Visual Studio web site (no project file); this project hosts it.
 +       Pages (.cshtml) and app_code are compiled at run time, as on IIS. -->
 +  <PropertyGroup>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
 +    <OutputType>Exe</OutputType>
 +    <AssemblyName>MiniBlog</AssemblyName>
 +    <ImplicitUsings>disable</ImplicitUsings>
@@ -32,10 +32,10 @@ index 0000000..888ba12
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages: the "Always" set, Web Pages and Helpers. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Razor" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Helpers" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Razor" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Helpers" Version="0.7.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>

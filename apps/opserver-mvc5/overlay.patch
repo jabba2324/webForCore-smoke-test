@@ -105,7 +105,7 @@ index ae39b67..43495c8 100644
 -<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk.Web">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is Opserver.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is Opserver.csproj.netfx. -->
    <PropertyGroup>
 -    <LangVersion>7</LangVersion>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -115,7 +115,7 @@ index ae39b67..43495c8 100644
 -    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
 +    <OutputType>Exe</OutputType>
      <RootNamespace>StackExchange.Opserver</RootNamespace>
      <AssemblyName>StackExchange.Opserver</AssemblyName>
@@ -797,10 +797,10 @@ index ae39b67..43495c8 100644
 -      <DependentUpon>HAProxy.cshtml</DependentUpon>
 -    </Content>
 +    <!-- webForCore 0.5.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.6.0" />
-+    <PackageReference Include="webForCore.WebGrease" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.7.0" />
++    <PackageReference Include="webForCore.WebGrease" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -808,7 +808,7 @@ index ae39b67..43495c8 100644
 +    <!-- The app's own libraries. -->
 +    <PackageReference Include="MiniProfiler.Mvc5" Version="4.0.138" />
 +    <PackageReference Include="StackExchange.Exceptional" Version="2.2.1" />
-+    <PackageReference Include="System.DirectoryServices.AccountManagement" Version="11.0.0-rc.3.26522.148" />
++    <PackageReference Include="System.DirectoryServices.AccountManagement" Version="10.0.14" />
    </ItemGroup>
 +
    <ItemGroup>

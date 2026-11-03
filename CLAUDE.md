@@ -1,7 +1,7 @@
 # Working in this repo
 
 This is the smoke test bed for webForCore (`../webForCore`, or `$WEBFORCORE_DIR`), which runs ASP.NET 4.x apps on
-.NET 11. Read `README.md` first, then webForCore's `docs/AGENT-MIGRATION.md`, `docs/MIGRATING.md`,
+.NET 10. Read `README.md` first, then webForCore's `docs/AGENT-MIGRATION.md`, `docs/MIGRATING.md`,
 `docs/NAMESPACES.md` and `docs/IIS-COMPATIBILITY.md`.
 
 ## The goal
@@ -20,7 +20,7 @@ Each app is a folder, `apps/<id>/` (see README.md). Nothing goes at the top leve
    `status` to `verified`, or `rejected` with the reason in `notes`.
 2. `scripts/wfc.py fetch <id>` and `scripts/wfc.py assess <id>`. Write the assessment in `apps/<id>/NOTES.md`.
 3. Migrate in `apps/<id>/src/` following `docs/AGENT-MIGRATION.md`, against webForCore's release packages
-   (`PackageReference Include="webForCore" Version="0.6.0"` and the framework packages; `scripts/wfc.py packages`
+   (`PackageReference Include="webForCore" Version="0.7.0"` and the framework packages; `scripts/wfc.py packages`
    downloads them), not its source. Keep changes minimal; don't modernise the app. Record each change and its
    reason in `NOTES.md` as you go, not afterwards.
 4. `scripts/wfc.py build <id>` and `scripts/wfc.py smoke <id>` on Linux, then `scripts/wfc.py windows run <id>` on Windows
@@ -37,7 +37,7 @@ Each app is a folder, `apps/<id>/` (see README.md). Nothing goes at the top leve
 webForCore ships only Microsoft assemblies. Builds of third-party libraries for it are in
 [webForCore-thirdparty](https://github.com/jabba2324/webForCore-thirdparty), for this test bed: an app that uses one
 of them references the package from there. `scripts/wfc.py packages` downloads its release (`THIRDPARTY_VERSION`,
-default 0.4.1) into the same folder as webForCore's; by hand:
+default 0.5.0) into the same folder as webForCore's; by hand:
 
 ```bash
 gh release download --repo jabba2324/webForCore-thirdparty --pattern '*.nupkg' --dir .packages/v<webForCore version> --skip-existing
@@ -78,3 +78,19 @@ not recommended for production. App/environment problems stay here.
 - Commit freely here, but don't add a remote or push without asking. Issues go only to webForCore's repo, as above.
 - Start with the small, self-contained apps (eShopLegacy, the samples, Bonobo, BlogEngine, MiniBlog) before the big
   CMSs and stores.
+
+## Contributing rules (from 3 Nov 2026)
+
+webForCore's CONTRIBUTING.md holds every repository in the project to the same rules; for this repo they mean:
+
+- **Overlays don't work around webForCore.** A migration never uses reflection into .NET's or webForCore's
+  internals, unsafe code, P/Invoke, or GC tricks (`GC.Collect`, `WaitForPendingFinalizers`, `AddMemoryPressure`,
+  `GCHandle`s, weak-reference polling) to get an app running. If an app seems to need one, that's a finding (a
+  webForCore bug or a guide gap, raised as an issue), not an overlay change. Reflection over the app's own types,
+  as the app already does, is fine.
+- **The runner and scripts: slow, stable and simple beat fast.** Every wait has a timeout and every external call
+  fails rather than hangs (git runs with a stall timeout and no credential prompt, for example). No parallelism or
+  caching tricks to save time.
+- **Report numbers.** Each app's result is probes passed out of the total, per platform, in `RESULTS.md` and in the
+  round's PR; a finding says how many apps it affects.
+- **Both platforms.** A round counts once it has run on Linux and on Windows; until then it's in progress.

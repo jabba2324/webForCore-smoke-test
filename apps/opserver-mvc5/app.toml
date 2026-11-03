@@ -8,7 +8,7 @@ project = "Opserver/Opserver.csproj"
 kinds = ["mvc"]
 licence = "MIT"
 status = "blocked"
-notes = "Blocked by F47 (System.Data.SqlClient 4.9.1's GetTypes() throws on .NET 11; webForCore#41, 0.6.0's known issue): 9/10 on 0.6.0, Linux and Windows. With the scan skipping those types (not in the overlay) it works."
+notes = "Blocked by F47 (System.Data.SqlClient 4.9.1's GetTypes() throws; webForCore#41): 10/11 probes on Linux and Windows on webForCore 0.7.0 (.NET 10, under webforcore-host). With the scan skipping those types (not in the overlay) it works."
 
 # The first request compiles the site, so it gets 120 s. Config/SecuritySettings.config (provider "alladmin", the
 # example's "everyone") and Config/SQLSettings.json (the compose SQL Server) are in the overlay. Every page but the

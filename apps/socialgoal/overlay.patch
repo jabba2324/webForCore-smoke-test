@@ -7,14 +7,14 @@ index 160545d..c3457e6 100644
 -<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is SocialGoal.Core.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is SocialGoal.Core.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 -    <ProjectGuid>{B1053A2D-A1EA-412F-BA95-19CE794F8891}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>SocialGoal.Core</RootNamespace>
      <AssemblyName>SocialGoal.Core</AssemblyName>
 -    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -57,7 +57,7 @@ index 160545d..c3457e6 100644
 -    <Compile Include="Common\ValidationResult.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 -  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 -  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -279,9 +279,9 @@ index 8c543f6..5c26acc 100644
 -</Project>
 \ No newline at end of file
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is SocialGoal.Data.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is SocialGoal.Data.csproj.netfx. -->
 +  <PropertyGroup>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
 +    <RootNamespace>SocialGoal.Data</RootNamespace>
 +    <AssemblyName>SocialGoal.Data</AssemblyName>
 +    <ImplicitUsings>disable</ImplicitUsings>
@@ -296,9 +296,9 @@ index 8c543f6..5c26acc 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.7.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -481,14 +481,14 @@ index 58b74b4..15b1f71 100644
 -<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is SocialGoal.Model.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is SocialGoal.Model.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 -    <ProjectGuid>{4D4923F5-548C-4D13-859D-7F5E9699FACD}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>SocialGoal.Model</RootNamespace>
      <AssemblyName>SocialGoal.Model</AssemblyName>
 -    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -568,9 +568,9 @@ index 58b74b4..15b1f71 100644
 -    <Compile Include="Models\UserProfile.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -826,9 +826,9 @@ index 124c094..70d3f21 100644
 -</Project>
 \ No newline at end of file
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is SocialGoal.Service.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is SocialGoal.Service.csproj.netfx. -->
 +  <PropertyGroup>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
 +    <RootNamespace>SocialGoal.Service</RootNamespace>
 +    <AssemblyName>SocialGoal.Service</AssemblyName>
 +    <ImplicitUsings>disable</ImplicitUsings>
@@ -843,9 +843,9 @@ index 124c094..70d3f21 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.7.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -1118,9 +1118,9 @@ index 93f35fa..4b9e535 100644
 -</Project>
 \ No newline at end of file
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is SocialGoal.Web.Core.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is SocialGoal.Web.Core.csproj.netfx. -->
 +  <PropertyGroup>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
 +    <RootNamespace>SocialGoal.Web.Core</RootNamespace>
 +    <AssemblyName>SocialGoal.Web.Core</AssemblyName>
 +    <ImplicitUsings>disable</ImplicitUsings>
@@ -1135,8 +1135,8 @@ index 93f35fa..4b9e535 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.7.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -2008,9 +2008,9 @@ index 4a2e6b1..4def55a 100644
 -</Project>
 \ No newline at end of file
 +<Project Sdk="Microsoft.NET.Sdk.Web">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is SocialGoal.Web.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is SocialGoal.Web.csproj.netfx. -->
 +  <PropertyGroup>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
 +    <OutputType>Exe</OutputType>
 +    <RootNamespace>SocialGoal</RootNamespace>
 +    <AssemblyName>SocialGoal</AssemblyName>
@@ -2036,16 +2036,16 @@ index 4a2e6b1..4def55a 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.EntityFramework" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.7.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>

@@ -46,27 +46,27 @@
       ]
     },
     "build": {
-      "at": "2026-11-01T23:29:32+00:00",
+      "at": "2026-11-03T12:15:47+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/mojoportal/logs/build.log",
-      "seconds": 16,
+      "seconds": 24,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.6.0"
+      "webforcore": "packages 0.7.0"
     },
     "fetch": {
-      "at": "2026-11-01T01:47:27+00:00",
+      "at": "2026-11-03T12:15:23+00:00",
       "commit": "31b4fb1efd121dba2aab58af5ad6b0f30161259e",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-01T23:35:05+00:00",
+      "at": "2026-11-03T12:16:18+00:00",
       "checks": [
         {
           "expected_text": "Your installation is up to date",
-          "ms": 546,
+          "ms": 2664,
           "ok": false,
           "path": "/Setup/Default.aspx",
           "status": 500,
@@ -74,107 +74,113 @@
         },
         {
           "expected_text": "Welcome to mojoPortal!",
-          "ms": 518,
+          "ms": 2593,
           "ok": false,
           "path": "/",
-          "status": 302,
-          "title": "Object moved"
+          "status": 500,
+          "title": "Could not load file or assembly 'App_GlobalResources, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
         },
         {
           "expected_text": "LoginCtrl_Password",
-          "ms": 9,
+          "ms": 2685,
           "ok": false,
           "path": "/Secure/Login.aspx",
-          "status": 302,
-          "title": "Object moved"
+          "status": 500,
+          "title": "Could not load file or assembly 'App_GlobalResources, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
         },
         {
           "expected_text": "__VIEWSTATE",
-          "ms": 8,
+          "ms": 2586,
           "ok": false,
           "path": "/Secure/Register.aspx",
-          "status": 302,
-          "title": "Object moved"
+          "status": 500,
+          "title": "Could not load file or assembly 'App_GlobalResources, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
         },
         {
           "expected_text": "File Management",
-          "ms": 312,
+          "ms": 2680,
           "ok": false,
           "path": "/FileManager",
-          "status": 302,
-          "title": "Object moved"
+          "status": 500,
+          "title": "Could not load file or assembly 'App_GlobalResources, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
         },
         {
           "expected_text": "Authorization has been denied for this request.",
-          "ms": 35,
+          "ms": 2755,
           "ok": false,
           "path": "/api/UserProfile/Property/FirstName",
-          "status": 302,
-          "title": "Object moved"
+          "status": 500,
+          "title": "Could not load file or assembly 'App_GlobalResources, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
         },
         {
           "expected_text": "Bootstrap v3.3.7",
-          "ms": 8,
+          "ms": 2659,
           "ok": false,
           "path": "/csshandler.ashx?s=1&skin=framework",
-          "status": 302,
-          "title": "Object moved"
+          "status": 500,
+          "title": "Could not load file or assembly 'App_GlobalResources, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
         },
         {
           "expected_text": "mojoPortal Site Search",
-          "ms": 7,
+          "ms": 2613,
           "ok": false,
           "path": "/SearchEngineInfo.ashx",
-          "status": 302,
-          "title": "Object moved"
+          "status": 500,
+          "title": "Could not load file or assembly 'App_GlobalResources, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
         },
         {
-          "ms": 10,
+          "ms": 2708,
           "ok": false,
           "path": "/Data/Sites/1/skins/framework/img/favicons/favicon-16x16.png",
-          "status": 302,
-          "title": "Object moved"
+          "status": 500,
+          "title": "Could not load file or assembly 'App_GlobalResources, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
         },
         {
-          "ms": 5,
+          "ms": 1082,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 5,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 3,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 5,
+          "ms": 4,
           "ok": true,
           "path": "/bin_dotnet/mojoPortal.Web.dll",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404
         }
       ],
       "log": "apps/mojoportal/logs/server.log",
       "status": "fail",
-      "summary": "6/15 probes"
+      "summary": "7/16 probes"
     }
   }
 }

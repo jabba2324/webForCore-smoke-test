@@ -2,87 +2,88 @@
   "id": "bonobo-git-server",
   "stages": {
     "build": {
-      "at": "2026-11-01T23:57:32+00:00",
+      "at": "2026-11-03T12:44:43+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\bonobo-git-server\\logs.windows\\build.log",
-      "seconds": 3,
+      "seconds": 15,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.6.0, webForCore-thirdparty 0.4.1"
+      "webforcore": "packages 0.7.0, webForCore-thirdparty 0.5.0"
     },
     "fetch": {
-      "at": "2026-11-01T23:57:29+00:00",
+      "at": "2026-11-03T12:44:28+00:00",
       "commit": "6277ecfe1015b4612795bf8bb0f03ae2dd25b1ad",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-01T23:57:58+00:00",
+      "at": "2026-11-03T12:44:54+00:00",
       "checks": [
         {
-          "ms": 8785,
+          "ms": 2812,
           "ok": true,
           "path": "/Home/LogOn",
           "status": 200
         },
         {
-          "ms": 38,
-          "ok": false,
+          "ms": 6,
+          "ok": true,
           "path": "/",
-          "status": 503,
-          "title": "<html><body>Server Too Busy</body></html>"
+          "status": 302
         },
         {
-          "expected_text": "body",
-          "ms": 9,
-          "ok": false,
+          "ms": 27,
+          "ok": true,
           "path": "/Content/Site.css",
-          "status": 503,
-          "title": "<html><body>Server Too Busy</body></html>"
+          "status": 200
         },
         {
-          "ms": 23,
+          "ms": 7,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 5,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 26,
+          "ms": 3,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 3,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "expected_text": "404 Page Not Found",
-          "ms": 3,
-          "ok": false,
+          "ms": 30,
+          "ok": true,
           "path": "/packages.config",
-          "status": 503,
-          "title": "<html><body>Server Too Busy</body></html>"
+          "status": 200
         },
         {
-          "ms": 18,
+          "ms": 62,
           "ok": true,
           "path": "/bin_dotnet/Bonobo.Git.Server.dll",
+          "status": 404
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404
         }
       ],
       "log": "apps\\bonobo-git-server\\logs.windows\\server.log",
-      "status": "fail",
-      "summary": "6/9 probes"
+      "status": "pass",
+      "summary": "10/10 probes"
     }
   }
 }

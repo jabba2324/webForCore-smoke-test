@@ -47,6 +47,7 @@ no notices.
 
 - **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 13/13 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28).
 - **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 13/13 probes on Linux and on Windows.
+- **Round 6 (webForCore 0.7.0 on .NET 10, webForCore-thirdparty 0.5.0; under webforcore-host; Linux and Windows):** 14/14 probes on Linux and Windows.
 
 Probes: log-in and register pages, the paged listing (`/Home/GetAllRealEstatesList`: EF 6 query through AutoMapper's
 `ProjectTo`), an `[Authorize]` controller (302 to the log-in page from OWIN cookie authentication), the SignalR chat

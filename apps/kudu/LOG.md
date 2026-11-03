@@ -1,0 +1,8 @@
+# kudu: run log
+
+Appended by `scripts/wfc.py`, one line per stage run.
+
+- 2026-11-03T01:33:47+00:00 **fetch**: fail (clone failed)
+- 2026-11-03T01:36:21+00:00 **fetch**: fail (clone failed)
+- 2026-11-03T12:15:16+00:00 **fetch**: pass at `7e7e310dee7e`
+- 2026-11-03T12:15:16+00:00 **build**: skip (not migrated yet (no SDK-style project))

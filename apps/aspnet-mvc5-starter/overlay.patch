@@ -7,14 +7,14 @@ index 730c84c..f3a61b9 100644
 -<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is App.Identity.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is App.Identity.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 -    <ProjectGuid>{1325D974-1E9A-49C1-BC71-A5F4B9EA3293}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>App.Identity</RootNamespace>
      <AssemblyName>Sarto.App.Identity</AssemblyName>
 -    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
@@ -77,10 +77,10 @@ index 730c84c..f3a61b9 100644
 -    <Compile Include="Repositories\IIdentityRepository.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -248,7 +248,7 @@ index 3b582cb..7eb0260 100644
 -  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk.Web">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is App.UI.Mvc5.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is App.UI.Mvc5.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -259,7 +259,7 @@ index 3b582cb..7eb0260 100644
 -    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
 +    <OutputType>Exe</OutputType>
      <RootNamespace>App.UI.Mvc5</RootNamespace>
      <AssemblyName>Sarto.App.UI.Mvc5</AssemblyName>
@@ -329,16 +329,16 @@ index 3b582cb..7eb0260 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.6.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.SignalR.SystemWeb" Version="0.6.0" />
-+    <PackageReference Include="webForCore.WebGrease" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.7.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.SignalR.SystemWeb" Version="0.7.0" />
++    <PackageReference Include="webForCore.WebGrease" Version="0.7.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -374,7 +374,7 @@ index 3b582cb..7eb0260 100644
 -    </PackageReference>
 -    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 -    <PackageReference Include="Owin" Version="1.0" />
-+    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="3.0.114" /> <!-- 2.0.48's build task fails to load on the .NET 11 SDK -->
++    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="3.0.114" /> <!-- 2.0.48's build task fails to load on the .NET 10 SDK -->
 +    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
      <PackageReference Include="RestSharp" Version="106.6.10" />
      <PackageReference Include="Serilog" Version="2.8.0" />
@@ -2387,14 +2387,14 @@ index 2a228db..b23de40 100644
 -<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is Data.Core.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is Data.Core.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 -    <ProjectGuid>{01367635-B331-458F-BF5A-7369925864D6}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>Data.Core</RootNamespace>
      <AssemblyName>Sarto.Data.Core</AssemblyName>
 -    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
@@ -2449,7 +2449,7 @@ index 2a228db..b23de40 100644
 -    <Compile Include="IDbConnectionFactory.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -2554,14 +2554,14 @@ index da259b5..a4799c0 100644
 -<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is Data.Store.SqlServer.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is Data.Store.SqlServer.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 -    <ProjectGuid>{5B6EF0E8-4213-4B43-8462-4518CC93BB56}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>Data.Store.SqlServer</RootNamespace>
      <AssemblyName>Data.Store.SqlServer</AssemblyName>
 -    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
@@ -2612,7 +2612,7 @@ index da259b5..a4799c0 100644
 -    <Compile Include="Infrastructure\SqlConnectionFactory.cs" />
 -    <Compile Include="UsersRepository.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -2733,13 +2733,13 @@ index 82ade75..2712b46 100644
 -<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is Data.Tools.Migrator.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is Data.Tools.Migrator.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 -    <ProjectGuid>{4B3A666D-9AFB-4307-AFF4-FFC7A1C02282}</ProjectGuid>
 -    <OutputType>Exe</OutputType>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>Data.Tools.Migrator</RootNamespace>
      <AssemblyName>data.tools.migrator</AssemblyName>
 -    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
@@ -2810,7 +2810,7 @@ index 82ade75..2712b46 100644
 -      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 -    </Content>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -3011,14 +3011,14 @@ index 3e82448..21fefd6 100644
 -<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is Domain.Core.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is Domain.Core.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 -    <ProjectGuid>{1FD4B39D-6971-45C1-8BEF-F6AC0F78A2C9}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>Domain.Core</RootNamespace>
      <AssemblyName>Sarto.Domain.Core</AssemblyName>
 -    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
@@ -3099,7 +3099,7 @@ index 3e82448..21fefd6 100644
 -      <Name>Shared.Extensions</Name>
 -    </ProjectReference>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -3233,14 +3233,14 @@ index 68c3c10..deb1d61 100644
 -<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is Shared.Extensions.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is Shared.Extensions.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 -    <ProjectGuid>{18AD2A68-3598-4B0C-9A49-9D6D06BC2164}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>Shared.Extensions</RootNamespace>
      <AssemblyName>Sarto.Shared.Extensions</AssemblyName>
 -    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
@@ -3311,7 +3311,7 @@ index 68c3c10..deb1d61 100644
 -    <Compile Include="TimeSpan\ToLocalizedLabel.cs" />
 -    <Compile Include="TimeSpan\ToTimeZone.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 -  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 -</Project>
@@ -3407,14 +3407,14 @@ index 99741f1..3cf7259 100644
 -<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is Shared.Infrastructure.Azure.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is Shared.Infrastructure.Azure.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 -    <ProjectGuid>{3CD39EFF-063E-4F38-9F73-84C0D9B3C3CC}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>Shared.Infrastructure.Azure</RootNamespace>
      <AssemblyName>Sarto.Shared.Infrastructure.Azure</AssemblyName>
 -    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
@@ -3464,7 +3464,7 @@ index 99741f1..3cf7259 100644
 -    <Compile Include="AzureStorageService.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -3617,14 +3617,14 @@ index d4f3629..7a47ddc 100644
 -<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is Shared.Infrastructure.Cloudinary.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is Shared.Infrastructure.Cloudinary.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 -    <ProjectGuid>{EC24B7BC-7091-4718-90BA-8281BBBE5DAC}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>Shared.Infrastructure.Cloudinary</RootNamespace>
      <AssemblyName>Sarto.Shared.Infrastructure.Cloudinary</AssemblyName>
 -    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
@@ -3676,7 +3676,7 @@ index d4f3629..7a47ddc 100644
 -    <Compile Include="CloudinaryThumbService.cs" />
 -    <Compile Include="ICloudinaryThumbService.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -3787,14 +3787,14 @@ index e347155..8f6970e 100644
 -<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is Shared.Infrastructure.DynamicImage.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is Shared.Infrastructure.DynamicImage.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 -    <ProjectGuid>{E4BFB48B-C53A-4172-B612-999AFDE10C2F}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>Shared.Infrastructure.DynamicImage</RootNamespace>
      <AssemblyName>Sarto.Shared.Infrastructure.DynamicImage</AssemblyName>
 -    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
@@ -3844,7 +3844,7 @@ index e347155..8f6970e 100644
 -    <Compile Include="DynamicTextImage.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -3933,14 +3933,14 @@ index c396024..3af5428 100644
 -<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is Shared.Infrastructure.FileSystem.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is Shared.Infrastructure.FileSystem.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 -    <ProjectGuid>{800B272C-1753-476D-A75B-13D03F2B8DE7}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>Shared.Infrastructure.FileSystem</RootNamespace>
      <AssemblyName>Sarto.Shared.Infrastructure.FileSystem</AssemblyName>
 -    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
@@ -3990,7 +3990,7 @@ index c396024..3af5428 100644
 -    <Compile Include="FileSystemStorageService.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -4079,14 +4079,14 @@ index 3df9d43..db62f60 100644
 -<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is Shared.Infrastructure.MailGun.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is Shared.Infrastructure.MailGun.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 -    <ProjectGuid>{88869511-342D-4785-8FA0-B16D80FBC1C8}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>Shared.Infrastructure.MailGun</RootNamespace>
      <AssemblyName>Sarto.Shared.Infrastructure.MailGun</AssemblyName>
 -    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
@@ -4135,7 +4135,7 @@ index 3df9d43..db62f60 100644
 -    <Compile Include="MailGunApiEmailDispatcherService.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -4256,14 +4256,14 @@ index 6ac360f..fe6185a 100644
 -<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is Shared.Infrastructure.Smtp.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is Shared.Infrastructure.Smtp.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 -    <ProjectGuid>{C0921F18-4F1B-4A00-8D7D-DE09CB184ABC}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>Shared.Infrastructure.Smtp</RootNamespace>
      <AssemblyName>Sarto.Shared.Infrastructure.Smtp</AssemblyName>
 -    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
@@ -4313,7 +4313,7 @@ index 6ac360f..fe6185a 100644
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 -    <Compile Include="SystemNetSmtpEmailDispatcherService.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -4402,14 +4402,14 @@ index a5645d5..784afd4 100644
 -<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is Shared.Infrastructure.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is Shared.Infrastructure.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 -    <ProjectGuid>{BF47AE35-D535-4842-A89A-061B6EF70315}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>Shared.Infrastructure</RootNamespace>
      <AssemblyName>Sarto.Shared.Infrastructure</AssemblyName>
 -    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
@@ -4463,7 +4463,7 @@ index a5645d5..784afd4 100644
 -    <Compile Include="MimeTypeMap.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.6.0" />
++    <PackageReference Include="webForCore" Version="0.7.0" />
    </ItemGroup>
 +
    <ItemGroup>
