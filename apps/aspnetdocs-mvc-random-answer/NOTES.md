@@ -15,6 +15,7 @@ Converter: `MVCRandomAnswerGenerator.csproj` → `.csproj.netfx`; SDK project wi
 
 - **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 8/8 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28).
 - **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 8/8 probes on Linux and on Windows.
+- **Round 6 (webForCore 0.7.0 on .NET 10, webForCore-thirdparty 0.5.0; under webforcore-host; Linux and Windows):** 9/9 probes on Linux and Windows.
 
 **8 of 9 pass**: the home page (layout, bundles) and About. Only the served W3C log fails ([F4](../../FINDINGS.md#f4)).
 
