@@ -13,6 +13,8 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 - **What's new:** F54 is the one new problem webForCore can act on; F54 onwards were found in this round.
 - **The feeds:** miniblog also restores from the NuGet feeds alone (webForCore#53 step 5).
 - **Umbraco 6** (a new app, migrated on 0.7.0, on Linux so far): F57–F64.
+- **Umbraco 7** (a new app, on 0.7.0, on Linux so far): builds, but is blocked at boot by AutoMapper 3.3.1 (F22); F65
+  and F66, and more evidence for F37 and F61–F64.
 
 Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
@@ -41,7 +43,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F19](#f19) | `System.Web.Abstractions`/`System.Web.Routing` 4.0.0.0 in web.config can't be loaded | webForCore bug | roadkill | [#20](https://github.com/xforcore/webForCore/issues/20) |
 | [F20](#f20) | `Assembly.LoadFrom` returns the default context's copy; WebActivatorEx start methods never run | webForCore bug | applicant-tracking, roadkill | [#21](https://github.com/xforcore/webForCore/issues/21) |
 | [F21](#f21) | Glimpse doesn't run on .NET | guide gap | realocate | [#22](https://github.com/xforcore/webForCore/issues/22) |
-| [F22](#f22) | AutoMapper before 12 doesn't run on .NET 11 or .NET 10 | app/environment | realocate, socialgoal | - |
+| [F22](#f22) | AutoMapper before 12 doesn't run on .NET 11 or .NET 10 | app/environment | realocate, socialgoal, umbraco-7 | - |
 | [F23](#f23) | `recaptcha` 1.0.5's lib folders aren't framework names (NU1202) | app/environment | roadkill | - |
 | [F24](#f24) | A transitive Microsoft.AspNet.Razor replaces webForCore's in the output with no build error | webForCore bug | bonobo-git-server, applicant-tracking, realocate, roadkill | [#23](https://github.com/xforcore/webForCore/issues/23) |
 | [F25](#f25) | .NET Framework builds of StructureMap 4.0 and NLog 4.2 need `AppDomainSetup` members .NET lacks; their .NET Standard builds work | app/environment | roadkill | - |
@@ -56,7 +58,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F34](#f34) | Build-time tools that don't run on Linux or the .NET 11 SDK (BuildWebCompiler, LibMan.Build 2.0) | app/environment | mvcforum, aspnet-mvc5-starter | - |
 | [F35](#f35) | `WsiProfiles`/`SoapBindingUse` in app code are CS0433: the System.Web.Services.Description package (from CoreWCF) has them too | webForCore bug | subtext, mojoportal | [#34](https://github.com/xforcore/webForCore/issues/34) |
 | [F36](#f36) | A `.resx` with non-string resources needs System.Resources.Extensions (MSB3822) | guide gap | subtext | [#36](https://github.com/xforcore/webForCore/issues/36) |
-| [F37](#f37) | `<compilation><assemblies>` lists .NET Framework assemblies .NET doesn't have (System.Design, System.Data.Linq) | guide gap | subtext, mojoportal | [#37](https://github.com/xforcore/webForCore/issues/37) |
+| [F37](#f37) | `<compilation><assemblies>` lists .NET Framework assemblies .NET doesn't have (System.Design, System.Data.Linq) | guide gap | subtext, mojoportal, umbraco-7 | [#37](https://github.com/xforcore/webForCore/issues/37) |
 | [F38](#f38) | Types a shared-framework facade forwards to the app's assemblies (System.Data's SqlClient) are a second copy: MissingMethodException | webForCore bug | subtext | [#35](https://github.com/xforcore/webForCore/issues/35) |
 | [F39](#f39) | NHibernate 3.3 doesn't run on .NET (proxy validation, `SqlCommandSet` by reflection) | app/environment | funnelweb | - |
 | [F40](#f40) | `Assembly.Load("App_GlobalResources")` (Visual Studio's resource designer code) can't work: .NET requires the simple name to match | webForCore bug | mojoportal | [#33](https://github.com/xforcore/webForCore/issues/33) |
@@ -80,10 +82,12 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F58](#f58) | `<system.codedom>` naming `Microsoft.CSharp.CSharpCodeProvider`: `InvalidCastException` on every page | webForCore bug | umbraco-6 | [#88](https://github.com/xforcore/webForCore/issues/88) |
 | [F59](#f59) | Recycling for an `App_Code` change: a request the old worker is still compiling fails with CS0006 | webForCore bug | umbraco-6 | [#89](https://github.com/xforcore/webForCore/issues/89) |
 | [F60](#f60) | Files without a BOM are read as UTF-8, not the ANSI code page: Windows-1252 characters become U+FFFD | webForCore bug | umbraco-6 | [#90](https://github.com/xforcore/webForCore/issues/90) |
-| [F61](#f61) | Code or configuration that loads assemblies from `~/bin` must follow `bin_dotnet` | guide gap | umbraco-6 | [#91](https://github.com/xforcore/webForCore/issues/91) |
-| [F62](#f62) | Linux: `Uri.TryCreate("/path", UriKind.Absolute)` succeeds and `Path.VolumeSeparatorChar` is `/` | guide gap | umbraco-6 | [#92](https://github.com/xforcore/webForCore/issues/92) |
-| [F63](#f63) | Calls that become ambiguous on .NET 10 (CS0121): the app's own `DistinctBy`, empty `params` calls | guide gap | umbraco-6 | [#93](https://github.com/xforcore/webForCore/issues/93) |
-| [F64](#f64) | Umbraco 6 on Linux: Windows file names, packages only on its MyGet feed, an installer that needs a JSON POST | app/environment | umbraco-6 | - |
+| [F61](#f61) | Code or configuration that loads assemblies from `~/bin` must follow `bin_dotnet` | guide gap | umbraco-6, umbraco-7 | [#91](https://github.com/xforcore/webForCore/issues/91) |
+| [F62](#f62) | Linux: `Uri.TryCreate("/path", UriKind.Absolute)` succeeds and `Path.VolumeSeparatorChar` is `/` | guide gap | umbraco-6, umbraco-7 | [#92](https://github.com/xforcore/webForCore/issues/92) |
+| [F63](#f63) | Calls that become ambiguous on .NET 10 (CS0121): the app's own `DistinctBy`, empty `params` calls | guide gap | umbraco-6, umbraco-7 | [#93](https://github.com/xforcore/webForCore/issues/93) |
+| [F64](#f64) | Umbraco on Linux: Windows file names, packages only on its MyGet feed, an installer that needs a JSON POST | app/environment | umbraco-6, umbraco-7 | - |
+| [F65](#f65) | Linux: named semaphores and events throw `PlatformNotSupportedException` (only named `Mutex` works) | guide gap | umbraco-7 | [#94](https://github.com/xforcore/webForCore/issues/94) |
+| [F66](#f66) | webForCore's `CallContext` doesn't reach prebuilt .NET Framework libraries: Log4Net.Async logs nothing | guide gap | umbraco-7 | [#95](https://github.com/xforcore/webForCore/issues/95) |
 ---
 
 ## F1
@@ -603,6 +607,11 @@ console app). Found on 0.2.0.
   `IMapperConfigurationExpression`). A line in `docs/MIGRATING.md`'s package list would save the search.
 - **.NET 10 (round 6):** unchanged. socialgoal (AutoMapper 3.1) fails the same way, and the repro on .NET 10.0.14
   fails with AutoMapper 4.2.0 and 11.0.1 and works with 12.0.1.
+- **umbraco-7** (AutoMapper 3.3.1, static API, not upgraded): Umbraco configures its maps in its boot
+  (`CoreBootManager.InitializeModelMappers` → `Mapper.Initialize`), and the first one,
+  `CodeFileDisplayMapper.ConfigureMappings` line 41, throws the 3.x error, so `Application_Start` fails and every request
+  is a 500. The repro fails with 3.3.1 on .NET 10.0.14 too. Upgrading means rewriting Umbraco's mapping layer (about 40
+  mapper classes), so the app is blocked here.
 
 ## F23
 
@@ -855,7 +864,9 @@ Guide gap. Raised as [#31](https://github.com/xforcore/webForCore/issues/31). Fo
 **web.config's `<compilation><assemblies>` lists .NET Framework assemblies that .NET doesn't have.** Guide gap. Raised
 as [#37](https://github.com/xforcore/webForCore/issues/37). Found on 0.4.0.
 
-- **Apps:** subtext (`System.Design, Version=4.0.0.0`), mojoportal (`System.Data.Linq, Version=4.0.0.0`).
+- **Apps:** subtext (`System.Design, Version=4.0.0.0`), mojoportal (`System.Data.Linq, Version=4.0.0.0`), umbraco-7
+  (round 6: `System.Runtime.InteropServices.WindowsRuntime`, `System.ServiceModel.Http` and `.NetTcp`, from the list of
+  .NET 4.5 facades its web.config adds; the guide's step, documented since 0.5.0, covered it).
 - **Error:** every page: `Configuration Error ... Could not load file or assembly 'System.Design, Version=4.0.0.0,
   Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'. The system cannot find the file specified.`
 - **Cause:** `docs/NAMESPACES.md` lists both assemblies as not on .NET. The guide doesn't say an `<add assembly>` entry
@@ -1226,6 +1237,8 @@ same on Windows (`Encoding.Default` is UTF-8 on .NET everywhere).
   `Assembly.LoadFrom(MapPath("~/bin/umbraco.dll"))`, so creating a document type failed with `FileNotFoundException:
   Could not load file or assembly '<site>/bin/umbraco.dll'`.
 - **Fix in the app:** Umbraco's own setting, `<add key="umbracoBinDirectory" value="~/bin_dotnet" />`.
+- **umbraco-7:** the same code (`LegacyDialogHandler.cs`) and the same setting, applied; not reached, as the app
+  doesn't boot (F22).
 - **Guide:** section 2 makes the output `bin_dotnet`, but nothing says that `~/bin` paths in the app must follow it
   (`HttpRuntime.BinDirectory`).
 
@@ -1244,6 +1257,8 @@ same on Windows (`Encoding.Default` is UTF-8 on .NET everywhere).
     under one named `~` in the site.
 - **Fix in the app:** `absoluteUri.IsFile == false` in the first; the second checks for `:` and, on Linux, for the
   site's folder.
+- **umbraco-7:** the same `IOHelper.MapPath`, fixed the same way (not reached past the boot, F22). Its log-in page is
+  AngularJS, so the first doesn't apply.
 - **Guide:** section 6 lists case-sensitive paths and `/`, not these.
 
 ## F63
@@ -1258,13 +1273,16 @@ same on Windows (`Encoding.Default` is UTF-8 on .NET everywhere).
     `params IParameter[]` and `params P[]` overloads: the Visual Studio 2012/2013 compiler resolved them, Roslyn doesn't.
 - **Fix in the app:** qualify the call (`EnumerableExtensions.DistinctBy(list, ...)`); pass `new IParameter[0]`.
   `<LangVersion>7.3</LangVersion>` helps with neither.
+- **umbraco-7:** three `DistinctBy` calls (`ContentType.cs`, twice in `Umbraco.Web/Editors/EntityController.cs`, where
+  the ambiguity also gave CS1503 on the next line); a chained call becomes a static call around the chain. Commented
+  on #93.
 
 ## F64
 
-**Umbraco 6 on Linux: Windows file names, packages only on its MyGet feed, an installer that needs a JSON POST.**
+**Umbraco on Linux: Windows file names, packages only on its MyGet feed, an installer that needs a JSON POST.**
 App/environment. Found on 0.7.0, on Linux.
 
-- **Apps:** umbraco-6.
+- **Apps:** umbraco-6, umbraco-7 (below).
 - **Windows file names** (each fixed in the app's code or files, `NOTES.md`):
   - the `.resx` files' linked SQL scripts (`sql\total.sql` for `Sql/Total.sql`, and so on): `MSB3103`;
   - `web.config` in code for the site's `Web.config` (the installer's connection string handling: `FileNotFoundException`)
@@ -1278,3 +1296,47 @@ App/environment. Found on 0.7.0, on Linux.
 - **Its install wizard's database step** is an ASP.NET AJAX page method, `InstallerRestService.aspx/Install`, which
   takes only a JSON POST. The runner's `[setup]` steps sent only forms, so at first setup stopped there and the home
   page probe failed (1 of 16). The runner now has `json` steps: setup completes and all 16 pass.
+- **umbraco-7:**
+  - the same kinds of names: seven `.resx` links (`blockingweb.config` for `BlockingWeb.config`, `jsinitialize.js`,
+    `..\..\umbraco.web.ui\views\web.config`, ...: `MSB3103`), and `web.config` for `Web.config` in five places in code;
+  - **one folder in two cases:** the web project has files under both `umbraco/` (188) and `Umbraco/` (46: the
+    installer's script, `AuthorizeUpgrade.cshtml`, the preview views, three language files, the partial view macro
+    templates, `umbraco.aspx`). On Windows they're one folder; on Linux `/umbraco/...` reaches only `umbraco/`. The
+    installer's view is asked for as `~/umbraco/install/views/index.cshtml` and is `umbraco/Install/Views/Index.cshtml`.
+    Not fixed (the app doesn't boot, F22): it needs the folders merged and those paths fixed;
+  - the repository's own `src/NuGet.Config` already names the MyGet feed;
+  - the back office is an AngularJS client built with npm, bower and gulp 3 (not in the repository); gulp 3 doesn't
+    run on current Node (it needs Node 10–12).
+
+## F65
+
+**Linux: named semaphores and events throw `PlatformNotSupportedException`; only named `Mutex` works.** Guide gap
+(.NET's behaviour on Unix, not webForCore's). Raised as [#94](https://github.com/xforcore/webForCore/issues/94). Found
+on 0.7.0, on Linux.
+
+- **Apps:** umbraco-7: `MainDom` (which app domain owns the indexes, scheduled tasks and XML cache) makes a named
+  `Semaphore` (through `AsyncLock`) and a named `EventWaitHandle` in `ApplicationContext.Init`, so the boot failed:
+  `PlatformNotSupportedException: The named version of this synchronization primitive is not supported on this
+  platform` at `Semaphore..ctor` ← `AsyncLock..ctor` ← `MainDom..ctor`.
+- **Repro:** on Linux, `new Semaphore(1, 1, "x")` and `new EventWaitHandle(false, EventResetMode.AutoReset, "x")` throw
+  it (checked on .NET 10.0.14); `new Mutex(false, "x")` works. On Windows all three work.
+- **Fix in the app:** off Windows, unnamed (process-local) ones. The old worker still releases MainDom when the host
+  stops it (`IRegisteredObject.Stop`), but a new worker no longer signals it. Under `webforcore-host` a recycle is a new
+  process, which is what such code coordinates, so a guide note should name the options (a named `Mutex`, a file lock).
+- **Guide:** section 6 (Linux) doesn't mention it.
+
+## F66
+
+**webForCore's `CallContext` doesn't reach prebuilt .NET Framework libraries: Log4Net.Async logs nothing.** Guide gap.
+Raised as [#95](https://github.com/xforcore/webForCore/issues/95). Found on 0.7.0, on Linux (the same on any OS).
+
+- **Apps:** umbraco-7: its `log4net.config` puts Log4Net.Async 2.0.4's `ParallelForwardingAppender` (net40, its last
+  release) in front of the file appender. Every event failed, and log4net swallows it, so the log was empty; with
+  `log4net.Internal.Debug`: `TypeLoadException: Could not load type 'System.Runtime.Remoting.Messaging.CallContext'
+  from assembly 'mscorlib, Version=4.0.0.0'` at `Log4Net.Async.AsyncForwardingAppenderBase.get_HttpContext()`.
+- **Cause:** webForCore's `System.Web.dll` carries `CallContext` (`docs/NAMESPACES.md`), which code compiled against
+  webForCore binds to (Umbraco.Core's own copy of the appender base compiles and loads). A .NET Framework binary was
+  compiled against mscorlib's, and .NET's mscorlib facade has no forward for it; webForCore can't add one.
+- **Fix in the app:** the root logger writes through the file appender directly (synchronous logging).
+- **Guide:** `docs/NAMESPACES.md` should say the carried types serve code compiled against webForCore, and
+  Log4Net.Async belongs in `docs/MIGRATING.md`'s "Libraries that don't run on .NET".

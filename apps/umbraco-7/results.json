@@ -60,39 +60,135 @@
       ]
     },
     "build": {
-      "at": "2026-11-03T12:33:36+00:00",
-      "error_count": 18,
-      "errors": [
-        "error MSB4018:    --- End of inner exception stack trace --- ",
-        "error MSB4018:    at Nerdbank.GitVersioning.Managed.GitExtensions.<>c__DisplayClass3_0.<GetVersionHeight>b__0(GitCommit c) ",
-        "error MSB4018:    at Nerdbank.GitVersioning.Managed.GitExtensions.<GetCommitHeight>g__TryCalculateHeight|4_0(GitCommit commit, <>c__DisplayClass4_0&) ",
-        "error MSB4018:    at Nerdbank.GitVersioning.Managed.GitExtensions.CommitMatchesVersion(GitCommit commit, SemanticVersion expectedVersion, Position comparisonPrecision, GitWalkTracker tracker) ",
-        "error MSB4018:    at Nerdbank.GitVersioning.Managed.GitExtensions.GetCommitHeight(GitRepository repository, GitCommit startingCommit, GitWalkTracker tracker, Func`2 continueStepping) ",
-        "error MSB4018:    at Nerdbank.GitVersioning.Managed.GitExtensions.GetHeight(ManagedGitContext context, Func`2 continueStepping) ",
-        "error MSB4018:    at Nerdbank.GitVersioning.Managed.GitExtensions.GetVersionHeight(ManagedGitContext context, Version baseVersion) ",
-        "error MSB4018:    at Nerdbank.GitVersioning.Managed.GitExtensions.GitWalkTracker.GetVersion(GitCommit commit) ",
-        "error MSB4018:    at Nerdbank.GitVersioning.Managed.ManagedGitContext.CalculateVersionHeight(VersionOptions committedVersion, VersionOptions workingVersion) ",
-        "error MSB4018:    at Nerdbank.GitVersioning.Managed.ManagedVersionFile.GetVersion(GitCommit commit, String repoRelativeProjectDirectory, Dictionary`2 blobVersionCache, VersionFileRequirements requirements, VersionFileLocations& locations) ",
-        "error MSB4018:    at Nerdbank.GitVersioning.ManagedGit.GitRepository.GetObjectBySha(GitObjectId sha, String objectType) ",
-        "error MSB4018:    at Nerdbank.GitVersioning.Tasks.GetBuildVersion.ExecuteInner() in D:\\a\\Nerdbank.GitVersioning\\Nerdbank.GitVersioning\\src\\Nerdbank.GitVersioning.Tasks\\GetBuildVersion.cs:line 254 ",
-        "error MSB4018:    at Nerdbank.GitVersioning.VersionOracle..ctor(GitContext context, ICloudBuild cloudBuild, Nullable`1 overrideVersionHeightOffset) ",
-        "error MSB4018:    at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args) ",
-        "error MSB4018:    at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr) ",
-        "error MSB4018:  ---> Nerdbank.GitVersioning.GitException: An blob object with SHA b06df7f7f7d795fb82daeb0050466f9e812e1c7e could not be found. ",
-        "error MSB4018: System.InvalidOperationException: Unable to get version from commit: 22452bcde20c2afe599a87d763a6109bd0686874 ",
-        "error MSB4018: The \"Nerdbank.GitVersioning.Tasks.GetBuildVersion\" task failed unexpectedly. "
-      ],
+      "at": "2026-11-03T20:02:01+00:00",
+      "error_count": 0,
+      "errors": [],
       "log": "apps/umbraco-7/logs/build.log",
-      "seconds": 40,
-      "status": "fail",
-      "summary": "18 distinct errors",
+      "seconds": 45,
+      "status": "pass",
+      "summary": null,
       "webforcore": "packages 0.7.0"
     },
     "fetch": {
-      "at": "2026-11-03T18:53:53+00:00",
+      "at": "2026-11-03T20:01:16+00:00",
       "commit": "bd60f4e2cea7ace2984dcfb8e61ef6512ea77c73",
-      "overlay": false,
+      "overlay": true,
       "status": "pass"
+    },
+    "setup": {
+      "at": "2026-11-03T20:02:01+00:00",
+      "created": [
+        "umbraco7"
+      ],
+      "date": "2026-11-03",
+      "status": "pass",
+      "steps": [],
+      "summary": "created umbraco7"
+    },
+    "smoke": {
+      "at": "2026-11-03T20:02:06+00:00",
+      "checks": [
+        {
+          "ms": 11,
+          "ok": false,
+          "path": "/",
+          "status": 500,
+          "title": "Resolution is not frozen, it is not yet possible to get values from it."
+        },
+        {
+          "expected_text": "\"installId\"",
+          "ms": 5,
+          "ok": false,
+          "path": "/install/api/GetSetup",
+          "status": 500,
+          "title": "Resolution is not frozen, it is not yet possible to get values from it."
+        },
+        {
+          "expected_text": "\"general_login\": \"Login\"",
+          "ms": 7,
+          "ok": false,
+          "path": "/umbraco/LocalizedText",
+          "status": 500,
+          "title": "Resolution is not frozen, it is not yet possible to get values from it."
+        },
+        {
+          "expected_text": "I'm alive!",
+          "ms": 5,
+          "ok": false,
+          "path": "/umbraco/ping.aspx",
+          "status": 500,
+          "title": "Resolution is not frozen, it is not yet possible to get values from it."
+        },
+        {
+          "expected_text": "legacyAjaxCalls Web Service",
+          "ms": 4,
+          "ok": false,
+          "path": "/umbraco/webservices/legacyAjaxCalls.asmx",
+          "status": 500,
+          "title": "Resolution is not frozen, it is not yet possible to get values from it."
+        },
+        {
+          "expected_text": "umbModalBox",
+          "ms": 5,
+          "ok": false,
+          "path": "/DependencyHandler.axd?s=L3VtYnJhY29fY2xpZW50L21vZGFsL3N0eWxlLmNzczs&t=Css&cdv=1",
+          "status": 500,
+          "title": "Resolution is not frozen, it is not yet possible to get values from it."
+        },
+        {
+          "expected_text": "div.umbModalBox",
+          "ms": 9,
+          "ok": false,
+          "path": "/umbraco_client/modal/style.css",
+          "status": 500,
+          "title": "Resolution is not frozen, it is not yet possible to get values from it."
+        },
+        {
+          "ms": 16,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 7,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 7,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 7,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "ms": 7,
+          "ok": true,
+          "path": "/packages.config",
+          "status": 404
+        },
+        {
+          "ms": 6,
+          "ok": true,
+          "path": "/bin_dotnet/Umbraco.Web.UI.dll",
+          "status": 404
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
+          "status": 404
+        }
+      ],
+      "log": "apps/umbraco-7/logs/server.log",
+      "status": "fail",
+      "summary": "7/14 probes"
     }
   }
 }
