@@ -582,7 +582,8 @@ def run_probe(base, probe, timeout, app_id=None):
 #              wizard): {get = path} or {post = path, fields = {...}}, and with button = name (and value) a Web Forms
 #              postback, whose hidden fields come from a GET of the page first; {post = path, json = "<body>"} posts
 #              that body as application/json (an ASP.NET AJAX page method, an MVC action). timeout (s, default 120), contains
-#              (text the response must have), may_fail = true (the step's outcome doesn't matter)
+#              (text the response must have), may_fail = true (the step's outcome doesn't matter), retries
+#              (times to run it again, 5 s apart, while it fails)
 # When every database it lists already exists, the app is set up already and nothing runs. On a database that's gone
 # (`docker compose down`), it runs again.
 
@@ -627,10 +628,7 @@ def web_steps(base, steps):
         except urllib.error.HTTPError as e:
             return e.code, e.read(MAX_BODY).decode("utf-8", "replace")
 
-    done = []
-    for step in steps:
-        path = step.get("get") or step.get("post")
-        timeout = step.get("timeout", 120)
+    def run(step, path, timeout):
         try:
             if "get" in step:
                 status, body = request(path, None, timeout)
@@ -645,10 +643,22 @@ def web_steps(base, steps):
                     fields[step["button"]] = step.get("value", "")
                 fields.update(step.get("fields", {}))
                 status, body = request(path, fields, timeout)
-            ok = status < 400 and step.get("contains", "") in body
-            result = {"step": path, "status": status, "ok": ok}
+            return {"step": path, "status": status, "ok": status < 400 and step.get("contains", "") in body}
         except Exception as ex:  # noqa: BLE001 - a step reports any failure
-            result = {"step": path, "ok": False, "error": f"{type(ex).__name__}: {ex}"}
+            return {"step": path, "ok": False, "error": f"{type(ex).__name__}: {ex}"}
+
+    done = []
+    for step in steps:
+        path = step.get("get") or step.get("post")
+        # retries: a step the app's own restart can catch (Umbraco 6's App_Code recycle, F59) runs again, 5 s apart.
+        for attempt in range(1 + step.get("retries", 0)):
+            if attempt:
+                time.sleep(5)
+            result = run(step, path, step.get("timeout", 120))
+            if result["ok"]:
+                break
+        if attempt:
+            result["attempts"] = attempt + 1
         if step.get("may_fail"):
             result["may_fail"] = True
         done.append(result)
