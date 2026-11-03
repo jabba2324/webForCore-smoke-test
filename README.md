@@ -23,18 +23,21 @@ There's no top-level project or solution: each app is a folder of its own under 
 | `src/` | The checkout (not committed) |
 
 At the top level: `scripts/wfc.py` (the runner, Python 3.11+, standard library only), `services/compose.yml` (SQL
-Server, MySQL and PostgreSQL for apps that need a database), `FINDINGS.md` (the problems found, across apps) and
-`RESULTS.md` (the summary table, generated).
+Server, MySQL and PostgreSQL for apps that need a database; `services/windows-mssql.ps1` sets up the same SQL Server on
+Windows), `.github/workflows/smoke.yml` (the CI workflow that runs the runner), `FINDINGS.md` (the problems found,
+across apps) and `RESULTS.md` (the summary table, generated).
 
 Only the patches are committed, never the apps' code, so each app keeps its own licence and the repo stays small.
 
-Each app goes through four stages:
+Each app goes through these stages:
 
 1. **fetch**: clone the repo at the pinned commit and apply the overlay.
 2. **assess**: Phase 0 of webForCore's `docs/AGENT-MIGRATION.md`: which frameworks it uses, its target framework, and
    every blocker (Windows authentication, WCF hosting, LINQ to SQL, ...) with file and line.
 3. **build**: `dotnet build -c Release` of the converted project.
-4. **smoke**: start the app on a free port (under `bin_dotnet/webforcore-host/webforcore-host.dll` from webForCore 0.7.0, as its worker; `bin_dotnet/<App>.dll` before), request the app's probes, and check that
+4. **setup**, for an app with `[setup]` in `app.toml`: create its database, load it, or run the app's install
+   wizard, once per new database.
+5. **smoke**: start the app on a free port (under `bin_dotnet/webforcore-host/webforcore-host.dll` from webForCore 0.7.0, as its worker; `bin_dotnet/<App>.dll` before), request the app's probes, and check that
    `web.config`, `App_Data`, `bin_dotnet`, `obj` and source files aren't served.
 
 ## Usage
@@ -53,13 +56,53 @@ scripts/wfc.py fetch eshop-legacy-mvc    # clone at the pinned commit, apply the
 scripts/wfc.py assess eshop-legacy-mvc
 # ... migrate in apps/eshop-legacy-mvc/src (see below), noting each step in NOTES.md, then:
 scripts/wfc.py save-overlay eshop-legacy-mvc
-scripts/wfc.py run eshop-legacy-mvc      # fetch, build, smoke
+scripts/wfc.py run eshop-legacy-mvc      # fetch, build, setup, smoke
 scripts/wfc.py run --all
 scripts/wfc.py report                    # RESULTS.md
 ```
 
 `fetch` leaves an existing checkout alone, so unsaved migration work isn't lost. `fetch --reset` discards it and
-reapplies the overlay.
+reapplies the overlay. An app that needs a database (`needs`) needs its service running first:
+`docker compose -f services/compose.yml up -d --wait mssql`, and `down -v` when you're done.
+
+## CI
+
+`.github/workflows/smoke.yml` runs the same commands in GitHub Actions. Each migrated app (it has an `overlay.patch`,
+and isn't `rejected`) is its own job on Linux (`ubuntu-24.04`) and on Windows (`windows-2025`), so a round runs in
+parallel. Each job runs `scripts/wfc.py` on the runner itself:
+
+1. `packages`, then the app's database if it `needs` one: the compose SQL Server on Linux, SQL Server Express from
+   `services/windows-mssql.ps1` on Windows.
+2. `fetch`, `build`, `setup` and `smoke`.
+3. `ci-result`: compares the results with the committed `results.json` (or `results.windows.json`) and adds a line to
+   the run's summary. The job fails if the app does worse: a check that passed fails, or a build that passed fails.
+   An app that's still blocked passes as long as it's no worse.
+
+Then a `report` job builds `RESULTS.md` from every job's results, shows it in the run's summary, and uploads it with
+every app's results as the `round` artifact.
+
+It runs:
+- **By hand,** for every migrated app or the ones you name, and on any webForCore release:
+
+  ```sh
+  gh workflow run smoke.yml                                  # every migrated app
+  gh workflow run smoke.yml -f apps="miniblog bonobo-git-server"
+  gh workflow run smoke.yml -f webforcore_version=0.8.0 -f thirdparty_version=0.6.0 -f drawing_version=0.3.0
+  ```
+- **On a pull request or a push to `main`,** for the apps it changes (`apps/<id>/`), or for every app if it changes
+  `scripts/`, `services/` or the workflow.
+
+To follow a run and take its results:
+
+```sh
+gh run list --workflow smoke.yml
+gh run watch <run-id>
+gh run download <run-id> -n round      # RESULTS.md and apps/*/results*.json, to commit
+gh run download <run-id> -n results-miniblog-windows   # one job's results and logs
+```
+
+A round on a new release is a manual run on that release. Download `round`, commit its `RESULTS.md` and results with
+the round's notes and findings, and the round counts once that run has covered both platforms.
 
 ## Windows
 
@@ -120,12 +163,14 @@ as a pass: note it in `NOTES.md` and `FINDINGS.md`, and fix webForCore instead.
 | `kinds` | `webforms`, `mvc`, `webapi`, `webpages`, `owin`, `signalr`, `identity` |
 | `licence` | SPDX id, or the project's own licence name |
 | `status` | `candidate` (listed, unchecked), `verified` (repo, ref, licence and paths checked), `migrating`, `migrated` (builds and passes its probes), `blocked` (needs something webForCore doesn't provide), `rejected` (not a fit; kept so it isn't added again) |
-| `needs` | Services from `services/compose.yml`: `mssql`, `mysql`, `postgres` |
+| `needs` | Services from `services/compose.yml`: `mssql`, `mysql`, `postgres` (CI starts them for the app's job) |
+| `[setup]` | What the app's database needs before the probes, run by `setup` when a database it lists is new: `databases` (SQL Server databases to create, empty), `sql_files` (scripts in the checkout, run against the first), `[[setup.steps]]` (requests to the running app, such as an install wizard: `get` or `post` a path, with `fields`; `button` and `value` for a Web Forms postback; `contains`, `timeout`, `may_fail`) |
+| `[ci]` | `linux = false` or `windows = false` to leave the app out of CI on that platform |
 | `env` | Extra environment for the server process (a table) |
 | `remove` | Globs of files `fetch` deletes before applying the overlay, kept out of the patch (the app's checked-in DLLs) |
 | `generated` | Globs of files the build or the app writes into the checkout, kept out of the patch (mojoPortal's features copy themselves into the site) |
 | `https` | `true` to serve the app over HTTPS with the .NET development certificate (`dotnet dev-certs https`), for apps with `RequireHttpsAttribute` |
-| `[[probes]]` | `path`, `status` (default 200), `contains` (text that proves the page rendered), `absent` (text that must not be in the response) |
+| `[[probes]]` | `path` (`{setup_date}` in it is the day `setup` set the database up), `status` (default 200), `contains` (text that proves the page rendered), `absent` (text that must not be in the response) |
 | `[forbidden."<path>"]` | Overrides for one of the paths that must not be served (`/web.config`, `/packages.config`, ...), for an app whose error handler answers 200 with its own page: `status`, `absent`, `contains` |
 | `notes` | One line for the summary; the detail goes in `NOTES.md` |
 

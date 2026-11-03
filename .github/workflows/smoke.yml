@@ -1,0 +1,148 @@
+# The smoke test in GitHub Actions: each migrated app is its own job, on Linux and on Windows, running
+# scripts/wfc.py on the runner itself (README.md, "CI"). A job fails when its app does worse than its committed
+# results; the report job builds RESULTS.md from every job's results.
+name: smoke
+
+on:
+  workflow_dispatch:
+    inputs:
+      apps:
+        description: App ids, separated by spaces (empty for every migrated app)
+        default: ""
+      webforcore_version:
+        description: webForCore release (empty for the runner's default)
+        default: ""
+      thirdparty_version:
+        description: webForCore-thirdparty release (empty for the runner's default)
+        default: ""
+      drawing_version:
+        description: drawingForCore release (empty for the runner's default)
+        default: ""
+  pull_request:
+    paths: ["apps/**", "scripts/**", "services/**", ".github/workflows/smoke.yml"]
+  push:
+    branches: [main]
+    paths: ["apps/**", "scripts/**", "services/**", ".github/workflows/smoke.yml"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: smoke-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHONUNBUFFERED: "1"
+  # Empty outside a manual run: the runner's defaults.
+  WEBFORCORE_VERSION: ${{ inputs.webforcore_version }}
+  THIRDPARTY_VERSION: ${{ inputs.thirdparty_version }}
+  DRAWING_VERSION: ${{ inputs.drawing_version }}
+
+jobs:
+  plan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+      count: ${{ steps.plan.outputs.count }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - id: plan
+        name: Apps to run
+        env:
+          EVENT: ${{ github.event_name }}
+          APPS: ${{ inputs.apps }}
+          BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: |
+          # A manual run: the apps asked for, or every one. A push or PR: the apps it changes (every one if it
+          # changes the runner or the services).
+          if [ "$EVENT" = workflow_dispatch ]; then
+            python3 scripts/wfc.py ci-matrix $APPS | tee -a "$GITHUB_OUTPUT"
+          else
+            python3 scripts/wfc.py ci-matrix --changed-since "$BASE" | tee -a "$GITHUB_OUTPUT"
+          fi
+
+  smoke:
+    needs: plan
+    if: needs.plan.outputs.count != '0'
+    name: ${{ matrix.app }} (${{ matrix.platform }})
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    env:
+      APP: ${{ matrix.app }}
+      GH_TOKEN: ${{ github.token }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Short checkout paths
+        if: runner.os == 'Windows'
+        # mojoPortal's paths go past Windows' 260 characters under the workspace's own long path.
+        run: echo 'WFC_CHECKOUTS=D:\w' >> "$GITHUB_ENV"
+      - name: Tools
+        run: |
+          dotnet --list-sdks
+          dotnet dev-certs https
+      - name: Packages
+        run: python scripts/wfc.py packages
+      - name: SQL Server (Linux)
+        if: contains(matrix.needs, 'mssql') && runner.os == 'Linux'
+        run: docker compose -f services/compose.yml up -d --wait mssql
+      - name: SQL Server (Windows)
+        if: contains(matrix.needs, 'mssql') && runner.os == 'Windows'
+        shell: pwsh
+        run: ./services/windows-mssql.ps1
+      - name: Fetch
+        run: python scripts/wfc.py fetch "$APP"
+      - name: Build
+        run: python scripts/wfc.py build "$APP"
+      - name: Set up
+        run: python scripts/wfc.py setup "$APP"
+      - name: Smoke
+        run: python scripts/wfc.py smoke "$APP"
+      - name: Compare with the committed results
+        if: always()
+        run: python scripts/wfc.py ci-result "$APP"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: results-${{ matrix.app }}-${{ matrix.platform }}
+          path: ci-out/
+          if-no-files-found: ignore
+          retention-days: 30
+      - name: Remove the SQL Server container
+        if: always() && contains(matrix.needs, 'mssql') && runner.os == 'Linux'
+        run: docker compose -f services/compose.yml down -v
+
+  report:
+    needs: [plan, smoke]
+    if: always() && needs.plan.outputs.count != '0'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: results-*
+          merge-multiple: true
+          path: .
+      - name: RESULTS.md
+        run: |
+          python3 scripts/wfc.py report
+          cat RESULTS.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: round
+          path: |
+            RESULTS.md
+            apps/*/results*.json
+          retention-days: 90
