@@ -73,6 +73,11 @@ migrations and a seed, Unity, Hangfire, ImageProcessor, SquishIt, .NET Framework
 
 - **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 14/14 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28); it passes with no workarounds: its `configSource`s written with `\`, `relaxedUrlToFileSystemMapping="true"` (#26, #27).
 - **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 14/14 probes on Linux and on Windows.
+- **Round 6 (webForCore 0.7.0 on .NET 10, webForCore-thirdparty 0.5.0; under webforcore-host):** first, the restore
+  failed with NU1605: `System.ComponentModel.Annotations` 5.0.0 (EntityFramework 6.5.1's minimum) downgraded to the
+  project's 4.4.1. .NET 11 pruned both as part of the framework; .NET 10 prunes only up to 4.3.0 (F54, guide gap,
+  [#62](https://github.com/jabba2324/webForCore/issues/62)). MvcForum.Core and MvcForum.Web now reference 5.0.0
+  (MvcForum.Plugins isn't built). Then 15/15 (the new probe is that `webforcore-host.dll` isn't served).
 
 Probes:
 - the home page, a topic and a category (from the seed);
