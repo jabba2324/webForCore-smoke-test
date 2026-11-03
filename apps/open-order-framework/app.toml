@@ -14,6 +14,15 @@ notes = "webForCore 0.7.0 (.NET 10, under webforcore-host): passes all probes, 1
 needs = ["mssql"]
 
 # The first request compiles the site and EF creates the database (Identity samples seed), so it gets 120 s.
+# EF creates the database on the first request, and on a new database the app's own seed deadlocks (F26): one
+# request that may time out, then smoke starts the app again on a database that exists.
+[setup]
+
+[[setup.steps]]
+get = "/"
+timeout = 180
+may_fail = true
+
 [[probes]]
 path = "/"
 contains = "Home Page - Order Framework"
