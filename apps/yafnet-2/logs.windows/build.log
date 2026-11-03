@@ -1,11 +1,12 @@
-<repo>\apps\yafnet-2\src\yafsrc\ServiceStack\ServiceStack.Text\PclExport.cs(35,17): error CS0246: The type or namespace name 'NetStandardPclExport' could not be found (are you missing a using directive or an assembly reference?) [<repo>\apps\yafnet-2\src\yafsrc\ServiceStack\ServiceStack.Text\ServiceStack.Text.csproj]
-<repo>\apps\yafnet-2\src\yafsrc\ServiceStack\ServiceStack.Text\Json\JsonTypeSerializer.cs(388,50): error CS8168: Cannot return local 'i' by reference because it is not a ref local [<repo>\apps\yafnet-2\src\yafsrc\ServiceStack\ServiceStack.Text\ServiceStack.Text.csproj]
-<repo>\apps\yafnet-2\src\yafsrc\ServiceStack\ServiceStack.Text\Json\JsonTypeSerializer.cs(388,20): error CS8347: Cannot use a result of 'JsonTypeSerializer.UnescapeJsonString(ReadOnlySpan<char>, ref int)' in this context because it may expose variables referenced by parameter 'index' outside of their declaration scope [<repo>\apps\yafnet-2\src\yafsrc\ServiceStack\ServiceStack.Text\ServiceStack.Text.csproj]
-<repo>\apps\yafnet-2\src\yafsrc\ServiceStack\ServiceStack.Text\Json\JsonTypeSerializer.cs(435,78): error CS8168: Cannot return local 'ignore' by reference because it is not a ref local [<repo>\apps\yafnet-2\src\yafsrc\ServiceStack\ServiceStack.Text\ServiceStack.Text.csproj]
-<repo>\apps\yafnet-2\src\yafsrc\ServiceStack\ServiceStack.Text\Json\JsonTypeSerializer.cs(435,20): error CS8347: Cannot use a result of 'JsonTypeSerializer.UnescapeJsString(ReadOnlySpan<char>, char, bool, ref int)' in this context because it may expose variables referenced by parameter 'index' outside of their declaration scope [<repo>\apps\yafnet-2\src\yafsrc\ServiceStack\ServiceStack.Text\ServiceStack.Text.csproj]
+<repo>\apps\yafnet-2\src\yafsrc\Lucene.Net\Lucene.Net\YAF.Lucene.Net.csproj : error NU1605: Warning As Error: Detected package downgrade: Microsoft.Extensions.Primitives from 8.0.0 to 5.0.1. Reference the package directly from the project to select a different version.  [<repo>\apps\yafnet-2\src\yafsrc\YetAnotherForum.NET\YAF.csproj]
+<repo>\apps\yafnet-2\src\yafsrc\Lucene.Net\Lucene.Net\YAF.Lucene.Net.csproj : error NU1605:  YAF.Lucene.Net -> webForCore 0.7.0 -> webForCore.Web.Extensions 0.7.0 -> CoreWCF.Http 1.9.1 -> Microsoft.Extensions.Primitives (>= 8.0.0)  [<repo>\apps\yafnet-2\src\yafsrc\YetAnotherForum.NET\YAF.csproj]
+<repo>\apps\yafnet-2\src\yafsrc\Lucene.Net\Lucene.Net\YAF.Lucene.Net.csproj : error NU1605:  YAF.Lucene.Net -> Microsoft.Extensions.Primitives (>= 5.0.1) [<repo>\apps\yafnet-2\src\yafsrc\YetAnotherForum.NET\YAF.csproj]
+<repo>\apps\yafnet-2\src\yafsrc\Lucene.Net\Lucene.Net\YAF.Lucene.Net.csproj : error NU1605: Warning As Error: Detected package downgrade: Microsoft.Extensions.Configuration.Abstractions from 8.0.0 to 5.0.0. Reference the package directly from the project to select a different version.  [<repo>\apps\yafnet-2\src\yafsrc\YetAnotherForum.NET\YAF.csproj]
+<repo>\apps\yafnet-2\src\yafsrc\Lucene.Net\Lucene.Net\YAF.Lucene.Net.csproj : error NU1605:  YAF.Lucene.Net -> webForCore 0.7.0 -> webForCore.Web.Extensions 0.7.0 -> CoreWCF.Http 1.9.1 -> Microsoft.AspNetCore.Hosting.Server.Abstractions 2.3.10 -> Microsoft.Extensions.Configuration.Abstractions (>= 8.0.0)  [<repo>\apps\yafnet-2\src\yafsrc\YetAnotherForum.NET\YAF.csproj]
+<repo>\apps\yafnet-2\src\yafsrc\Lucene.Net\Lucene.Net\YAF.Lucene.Net.csproj : error NU1605:  YAF.Lucene.Net -> Microsoft.Extensions.Configuration.Abstractions (>= 5.0.0) [<repo>\apps\yafnet-2\src\yafsrc\YetAnotherForum.NET\YAF.csproj]
 
 Build FAILED.
-    2259 Warning(s)
-    5 Error(s)
+    14 Warning(s)
+    2 Error(s)
 
-Time Elapsed 00:00:04.21
+Time Elapsed 00:00:03.36

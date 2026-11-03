@@ -45,6 +45,12 @@ Not reached. The build stops in the vendored ServiceStack.Text.
 
   Either way the vendored library would need repairing (F49, app/environment).
 - **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** the build fails on Linux and on Windows, as in round 4: the vendored ServiceStack fork (F49) and C# 11's ref safety (F48, now in MIGRATING.md).
+- **Round 6 (webForCore 0.7.0 on .NET 10, webForCore-thirdparty 0.5.0; Linux and Windows):** the restore fails first,
+  before those: NU1605 in its Lucene.Net class libraries. `Microsoft.Extensions.Primitives` 8.0.0 and
+  `.Configuration.Abstractions` 8.0.0 (through webForCore.Web.Extensions → CoreWCF.Http) are downgraded to Lucene's
+  5.0.x pins. .NET 11 pruned them as part of Microsoft.NETCore.App. On .NET 10 they are only in
+  Microsoft.AspNetCore.App, which a plain class library doesn't reference (F54, guide gap,
+  [#62](https://github.com/jabba2324/webForCore/issues/62)). Not fixed here, since F48 and F49 block it regardless.
 
 ## Open problems
 
