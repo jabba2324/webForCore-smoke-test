@@ -37,6 +37,7 @@ samples package), .NET Framework 4.5.1, one web project. `scripts/wfc.py assess`
 
 - **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 12/12 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28); passes once its database exists; on the fresh database the first run hit its own seed deadlock (F26).
 - **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 12/12 probes on Linux and on Windows. On Linux the first run against the new database timed out (F26); the second passed.
+- **Round 6 (webForCore 0.7.0 on .NET 10, webForCore-thirdparty 0.5.0; under webforcore-host; Linux and Windows):** 13/13 probes on Linux and Windows. The database was new this round, so the first run timed out (F26), as in round 5; the second passed.
 
 Probes: the home page, the store (genres), the cart, log-in and register (anti-forgery token) and a static CSS file.
 
