@@ -432,7 +432,11 @@ def smoke(app):
     e = env()
     e.update(app.get("env", {}))
     with log.open("w") as f:
-        server = subprocess.Popen(["dotnet", str(dll.relative_to(site)), "--urls", base], cwd=site, env=e,
+        # From webForCore 0.7.0 the application runs as webforcore-host's worker process (webForCore#56), which the
+        # webForCore package puts in the output; earlier releases run it directly.
+        host = site / "bin_dotnet" / "webforcore-host" / "webforcore-host.dll"
+        start = host if host.exists() else dll
+        server = subprocess.Popen(["dotnet", str(start.relative_to(site)), "--urls", base], cwd=site, env=e,
                                   stdout=f, stderr=subprocess.STDOUT)
     checks = []
     try:
@@ -446,6 +450,14 @@ def smoke(app):
         if server.poll() is not None:
             return record(app["id"], "smoke", "fail", summary=f"server exited with {server.returncode}",
                           log_tail=scrub(log)[-3000:])
+        # The host answers 503 until its worker serves.
+        while host.exists() and time.time() < deadline + 60 and server.poll() is None:
+            try:
+                if get(base + "/", timeout=120)[0] != 503:
+                    break
+            except OSError:
+                pass
+            time.sleep(1)
         probes = app.get("probes") or [{"path": "/", "status": 200}]
         for i, probe in enumerate(probes):
             # The first request compiles the site, as on IIS.
@@ -458,7 +470,7 @@ def smoke(app):
         # An app whose error handler answers 200 with its own "not found" page sets [forbidden."<path>"] in app.toml,
         # e.g. { status = 200, absent = "<package " }: what matters is that the file's content isn't served.
         overrides = app.get("forbidden", {})
-        for path in FORBIDDEN + [f"/bin_dotnet/{dll.name}"]:
+        for path in FORBIDDEN + [f"/bin_dotnet/{dll.name}"] + (["/bin_dotnet/webforcore-host/webforcore-host.dll"] if host.exists() else []):
             probe = {"path": path, "status": 404, "forbidden": True, **overrides.get(path, {})}
             checks.append(run_probe(base, probe, timeout=30))
         for path in w3c:  # an app that answers every URL itself (OWIN) may return 200: what matters is the log's content

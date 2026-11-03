@@ -70,7 +70,7 @@ index 4d34a93..e9bfc22 100644
 -  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is eShopLegacyWebForms.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is eShopLegacyWebForms.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -81,7 +81,7 @@ index 4d34a93..e9bfc22 100644
 -    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
 +    <OutputType>Exe</OutputType>
      <RootNamespace>eShopLegacyWebForms</RootNamespace>
      <AssemblyName>eShopLegacyWebForms</AssemblyName>

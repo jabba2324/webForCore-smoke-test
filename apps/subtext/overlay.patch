@@ -6,7 +6,7 @@ index c08e08d6..162e62fa 100644
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is Subtext.Extensibility.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is Subtext.Extensibility.csproj.netfx. -->
    <PropertyGroup>
 -    <ProjectType>Local</ProjectType>
 -    <ProductVersion>9.0.30729</ProductVersion>
@@ -26,7 +26,7 @@ index c08e08d6..162e62fa 100644
 -    <DefaultTargetSchema>IE50</DefaultTargetSchema>
 -    <DelaySign>false</DelaySign>
 -    <OutputType>Library</OutputType>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>Subtext.Extensibility</RootNamespace>
 -    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
 -    <StartupObject>
@@ -476,7 +476,7 @@ index c0129afd..edf0fe31 100644
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is SubText.Framework.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is SubText.Framework.csproj.netfx. -->
    <PropertyGroup>
 -    <ProjectType>Local</ProjectType>
 -    <ProductVersion>9.0.30729</ProductVersion>
@@ -496,7 +496,7 @@ index c0129afd..edf0fe31 100644
 -    <DefaultTargetSchema>IE50</DefaultTargetSchema>
 -    <DelaySign>false</DelaySign>
 -    <OutputType>Library</OutputType>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>Subtext.Framework</RootNamespace>
 -    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
 -    <StartupObject>
@@ -2257,7 +2257,7 @@ index 24447384..600803ac 100644
  using System;
  using System.IO;
 -using System.Runtime.Serialization.Formatters.Binary;
-+using WebFormsForCore.Serialization.Formatters.Binary; // webForCore: .NET 11's BinaryFormatter throws (docs/NAMESPACES.md)
++using WebFormsForCore.Serialization.Formatters.Binary; // webForCore: .NET 10's BinaryFormatter throws (docs/NAMESPACES.md)
  using System.Xml.Serialization;
  
  namespace Subtext.Framework.Util
@@ -2285,7 +2285,7 @@ index 6e707430..1f7fb568 100644
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is Subtext.Providers.BlogEntryEditor.CKEditor.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is Subtext.Providers.BlogEntryEditor.CKEditor.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -2294,7 +2294,7 @@ index 6e707430..1f7fb568 100644
 -    <ProjectGuid>{B8F3979C-2086-4C87-92A6-E77A71A3D4F2}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>Subtext.Providers.BlogEntryEditor.CKEditor</RootNamespace>
      <AssemblyName>Subtext.Providers.BlogEntryEditor.CKEditor</AssemblyName>
 -    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -2466,7 +2466,7 @@ index 6737046b..854295b3 100644
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is Subtext.Providers.BlogEntryEditor.FCKeditor.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is Subtext.Providers.BlogEntryEditor.FCKeditor.csproj.netfx. -->
    <PropertyGroup>
 -    <ProjectType>Local</ProjectType>
 -    <ProductVersion>9.0.30729</ProductVersion>
@@ -2486,7 +2486,7 @@ index 6737046b..854295b3 100644
 -    <DefaultTargetSchema>IE50</DefaultTargetSchema>
 -    <DelaySign>false</DelaySign>
 -    <OutputType>Library</OutputType>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>Subtext.Providers.BlogEntryEditor.FCKeditor</RootNamespace>
 -    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
 -    <StartupObject>
@@ -3007,7 +3007,7 @@ index eecb3c26..13a8f084 100644
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
 +<Project Sdk="Microsoft.NET.Sdk.Web">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is SubText.Web.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is SubText.Web.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -3017,7 +3017,7 @@ index eecb3c26..13a8f084 100644
 -    <ProjectTypeGuids>{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
 +    <OutputType>Exe</OutputType>
 +    <!-- .resx files with non-string resources (MSB3822): read through System.Resources.Extensions on .NET. -->
 +    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
@@ -3994,7 +3994,7 @@ index eecb3c26..13a8f084 100644
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
 +    <PackageReference Include="webForCore" Version="0.6.0" />
 +    <PackageReference Include="webForCore.Web.Mvc" Version="0.6.0" />
-+    <PackageReference Include="System.Resources.Extensions" Version="11.0.0-rc.3.26522.148" />
++    <PackageReference Include="System.Resources.Extensions" Version="10.0.14" />
    </ItemGroup>
 +
    <ItemGroup>

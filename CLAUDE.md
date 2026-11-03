@@ -1,7 +1,7 @@
 # Working in this repo
 
 This is the smoke test bed for webForCore (`../webForCore`, or `$WEBFORCORE_DIR`), which runs ASP.NET 4.x apps on
-.NET 11. Read `README.md` first, then webForCore's `docs/AGENT-MIGRATION.md`, `docs/MIGRATING.md`,
+.NET 10. Read `README.md` first, then webForCore's `docs/AGENT-MIGRATION.md`, `docs/MIGRATING.md`,
 `docs/NAMESPACES.md` and `docs/IIS-COMPATIBILITY.md`.
 
 ## The goal

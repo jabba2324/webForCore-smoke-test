@@ -6,7 +6,7 @@ index 7095bac..75fa635 100644
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is FunnelWeb.Extensions.CommentNotification.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is FunnelWeb.Extensions.CommentNotification.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -16,7 +16,7 @@ index 7095bac..75fa635 100644
 -    <RestorePackages>true</RestorePackages>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>FunnelWeb.Extensions.CommentNotification</RootNamespace>
      <AssemblyName>FunnelWeb.Extensions.CommentNotification</AssemblyName>
 -    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -86,7 +86,7 @@ index 7095bac..75fa635 100644
 -    </ProjectReference>
 +    <!-- The app's own libraries. -->
 +    <PackageReference Include="Autofac" Version="2.6.3.862" />
-+    <PackageReference Include="System.ComponentModel.Composition" Version="11.0.0-rc.3.26522.148" />
++    <PackageReference Include="System.ComponentModel.Composition" Version="10.0.14" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -212,7 +212,7 @@ index d3312f3..2b9755c 100644
 -<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk.Web">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is FunnelWeb.Web.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is FunnelWeb.Web.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -223,7 +223,7 @@ index d3312f3..2b9755c 100644
 -    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
 +    <OutputType>Exe</OutputType>
      <RootNamespace>FunnelWeb.Web</RootNamespace>
      <AssemblyName>FunnelWeb.Web</AssemblyName>
@@ -778,8 +778,8 @@ index d3312f3..2b9755c 100644
 +    <PackageReference Include="WindowsAzure.Storage" Version="1.7.0.0" />
 +    <PackageReference Include="xmlrpcnet" Version="3.0.0.266" />
 +    <PackageReference Include="xmlrpcnet-server" Version="3.0.0.266" />
-+    <PackageReference Include="System.ComponentModel.Composition" Version="11.0.0-rc.3.26522.148" />
-+    <PackageReference Include="System.ServiceModel.Syndication" Version="11.0.0-rc.3.26522.148" />
++    <PackageReference Include="System.ComponentModel.Composition" Version="10.0.14" />
++    <PackageReference Include="System.ServiceModel.Syndication" Version="10.0.14" />
 +    <Reference Include="Joel.Net.Akismet" HintPath="../../lib/Akismet/Joel.Net.Akismet.dll" />
    </ItemGroup>
 +
@@ -1478,7 +1478,7 @@ index 1e5f1bf..d352585 100644
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 +<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is FunnelWeb.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is FunnelWeb.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -1488,7 +1488,7 @@ index 1e5f1bf..d352585 100644
 -    <ProjectGuid>{3E448C45-F459-45D7-950C-5ABEF926513D}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>FunnelWeb</RootNamespace>
      <AssemblyName>FunnelWeb</AssemblyName>
 -    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -1966,7 +1966,7 @@ index 1e5f1bf..d352585 100644
 +    <PackageReference Include="SharpZipLib" Version="0.86.0" />
 +    <PackageReference Include="SqlServerCompact" Version="4.0.8854.1" />
 +    <PackageReference Include="WindowsAzure.Storage" Version="1.7.0.0" />
-+    <PackageReference Include="System.ComponentModel.Composition" Version="11.0.0-rc.3.26522.148" />
++    <PackageReference Include="System.ComponentModel.Composition" Version="10.0.14" />
 +  </ItemGroup>
 +
 +</Project>

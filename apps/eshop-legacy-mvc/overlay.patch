@@ -18,14 +18,14 @@ index efb378f..bfde99f 100644
 -<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +﻿<Project Sdk="Microsoft.NET.Sdk">
-+  <!-- Migrated to .NET 11 for webForCore. The .NET Framework project is eShopLegacy.Utilities.csproj.netfx. -->
++  <!-- Migrated to .NET 10 for webForCore. The .NET Framework project is eShopLegacy.Utilities.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 -    <ProjectGuid>{D466562E-F48C-4EF1-AE08-3A80B0ED9671}</ProjectGuid>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
      <RootNamespace>eShopLegacy.Utilities</RootNamespace>
      <AssemblyName>eShopLegacy.Utilities</AssemblyName>
 -    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -65,7 +65,7 @@ index efb378f..bfde99f 100644
    <ItemGroup>
 -    <Compile Include="Serializing.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
-+    <!-- BinaryFormatter: .NET 11's throws; webForCore's port replaces it (docs/NAMESPACES.md). From the 0.1.0 release. -->
++    <!-- BinaryFormatter: .NET 10's throws; webForCore's port replaces it (docs/NAMESPACES.md). From the 0.1.0 release. -->
 +    <PackageReference Include="webForCore.Serialization.Formatters" Version="0.6.0" />
    </ItemGroup>
 -  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -234,7 +234,7 @@ index 503535d..b5cca60 100644
 -  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
 +<Project Sdk="Microsoft.NET.Sdk.Web">
-+  <!-- Migrated to webForCore (.NET 11). The .NET Framework project is eShopLegacyMVC.csproj.netfx. -->
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is eShopLegacyMVC.csproj.netfx. -->
    <PropertyGroup>
 -    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
 -    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -245,7 +245,7 @@ index 503535d..b5cca60 100644
 -    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
-+    <TargetFramework>net11.0</TargetFramework>
++    <TargetFramework>net10.0</TargetFramework>
 +    <OutputType>Exe</OutputType>
      <RootNamespace>eShopLegacyMVC</RootNamespace>
      <AssemblyName>eShopLegacyMVC</AssemblyName>
