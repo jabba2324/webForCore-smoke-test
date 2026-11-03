@@ -139,7 +139,7 @@ Not done, because nothing past the boot can be checked (each is needed once F22 
 - **Round 6 (webForCore 0.7.0 on .NET 10; under webforcore-host; Linux):** builds; 7/14 checks (0/7 probes and the
   7 forbidden paths), from a new database (`fetch --reset`, `build`, `setup`, `smoke`, as CI runs them). `setup` only
   creates the database.
-- Windows: not run yet (CI runs it). It should be the same: F65 and the file-name problems are Linux's, but F22 isn't.
+- Windows (CI, PR #14): 7/14, the same as Linux: F22 stops the boot there too.
 
 Why every probe fails: Umbraco's boot (`Application_Start`) throws, configuring AutoMapper:
 
