@@ -15,6 +15,11 @@ needs = ["mssql"]
 
 # The database is created from lib/Test-databases/roadkill-sqlserver.sql (NOTES.md). The first request compiles the
 # site, so it gets 120 s. Blocked before any page renders, so the probes have no text checks yet.
+# Its database, loaded from the app's own SQL Server script (NOTES.md, step 5).
+[setup]
+databases = ["Roadkill"]
+sql_files = ["lib/Test-databases/roadkill-sqlserver.sql"]
+
 [[probes]]
 path = "/"
 
