@@ -69,9 +69,10 @@ reapplies the overlay. An app that needs a database (`needs`) needs its service 
 
 `.github/workflows/smoke.yml` runs the same commands in GitHub Actions. Each migrated app (it has an `overlay.patch`,
 and isn't `rejected`) is its own job on Linux (`ubuntu-24.04`) and on Windows (`windows-2025`), so a round runs in
-parallel. Each job runs `scripts/wfc.py` on the runner itself:
+parallel. A `packages` job downloads the release packages once and hands them to the app jobs (each downloading
+them went past GitHub's API rate limit). Each app job runs `scripts/wfc.py` on the runner itself:
 
-1. `packages`, then the app's database if it `needs` one: the compose SQL Server on Linux, SQL Server Express from
+1. The packages, then the app's database if it `needs` one: the compose SQL Server on Linux, SQL Server Express from
    `services/windows-mssql.ps1` on Windows.
 2. `fetch`, `build`, `setup` and `smoke`.
 3. `ci-result`: compares the results with the committed `results.json` (or `results.windows.json`) and adds a line to

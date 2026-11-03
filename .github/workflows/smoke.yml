@@ -64,8 +64,27 @@ jobs:
             python3 scripts/wfc.py ci-matrix --changed-since "$BASE" | tee -a "$GITHUB_OUTPUT"
           fi
 
-  smoke:
+  # The release packages, downloaded once for every job: 54 jobs downloading them each went past the API's rate
+  # limit for the repository's token.
+  packages:
     needs: plan
+    if: needs.plan.outputs.count != '0'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+      - run: python3 scripts/wfc.py packages
+      - uses: actions/upload-artifact@v7
+        with:
+          name: packages
+          path: .packages/
+          include-hidden-files: true
+          retention-days: 1
+
+  smoke:
+    needs: [plan, packages]
     if: needs.plan.outputs.count != '0'
     name: ${{ matrix.app }} (${{ matrix.platform }})
     runs-on: ${{ matrix.runner }}
@@ -75,7 +94,6 @@ jobs:
       matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
     env:
       APP: ${{ matrix.app }}
-      GH_TOKEN: ${{ github.token }}
     defaults:
       run:
         shell: bash
@@ -92,8 +110,10 @@ jobs:
         run: |
           dotnet --list-sdks
           dotnet dev-certs https
-      - name: Packages
-        run: python scripts/wfc.py packages
+      - uses: actions/download-artifact@v8
+        with:
+          name: packages
+          path: .packages
       - name: SQL Server (Linux)
         if: contains(matrix.needs, 'mssql') && runner.os == 'Linux'
         run: docker compose -f services/compose.yml up -d --wait mssql
