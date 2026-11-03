@@ -1,6 +1,6 @@
 # webForCore smoke test
 
-A test bed for [webForCore](https://github.com/jabba2324/webForCore): it takes real open-source ASP.NET 4.x
+A test bed for [webForCore](https://github.com/xforcore/webForCore): it takes real open-source ASP.NET 4.x
 applications (MVC 5, Web API 2, Web Forms, Web Pages, OWIN, SignalR 2), migrates each one to .NET 10 with webForCore
 following its migration guide, then builds it, runs it on Kestrel and probes it over HTTP, on Linux and on Windows.
 

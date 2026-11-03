@@ -35,12 +35,12 @@ Each app is a folder, `apps/<id>/` (see README.md). Nothing goes at the top leve
 ## Third-party libraries
 
 webForCore ships only Microsoft assemblies. Builds of third-party libraries for it are in
-[webForCore-thirdparty](https://github.com/jabba2324/webForCore-thirdparty), for this test bed: an app that uses one
+[webForCore-thirdparty](https://github.com/xforcore/webForCore-thirdparty), for this test bed: an app that uses one
 of them references the package from there. `scripts/wfc.py packages` downloads its release (`THIRDPARTY_VERSION`,
 default 0.5.0) into the same folder as webForCore's; by hand:
 
 ```bash
-gh release download --repo jabba2324/webForCore-thirdparty --pattern '*.nupkg' --dir .packages/v<webForCore version> --skip-existing
+gh release download --repo xforcore/webForCore-thirdparty --pattern '*.nupkg' --dir .packages/v<webForCore version> --skip-existing
 ```
 
 | The app uses | Reference | Without it |
@@ -65,7 +65,7 @@ reproduction where you can make one, and the classification:
 - **app/environment**: the app's own problem (needs a database, a Windows path, a missing package).
 
 Don't change webForCore itself from here. Write the finding up so it can be fixed there, and raise each webForCore
-bug and guide gap as an issue on [jabba2324/webForCore](https://github.com/jabba2324/webForCore/issues) (check for an
+bug and guide gap as an issue on [xforcore/webForCore](https://github.com/xforcore/webForCore/issues) (check for an
 existing one first), with the repro; link it from `FINDINGS.md`. Security problems are public issues too: webForCore is pre-release and
 not recommended for production. App/environment problems stay here.
 

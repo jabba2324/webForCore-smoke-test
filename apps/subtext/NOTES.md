@@ -5,7 +5,7 @@ repo, licence (MIT), web project and its `<TargetFrameworkVersion>` were checked
 
 Round 3b, on webForCore 0.4.0 and webForCore-thirdparty 0.4.0. It also uses `webForCore.WebActivator` 0.4.1, a build of
 WebActivator 1.5 added to webForCore-thirdparty for this app
-([jabba2324/webForCore-thirdparty#1](https://github.com/jabba2324/webForCore-thirdparty/pull/1), not released yet). Until
+([xforcore/webForCore-thirdparty#1](https://github.com/xforcore/webForCore-thirdparty/pull/1), not released yet). Until
 that is released, `scripts/wfc.py packages` doesn't download it: copy its `.nupkg` into `.packages/v0.4.0` by hand.
 
 ## Assessment
@@ -70,11 +70,11 @@ page, an admin page (forms authentication redirect), RSS, two MVC controllers ro
 
 - **On 0.4.0:** the build fails with `CS0433: The type 'SoapBindingUse' exists in both 'System.Web.Services.Description'
   and 'System.Web.Services'`, from the Web Reference proxy (F35, webForCore bug,
-  [#34](https://github.com/jabba2324/webForCore/issues/34)).
+  [#34](https://github.com/xforcore/webForCore/issues/34)).
 - **Past F35 (exploration only: a temporary build target dropped the package's compile reference):** every request failed with
   `MissingMethodException: Method not found: 'SqlDataReader SqlHelper.ExecuteReader(String, CommandType, String)'`
-  (F38, webForCore bug, [#35](https://github.com/jabba2324/webForCore/issues/35)).
-- **On the packages of jabba2324/webForCore#32** (F35 and F38 fixed): the install wizard runs, and 15 of 16 checks pass (10 probes and the 6 forbidden paths).
+  (F38, webForCore bug, [#35](https://github.com/xforcore/webForCore/issues/35)).
+- **On the packages of xforcore/webForCore#32** (F35 and F38 fixed): the install wizard runs, and 15 of 16 checks pass (10 probes and the 6 forbidden paths).
   The log-in page fails in DotNetOpenAuth's OpenID control (F44, app/environment).
 
 ## Open problems

@@ -36,7 +36,7 @@ The probes cover the log-in page, two pages that need a log-in (redirects) and a
   'System.Data.SqlClient, Version=4.6.1.6' because it contains an object field at offset 0 that is incorrectly aligned or
   overlapped by a non-object field`. System.Data.SqlClient 4.9.1's Unix build doesn't load fully on .NET 11. It
   reproduces in a console app without webForCore, but webForCore brings the package to every app (F47,
-  [#41](https://github.com/jabba2324/webForCore/issues/41)).
+  [#41](https://github.com/xforcore/webForCore/issues/41)).
 - **With the scan skipping types that fail to load** (exploration only, not in the overlay), Opserver works:
   - the log-in (a forms-authentication POST);
   - the MVC pages;
@@ -47,6 +47,6 @@ The probes cover the log-in page, two pages that need a log-in (redirects) and a
 
 ## Open problems
 
-- F47: [webForCore#41](https://github.com/jabba2324/webForCore/issues/41). The fix is a choice for webForCore: lift and
+- F47: [webForCore#41](https://github.com/xforcore/webForCore/issues/41). The fix is a choice for webForCore: lift and
   fix SqlClient, move to Microsoft.Data.SqlClient, or document catching the exception.
-- F45, guide gap: [webForCore#42](https://github.com/jabba2324/webForCore/issues/42).
+- F45, guide gap: [webForCore#42](https://github.com/xforcore/webForCore/issues/42).

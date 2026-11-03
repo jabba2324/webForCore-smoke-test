@@ -50,16 +50,16 @@ WEBFORCORE = Path(os.environ.get("WEBFORCORE_DIR", ROOT.parent / "webForCore")).
 # webForCore's NuGet packages come from its GitHub releases, not nuget.org. `packages` downloads a release here, and
 # builds restore from it (apps reference the packages, docs/MIGRATING.md section 1). WEBFORCORE_DIR is only needed by
 # apps still migrated against webForCore's source.
-WEBFORCORE_REPO = "jabba2324/webForCore"
+WEBFORCORE_REPO = "xforcore/webForCore"
 WEBFORCORE_VERSION = os.environ.get("WEBFORCORE_VERSION", "0.7.0")
 # Builds of third-party libraries for webForCore (WebActivatorEx, AjaxControlToolkit; CLAUDE.md), from
 # webForCore-thirdparty's releases, go in the same folder.
-THIRDPARTY_REPO = "jabba2324/webForCore-thirdparty"
+THIRDPARTY_REPO = "xforcore/webForCore-thirdparty"
 THIRDPARTY_VERSION = os.environ.get("THIRDPARTY_VERSION", "0.5.0")
 THIRDPARTY_PACKAGES = ("webForCore.WebActivatorEx", "webForCore.AjaxControlToolkit")
 # System.Drawing, which the webForCore package depends on from 0.7.0 (drawingForCore and drawingForCore.Common), goes
 # there too.
-DRAWING_REPO = "jabba2324/drawingForCore"
+DRAWING_REPO = "xforcore/drawingForCore"
 DRAWING_VERSION = os.environ.get("DRAWING_VERSION", "0.2.0")
 PACKAGES = ROOT / ".packages"
 # The OS this run is on. Linux keeps the original file names; Windows' results sit beside them.
