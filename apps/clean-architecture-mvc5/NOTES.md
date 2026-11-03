@@ -30,6 +30,7 @@ No change to the app's code or web.config (it has no `<system.codedom>`).
 
 - **Round 4 (webForCore 0.5.0, webForCore-thirdparty 0.4.1):** 11/11 probes; the explicit `webForCore.Web.Helpers` reference is removed, as webForCore.Web.Mvc brings it since 0.5.0 (#28).
 - **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 11/11 probes on Linux and on Windows.
+- **Round 6 (webForCore 0.7.0 on .NET 10, webForCore-thirdparty 0.5.0; under webforcore-host; Linux and Windows):** 12/12 probes on Linux and Windows.
 
 Probes: the home page, the products list and a product, the contact page, and a view file requested directly (must be
 404).
