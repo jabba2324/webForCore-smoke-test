@@ -580,7 +580,8 @@ def run_probe(base, probe, timeout, app_id=None):
 #   sql_files  scripts in the checkout run against the first of them, when setup has just created it
 #   steps      requests made to the running app, in order, with cookies kept and redirects followed (an install
 #              wizard): {get = path} or {post = path, fields = {...}}, and with button = name (and value) a Web Forms
-#              postback, whose hidden fields come from a GET of the page first. timeout (s, default 120), contains
+#              postback, whose hidden fields come from a GET of the page first; {post = path, json = "<body>"} posts
+#              that body as application/json (an ASP.NET AJAX page method, an MVC action). timeout (s, default 120), contains
 #              (text the response must have), may_fail = true (the step's outcome doesn't matter)
 # When every database it lists already exists, the app is set up already and nothing runs. On a database that's gone
 # (`docker compose down`), it runs again.
@@ -613,9 +614,13 @@ def web_steps(base, steps):
     opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(jar),
                                          urllib.request.HTTPSHandler(context=_TLS))
 
-    def request(path, data, timeout):
+    def request(path, data, timeout, json_body=None):
+        headers = {"User-Agent": "webForCore-smoke-test"}
         body = urllib.parse.urlencode(data).encode() if data is not None else None
-        req = urllib.request.Request(base + path, data=body, headers={"User-Agent": "webForCore-smoke-test"})
+        if json_body is not None:
+            body = json_body.encode()
+            headers["Content-Type"] = "application/json; charset=utf-8"
+        req = urllib.request.Request(base + path, data=body, headers=headers)
         try:
             with opener.open(req, timeout=timeout) as r:
                 return r.status, r.read(MAX_BODY).decode("utf-8", "replace")
@@ -629,6 +634,8 @@ def web_steps(base, steps):
         try:
             if "get" in step:
                 status, body = request(path, None, timeout)
+            elif "json" in step:
+                status, body = request(path, None, timeout, json_body=step["json"])
             else:
                 fields = {}
                 if step.get("button"):
