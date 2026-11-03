@@ -50,10 +50,10 @@ Not reached. The build stops in the vendored ServiceStack.Text.
   `.Configuration.Abstractions` 8.0.0 (through webForCore.Web.Extensions → CoreWCF.Http) are downgraded to Lucene's
   5.0.x pins. .NET 11 pruned them as part of Microsoft.NETCore.App. On .NET 10 they are only in
   Microsoft.AspNetCore.App, which a plain class library doesn't reference (F54, guide gap,
-  [#62](https://github.com/jabba2324/webForCore/issues/62)). Not fixed here, since F48 and F49 block it regardless.
+  [#62](https://github.com/xforcore/webForCore/issues/62)). Not fixed here, since F48 and F49 block it regardless.
 
 ## Open problems
 
 - F49, app/environment: YAF.NET's vendored ServiceStack 5.9 fork only works as .NET Framework code.
-- F48, guide gap: [webForCore#43](https://github.com/jabba2324/webForCore/issues/43).
-- F45, guide gap: [webForCore#42](https://github.com/jabba2324/webForCore/issues/42).
+- F48, guide gap: [webForCore#43](https://github.com/xforcore/webForCore/issues/43).
+- F45, guide gap: [webForCore#42](https://github.com/xforcore/webForCore/issues/42).

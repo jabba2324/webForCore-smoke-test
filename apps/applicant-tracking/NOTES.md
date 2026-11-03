@@ -51,7 +51,7 @@ the copy in the default load context, not the application's. Checked by hand fro
 and `GetCustomAttributes(typeof(WebActivatorEx.PreApplicationStartMethodAttribute))` on the loaded copy finds 0.
 [F20](../../FINDINGS.md#f20)
 
-### With webForCore's fixes ([jabba2324/webForCore#24](https://github.com/jabba2324/webForCore/pull/24))
+### With webForCore's fixes ([xforcore/webForCore#24](https://github.com/xforcore/webForCore/pull/24))
 
 On the PR's packages, WebActivatorEx's start method registers Unity (#21) and the DI controllers work. The
 `ExcludeAssets` references for Unity.Mvc's transitive packages aren't needed (#23).

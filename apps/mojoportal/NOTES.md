@@ -76,11 +76,11 @@ The probes cover:
 
 - **On 0.4.0:** the build fails with `CS0433: The type 'WsiProfiles' exists in both 'System.Web.Services.Description'
   and 'System.Web.Services'`, in the `.ashx` handlers (F35, webForCore bug,
-  [#34](https://github.com/jabba2324/webForCore/issues/34)).
-- **On the packages of jabba2324/webForCore#32** (F35 fixed): it builds. Every page then fails with
+  [#34](https://github.com/xforcore/webForCore/issues/34)).
+- **On the packages of xforcore/webForCore#32** (F35 fixed): it builds. Every page then fails with
   `Could not load file or assembly 'App_GlobalResources, Culture=neutral, PublicKeyToken=null'`: the
   `App_GlobalResources` designer code does `Assembly.Load("App_GlobalResources")` (F40, webForCore bug,
-  [#33](https://github.com/jabba2324/webForCore/issues/33), not fixed). 8 of 15 checks pass: the forbidden-path checks
+  [#33](https://github.com/xforcore/webForCore/issues/33), not fixed). 8 of 15 checks pass: the forbidden-path checks
   and the static file.
 - **With `<compilation optimizeCompilations="true">`** (exploration only, not in the overlay; it gives App_Code and
   App_GlobalResources their fixed names), all 9 probes pass. Setup installs the schema (2.3.4.8 → 3.2.0.0) and the

@@ -50,7 +50,7 @@ database; `/`, `/Store`, `/ShoppingCart`, `/Account/Login`, `/Account/Register` 
 200 with their pages. `/Store/Browse` without a genre is a 500 (`Sequence contains no elements`), the app's own
 behaviour on an empty catalogue.
 
-### With webForCore's fixes ([jabba2324/webForCore#24](https://github.com/jabba2324/webForCore/pull/24))
+### With webForCore's fixes ([xforcore/webForCore#24](https://github.com/xforcore/webForCore/pull/24))
 
 On the PR's packages, all 12 probes pass: the `System.Net.Http.WebRequest` the Google provider needs is in the
 "Always" set (#18).

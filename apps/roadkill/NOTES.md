@@ -70,7 +70,7 @@ Probes: the home page, the log-in page and a static CSS file (no text checks yet
 null because `[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(LocatorStartup), "StartMVC")]` in
 `Roadkill.Core` never ran. [F20](../../FINDINGS.md#f20)
 
-### With webForCore's fixes ([jabba2324/webForCore#24](https://github.com/jabba2324/webForCore/pull/24))
+### With webForCore's fixes ([xforcore/webForCore#24](https://github.com/xforcore/webForCore/pull/24))
 
 On the PR's packages, the facades load (#20) and WebActivatorEx runs `LocatorStartup.StartMVC` (#21). Every request then
 fails in StructureMap 4.0's `AssemblyFinder.FindBinPath`: `Method not found: 'System.String

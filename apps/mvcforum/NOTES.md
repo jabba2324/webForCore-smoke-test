@@ -76,7 +76,7 @@ migrations and a seed, Unity, Hangfire, ImageProcessor, SquishIt, .NET Framework
 - **Round 6 (webForCore 0.7.0 on .NET 10, webForCore-thirdparty 0.5.0; under webforcore-host):** first, the restore
   failed with NU1605: `System.ComponentModel.Annotations` 5.0.0 (EntityFramework 6.5.1's minimum) downgraded to the
   project's 4.4.1. .NET 11 pruned both as part of the framework; .NET 10 prunes only up to 4.3.0 (F54, guide gap,
-  [#62](https://github.com/jabba2324/webForCore/issues/62)). MvcForum.Core and MvcForum.Web now reference 5.0.0
+  [#62](https://github.com/xforcore/webForCore/issues/62)). MvcForum.Core and MvcForum.Web now reference 5.0.0
   (MvcForum.Plugins isn't built). Then 15/15 (the new probe is that `webforcore-host.dll` isn't served).
 
 Probes:
@@ -109,7 +109,7 @@ So a `configSource` in a subfolder can't work on Linux at all. [F28](../../FINDI
   - `/api/TinyMce/UploadImage` answers Web API's 405 JSON;
   - the theme CSS is served.
 
-### With webForCore's fixes ([jabba2324/webForCore#32](https://github.com/jabba2324/webForCore/pull/32))
+### With webForCore's fixes ([xforcore/webForCore#32](https://github.com/xforcore/webForCore/pull/32))
 
 On the PR's packages, all 14 probes pass with the overlay as committed, and with its explicit `webForCore.Web.Helpers`
 reference removed. The `Config\imageprocessor\*.config` sections load (#26), `MapPath` works with

@@ -54,4 +54,4 @@ log-in form (MVC), the installer (forms authentication redirect) and a static fi
 
 - F39, app/environment: NHibernate 3.3. Moving to NHibernate 5.1+ and FluentNHibernate 3 is an upgrade of the app's
   data layer, beyond a migration.
-- F42, guide gap: documented in jabba2324/webForCore#32.
+- F42, guide gap: documented in xforcore/webForCore#32.

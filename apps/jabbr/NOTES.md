@@ -35,8 +35,8 @@ Round 4, on webForCore 0.5.0 and webForCore-thirdparty 0.4.1.
 - **On 0.5.0:** the build fails with `CS1705: Assembly 'Microsoft.AspNet.SignalR.SqlServer' ... uses
   'Microsoft.AspNet.SignalR.Core, Version=2.4.3.0' which has a higher version than referenced assembly
   'Microsoft.AspNet.SignalR.Core' with identity '..., Version=0.0.0.0'`. webForCore's SignalR assemblies have no version
-  (F46, webForCore bug, [#40](https://github.com/jabba2324/webForCore/issues/40)).
-- **On the packages of [webForCore#44](https://github.com/jabba2324/webForCore/pull/44):** it builds. Start-up then fails in Nancy 0.20:
+  (F46, webForCore bug, [#40](https://github.com/xforcore/webForCore/issues/40)).
+- **On the packages of [webForCore#44](https://github.com/xforcore/webForCore/pull/44):** it builds. Start-up then fails in Nancy 0.20:
   `MissingMethodException: Method not found: 'System.String System.AppDomainSetup.get_PrivateBinPathProbe()'`, from
   `Nancy.Bootstrapper.AppDomainAssemblyTypeScanner`. Nancy 0.20 is .NET Framework only. Nancy 2.x runs on .NET Standard,
   but its API changed enough that moving JabbR's modules would be a port (F50, app/environment).
@@ -46,4 +46,4 @@ Round 4, on webForCore 0.5.0 and webForCore-thirdparty 0.4.1.
 ## Open problems
 
 - F50, app/environment: Nancy 0.20.
-- F46, webForCore bug: fixed in [webForCore#44](https://github.com/jabba2324/webForCore/pull/44).
+- F46, webForCore bug: fixed in [webForCore#44](https://github.com/xforcore/webForCore/pull/44).

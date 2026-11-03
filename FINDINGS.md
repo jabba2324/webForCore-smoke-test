@@ -1,11 +1,11 @@
 # Findings
 
 One entry per distinct problem found while migrating apps. webForCore bugs and guide gaps are raised on
-[jabba2324/webForCore](https://github.com/jabba2324/webForCore/issues), security problems included (webForCore is
+[xforcore/webForCore](https://github.com/xforcore/webForCore/issues), security problems included (webForCore is
 pre-release and not recommended for production). See CLAUDE.md for the format. Every entry was found
 with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 release packages (tag `v0.1.0`,
 `2942b694`), unless the entry says otherwise. F16 onwards were found in round 2, on the released 0.2.0 packages
-(tag `v0.2.0`, `1c92215`), where F1–F15 are fixed or documented. F16–F21 and F24 are fixed in [jabba2324/webForCore#24](https://github.com/jabba2324/webForCore/pull/24) (released in 0.3.0), checked against the apps. Round 3 ran on 0.4.0, with webForCore-thirdparty 0.4.0 for WebActivatorEx (CLAUDE.md); F25 onwards were found there. F28–F33 are fixed or documented in [jabba2324/webForCore#32](https://github.com/jabba2324/webForCore/pull/32), checked against the apps. Round 3b (subtext, funnelweb, mojoportal) also ran on 0.4.0, with webForCore-thirdparty 0.4.0 and the unreleased `webForCore.WebActivator` 0.4.1 ([jabba2324/webForCore-thirdparty#1](https://github.com/jabba2324/webForCore-thirdparty/pull/1)); F35 onwards were found there. F35 and F38 are fixed in #32 too, and F36, F37, F41 and F42 documented there, checked against the apps. Round 4 ran on the released 0.5.0 packages (#32 merged), with webForCore-thirdparty 0.4.1: all 24 migrated apps build, the fixes hold in every app that needed them (MVCForum and Subtext with no workarounds, no explicit `webForCore.Web.Helpers`), and there are no new findings. F40 (#33) is 0.5.0's known issue. Round 4's new candidates (jabbr, opserver-mvc5, yafnet-2) found F45 onwards; F46 is fixed and F45, F48 documented in [jabba2324/webForCore#44](https://github.com/jabba2324/webForCore/pull/44). Round 5 ran on the released 0.6.0 packages (#44 merged), with webForCore-thirdparty 0.4.1, on Linux and, for the first time, on Windows (README.md, "Windows"): every app on both. F46 is fixed (JabbR builds), and the results are the same on both platforms except where F51 is reached; F51 onwards were found there. Round 6 ran on the released 0.7.0 packages, on Linux and Windows:
+(tag `v0.2.0`, `1c92215`), where F1–F15 are fixed or documented. F16–F21 and F24 are fixed in [xforcore/webForCore#24](https://github.com/xforcore/webForCore/pull/24) (released in 0.3.0), checked against the apps. Round 3 ran on 0.4.0, with webForCore-thirdparty 0.4.0 for WebActivatorEx (CLAUDE.md); F25 onwards were found there. F28–F33 are fixed or documented in [xforcore/webForCore#32](https://github.com/xforcore/webForCore/pull/32), checked against the apps. Round 3b (subtext, funnelweb, mojoportal) also ran on 0.4.0, with webForCore-thirdparty 0.4.0 and the unreleased `webForCore.WebActivator` 0.4.1 ([xforcore/webForCore-thirdparty#1](https://github.com/xforcore/webForCore-thirdparty/pull/1)); F35 onwards were found there. F35 and F38 are fixed in #32 too, and F36, F37, F41 and F42 documented there, checked against the apps. Round 4 ran on the released 0.5.0 packages (#32 merged), with webForCore-thirdparty 0.4.1: all 24 migrated apps build, the fixes hold in every app that needed them (MVCForum and Subtext with no workarounds, no explicit `webForCore.Web.Helpers`), and there are no new findings. F40 (#33) is 0.5.0's known issue. Round 4's new candidates (jabbr, opserver-mvc5, yafnet-2) found F45 onwards; F46 is fixed and F45, F48 documented in [xforcore/webForCore#44](https://github.com/xforcore/webForCore/pull/44). Round 5 ran on the released 0.6.0 packages (#44 merged), with webForCore-thirdparty 0.4.1, on Linux and, for the first time, on Windows (README.md, "Windows"): every app on both. F46 is fixed (JabbR builds), and the results are the same on both platforms except where F51 is reached; F51 onwards were found there. Round 6 ran on the released 0.7.0 packages, on Linux and Windows:
 - **The release:** .NET 10 LTS; every app runs as a worker process under `webforcore-host`; System.Drawing comes from drawingForCore 0.2.0.
 - **Third-party packages:** webForCore-thirdparty 0.5.0, the first built for net10.0 (F55 explains why 0.4.1 couldn't be used).
 - **Results:** they match round 5 on both platforms, apart from one new probe: `webforcore-host.dll` isn't served.
@@ -18,68 +18,68 @@ Repro sites are small enough to paste: a `Program.cs` as in
 
 | # | Problem | Classification | Apps | Raised |
 | --- | --- | --- | --- | --- |
-| [F1](#f1) | .NET Framework libraries get a second `ConfigurationManager` that can't read web.config | webForCore bug | eshop-legacy-mvc, eshop-legacy-webforms, bonobo-git-server | [#1](https://github.com/jabba2324/webForCore/issues/1) |
-| [F2](#f2) | `CacheDependency` on one file under two spellings throws on Linux (bundling) | webForCore bug | eshop-legacy-mvc | [#2](https://github.com/jabba2324/webForCore/issues/2) |
-| [F3](#f3) | `AppDomain.CurrentDomain.BaseDirectory` is `bin_dotnet/`, not the site root | webForCore bug | eshop-legacy-mvc | [#3](https://github.com/jabba2324/webForCore/issues/3) |
-| [F4](#f4) | W3C logs are written inside the site and served over HTTP | webForCore bug (security) | every app using `AddWebForms()` (seen on 10) | [#15](https://github.com/jabba2324/webForCore/issues/15) |
-| [F5](#f5) | Third-party packages bring Microsoft's ASP.NET packages back transitively (CS0433) | guide gap | eshop-legacy-mvc, bonobo-git-server | [#4](https://github.com/jabba2324/webForCore/issues/4) |
-| [F6](#f6) | A `lib/net45`-only package with a `build/` folder restores with no assembly | guide gap | eshop-legacy-mvc, eshop-legacy-webforms | [#5](https://github.com/jabba2324/webForCore/issues/5) |
-| [F7](#f7) | Packages that must be upgraded: EF 6.2 → 6.4+, Newtonsoft.Json 12 → 13 | guide gap | eshop-legacy-mvc, eshop-legacy-webforms, bonobo-git-server | [#6](https://github.com/jabba2324/webForCore/issues/6) |
-| [F8](#f8) | `HttpUtility` in app code is CS0433 outside webForCore's repository | webForCore bug | eshop-legacy-webforms, bonobo-git-server, aspnet-samples-webapi-bson, aspnet-samples-webapi-webforms | [#7](https://github.com/jabba2324/webForCore/issues/7) |
-| [F9](#f9) | Data controls with `ItemType` need System.Web.DynamicData, which isn't built | documented gap (consequence undocumented) | eshop-legacy-webforms | [#8](https://github.com/jabba2324/webForCore/issues/8) |
-| [F10](#f10) | .NET Framework assemblies that are NuGet packages on .NET (System.ServiceModel.Syndication) | guide gap | miniblog | [#9](https://github.com/jabba2324/webForCore/issues/9) |
-| [F11](#f11) | One URL Rewrite feature ASP.NET Core lacks (Wildcard syntax, `{CACHE_URL}`) drops every rule, failing open | webForCore bug | miniblog | [#10](https://github.com/jabba2324/webForCore/issues/10) |
-| [F12](#f12) | A rewrite to a query-only URL (`?slug={R:1}`) is a bare 500 (`IndexOutOfRangeException`) | webForCore bug | miniblog | [#11](https://github.com/jabba2324/webForCore/issues/11) |
-| [F13](#f13) | `<handlers>` entries whose `path` starts with `/` never match | webForCore bug | miniblog | [#12](https://github.com/jabba2324/webForCore/issues/12) |
+| [F1](#f1) | .NET Framework libraries get a second `ConfigurationManager` that can't read web.config | webForCore bug | eshop-legacy-mvc, eshop-legacy-webforms, bonobo-git-server | [#1](https://github.com/xforcore/webForCore/issues/1) |
+| [F2](#f2) | `CacheDependency` on one file under two spellings throws on Linux (bundling) | webForCore bug | eshop-legacy-mvc | [#2](https://github.com/xforcore/webForCore/issues/2) |
+| [F3](#f3) | `AppDomain.CurrentDomain.BaseDirectory` is `bin_dotnet/`, not the site root | webForCore bug | eshop-legacy-mvc | [#3](https://github.com/xforcore/webForCore/issues/3) |
+| [F4](#f4) | W3C logs are written inside the site and served over HTTP | webForCore bug (security) | every app using `AddWebForms()` (seen on 10) | [#15](https://github.com/xforcore/webForCore/issues/15) |
+| [F5](#f5) | Third-party packages bring Microsoft's ASP.NET packages back transitively (CS0433) | guide gap | eshop-legacy-mvc, bonobo-git-server | [#4](https://github.com/xforcore/webForCore/issues/4) |
+| [F6](#f6) | A `lib/net45`-only package with a `build/` folder restores with no assembly | guide gap | eshop-legacy-mvc, eshop-legacy-webforms | [#5](https://github.com/xforcore/webForCore/issues/5) |
+| [F7](#f7) | Packages that must be upgraded: EF 6.2 → 6.4+, Newtonsoft.Json 12 → 13 | guide gap | eshop-legacy-mvc, eshop-legacy-webforms, bonobo-git-server | [#6](https://github.com/xforcore/webForCore/issues/6) |
+| [F8](#f8) | `HttpUtility` in app code is CS0433 outside webForCore's repository | webForCore bug | eshop-legacy-webforms, bonobo-git-server, aspnet-samples-webapi-bson, aspnet-samples-webapi-webforms | [#7](https://github.com/xforcore/webForCore/issues/7) |
+| [F9](#f9) | Data controls with `ItemType` need System.Web.DynamicData, which isn't built | documented gap (consequence undocumented) | eshop-legacy-webforms | [#8](https://github.com/xforcore/webForCore/issues/8) |
+| [F10](#f10) | .NET Framework assemblies that are NuGet packages on .NET (System.ServiceModel.Syndication) | guide gap | miniblog | [#9](https://github.com/xforcore/webForCore/issues/9) |
+| [F11](#f11) | One URL Rewrite feature ASP.NET Core lacks (Wildcard syntax, `{CACHE_URL}`) drops every rule, failing open | webForCore bug | miniblog | [#10](https://github.com/xforcore/webForCore/issues/10) |
+| [F12](#f12) | A rewrite to a query-only URL (`?slug={R:1}`) is a bare 500 (`IndexOutOfRangeException`) | webForCore bug | miniblog | [#11](https://github.com/xforcore/webForCore/issues/11) |
+| [F13](#f13) | `<handlers>` entries whose `path` starts with `/` never match | webForCore bug | miniblog | [#12](https://github.com/xforcore/webForCore/issues/12) |
 
-| [F14](#f14) | The trailing-slash 301 for a directory pre-empts routing with `RouteExistingFiles = true` | webForCore bug | clean-architecture-mvc5 | [#13](https://github.com/jabba2324/webForCore/issues/13) |
-| [F15](#f15) | The VS template's social login packages (Facebook, Google, MicrosoftAccount, Twitter) aren't in webForCore | guide gap | aspnetdocs-mvcmovie | [#14](https://github.com/jabba2324/webForCore/issues/14) |
-| [F16](#f16) | Replaced packages are one version; Identity 2.0 apps collide with 2.2's `SignInStatus` | guide gap | open-order-framework | [#17](https://github.com/jabba2324/webForCore/issues/17) |
-| [F17](#f17) | Katana's social providers need `System.Net.Http.WebRequest` and fail at start-up when used | guide gap | open-order-framework, socialgoal | [#18](https://github.com/jabba2324/webForCore/issues/18) |
-| [F18](#f18) | Configuration types referenced through `System.dll` reach the host's ConfigurationManager (ELMAH) | webForCore bug | socialgoal | [#19](https://github.com/jabba2324/webForCore/issues/19) |
-| [F19](#f19) | `System.Web.Abstractions`/`System.Web.Routing` 4.0.0.0 in web.config can't be loaded | webForCore bug | roadkill | [#20](https://github.com/jabba2324/webForCore/issues/20) |
-| [F20](#f20) | `Assembly.LoadFrom` returns the default context's copy; WebActivatorEx start methods never run | webForCore bug | applicant-tracking, roadkill | [#21](https://github.com/jabba2324/webForCore/issues/21) |
-| [F21](#f21) | Glimpse doesn't run on .NET | guide gap | realocate | [#22](https://github.com/jabba2324/webForCore/issues/22) |
+| [F14](#f14) | The trailing-slash 301 for a directory pre-empts routing with `RouteExistingFiles = true` | webForCore bug | clean-architecture-mvc5 | [#13](https://github.com/xforcore/webForCore/issues/13) |
+| [F15](#f15) | The VS template's social login packages (Facebook, Google, MicrosoftAccount, Twitter) aren't in webForCore | guide gap | aspnetdocs-mvcmovie | [#14](https://github.com/xforcore/webForCore/issues/14) |
+| [F16](#f16) | Replaced packages are one version; Identity 2.0 apps collide with 2.2's `SignInStatus` | guide gap | open-order-framework | [#17](https://github.com/xforcore/webForCore/issues/17) |
+| [F17](#f17) | Katana's social providers need `System.Net.Http.WebRequest` and fail at start-up when used | guide gap | open-order-framework, socialgoal | [#18](https://github.com/xforcore/webForCore/issues/18) |
+| [F18](#f18) | Configuration types referenced through `System.dll` reach the host's ConfigurationManager (ELMAH) | webForCore bug | socialgoal | [#19](https://github.com/xforcore/webForCore/issues/19) |
+| [F19](#f19) | `System.Web.Abstractions`/`System.Web.Routing` 4.0.0.0 in web.config can't be loaded | webForCore bug | roadkill | [#20](https://github.com/xforcore/webForCore/issues/20) |
+| [F20](#f20) | `Assembly.LoadFrom` returns the default context's copy; WebActivatorEx start methods never run | webForCore bug | applicant-tracking, roadkill | [#21](https://github.com/xforcore/webForCore/issues/21) |
+| [F21](#f21) | Glimpse doesn't run on .NET | guide gap | realocate | [#22](https://github.com/xforcore/webForCore/issues/22) |
 | [F22](#f22) | AutoMapper before 12 doesn't run on .NET 11 | app/environment | realocate, socialgoal | - |
 | [F23](#f23) | `recaptcha` 1.0.5's lib folders aren't framework names (NU1202) | app/environment | roadkill | - |
-| [F24](#f24) | A transitive Microsoft.AspNet.Razor replaces webForCore's in the output with no build error | webForCore bug | bonobo-git-server, applicant-tracking, realocate, roadkill | [#23](https://github.com/jabba2324/webForCore/issues/23) |
+| [F24](#f24) | A transitive Microsoft.AspNet.Razor replaces webForCore's in the output with no build error | webForCore bug | bonobo-git-server, applicant-tracking, realocate, roadkill | [#23](https://github.com/xforcore/webForCore/issues/23) |
 | [F25](#f25) | .NET Framework builds of StructureMap 4.0 and NLog 4.2 need `AppDomainSetup` members .NET lacks; their .NET Standard builds work | app/environment | roadkill | - |
 | [F26](#f26) | OpenOrderFramework's Identity seed deadlocks on a fresh database (EF 6 initialization lock + `AsyncHelper.RunSync`) | app/environment | open-order-framework | - |
 | [F27](#f27) | LightSpeed (closed-source ORM) needs `AppDomain.DefineDynamicAssembly` | app/environment | roadkill | - |
-| [F28](#f28) | A `configSource` in a subfolder can't be loaded on Linux (`\` isn't a separator; `/` is rejected) | webForCore bug | mvcforum | [#26](https://github.com/jabba2324/webForCore/issues/26) |
-| [F29](#f29) | `relaxedUrlToFileSystemMapping="true"` makes every `MapPath` return `NOT_A_VALID_FILESYSTEM_PATH` | webForCore bug | mvcforum | [#27](https://github.com/jabba2324/webForCore/issues/27) |
-| [F30](#f30) | `webForCore.Web.Mvc` doesn't bring System.Web.Helpers, which Microsoft.AspNet.Mvc did | webForCore bug | mvcforum | [#28](https://github.com/jabba2324/webForCore/issues/28) |
-| [F31](#f31) | System.Web.ApplicationServices is visible to every project: a library's own `MembershipUser` is ambiguous | guide gap | mvcforum | [#29](https://github.com/jabba2324/webForCore/issues/29) |
-| [F32](#f32) | More versions webForCore requires: Humanizer.Core 2.14.1, System.* packages at 11.0 | guide gap | aspnet-mvc5-starter, mvcforum | [#30](https://github.com/jabba2324/webForCore/issues/30) |
-| [F33](#f33) | Some packages' .NET Standard builds have less than their net45 builds (WindowsAzure.Storage, Hangfire 1.6) | guide gap | aspnet-mvc5-starter, mvcforum | [#31](https://github.com/jabba2324/webForCore/issues/31) |
+| [F28](#f28) | A `configSource` in a subfolder can't be loaded on Linux (`\` isn't a separator; `/` is rejected) | webForCore bug | mvcforum | [#26](https://github.com/xforcore/webForCore/issues/26) |
+| [F29](#f29) | `relaxedUrlToFileSystemMapping="true"` makes every `MapPath` return `NOT_A_VALID_FILESYSTEM_PATH` | webForCore bug | mvcforum | [#27](https://github.com/xforcore/webForCore/issues/27) |
+| [F30](#f30) | `webForCore.Web.Mvc` doesn't bring System.Web.Helpers, which Microsoft.AspNet.Mvc did | webForCore bug | mvcforum | [#28](https://github.com/xforcore/webForCore/issues/28) |
+| [F31](#f31) | System.Web.ApplicationServices is visible to every project: a library's own `MembershipUser` is ambiguous | guide gap | mvcforum | [#29](https://github.com/xforcore/webForCore/issues/29) |
+| [F32](#f32) | More versions webForCore requires: Humanizer.Core 2.14.1, System.* packages at 11.0 | guide gap | aspnet-mvc5-starter, mvcforum | [#30](https://github.com/xforcore/webForCore/issues/30) |
+| [F33](#f33) | Some packages' .NET Standard builds have less than their net45 builds (WindowsAzure.Storage, Hangfire 1.6) | guide gap | aspnet-mvc5-starter, mvcforum | [#31](https://github.com/xforcore/webForCore/issues/31) |
 | [F34](#f34) | Build-time tools that don't run on Linux or the .NET 11 SDK (BuildWebCompiler, LibMan.Build 2.0) | app/environment | mvcforum, aspnet-mvc5-starter | - |
-| [F35](#f35) | `WsiProfiles`/`SoapBindingUse` in app code are CS0433: the System.Web.Services.Description package (from CoreWCF) has them too | webForCore bug | subtext, mojoportal | [#34](https://github.com/jabba2324/webForCore/issues/34) |
-| [F36](#f36) | A `.resx` with non-string resources needs System.Resources.Extensions (MSB3822) | guide gap | subtext | [#36](https://github.com/jabba2324/webForCore/issues/36) |
-| [F37](#f37) | `<compilation><assemblies>` lists .NET Framework assemblies .NET doesn't have (System.Design, System.Data.Linq) | guide gap | subtext, mojoportal | [#37](https://github.com/jabba2324/webForCore/issues/37) |
-| [F38](#f38) | Types a shared-framework facade forwards to the app's assemblies (System.Data's SqlClient) are a second copy: MissingMethodException | webForCore bug | subtext | [#35](https://github.com/jabba2324/webForCore/issues/35) |
+| [F35](#f35) | `WsiProfiles`/`SoapBindingUse` in app code are CS0433: the System.Web.Services.Description package (from CoreWCF) has them too | webForCore bug | subtext, mojoportal | [#34](https://github.com/xforcore/webForCore/issues/34) |
+| [F36](#f36) | A `.resx` with non-string resources needs System.Resources.Extensions (MSB3822) | guide gap | subtext | [#36](https://github.com/xforcore/webForCore/issues/36) |
+| [F37](#f37) | `<compilation><assemblies>` lists .NET Framework assemblies .NET doesn't have (System.Design, System.Data.Linq) | guide gap | subtext, mojoportal | [#37](https://github.com/xforcore/webForCore/issues/37) |
+| [F38](#f38) | Types a shared-framework facade forwards to the app's assemblies (System.Data's SqlClient) are a second copy: MissingMethodException | webForCore bug | subtext | [#35](https://github.com/xforcore/webForCore/issues/35) |
 | [F39](#f39) | NHibernate 3.3 doesn't run on .NET (proxy validation, `SqlCommandSet` by reflection) | app/environment | funnelweb | - |
-| [F40](#f40) | `Assembly.Load("App_GlobalResources")` (Visual Studio's resource designer code) can't work: .NET requires the simple name to match | webForCore bug | mojoportal | [#33](https://github.com/jabba2324/webForCore/issues/33) |
-| [F41](#f41) | WebActivator 1.x has WebActivatorEx's problem (#21), and the guide names only WebActivatorEx | guide gap | subtext | [#38](https://github.com/jabba2324/webForCore/issues/38) |
-| [F42](#f42) | SDK-style project references are transitive: NU1605 from versions pinned per project, a namespace that hides a type (CS0118) | guide gap | funnelweb, mojoportal | [#39](https://github.com/jabba2324/webForCore/issues/39) |
+| [F40](#f40) | `Assembly.Load("App_GlobalResources")` (Visual Studio's resource designer code) can't work: .NET requires the simple name to match | webForCore bug | mojoportal | [#33](https://github.com/xforcore/webForCore/issues/33) |
+| [F41](#f41) | WebActivator 1.x has WebActivatorEx's problem (#21), and the guide names only WebActivatorEx | guide gap | subtext | [#38](https://github.com/xforcore/webForCore/issues/38) |
+| [F42](#f42) | SDK-style project references are transitive: NU1605 from versions pinned per project, a namespace that hides a type (CS0118) | guide gap | funnelweb, mojoportal | [#39](https://github.com/xforcore/webForCore/issues/39) |
 | [F43](#f43) | Projects that deploy into the site with Windows `xcopy` post-build events | app/environment | mojoportal | - |
 | [F44](#f44) | DotNetOpenAuth 3.x reflects on .NET Framework's private `UriParser` fields | app/environment | subtext | - |
-| [F45](#f45) | Every package webForCore depends on is a version floor: System.Data.SqlClient 4.9.1, System.DirectoryServices 11.0 (NU1605) | guide gap | opserver-mvc5, yafnet-2 | [#42](https://github.com/jabba2324/webForCore/issues/42) |
-| [F46](#f46) | webForCore's SignalR and System.Web.DataVisualization assemblies are 0.0.0.0: libraries built against Microsoft's are CS1705 | webForCore bug | jabbr | [#40](https://github.com/jabba2324/webForCore/issues/40) |
-| [F47](#f47) | `GetTypes()` on System.Data.SqlClient 4.9.1 throws on .NET 11: apps that scan all assemblies fail | webForCore bug (dependency) | opserver-mvc5 | [#41](https://github.com/jabba2324/webForCore/issues/41) |
-| [F48](#f48) | The C# version: C# 14's span conversions and C# 11's ref safety break code written for older C# | guide gap | yafnet-2 | [#43](https://github.com/jabba2324/webForCore/issues/43) |
+| [F45](#f45) | Every package webForCore depends on is a version floor: System.Data.SqlClient 4.9.1, System.DirectoryServices 11.0 (NU1605) | guide gap | opserver-mvc5, yafnet-2 | [#42](https://github.com/xforcore/webForCore/issues/42) |
+| [F46](#f46) | webForCore's SignalR and System.Web.DataVisualization assemblies are 0.0.0.0: libraries built against Microsoft's are CS1705 | webForCore bug | jabbr | [#40](https://github.com/xforcore/webForCore/issues/40) |
+| [F47](#f47) | `GetTypes()` on System.Data.SqlClient 4.9.1 throws on .NET 11: apps that scan all assemblies fail | webForCore bug (dependency) | opserver-mvc5 | [#41](https://github.com/xforcore/webForCore/issues/41) |
+| [F48](#f48) | The C# version: C# 14's span conversions and C# 11's ref safety break code written for older C# | guide gap | yafnet-2 | [#43](https://github.com/xforcore/webForCore/issues/43) |
 | [F49](#f49) | YAF.NET's vendored ServiceStack 5.9 fork only works as .NET Framework code | app/environment | yafnet-2 | - |
 | [F50](#f50) | Nancy 0.20 needs `AppDomainSetup.PrivateBinPathProbe` | app/environment | jabbr | - |
-| [F51](#f51) | A change while the next start is starting leaves the application dead: 503 for every request | webForCore bug | bonobo-git-server, mojoportal (Windows); any app | [#49](https://github.com/jabba2324/webForCore/issues/49) |
-| [F52](#f52) | AppDomain data `DataDirectory` isn't set: `\|DataDirectory\|` resolves to `bin_dotnet/` | webForCore bug | bonobo-git-server | [#50](https://github.com/jabba2324/webForCore/issues/50) |
-| [F53](#f53) | Linux: a change in `bin` or `App_Code` doesn't restart the application | webForCore bug | any app (seen on aspnetdocs-mvcmovie, miniblog) | [#51](https://github.com/jabba2324/webForCore/issues/51) |
-| [F54](#f54) | .NET 10 prunes fewer framework packages than .NET 11: NU1605 downgrades (System.ComponentModel.Annotations; Microsoft.Extensions.\* in class libraries) | guide gap | mvcforum, yafnet-2 | [#62](https://github.com/jabba2324/webForCore/issues/62) |
+| [F51](#f51) | A change while the next start is starting leaves the application dead: 503 for every request | webForCore bug | bonobo-git-server, mojoportal (Windows); any app | [#49](https://github.com/xforcore/webForCore/issues/49) |
+| [F52](#f52) | AppDomain data `DataDirectory` isn't set: `\|DataDirectory\|` resolves to `bin_dotnet/` | webForCore bug | bonobo-git-server | [#50](https://github.com/xforcore/webForCore/issues/50) |
+| [F53](#f53) | Linux: a change in `bin` or `App_Code` doesn't restart the application | webForCore bug | any app (seen on aspnetdocs-mvcmovie, miniblog) | [#51](https://github.com/xforcore/webForCore/issues/51) |
+| [F54](#f54) | .NET 10 prunes fewer framework packages than .NET 11: NU1605 downgrades (System.ComponentModel.Annotations; Microsoft.Extensions.\* in class libraries) | guide gap | mvcforum, yafnet-2 | [#62](https://github.com/xforcore/webForCore/issues/62) |
 | [F55](#f55) | webForCore-thirdparty 0.4.x (net11.0 only) restores on .NET 10 with no error and no assembly: the original WebActivatorEx runs | app/environment (fixed in webForCore-thirdparty 0.5.0) | applicant-tracking (bonobo-git-server, mvcforum, roadkill, subtext would have) | - |
 | [F56](#f56) | An app's repository is gone from GitHub (devbridge/BetterCMS), and a clone of one waited for credentials | app/environment | better-cms (and prodinner, already rejected for it) | - |
 ---
 
 ## F1
 
-**.NET Framework libraries get a second `ConfigurationManager` that can't read web.config.** webForCore bug. Raised as [#1](https://github.com/jabba2324/webForCore/issues/1).
+**.NET Framework libraries get a second `ConfigurationManager` that can't read web.config.** webForCore bug. Raised as [#1](https://github.com/xforcore/webForCore/issues/1).
 
 - **Apps:** bonobo-git-server (WebActivatorEx 2.2.0, which reads `AppSettings` in its PreApplicationStartMethod, so
   the whole site fails); eshop-legacy-mvc, eshop-legacy-webforms (`Microsoft.AspNet.SessionState.SessionStateModule` 1.1.0, which web.config's
@@ -121,7 +121,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 
 ## F2
 
-**`CacheDependency` on one file under two spellings throws on Linux.** webForCore bug. Raised as [#2](https://github.com/jabba2324/webForCore/issues/2).
+**`CacheDependency` on one file under two spellings throws on Linux.** webForCore bug. Raised as [#2](https://github.com/xforcore/webForCore/issues/2).
 
 - **Apps:** eshop-legacy-mvc: `@Styles.Render`/`@Scripts.Render` in `_Layout.cshtml` failed when two first requests
   rendered the bundles at once (`System.Web.Optimization.HttpContextCache.Put` → `MapPathBasedVirtualPathProvider.GetCacheDependency`).
@@ -158,7 +158,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 ## F3
 
 **`AppDomain.CurrentDomain.BaseDirectory` is `bin_dotnet/`, not the site root.** webForCore bug (not in
-`docs/NAMESPACES.md` or `docs/IIS-COMPATIBILITY.md`). Raised as [#3](https://github.com/jabba2324/webForCore/issues/3).
+`docs/NAMESPACES.md` or `docs/IIS-COMPATIBILITY.md`). Raised as [#3](https://github.com/xforcore/webForCore/issues/3).
 
 - **Apps:** eshop-legacy-mvc: `CatalogDBInitializer.ExecuteScript` reads
   `Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Models/Infrastructure/dbo.catalog_hilo.Sequence.sql")`.
@@ -176,7 +176,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 
 ## F4
 
-**W3C logs are written inside the site and served over HTTP.** webForCore bug, with security impact. Raised as [#15](https://github.com/jabba2324/webForCore/issues/15).
+**W3C logs are written inside the site and served over HTTP.** webForCore bug, with security impact. Raised as [#15](https://github.com/xforcore/webForCore/issues/15).
 
 - **Apps:** every app whose `Program.cs` calls `builder.Services.AddWebForms()` with the defaults, as
   `docs/MIGRATING.md` section 4 says. Found on eshop-legacy-mvc and confirmed on a minimal site.
@@ -194,7 +194,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 
 ## F5
 
-**Third-party packages bring Microsoft's ASP.NET packages back transitively.** Guide gap. Raised as [#4](https://github.com/jabba2324/webForCore/issues/4).
+**Third-party packages bring Microsoft's ASP.NET packages back transitively.** Guide gap. Raised as [#4](https://github.com/xforcore/webForCore/issues/4).
 
 - **Apps:** eshop-legacy-mvc, and in round 2 bonobo-git-server, applicant-tracking, realocate and roadkill (where it
   showed as F24, at run time). eshop-legacy-mvc: `Autofac.Mvc5` 4.0.2 depends on `Microsoft.AspNet.Mvc` 5.1.0 (and through it Razor 3.1,
@@ -217,7 +217,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 
 ## F6
 
-**A `lib/net45`-only package with a `build/` folder restores with no assembly.** Guide gap. Raised as [#5](https://github.com/jabba2324/webForCore/issues/5).
+**A `lib/net45`-only package with a `build/` folder restores with no assembly.** Guide gap. Raised as [#5](https://github.com/xforcore/webForCore/issues/5).
 
 - **Apps:** eshop-legacy-mvc: `Microsoft.ApplicationInsights.Web` 2.9.1 (`lib/net45/Microsoft.AI.Web.dll`,
   `build/Microsoft.ApplicationInsights.Web.targets`), named by web.config's `ApplicationInsightsWebTracking` module.
@@ -237,7 +237,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 
 ## F7
 
-**Packages that must be upgraded.** Guide gap (small). Raised as [#6](https://github.com/jabba2324/webForCore/issues/6).
+**Packages that must be upgraded.** Guide gap (small). Raised as [#6](https://github.com/xforcore/webForCore/issues/6).
 
 - **Apps:** eshop-legacy-mvc.
 - `EntityFramework` 6.2.0 has only `net40`/`net45` builds; on .NET it needs 6.4 or later (the guide's "EntityFramework
@@ -253,7 +253,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 
 ## F8
 
-**`HttpUtility` in app code is CS0433 outside webForCore's repository.** webForCore bug. Raised as [#7](https://github.com/jabba2324/webForCore/issues/7).
+**`HttpUtility` in app code is CS0433 outside webForCore's repository.** webForCore bug. Raised as [#7](https://github.com/xforcore/webForCore/issues/7).
 
 - **Apps:** bonobo-git-server (`IHtmlString`: every type in the framework's `System.Web.HttpUtility.dll` clashes);
   eshop-legacy-webforms (`ViewSwitcher.ascx.cs:39`, `HttpUtility.UrlEncode`), the Visual Studio Web Forms
@@ -278,7 +278,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 ## F9
 
 **Data controls with `ItemType` need System.Web.DynamicData, which isn't built.** Documented gap, but the
-consequence isn't. Raised as [#8](https://github.com/jabba2324/webForCore/issues/8).
+consequence isn't. Raised as [#8](https://github.com/xforcore/webForCore/issues/8).
 
 - **Apps:** eshop-legacy-webforms: `Default.aspx`'s `<asp:ListView ... ItemType="eShopLegacyWebForms.Models.CatalogItem">`.
 - **Error:** `FileNotFoundException: Could not load file or assembly 'System.Web.DynamicData, Version=4.0.0.0,
@@ -297,7 +297,7 @@ consequence isn't. Raised as [#8](https://github.com/jabba2324/webForCore/issues
 
 ## F10
 
-**.NET Framework assemblies that are NuGet packages on .NET.** Guide gap. Raised as [#9](https://github.com/jabba2324/webForCore/issues/9).
+**.NET Framework assemblies that are NuGet packages on .NET.** Guide gap. Raised as [#9](https://github.com/xforcore/webForCore/issues/9).
 
 - **Apps:** miniblog: `app_code/handlers/FeedHandler.cs` uses `System.ServiceModel.Syndication` (`SyndicationFeed`,
   `Rss20FeedFormatter`).
@@ -315,7 +315,7 @@ consequence isn't. Raised as [#8](https://github.com/jabba2324/webForCore/issues
 
 ## F11
 
-**One URL Rewrite feature ASP.NET Core lacks drops every rule, failing open.** webForCore bug. Raised as [#10](https://github.com/jabba2324/webForCore/issues/10).
+**One URL Rewrite feature ASP.NET Core lacks drops every rule, failing open.** webForCore bug. Raised as [#10](https://github.com/xforcore/webForCore/issues/10).
 
 - **Apps:** miniblog. Its first rule is IIS's own "Remove WWW" template:
   ```xml
@@ -348,7 +348,7 @@ consequence isn't. Raised as [#8](https://github.com/jabba2324/webForCore/issues
 
 ## F12
 
-**A rewrite to a query-only URL is a bare 500.** webForCore bug. Raised as [#11](https://github.com/jabba2324/webForCore/issues/11).
+**A rewrite to a query-only URL is a bare 500.** webForCore bug. Raised as [#11](https://github.com/xforcore/webForCore/issues/11).
 
 - **Apps:** miniblog: `<action type="Rewrite" url="?slug={R:1}" />` for `^post/(.*)`, and the same for paging and
   categories. On IIS the rewritten URL is resolved against the site root, so `/post/test-1` runs `/?slug=test-1`
@@ -363,7 +363,7 @@ consequence isn't. Raised as [#8](https://github.com/jabba2324/webForCore/issues
 
 ## F13
 
-**`<handlers>` entries whose `path` starts with `/` never match.** webForCore bug. Raised as [#12](https://github.com/jabba2324/webForCore/issues/12).
+**`<handlers>` entries whose `path` starts with `/` never match.** webForCore bug. Raised as [#12](https://github.com/xforcore/webForCore/issues/12).
 
 - **Apps:** miniblog: `path="/comment.ashx"` (comment posting), `path="/post.ashx"`, `path="/metaweblog"` (Windows Live
   Writer / XML-RPC) and `path="/feed/*"` (RSS and Atom) are all 404. `path="*.css"` and `path="*.js"` in the same
@@ -377,7 +377,7 @@ consequence isn't. Raised as [#8](https://github.com/jabba2324/webForCore/issues
 
 ## F14
 
-**The trailing-slash 301 for a directory pre-empts routing with `RouteExistingFiles = true`.** webForCore bug. Raised as [#13](https://github.com/jabba2324/webForCore/issues/13).
+**The trailing-slash 301 for a directory pre-empts routing with `RouteExistingFiles = true`.** webForCore bug. Raised as [#13](https://github.com/xforcore/webForCore/issues/13).
 
 - **Apps:** clean-architecture-mvc5: feature folders `Products/` and `Contact/` (controllers and views) share their
   names with the controllers, and `RouteConfig` sets `routes.RouteExistingFiles = true` so that `/Products` reaches
@@ -407,7 +407,7 @@ consequence isn't. Raised as [#8](https://github.com/jabba2324/webForCore/issues
 
 ## F15
 
-**The Visual Studio template's social login packages aren't in webForCore.** Guide gap. Raised as [#14](https://github.com/jabba2324/webForCore/issues/14).
+**The Visual Studio template's social login packages aren't in webForCore.** Guide gap. Raised as [#14](https://github.com/xforcore/webForCore/issues/14).
 
 - **Apps:** aspnetdocs-mvcmovie. Every app made from the Visual Studio 2013-2019 "MVC" or "Web Forms" template with
   individual accounts references `Microsoft.Owin.Security.Facebook`, `.Google`, `.MicrosoftAccount` and `.Twitter`, and
@@ -430,7 +430,7 @@ consequence isn't. Raised as [#8](https://github.com/jabba2324/webForCore/issues
 ## F16
 
 **Packages webForCore replaces are at one version; an app written against an older one can collide with its additions.**
-Guide gap. Raised as [#17](https://github.com/jabba2324/webForCore/issues/17). Found on 0.2.0.
+Guide gap. Raised as [#17](https://github.com/xforcore/webForCore/issues/17). Found on 0.2.0.
 
 - **Apps:** open-order-framework (ASP.NET Identity 2.0.0).
 - **Error:** `CS0104: 'SignInStatus' is an ambiguous reference between 'OpenOrderFramework.Models.SignInStatus' and
@@ -452,7 +452,7 @@ Guide gap. Raised as [#17](https://github.com/jabba2324/webForCore/issues/17). F
 
 **The Katana social providers webForCore doesn't lift fail at start-up when they're used:**
 `System.Net.Http.WebRequest` doesn't exist on .NET. Guide gap: F15's documented step works only while the providers are
-commented out. Raised as [#18](https://github.com/jabba2324/webForCore/issues/18). Found on 0.2.0.
+commented out. Raised as [#18](https://github.com/xforcore/webForCore/issues/18). Found on 0.2.0.
 
 - **Apps:** open-order-framework (Katana 2.1.0), socialgoal (Katana 2.0.0). Both call `app.UseGoogleAuthentication()`
   in `Startup.Auth.cs`. MvcMovie (F15), where the providers are commented out, works.
@@ -509,7 +509,7 @@ on 0.2.0.
 ## F19
 
 **`System.Web.Abstractions` and `System.Web.Routing` 4.0.0.0 can't be loaded:** web.configs that list them in
-`<compilation><assemblies>` fail on every request. webForCore bug. Raised as [#19](https://github.com/jabba2324/webForCore/issues/19). Raised as [#20](https://github.com/jabba2324/webForCore/issues/20). Found on 0.2.0.
+`<compilation><assemblies>` fail on every request. webForCore bug. Raised as [#19](https://github.com/xforcore/webForCore/issues/19). Raised as [#20](https://github.com/xforcore/webForCore/issues/20). Found on 0.2.0.
 
 - **Apps:** roadkill. Web.configs from MVC 2-4 projects have
   `<add assembly="System.Web.Abstractions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" />` and
@@ -531,7 +531,7 @@ on 0.2.0.
 ## F20
 
 **`Assembly.LoadFrom` in an application returns the default load context's copy:** WebActivatorEx's start methods
-never run. webForCore bug. Raised as [#21](https://github.com/jabba2324/webForCore/issues/21). Found on 0.2.0.
+never run. webForCore bug. Raised as [#21](https://github.com/xforcore/webForCore/issues/21). Found on 0.2.0.
 
 - **Apps:** applicant-tracking (Unity.Mvc 5 registers its resolver from `UnityMvcActivator` by
   `WebActivatorEx.PreApplicationStartMethod`), roadkill (StructureMap from `LocatorStartup` in `Roadkill.Core`).
@@ -564,7 +564,7 @@ never run. webForCore bug. Raised as [#21](https://github.com/jabba2324/webForCo
 
 ## F21
 
-**Glimpse doesn't run on .NET.** Guide gap. Raised as [#22](https://github.com/jabba2324/webForCore/issues/22). Found on 0.2.0.
+**Glimpse doesn't run on .NET.** Guide gap. Raised as [#22](https://github.com/xforcore/webForCore/issues/22). Found on 0.2.0.
 
 - **Apps:** realocate (Glimpse 1.8/1.9: Core, Ado, AspNet, EF6, Mvc5).
 - **Errors:** Glimpse.Ado's pre-application-start method throws `NullReferenceException` in
@@ -610,7 +610,7 @@ Found on 0.2.0.
 ## F24
 
 **A transitive Microsoft.AspNet.Razor/WebPages replaces webForCore's in the output with no build error;** every view
-then fails. webForCore bug (F5's documented step is the workaround). Raised as [#23](https://github.com/jabba2324/webForCore/issues/23). Found on 0.2.0.
+then fails. webForCore bug (F5's documented step is the workaround). Raised as [#23](https://github.com/xforcore/webForCore/issues/23). Found on 0.2.0.
 
 - **Apps:** bonobo-git-server (Unity.Mvc 5.11 → Microsoft.AspNet.Mvc 5.2.7), applicant-tracking (Unity.Mvc 5.0.13 →
   5.2.3), realocate (Autofac.Mvc5 3.3.4 → 5.1.0), roadkill (FixedDisplayModes and Swashbuckle → MVC 5.0, Web API 4.0).
@@ -634,7 +634,7 @@ then fails. webForCore bug (F5's documented step is the workaround). Raised as [
 ## F25
 
 **StructureMap 4.0's .NET Framework build needs `AppDomainSetup.PrivateBinPath`.** App/environment. Found on the
-packages of jabba2324/webForCore#24 (it was behind F19 and F20).
+packages of xforcore/webForCore#24 (it was behind F19 and F20).
 
 - **Apps:** roadkill (`structuremap` 4.0.0.315, through `StructureMap.MVC5` and `structuremap.web`).
 - **Error:** every request, from Roadkill's WebActivatorEx start method:
@@ -688,7 +688,7 @@ F19, F20 and F25).
 
 ## F28
 
-**A `configSource` in a subfolder can't be loaded on Linux.** webForCore bug. Raised as [#26](https://github.com/jabba2324/webForCore/issues/26). Found on 0.4.0.
+**A `configSource` in a subfolder can't be loaded on Linux.** webForCore bug. Raised as [#26](https://github.com/xforcore/webForCore/issues/26). Found on 0.4.0.
 
 - **Apps:** mvcforum (ImageProcessor's `<security configSource="Config\imageprocessor\security.config"/>`, and `cache`,
   `processing`). Splitting sections into a `Config\` folder is common (ImageProcessor, Umbraco, connection strings and
@@ -708,7 +708,7 @@ F19, F20 and F25).
 ## F29
 
 **`relaxedUrlToFileSystemMapping="true"` makes every `MapPath` return `NOT_A_VALID_FILESYSTEM_PATH` on Linux.**
-webForCore bug. Raised as [#27](https://github.com/jabba2324/webForCore/issues/27). Found on 0.4.0.
+webForCore bug. Raised as [#27](https://github.com/xforcore/webForCore/issues/27). Found on 0.4.0.
 
 - **Apps:** mvcforum (`<httpRuntime relaxedUrlToFileSystemMapping="true" ...>`, common in apps that allow special
   characters in URLs).
@@ -741,7 +741,7 @@ Found on 0.4.0.
 ## F31
 
 **System.Web.ApplicationServices is visible to every project, so a library's own `MembershipUser` becomes ambiguous.**
-Guide gap. Raised as [#29](https://github.com/jabba2324/webForCore/issues/29). Found on 0.4.0.
+Guide gap. Raised as [#29](https://github.com/xforcore/webForCore/issues/29). Found on 0.4.0.
 
 - **Apps:** mvcforum (`MVCForum.Core` defines `MembershipUser` and `MembershipCreateStatus` and has
   `using System.Web.Security;`).
@@ -760,7 +760,7 @@ Guide gap. Raised as [#29](https://github.com/jabba2324/webForCore/issues/29). F
 ## F32
 
 **More versions webForCore requires: Humanizer.Core 2.14.1 and the System.* packages at 11.0.** Guide gap (extends
-F7, #6). Raised as [#30](https://github.com/jabba2324/webForCore/issues/30). Found on 0.4.0.
+F7, #6). Raised as [#30](https://github.com/xforcore/webForCore/issues/30). Found on 0.4.0.
 
 - **Apps:** aspnet-mvc5-starter (`Humanizer.Core` 2.6.2), mvcforum (`System.Configuration.ConfigurationManager` and
   `System.Runtime.Caching` 4.5.0-preview1).
@@ -775,7 +775,7 @@ F7, #6). Raised as [#30](https://github.com/jabba2324/webForCore/issues/30). Fou
 ## F33
 
 **Some packages' .NET Standard builds have less than their `net45` builds, and NuGet picks the .NET Standard one.**
-Guide gap. Raised as [#31](https://github.com/jabba2324/webForCore/issues/31). Found on 0.4.0.
+Guide gap. Raised as [#31](https://github.com/xforcore/webForCore/issues/31). Found on 0.4.0.
 
 - **Apps:**
   - aspnet-mvc5-starter: WindowsAzure.Storage 9.3.3's `netstandard1.3` build has no synchronous blob methods (`Exists`,
@@ -809,7 +809,7 @@ Guide gap. Raised as [#31](https://github.com/jabba2324/webForCore/issues/31). F
 ## F35
 
 **`WsiProfiles` and `SoapBindingUse` in app code are CS0433.** webForCore bug. Raised as
-[#34](https://github.com/jabba2324/webForCore/issues/34). Found on 0.4.0. Fixed in #32.
+[#34](https://github.com/xforcore/webForCore/issues/34). Found on 0.4.0. Fixed in #32.
 
 - **Apps:**
   - mojoportal: its `.ashx` handlers, from Visual Studio's generic handler template
@@ -829,7 +829,7 @@ Guide gap. Raised as [#31](https://github.com/jabba2324/webForCore/issues/31). F
 ## F36
 
 **A `.resx` with non-string resources needs System.Resources.Extensions.** Guide gap. Raised as
-[#36](https://github.com/jabba2324/webForCore/issues/36). Found on 0.4.0.
+[#36](https://github.com/xforcore/webForCore/issues/36). Found on 0.4.0.
 
 - **Apps:** subtext (`Subtext.Web`'s resources include images).
 - **Error:** `error MSB3822: Non-string resources require the System.Resources.Extensions assembly at runtime, but it
@@ -842,7 +842,7 @@ Guide gap. Raised as [#31](https://github.com/jabba2324/webForCore/issues/31). F
 ## F37
 
 **web.config's `<compilation><assemblies>` lists .NET Framework assemblies that .NET doesn't have.** Guide gap. Raised
-as [#37](https://github.com/jabba2324/webForCore/issues/37). Found on 0.4.0.
+as [#37](https://github.com/xforcore/webForCore/issues/37). Found on 0.4.0.
 
 - **Apps:** subtext (`System.Design, Version=4.0.0.0`), mojoportal (`System.Data.Linq, Version=4.0.0.0`).
 - **Error:** every page: `Configuration Error ... Could not load file or assembly 'System.Design, Version=4.0.0.0,
@@ -854,7 +854,7 @@ as [#37](https://github.com/jabba2324/webForCore/issues/37). Found on 0.4.0.
 ## F38
 
 **Types that a shared-framework facade forwards to one of the app's assemblies are a second copy.** webForCore bug.
-Raised as [#35](https://github.com/jabba2324/webForCore/issues/35). Found on 0.4.0. Fixed in #32.
+Raised as [#35](https://github.com/xforcore/webForCore/issues/35). Found on 0.4.0. Fixed in #32.
 
 - **Apps:** subtext. `Microsoft.ApplicationBlocks.Data.dll`, the checked-in .NET Framework 1.1 data access block,
   references `SqlDataReader` in `System.Data, Version=1.0.5000.0`.
@@ -897,7 +897,7 @@ Raised as [#35](https://github.com/jabba2324/webForCore/issues/35). Found on 0.4
 ## F40
 
 **`Assembly.Load("App_GlobalResources")` can't work on .NET.** webForCore bug. Raised as
-[#33](https://github.com/jabba2324/webForCore/issues/33). Found on 0.4.0. Not fixed.
+[#33](https://github.com/xforcore/webForCore/issues/33). Found on 0.4.0. Not fixed.
 
 - **Apps:** mojoportal. Its `App_GlobalResources/*.Designer.cs`, Visual Studio's generated code, does
   `new ResourceManager("Resources.Resource", Assembly.Load("App_GlobalResources"))`.
@@ -921,7 +921,7 @@ Raised as [#35](https://github.com/jabba2324/webForCore/issues/35). Found on 0.4
 ## F41
 
 **WebActivator 1.x has the same problem as WebActivatorEx (#21).** Guide gap. Raised as
-[#38](https://github.com/jabba2324/webForCore/issues/38). Found on 0.4.0.
+[#38](https://github.com/xforcore/webForCore/issues/38). Found on 0.4.0.
 
 - **Apps:** subtext. Its Ninject bootstrapper, `App_Start/NinjectMVC3.cs`, uses
   `[assembly: WebActivator.PreApplicationStartMethod(...)]`. It is WebActivator 1.5, the package before WebActivatorEx
@@ -929,14 +929,14 @@ Raised as [#35](https://github.com/jabba2324/webForCore/issues/35). Found on 0.4
 - **Cause:** as #21: its start methods are never run, so the container isn't set up. `docs/MIGRATING.md` and
   webForCore-thirdparty cover WebActivatorEx only.
 - **What worked:** `webForCore.WebActivator` 0.4.1, a build of WebActivator 1.5 for webForCore, added to
-  webForCore-thirdparty in [jabba2324/webForCore-thirdparty#1](https://github.com/jabba2324/webForCore-thirdparty/pull/1).
+  webForCore-thirdparty in [xforcore/webForCore-thirdparty#1](https://github.com/xforcore/webForCore-thirdparty/pull/1).
   Its smoke test fails without the package and passes with it, on webForCore 0.3.0 and 0.4.0. Calling
   `WebActivator.ActivationManager`'s methods from `Application_Start` is the workaround without it.
 
 ## F42
 
 **SDK-style project references are transitive.** Guide gap. Raised as
-[#39](https://github.com/jabba2324/webForCore/issues/39). Found on 0.4.0.
+[#39](https://github.com/xforcore/webForCore/issues/39). Found on 0.4.0.
 
 - **Apps:**
   - funnelweb: the web project pins `Iesi.Collections` 3.2.0.4000 in packages.config, and the `FunnelWeb` library pins
@@ -975,7 +975,7 @@ Raised as [#35](https://github.com/jabba2324/webForCore/issues/35). Found on 0.4
 ## F45
 
 **Every package webForCore depends on is a floor for the application's reference to it.** Guide gap (extends F7 and F32).
-Raised as [#42](https://github.com/jabba2324/webForCore/issues/42). Found on 0.5.0. Documented in #44.
+Raised as [#42](https://github.com/xforcore/webForCore/issues/42). Found on 0.5.0. Documented in #44.
 
 - **Apps:** yafnet-2 (ServiceStack.OrmLite.SqlServer has System.Data.SqlClient 4.8.1), opserver-mvc5 (Opserver.Core has
   System.DirectoryServices 4.5.0).
@@ -987,7 +987,7 @@ Raised as [#42](https://github.com/jabba2324/webForCore/issues/42). Found on 0.5
 ## F46
 
 **webForCore's SignalR and System.Web.DataVisualization assemblies have version 0.0.0.0.** webForCore bug. Raised as
-[#40](https://github.com/jabba2324/webForCore/issues/40). Found on 0.5.0. Fixed in #44.
+[#40](https://github.com/xforcore/webForCore/issues/40). Found on 0.5.0. Fixed in #44.
 
 - **Apps:** jabbr. It keeps Microsoft's SignalR SQL Server and Service Bus scale-out packages, which webForCore doesn't
   lift.
@@ -1009,7 +1009,7 @@ Raised as [#42](https://github.com/jabba2324/webForCore/issues/42). Found on 0.5
 ## F47
 
 **`GetTypes()` on System.Data.SqlClient 4.9.1 throws on .NET 11.** webForCore bug (its dependency). Raised as
-[#41](https://github.com/jabba2324/webForCore/issues/41). Found on 0.5.0. Not fixed: the fix is a choice for webForCore.
+[#41](https://github.com/xforcore/webForCore/issues/41). Found on 0.5.0. Not fixed: the fix is a choice for webForCore.
 
 - **Apps:** opserver-mvc5. It builds its tabs by scanning every loaded assembly's types. Any app that scans all
   assemblies is affected: DI registration, AutoMapper profiles, MEF, plugin loaders.
@@ -1025,7 +1025,7 @@ Raised as [#42](https://github.com/jabba2324/webForCore/issues/42). Found on 0.5
 
 ## F48
 
-**The C# version code was written for.** Guide gap. Raised as [#43](https://github.com/jabba2324/webForCore/issues/43).
+**The C# version code was written for.** Guide gap. Raised as [#43](https://github.com/xforcore/webForCore/issues/43).
 Found on 0.5.0. Documented in #44.
 
 - **Apps:** yafnet-2 (its vendored ServiceStack.Text).
@@ -1061,7 +1061,7 @@ Found on 0.5.0. Documented in #44.
 ## F51
 
 **A change while the next start is starting leaves the application dead.** webForCore bug. Raised as
-[#49](https://github.com/jabba2324/webForCore/issues/49). Found on 0.6.0, on Linux and Windows.
+[#49](https://github.com/xforcore/webForCore/issues/49). Found on 0.6.0, on Linux and Windows.
 
 - **Apps:** bonobo-git-server and mojoportal on Windows, where the app itself writes into `bin_dotnet` (F52, F3); any app
   when files keep changing during a restart (a deployment copying a build).
@@ -1076,7 +1076,7 @@ Found on 0.5.0. Documented in #44.
 ## F52
 
 **AppDomain data `DataDirectory` isn't set.** webForCore bug. Raised as
-[#50](https://github.com/jabba2324/webForCore/issues/50). Found on 0.6.0 (and 0.5.0), on Linux and Windows.
+[#50](https://github.com/xforcore/webForCore/issues/50). Found on 0.6.0 (and 0.5.0), on Linux and Windows.
 
 - **Apps:** bonobo-git-server: `Data Source=|DataDirectory|Bonobo.Git.Server.db` (System.Data.SQLite) puts the database
   in `bin_dotnet/`, not `App_Data/`. On Windows that write is a change in `bin`, and the app then hits F51.
@@ -1088,7 +1088,7 @@ Found on 0.5.0. Documented in #44.
 ## F53
 
 **Linux: a change in `bin` or `App_Code` doesn't restart the application.** webForCore bug. Raised as
-[#51](https://github.com/jabba2324/webForCore/issues/51). Found on 0.6.0 (and 0.5.0).
+[#51](https://github.com/xforcore/webForCore/issues/51). Found on 0.6.0 (and 0.5.0).
 
 - **Apps:** any; checked with aspnetdocs-mvcmovie (a new `.dll` in `bin_dotnet`) and miniblog (a new `.cs` in
   `app_code`). `Web.config` restarts it; on Windows all three do. docs/IIS-COMPATIBILITY.md says they work.
@@ -1098,7 +1098,7 @@ Found on 0.5.0. Documented in #44.
 ## F54
 
 **.NET 10 prunes fewer framework packages than .NET 11, so restores fail with NU1605 package downgrades.** Guide
-gap. Raised as [#62](https://github.com/jabba2324/webForCore/issues/62). Found in round 6, on 0.7.0 (.NET 10), on
+gap. Raised as [#62](https://github.com/xforcore/webForCore/issues/62). Found in round 6, on 0.7.0 (.NET 10), on
 Linux and Windows.
 
 - **Apps:**
