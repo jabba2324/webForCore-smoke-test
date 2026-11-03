@@ -2,26 +2,26 @@
   "id": "aspnet-samples-webapi-bson",
   "stages": {
     "build": {
-      "at": "2026-11-01T23:56:09+00:00",
+      "at": "2026-11-03T12:43:36+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\aspnet-samples-webapi-bson\\logs.windows\\build.log",
-      "seconds": 1,
+      "seconds": 5,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.6.0"
+      "webforcore": "packages 0.7.0"
     },
     "fetch": {
-      "at": "2026-11-01T23:56:08+00:00",
+      "at": "2026-11-03T12:43:31+00:00",
       "commit": "f7d4a776327df09c13b39489b122209c5d04693b",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-01T23:56:24+00:00",
+      "at": "2026-11-03T12:43:42+00:00",
       "checks": [
         {
-          "ms": 3997,
+          "ms": 9,
           "ok": true,
           "path": "/",
           "status": 200
@@ -33,19 +33,19 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 3,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 13,
+          "ms": 18,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 14,
+          "ms": 16,
           "ok": true,
           "path": "/obj/",
           "status": 404
@@ -57,15 +57,21 @@
           "status": 404
         },
         {
-          "ms": 21,
+          "ms": 4,
           "ok": true,
           "path": "/bin_dotnet/BSONSample.dll",
+          "status": 404
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404
         }
       ],
       "log": "apps\\aspnet-samples-webapi-bson\\logs.windows\\server.log",
       "status": "pass",
-      "summary": "7/7 probes"
+      "summary": "8/8 probes"
     }
   }
 }
