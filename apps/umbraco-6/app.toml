@@ -10,8 +10,8 @@ project = "src/Umbraco.Web.UI/Umbraco.Web.UI.csproj"
 generated = ["src/Umbraco.Web.UI/config/ClientDependency.config"]
 kinds = ["webforms", "mvc", "webapi", "webpages"]
 licence = "MIT"
-status = "blocked"
-notes = "On webForCore 0.7.0 (.NET 10, under webforcore-host) it builds; the back office, Web API, ASMX and handlers work: 15/16 on Linux. Setup stops at the install wizard's JSON page method, which the runner can't post yet (F64); with that step (tested) 16/16."
+status = "migrated"
+notes = "On webForCore 0.7.0 (.NET 10, under webforcore-host) it builds, installs through [setup] and passes 16/16 on Linux: the back office, Web API, ASMX, handlers and an MVC template. Found F57-F63 (four webForCore bugs, three guide gaps) and F64."
 needs = ["mssql"]
 
 # The first request compiles the site, so it gets 120 s. The probes need the compose SQL Server with an "umbraco6"

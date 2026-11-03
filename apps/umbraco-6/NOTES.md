@@ -1,6 +1,6 @@
 # Umbraco 6: migration notes
 
-Status: blocked (on the runner: its install wizard needs a JSON POST; see Smoke). Source:
+Status: migrated (16/16 on Linux; four webForCore bugs and three guide gaps found on the way). Source:
 https://github.com/umbraco/Umbraco-CMS at `026805e4` (tag release-6.2.6, the last 6.x release). The repo, licence (MIT),
 web project and its `<TargetFrameworkVersion>` (v4.0) were checked when the app was added.
 
@@ -108,10 +108,8 @@ Go, with SQL Server.
 - **Round 6 (webForCore 0.7.0 on .NET 10; under webforcore-host; Linux):** 15/16 checks on Linux (9 probes and the 7
   forbidden paths). Setup stops at the install wizard's JSON step (1/2 steps), so the site is never installed and the
   home page probe gets a 302 to `/install/` (F64). Every other probe passes on the uninstalled site.
-- **With the setup the runner can't run yet:** the whole `[setup]` was run against the built site with a copy of the
-  runner's `web_steps` that also sends `json` steps (a POST of the raw body as `application/json`): the steps pass in one
-  go (the `may_fail` one catching F59), and then `scripts/wfc.py smoke` passes 16/16 (LOG.md, 19:29). The results
-  committed are the runner's own.
+- **With the runner's `json` setup steps** (added for this app): from a new database, `build`, `setup` (9/10 steps,
+  the `may_fail` one catching F59) and `smoke` pass 16/16 on Linux.
 - Windows: not run yet (CI runs it).
 
 The probes cover:
@@ -132,8 +130,8 @@ Also checked by hand on the installed site (not probes, as they need a log-in or
 
 Setup notes:
 - The database step's install button is an ASP.NET AJAX page method (`InstallerRestService.aspx/Install`): only a JSON
-  POST reaches it. The runner needs a `json` step for it (and for the template save, which Umbraco's editor sends as
-  JSON to an MVC action).
+  POST reaches it, so it's a `json` step (as is the template save, which Umbraco's editor sends as JSON to an MVC
+  action).
 - The admin user step is a `LinkButton`: with a user agent the browser files don't know, ASP.NET renders no
   `__doPostBack`/`__EVENTTARGET` (as on IIS), so the step posts `__EVENTTARGET` itself.
 - The starter kits come from our.umbraco.org, so that step is skipped; the home page is made in the back office
@@ -161,7 +159,7 @@ Other differences seen:
 - F60, webForCore bug ([#90](https://github.com/xforcore/webForCore/issues/90)): ANSI files read as UTF-8.
 - F61, F62, F63, guide gaps ([#91](https://github.com/xforcore/webForCore/issues/91),
   [#92](https://github.com/xforcore/webForCore/issues/92), [#93](https://github.com/xforcore/webForCore/issues/93)).
-- F64, app/environment: the MyGet feed, SQL CE, Windows file names, and the install wizard's JSON page method, which
-  the runner can't post yet: the one failing probe.
+- F64, app/environment: the MyGet feed, SQL CE, Windows file names, and the install wizard's JSON page method (a
+  `json` setup step since the runner has them).
 - Not exercised: `WindowsIdentity.GetCurrent()` in the log4net appender's error paths and `fileHelper.HasAccces`
   would throw `PlatformNotSupportedException` on Linux; `new SmtpClient()` in notifications ignores `<mailSettings>`.

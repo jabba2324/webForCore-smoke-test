@@ -28,3 +28,8 @@ Appended by `scripts/wfc.py`, one line per stage run.
 - 2026-11-03T19:33:02+00:00 **build**: pass
 - 2026-11-03T19:33:06+00:00 **setup**: fail (1/2 steps)
 - 2026-11-03T19:33:11+00:00 **smoke**: fail (15/16 probes)
+- 2026-11-03T19:38:39+00:00 **setup**: fail (0/1 steps)
+- 2026-11-03T19:38:44+00:00 **smoke**: fail (11/16 probes)
+- 2026-11-03T19:39:33+00:00 **build**: pass
+- 2026-11-03T19:39:49+00:00 **setup**: pass (9/10 steps, 1 allowed to fail)
+- 2026-11-03T19:39:54+00:00 **smoke**: pass (16/16 probes)

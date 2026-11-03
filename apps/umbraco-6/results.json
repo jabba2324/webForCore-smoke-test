@@ -61,7 +61,7 @@
       ]
     },
     "build": {
-      "at": "2026-11-03T19:33:02+00:00",
+      "at": "2026-11-03T19:39:33+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/umbraco-6/logs/build.log",
@@ -77,12 +77,12 @@
       "summary": "existing checkout"
     },
     "setup": {
-      "at": "2026-11-03T19:33:06+00:00",
+      "at": "2026-11-03T19:39:49+00:00",
       "created": [
         "umbraco6"
       ],
       "date": "2026-11-03",
-      "status": "fail",
+      "status": "pass",
       "steps": [
         {
           "ok": true,
@@ -90,68 +90,107 @@
           "step": "/install/default.aspx?installStep=database"
         },
         {
-          "ok": false,
+          "ok": true,
           "status": 200,
           "step": "/install/InstallerRestService.aspx/Install"
-        }
-      ],
-      "summary": "1/2 steps"
-    },
-    "smoke": {
-      "at": "2026-11-03T19:33:11+00:00",
-      "checks": [
-        {
-          "expected_text": "Rendered by Umbraco: Home",
-          "ms": 5,
-          "ok": false,
-          "path": "/",
-          "status": 302,
-          "title": "Object moved"
         },
         {
-          "ms": 734,
+          "ok": true,
+          "status": 200,
+          "step": "/install/default.aspx?installStep=defaultUser"
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "step": "/install/default.aspx?installStep=theend"
+        },
+        {
+          "may_fail": true,
+          "ok": false,
+          "status": 500,
+          "step": "/umbraco/login.aspx"
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "step": "/umbraco/login.aspx"
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "step": "/umbraco/create.aspx?nodeId=init&nodeType=initnodeTypes&nodeName=Document%20Types&rnd=1"
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "step": "/umbraco/RestServices/SaveFile/SaveTemplate"
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "step": "/umbraco/create.aspx?nodeId=-1&nodeType=content&nodeName=Content&rnd=1"
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "step": "/umbraco/editContent.aspx?id=1047"
+        }
+      ],
+      "summary": "9/10 steps, 1 allowed to fail"
+    },
+    "smoke": {
+      "at": "2026-11-03T19:39:54+00:00",
+      "checks": [
+        {
+          "ms": 7,
+          "ok": true,
+          "path": "/",
+          "status": 200
+        },
+        {
+          "ms": 91,
           "ok": true,
           "path": "/umbraco/login.aspx",
           "status": 200
         },
         {
-          "ms": 4,
+          "ms": 382,
           "ok": true,
           "path": "/umbraco/",
           "status": 302
         },
         {
-          "ms": 127,
+          "ms": 132,
           "ok": true,
           "path": "/umbraco/ping.aspx",
           "status": 200
         },
         {
-          "ms": 606,
+          "ms": 599,
           "ok": true,
           "path": "/umbraco/BackOffice/Api/ExamineManagementApi/GetIndexerDetails",
           "status": 401
         },
         {
-          "ms": 26,
+          "ms": 23,
           "ok": true,
           "path": "/umbraco/webservices/CheckForUpgrade.asmx/js",
           "status": 200
         },
         {
-          "ms": 639,
+          "ms": 622,
           "ok": true,
           "path": "/umbraco/webservices/legacyAjaxCalls.asmx",
           "status": 200
         },
         {
-          "ms": 27,
+          "ms": 24,
           "ok": true,
           "path": "/DependencyHandler.axd?s=L3VtYnJhY29fY2xpZW50L3VpL2RlZmF1bHQuY3NzOw&t=Css&cdv=1",
           "status": 200
         },
         {
-          "ms": 16,
+          "ms": 13,
           "ok": true,
           "path": "/umbraco_client/ui/default.css",
           "status": 200
@@ -181,7 +220,7 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/packages.config",
           "status": 404
@@ -193,15 +232,15 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404
         }
       ],
       "log": "apps/umbraco-6/logs/server.log",
-      "status": "fail",
-      "summary": "15/16 probes"
+      "status": "pass",
+      "summary": "16/16 probes"
     }
   }
 }

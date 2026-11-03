@@ -1276,6 +1276,5 @@ App/environment. Found on 0.7.0, on Linux.
   `.nuget/NuGet.targets` names. The overlay adds a `src/NuGet.Config` with it; a build depends on that feed staying up.
 - **SQL CE 4** (its embedded database option) is Windows-native; the migration uses SQL Server.
 - **Its install wizard's database step** is an ASP.NET AJAX page method, `InstallerRestService.aspx/Install`, which
-  takes only a JSON POST. The runner's `[setup]` steps send forms, so setup stops there and the site stays uninstalled:
-  the home page probe fails (1 of 16). With a JSON step (tested with a copy of the runner's `web_steps` that sends
-  one), setup completes and all 16 pass.
+  takes only a JSON POST. The runner's `[setup]` steps sent only forms, so at first setup stopped there and the home
+  page probe failed (1 of 16). The runner now has `json` steps: setup completes and all 16 pass.
