@@ -1,16 +1,125 @@
 {
   "id": "composite-c1",
   "stages": {
+    "assess": {
+      "at": "2026-11-04T21:03:05+00:00",
+      "blockers": {
+        "appdomain-thread-abort": [
+          "Composite/Core/Parallelization/ParallelFacade.cs:237",
+          "Composite/Core/Parallelization/ParallelFacade.cs:239",
+          "Composite/Core/Parallelization/ParallelFacade.cs:308",
+          "Composite.Workflows/Plugins/Elements/ElementProviders/XsltBasedFunctionProviderElementProvider/EditXsltFunctionWorkflow.cs:351"
+        ],
+        "linq-to-sql": [
+          "Composite/Plugins/Data/DataProviders/MSSqlServerDataProvider/SqlDataProvider_Stores.cs:4",
+          "Composite/Plugins/Data/DataProviders/MSSqlServerDataProvider/SqlDataTypeStore.cs:4",
+          "Composite/Plugins/Data/DataProviders/MSSqlServerDataProvider/SqlDataTypeStoresContainer.cs:5",
+          "Composite/Plugins/Data/DataProviders/MSSqlServerDataProvider/CodeGeneration/DataContextAssembler.cs:4",
+          "Composite/Plugins/Data/DataProviders/MSSqlServerDataProvider/CodeGeneration/DataContextBase.cs:3",
+          "Composite/Plugins/Data/DataProviders/MSSqlServerDataProvider/CodeGeneration/DataContextBase.cs:5",
+          "Composite/Plugins/Data/DataProviders/MSSqlServerDataProvider/CodeGeneration/EntityClassGenerator.cs:4",
+          "Composite/Plugins/Data/DataProviders/MSSqlServerDataProvider/CodeGeneration/SqlDataContextHelperClass.cs:2",
+          "Composite/Plugins/Data/DataProviders/MSSqlServerDataProvider/CodeGeneration/SqlDataProviderCodeBuilder.cs:6",
+          "Composite/Data/Foundation/DataFacadeQueryable.cs:4",
+          "Composite/Data/Foundation/DataFacadeQueryableExpressionVisitor.cs:4",
+          "Composite/Data/Foundation/DataFacadeQueryableExpressionVisitor.cs:258",
+          "Composite/Data/Foundation/DataFacadeQueryableExpressionVisitor.cs:259",
+          "Composite/Core/Types/CodeGenerationCommon.cs:88"
+        ],
+        "wcf-hosting": [
+          "Composite/web.config:71",
+          "Composite/services/LogService/LogService.svc:1"
+        ],
+        "windows-auth": [
+          "Composite/web.config:27",
+          "Composite/Core/IO/PathUtil.cs:145",
+          "Composite/Core/IO/PathUtil.cs:145"
+        ]
+      },
+      "kinds": [
+        "webforms",
+        "webpages"
+      ],
+      "libraries": [
+        "Composite",
+        "Composite.Workflows"
+      ],
+      "notices": {
+        "binaryformatter": [
+          "Composite/Data/Validation/ClientValidationRuleSerializerHandler.cs:3",
+          "Composite/Data/Validation/ClientValidationRuleSerializerHandler.cs:15",
+          "Composite/Data/Validation/ClientValidationRuleSerializerHandler.cs:38",
+          "Composite/Core/Serialization/SystemSerializableValueXmlSerializer.cs:3",
+          "Composite/Core/Serialization/SystemSerializableValueXmlSerializer.cs:28",
+          "Composite/Core/Serialization/SystemSerializableValueXmlSerializer.cs:89",
+          "Composite/C1Console/Actions/ActionLockingFacade.cs:7",
+          "Composite/C1Console/Actions/ActionLockingFacade.cs:26",
+          "Composite/C1Console/Workflow/FilePersistenceService.cs:7",
+          "Composite/C1Console/Workflow/FilePersistenceService.cs:224",
+          "Composite/C1Console/Workflow/FilePersistenceService.cs:252"
+        ],
+        "smtpclient-config": [
+          "Composite/Core/SmtpMailer.cs:10",
+          "Composite/Core/SmtpMailer.cs:18"
+        ]
+      },
+      "status": "blocked",
+      "summary": "appdomain-thread-abort, linq-to-sql, wcf-hosting, windows-auth",
+      "target_frameworks": [
+        "v4.8"
+      ]
+    },
     "build": {
-      "at": "2026-11-03T12:13:15+00:00",
-      "status": "skip",
-      "summary": "not migrated yet (no SDK-style project)"
+      "at": "2026-11-04T21:13:49+00:00",
+      "error_count": 46,
+      "errors": [
+        "error CS0103: The name 'AspNetCompatibilityRequirementsMode' does not exist in the current context ",
+        "error CS0103: The name 'InstanceContextMode' does not exist in the current context ",
+        "error CS0103: The name 'WebMessageBodyStyle' does not exist in the current context ",
+        "error CS0234: The type or namespace name 'Activation' does not exist in the namespace 'System.ServiceModel' (are you missing an assembly reference?) ",
+        "error CS0234: The type or namespace name 'Linq' does not exist in the namespace 'System.Data' (are you missing an assembly reference?) ",
+        "error CS0234: The type or namespace name 'Web' does not exist in the namespace 'System.ServiceModel' (are you missing an assembly reference?) ",
+        "error CS0234: The type or namespace name 'Workflow' does not exist in the namespace 'System' (are you missing an assembly reference?) ",
+        "error CS0246: The type or namespace name 'Activity' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'ActivityCondition' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'ActivityExecutionContext' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'ActivityExecutionStatus' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'ActivityValidator' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'ActivityValidatorAttribute' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'AspNetCompatibilityRequirements' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'AspNetCompatibilityRequirementsAttribute' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'CodeActivity' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'ConditionalEventArgs' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'DataContext' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'DependencyProperty' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'EventDrivenActivity' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'ExternalDataEventArgs' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'ExternalDataExchange' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'ExternalDataExchangeAttribute' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'ExternalDataExchangeService' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'Function' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'FunctionAttribute' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'HandleExternalEventActivity' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'HandleExternalEventActivityValidator' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'ITable' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'IfElseActivity' could not be found (are you missing a using directive or an assembly reference?) "
+      ],
+      "log": "apps/composite-c1/logs/build.log",
+      "seconds": 12,
+      "status": "fail",
+      "summary": "46 distinct errors",
+      "webforcore": "packages 0.8.0"
     },
     "fetch": {
-      "at": "2026-11-03T12:13:15+00:00",
+      "at": "2026-11-04T21:13:37+00:00",
       "commit": "98b7e87d03003e2dac1799f569da63789528dad8",
-      "overlay": false,
+      "overlay": true,
       "status": "pass"
+    },
+    "smoke": {
+      "at": "2026-11-04T21:13:56+00:00",
+      "status": "skip",
+      "summary": "not built (apps/composite-c1/src/Website/bin_dotnet/Composite.Website.dll missing)"
     }
   }
 }
