@@ -43,8 +43,9 @@ Windows (CI run 41905418748; eshop-legacy-mvc's Windows job didn't start its ser
   and Windows, but every request fails at start (7/11 on both, the forbidden paths only), because `BuildManager.GetType(name,
   false)` throws for a missing assembly (F130); on Linux, DNN's Windows paths stop its install after that (F133).
   F130–F133 were found there.
-- **Kooboo CMS and Umbraco 8** (new apps, round 8, on 0.8.0 with drawingForCore 0.3.0): umbraco-8 ROUND_U8, kooboo-cms
-  ROUND_KB; F90–F94 were found there.
+- **Kooboo CMS and Umbraco 8** (new apps, round 8, on 0.8.0 with drawingForCore 0.3.0): kooboo-cms 23/23 and
+  umbraco-8 21/21, on Linux and Windows (CI run 41920542509). kooboo-cms needs about half of Linux's default inotify
+  instances (F92), so its runs on the shared development machine were partial. F90–F94 were found there.
 
 Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.

@@ -1,6 +1,6 @@
 # Kooboo CMS: migration notes
 
-Status: see `app.toml`. Source: https://github.com/Kooboo/CMS at `e5879728` (Kooboo CMS 4.4.0.813). Found by
+Status: migrated (CI run 41920542509: 23/23 on Linux and Windows). Source: https://github.com/Kooboo/CMS at `e5879728` (Kooboo CMS 4.4.0.813). Found by
 searching GitHub on 2026-10-31; the repo, licence (BSD-3-Clause), web project and its `<TargetFrameworkVersion>` were
 checked through the GitHub API.
 
@@ -115,7 +115,8 @@ its 128 inotify instances in use by other processes, and Kooboo's worker needs 4
 hit "Failed to start monitoring changes" on some probes (12/23 to 18/23), and the setup sometimes too. CI's runners
 are the reference.
 
-WINDOWS-TBD
+**CI run 41920542509: 23/23 on Linux and on Windows** (16 probes, the 7 forbidden paths), with the setup's 4 steps passing.
+The first CI run (41918977774) had 22/23 on both: the search found nothing until the setup rebuilt the index.
 
 ## Open problems
 

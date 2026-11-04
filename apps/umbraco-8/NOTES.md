@@ -1,6 +1,6 @@
 # Umbraco 8: migration notes
 
-Status: see `app.toml`. Source: https://github.com/umbraco/Umbraco-CMS at `4fbf8020` (tag release-8.18.15, the last
+Status: migrated (CI run 41920542509: 21/21 on Linux and Windows). Source: https://github.com/umbraco/Umbraco-CMS at `4fbf8020` (tag release-8.18.15, the last
 8.x release). The repo, licence (MIT), web project and its `<TargetFrameworkVersion>` (v4.7.2) were checked when the
 app was pinned.
 
@@ -121,7 +121,7 @@ files), `Authentication/IsAuthenticated` and `GetCurrentUser` (Web API: anonymou
 hub's proxies and negotiation, ClientDependency's `DependencyHandler.axd`, two static files and `/Views/Web.config`
 (404).
 
-WINDOWS-TBD
+**CI run 41920542509 (Linux and Windows): 21/21 on both.**
 
 ## Open problems
 

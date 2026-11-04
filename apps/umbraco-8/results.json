@@ -37,23 +37,23 @@
       ]
     },
     "build": {
-      "at": "2026-11-04T21:33:36+00:00",
+      "at": "2026-11-04T21:57:19+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/umbraco-8/logs/build.log",
-      "seconds": 64,
+      "seconds": 53,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.8.0"
     },
     "fetch": {
-      "at": "2026-11-04T21:32:32+00:00",
+      "at": "2026-11-04T21:56:26+00:00",
       "commit": "4fbf8020bf08dc26bf93f01b02bc39852ee36553",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-04T21:36:16+00:00",
+      "at": "2026-11-04T21:57:30+00:00",
       "created": [
         "umbraco8"
       ],
@@ -74,10 +74,10 @@
       "summary": "2/2 steps"
     },
     "smoke": {
-      "at": "2026-11-04T21:36:24+00:00",
+      "at": "2026-11-04T21:57:36+00:00",
       "checks": [
         {
-          "ms": 6,
+          "ms": 7,
           "ok": true,
           "path": "/",
           "status": 200
@@ -89,67 +89,67 @@
           "status": 200
         },
         {
-          "ms": 553,
+          "ms": 488,
           "ok": true,
           "path": "/install/",
           "status": 302
         },
         {
-          "ms": 683,
+          "ms": 702,
           "ok": true,
           "path": "/umbraco/",
           "status": 200
         },
         {
-          "ms": 19,
+          "ms": 20,
           "ok": true,
           "path": "/umbraco/Application",
           "status": 200
         },
         {
-          "ms": 75,
+          "ms": 36,
           "ok": true,
           "path": "/umbraco/LocalizedText",
           "status": 200
         },
         {
-          "ms": 89,
+          "ms": 77,
           "ok": true,
           "path": "/umbraco/backoffice/UmbracoApi/Authentication/IsAuthenticated",
           "status": 200
         },
         {
-          "ms": 11,
+          "ms": 12,
           "ok": true,
           "path": "/umbraco/backoffice/UmbracoApi/Authentication/GetCurrentUser",
           "status": 401
         },
         {
-          "ms": 39,
+          "ms": 43,
           "ok": true,
           "path": "/umbraco/BackOffice/signalr/hubs",
           "status": 200
         },
         {
-          "ms": 16,
+          "ms": 20,
           "ok": true,
           "path": "/umbraco/BackOffice/signalr/negotiate?clientProtocol=1.5",
           "status": 200
         },
         {
-          "ms": 20,
+          "ms": 23,
           "ok": true,
           "path": "/DependencyHandler.axd?s=L1VtYnJhY28vanMvZ3VpRnVuY3Rpb25zLmpzOw&t=Javascript&cdv=1",
           "status": 200
         },
         {
-          "ms": 11,
+          "ms": 12,
           "ok": true,
           "path": "/Umbraco/js/guiFunctions.js",
           "status": 200
         },
         {
-          "ms": 6,
+          "ms": 11,
           "ok": true,
           "path": "/Umbraco/assets/img/login.jpg",
           "status": 200
@@ -161,13 +161,13 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 3,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
@@ -197,7 +197,7 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404
