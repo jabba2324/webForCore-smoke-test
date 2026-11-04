@@ -15,6 +15,9 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 - **Umbraco 6** (a new app, migrated on 0.7.0): F57–F64, and F67 from its first CI run (Ubuntu's `C` locale).
 - **Umbraco 7** (a new app, on 0.7.0, on Linux so far): builds, but is blocked at boot by AutoMapper 3.3.1 (F22); F65
   and F66, and more evidence for F37 and F61–F64.
+- **Web Forms, Web Pages and MVC 3 candidates** (new apps, migrated on 0.7.0 with webForCore-thirdparty 0.6.0):
+  screwturn-wiki (24/24 on Linux and Windows), mvc-music-store (20/20 on both; its accounts are blocked by F75) and
+  rabbit-webpages (20/21 on both, F79); F73–F79 were found there.
 
 Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
@@ -94,6 +97,14 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F70](#f70) | `/signalr/hubs` serves the template's unreplaced `[!VERSION!]` | webForCore bug | signalr-samples | [#118](https://github.com/xforcore/webForCore/issues/118) |
 | [F71](#f71) | VB projects: `<MyType>Windows</MyType>` doesn't compile on .NET (BC30002 `My.Computer`, `My.User`) | guide gap | signalr-samples | [#121](https://github.com/xforcore/webForCore/issues/121) |
 | [F72](#f72) | Linux: the user's inotify instances (128 by default) run out with many apps running: "Failed to start monitoring changes" | app/environment | signalr-samples, identityserver3-example (on this machine) | - |
+
+| [F73](#f73) | MVC 3/4 apps: `webpages:Version` 1.0.0.0/2.0.0.0 fails every request ("Conflicting versions of ASP.NET Web Pages") | guide gap | mvc-music-store | [#122](https://github.com/xforcore/webForCore/issues/122) |
+| [F74](#f74) | MVC 3/4 apps: `[Compare]` is ambiguous (CS0104) between MVC's and DataAnnotations' `CompareAttribute` | guide gap | mvc-music-store | [#122](https://github.com/xforcore/webForCore/issues/122) |
+| [F75](#f75) | No `aspnet_regsql`: `SqlServices.Install` can't find `InstallCommon.sql`, so SQL membership/roles/profile apps can't create their database | webForCore bug | mvc-music-store | [#123](https://github.com/xforcore/webForCore/issues/123) |
+| [F76](#f76) | ICU: `en-US`/`en-GB` `NumberDecimalDigits` is 3, so `{0:F}` prints `8.990` for 8.99 | guide gap | mvc-music-store | [#124](https://github.com/xforcore/webForCore/issues/124) |
+| [F77](#f77) | Windows-only data stores (SQL CE, SQL Express user instances) and data written on Windows (`\` in a wiki's page index) | app/environment | screwturn-wiki, mvc-music-store, rabbit-webpages | - |
+| [F78](#f78) | WebMatrix.Data and WebMatrix.WebData aren't provided or documented (Microsoft's 3.2.9 packages work) | guide gap | rabbit-webpages | [#130](https://github.com/xforcore/webForCore/issues/130) |
+| [F79](#f79) | `Response.End()` after `StatusCode = 401` sends the 401: forms authentication doesn't redirect to the log-in page | webForCore bug | rabbit-webpages | [#129](https://github.com/xforcore/webForCore/issues/129) |
 ---
 
 ## F1
@@ -1454,3 +1465,114 @@ running at the same time as the same user.
   `fs.inotify.max_user_instances`.
 - **In the runs:** `DOTNET_USE_POLLING_FILE_WATCHER=1` (ASP.NET Core's configuration watchers poll) for the final
   Linux runs; nothing committed changes.
+
+## F73
+
+**MVC 3/4 apps: `webpages:Version` 1.0.0.0 (or 2.0.0.0) fails every request with "Conflicting versions of ASP.NET
+Web Pages detected".** Guide gap. Raised as [#122](https://github.com/xforcore/webForCore/issues/122). Found on 0.7.0
+(candidates round), on Linux.
+
+- **Apps:** mvc-music-store (MVC 3).
+- **Error:** `System.InvalidOperationException: Conflicting versions of ASP.NET Web Pages detected: specified version
+  is "1.0.0.0", but the version in bin is "3.0.0.0". To continue, remove files from the application's bin directory or
+  remove the version specification in web.config.` on the first request, from `<add key="webpages:Version"
+  value="1.0.0.0"/>` (the MVC 3 template's; MVC 4's says `2.0.0.0`).
+- **Fix in the app:** `value="3.0.0.0"`, as Microsoft's MVC 3/4 → 5 upgrade on .NET Framework. The other MVC 3
+  version numbers in web.config (`<compilation><assemblies>`, `Views/Web.config`'s `System.Web.WebPages.Razor,
+  Version=1.0.0.0` sections and `MvcWebRazorHostFactory, System.Web.Mvc, Version=3.0.0.0`) work unchanged.
+- **Guide:** `docs/MIGRATING.md` says an app on an older MVC gets the upgrade, but not that MVC 3/4 apps need this.
+
+## F74
+
+**MVC 3/4 apps: `[Compare]` is ambiguous (CS0104) between MVC's and DataAnnotations' `CompareAttribute`.** Guide
+gap. Raised as [#122](https://github.com/xforcore/webForCore/issues/122) (with F73). Found on 0.7.0, on Linux.
+
+- **Apps:** mvc-music-store (the MVC 3 template's `Models/AccountModels.cs`; every MVC 3/4 template app has it).
+- **Error:** `CS0104: 'Compare' is an ambiguous reference between
+  'System.ComponentModel.DataAnnotations.CompareAttribute' and 'System.Web.Mvc.CompareAttribute'`. .NET Framework 4.5
+  added the DataAnnotations one; the app targeted 4.0, where only MVC's existed.
+- **Fix in the app:** `using CompareAttribute = System.Web.Mvc.CompareAttribute;` in that file (what it compiled to
+  on 4.0; the Register form keeps `data-val-equalto`).
+- **Guide:** like #17's `SignInStatus`, a type the newer framework added; `docs/MIGRATING.md` doesn't mention it.
+
+## F75
+
+**No `aspnet_regsql`: `SqlServices.Install` looks for `InstallCommon.sql` in .NET's runtime folder, so apps on the
+default SQL membership, role and profile providers can't create their database.** webForCore bug. Raised as
+[#123](https://github.com/xforcore/webForCore/issues/123). Found on 0.7.0, on Linux (the same on any OS).
+
+- **Apps:** mvc-music-store: `AccountController`'s `Membership.ValidateUser`/`CreateUser` use machine.config's
+  `AspNetSqlMembershipProvider` on `LocalSqlServer` (SQL Express user instance, `aspnetdb.mdf`), which can't exist on
+  Linux; posting log-on or register is a 500, "SQLExpress database file auto-creation error". Checkout and the store
+  manager (a user, the Administrator role) are untested.
+- **Cause:** on .NET Framework the providers' schema scripts (`InstallCommon.sql`, `InstallMembership.sql`,
+  `InstallRoles.sql`, `InstallProfile.sql`, `InstallSqlState.sql`, ...) are in the framework folder, which
+  `System.Web.Management.SqlServices`, `aspnet_regsql.exe` and the SQL Express auto-creation read
+  (`HttpRuntime.AspInstallDirectory`). webForCore ships none of them and no `aspnet_regsql` equivalent;
+  `AspInstallDirectory` is .NET's runtime folder.
+- **Repro:** a page that calls
+  `SqlServices.Install("aspnetdb", SqlFeatures.Membership, "<a SQL Server connection string>")`:
+  `FileNotFoundException: Could not find file '<dotnet>/shared/Microsoft.NETCore.App/10.0.14/InstallCommon.sql'`.
+- **Affects:** every MVC 2–4 and Web Forms 3.5/4.0 template app's accounts, `SqlWebEventProvider`, and SQL Server
+  session state (`InstallSqlState.sql`).
+
+## F76
+
+**ICU culture data: `NumberDecimalDigits` is 3 for `en-US`/`en-GB`, so `{0:F}` prints `8.990` for 8.99.** Guide gap
+(.NET's culture data on ICU, not webForCore's). Raised as [#124](https://github.com/xforcore/webForCore/issues/124).
+Found on 0.7.0, on Linux (Fedora 44, ICU 77.1).
+
+- **Apps:** mvc-music-store: the album page's price, `@String.Format("{0:F}", Model.Price)`, is `8.990` (IIS:
+  `8.99`). Not probed.
+- **Repro:** plain .NET 10, `string.Format(new CultureInfo("en-US"), "{0:F}", 8.99m)` is `8.990`; `NumberDecimalDigits`
+  is 3 for `en-US` and `en-GB` (ICU's pattern `#,##0.###`), 2 for the invariant culture and on Windows NLS.
+- **Guide:** `docs/MIGRATING.md` section 6 says ICU's formats differ "slightly" (currency and date patterns); this one
+  changes ordinary numbers (`F`, `N` with no precision).
+
+## F77
+
+**Windows-only data stores and data written on Windows: SQL CE, SQL Express user instances, `\` in a wiki's page
+index.** App/environment. Found on 0.7.0 (candidates round), on Linux.
+
+- **Apps:**
+  - screwturn-wiki: its page index (`public/Pages.cs`) lists the `Dev` namespace's main page as `Dev\MainPage.cs`;
+    `Path.Combine` with the pages folder finds no such file on Linux, so `/Dev.MainPage.ashx` rendered empty. The
+    data file says `Dev/MainPage.cs` in the overlay; the app writes new entries with `Path.DirectorySeparatorChar`, so
+    only data made on Windows has it (an existing wiki moved to Linux needs the same edit).
+  - mvc-music-store: Entity Framework on SQL Server Compact 4.0 (Windows-native, no .NET build) and membership on a
+    SQL Express user instance (`LocalSqlServer`). The catalogue uses the test bed's SQL Server; membership is F75.
+  - rabbit-webpages: WebMatrix's `Database.Open("StarterSite")` with no connection string opens
+    `App_Data/StarterSite.sdf` (SQL CE); a `StarterSite` connection string to SQL Server replaces it.
+- **Guide:** covered (section 5: "LocalDB doesn't exist on Linux"; section 6: file paths), except that the guide
+  doesn't name SQL CE or `User Instance=true` (the SQL Express of the MVC 3/Web Forms 4.0 templates).
+
+## F78
+
+**WebMatrix.Data and WebMatrix.WebData aren't provided or documented; Microsoft's 3.2.9 packages work.** Guide gap.
+Raised as [#130](https://github.com/xforcore/webForCore/issues/130). Found on 0.7.0 (candidates round), on Linux.
+
+- **Apps:** rabbit-webpages (WebMatrix's Starter Site: `WebSecurity`, `Database.Open`). Every WebMatrix template site
+  and the MVC 4 Internet Application template use them.
+- **What's missing:** webForCore builds Web Pages, Razor, Deployment and Helpers from AspNetWebStack, but not
+  `WebMatrix.Data`, `WebMatrix.WebData` or `System.Web.WebPages.Administration` (its fork has them removed), and
+  `docs/NAMESPACES.md`/`docs/MIGRATING.md` don't say so. On WebMatrix sites they came from the GAC, so there's
+  nothing in the site's `bin`.
+- **What works:** `Microsoft.AspNet.WebPages.Data` and `Microsoft.AspNet.WebPages.WebData` 3.2.9, unchanged; their
+  Web Pages and Razor dependencies lose to webForCore's. SimpleMembership creates its tables on SQL Server; register,
+  log in, log out and an authenticated page work, and WebData's pre-start method runs.
+
+## F79
+
+**`Response.End()` after `StatusCode = 401` sends the 401, so forms authentication doesn't redirect to the log-in
+page.** webForCore bug. Raised as [#129](https://github.com/xforcore/webForCore/issues/129). Found on 0.7.0, on Linux.
+
+- **Apps:** rabbit-webpages: `Account/ChangePassword.cshtml` calls `WebSecurity.RequireAuthenticatedUser()`, which is
+  `Response.StatusCode = 401; Response.End();`; an anonymous request gets an empty 401, where IIS redirects to
+  `/Account/Login?ReturnUrl=...` (1 of 21 probes).
+- **Repro:** in a forms-authentication site, `@{ Response.StatusCode = 401; }` gets the 302 to the log-in page;
+  `@{ Response.StatusCode = 401; Response.End(); }` gets the 401. The same in `.aspx`.
+- **Cause (likely):** on .NET Framework, `Response.End()` in the handler aborts the thread and the response stays
+  buffered, so `FormsAuthenticationModule`'s EndRequest still replaces the 401 with its redirect. webForCore has no
+  thread abort (documented), and its `End()` sends the response first.
+- **Affects:** every Web Pages page with `WebSecurity.RequireAuthenticatedUser()`/`RequireRoles()`, and Web Forms code
+  that sends users to the log-in page with a 401 and `Response.End()`.

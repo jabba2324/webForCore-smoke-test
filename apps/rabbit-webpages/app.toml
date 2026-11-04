@@ -1,0 +1,97 @@
+# Rabbit: a WebMatrix (ASP.NET Web Pages 1) Starter Site with Yiyi Sun's Rabbit framework. Fields are described in
+# README.md.
+
+name = "Rabbit (WebMatrix Starter Site)"
+repo = "https://github.com/yysun/Rabbit"
+ref = "a819ee234c8cdb8b734f4e6e577f73517e7872a1"
+site = "WebSite"
+project = "WebSite/WebSite.csproj"
+kinds = ["webpages"]
+licence = "MIT"
+status = "blocked"
+notes = "webForCore 0.7.0 (.NET 10, under webforcore-host), webForCore-thirdparty 0.6.0, on SQL Server with Microsoft's WebMatrix.Data/WebData 3.2.9 (F78): 20/21 on Linux and Windows (CI run 41900122122). WebSecurity.RequireAuthenticatedUser gives anonymous users a 401, not the log-in redirect (F79)."
+
+needs = ["mssql"]
+
+# WebSecurity.InitializeDatabaseConnection(..., autoCreateTables: true) creates its tables in an existing database.
+[setup]
+databases = ["RabbitStarterSite"]
+
+# An account through WebSecurity (SimpleMembership creates its tables in the new database), logged in after
+# registering; its own Change Password page; then log out.
+[[setup.steps]]
+post = "/Account/Register"
+fields = { email = "smoke@example.com", password = "Passw0rd!", confirmPassword = "Passw0rd!" }
+contains = "smoke@example.com"
+
+[[setup.steps]]
+get = "/Account/ChangePassword"
+contains = "Change Password Form"
+
+[[setup.steps]]
+get = "/Account/Logout"
+contains = "Register"
+
+# The first request compiles the site, so it gets 120 s.
+# The home page redirects to the Pages module's home page.
+[[probes]]
+path = "/"
+status = 302
+
+[[probes]]
+path = "/Pages"
+contains = "<h2>Welcome to my Web Site!"
+
+[[probes]]
+path = "/Pages/About"
+contains = "<h2>About My Site"
+
+# The same page as JSON (Accept: application/json is the site's own switch) isn't probed: probes send no headers.
+[[probes]]
+path = "/Tags/home"
+contains = "Welcome to my Web Site!"
+
+# Forms.
+[[probes]]
+path = "/Account/Login"
+contains = "name=\"username\""
+
+[[probes]]
+path = "/Account/Register"
+contains = "name=\"confirmPassword\""
+
+[[probes]]
+path = "/Account/ForgotPassword"
+contains = "Forget Your Password?"
+
+# WebSecurity.RequireAuthenticatedUser() for an anonymous user: on IIS forms authentication turns its 401 into a
+# 302 to the log-in page; webForCore sends the 401 (F79).
+[[probes]]
+path = "/Account/ChangePassword"
+status = 302
+
+[[probes]]
+path = "/Rabbit-Admin/"
+contains = "<h2>Module Admin"
+
+[[probes]]
+path = "/Rabbit-Admin/CodeGen"
+contains = "<h2>Create New Module"
+
+# Its unit test runner, which finds the test classes in App_Code by reflection.
+[[probes]]
+path = "/Rabbit-Admin/Test"
+contains = "PageControllerTest"
+
+[[probes]]
+path = "/Templates/Sample1/Site.css"
+contains = "body"
+
+[[probes]]
+path = "/robots.txt"
+contains = "# WebMatrix 1.0"
+
+# The site's data (JSON files in App_Data).
+[[probes]]
+path = "/App_Data/Rabbit/Site"
+status = 404
