@@ -58,6 +58,11 @@ Windows (CI run 41905418748; eshop-legacy-mvc's Windows job didn't start its ser
   umbraco-8 21/21, on Linux and Windows (CI run 41920542509). kooboo-cms needs about half of Linux's default inotify
   instances (F92), so its runs on the shared development machine were partial. F90–F94 were found there.
 
+**What "migrated" means (4 Nov 2026):** an app counts as migrated only when it builds, passes every probe on Linux and on
+Windows every time, and has no feature known to be broken by webForCore, probed or not. Anything less is blocked, with
+the reason. On that rule nopcommerce-3.90 (F86, F89), signalr-samples (F70) and mvc-music-store (log-on and registration,
+F75) moved from migrated to blocked. Features the probes can't reach are listed as untested in the app's NOTES.md.
+
 Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
 

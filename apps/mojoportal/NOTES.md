@@ -1,6 +1,6 @@
 # mojoPortal: migration notes
 
-Status: verified. Source: https://github.com/i7MEDIA/mojoportal at `31b4fb1e`. Found by searching GitHub on 2026-10-31; the
+Status: migrated (webForCore 0.8.0: all 16 probes on Linux and Windows; F40 was fixed in 0.8.0). Source: https://github.com/i7MEDIA/mojoportal at `31b4fb1e`. Found by searching GitHub on 2026-10-31; the
 repo, licence (EPL-1.0), web project and its `<TargetFrameworkVersion>` were checked through the GitHub API.
 
 Round 3b, on webForCore 0.4.0 (no webForCore-thirdparty packages).

@@ -1,6 +1,6 @@
 # nopCommerce 3.90: migration notes
 
-Status: migrated: 22/23 probes on Linux (F86), 23/23 on Windows in 2 of 5 runs (F89), webForCore 0.8.0.
+Status: blocked (webForCore 0.8.0): 22/23 probes on Linux (F86, webForCore#140), and on Windows 23/23 in only 2 of 5 runs (F89). An app is migrated only when every probe passes on both platforms every time.
 Source: https://github.com/nopSolutions/nopCommerce at `12d1f013`
 (tag `release-3.90`, the last MVC 5 release before nopCommerce moved to ASP.NET Core). Licence: the nopCommerce Public
 License 3.0, GPL-3.0 with an attribution term ("powered by nopCommerce" on every page, which the store keeps). The
