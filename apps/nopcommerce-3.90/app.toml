@@ -2,16 +2,132 @@
 
 name = "nopCommerce 3.90"
 repo = "https://github.com/nopSolutions/nopCommerce"
-ref = "release-3.90"
+# The release-3.90 tag.
+ref = "12d1f0139149a9d6e84964d325d62bae6ac748f6"
 site = "src/Presentation/Nop.Web"
+# The plugins build themselves into the site's Plugins folder, as in Visual Studio; Nop.Admin is a project reference
+# of the web project (NOTES.md).
+also_build = [
+  "src/Plugins/Nop.Plugin.DiscountRules.CustomerRoles/Nop.Plugin.DiscountRules.CustomerRoles.csproj",
+  "src/Plugins/Nop.Plugin.DiscountRules.HasOneProduct/Nop.Plugin.DiscountRules.HasOneProduct.csproj",
+  "src/Plugins/Nop.Plugin.ExchangeRate.EcbExchange/Nop.Plugin.ExchangeRate.EcbExchange.csproj",
+  "src/Plugins/Nop.Plugin.ExternalAuth.Facebook/Nop.Plugin.ExternalAuth.Facebook.csproj",
+  "src/Plugins/Nop.Plugin.Feed.GoogleShopping/Nop.Plugin.Feed.GoogleShopping.csproj",
+  "src/Plugins/Nop.Plugin.Payments.CheckMoneyOrder/Nop.Plugin.Payments.CheckMoneyOrder.csproj",
+  "src/Plugins/Nop.Plugin.Payments.Manual/Nop.Plugin.Payments.Manual.csproj",
+  "src/Plugins/Nop.Plugin.Payments.PayPalDirect/Nop.Plugin.Payments.PayPalDirect.csproj",
+  "src/Plugins/Nop.Plugin.Payments.PayPalStandard/Nop.Plugin.Payments.PayPalStandard.csproj",
+  "src/Plugins/Nop.Plugin.Payments.PurchaseOrder/Nop.Plugin.Payments.PurchaseOrder.csproj",
+  "src/Plugins/Nop.Plugin.Pickup.PickupInStore/Nop.Plugin.Pickup.PickupInStore.csproj",
+  "src/Plugins/Nop.Plugin.Shipping.AustraliaPost/Nop.Plugin.Shipping.AustraliaPost.csproj",
+  "src/Plugins/Nop.Plugin.Shipping.CanadaPost/Nop.Plugin.Shipping.CanadaPost.csproj",
+  "src/Plugins/Nop.Plugin.Shipping.Fedex/Nop.Plugin.Shipping.Fedex.csproj",
+  "src/Plugins/Nop.Plugin.Shipping.FixedOrByWeight/Nop.Plugin.Shipping.FixedOrByWeight.csproj",
+  "src/Plugins/Nop.Plugin.Shipping.UPS/Nop.Plugin.Shipping.UPS.csproj",
+  "src/Plugins/Nop.Plugin.Shipping.USPS/Nop.Plugin.Shipping.USPS.csproj",
+  "src/Plugins/Nop.Plugin.Tax.FixedOrByCountryStateZip/Nop.Plugin.Tax.FixedOrByCountryStateZip.csproj",
+  "src/Plugins/Nop.Plugin.Widgets.GoogleAnalytics/Nop.Plugin.Widgets.GoogleAnalytics.csproj",
+  "src/Plugins/Nop.Plugin.Widgets.NivoSlider/Nop.Plugin.Widgets.NivoSlider.csproj",
+]
 kinds = ["mvc"]
-licence = "nopCommerce Public License (GPL-3.0 with attribution)"
-status = "candidate"
+licence = "nopCommerce Public License 3.0 (GPL-3.0 with an attribution term)"
+status = "migrating"
 needs = ["mssql"]
 notes = "Last MVC 5 release before ASP.NET Core. Large: plugins, Autofac, EF6."
 
-# The first request compiles the site, so it gets 120 s.
-# [[probes]]
-# path = "/"
-# status = 200
-# contains = ""
+# nopCommerce's install wizard: SQL Server, an existing (empty) database given as a connection string, with the
+# sample data. It installs every plugin in the site's Plugins folder, then restarts the application.
+[setup]
+databases = ["nop390"]
+
+[[setup.steps]]
+get = "/install"
+timeout = 300
+contains = "nopCommerce installation"
+
+# The install redirects to the home page across the restart, so its outcome is the next step's.
+[[setup.steps]]
+post = "/install"
+timeout = 600
+fields = { AdminEmail = "admin@yourStore.com", AdminPassword = "Smoke_test_1234", ConfirmPassword = "Smoke_test_1234", InstallSampleData = "true", DataProvider = "sqlserver", SqlServerCreateDatabase = "false", SqlConnectionInfo = "sqlconnectioninfo_raw", DatabaseConnectionString = "Data Source=127.0.0.1,14330;Initial Catalog=nop390;User ID=sa;Password=Smoke_test_1234;TrustServerCertificate=True", SqlAuthenticationType = "sqlauthentication", UseCustomCollation = "false", Collation = "SQL_Latin1_General_CP1_CI_AS" }
+may_fail = true
+
+[[setup.steps]]
+get = "/"
+timeout = 300
+retries = 6
+contains = "Your store"
+
+# The first request compiles the site, so it gets 120 s. The sample data's categories and products, and the NivoSlider
+# plugin's widget on the home page.
+[[probes]]
+path = "/"
+contains = "nivoSlider"
+
+[[probes]]
+path = "/computers"
+contains = "Your store. Computers"
+
+[[probes]]
+path = "/apple-macbook-pro-13-inch"
+contains = "Apple MacBook Pro 13-inch"
+
+[[probes]]
+path = "/search?q=apple"
+contains = "Apple MacBook Pro 13-inch"
+
+[[probes]]
+path = "/blog"
+contains = "Your store. Blog"
+
+# Forms.
+[[probes]]
+path = "/login"
+contains = "Your store. Login"
+
+[[probes]]
+path = "/register"
+contains = "Your store. Register"
+
+[[probes]]
+path = "/contactus"
+contains = "Your store. Contact Us"
+
+# RSS and the XML sitemap (MVC actions returning XML).
+[[probes]]
+path = "/news/rss/1"
+contains = "<rss"
+
+[[probes]]
+path = "/sitemap.xml"
+contains = "<urlset"
+
+# nopCommerce's own 404 page.
+[[probes]]
+path = "/no-such-page"
+status = 404
+contains = "Page not found"
+
+# The administration (Nop.Admin) needs a log-in.
+[[probes]]
+path = "/admin"
+status = 302
+
+# Static files: the theme's CSS, a plugin's content, and a product thumbnail at the URL nopCommerce writes
+# (/content/images/thumbs/, the folder is Content/Images/Thumbs; F86: 404 on Linux until it's been requested in its
+# own case).
+[[probes]]
+path = "/Themes/DefaultClean/Content/css/styles.css"
+contains = ".header"
+
+[[probes]]
+path = "/Plugins/Widgets.NivoSlider/Content/nivoslider/nivo-slider.css"
+contains = "nivoSlider"
+
+[[probes]]
+path = "/content/images/thumbs/0000020_build-your-own-computer_415.jpeg"
+
+# A plugin's assembly isn't served (web.config's DenyAccessToPluginDLLs).
+[[probes]]
+path = "/Plugins/Widgets.NivoSlider/Nop.Plugin.Widgets.NivoSlider.dll"
+status = 403

@@ -66,7 +66,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F19](#f19) | `System.Web.Abstractions`/`System.Web.Routing` 4.0.0.0 in web.config can't be loaded | webForCore bug | roadkill | [#20](https://github.com/xforcore/webForCore/issues/20) |
 | [F20](#f20) | `Assembly.LoadFrom` returns the default context's copy; WebActivatorEx start methods never run | webForCore bug | applicant-tracking, roadkill | [#21](https://github.com/xforcore/webForCore/issues/21) |
 | [F21](#f21) | Glimpse doesn't run on .NET | guide gap | realocate | [#22](https://github.com/xforcore/webForCore/issues/22) |
-| [F22](#f22) | AutoMapper before 12 doesn't run on .NET 11 or .NET 10 | app/environment | realocate, socialgoal, umbraco-7 | - |
+| [F22](#f22) | AutoMapper before 12 doesn't run on .NET 11 or .NET 10 | app/environment | realocate, socialgoal, umbraco-7, nopcommerce-3.90 | - |
 | [F23](#f23) | `recaptcha` 1.0.5's lib folders aren't framework names (NU1202) | app/environment | roadkill | - |
 | [F24](#f24) | A transitive Microsoft.AspNet.Razor replaces webForCore's in the output with no build error | webForCore bug | bonobo-git-server, applicant-tracking, realocate, roadkill | [#23](https://github.com/xforcore/webForCore/issues/23) |
 | [F25](#f25) | .NET Framework builds of StructureMap 4.0 and NLog 4.2 need `AppDomainSetup` members .NET lacks; their .NET Standard builds work | app/environment | roadkill | - |
@@ -127,12 +127,18 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F80](#f80) | A request path with an escaped character (a space, non-ASCII) is answered 400 before the application | webForCore bug | aspnetdocs-wingtip-toys | [#126](https://github.com/xforcore/webForCore/issues/126) |
 | [F81](#f81) | `Request.RawUrl` is the default document's path for a directory request: FriendlyUrls 301s `/` to `/Default` | webForCore bug | aspnetdocs-wingtip-toys | [#127](https://github.com/xforcore/webForCore/issues/127) |
 | [F82](#f82) | Linux: `Server.MachineName` throws `DllNotFoundException` (kernel32); ELMAH's log pages fail | webForCore bug | aspnetdocs-wingtip-toys | [#128](https://github.com/xforcore/webForCore/issues/128) |
+| [F83](#f83) | C# 14's span conversions break LINQ to Entities at run time (`Contains(ReadOnlySpan)`), not only the build | guide gap | nopcommerce-3.90 | [#138](https://github.com/xforcore/webForCore/issues/138) |
+| [F84](#f84) | `AppDomain.CurrentDomain.DynamicDirectory` is null: plugin managers that shadow-copy there fail at start | guide gap | nopcommerce-3.90, smartstorenet | [#139](https://github.com/xforcore/webForCore/issues/139) |
+| [F85](#f85) | System.Linq.Dynamic 1.0.7 (net40) needs .NET Framework's `System.Data.Entity` 4.0 | app/environment | nopcommerce-3.90 | – |
+| [F86](#f86) | Linux: a static file in another case is 404 until requested once in its own case, then 200 in any case | webForCore bug | nopcommerce-3.90 | [#140](https://github.com/xforcore/webForCore/issues/140) |
+| [F87](#f87) | `System.Web.Optimization` and `WebGrease` don't have Microsoft's identities: BundleTransformer fails with CS0012 | webForCore bug | smartstorenet | [#141](https://github.com/xforcore/webForCore/issues/141) |
+| [F88](#f88) | One inotify instance per watched folder: nopCommerce takes more than 50 of the user's 128 | documented gap | nopcommerce-3.90 | – |
 | [F116](#f116) | Windows Workflow Foundation 3 (`System.Workflow.*`) isn't on .NET, and the docs and blocker search don't say so | guide gap | composite-c1 | [#132](https://github.com/xforcore/webForCore/issues/132) |
 | [F117](#f117) | Run-time C# compilation in application code (`CodeDomProvider.CreateProvider("c#")`) throws `PlatformNotSupportedException`; no documented replacement | guide gap | composite-c1 | [#133](https://github.com/xforcore/webForCore/issues/133) |
 | [F118](#f118) | CoreWCF's source generator reaches applications: `CS8370`/`CS8107` for any `[ServiceContract]` with `LangVersion` below 11 | webForCore bug | composite-c1 | [#134](https://github.com/xforcore/webForCore/issues/134) |
 | [F119](#f119) | webForCore's `CSharpCodeProvider` with `GenerateInMemory` and no PDB throws `ArgumentNullException` | webForCore bug | composite-c1 | [#135](https://github.com/xforcore/webForCore/issues/135) |
 | [F120](#f120) | C1's core needs LINQ to SQL (even with the XML data store) and WCF REST hosting | documented gap | composite-c1 | – |
-| [F121](#f121) | Types .NET added (`System.Collections.Generic.KeyValuePair`) make the app's own type ambiguous (`CS0104`) | guide gap | composite-c1 | [#136](https://github.com/xforcore/webForCore/issues/136) |
+| [F121](#f121) | Types .NET added (`System.Collections.Generic.KeyValuePair`) make the app's own type ambiguous (`CS0104`) | guide gap | composite-c1, smartstorenet | [#136](https://github.com/xforcore/webForCore/issues/136) |
 | [F123](#f123) | A Web Site Project has no `.csproj`; the guide's template compiles its `CodeFile=` code (CS0103) | guide gap | rock-rms (assessed only) | [#131](https://github.com/xforcore/webForCore/issues/131) |
 ---
 
@@ -658,6 +664,7 @@ console app). Found on 0.2.0.
   `CodeFileDisplayMapper.ConfigureMappings` line 41, throws the 3.x error, so `Application_Start` fails and every request
   is a 500. The repro fails with 3.3.1 on .NET 10.0.14 too. Upgrading means rewriting Umbraco's mapping layer (about 40
   mapper classes), so the app is blocked here.
+- **nopcommerce-3.90** (AutoMapper 5.2.0, instance API: `MapperConfiguration`, `IMapper`): `Method System.Linq.Enumerable.MaxInteger: type argument 'System.String' violates the constraint of type parameter 'T'` on every page; upgraded to 12.0.1, which compiles unchanged (round 7).
 
 ## F23
 
@@ -1652,6 +1659,112 @@ round for the AspNetDocs tutorial apps.
 - **Repro:** a page with `<%= Server.MachineName %>`, on Linux.
 - **Suggested fix:** `Environment.MachineName` off Windows.
 
+## F83
+
+**C# 14's first-class span conversions change LINQ expression trees, so LINQ to Entities fails at run time; the guide
+describes only the compile errors.** Guide gap. Raised as [#138](https://github.com/xforcore/webForCore/issues/138)
+(the step itself is #43, F48). Found on 0.8.0 (Linux), migrating nopCommerce 3.90.
+
+- **Apps:** nopcommerce-3.90 (every product page: `ProductService.GetProductsByIds`, `where productIds.Contains(p.Id)`).
+  smartstorenet pins C# 13 from the start, so it can't hit it.
+- **Error:** the project builds; at run time `System.NotSupportedException: LINQ to Entities does not recognize the
+  method 'Boolean Contains[Int32](System.ReadOnlySpan`1[System.Int32], Int32)' method, and this method cannot be
+  translated into a store expression.` With no `<LangVersion>`, net10.0 compiles C# 14, which binds `int[].Contains(x)`
+  inside an expression tree to `MemoryExtensions.Contains(ReadOnlySpan<T>, T)`; EF 6 can't translate it.
+- **What worked:** `<LangVersion>7.3</LangVersion>` (the projects set none), as `docs/MIGRATING.md` section 2 says. But
+  its symptoms there are only `CS0029`/`CS1503`, so a project that compiles looks as if it didn't need it, and
+  `docs/AGENT-MIGRATION.md`'s Phase 2 doesn't list the property. `scripts/convert.py` pins it only for SDK-style
+  projects, not for the old-style ones it rewrites.
+- **Repro:** net10.0, EntityFramework 6.5.1, no `<LangVersion>`: `var ids = new[] { 1, 2 };
+  db.Products.Where(p => ids.Contains(p.Id)).ToList()` throws; with `<LangVersion>13.0</LangVersion>` it works.
+
+## F84
+
+**`AppDomain.CurrentDomain.DynamicDirectory` is null on .NET.** Guide gap. Raised as
+[#139](https://github.com/xforcore/webForCore/issues/139). Found on 0.8.0, migrating nopCommerce 3.90.
+
+- **Apps:** nopcommerce-3.90 and smartstorenet: their plugin managers (Umbraco's design, a `PreApplicationStartMethod`)
+  copy each plugin's DLLs into the code generation folder, `Assembly.Load` them by name and add them to `BuildManager`.
+- **Error:** `ArgumentNullException: Value cannot be null. (Parameter 'path')` at `new DirectoryInfo(
+  AppDomain.CurrentDomain.DynamicDirectory)` in `PluginManager.PerformFileDeploy`, from `BuildManager.
+  InvokePreStartInitMethodsCore`: every request fails. A plain .NET console app prints `null` for it too, so webForCore
+  can't change it.
+- **What worked:** `HttpRuntime.CodegenDir`, which is the folder `DynamicDirectory` was on IIS; webForCore's resolver
+  probes it, so nopCommerce's 20 plugins load, are referenced by the views' compilation and work. SmartStoreNET also
+  reads `AppDomainSetup.PrivateBinPath` (no such property on .NET, CS1061): `HttpRuntime.BinDirectory`.
+- **Suggested fix:** a line beside `BaseDirectory` in `docs/NAMESPACES.md` and `docs/MIGRATING.md` section 6, and
+  `DynamicDirectory` in AGENT-MIGRATION.md's search list.
+
+## F85
+
+**System.Linq.Dynamic 1.0.7 is a .NET Framework 4.0 library that references `System.Data.Entity` 4.0 (EF 1–4).**
+App/environment. Found on 0.8.0, migrating nopCommerce 3.90.
+
+- **Apps:** nopcommerce-3.90: every administration edit page (`BaseNopValidator` builds its length rules with
+  `DynamicExpression.ParseLambda`), the Kendo grids' filters and sorting, and message templates' conditions.
+- **Error:** `FileNotFoundException: Could not load file or assembly 'System.Data.Entity, Version=4.0.0.0,
+  Culture=neutral, PublicKeyToken=b77a5c561934e089'`.
+- **What worked:** its successor, System.Linq.Dynamic.Core 1.2.1 (MIT; SmartStoreNET 4 uses it): the namespace,
+  `DynamicExpressionParser.ParseLambda<T, TResult>(null, false, name)`, and `.AsQueryable()` before a `Where(string)`
+  on an array. Three files.
+
+## F86
+
+**Linux: a static file requested in another case than its own is a 404 until it has been requested once in its own
+case; then it is a 200 in any case.** webForCore bug. Raised as [#140](https://github.com/xforcore/webForCore/issues/140).
+Found on 0.8.0 (Linux), migrating nopCommerce 3.90.
+
+- **Apps:** nopcommerce-3.90: it writes every product picture's URL as `/content/images/thumbs/<file>`, and the folder
+  is `Content/Images/Thumbs` (where `MapPath("~/content/images/thumbs")` puts the files, as webForCore resolves the
+  folder's case). Every picture on the store's pages is a 404 on Linux, unless it was requested in its own case since
+  the worker started. On Windows it's a 200, as on IIS.
+- **Repro:** a minimal site (`Program.cs` as in `docs/MIGRATING.md` section 4) with `Content/a.txt` and
+  `Content/b.txt`: `/content/a.txt` 404, `/Content/a.txt` 200, `/content/a.txt` 200, `/CONTENT/A.TXT` 200,
+  `/content/b.txt` 404, `/Content/b.txt` 200, `/content/b.txt` 200.
+- **Cause (likely):** the path mapping cache is keyed case-insensitively, as on .NET Framework, so a request in the
+  file's own case caches its mapping for every case; a first request in another case maps literally and misses.
+- **Suggested fix:** one rule: resolve the case on every lookup off Windows (as `MapPath` does for folders, and as IIS
+  on NTFS behaves), or key the cache case-sensitively off Windows so the answer is always a 404.
+- Not worked around in the app: its probe of a thumbnail at the URL the store writes shows it.
+
+## F87
+
+**webForCore's `System.Web.Optimization` and `WebGrease` don't have Microsoft's assembly identities**, so libraries
+built on Microsoft's bundling don't compile against them. webForCore bug. Raised as
+[#141](https://github.com/xforcore/webForCore/issues/141). Found on 0.8.0, migrating SmartStoreNET 4.x. The same kind of
+problem as F40 (SignalR and DataVisualization at 0.0.0.0, #40).
+
+- **Apps:** smartstorenet: all its bundles (and its themes' SCSS) go through BundleTransformer 1.10–1.12. The build
+  stops in `SmartStore.Web.Framework` with 7 distinct errors: `CS0012: The type 'IBundleTransform' is defined in an
+  assembly that is not referenced. You must add a reference to assembly 'System.Web.Optimization, Version=1.1.0.0,
+  Culture=neutral, PublicKeyToken=31bf3856ad364e35'`, `CS0029`, `CS0039`.
+- **Identities:** webForCore 0.8.0's `System.Web.Optimization` and `WebGrease` are `Version=11.0.0.0,
+  PublicKeyToken=b03f5f7f11d50a3a`; Microsoft's are `System.Web.Optimization 1.1.0.0` and `WebGrease 1.6.5135.21930`,
+  `PublicKeyToken=31bf3856ad364e35`. webForCore's MVC, Web Pages, Web API and Katana keep Microsoft's.
+- **Repro:** a net10.0 library with `webForCore.Web.Optimization` 0.8.0 and `BundleTransformer.Core` 1.10.0:
+  `System.Web.Optimization.IBundleTransform t = new BundleTransformer.Core.Transformers.StyleTransformer();` is CS0012.
+- **Cause:** the packaged project (`WebFormsForCore.Web.Optimization.csproj`) is signed with webForCore's own key and
+  versioned with webForCore, unlike the `System.Web.Optimization.csproj` beside it (Microsoft's shared key).
+- **Suggested fix:** Microsoft's names, versions and key for both, as #40 did for SignalR.
+
+## F88
+
+**webForCore takes one inotify instance per watched folder, and nopCommerce 3.90 watches more than 50 folders.**
+Documented gap (`docs/IIS-COMPATIBILITY.md`, "Restart on web.config, `bin` or `App_Code` change", #107). Found on 0.8.0
+(Linux), migrating nopCommerce 3.90.
+
+- **Apps:** nopcommerce-3.90: its worker had 48 inotify instances after a dozen store pages, and more after the
+  administration (each folder with a `web.config`: 23 in the site and its plugins; each folder of views its theme view
+  engine looks in). The default limit is 128 per user (`fs.inotify.max_user_instances`), so with a desktop session
+  (about 70 here) or another site under the same user, pages fail: `IOException: The configured user limit (128) on
+  the number of inotify instances has been reached` from `DirMonCompletion.StartManagedDirectoryWatch`, for whichever
+  folder comes next (a theme's `Content/Web.config`, `Administration/Web.config`). The docs' figure, "about 15
+  instances" per worker, is far from a large app's.
+- **Not tried as a fix:** `<httpRuntime fcnMode="Single">` doesn't change it (each folder still gets its own watcher).
+- **Suggestion:** off Windows, one inotify instance for the application (one `FileSystemWatcher` with
+  `IncludeSubdirectories` on the site, which takes watches, not instances, from the far larger
+  `max_user_watches`), or the docs' numbers for a large app.
+
 ## F116
 
 **Windows Workflow Foundation 3 (`System.Workflow.Runtime`, `.ComponentModel`, `.Activities`) isn't on .NET, and
@@ -1756,6 +1869,7 @@ Guide gap. Raised as [#136](https://github.com/xforcore/webForCore/issues/136). 
   parameters, so `KeyValuePair<TKey, TValue>` still binds to .NET's).
 - **Docs:** MIGRATING.md section 2 covers the method case (`DistinctBy`, CS0121, #93) and webForCore's newer
   versions' types (`SignInStatus`, #17), not types .NET added.
+- **smartstorenet** (round 7): its own `SmartStore.ComponentModel.ReferenceEqualityComparer` against .NET 5's `System.Collections.Generic.ReferenceEqualityComparer`, in two files; an alias in each.
 
 ## F123
 
