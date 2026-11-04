@@ -1,7 +1,7 @@
 info: WebFormsForCore.Host.WorkerPool[0]
-      Started worker 1 (process 3152) for $WFC_CHECKOUTS\nopcommerce-3.90\src\Presentation\Nop.Web\bin_dotnet\Nop.Web.dll: the host started.
+      Started worker 1 (process 6992) for $WFC_CHECKOUTS\nopcommerce-3.90\src\Presentation\Nop.Web\bin_dotnet\Nop.Web.dll: the host started.
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://127.0.0.1:63564
+      Now listening on: http://127.0.0.1:51802
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
@@ -9,13 +9,23 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Content root path: $WFC_CHECKOUTS\nopcommerce-3.90\src\Presentation\Nop.Web
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/ - - -
+Unhandled exception. System.IO.FileLoadException: Could not load file or assembly '~\AppData\Local\Temp\Temporary_ASP.NET_Files\root\baf62fbd\Nop.Plugin.Shipping.USPS.dll'. The process cannot access the file because it is being used by another process. (0x80070020)
+File name: '~\AppData\Local\Temp\Temporary_ASP.NET_Files\root\baf62fbd\Nop.Plugin.Shipping.USPS.dll'
+   at System.Runtime.Loader.AssemblyLoadContext.LoadFromAssemblyPath(String assemblyPath)
+   at System.Web.Hosting.AssemblyLoaderNetCore.<>c__DisplayClass17_0.<Resolve>b__3(<>f__AnonymousType9`2 p)
+   at System.Linq.Enumerable.IEnumerableWhereSelectIterator`2.MoveNext()
+   at System.Linq.Enumerable.IEnumerableWhereIterator`1.TryGetFirst(Boolean& found)
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Web.Hosting.AssemblyLoaderNetCore.Resolve(AssemblyLoadContext context, AssemblyName name)
+   at System.Runtime.Loader.AssemblyLoadContext.GetFirstResolvedAssemblyFromResolvingEvent(AssemblyName assemblyName)
+   at System.Runtime.Loader.AssemblyLoadContext.ResolveUsingEvent(AssemblyName assemblyName)
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application f964a1f2 in process 3152 (worker 1 of webforcore-host).
+      Started application f964a1f2 in process 6992 (worker 1 of webforcore-host).
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://unix:~\AppData\Local\Temp\webforcore-oqtab34j.5bm\worker-1.sock
+      Now listening on: http://unix:~\AppData\Local\Temp\webforcore-v5uzful5.4bq\worker-1.sock
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 1 (process 3152) is serving (0.6 s after it started).
+      Worker 1 (process 6992) is serving (0.8 s after it started).
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
@@ -25,286 +35,286 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/ - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/ - 200 36732 text/html;+charset=utf-8 2876.9121ms
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/ - 200 36732 text/html;+charset=utf-8 3154.0324ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/ - 200 36733 text/html;+charset=utf-8 4653.6098ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/ - 200 36733 text/html;+charset=utf-8 5225.0842ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/ - 200 36732 text/html;+charset=utf-8 84.8182ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/ - 200 36733 text/html;+charset=utf-8 156.4439ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/ - 200 36732 text/html;+charset=utf-8 87.4608ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/ - 200 36733 text/html;+charset=utf-8 160.0690ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/computers - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/computers - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/computers HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/computers - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/computers - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/computers - 200 25488 text/html;+charset=utf-8 526.1921ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/computers - 200 25488 text/html;+charset=utf-8 750.6511ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/computers - 200 25488 text/html;+charset=utf-8 527.8466ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/computers - 200 25488 text/html;+charset=utf-8 752.3262ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/apple-macbook-pro-13-inch - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/apple-macbook-pro-13-inch - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/apple-macbook-pro-13-inch HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/apple-macbook-pro-13-inch - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/apple-macbook-pro-13-inch - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/apple-macbook-pro-13-inch - 200 41238 text/html;+charset=utf-8 530.7750ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/apple-macbook-pro-13-inch - 200 41235 text/html;+charset=utf-8 771.4948ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/apple-macbook-pro-13-inch - 200 41238 text/html;+charset=utf-8 532.5970ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/apple-macbook-pro-13-inch - 200 41235 text/html;+charset=utf-8 773.4441ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/search?q=apple - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/search?q=apple - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/search?q=apple HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/search?q=apple - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/search?q=apple - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/search?q=apple - 200 32361 text/html;+charset=utf-8 194.8771ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/search?q=apple - 200 32360 text/html;+charset=utf-8 256.4377ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/search?q=apple - 200 32361 text/html;+charset=utf-8 195.8513ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/search?q=apple - 200 32360 text/html;+charset=utf-8 257.4554ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/blog - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/blog - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/blog HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/blog - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/blog - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/blog - 200 25097 text/html;+charset=utf-8 1458.3477ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/blog - 200 25097 text/html;+charset=utf-8 2569.8785ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/blog - 200 25097 text/html;+charset=utf-8 1459.8120ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/blog - 200 25097 text/html;+charset=utf-8 2571.3985ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/login - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/login - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/login HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/login - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/login - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/login - 200 21380 text/html;+charset=utf-8 708.2231ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/login - 200 21380 text/html;+charset=utf-8 1198.3087ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/login - 200 21380 text/html;+charset=utf-8 709.1496ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/login - 200 21380 text/html;+charset=utf-8 1199.4259ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/register - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/register - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/register HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/register - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/register - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/register - 200 30411 text/html;+charset=utf-8 192.3605ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/register - 200 30411 text/html;+charset=utf-8 324.3833ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/register - 200 30411 text/html;+charset=utf-8 194.7299ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/register - 200 30411 text/html;+charset=utf-8 327.7318ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/contactus - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/contactus - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/contactus HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/contactus - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/contactus - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/contactus - 200 20665 text/html;+charset=utf-8 70.6152ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/contactus - 200 20665 text/html;+charset=utf-8 130.4369ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/contactus - 200 20665 text/html;+charset=utf-8 71.4180ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/contactus - 200 20665 text/html;+charset=utf-8 131.3706ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/news/rss/1 - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/news/rss/1 - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/news/rss/1 HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/news/rss/1 - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/news/rss/1 - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/news/rss/1 - 200 1477 application/rss+xml;+charset=utf-8 74.4507ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/news/rss/1 - 200 1477 application/rss+xml;+charset=utf-8 79.4195ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/news/rss/1 - 200 1477 application/rss+xml;+charset=utf-8 75.2461ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/news/rss/1 - 200 1477 application/rss+xml;+charset=utf-8 80.4057ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/sitemap.xml - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/sitemap.xml - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/sitemap.xml HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/sitemap.xml - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/sitemap.xml - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/sitemap.xml - 200 3611 text/xml;+charset=utf-8 45.2015ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/sitemap.xml - 200 3611 text/xml;+charset=utf-8 100.2143ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/sitemap.xml - 200 3611 text/xml;+charset=utf-8 45.9537ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/sitemap.xml - 200 3611 text/xml;+charset=utf-8 101.0338ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/no-such-page - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/no-such-page - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/no-such-page HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/no-such-page - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/no-such-page - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/no-such-page - 404 18755 text/html;+charset=utf-8 50.7156ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/no-such-page - 404 18755 text/html;+charset=utf-8 94.0228ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/no-such-page - 404 18755 text/html;+charset=utf-8 97.4804ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/admin - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/admin - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/admin HTTP/1.1 RequestVersionExact 
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/no-such-page - 404 18755 text/html;+charset=utf-8 52.3683ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/admin - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/admin - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/admin - 302 142 text/html;+charset=utf-8 26.8609ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/admin - 302 142 text/html;+charset=utf-8 42.1756ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 302.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/admin - 302 142 text/html;+charset=utf-8 28.1425ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/admin - 302 142 text/html;+charset=utf-8 43.1440ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/Themes/DefaultClean/Content/css/styles.css - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/Themes/DefaultClean/Content/css/styles.css - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/Themes/DefaultClean/Content/css/styles.css HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/Themes/DefaultClean/Content/css/styles.css - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/Themes/DefaultClean/Content/css/styles.css - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/Themes/DefaultClean/Content/css/styles.css - 200 123860 text/css 13.8624ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/Themes/DefaultClean/Content/css/styles.css - 200 123860 text/css 21.0851ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/Themes/DefaultClean/Content/css/styles.css - 200 123860 text/css 14.6856ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/Themes/DefaultClean/Content/css/styles.css - 200 123860 text/css 22.1977ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/Plugins/Widgets.NivoSlider/Content/nivoslider/nivo-slider.css - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/Plugins/Widgets.NivoSlider/Content/nivoslider/nivo-slider.css - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/Plugins/Widgets.NivoSlider/Content/nivoslider/nivo-slider.css HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/Plugins/Widgets.NivoSlider/Content/nivoslider/nivo-slider.css - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/Plugins/Widgets.NivoSlider/Content/nivoslider/nivo-slider.css - 200 2077 text/css 4.0266ms
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/Plugins/Widgets.NivoSlider/Content/nivoslider/nivo-slider.css - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/Plugins/Widgets.NivoSlider/Content/nivoslider/nivo-slider.css - 200 2077 text/css 4.7046ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/Plugins/Widgets.NivoSlider/Content/nivoslider/nivo-slider.css - 200 2077 text/css 4.2362ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/Plugins/Widgets.NivoSlider/Content/nivoslider/nivo-slider.css - 200 2077 text/css 4.8779ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/content/images/thumbs/0000020_build-your-own-computer_415.jpeg - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/content/images/thumbs/0000020_build-your-own-computer_415.jpeg - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/content/images/thumbs/0000020_build-your-own-computer_415.jpeg HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/content/images/thumbs/0000020_build-your-own-computer_415.jpeg - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/content/images/thumbs/0000020_build-your-own-computer_415.jpeg - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/content/images/thumbs/0000020_build-your-own-computer_415.jpeg - 200 12272 image/jpeg 2.2355ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/content/images/thumbs/0000020_build-your-own-computer_415.jpeg - 200 12272 image/jpeg 3.4669ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/content/images/thumbs/0000020_build-your-own-computer_415.jpeg - 200 12272 image/jpeg 2.7383ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/content/images/thumbs/0000020_build-your-own-computer_415.jpeg - 200 12272 image/jpeg 4.1087ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/Plugins/Widgets.NivoSlider/Nop.Plugin.Widgets.NivoSlider.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/Plugins/Widgets.NivoSlider/Nop.Plugin.Widgets.NivoSlider.dll - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/Plugins/Widgets.NivoSlider/Nop.Plugin.Widgets.NivoSlider.dll HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/Plugins/Widgets.NivoSlider/Nop.Plugin.Widgets.NivoSlider.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/Plugins/Widgets.NivoSlider/Nop.Plugin.Widgets.NivoSlider.dll - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/Plugins/Widgets.NivoSlider/Nop.Plugin.Widgets.NivoSlider.dll - 403 2597 text/html;+charset=utf-8 49.0770ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/Plugins/Widgets.NivoSlider/Nop.Plugin.Widgets.NivoSlider.dll - 403 2597 text/html;+charset=utf-8 66.2287ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 403.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/Plugins/Widgets.NivoSlider/Nop.Plugin.Widgets.NivoSlider.dll - 403 2597 text/html;+charset=utf-8 49.8534ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/Plugins/Widgets.NivoSlider/Nop.Plugin.Widgets.NivoSlider.dll - 403 2597 text/html;+charset=utf-8 66.8266ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/web.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/web.config - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/web.config HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/web.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/web.config - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/web.config - 404 252 text/html 3.5901ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/web.config - 404 252 text/html 11.2250ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/web.config - 404 252 text/html 3.1970ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/web.config - 404 252 text/html 9.3927ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/App_Data/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/App_Data/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/App_Data/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/App_Data/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/App_Data/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/App_Data/ - 404 252 text/html 0.7225ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/App_Data/ - 404 252 text/html 1.6994ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/App_Data/ - 404 252 text/html 1.1425ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/App_Data/ - 404 252 text/html 3.0712ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/Global.asax.cs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/Global.asax.cs - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/Global.asax.cs HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/Global.asax.cs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/Global.asax.cs - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/Global.asax.cs - 404 215 text/html 0.3908ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/Global.asax.cs - 404 215 text/html 1.1092ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/Global.asax.cs - 404 215 text/html 0.7094ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/Global.asax.cs - 404 215 text/html 1.8240ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/obj/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/obj/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/obj/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/obj/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/obj/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/obj/ - 404 252 text/html 0.4507ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/obj/ - 404 252 text/html 0.7713ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/obj/ - 404 252 text/html 0.7796ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/obj/ - 404 252 text/html 1.2097ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/packages.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/packages.config - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/packages.config HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/packages.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/packages.config - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/packages.config - 404 215 text/html 0.4078ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/packages.config - 404 215 text/html 0.6030ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/packages.config - 404 215 text/html 0.7051ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/packages.config - 404 215 text/html 1.0433ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/bin_dotnet/Nop.Web.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/bin_dotnet/Nop.Web.dll - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/bin_dotnet/Nop.Web.dll HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/bin_dotnet/Nop.Web.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/bin_dotnet/Nop.Web.dll - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/bin_dotnet/Nop.Web.dll - 404 252 text/html 0.7184ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/bin_dotnet/Nop.Web.dll - 404 252 text/html 1.2162ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/bin_dotnet/Nop.Web.dll - 404 252 text/html 1.0029ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/bin_dotnet/Nop.Web.dll - 404 252 text/html 1.5843ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/bin_dotnet/webforcore-host/webforcore-host.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/bin_dotnet/webforcore-host/webforcore-host.dll - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/bin_dotnet/webforcore-host/webforcore-host.dll HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:63564/bin_dotnet/webforcore-host/webforcore-host.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:51802/bin_dotnet/webforcore-host/webforcore-host.dll - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 0.6957ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 0.7101ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:63564/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 0.5877ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:51802/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 1.0457ms

@@ -47,9 +47,10 @@ Windows (CI run 41905418748; eshop-legacy-mvc's Windows job didn't start its ser
   3.3.1, F22 no longer stops it: it boots, installs through `[setup]` and passes 21/21 on Linux and Windows (7/14 before). One
   mapping needed a change for F104 (webForCore-thirdparty); F104 and F105 were found there.
 - **Stores** (nopcommerce-3.90 and smartstorenet, new apps on 0.8.0): nopCommerce 3.90, with its administration and
-  20 plugins, is migrated: 22/23 on Linux (product thumbnails, F86) and 23/23 on Windows. SmartStoreNET 4.x is blocked
-  at build, on both platforms, by webForCore's System.Web.Optimization identity (F87). F83–F89 were found there (F89
-  in the runner, fixed: on Windows it now stops a server's whole process tree).
+  20 plugins, is migrated: 22/23 on Linux (product thumbnails, F86) and 23/23 on Windows, in 2 of 4 Windows runs (7/23
+  in the others, F89, intermittent). SmartStoreNET 4.x is blocked at build, on both platforms, by webForCore's
+  System.Web.Optimization identity (F87). F83–F89 were found there; for F89 the runner now stops a server's whole
+  process tree on Windows and records a failed probe's stack.
 
 Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
@@ -144,7 +145,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F86](#f86) | Linux: a static file in another case is 404 until requested once in its own case, then 200 in any case | webForCore bug | nopcommerce-3.90 | [#140](https://github.com/xforcore/webForCore/issues/140) |
 | [F87](#f87) | `System.Web.Optimization` and `WebGrease` don't have Microsoft's identities: BundleTransformer fails with CS0012 | webForCore bug | smartstorenet | [#141](https://github.com/xforcore/webForCore/issues/141) |
 | [F88](#f88) | One inotify instance per watched folder: nopCommerce takes more than 50 of the user's 128 | documented gap | nopcommerce-3.90 | – |
-| [F89](#f89) | Windows: the runner stopped only `webforcore-host`; its worker kept the compilation folder for the next stage (fixed in the runner) | app/environment | nopcommerce-3.90 | – |
+| [F89](#f89) | Windows, intermittent: nopCommerce's smoke after setup fails at start, "file is being used by another process" (cause not confirmed) | app/environment | nopcommerce-3.90 | – |
 | [F104](#f104) | webForCore.AutoMapperLegacy on AutoMapper 12: a member mapped from a value already of its type is mapped again through a base-type map, and the whole configuration fails | app/environment (webForCore-thirdparty) | umbraco-7 | [thirdparty#11](https://github.com/xforcore/webForCore-thirdparty/issues/11) |
 | [F105](#f105) | `ApplicationSettingsBase` (Settings.settings, Web Reference SOAP clients) throws `TypeLoadException`: `ConfigurationManagerInternal` is looked up in `System.Configuration` 4.0.0.0 | webForCore bug | umbraco-7 | [#154](https://github.com/xforcore/webForCore/issues/154) |
 | [F116](#f116) | Windows Workflow Foundation 3 (`System.Workflow.*`) isn't on .NET, and the docs and blocker search don't say so | guide gap | composite-c1 | [#132](https://github.com/xforcore/webForCore/issues/132) |
@@ -1792,24 +1793,26 @@ Documented gap (`docs/IIS-COMPATIBILITY.md`, "Restart on web.config, `bin` or `A
 
 ## F89
 
-**On Windows the runner stopped only `webforcore-host`, and the host's worker, still stopping, kept the site's
-compilation folder when the next stage started a server for the same site.** App/environment (the runner, fixed here).
-Found on 0.8.0 (Windows, CI), with nopCommerce 3.90.
+**Windows, intermittent: nopCommerce's smoke run (after its setup run) fails every request at start with "The process
+cannot access the file because it is being used by another process".** App/environment, cause not confirmed. Found on
+0.8.0 (Windows, CI), with nopCommerce 3.90; never on Linux.
 
-- **Apps:** nopcommerce-3.90 on Windows: setup passed (3/3), then every smoke request was a 500, "The process cannot
-  access the file because it is being used by another process" (7/23: only the forbidden-path checks passed).
-  nopCommerce's plugin manager copies its plugins into the compilation folder at start (F84), and setup's worker had
-  them loaded from there.
-- **Cause:** `Server.stop()` used `Popen.terminate()`, which on Windows is `TerminateProcess` for the host alone. The
-  worker notices its host is gone (stdin closes) and stops gracefully, which takes a while; smoke's host started at
-  once on the same site. `docs/MIGRATING.md` section 8 says it: "Several processes must not share one site folder:
-  they share the compilation folder." On Linux `terminate()` is a SIGTERM, which the host handles by stopping its
-  workers, and open files don't block a copy.
-- **Fix:** the runner ends the server's process tree on Windows first (`taskkill /T /F`), which is what SIGTERM comes to on Linux
-  here. With it, nopcommerce-3.90 is 23/23 on Windows (CI run 41918820640). No other app copies into the
-  compilation folder at start, which is why none showed it.
-- **For webForCore (not raised):** a worker whose host died abruptly could exit at once rather than drain requests
-  nobody will forward.
+- **Apps:** nopcommerce-3.90 on Windows: setup passes (3/3) every time; then in some runs every smoke request is a 500
+  with that message (7/23: only the forbidden-path checks pass), in others the smoke run passes 23/23. The error is at
+  start (every request, static files included), so it comes from the `PreApplicationStartMethod`, and the only file
+  writes there are nopCommerce's plugin manager copying the plugins' DLLs into the compilation folder (F84) over the
+  copies setup's workers loaded, renaming a locked file aside if the copy fails.
+- **Runs:** without a runner change, 1 of 1 failed (CI run 41916845600). With the runner ending the whole server's
+  process tree on Windows (below), 2 of 3 passed (41918820640, 41924554094) and 1 failed (41921438048).
+- **Likely cause:** something still holds a copy that setup loaded when smoke's first worker starts. The runner stopped
+  setup's server with `Popen.terminate()`, which on Windows ends only `webforcore-host`; its worker then stops by
+  itself, more slowly, still in the site's compilation folder (`docs/MIGRATING.md` section 8: "Several processes must
+  not share one site folder"). Ending the tree (`taskkill /T /F`) made it pass more often but not always, so a
+  process still terminating, or something else that opens new DLLs on Windows runners (an antivirus scan), may be the
+  rest.
+- **Runner changes:** `Server.stop` ends the process tree on Windows; a failed probe now records the error page's
+  exception lines and first stack frames (`stack` in the results), so the next failure says which file and call.
+- Not raised: no webForCore behaviour is shown to differ from IIS yet.
 
 ## F104
 
