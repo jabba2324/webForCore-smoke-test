@@ -97,7 +97,8 @@ From the assessment, not reached yet:
 
 ## Smoke
 
-- **webForCore 0.8.0 (Linux):** build fails (F87, 7 distinct errors), so smoke is skipped.
+- **webForCore 0.8.0, CI run 41916845600 (Linux and Windows):** the build fails the same way on both (F87, 7 distinct
+  errors), so smoke is skipped: 0/1.
 
 ## Open problems
 
