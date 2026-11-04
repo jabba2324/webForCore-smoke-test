@@ -1,0 +1,220 @@
+info: WebFormsForCore.Host.WorkerPool[0]
+      Started worker 1 (process 1144480) for <repo>/apps/umbraco-7/src/src/Umbraco.Web.UI/bin_dotnet/Umbraco.Web.UI.dll: the host started.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://127.0.0.1:46631
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: <repo>/apps/umbraco-7/src/src/Umbraco.Web.UI
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:46631/ - - -
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application d792bc49 in process 1144480 (worker 1 of webforcore-host).
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/webforcore-mZGmex/worker-1.sock
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 1 (process 1144480) is serving (1.9 s after it started).
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: <repo>/apps/umbraco-7/src/src/Umbraco.Web.UI
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:46631/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 302.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46631/ - 302 - text/html;+charset=utf-8 2247.1050ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46631/default.aspx - 302 - text/html;+charset=utf-8 732.2869ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:46631/install/api/GetSetup - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/install/api/GetSetup HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:46631/install/api/GetSetup - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46631/install/api/GetSetup - 200 1230 application/json;+charset=utf-8 623.8995ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46631/install/api/GetSetup - 200 1230 application/json;+charset=utf-8 626.3673ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - application/json;+charset=utf-8 427
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/install/api/PostPerformInstall HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - application/json;+charset=utf-8 427
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - 200 112 application/json;+charset=utf-8 49.5892ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - 200 112 application/json;+charset=utf-8 52.7736ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - application/json;+charset=utf-8 427
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/install/api/PostPerformInstall HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - application/json;+charset=utf-8 427
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - 200 114 application/json;+charset=utf-8 104.2723ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - 200 114 application/json;+charset=utf-8 106.3313ms
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Application d792bc49 is shutting down (ConfigurationChange).
+info: WebFormsForCore.Host.WorkerPool[0]
+      Recycling worker 1 (process 1144480): ConfigurationChange.
+info: WebFormsForCore.Host.WorkerPool[0]
+      Started worker 2 (process 1144867) for <repo>/apps/umbraco-7/src/src/Umbraco.Web.UI/bin_dotnet/Umbraco.Web.UI.dll: worker 1 recycled.
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 1 (process 1144480) exited (0).
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application d792bc49 in process 1144867 (worker 2 of webforcore-host).
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/webforcore-mZGmex/worker-2.sock
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 2 (process 1144867) is serving (0.4 s after it started).
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: <repo>/apps/umbraco-7/src/src/Umbraco.Web.UI
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - application/json;+charset=utf-8 427
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/install/api/PostPerformInstall HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - application/json;+charset=utf-8 427
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - 200 101 application/json;+charset=utf-8 2421.5438ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - 200 101 application/json;+charset=utf-8 2399.6280ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - application/json;+charset=utf-8 427
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/install/api/PostPerformInstall HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - application/json;+charset=utf-8 427
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - 200 103 application/json;+charset=utf-8 99.4591ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - 200 103 application/json;+charset=utf-8 100.8755ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - application/json;+charset=utf-8 427
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/install/api/PostPerformInstall HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - application/json;+charset=utf-8 427
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Application d792bc49 is shutting down (ConfigurationChange).
+info: WebFormsForCore.Host.WorkerPool[0]
+      Recycling worker 2 (process 1144867): ConfigurationChange.
+info: WebFormsForCore.Host.WorkerPool[0]
+      Started worker 3 (process 1145672) for <repo>/apps/umbraco-7/src/src/Umbraco.Web.UI/bin_dotnet/Umbraco.Web.UI.dll: worker 2 recycled.
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - 200 96 application/json;+charset=utf-8 454.0929ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - 200 96 application/json;+charset=utf-8 457.3227ms
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 2 (process 1144867) exited (0).
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application d792bc49 in process 1145672 (worker 3 of webforcore-host).
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/webforcore-mZGmex/worker-3.sock
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 3 (process 1145672) is serving (0.4 s after it started).
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: <repo>/apps/umbraco-7/src/src/Umbraco.Web.UI
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - application/json;+charset=utf-8 427
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/install/api/PostPerformInstall HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - application/json;+charset=utf-8 427
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - 200 81 application/json;+charset=utf-8 874.8916ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:46631/install/api/PostPerformInstall - 200 81 application/json;+charset=utf-8 880.2418ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:46631/umbraco/backoffice/UmbracoApi/Authentication/PostLogin - application/json;+charset=utf-8 64
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/umbraco/backoffice/UmbracoApi/Authentication/PostLogin HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:46631/umbraco/backoffice/UmbracoApi/Authentication/PostLogin - application/json;+charset=utf-8 64
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:46631/umbraco/backoffice/UmbracoApi/Authentication/PostLogin - 200 352 application/json;+charset=utf-8 541.6394ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:46631/umbraco/backoffice/UmbracoApi/Authentication/PostLogin - 200 352 application/json;+charset=utf-8 542.5424ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:46631/umbraco/backoffice/UmbracoApi/Authentication/GetCurrentUser - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/umbraco/backoffice/UmbracoApi/Authentication/GetCurrentUser HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:46631/umbraco/backoffice/UmbracoApi/Authentication/GetCurrentUser - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46631/umbraco/backoffice/UmbracoApi/Authentication/GetCurrentUser - 200 358 application/json;+charset=utf-8 16.7093ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46631/umbraco/backoffice/UmbracoApi/Authentication/GetCurrentUser - 200 358 application/json;+charset=utf-8 17.8621ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:46631/umbraco/create.aspx?nodeId=init&nodeType=initstylesheets&nodeName=Stylesheets&rnd=1 - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/umbraco/create.aspx?nodeId=init&nodeType=initstylesheets&nodeName=Stylesheets&rnd=1 HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:46631/umbraco/create.aspx?nodeId=init&nodeType=initstylesheets&nodeName=Stylesheets&rnd=1 - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46631/umbraco/create.aspx?nodeId=init&nodeType=initstylesheets&nodeName=Stylesheets&rnd=1 - 200 4516 text/html;+charset=utf-8 2446.3276ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46631/umbraco/create.aspx?nodeId=init&nodeType=initstylesheets&nodeName=Stylesheets&rnd=1 - 200 4516 text/html;+charset=utf-8 2447.8910ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:46631/umbraco/create.aspx?nodeId=init&nodeType=initstylesheets&nodeName=Stylesheets&rnd=1 - application/x-www-form-urlencoded 373
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/umbraco/create.aspx?nodeId=init&nodeType=initstylesheets&nodeName=Stylesheets&rnd=1 HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:46631/umbraco/create.aspx?nodeId=init&nodeType=initstylesheets&nodeName=Stylesheets&rnd=1 - application/x-www-form-urlencoded 373
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:46631/umbraco/create.aspx?nodeId=init&nodeType=initstylesheets&nodeName=Stylesheets&rnd=1 - 200 4658 text/html;+charset=utf-8 27.4957ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:46631/umbraco/create.aspx?nodeId=init&nodeType=initstylesheets&nodeName=Stylesheets&rnd=1 - 200 4658 text/html;+charset=utf-8 28.3087ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: WebFormsForCore.Hosting.WorkerProcess.WorkerLifetime[0]
+      Worker 3: the host closed its connection: stopping.
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Application d792bc49 is shutting down (HostingEnvironment).
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 3 (process 1145672) exited (0).
