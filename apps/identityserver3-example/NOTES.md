@@ -1,6 +1,6 @@
 # IdentityServer3 example: migration notes
 
-Status: blocked (webForCore 0.7.0, 7/10 probes on Linux): IdentityServer3 2.5.0 needs .NET Framework's
+Status: blocked (webForCore 0.7.0, 7/10 probes on Linux and on Windows): IdentityServer3 2.5.0 needs .NET Framework's
 `System.IdentityModel` (Windows Identity Foundation), which .NET doesn't have ([F69](../../FINDINGS.md#f69)).
 
 scottbrady91/IdentityServer3-Example at `4c810334`, MIT (`LICENSE`). `src/ScottBrady91.IdentityServer3.Example`: an
@@ -42,7 +42,7 @@ The build passes.
 
 ## Smoke
 
-Round 7 candidates (webForCore 0.7.0; Linux): **7/10**. The seven forbidden-path checks pass. Every request under
+Round 7 candidates (webForCore 0.7.0): **7/10 on Linux and on Windows** (Windows: CI run 41898913795). The seven forbidden-path checks pass. Every request under
 `/core` is a 500: the OWIN startup fails where it calls `UseIdentityServer`, before IdentityServer3 runs any of its
 code:
 

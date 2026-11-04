@@ -1,0 +1,161 @@
+info: WebFormsForCore.Host.WorkerPool[0]
+      Started worker 1 (process 2456) for $WFC_CHECKOUTS\identityserver3-example\src\ScottBrady91.IdentityServer3.Example\bin_dotnet\ScottBrady91.IdentityServer3.Example.dll: the host started.
+warn: Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServer[8]
+      The ASP.NET Core developer certificate is not trusted. For information about trusting the ASP.NET Core developer certificate, see https://aka.ms/aspnet/https-trust-dev-cert
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: https://127.0.0.1:54391
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: $WFC_CHECKOUTS\identityserver3-example\src\ScottBrady91.IdentityServer3.Example
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET https://127.0.0.1:54391/ - - -
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application 8d8ff3b4 in process 2456 (worker 1 of webforcore-host).
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:~\AppData\Local\Temp\webforcore-nvwd3dj1.wox\worker-1.sock
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 1 (process 2456) is serving (2.4 s after it started).
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: $WFC_CHECKOUTS\identityserver3-example\src\ScottBrady91.IdentityServer3.Example
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:54391/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET https://127.0.0.1:54391/ - 500 9617 text/html;+charset=utf-8 427.8511ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 500.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET https://127.0.0.1:54391/ - 500 9617 text/html;+charset=utf-8 1832.0443ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET https://127.0.0.1:54391/core/.well-known/openid-configuration - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/core/.well-known/openid-configuration HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:54391/core/.well-known/openid-configuration - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET https://127.0.0.1:54391/core/.well-known/openid-configuration - 500 9337 text/html;+charset=utf-8 17.7803ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 500.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET https://127.0.0.1:54391/core/.well-known/openid-configuration - 500 9337 text/html;+charset=utf-8 19.4515ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET https://127.0.0.1:54391/core/.well-known/jwks - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/core/.well-known/jwks HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:54391/core/.well-known/jwks - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET https://127.0.0.1:54391/core/.well-known/jwks - 500 9337 text/html;+charset=utf-8 18.5461ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 500.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET https://127.0.0.1:54391/core/.well-known/jwks - 500 9337 text/html;+charset=utf-8 19.3453ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET https://127.0.0.1:54391/core/connect/authorize?client_id=implicitclient&response_type=id_token&scope=openid&redirect_uri=https%3A%2F%2Flocalhost%3A44304%2Faccount%2FsignInCallback&nonce=n1 - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/core/connect/authorize?client_id=implicitclient&response_type=id_token&scope=openid&redirect_uri=https%3A%2F%2Flocalhost%3A44304%2Faccount%2FsignInCallback&nonce=n1 HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:54391/core/connect/authorize?client_id=implicitclient&response_type=id_token&scope=openid&redirect_uri=https%3A%2F%2Flocalhost%3A44304%2Faccount%2FsignInCallback&nonce=n1 - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET https://127.0.0.1:54391/core/connect/authorize?client_id=implicitclient&response_type=id_token&scope=openid&redirect_uri=https%3A%2F%2Flocalhost%3A44304%2Faccount%2FsignInCallback&nonce=n1 - 500 9337 text/html;+charset=utf-8 14.0187ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 500.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET https://127.0.0.1:54391/core/connect/authorize?client_id=implicitclient&response_type=id_token&scope=openid&redirect_uri=https%3A%2F%2Flocalhost%3A44304%2Faccount%2FsignInCallback&nonce=n1 - 500 9337 text/html;+charset=utf-8 14.6085ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET https://127.0.0.1:54391/web.config - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/web.config HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:54391/web.config - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 404.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET https://127.0.0.1:54391/web.config - 404 252 text/html 3.3799ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET https://127.0.0.1:54391/web.config - 404 252 text/html 2.8178ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET https://127.0.0.1:54391/App_Data/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/App_Data/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:54391/App_Data/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET https://127.0.0.1:54391/App_Data/ - 404 252 text/html 0.4647ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 404.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET https://127.0.0.1:54391/App_Data/ - 404 252 text/html 0.9275ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET https://127.0.0.1:54391/Global.asax.cs - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/Global.asax.cs HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:54391/Global.asax.cs - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET https://127.0.0.1:54391/Global.asax.cs - 404 215 text/html 0.4867ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 404.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET https://127.0.0.1:54391/Global.asax.cs - 404 215 text/html 0.8364ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET https://127.0.0.1:54391/obj/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/obj/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:54391/obj/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET https://127.0.0.1:54391/obj/ - 404 252 text/html 0.3579ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 404.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET https://127.0.0.1:54391/obj/ - 404 252 text/html 0.7246ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET https://127.0.0.1:54391/packages.config - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/packages.config HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:54391/packages.config - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET https://127.0.0.1:54391/packages.config - 404 215 text/html 0.2744ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 404.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET https://127.0.0.1:54391/packages.config - 404 215 text/html 0.6032ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET https://127.0.0.1:54391/bin_dotnet/ScottBrady91.IdentityServer3.Example.dll - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/bin_dotnet/ScottBrady91.IdentityServer3.Example.dll HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:54391/bin_dotnet/ScottBrady91.IdentityServer3.Example.dll - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET https://127.0.0.1:54391/bin_dotnet/ScottBrady91.IdentityServer3.Example.dll - 404 252 text/html 0.5200ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 404.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET https://127.0.0.1:54391/bin_dotnet/ScottBrady91.IdentityServer3.Example.dll - 404 252 text/html 0.8635ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET https://127.0.0.1:54391/bin_dotnet/webforcore-host/webforcore-host.dll - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/bin_dotnet/webforcore-host/webforcore-host.dll HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:54391/bin_dotnet/webforcore-host/webforcore-host.dll - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET https://127.0.0.1:54391/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 0.3557ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 404.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET https://127.0.0.1:54391/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 0.6917ms
+info: WebFormsForCore.Hosting.WorkerProcess.WorkerLifetime[0]
+      Worker 1: the host closed its connection: stopping.
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shuttininfo: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Application 8d8ff3b4 is shutting down (HostingEnvironment).
