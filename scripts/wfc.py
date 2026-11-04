@@ -178,7 +178,12 @@ def now():
 
 def scrub(log):
     """Logs are committed, so this machine's paths become placeholders."""
-    text = log.read_text(errors="replace")
+    text = scrub_text(log.read_text(errors="replace"))
+    log.write_text(text)
+    return text
+
+
+def scrub_text(text):
     # Longest first: the repo's path can start with webForCore's (../webForCore-smoke-test).
     pairs = [(str(WEBFORCORE), "$WEBFORCORE_DIR"), (str(ROOT), "<repo>"), (str(Path.home()), "~")]
     if CHECKOUTS:
@@ -186,7 +191,6 @@ def scrub(log):
     pairs += [(a.replace("\\", "/"), b) for a, b in pairs if "\\" in a]  # Windows paths, also written with /
     for path, name in sorted(pairs, key=lambda p: -len(p[0])):
         text = text.replace(path, name)
-    log.write_text(text)
     return text
 
 
@@ -498,6 +502,16 @@ class Server:
 
     def stop(self):
         if self.process:
+            # On Windows terminate() ends only webforcore-host; its worker then stops by itself, which takes a while,
+            # and still has the site's compilation folder (and the assemblies loaded from it) when the next stage
+            # starts a host for the same site (nopCommerce's plugin manager copies its plugins there at start:
+            # "The process cannot access the file", FINDINGS.md F89, which this makes rarer but not gone). Ending the
+            # whole tree frees them, as SIGTERM (a graceful stop of the host and its workers) does on Linux.
+            if PLATFORM == "windows" and self.process.poll() is None:
+                try:
+                    subprocess.run(["taskkill", "/T", "/F", "/PID", str(self.process.pid)], capture_output=True, timeout=30)
+                except (OSError, subprocess.TimeoutExpired):
+                    pass
             self.process.terminate()
             try:
                 self.process.wait(10)
@@ -573,6 +587,12 @@ def run_probe(base, probe, timeout, app_id=None, opener=OPENER):
         # The ASP.NET error page's title is the most useful line.
         m = re.search(r"<title>(.*?)</title>", body, re.S | re.I)
         check["title"] = (m.group(1).strip() if m else body[:300])[:300]
+        # And, for an error page with a stack trace, where it was thrown (on CI there's no other way to see it): the
+        # exception lines ("[IOException: ...]") and the first frames under each.
+        if "Stack Trace:" in body:
+            trace = html.unescape(re.sub(r"<[^>]+>", "", body.split("Stack Trace:", 1)[1]))
+            lines = [x.rstrip() for x in trace.splitlines() if x.lstrip().startswith(("[", "at "))]
+            check["stack"] = [scrub_text(x)[:200] for x in lines[:40]]
         if probe.get("contains"):
             check["expected_text"] = probe["contains"]
     return check

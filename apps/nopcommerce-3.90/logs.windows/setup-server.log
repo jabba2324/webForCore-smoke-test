@@ -1,0 +1,114 @@
+info: WebFormsForCore.Host.WorkerPool[0]
+      Started worker 1 (process 1812) for $WFC_CHECKOUTS\nopcommerce-3.90\src\Presentation\Nop.Web\bin_dotnet\Nop.Web.dll: the host started.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://127.0.0.1:64491
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: $WFC_CHECKOUTS\nopcommerce-3.90\src\Presentation\Nop.Web
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:64491/ - - -
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application f964a1f2 in process 1812 (worker 1 of webforcore-host).
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:~\AppData\Local\Temp\webforcore-msiwgm3z.y1m\worker-1.sock
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 1 (process 1812) is serving (4.7 s after it started).
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: $WFC_CHECKOUTS\nopcommerce-3.90\src\Presentation\Nop.Web
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:64491/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 302.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:64491/ - 302 - text/html;+charset=utf-8 1919.3665ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:64491/ - 302 - text/html;+charset=utf-8 6229.4484ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:64491/install - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/install HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:64491/install - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:64491/install - 200 24474 text/html;+charset=utf-8 1619.9931ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:64491/install - 200 24474 text/html;+charset=utf-8 1624.5764ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:64491/install - application/x-www-form-urlencoded 474
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/install HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:64491/install - application/x-www-form-urlencoded 474
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Application f964a1f2 is shutting down (UnloadAppDomainCalled).
+info: WebFormsForCore.Host.WorkerPool[0]
+      Recycling worker 1 (process 1812): UnloadAppDomainCalled.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:64491/install - 302 118 text/html;+charset=utf-8 42707.8383ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 302.
+info: WebFormsForCore.Host.WorkerPool[0]
+      Started worker 2 (process 9044) for $WFC_CHECKOUTS\nopcommerce-3.90\src\Presentation\Nop.Web\bin_dotnet\Nop.Web.dll: worker 1 recycled.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:64491/install - 302 118 text/html;+charset=utf-8 42713.2012ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:64491/ - - -
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 1 (process 1812) exited (0).
+Unhandled exception. System.IO.FileLoadException: Could not load file or assembly '~\AppData\Local\Temp\Temporary_ASP.NET_Files\root\baf62fbd\Nop.Plugin.DiscountRules.CustomerRoles.dll'. The process cannot access the file because it is being used by another process. (0x80070020)
+File name: '~\AppData\Local\Temp\Temporary_ASP.NET_Files\root\baf62fbd\Nop.Plugin.DiscountRules.CustomerRoles.dll'
+   at System.Runtime.Loader.AssemblyLoadContext.LoadFromAssemblyPath(String assemblyPath)
+   at System.Web.Hosting.AssemblyLoaderNetCore.<>c__DisplayClass17_0.<Resolve>b__3(<>f__AnonymousType9`2 p)
+   at System.Linq.Enumerable.IEnumerableWhereSelectIterator`2.MoveNext()
+   at System.Linq.Enumerable.IEnumerableWhereIterator`1.TryGetFirst(Boolean& found)
+   at System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source)
+   at System.Web.Hosting.AssemblyLoaderNetCore.Resolve(AssemblyLoadContext context, AssemblyName name)
+   at System.Runtime.Loader.AssemblyLoadContext.GetFirstResolvedAssemblyFromResolvingEvent(AssemblyName assemblyName)
+   at System.Runtime.Loader.AssemblyLoadContext.ResolveUsingEvent(AssemblyName assemblyName)
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application f964a1f2 in process 9044 (worker 2 of webforcore-host).
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:~\AppData\Local\Temp\webforcore-msiwgm3z.y1m\worker-2.sock
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 2 (process 9044) is serving (4.9 s after it started).
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: $WFC_CHECKOUTS\nopcommerce-3.90\src\Presentation\Nop.Web
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:64491/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:64491/ - 200 36735 text/html;+charset=utf-8 21484.8069ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:64491/ - 200 36735 text/html;+charset=utf-8 16546.3410ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:64491/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:64491/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:64491/ - 200 36735 text/html;+charset=utf-8 224.7520ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:64491/ - 200 36735 text/html;+charset=utf-8 226.9005ms

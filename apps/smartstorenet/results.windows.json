@@ -1,0 +1,34 @@
+{
+  "id": "smartstorenet",
+  "stages": {
+    "build": {
+      "at": "2026-11-04T21:38:21+00:00",
+      "error_count": 7,
+      "errors": [
+        "error CS0012: The type 'Bundle' is defined in an assembly that is not referenced. You must add a reference to assembly 'System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. ",
+        "error CS0012: The type 'IBundleBuilder' is defined in an assembly that is not referenced. You must add a reference to assembly 'System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. ",
+        "error CS0012: The type 'IBundleOrderer' is defined in an assembly that is not referenced. You must add a reference to assembly 'System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. ",
+        "error CS0012: The type 'IBundleTransform' is defined in an assembly that is not referenced. You must add a reference to assembly 'System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35'. ",
+        "error CS0029: Cannot implicitly convert type 'BundleTransformer.Core.Builders.NullBuilder' to 'System.Web.Optimization.IBundleBuilder' ",
+        "error CS0029: Cannot implicitly convert type 'BundleTransformer.Core.Orderers.NullOrderer' to 'System.Web.Optimization.IBundleOrderer' ",
+        "error CS0039: Cannot convert type 'BundleTransformer.Core.Bundles.CustomScriptBundle' to 'System.Web.Optimization.Bundle' via a reference conversion, boxing conversion, unboxing conversion, wrapping conversion, or null type conversion "
+      ],
+      "log": "apps\\smartstorenet\\logs.windows\\build.log",
+      "seconds": 127,
+      "status": "fail",
+      "summary": "7 distinct errors",
+      "webforcore": "packages 0.8.0"
+    },
+    "fetch": {
+      "at": "2026-11-04T21:36:14+00:00",
+      "commit": "b6520754a3793da1bd4157589459b6cac7f2ef8c",
+      "overlay": true,
+      "status": "pass"
+    },
+    "smoke": {
+      "at": "2026-11-04T21:38:22+00:00",
+      "status": "skip",
+      "summary": "not built ($WFC_CHECKOUTS/smartstorenet/src/Presentation/SmartStore.Web/bin_dotnet/SmartStore.Web.dll missing)"
+    }
+  }
+}

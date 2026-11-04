@@ -2,15 +2,15 @@
 
 name = "SmartStoreNET"
 repo = "https://github.com/smartstore/SmartStoreNET"
-ref = ""
+# The head of the 4.x branch (4.2.x, the last .NET Framework release line, after 4.2.0).
+ref = "b6520754a3793da1bd4157589459b6cac7f2ef8c"
 site = "src/Presentation/SmartStore.Web"
-kinds = ["mvc"]
+kinds = ["mvc", "webapi"]
 licence = "GPL-3.0"
-status = "candidate"
+status = "blocked"
 needs = ["mssql"]
+notes = "webForCore 0.8.0: doesn't build. Its bundling is BundleTransformer, built against Microsoft's System.Web.Optimization 1.1.0.0, and webForCore's has another identity (F87, CS0012). Plugins not migrated yet."
 
-# The first request compiles the site, so it gets 120 s.
-# [[probes]]
-# path = "/"
-# status = 200
-# contains = ""
+# The first request compiles the site, so it gets 120 s. Until it builds, the probe is the home page.
+[[probes]]
+path = "/"
