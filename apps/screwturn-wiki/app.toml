@@ -1,0 +1,90 @@
+# ScrewTurn Wiki 3.0.4 (MarkZither's .NET 4.7.2 update). Fields are described in README.md.
+
+name = "ScrewTurn Wiki 3.0"
+repo = "https://github.com/MarkZither/ScrewTurnWiki"
+# 24 Feb 2019: v3.0.4.560 retargeted to .NET Framework 4.7.2, before the fork replaced Anthem.NET with Syncfusion's
+# (commercial) Essential JS controls.
+ref = "7b1ccb462779d586f8beb8f37f78322e055149b6"
+site = "WebApplication"
+project = "WebApplication/WebApplication.csproj"
+kinds = ["webforms"]
+# The wiki rewrites its settings, log and search index (text files under public/) when it runs.
+generated = ["WebApplication/public/Config.cs", "WebApplication/public/Log.cs", "WebApplication/public/Index*.cs"]
+licence = "GPL-2.0"
+status = "migrated"
+notes = "webForCore 0.7.0 (.NET 10, under webforcore-host), webForCore-thirdparty 0.6.0: passes all probes, 24/24 on Linux. A Windows-written page index needed `/` (F72)."
+
+# The first request compiles the site, so it gets 120 s.
+[[probes]]
+path = "/"
+contains = "Main Page - ScrewTurn Wiki"
+
+[[probes]]
+path = "/MainPage.ashx"
+contains = "Main Page - ScrewTurn Wiki"
+
+# A page in a namespace: its file is under public/Pages/Dev/.
+[[probes]]
+path = "/Dev.MainPage.ashx"
+contains = "main page of the namespace"
+
+[[probes]]
+path = "/AllPages.aspx"
+contains = "Wiki Index - ScrewTurn Wiki"
+
+[[probes]]
+path = "/Category.aspx"
+contains = "Categories - ScrewTurn Wiki"
+
+[[probes]]
+path = "/History.aspx?Page=MainPage"
+contains = "Page History - ScrewTurn Wiki"
+
+[[probes]]
+path = "/Search.aspx?Query=wiki"
+contains = "Search Engine - ScrewTurn Wiki"
+
+[[probes]]
+path = "/Search.aspx?OpenSearch=1"
+contains = "<ShortName>ScrewTurn Wiki</ShortName>"
+
+[[probes]]
+path = "/RSS.aspx"
+contains = "<rss version=\"2.0\""
+
+# Forms: the log-in and registration pages (view state, event validation).
+[[probes]]
+path = "/Login.aspx"
+contains = "ctl00$CphMasterSA$btnLogin"
+
+[[probes]]
+path = "/Register.aspx"
+contains = "Create Account - ScrewTurn Wiki"
+
+# Anonymous users are sent to the log-in page.
+[[probes]]
+path = "/Edit.aspx?Page=MainPage"
+status = 302
+
+# A CAPTCHA image drawn with System.Drawing.
+[[probes]]
+path = "/Captcha.aspx"
+contains = "JFIF"
+
+# Static files.
+[[probes]]
+path = "/Themes/Default/Screen_Styles.css"
+contains = "body"
+
+[[probes]]
+path = "/JS/Scripts.js"
+contains = "function"
+
+# The wiki's data files (public/*.cs: users, settings) must not be served.
+[[probes]]
+path = "/public/Users.cs"
+status = 404
+
+[[probes]]
+path = "/public/Config.cs"
+status = 404

@@ -1,0 +1,194 @@
+{
+  "id": "screwturn-wiki",
+  "stages": {
+    "assess": {
+      "at": "2026-11-04T19:24:33+00:00",
+      "blockers": {},
+      "kinds": [
+        "webforms"
+      ],
+      "libraries": [
+        "AclEngine",
+        "Core",
+        "PluginFramework",
+        "SearchEngine"
+      ],
+      "notices": {},
+      "status": "pass",
+      "summary": "no blockers found",
+      "target_frameworks": [
+        "v3.5",
+        "v4.7.1",
+        "v4.7.2"
+      ]
+    },
+    "build": {
+      "at": "2026-11-04T19:29:40+00:00",
+      "error_count": 0,
+      "errors": [],
+      "log": "apps/screwturn-wiki/logs/build.log",
+      "seconds": 21,
+      "status": "pass",
+      "summary": null,
+      "webforcore": "packages 0.7.0"
+    },
+    "fetch": {
+      "at": "2026-11-04T19:29:18+00:00",
+      "commit": "7b1ccb462779d586f8beb8f37f78322e055149b6",
+      "status": "pass",
+      "summary": "existing checkout"
+    },
+    "smoke": {
+      "at": "2026-11-04T19:35:33+00:00",
+      "checks": [
+        {
+          "ms": 8,
+          "ok": true,
+          "path": "/",
+          "status": 200
+        },
+        {
+          "ms": 8,
+          "ok": true,
+          "path": "/MainPage.ashx",
+          "status": 200
+        },
+        {
+          "ms": 10,
+          "ok": true,
+          "path": "/Dev.MainPage.ashx",
+          "status": 200
+        },
+        {
+          "ms": 30,
+          "ok": true,
+          "path": "/AllPages.aspx",
+          "status": 200
+        },
+        {
+          "ms": 9,
+          "ok": true,
+          "path": "/Category.aspx",
+          "status": 200
+        },
+        {
+          "ms": 20,
+          "ok": true,
+          "path": "/History.aspx?Page=MainPage",
+          "status": 200
+        },
+        {
+          "ms": 30,
+          "ok": true,
+          "path": "/Search.aspx?Query=wiki",
+          "status": 200
+        },
+        {
+          "ms": 21,
+          "ok": true,
+          "path": "/Search.aspx?OpenSearch=1",
+          "status": 200
+        },
+        {
+          "ms": 12,
+          "ok": true,
+          "path": "/RSS.aspx",
+          "status": 200
+        },
+        {
+          "ms": 21,
+          "ok": true,
+          "path": "/Login.aspx",
+          "status": 200
+        },
+        {
+          "ms": 23,
+          "ok": true,
+          "path": "/Register.aspx",
+          "status": 200
+        },
+        {
+          "ms": 33,
+          "ok": true,
+          "path": "/Edit.aspx?Page=MainPage",
+          "status": 302
+        },
+        {
+          "ms": 72,
+          "ok": true,
+          "path": "/Captcha.aspx",
+          "status": 200
+        },
+        {
+          "ms": 17,
+          "ok": true,
+          "path": "/Themes/Default/Screen_Styles.css",
+          "status": 200
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/JS/Scripts.js",
+          "status": 200
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/public/Users.cs",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/public/Config.cs",
+          "status": 404
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 3,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 3,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 3,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "ms": 3,
+          "ok": true,
+          "path": "/packages.config",
+          "status": 404
+        },
+        {
+          "ms": 3,
+          "ok": true,
+          "path": "/bin_dotnet/ScrewTurn.Wiki.dll",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
+          "status": 404
+        }
+      ],
+      "log": "apps/screwturn-wiki/logs/server.log",
+      "status": "pass",
+      "summary": "24/24 probes"
+    }
+  }
+}
