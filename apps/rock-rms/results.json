@@ -1,14 +1,57 @@
 {
   "id": "rock-rms",
   "stages": {
+    "assess": {
+      "at": "2026-11-04T21:03:55+00:00",
+      "blockers": {
+        "linq-to-sql": [
+          "Blocks/Administration/PageViews.ascx.cs:198",
+          "Blocks/CheckIn/AttendanceAnalytics.ascx.cs:2046",
+          "Blocks/Communication/CommunicationEntryWizard.ascx.cs:1410",
+          "Blocks/Communication/CommunicationEntryWizard.ascx.cs:1453",
+          "Blocks/Communication/CommunicationQueue.ascx.cs:253",
+          "Blocks/Connection/ConnectionRequestBoard.ascx.cs:2780",
+          "Blocks/Connection/ConnectionRequestBoard.ascx.cs:2785",
+          "Blocks/Connection/ConnectionRequestBoard.ascx.cs:2791",
+          "Blocks/Crm/AssessmentHistory.ascx.cs:283",
+          "Blocks/Event/RegistrationInstanceActiveList.ascx.cs:142",
+          "Blocks/Event/RegistrationInstanceLinkageList.ascx.cs:460",
+          "Blocks/Event/RegistrationInstanceList.ascx.cs:394",
+          "Blocks/Event/RegistrationInstancePaymentList.ascx.cs:404",
+          "Blocks/Event/RegistrationInstanceRegistrantList.ascx.cs:1808",
+          "Blocks/Event/RegistrationInstanceRegistrantList.ascx.cs:1809",
+          "Blocks/Event/RegistrationInstanceRegistrationList.ascx.cs:807",
+          "Blocks/Event/RegistrationInstanceRegistrationList.ascx.cs:811",
+          "Blocks/Event/RegistrationInstanceRegistrationList.ascx.cs:818",
+          "Blocks/Event/RegistrationInstanceRegistrationList.ascx.cs:822",
+          "Blocks/Event/RegistrationInstanceRegistrationList.ascx.cs:835",
+          "... 28 more"
+        ],
+        "windows-auth": [
+          "App_Code/SqlServerTypes/Loader.cs:72"
+        ]
+      },
+      "kinds": [
+        "ef6",
+        "owin",
+        "signalr",
+        "webapi",
+        "webforms"
+      ],
+      "libraries": [],
+      "notices": {},
+      "status": "blocked",
+      "summary": "linq-to-sql, windows-auth",
+      "target_frameworks": []
+    },
     "build": {
       "at": "2026-11-03T12:31:26+00:00",
       "status": "fail",
       "summary": "no project file"
     },
     "fetch": {
-      "at": "2026-11-03T12:31:26+00:00",
-      "commit": "108e6f2d650bb86dda08c9b02df20fe4f54520f0",
+      "at": "2026-11-04T21:03:12+00:00",
+      "commit": "85705ceb0bb3c1dc47a00f07f2e73fde33fc64a3",
       "overlay": false,
       "status": "pass"
     }
