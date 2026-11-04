@@ -97,7 +97,8 @@ anyway, so the build shows exactly what's left.
 
 - **Round 7 (webForCore 0.8.0, Linux):** `build` fails with 46 distinct errors (464 lines), all in `Composite.dll`
   and all WF3 (F116), LINQ to SQL or WCF REST hosting (F120); `smoke` is skipped (nothing built). `Composite.Workflows`
-  and the site aren't reached: they depend on `Composite.dll`. Windows: from CI (`results.windows.json`).
+  and the site aren't reached: they depend on `Composite.dll`.
+- **Windows (CI run 41914624804, PR #21):** the same: `build` fails with the same 46 distinct errors, `smoke` skipped.
 - The probes in `app.toml` (`/robots.txt`, the console's `Login.aspx`) are for when it builds. The aim was the setup
   wizard with a starter site on the XML data store, a rendered public page, the console's log-in, an XSLT function's
   output and a static file; none can be reached.
