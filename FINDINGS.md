@@ -1381,7 +1381,7 @@ AspNetDocs tutorial apps.
 
 **`Request.RawUrl` is the default document's path for a directory request, so FriendlyUrls redirects `/` to
 `/Default`.** webForCore bug. Raised as [#127](https://github.com/xforcore/webForCore/issues/127). Found on 0.7.0
-(Linux), in the candidates round for the AspNetDocs tutorial apps.
+(Linux and Windows), in the candidates round for the AspNetDocs tutorial apps.
 
 - **Apps:** aspnetdocs-wingtip-toys (the Visual Studio 2013 Web Forms template's
   `EnableFriendlyUrls(new FriendlyUrlSettings { AutoRedirectMode = RedirectMode.Permanent })`): `GET /` is
