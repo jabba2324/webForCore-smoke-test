@@ -127,7 +127,7 @@ instances), the setup page renders, the setup creates the schema with NHibernate
 recipe enables its features, imports its content types and runs the migrations, then fails at 128 on its first command
 (`menu create`, while Orchard looks for `.po` files in every module).
 
-**Windows:** see `results.windows.json` (CI).
+**Windows (CI run 41918944385): 9/15.** It builds, and with all 69 modules (no inotify limit) the setup page renders; after the setup form the tenant stays "initializing" (503) for the whole wait (37 tries), so every page probe is 503 and only the paths that must not be served pass. Why isn't in the logs CI keeps (Orchard logs to App_Data/Logs); the overlay now also logs to the console, for the next run.
 
 ## Open problems
 
