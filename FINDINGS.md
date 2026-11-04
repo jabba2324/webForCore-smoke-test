@@ -39,6 +39,9 @@ Windows (CI run 41905418748; eshop-legacy-mvc's Windows job didn't start its ser
 - **Rock RMS** (a candidate, assessed on 0.8.0): rejected, as the Rock Community License limits use, derivative works and
   distribution to faith-based organisations' internal use, so no overlay can be published here. Its assessment (a Web
   Site Project, Windows-only native spatial types, a named `EventWaitHandle`) is in its NOTES.md; F123 was found there.
+- **Umbraco 7 unblocked** (on 0.8.0): with webForCore-thirdparty 0.6.0's `webForCore.AutoMapperLegacy` for AutoMapper
+  3.3.1, F22 no longer stops it: it boots, installs through `[setup]` and passes 21/21 on Linux (7/14 before). One
+  mapping needed a change for F104 (webForCore-thirdparty); F104 and F105 were found there.
 
 Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
@@ -66,7 +69,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F19](#f19) | `System.Web.Abstractions`/`System.Web.Routing` 4.0.0.0 in web.config can't be loaded | webForCore bug | roadkill | [#20](https://github.com/xforcore/webForCore/issues/20) |
 | [F20](#f20) | `Assembly.LoadFrom` returns the default context's copy; WebActivatorEx start methods never run | webForCore bug | applicant-tracking, roadkill | [#21](https://github.com/xforcore/webForCore/issues/21) |
 | [F21](#f21) | Glimpse doesn't run on .NET | guide gap | realocate | [#22](https://github.com/xforcore/webForCore/issues/22) |
-| [F22](#f22) | AutoMapper before 12 doesn't run on .NET 11 or .NET 10 | app/environment | realocate, socialgoal, umbraco-7 | - |
+| [F22](#f22) | AutoMapper before 12 doesn't run on .NET 11 or .NET 10 (umbraco-7: fixed by webForCore-thirdparty 0.6.0's AutoMapperLegacy) | app/environment | realocate, socialgoal, umbraco-7 | - |
 | [F23](#f23) | `recaptcha` 1.0.5's lib folders aren't framework names (NU1202) | app/environment | roadkill | - |
 | [F24](#f24) | A transitive Microsoft.AspNet.Razor replaces webForCore's in the output with no build error | webForCore bug | bonobo-git-server, applicant-tracking, realocate, roadkill | [#23](https://github.com/xforcore/webForCore/issues/23) |
 | [F25](#f25) | .NET Framework builds of StructureMap 4.0 and NLog 4.2 need `AppDomainSetup` members .NET lacks; their .NET Standard builds work | app/environment | roadkill | - |
@@ -127,6 +130,8 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F80](#f80) | A request path with an escaped character (a space, non-ASCII) is answered 400 before the application | webForCore bug | aspnetdocs-wingtip-toys | [#126](https://github.com/xforcore/webForCore/issues/126) |
 | [F81](#f81) | `Request.RawUrl` is the default document's path for a directory request: FriendlyUrls 301s `/` to `/Default` | webForCore bug | aspnetdocs-wingtip-toys | [#127](https://github.com/xforcore/webForCore/issues/127) |
 | [F82](#f82) | Linux: `Server.MachineName` throws `DllNotFoundException` (kernel32); ELMAH's log pages fail | webForCore bug | aspnetdocs-wingtip-toys | [#128](https://github.com/xforcore/webForCore/issues/128) |
+| [F104](#f104) | webForCore.AutoMapperLegacy on AutoMapper 12: a member mapped from a value already of its type is mapped again through a base-type map, and the whole configuration fails | app/environment (webForCore-thirdparty) | umbraco-7 | [thirdparty#11](https://github.com/xforcore/webForCore-thirdparty/issues/11) |
+| [F105](#f105) | `ApplicationSettingsBase` (Settings.settings, Web Reference SOAP clients) throws `TypeLoadException`: `ConfigurationManagerInternal` is looked up in `System.Configuration` 4.0.0.0 | webForCore bug | umbraco-7 | [#154](https://github.com/xforcore/webForCore/issues/154) |
 | [F116](#f116) | Windows Workflow Foundation 3 (`System.Workflow.*`) isn't on .NET, and the docs and blocker search don't say so | guide gap | composite-c1 | [#132](https://github.com/xforcore/webForCore/issues/132) |
 | [F117](#f117) | Run-time C# compilation in application code (`CodeDomProvider.CreateProvider("c#")`) throws `PlatformNotSupportedException`; no documented replacement | guide gap | composite-c1 | [#133](https://github.com/xforcore/webForCore/issues/133) |
 | [F118](#f118) | CoreWCF's source generator reaches applications: `CS8370`/`CS8107` for any `[ServiceContract]` with `LangVersion` below 11 | webForCore bug | composite-c1 | [#134](https://github.com/xforcore/webForCore/issues/134) |
@@ -657,7 +662,14 @@ console app). Found on 0.2.0.
   (`CoreBootManager.InitializeModelMappers` → `Mapper.Initialize`), and the first one,
   `CodeFileDisplayMapper.ConfigureMappings` line 41, throws the 3.x error, so `Application_Start` fails and every request
   is a 500. The repro fails with 3.3.1 on .NET 10.0.14 too. Upgrading means rewriting Umbraco's mapping layer (about 40
-  mapper classes), so the app is blocked here.
+  mapper classes), so the app was blocked here.
+- **Fixed for umbraco-7 by webForCore-thirdparty 0.6.0** (round 7, webForCore 0.8.0): its `webForCore.AutoMapperLegacy`
+  (AutoMapper 3.x's static API on AutoMapper 12.0.1) replaces AutoMapper 3.3.1 in Umbraco.Core, Umbraco.Web and
+  umbraco.businesslogic with the steps its README gives (the package, its global usings, one more alias for Umbraco's
+  own `MapperConfiguration`, C# 14, `AutoMapperLegacy.ITypeConverter<,>` in the 2 classes that implement it). The
+  rest of the 90 files that use AutoMapper compile unchanged, the boot configures every map, and the app installs
+  and passes 21/21 on Linux (7/14 before). One mapping had to change, for F104 (an AutoMapper 12 difference the
+  package passes through). socialgoal and realocate aren't moved to it here.
 
 ## F23
 
@@ -1651,6 +1663,80 @@ round for the AspNetDocs tutorial apps.
   `HttpServerUtility.get_MachineName()`.
 - **Repro:** a page with `<%= Server.MachineName %>`, on Linux.
 - **Suggested fix:** `Environment.MachineName` off Windows.
+
+## F104
+
+**webForCore.AutoMapperLegacy on AutoMapper 12: a member mapped from a value that already has the member's type is
+mapped again, through a map between base types of its elements, and the whole configuration fails.** App/environment
+for webForCore (it isn't webForCore's: AutoMapper 12's behaviour, which webForCore-thirdparty's compatibility package
+passes through). Raised as
+[xforcore/webForCore-thirdparty#11](https://github.com/xforcore/webForCore-thirdparty/issues/11). Found on webForCore
+0.8.0 with webForCore-thirdparty 0.6.0 (Linux).
+
+- **Apps:** umbraco-7. `ContentTypeModelMapperExtensions.MapPropertyGroupBasicToPropertyGroupDisplay` maps
+  `PropertyGroupBasic<MemberPropertyTypeBasic>` to `PropertyGroupDisplay<MemberPropertyTypeDisplay>` with
+  `.ForMember(g => g.Properties, o => o.MapFrom(s => s.Properties.Select(Mapper.Map<MemberPropertyTypeDisplay>)))`, and
+  there's a `PropertyTypeBasic -> PropertyTypeDisplay` map (`MemberPropertyTypeDisplay : PropertyTypeDisplay :
+  PropertyTypeBasic`). AutoMapper 3.3.1 assigned the elements (no map for the element type to itself). AutoMapper
+  12.0.1 maps the `IEnumerable<MemberPropertyTypeDisplay>` again, element by element, picks the base-type map, and
+  can't add its `PropertyTypeDisplay` to the `List<MemberPropertyTypeDisplay>`.
+- **Error:** at the first `Mapper.Map` (the package builds one AutoMapper 12 configuration from every registered map,
+  on first use), whatever it maps: in Umbraco, `BackOfficeUserStore.FindByIdAsync` in the installer's last step, which
+  then fails on every retry.
+  ```
+  System.ArgumentException: Expression of type 'Umbraco.Web.Models.ContentEditing.PropertyTypeDisplay' cannot be used for parameter of type 'Umbraco.Web.Models.ContentEditing.MemberPropertyTypeDisplay' of method 'Void Add(Umbraco.Web.Models.ContentEditing.MemberPropertyTypeDisplay)' (Parameter 'arg0')
+     at AutoMapper.Internal.Mappers.CollectionMapper.<MapExpression>g__MapCollectionCore|3_1(...)
+     ...
+     at AutoMapper.TypeMap.Seal(IGlobalConfiguration configuration)
+     at AutoMapper.MapperConfiguration..ctor(Action`1 configure)
+     at AutoMapperLegacy.RootConfiguration.Build()
+     at AutoMapperLegacy.Mapper.get_Current()
+     at AutoMapperLegacy.Mapper.Map[TDestination](Object source)
+  ```
+- **Repro** (`dotnet run`, .NET 10, `#:package webForCore.AutoMapperLegacy@0.6.0`): `Mapper.CreateMap<PropertyBasic,
+  PropertyDisplay>()`, `Mapper.CreateMap<MemberPropertyBasic, MemberPropertyDisplay>()`,
+  `Mapper.CreateMap<GroupBasic<MemberPropertyBasic>, GroupDisplay<MemberPropertyDisplay>>().ForMember(d =>
+  d.Properties, o => o.MapFrom(s => s.Properties.Select(Mapper.Map<MemberPropertyDisplay>)))` and an unrelated
+  `Mapper.CreateMap<Unrelated, UnrelatedDto>()`; `Mapper.Map<UnrelatedDto>(new Unrelated())` throws the error above.
+  `ResolveUsing` instead of `MapFrom` fails the same way. Plain AutoMapper 12.0.1 (no facade) throws building the same
+  configuration. With AutoMapper 13.0.1 or 14.0.0 (also in the package's range) the configuration builds, but mapping
+  the member throws `NotSupportedException: Specified method is not supported` (plain 14.0.0 too).
+- **What worked:** in the app, `Ignore()` the member and assign it in an `AfterMap` (`dest.Properties =
+  source.Properties.Select(Mapper.Map<TPropertyTypeDisplay>).ToList()`): one change in Umbraco 7. Umbraco then installs,
+  and its back-office API (member types included) answers.
+- **Suggested fix (webForCore-thirdparty):** have the facade assign a resolved value that is already of the destination
+  member's type, as 3.x did, or document the rewrite under "What an application may still have to change"; and say in
+  the README that one faulty map makes every map fail.
+
+## F105
+
+**`ApplicationSettingsBase` throws `TypeLoadException`, so a Visual Studio settings class (`Settings.settings`, and every
+"Web Reference" SOAP client, which reads its URL from one) can't read a setting.** webForCore bug. Raised as
+[#154](https://github.com/xforcore/webForCore/issues/154). Found on 0.8.0 (Linux).
+
+- **Apps:** umbraco-7: `InstallHelper.InstallStatus`, in the installer's last step, creates
+  `org.umbraco.update.CheckForUpgrade` (a Web Reference client), whose constructor reads
+  `Settings.Default.umbraco_org_umbraco_update_CheckForUpgrade`. Umbraco catches and logs it, so the install goes on;
+  the back office's upgrade check uses the same client.
+- **Error:**
+  ```
+  System.TypeLoadException: Could not resolve type 'System.Configuration.Internal.ConfigurationManagerInternal' in assembly 'System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'.
+     at System.Type.GetType(String typeName, Boolean throwOnError)
+     at System.Configuration.TypeUtil.CreateInstanceWithReflectionPermission(String typeString)
+     at System.Configuration.ConfigurationManagerInternalFactory.get_Instance()
+     at System.Configuration.ApplicationSettingsBase.get_Initializer()
+     ...
+     at Umbraco.Web.Properties.Settings.get_umbraco_org_umbraco_update_CheckForUpgrade()
+  ```
+- **Cause:** webForCore's System.Configuration is the reference source's, in the assembly
+  `System.Configuration.ConfigurationManager` 14.5.0.0. Its `ConfigurationManagerInternalFactory` creates
+  `ConfigurationManagerInternal` by name, `"System.Configuration.Internal.ConfigurationManagerInternal, " +
+  AssemblyRef.SystemConfiguration`; on .NET `System.Configuration` 4.0.0.0 is the runtime's forwarding facade, which
+  doesn't have the (internal) type. .NET Framework returns the setting.
+- **Repro:** a console app (or a page) with the `webForCore` 0.8.0 package and `class Settings :
+  ApplicationSettingsBase { [ApplicationScopedSetting, DefaultSettingValue("http://example.com/")] public string Url =>
+  (string)this["Url"]; }`: `new Settings().Url` throws.
+- **Suggested fix:** create the type directly, or name webForCore's own assembly in the type string.
 
 ## F116
 

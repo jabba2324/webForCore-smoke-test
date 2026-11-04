@@ -20,3 +20,21 @@ Appended by `scripts/wfc.py`, one line per stage run.
 - 2026-11-03T20:02:01+00:00 **build**: pass
 - 2026-11-03T20:02:01+00:00 **setup**: pass (created umbraco7)
 - 2026-11-03T20:02:06+00:00 **smoke**: fail (7/14 probes)
+- 2026-11-04T20:47:50+00:00 **fetch**: pass at `bd60f4e2cea7`
+- 2026-11-04T20:49:54+00:00 **setup**: pass (created umbraco7)
+- 2026-11-04T20:50:02+00:00 **smoke**: fail (13/14 probes)
+- 2026-11-04T20:51:57+00:00 **fetch**: pass at `bd60f4e2cea7`
+- 2026-11-04T20:53:09+00:00 **build**: pass
+- 2026-11-04T20:55:48+00:00 **setup**: fail (1/2 steps)
+- 2026-11-04T20:57:38+00:00 **fetch**: pass at `bd60f4e2cea7`
+- 2026-11-04T20:58:26+00:00 **build**: pass
+- 2026-11-04T20:59:10+00:00 **build**: pass
+- 2026-11-04T20:59:12+00:00 **setup**: fail (0/1 steps)
+- 2026-11-04T21:01:34+00:00 **setup**: fail (0/1 steps)
+- 2026-11-04T21:36:04+00:00 **setup**: fail (1/2 steps)
+- 2026-11-04T21:37:11+00:00 **setup**: fail (server exited with -6)
+- 2026-11-04T21:38:51+00:00 **setup**: pass (2/2 steps)
+- 2026-11-04T21:38:57+00:00 **smoke**: fail (12/14 probes)
+- 2026-11-04T21:43:10+00:00 **setup**: pass (5/5 steps)
+- 2026-11-04T21:43:16+00:00 **smoke**: pass (21/21 probes)
+- 2026-11-04T21:43:42+00:00 **smoke**: pass (21/21 probes)

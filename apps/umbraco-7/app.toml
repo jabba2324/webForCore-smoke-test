@@ -11,51 +11,116 @@ project = "src/Umbraco.Web.UI/Umbraco.Web.UI.csproj"
 generated = ["src/Umbraco.Web.UI/config/ClientDependency.config"]
 kinds = ["webforms", "mvc", "webapi", "webpages", "owin", "identity", "signalr"]
 licence = "MIT"
-status = "blocked"
-notes = "Builds on webForCore 0.8.0 (.NET 10), but Umbraco doesn't boot: its AutoMapper 3.3.1 throws configuring its first map (F22), so every request is a 500 and only the forbidden-path checks pass. Found F65 (named semaphores and events on Linux) and F66 (Log4Net.Async's CallContext)."
+status = "migrated"
+notes = "On webForCore 0.8.0 (.NET 10) with webForCore-thirdparty 0.6.0's webForCore.AutoMapperLegacy for AutoMapper 3.3.1 (F22), it builds, installs through [setup] (the installer's JSON API, a back-office log-in and a Web Forms create dialog) and passes 21/21 on Linux: the front end, the back office's MVC page and actions, Web API, SignalR, Web Forms, ASMX and ClientDependency. One mapping changed for F104 (webForCore-thirdparty#11); found F105 (ApplicationSettingsBase, webForCore#154), F65 and F66. The AngularJS client isn't built (Node 10-12 gulp 3), and no content is made (the API needs an XSRF header)."
 needs = ["mssql"]
 
-# web.config (made from web.Template.config at build) points at an "umbraco7" database on the compose SQL Server. The
-# install wizard can't run until Umbraco boots (F22): its JSON API (/install/api/GetSetup, PostPerformInstall) is where
-# the setup steps would go, as `json` steps (NOTES.md, "Smoke").
+# web.Template.config has Umbraco's own empty connection string, so the site starts uninstalled and the installer's
+# JSON API sets it up, as its AngularJS client does (NOTES.md, "Smoke"): GetSetup lists the steps, then each
+# PostPerformInstall runs the next one, until the answer says it's complete. The install id is fixed: the steps are
+# tracked in memory and in App_Data/TEMP/Install/install_<id>.txt, which the post after a restart reads (the database
+# step writes the connection string to web.config, and others restart the application too). The database step gets
+# the compose SQL Server, the User step the admin user, and the starter kit (from our.umbraco.org) is skipped with an
+# empty id. A post caught by a restart fails and runs again.
 [setup]
 databases = ["umbraco7"]
 
-# What a working, not yet installed Umbraco 7 answers (from its source; none has been seen to pass, NOTES.md). The
-# installer page (/install/) and the back office (/umbraco/) also need the AngularJS client built with npm and the
-# umbraco/Umbraco folders merged on Linux, so they aren't probed. The first request compiles, so it gets 120 s.
-
-# An uninstalled site sends every page to the installer.
-[[probes]]
-path = "/"
-status = 302
-
-# Web API: the installer's API (JSON, behind Angular's ")]}'," prefix).
-[[probes]]
-path = "/install/api/GetSetup"
+[[setup.steps]]
+get = "/install/api/GetSetup"
 contains = "\"installId\""
 
-# MVC: the back office's localized text action (JSON from umbraco/config/lang/en.xml).
+[[setup.steps]]
+post = "/install/api/PostPerformInstall"
+json = '{"installId": "75b1e2f0-0000-4000-8000-000000000007", "instructions": {"DatabaseConfigure": {"dbType": "SqlServer", "server": "127.0.0.1,14330", "databaseName": "umbraco7", "login": "sa", "password": "Smoke_test_1234", "integratedAuth": false}, "User": {"name": "admin", "email": "admin@example.com", "password": "Smoke_test_1234", "subscribeToNewsLetter": false}, "StarterKitDownload": "00000000-0000-0000-0000-000000000000"}}'
+timeout = 300
+contains = "\"complete\":true"
+retries = 30
+
+# Then, in the back office: the log-in (the AngularJS client's JSON POST to the authentication API, which sets the
+# back-office cookie), the current user (Web API with that cookie), and a stylesheet made with a legacy Web Forms
+# create dialog (a postback; it writes css/Smoke.css). The back office's other API calls and its editors' saves also
+# need the X-UMB-XSRF-TOKEN header, which the runner's steps can't send, so no content is made (NOTES.md, "Smoke").
+[[setup.steps]]
+post = "/umbraco/backoffice/UmbracoApi/Authentication/PostLogin"
+json = '{"username": "admin@example.com", "password": "Smoke_test_1234"}'
+contains = "\"name\":\"admin\""
+retries = 4
+
+[[setup.steps]]
+get = "/umbraco/backoffice/UmbracoApi/Authentication/GetCurrentUser"
+contains = "\"email\":\"admin@example.com\""
+
+[[setup.steps]]
+post = "/umbraco/create.aspx?nodeId=init&nodeType=initstylesheets&nodeName=Stylesheets&rnd=1"
+button = "ctl00$body$ctl00$sbmt"
+value = "Create"
+fields = { "ctl00$body$ctl00$rename" = "Smoke" }
+contains = "editStylesheet.aspx?id=Smoke.css"
+
+# What the installed Umbraco 7 answers to an anonymous visitor. The first request compiles, so it gets 120 s.
+
+# Umbraco's front end with no published content: its "no nodes" page (Web Forms).
+[[probes]]
+path = "/"
+contains = "Welcome to your Umbraco installation"
+
+# The back office's page (an MVC view; its AngularJS client isn't built, NOTES.md), with the server variables.
+[[probes]]
+path = "/umbraco/"
+contains = "\"authenticationApiBaseUrl\":\"/umbraco/backoffice/UmbracoApi/Authentication/\""
+
+# The installer, once installed, sends visitors to the back office.
+[[probes]]
+path = "/install/"
+status = 302
+
+# Web API: the authentication API (JSON, behind Angular's ")]}'," prefix), and a back-office API controller.
+[[probes]]
+path = "/umbraco/backoffice/UmbracoApi/Authentication/IsAuthenticated"
+contains = ")]}',\nfalse"
+
+[[probes]]
+path = "/umbraco/backoffice/UmbracoApi/Section/GetSections"
+status = 401
+contains = "Authorization has been denied for this request."
+
+# MVC: the back office's localized text action (JSON from umbraco/config/lang/en.xml) and its application script.
 [[probes]]
 path = "/umbraco/LocalizedText"
 contains = "\"general_login\": \"Login\""
+
+[[probes]]
+path = "/umbraco/Application"
+contains = "LazyLoad.js("
+
+# SignalR: the back office's hubs proxy (preview).
+[[probes]]
+path = "/umbraco/BackOffice/signalr/hubs"
+contains = "ASP.NET SignalR JavaScript Library"
 
 # Web Forms.
 [[probes]]
 path = "/umbraco/ping.aspx"
 contains = "I'm alive!"
 
-# ASMX: a script service's help page.
+# ASMX: a script service's help page and its ASP.NET AJAX client proxy.
 [[probes]]
 path = "/umbraco/webservices/legacyAjaxCalls.asmx"
 contains = "legacyAjaxCalls Web Service"
+
+[[probes]]
+path = "/umbraco/webservices/CheckForUpgrade.asmx/js"
+contains = "umbraco.presentation.webservices.CheckForUpgrade"
 
 # ClientDependency's composite handler (an .axd in <handlers>), minifying /umbraco_client/modal/style.css.
 [[probes]]
 path = "/DependencyHandler.axd?s=L3VtYnJhY29fY2xpZW50L21vZGFsL3N0eWxlLmNzczs&t=Css&cdv=1"
 contains = "umbModalBox"
 
-# A static file.
+# Static files: one of Umbraco's, and the stylesheet the setup's create dialog made.
 [[probes]]
 path = "/umbraco_client/modal/style.css"
 contains = "div.umbModalBox"
+
+[[probes]]
+path = "/css/Smoke.css"
