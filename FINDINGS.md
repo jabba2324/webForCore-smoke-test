@@ -40,7 +40,7 @@ Windows (CI run 41905418748; eshop-legacy-mvc's Windows job didn't start its ser
   distribution to faith-based organisations' internal use, so no overlay can be published here. Its assessment (a Web
   Site Project, Windows-only native spatial types, a named `EventWaitHandle`) is in its NOTES.md; F123 was found there.
 - **Umbraco 7 unblocked** (on 0.8.0): with webForCore-thirdparty 0.6.0's `webForCore.AutoMapperLegacy` for AutoMapper
-  3.3.1, F22 no longer stops it: it boots, installs through `[setup]` and passes 21/21 on Linux (7/14 before). One
+  3.3.1, F22 no longer stops it: it boots, installs through `[setup]` and passes 21/21 on Linux and Windows (7/14 before). One
   mapping needed a change for F104 (webForCore-thirdparty); F104 and F105 were found there.
 
 Repro sites are small enough to paste: a `Program.cs` as in
@@ -668,7 +668,7 @@ console app). Found on 0.2.0.
   umbraco.businesslogic with the steps its README gives (the package, its global usings, one more alias for Umbraco's
   own `MapperConfiguration`, C# 14, `AutoMapperLegacy.ITypeConverter<,>` in the 2 classes that implement it). The
   rest of the 90 files that use AutoMapper compile unchanged, the boot configures every map, and the app installs
-  and passes 21/21 on Linux (7/14 before). One mapping had to change, for F104 (an AutoMapper 12 difference the
+  and passes 21/21 on Linux and Windows (7/14 before). One mapping had to change, for F104 (an AutoMapper 12 difference the
   package passes through). socialgoal and realocate aren't moved to it here.
 
 ## F23

@@ -1,6 +1,6 @@
 # Umbraco 7: migration notes
 
-Status: migrated (installs through `[setup]` and passes 21/21 on Linux, webForCore 0.8.0 with webForCore-thirdparty
+Status: migrated (installs through `[setup]` and passes 21/21 on Linux and Windows, webForCore 0.8.0 with webForCore-thirdparty
 0.6.0's `webForCore.AutoMapperLegacy`). Source: https://github.com/umbraco/Umbraco-CMS at `bd60f4e2` (tag
 release-7.15.11, the last 7.x release). The repo, licence (MIT), web project and its `<TargetFrameworkVersion>` (v4.5.2)
 were checked when the app was added.
@@ -167,7 +167,7 @@ Not done:
   overlay:** 7/14 on both.
 - **Round 7, with webForCore.AutoMapperLegacy 0.6.0 (Linux):** from a new database (`fetch --reset`, `build`,
   `setup`, `smoke`, as CI runs them), `setup` passes 5/5 steps and `smoke` 21/21 (14 probes and the 7 forbidden paths),
-  also under `LANG=C` (F67). Windows: see "CI" in the PR's results.
+  also under `LANG=C` (F67). Windows (CI run 41919373974, PR #26): setup 5/5, 21/21, the same as Linux.
 - Without the F104 change (step 9), the install got to its last step (`UmbracoVersion`) and failed there on every
   retry: setup 1/2, and the uninstalled site's probes.
 

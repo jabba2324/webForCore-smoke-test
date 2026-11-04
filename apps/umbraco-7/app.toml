@@ -12,7 +12,7 @@ generated = ["src/Umbraco.Web.UI/config/ClientDependency.config"]
 kinds = ["webforms", "mvc", "webapi", "webpages", "owin", "identity", "signalr"]
 licence = "MIT"
 status = "migrated"
-notes = "On webForCore 0.8.0 (.NET 10) with webForCore-thirdparty 0.6.0's webForCore.AutoMapperLegacy for AutoMapper 3.3.1 (F22), it builds, installs through [setup] (the installer's JSON API, a back-office log-in and a Web Forms create dialog) and passes 21/21 on Linux: the front end, the back office's MVC page and actions, Web API, SignalR, Web Forms, ASMX and ClientDependency. One mapping changed for F104 (webForCore-thirdparty#11); found F105 (ApplicationSettingsBase, webForCore#154), F65 and F66. The AngularJS client isn't built (Node 10-12 gulp 3), and no content is made (the API needs an XSRF header)."
+notes = "On webForCore 0.8.0 (.NET 10) with webForCore-thirdparty 0.6.0's webForCore.AutoMapperLegacy for AutoMapper 3.3.1 (F22), it builds, installs through [setup] (the installer's JSON API, a back-office log-in and a Web Forms create dialog) and passes 21/21 on Linux and Windows: the front end, the back office's MVC page and actions, Web API, SignalR, Web Forms, ASMX and ClientDependency. One mapping changed for F104 (webForCore-thirdparty#11); found F105 (ApplicationSettingsBase, webForCore#154), F65 and F66. The AngularJS client isn't built (Node 10-12 gulp 3), and no content is made (the API needs an XSRF header)."
 needs = ["mssql"]
 
 # web.Template.config has Umbraco's own empty connection string, so the site starts uninstalled and the installer's
