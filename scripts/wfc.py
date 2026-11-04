@@ -441,10 +441,10 @@ OPENER = urllib.request.build_opener(NoRedirect, urllib.request.HTTPSHandler(con
 MAX_BODY = 4_000_000  # bytes read per response: bundles are large, and larger on Windows (CRLF line ends)
 
 
-def get(url, timeout):
+def get(url, timeout, opener=OPENER):
     req = urllib.request.Request(url, headers={"User-Agent": "webForCore-smoke-test"})
     try:
-        with OPENER.open(req, timeout=timeout) as r:
+        with opener.open(req, timeout=timeout) as r:
             return r.status, dict(r.headers), r.read(MAX_BODY).decode("utf-8", "replace")
     except urllib.error.HTTPError as e:
         return e.code, dict(e.headers), e.read(MAX_BODY).decode("utf-8", "replace")
@@ -518,9 +518,13 @@ def smoke(app):
                           **({"log_tail": server.stop()[-3000:]} if server.process else {}))
         base, site, dll = server.base, server.site, server.dll
         probes = app.get("probes") or [{"path": "/", "status": 200}]
+        # Probes with cookies = true share one cookie jar, in order (a session: add to a cart, then view it).
+        cookie_opener = urllib.request.build_opener(NoRedirect, urllib.request.HTTPSHandler(context=_TLS),
+                                                    urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar()))
         for i, probe in enumerate(probes):
             # The first request compiles the site, as on IIS.
-            checks.append(run_probe(base, probe, timeout=120 if i == 0 else 30, app_id=app["id"]))
+            checks.append(run_probe(base, probe, timeout=120 if i == 0 else 30, app_id=app["id"],
+                                    opener=cookie_opener if probe.get("cookies") else OPENER))
         # AddWebForms() writes W3C logs under the site folder by default (FINDINGS.md); they must not be served.
         # The log is flushed every second, and entries not yet flushed are lost when the server stops.
         time.sleep(1.5)
@@ -551,12 +555,12 @@ def probe_url(app_id, path):
     return path
 
 
-def run_probe(base, probe, timeout, app_id=None):
+def run_probe(base, probe, timeout, app_id=None, opener=OPENER):
     path = probe["path"]
     url = probe_url(app_id, path) if app_id else path
     t = time.time()
     try:
-        status, headers, body = get(base + url, timeout)
+        status, headers, body = get(base + url, timeout, opener)
     except Exception as ex:  # noqa: BLE001 - a probe reports any failure
         return {"path": path, "ok": False, "error": f"{type(ex).__name__}: {ex}"}
     ok = status == probe.get("status", 200) or bool(probe.get("forbidden") and status in (403, 404))

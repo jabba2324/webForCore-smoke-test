@@ -153,7 +153,7 @@ as a pass: note it in `NOTES.md` and `FINDINGS.md`, and fix webForCore instead.
 | `remove` | Globs of files `fetch` deletes before applying the overlay, kept out of the patch (the app's checked-in DLLs) |
 | `generated` | Globs of files the build or the app writes into the checkout, kept out of the patch (mojoPortal's features copy themselves into the site) |
 | `https` | `true` to serve the app over HTTPS with the .NET development certificate (`dotnet dev-certs https`), for apps with `RequireHttpsAttribute` |
-| `[[probes]]` | `path` (`{setup_date}` in it is the day `setup` set the database up), `status` (default 200), `contains` (text that proves the page rendered), `absent` (text that must not be in the response) |
+| `[[probes]]` | `path` (`{setup_date}` in it is the day `setup` set the database up), `status` (default 200), `contains` (text that proves the page rendered), `absent` (text that must not be in the response), `cookies = true` (the probe sends and keeps cookies in a jar shared with the app's other `cookies` probes, in order, for a flow that needs a session; redirects are still not followed) |
 | `[forbidden."<path>"]` | Overrides for one of the paths that must not be served (`/web.config`, `/packages.config`, ...), for an app whose error handler answers 200 with its own page: `status`, `absent`, `contains` |
 | `notes` | One line for the summary; the detail goes in `NOTES.md` |
 
