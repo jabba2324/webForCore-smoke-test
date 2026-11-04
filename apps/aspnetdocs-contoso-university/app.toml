@@ -1,0 +1,52 @@
+# AspNetDocs: Contoso University (MVC 5 + EF 6 tutorial). Fields are described in README.md.
+# The tutorial (dotnet/AspNetDocs, aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc) links its
+# completed project on the retired MSDN Code Gallery; Microsoft's archive of the gallery keeps it, Apache-2.0.
+
+name = "AspNetDocs: Contoso University (MVC 5 + EF 6 tutorial)"
+repo = "https://github.com/microsoftarchive/msdn-code-gallery-community-a-c"
+ref = "bbfca35de1c811927fbd019d51969aa878dbd032"
+site = "ASP.NET MVC Application Using Entity Framework Code First/[C#]-ASP.NET MVC Application Using Entity Framework Code First/C#/ContosoUniversity"
+project = "ASP.NET MVC Application Using Entity Framework Code First/[C#]-ASP.NET MVC Application Using Entity Framework Code First/C#/ContosoUniversity/ContosoUniversity.csproj"
+kinds = ["mvc"]
+licence = "Apache-2.0"
+status = "migrated"
+notes = "webForCore 0.7.0 (.NET 10, under webforcore-host): passes all probes, 16/16 on Linux."
+needs = ["mssql"]
+
+# The first request compiles the site, so it gets 120 s.
+
+[[probes]]
+path = "/"
+contains = "Welcome to Contoso University"
+
+[[probes]]
+path = "/Student"
+contains = "Alexander"
+
+[[probes]]
+path = "/Student?sortOrder=name_desc&searchString=an"
+contains = "Page 1 of"
+
+[[probes]]
+path = "/Student/Create"
+contains = "__RequestVerificationToken"
+
+[[probes]]
+path = "/Course"
+contains = "Chemistry"
+
+[[probes]]
+path = "/Instructor?id=9&courseID=2042"
+contains = "Students Enrolled in Selected Course"
+
+[[probes]]
+path = "/Department"
+contains = "Economics"
+
+[[probes]]
+path = "/Home/About"
+contains = "Enrollment Date"
+
+[[probes]]
+path = "/Content/Site.css"
+contains = "body"
