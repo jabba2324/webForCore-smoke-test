@@ -15,6 +15,8 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 - **Umbraco 6** (a new app, migrated on 0.7.0): F57–F64, and F67 from its first CI run (Ubuntu's `C` locale).
 - **Umbraco 7** (a new app, on 0.7.0, on Linux so far): builds, but is blocked at boot by AutoMapper 3.3.1 (F22); F65
   and F66, and more evidence for F37 and F61–F64.
+- **Web Forms and MVC 3 candidates** (new apps, migrated on 0.7.0 with webForCore-thirdparty 0.6.0): screwturn-wiki
+  (24/24 on Linux) and mvc-music-store (20/20 on Linux; its accounts are blocked by F70); F68–F72 were found there.
 
 Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
@@ -89,6 +91,11 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F65](#f65) | Linux: named semaphores and events throw `PlatformNotSupportedException` (only named `Mutex` works) | guide gap | umbraco-7 | [#94](https://github.com/xforcore/webForCore/issues/94) |
 | [F66](#f66) | webForCore's `CallContext` doesn't reach prebuilt .NET Framework libraries: Log4Net.Async logs nothing | guide gap | umbraco-7 | [#95](https://github.com/xforcore/webForCore/issues/95) |
 | [F67](#f67) | Linux with no locale (`C`/`POSIX`: CI runners, containers): the culture is invariant, so apps that pick resources by culture find none | guide gap | umbraco-6 | [#97](https://github.com/xforcore/webForCore/issues/97) |
+| [F68](#f68) | MVC 3/4 apps: `webpages:Version` 1.0.0.0/2.0.0.0 fails every request ("Conflicting versions of ASP.NET Web Pages") | guide gap | mvc-music-store | [#122](https://github.com/xforcore/webForCore/issues/122) |
+| [F69](#f69) | MVC 3/4 apps: `[Compare]` is ambiguous (CS0104) between MVC's and DataAnnotations' `CompareAttribute` | guide gap | mvc-music-store | [#122](https://github.com/xforcore/webForCore/issues/122) |
+| [F70](#f70) | No `aspnet_regsql`: `SqlServices.Install` can't find `InstallCommon.sql`, so SQL membership/roles/profile apps can't create their database | webForCore bug | mvc-music-store | [#123](https://github.com/xforcore/webForCore/issues/123) |
+| [F71](#f71) | ICU: `en-US`/`en-GB` `NumberDecimalDigits` is 3, so `{0:F}` prints `8.990` for 8.99 | guide gap | mvc-music-store | [#124](https://github.com/xforcore/webForCore/issues/124) |
+| [F72](#f72) | Windows-only data stores (SQL CE, SQL Express user instances) and data written on Windows (`\` in a wiki's page index) | app/environment | screwturn-wiki, mvc-music-store | - |
 ---
 
 ## F1
@@ -1358,3 +1365,81 @@ GitHub's `ubuntu-24.04` runner (its locale is `C`); it passed on this machine (`
   16/16 under `LANG=C`. Setting `LANG` for the server would do too.
 - **Guide:** `docs/MIGRATING.md` should say that a Linux server or container without a locale runs with the invariant
   culture, and to set `<globalization culture uiCulture>` or `LANG`.
+
+## F68
+
+**MVC 3/4 apps: `webpages:Version` 1.0.0.0 (or 2.0.0.0) fails every request with "Conflicting versions of ASP.NET
+Web Pages detected".** Guide gap. Raised as [#122](https://github.com/xforcore/webForCore/issues/122). Found on 0.7.0
+(candidates round), on Linux.
+
+- **Apps:** mvc-music-store (MVC 3).
+- **Error:** `System.InvalidOperationException: Conflicting versions of ASP.NET Web Pages detected: specified version
+  is "1.0.0.0", but the version in bin is "3.0.0.0". To continue, remove files from the application's bin directory or
+  remove the version specification in web.config.` on the first request, from `<add key="webpages:Version"
+  value="1.0.0.0"/>` (the MVC 3 template's; MVC 4's says `2.0.0.0`).
+- **Fix in the app:** `value="3.0.0.0"`, as Microsoft's MVC 3/4 → 5 upgrade on .NET Framework. The other MVC 3
+  version numbers in web.config (`<compilation><assemblies>`, `Views/Web.config`'s `System.Web.WebPages.Razor,
+  Version=1.0.0.0` sections and `MvcWebRazorHostFactory, System.Web.Mvc, Version=3.0.0.0`) work unchanged.
+- **Guide:** `docs/MIGRATING.md` says an app on an older MVC gets the upgrade, but not that MVC 3/4 apps need this.
+
+## F69
+
+**MVC 3/4 apps: `[Compare]` is ambiguous (CS0104) between MVC's and DataAnnotations' `CompareAttribute`.** Guide
+gap. Raised as [#122](https://github.com/xforcore/webForCore/issues/122) (with F68). Found on 0.7.0, on Linux.
+
+- **Apps:** mvc-music-store (the MVC 3 template's `Models/AccountModels.cs`; every MVC 3/4 template app has it).
+- **Error:** `CS0104: 'Compare' is an ambiguous reference between
+  'System.ComponentModel.DataAnnotations.CompareAttribute' and 'System.Web.Mvc.CompareAttribute'`. .NET Framework 4.5
+  added the DataAnnotations one; the app targeted 4.0, where only MVC's existed.
+- **Fix in the app:** `using CompareAttribute = System.Web.Mvc.CompareAttribute;` in that file (what it compiled to
+  on 4.0; the Register form keeps `data-val-equalto`).
+- **Guide:** like #17's `SignInStatus`, a type the newer framework added; `docs/MIGRATING.md` doesn't mention it.
+
+## F70
+
+**No `aspnet_regsql`: `SqlServices.Install` looks for `InstallCommon.sql` in .NET's runtime folder, so apps on the
+default SQL membership, role and profile providers can't create their database.** webForCore bug. Raised as
+[#123](https://github.com/xforcore/webForCore/issues/123). Found on 0.7.0, on Linux (the same on any OS).
+
+- **Apps:** mvc-music-store: `AccountController`'s `Membership.ValidateUser`/`CreateUser` use machine.config's
+  `AspNetSqlMembershipProvider` on `LocalSqlServer` (SQL Express user instance, `aspnetdb.mdf`), which can't exist on
+  Linux; posting log-on or register is a 500, "SQLExpress database file auto-creation error". Checkout and the store
+  manager (a user, the Administrator role) are untested.
+- **Cause:** on .NET Framework the providers' schema scripts (`InstallCommon.sql`, `InstallMembership.sql`,
+  `InstallRoles.sql`, `InstallProfile.sql`, `InstallSqlState.sql`, ...) are in the framework folder, which
+  `System.Web.Management.SqlServices`, `aspnet_regsql.exe` and the SQL Express auto-creation read
+  (`HttpRuntime.AspInstallDirectory`). webForCore ships none of them and no `aspnet_regsql` equivalent;
+  `AspInstallDirectory` is .NET's runtime folder.
+- **Repro:** a page that calls
+  `SqlServices.Install("aspnetdb", SqlFeatures.Membership, "<a SQL Server connection string>")`:
+  `FileNotFoundException: Could not find file '<dotnet>/shared/Microsoft.NETCore.App/10.0.14/InstallCommon.sql'`.
+- **Affects:** every MVC 2–4 and Web Forms 3.5/4.0 template app's accounts, `SqlWebEventProvider`, and SQL Server
+  session state (`InstallSqlState.sql`).
+
+## F71
+
+**ICU culture data: `NumberDecimalDigits` is 3 for `en-US`/`en-GB`, so `{0:F}` prints `8.990` for 8.99.** Guide gap
+(.NET's culture data on ICU, not webForCore's). Raised as [#124](https://github.com/xforcore/webForCore/issues/124).
+Found on 0.7.0, on Linux (Fedora 44, ICU 77.1).
+
+- **Apps:** mvc-music-store: the album page's price, `@String.Format("{0:F}", Model.Price)`, is `8.990` (IIS:
+  `8.99`). Not probed.
+- **Repro:** plain .NET 10, `string.Format(new CultureInfo("en-US"), "{0:F}", 8.99m)` is `8.990`; `NumberDecimalDigits`
+  is 3 for `en-US` and `en-GB` (ICU's pattern `#,##0.###`), 2 for the invariant culture and on Windows NLS.
+- **Guide:** `docs/MIGRATING.md` section 6 says ICU's formats differ "slightly" (currency and date patterns); this one
+  changes ordinary numbers (`F`, `N` with no precision).
+
+## F72
+
+**Windows-only data stores and data written on Windows: SQL CE, SQL Express user instances, `\` in a wiki's page
+index.** App/environment. Found on 0.7.0 (candidates round), on Linux.
+
+- **Apps:**
+  - screwturn-wiki: its page index (`public/Pages.cs`) lists the `Dev` namespace's main page as `Dev\MainPage.cs`;
+    `Path.Combine` with the pages folder finds no such file on Linux, so `/Dev.MainPage.ashx` rendered empty. The
+    data file says `Dev/MainPage.cs` in the overlay; the app writes new entries with `Path.DirectorySeparatorChar`, so
+    only data made on Windows has it (an existing wiki moved to Linux needs the same edit).
+  - mvc-music-store: Entity Framework on SQL Server Compact 4.0 (Windows-native, no .NET build) and membership on a
+    SQL Express user instance (`LocalSqlServer`). The catalogue uses the test bed's SQL Server; membership is F70.
+- **Guide:** covered (section 5: "LocalDB doesn't exist on Linux"; section 6: file paths), except that the guide
+  doesn't name SQL CE or `User Instance=true` (the SQL Express of the MVC 3/Web Forms 4.0 templates).
