@@ -1,0 +1,71 @@
+# MVC Music Store (MVC 3 version). Fields are described in README.md.
+
+name = "MVC Music Store (MVC 3)"
+repo = "https://github.com/jongalloway/MvcMusicStore"
+ref = "ea2552d6eda7c20e9477a512e5c615665618cf35"
+site = "src/MVC3/MvcMusicStore-Completed/MvcMusicStore"
+project = "src/MVC3/MvcMusicStore-Completed/MvcMusicStore/MvcMusicStore.csproj"
+kinds = ["mvc"]
+licence = "MS-PL"
+status = "migrated"
+notes = "webForCore 0.7.0 (.NET 10, under webforcore-host), webForCore-thirdparty 0.6.0, on SQL Server: passes all probes, 20/20 on Linux and Windows (CI run 41900122122). Log-on and registration fail: no aspnet_regsql for the default membership provider (F75); prices print 8.990 (ICU, F76)."
+
+needs = ["mssql"]
+# No [setup]: Entity Framework creates and seeds the database (DropCreateDatabaseIfModelChanges) on the first request.
+
+# The first request compiles the site and creates the database, so it gets 120 s.
+[[probes]]
+path = "/"
+contains = "<em>Fresh</em> off the grill"
+
+[[probes]]
+path = "/Store"
+contains = "Select from 10 genres"
+
+[[probes]]
+path = "/Store/Browse?genre=Jazz"
+contains = "<em>Jazz</em> Albums"
+
+[[probes]]
+path = "/Store/Details/1"
+contains = "The Best Of Men At Work"
+
+[[probes]]
+path = "/ShoppingCart"
+contains = "your cart"
+
+# Forms with unobtrusive validation; [Compare] is MVC's (data-val-equalto).
+[[probes]]
+path = "/Account/LogOn"
+contains = "data-val-required=\"The User name field is required.\""
+
+[[probes]]
+path = "/Account/Register"
+contains = "data-val-equalto="
+
+# [Authorize]: anonymous users are sent to the log-on page.
+[[probes]]
+path = "/StoreManager"
+status = 302
+
+[[probes]]
+path = "/Checkout/AddressAndPayment"
+status = 302
+
+# A child action can't be requested directly, as on IIS.
+[[probes]]
+path = "/Store/GenreMenu"
+status = 500
+contains = "is accessible only by a child request"
+
+[[probes]]
+path = "/Content/Site.css"
+contains = "body"
+
+[[probes]]
+path = "/Scripts/jquery-1.5.1.min.js"
+contains = "jQuery"
+
+[[probes]]
+path = "/no-such-controller"
+status = 404

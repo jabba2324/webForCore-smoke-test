@@ -1,0 +1,146 @@
+{
+  "id": "odata-samples-compositekey",
+  "stages": {
+    "assess": {
+      "at": "2026-11-04T19:22:42+00:00",
+      "blockers": {},
+      "kinds": [
+        "webapi"
+      ],
+      "libraries": [],
+      "notices": {},
+      "status": "pass",
+      "summary": "no blockers found",
+      "target_frameworks": [
+        "v4.8"
+      ]
+    },
+    "build": {
+      "at": "2026-11-04T19:37:39+00:00",
+      "error_count": 0,
+      "errors": [],
+      "log": "apps/odata-samples-compositekey/logs/build.log",
+      "seconds": 4,
+      "status": "pass",
+      "summary": null,
+      "webforcore": "packages 0.7.0"
+    },
+    "fetch": {
+      "at": "2026-11-04T19:37:35+00:00",
+      "commit": "2e60476b62d411fbac8265b4e23a5d8f414676c7",
+      "overlay": true,
+      "status": "pass"
+    },
+    "smoke": {
+      "at": "2026-11-04T19:37:42+00:00",
+      "checks": [
+        {
+          "expected_text": "\"name\":\"People\"",
+          "ms": 25,
+          "ok": false,
+          "path": "/",
+          "status": 404,
+          "title": "The resource cannot be found."
+        },
+        {
+          "expected_text": "<Key><PropertyRef Name=\"FirstName\" /><PropertyRef Name=\"LastName\" /></Key>",
+          "ms": 4,
+          "ok": false,
+          "path": "/$metadata",
+          "status": 404,
+          "title": "The resource cannot be found."
+        },
+        {
+          "expected_text": "\"FirstName\":\"Lewis\",\"LastName\":\"James\",\"Age\":6",
+          "ms": 4,
+          "ok": false,
+          "path": "/People",
+          "status": 404,
+          "title": "The resource cannot be found."
+        },
+        {
+          "expected_text": "\"Age\":5",
+          "ms": 3,
+          "ok": false,
+          "path": "/People(FirstName='Kate',LastName='Jones')",
+          "status": 404,
+          "title": "The resource cannot be found."
+        },
+        {
+          "ms": 3,
+          "ok": true,
+          "path": "/People(FirstName='Kate',LastName='Nobody')",
+          "status": 404
+        },
+        {
+          "expected_text": "\"value\":[{\"LastName\":\"Park\"},{\"LastName\":\"James\"}]",
+          "ms": 3,
+          "ok": false,
+          "path": "/People?$filter=Age%20gt%205&$orderby=Age%20desc&$select=LastName",
+          "status": 404,
+          "title": "The resource cannot be found."
+        },
+        {
+          "expected_text": "3",
+          "ms": 3,
+          "ok": false,
+          "path": "/People/$count",
+          "status": 404,
+          "title": "The resource cannot be found."
+        },
+        {
+          "ms": 2,
+          "ok": false,
+          "path": "/People?$format=application/xml",
+          "status": 404,
+          "title": "The resource cannot be found."
+        },
+        {
+          "ms": 16,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 6,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 7,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 6,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "ms": 6,
+          "ok": true,
+          "path": "/packages.config",
+          "status": 404
+        },
+        {
+          "ms": 8,
+          "ok": true,
+          "path": "/bin_dotnet/ODataCompositeKeySample.dll",
+          "status": 404
+        },
+        {
+          "ms": 7,
+          "ok": true,
+          "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
+          "status": 404
+        }
+      ],
+      "log": "apps/odata-samples-compositekey/logs/server.log",
+      "status": "fail",
+      "summary": "8/15 probes"
+    }
+  }
+}
