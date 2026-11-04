@@ -501,8 +501,8 @@ class Server:
             # On Windows terminate() ends only webforcore-host; its worker then stops by itself, which takes a while,
             # and still has the site's compilation folder (and the assemblies loaded from it) when the next stage
             # starts a host for the same site (nopCommerce's plugin manager copies its plugins there at start:
-            # "The process cannot access the file", FINDINGS.md F89). Ending the whole tree frees them, as SIGTERM
-            # (a graceful stop of the host and its workers) does on Linux.
+            # "The process cannot access the file", FINDINGS.md F89, which this makes rarer but not gone). Ending the
+            # whole tree frees them, as SIGTERM (a graceful stop of the host and its workers) does on Linux.
             if PLATFORM == "windows" and self.process.poll() is None:
                 try:
                     subprocess.run(["taskkill", "/T", "/F", "/PID", str(self.process.pid)], capture_output=True, timeout=30)
