@@ -154,10 +154,41 @@ index c0da7b4d5..93ae403df 100644
          </Component>
  
 diff --git a/src/Orchard.Web/Config/log4net.config b/src/Orchard.Web/Config/log4net.config
-index 55cdac153..2b2e845de 100644
+index 55cdac153..cf13f91ac 100644
 --- a/src/Orchard.Web/Config/log4net.config
 +++ b/src/Orchard.Web/Config/log4net.config
-@@ -56,7 +56,7 @@
+@@ -8,6 +8,8 @@
+         <priority value="WARN" />
+         <appender-ref ref="error-file" />
+         <appender-ref ref="debug-file" />
++        <!-- webForCore smoke test: warnings and errors on the console too, which the test bed keeps as the server log. -->
++        <appender-ref ref="console" />
+     </root>
+ 
+     <!-- Example of turning on the output from a component or namespace. -->
+@@ -21,6 +23,7 @@
+         <!-- Anything recipe-related goes into a dedicated file. -->
+         <priority value="INFO" />
+         <appender-ref ref="recipes-file" />
++        <appender-ref ref="console" />
+     </logger>
+ 
+     <logger name="Orchard">
+@@ -49,6 +52,13 @@
+         <priority value="OFF" />
+     </logger>
+ 
++    <appender name="console" type="log4net.Appender.ConsoleAppender">
++        <threshold value="INFO" />
++        <layout type="log4net.Layout.PatternLayout">
++            <conversionPattern value="orchard: %date [%thread] %logger - %level %message%newline%exception" />
++        </layout>
++    </appender>
++
+     <appender name="debugger" type="log4net.Appender.DebugAppender">
+         <!-- Sends log messages to Visual Studio if attached. -->
+         <immediateFlush value="true" />
+@@ -56,7 +66,7 @@
      </appender>
  
      <appender name="debug-file" type="Orchard.Logging.OrchardFileAppender">
@@ -166,7 +197,7 @@ index 55cdac153..2b2e845de 100644
          <appendToFile value="true" />
          <!-- Immediate flush on error log, to avoid data loss with sudden termination. -->
          <immediateFlush value="true" />
-@@ -71,7 +71,7 @@
+@@ -71,7 +81,7 @@
      </appender>
  
      <appender name="error-file" type="Orchard.Logging.OrchardFileAppender">
@@ -175,7 +206,7 @@ index 55cdac153..2b2e845de 100644
          <appendToFile value="true" />
          <!-- Immediate flush on error log, to avoid data loss with sudden termination. -->
          <immediateFlush value="true" />
-@@ -90,7 +90,7 @@
+@@ -90,7 +100,7 @@
      </appender>
  
      <appender name="recipes-file" type="Orchard.Logging.OrchardFileAppender">
