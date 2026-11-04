@@ -1,6 +1,6 @@
 # AspNetDocs: Wingtip Toys (Web Forms 4.5 + EF 6 tutorial): migration notes
 
-Status: blocked (webForCore 0.7.0, 16/19 probes on Linux; F68, F69 and F70 are webForCore bugs). Source: the
+Status: blocked (webForCore 0.7.0, 16/19 probes on Linux, 17/19 on Windows; F68, F69 and F70 are webForCore bugs). Source: the
 completed project of the AspNetDocs tutorial "Getting Started with ASP.NET 4.5 Web Forms and Visual Studio 2013"
 (`aspnet/web-forms/overview/getting-started/getting-started-with-aspnet-45-web-forms` in dotnet/AspNetDocs). The
 repository has only the tutorial's snippets; the tutorial links the project on the retired MSDN Code Gallery
@@ -10,7 +10,7 @@ keeps it, Apache-2.0 (the sample's README). Packages: webForCore 0.7.0, webForCo
 drawingForCore 0.2.0. webForCore 0.8.0 wasn't released when this was migrated.
 
 The checkout is the whole archive repository (about 1.3 GB of samples), as the runner clones repositories whole, and
-the site's path in it is long (about 200 characters), which Windows may not like.
+the site's path in it is long (about 200 characters); CI's Windows job checks it out and builds it (the runner sets `core.longpaths`).
 
 ## Assessment
 
@@ -50,7 +50,7 @@ No change to the code.
 
 ## Smoke
 
-**Linux, webForCore 0.7.0: 16/19.** Pass: `/ProductList` (the catalogue from the seeded database, model binding),
+**Linux, webForCore 0.7.0: 16/19; Windows (CI run 41900268720): 17/19**, the same but for `/elmah.axd`, which works there (F70 is Linux only). Pass: `/ProductList` (the catalogue from the seeded database, model binding),
 `/Category/Planes` (page route with `[RouteData]`), `/ProductDetails?productID=2` (`[QueryString]`), `/ShoppingCart`,
 `/Account/Login` and `/Account/Register` (Identity pages, view state), `/About` (FriendlyUrls' extensionless URL),
 `/Admin/AdminPage` (302 to the login page: `<authorization>` for the `canEdit` role and the OWIN cookie

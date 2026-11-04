@@ -1366,7 +1366,7 @@ GitHub's `ubuntu-24.04` runner (its locale is `C`); it passed on this machine (`
 
 **A request path with a percent-escaped character (a space, any non-ASCII character) is answered 400 with an empty
 body, before the application sees it.** webForCore bug. Raised as
-[#126](https://github.com/xforcore/webForCore/issues/126). Found on 0.7.0 (Linux), in the candidates round for the
+[#126](https://github.com/xforcore/webForCore/issues/126). Found on 0.7.0 (Linux and Windows), in the candidates round for the
 AspNetDocs tutorial apps.
 
 - **Apps:** aspnetdocs-wingtip-toys: its product list links each product as
