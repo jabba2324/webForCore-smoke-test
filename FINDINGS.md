@@ -47,7 +47,7 @@ Windows (CI run 41905418748; eshop-legacy-mvc's Windows job didn't start its ser
   3.3.1, F22 no longer stops it: it boots, installs through `[setup]` and passes 21/21 on Linux and Windows (7/14 before). One
   mapping needed a change for F104 (webForCore-thirdparty); F104 and F105 were found there.
 - **Stores** (nopcommerce-3.90 and smartstorenet, new apps on 0.8.0): nopCommerce 3.90, with its administration and
-  20 plugins, is migrated: 22/23 on Linux (product thumbnails, F86) and 23/23 on Windows, in 2 of 4 Windows runs (7/23
+  20 plugins, is migrated: 22/23 on Linux (product thumbnails, F86) and 23/23 on Windows, in 2 of 5 Windows runs (7/23
   in the others, F89, intermittent). SmartStoreNET 4.x is blocked at build, on both platforms, by webForCore's
   System.Web.Optimization identity (F87). F83–F89 were found there; for F89 the runner now stops a server's whole
   process tree on Windows and records a failed probe's stack.
@@ -148,7 +148,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F86](#f86) | Linux: a static file in another case is 404 until requested once in its own case, then 200 in any case | webForCore bug | nopcommerce-3.90 | [#140](https://github.com/xforcore/webForCore/issues/140) |
 | [F87](#f87) | `System.Web.Optimization` and `WebGrease` don't have Microsoft's identities: BundleTransformer fails with CS0012 | webForCore bug | smartstorenet | [#141](https://github.com/xforcore/webForCore/issues/141) |
 | [F88](#f88) | The same as F92: one inotify instance per watched folder; nopCommerce takes more than 50 of the user's 128 | webForCore bug | nopcommerce-3.90 | [#152](https://github.com/xforcore/webForCore/issues/152) |
-| [F89](#f89) | Windows, intermittent: nopCommerce's smoke after setup fails at start, "file is being used by another process" (cause not confirmed) | app/environment | nopcommerce-3.90 | – |
+| [F89](#f89) | Windows, intermittent: nopCommerce's plugin manager can't replace a plugin copy in the compilation folder at start ("rename failed") | app/environment | nopcommerce-3.90 | – |
 | [F90](#f90) | The parameterless crypto factories (`KeyedHashAlgorithm.Create()`, `HashAlgorithm.Create()`, ...) throw on .NET | guide gap | kooboo-cms | [#151](https://github.com/xforcore/webForCore/issues/151) |
 | [F91](#f91) | DotNetZip 1.9 (`Ionic.Zip.Reduced`) can't extract on Linux | app/environment | kooboo-cms | - |
 | [F92](#f92) | Linux: every watched directory is an inotify instance on .NET 10; Kooboo's worker alone takes 48+ of the default 128 | webForCore bug | kooboo-cms (umbraco-8: 20) | [#152](https://github.com/xforcore/webForCore/issues/152) |
@@ -1798,26 +1798,29 @@ worker takes more than 50 of the user's 128.** webForCore bug (`docs/IIS-COMPATI
 
 ## F89
 
-**Windows, intermittent: nopCommerce's smoke run (after its setup run) fails every request at start with "The process
-cannot access the file because it is being used by another process".** App/environment, cause not confirmed. Found on
-0.8.0 (Windows, CI), with nopCommerce 3.90; never on Linux.
+**Windows, intermittent: nopCommerce's plugin manager can't replace a plugin's copy in the compilation folder at start
+("rename failed, cannot initialize plugin"), so every request fails.** App/environment (nopCommerce's plugin manager,
+which copies the same way on IIS). Found on 0.8.0 (Windows, CI), with nopCommerce 3.90; never on Linux.
 
-- **Apps:** nopcommerce-3.90 on Windows: setup passes (3/3) every time; then in some runs every smoke request is a 500
-  with that message (7/23: only the forbidden-path checks pass), in others the smoke run passes 23/23. The error is at
-  start (every request, static files included), so it comes from the `PreApplicationStartMethod`, and the only file
-  writes there are nopCommerce's plugin manager copying the plugins' DLLs into the compilation folder (F84) over the
-  copies setup's workers loaded, renaming a locked file aside if the copy fails.
-- **Runs:** without a runner change, 1 of 1 failed (CI run 41916845600). With the runner ending the whole server's
-  process tree on Windows (below), 2 of 3 passed (41918820640, 41924554094) and 1 failed (41921438048).
-- **Likely cause:** something still holds a copy that setup loaded when smoke's first worker starts. The runner stopped
-  setup's server with `Popen.terminate()`, which on Windows ends only `webforcore-host`; its worker then stops by
-  itself, more slowly, still in the site's compilation folder (`docs/MIGRATING.md` section 8: "Several processes must
-  not share one site folder"). Ending the tree (`taskkill /T /F`) made it pass more often but not always, so a
-  process still terminating, or something else that opens new DLLs on Windows runners (an antivirus scan), may be the
-  rest.
-- **Runner changes:** `Server.stop` ends the process tree on Windows; a failed probe now records the error page's
-  exception lines and first stack frames (`stack` in the results), so the next failure says which file and call.
-- Not raised: no webForCore behaviour is shown to differ from IIS yet.
+- **Apps:** nopcommerce-3.90 on Windows: setup passes (3/3) every time; then in some runs every smoke request is a 500,
+  "The process cannot access the file because it is being used by another process" (7/23: only the forbidden-path
+  checks pass); in the others the smoke run passes 23/23.
+- **Where** (the stack the runner now records, CI run 41926373548): `PluginManager.Initialize`, a
+  `PreApplicationStartMethod`, copies each plugin's DLL into the compilation folder over the copy setup's workers loaded
+  (`File.Copy(..., overwrite: true)`); when that fails it renames the old copy aside, and that failed too:
+  `IOException: ~\AppData\Local\Temp\Temporary_ASP.NET_Files\root\<hash>\Nop.Plugin.Shipping.UPS.dll rename failed,
+  cannot initialize plugin` ← `IOException: The process cannot access the file because it is being used by another
+  process`. The plugins before it in nopCommerce's order were replaced; UPS (one of the largest, with its SOAP proxies)
+  wasn't.
+- **Runs:** 2 of 5 Windows runs passed (41918820640, 41924554094); 3 failed (41916845600, 41921438048, 41926373548).
+  The runner's stop on Windows now ends the server's whole process tree (`terminate()` ended only `webforcore-host`,
+  leaving setup's worker to stop by itself in the same compilation folder); failures happened with and without it, so
+  what holds the file is something else: a handle without `FILE_SHARE_DELETE` (an antivirus scan of a DLL that was
+  just written is the usual one on Windows runners) at the moment the plugin manager runs.
+- **Runner changes:** `Server.stop` ends the process tree on Windows; a failed probe records the error page's exception
+  lines and first stack frames (`stack`, paths scrubbed as in the logs).
+- Not raised: nothing shown to differ from IIS, where nopCommerce copies the same way (its code's comments describe
+  locked plugin files there, and the rename is its workaround).
 
 ## F90
 

@@ -2,23 +2,23 @@
   "id": "nopcommerce-3.90",
   "stages": {
     "build": {
-      "at": "2026-11-04T22:29:20+00:00",
+      "at": "2026-11-04T22:41:49+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\nopcommerce-3.90\\logs.windows\\build.log",
-      "seconds": 227,
+      "seconds": 240,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.8.0"
     },
     "fetch": {
-      "at": "2026-11-04T22:25:33+00:00",
+      "at": "2026-11-04T22:37:48+00:00",
       "commit": "12d1f0139149a9d6e84964d325d62bae6ac748f6",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-04T22:30:25+00:00",
+      "at": "2026-11-04T22:43:04+00:00",
       "created": [
         "nop390"
       ],
@@ -45,118 +45,275 @@
       "summary": "3/3 steps"
     },
     "smoke": {
-      "at": "2026-11-04T22:30:39+00:00",
+      "at": "2026-11-04T22:43:07+00:00",
       "checks": [
         {
-          "ms": 185,
-          "ok": true,
+          "expected_text": "nivoSlider",
+          "ms": 23,
+          "ok": false,
           "path": "/",
-          "status": 200
+          "stack": [
+            "[IOException: The process cannot access the file because it is being used by another process.]",
+            "[IOException: ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin",
+            "[InvalidOperationException: The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United P",
+            "[HttpException (0x80004005): The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United "
+          ],
+          "status": 500,
+          "title": "The process cannot access the file because it is being used by another process."
         },
         {
-          "ms": 753,
-          "ok": true,
+          "expected_text": "Your store. Computers",
+          "ms": 5,
+          "ok": false,
           "path": "/computers",
-          "status": 200
+          "stack": [
+            "[IOException: The process cannot access the file because it is being used by another process.]",
+            "[IOException: ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin",
+            "[InvalidOperationException: The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United P",
+            "[HttpException (0x80004005): The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United "
+          ],
+          "status": 500,
+          "title": "The process cannot access the file because it is being used by another process."
         },
         {
-          "ms": 785,
-          "ok": true,
+          "expected_text": "Apple MacBook Pro 13-inch",
+          "ms": 3,
+          "ok": false,
           "path": "/apple-macbook-pro-13-inch",
-          "status": 200
+          "stack": [
+            "[IOException: The process cannot access the file because it is being used by another process.]",
+            "[IOException: ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin",
+            "[InvalidOperationException: The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United P",
+            "[HttpException (0x80004005): The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United "
+          ],
+          "status": 500,
+          "title": "The process cannot access the file because it is being used by another process."
         },
         {
-          "ms": 258,
-          "ok": true,
+          "expected_text": "Apple MacBook Pro 13-inch",
+          "ms": 4,
+          "ok": false,
           "path": "/search?q=apple",
-          "status": 200
+          "stack": [
+            "[IOException: The process cannot access the file because it is being used by another process.]",
+            "[IOException: ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin",
+            "[InvalidOperationException: The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United P",
+            "[HttpException (0x80004005): The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United "
+          ],
+          "status": 500,
+          "title": "The process cannot access the file because it is being used by another process."
         },
         {
-          "ms": 2573,
-          "ok": true,
+          "expected_text": "Your store. Blog",
+          "ms": 4,
+          "ok": false,
           "path": "/blog",
-          "status": 200
+          "stack": [
+            "[IOException: The process cannot access the file because it is being used by another process.]",
+            "[IOException: ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin",
+            "[InvalidOperationException: The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United P",
+            "[HttpException (0x80004005): The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United "
+          ],
+          "status": 500,
+          "title": "The process cannot access the file because it is being used by another process."
         },
         {
-          "ms": 1201,
-          "ok": true,
+          "expected_text": "Your store. Login",
+          "ms": 6,
+          "ok": false,
           "path": "/login",
-          "status": 200
+          "stack": [
+            "[IOException: The process cannot access the file because it is being used by another process.]",
+            "[IOException: ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin",
+            "[InvalidOperationException: The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United P",
+            "[HttpException (0x80004005): The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United "
+          ],
+          "status": 500,
+          "title": "The process cannot access the file because it is being used by another process."
         },
         {
-          "ms": 329,
-          "ok": true,
+          "expected_text": "Your store. Register",
+          "ms": 4,
+          "ok": false,
           "path": "/register",
-          "status": 200
+          "stack": [
+            "[IOException: The process cannot access the file because it is being used by another process.]",
+            "[IOException: ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin",
+            "[InvalidOperationException: The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United P",
+            "[HttpException (0x80004005): The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United "
+          ],
+          "status": 500,
+          "title": "The process cannot access the file because it is being used by another process."
         },
         {
-          "ms": 133,
-          "ok": true,
+          "expected_text": "Your store. Contact Us",
+          "ms": 4,
+          "ok": false,
           "path": "/contactus",
-          "status": 200
+          "stack": [
+            "[IOException: The process cannot access the file because it is being used by another process.]",
+            "[IOException: ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin",
+            "[InvalidOperationException: The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United P",
+            "[HttpException (0x80004005): The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United "
+          ],
+          "status": 500,
+          "title": "The process cannot access the file because it is being used by another process."
         },
         {
-          "ms": 104,
-          "ok": true,
+          "expected_text": "<rss",
+          "ms": 6,
+          "ok": false,
           "path": "/news/rss/1",
-          "status": 200
+          "stack": [
+            "[IOException: The process cannot access the file because it is being used by another process.]",
+            "[IOException: ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin",
+            "[InvalidOperationException: The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United P",
+            "[HttpException (0x80004005): The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United "
+          ],
+          "status": 500,
+          "title": "The process cannot access the file because it is being used by another process."
         },
         {
-          "ms": 101,
-          "ok": true,
+          "expected_text": "<urlset",
+          "ms": 4,
+          "ok": false,
           "path": "/sitemap.xml",
-          "status": 200
+          "stack": [
+            "[IOException: The process cannot access the file because it is being used by another process.]",
+            "[IOException: ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin",
+            "[InvalidOperationException: The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United P",
+            "[HttpException (0x80004005): The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United "
+          ],
+          "status": 500,
+          "title": "The process cannot access the file because it is being used by another process."
         },
         {
-          "ms": 96,
-          "ok": true,
+          "expected_text": "Page not found",
+          "ms": 3,
+          "ok": false,
           "path": "/no-such-page",
-          "status": 404
+          "stack": [
+            "[IOException: The process cannot access the file because it is being used by another process.]",
+            "[IOException: ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin",
+            "[InvalidOperationException: The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United P",
+            "[HttpException (0x80004005): The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United "
+          ],
+          "status": 500,
+          "title": "The process cannot access the file because it is being used by another process."
         },
         {
-          "ms": 67,
-          "ok": true,
+          "ms": 16,
+          "ok": false,
           "path": "/admin",
-          "status": 302
+          "stack": [
+            "[IOException: The process cannot access the file because it is being used by another process.]",
+            "[IOException: ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin",
+            "[InvalidOperationException: The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United P",
+            "[HttpException (0x80004005): The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United "
+          ],
+          "status": 500,
+          "title": "The process cannot access the file because it is being used by another process."
         },
         {
-          "ms": 22,
-          "ok": true,
+          "expected_text": ".header",
+          "ms": 9,
+          "ok": false,
           "path": "/Themes/DefaultClean/Content/css/styles.css",
-          "status": 200
+          "stack": [
+            "[IOException: The process cannot access the file because it is being used by another process.]",
+            "[IOException: ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin",
+            "[InvalidOperationException: The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United P",
+            "[HttpException (0x80004005): The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United "
+          ],
+          "status": 500,
+          "title": "The process cannot access the file because it is being used by another process."
+        },
+        {
+          "expected_text": "nivoSlider",
+          "ms": 26,
+          "ok": false,
+          "path": "/Plugins/Widgets.NivoSlider/Content/nivoslider/nivo-slider.css",
+          "stack": [
+            "[IOException: The process cannot access the file because it is being used by another process.]",
+            "[IOException: ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin",
+            "[InvalidOperationException: The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United P",
+            "[HttpException (0x80004005): The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United "
+          ],
+          "status": 500,
+          "title": "The process cannot access the file because it is being used by another process."
         },
         {
           "ms": 10,
-          "ok": true,
-          "path": "/Plugins/Widgets.NivoSlider/Content/nivoslider/nivo-slider.css",
-          "status": 200
-        },
-        {
-          "ms": 5,
-          "ok": true,
+          "ok": false,
           "path": "/content/images/thumbs/0000020_build-your-own-computer_415.jpeg",
-          "status": 200
+          "stack": [
+            "[IOException: The process cannot access the file because it is being used by another process.]",
+            "[IOException: ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin",
+            "[InvalidOperationException: The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United P",
+            "[HttpException (0x80004005): The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United "
+          ],
+          "status": 500,
+          "title": "The process cannot access the file because it is being used by another process."
         },
         {
-          "ms": 68,
-          "ok": true,
+          "ms": 4,
+          "ok": false,
           "path": "/Plugins/Widgets.NivoSlider/Nop.Plugin.Widgets.NivoSlider.dll",
-          "status": 403
+          "stack": [
+            "[IOException: The process cannot access the file because it is being used by another process.]",
+            "[IOException: ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin]",
+            "[Exception: Plugin 'UPS (United Parcel Service)'. ~\\AppData\\Local\\Temp\\Temporary_ASP.NET_Files\\root\\baf62fbd\\Nop.Plugin.Shipping.UPS.dll rename failed, cannot initialize plugin",
+            "[InvalidOperationException: The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United P",
+            "[HttpException (0x80004005): The pre-application start initialization method Initialize on type Nop.Core.Plugins.PluginManager threw an exception with the following error message: Plugin 'UPS (United "
+          ],
+          "status": 500,
+          "title": "The process cannot access the file because it is being used by another process."
         },
         {
-          "ms": 15,
+          "ms": 8,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 5,
+          "ms": 14,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 27,
+          "ms": 28,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
@@ -174,21 +331,21 @@
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 4,
           "ok": true,
           "path": "/bin_dotnet/Nop.Web.dll",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404
         }
       ],
       "log": "apps\\nopcommerce-3.90\\logs.windows\\server.log",
-      "status": "pass",
-      "summary": "23/23 probes"
+      "status": "fail",
+      "summary": "7/23 probes"
     }
   }
 }

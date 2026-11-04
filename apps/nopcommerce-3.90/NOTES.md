@@ -1,6 +1,6 @@
 # nopCommerce 3.90: migration notes
 
-Status: migrated: 22/23 probes on Linux (F86), 23/23 on Windows (intermittent, F89), webForCore 0.8.0.
+Status: migrated: 22/23 probes on Linux (F86), 23/23 on Windows in 2 of 5 runs (F89), webForCore 0.8.0.
 Source: https://github.com/nopSolutions/nopCommerce at `12d1f013`
 (tag `release-3.90`, the last MVC 5 release before nopCommerce moved to ASP.NET Core). Licence: the nopCommerce Public
 License 3.0, GPL-3.0 with an attribution term ("powered by nopCommerce" on every page, which the store keeps). The
@@ -110,15 +110,15 @@ log-in), the theme's CSS, a plugin's CSS, a product thumbnail at the URL the sto
 site's `DenyAccessToPluginDLLs` handler), and the runner's checks that `web.config`, `App_Data`, `bin_dotnet`, `obj`,
 source files and `webforcore-host.dll` aren't served.
 
-- **webForCore 0.8.0, CI (Linux: ubuntu-24.04; Windows: windows-2025): 22/23 on Linux, 23/23 on Windows** (the
-  committed results: run 41924554094). Setup 3/3 on both, every run. The Linux failure is the thumbnail,
-  `/content/images/thumbs/0000020_build-your-own-computer_415.jpeg` (404; the file is `Content/Images/Thumbs/...`, F86),
-  the same in all four Linux runs.
-- **Windows is intermittent** (F89): 23/23 in 2 of 4 runs (41918820640, 41924554094), 7/23 in the others (41916845600,
-  41921438048), where every request after setup is a 500 at start, "The process cannot access the file because it is
-  being used by another process": the plugin manager copying the plugins into the compilation folder while something
-  still holds setup's copies. The runner now ends a server's whole process tree on Windows (the first failure was before
-  that; the second after), and records the stack of a failed probe, so the next failure will show the call.
+- **webForCore 0.8.0, CI (Linux: ubuntu-24.04; Windows: windows-2025): 22/23 on Linux; on Windows 23/23 or 7/23**
+  (the committed results are the last run, 41926373548: 22/23 and 7/23). Setup 3/3 on both, every run. The Linux
+  failure is the thumbnail, `/content/images/thumbs/0000020_build-your-own-computer_415.jpeg` (404; the file is
+  `Content/Images/Thumbs/...`, F86), the same in all five Linux runs.
+- **Windows is intermittent** (F89): 23/23 in 2 of 5 runs (41918820640, 41924554094), 7/23 in the others (41916845600,
+  41921438048, 41926373548), where every request after setup is a 500 at start: the plugin manager can't replace
+  `Nop.Plugin.Shipping.UPS.dll` in the compilation folder ("rename failed, cannot initialize plugin" ← "The process
+  cannot access the file because it is being used by another process", the stack the runner now records). The
+  runner's new process-tree stop on Windows didn't make it go away.
   [F89](../../FINDINGS.md#f89)
 - On the development machine (Linux) runs are unreliable for this app: its worker needs more than 50 inotify
   instances (F88) and the user's 128 are shared with a desktop session and other servers, so some pages fail with
