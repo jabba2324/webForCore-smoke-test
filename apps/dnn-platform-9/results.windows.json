@@ -1,0 +1,119 @@
+{
+  "id": "dnn-platform-9",
+  "stages": {
+    "build": {
+      "at": "2026-11-04T21:45:29+00:00",
+      "error_count": 0,
+      "errors": [],
+      "log": "apps\\dnn-platform-9\\logs.windows\\build.log",
+      "seconds": 187,
+      "status": "pass",
+      "summary": null,
+      "webforcore": "packages 0.8.0"
+    },
+    "fetch": {
+      "at": "2026-11-04T21:42:22+00:00",
+      "commit": "53cdf4750477293b4e6316b4d91e1d5e43610127",
+      "overlay": true,
+      "status": "pass"
+    },
+    "setup": {
+      "at": "2026-11-04T21:45:48+00:00",
+      "created": [
+        "dnn9"
+      ],
+      "date": "2026-11-04",
+      "status": "fail",
+      "steps": [
+        {
+          "ok": false,
+          "status": 500,
+          "step": "/Install/Install.aspx?mode=install"
+        }
+      ],
+      "summary": "0/1 steps"
+    },
+    "smoke": {
+      "at": "2026-11-04T21:46:11+00:00",
+      "checks": [
+        {
+          "expected_text": "Xcillion",
+          "ms": 4299,
+          "ok": false,
+          "path": "/",
+          "status": 500,
+          "title": "Could not load file or assembly 'ClientDependency.Core.Mvc, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified."
+        },
+        {
+          "expected_text": "dnn_ctr_Login",
+          "ms": 3774,
+          "ok": false,
+          "path": "/Login.aspx",
+          "status": 500,
+          "title": "Could not load file or assembly 'ClientDependency.Core.Mvc, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified."
+        },
+        {
+          "expected_text": "Canada",
+          "ms": 3781,
+          "ok": false,
+          "path": "/API/InternalServices/CountryRegion/Countries",
+          "status": 500,
+          "title": "Could not load file or assembly 'ClientDependency.Core.Mvc, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified."
+        },
+        {
+          "expected_text": "dnnJscriptVersion",
+          "ms": 3797,
+          "ok": false,
+          "path": "/js/dnn.js",
+          "status": 500,
+          "title": "Could not load file or assembly 'ClientDependency.Core.Mvc, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified."
+        },
+        {
+          "ms": 891,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 6,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "ms": 0,
+          "ok": true,
+          "path": "/packages.config",
+          "status": 404
+        },
+        {
+          "ms": 25,
+          "ok": true,
+          "path": "/bin_dotnet/DotNetNuke.Website.dll",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
+          "status": 404
+        }
+      ],
+      "log": "apps\\dnn-platform-9\\logs.windows\\server.log",
+      "status": "fail",
+      "summary": "7/11 probes"
+    }
+  }
+}
