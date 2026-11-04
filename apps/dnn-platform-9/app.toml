@@ -2,16 +2,47 @@
 
 name = "DNN Platform 9"
 repo = "https://github.com/dnnsoftware/Dnn.Platform"
-ref = ""
+# v9.13.10, the last 9.x release.
+ref = "53cdf4750477293b4e6316b4d91e1d5e43610127"
 site = "DNN Platform/Website"
+project = "DNN Platform/Website/DotNetNuke.Website.csproj"
+# The build packages the Xcillion skin into Install/Skin (NOTES.md); the installer and the running site write the rest.
+generated = ["DNN Platform/Website/Install/Skin/*.zip", "DNN Platform/Website/Install/DotNetNuke.install.config",
+             "DNN Platform/Website/App_Data/**", "DNN Platform/Website/Portals/**/Cache/**", "DNN Platform/Website/Portals/_default/Logs/**"]
 kinds = ["webforms", "mvc", "webapi"]
 licence = "MIT"
-status = "candidate"
+status = "blocked"
 needs = ["mssql"]
-notes = "Very large; a stress test rather than an early target."
+notes = "On webForCore 0.8.0 the web project and its 19 libraries build (Linux and Windows), but every request fails at start: BuildManager.GetType(name, false) throws for a missing assembly (F130), which ClientDependency and DNN's provider registration rely on. Linux is blocked after that by DNN's Windows paths. F130-F133."
 
-# The first request compiles the site, so it gets 120 s.
-# [[probes]]
-# path = "/"
-# status = 200
-# contains = ""
+# The compose SQL Server, database dnn9 (web.config's connection string). Install.aspx?mode=install is DNN's unattended
+# install: the schema and data scripts, the host settings and the default site from DotNetNuke.install.config, with the
+# packages in Install/ (here only the Xcillion skin). It writes web.config at the end, which restarts the application.
+[setup]
+databases = ["dnn9"]
+
+[[setup.steps]]
+get = "/Install/Install.aspx?mode=install"
+timeout = 900
+contains = "Installation Complete"
+
+# The first request after the install compiles the site, so it gets 120 s.
+# The home page of the default site, in the Xcillion skin (Web Forms: Default.aspx with the skin's user controls).
+[[probes]]
+path = "/"
+contains = "Xcillion"
+
+# The log-in page (Web Forms; the Account Login module with the DNN authentication system).
+[[probes]]
+path = "/Login.aspx"
+contains = "dnn_ctr_Login"
+
+# Web API (DNN's Services Framework): an anonymous InternalServices controller, routed as /API/{module}/{controller}/{action}.
+[[probes]]
+path = "/API/InternalServices/CountryRegion/Countries"
+contains = "Canada"
+
+# A static file.
+[[probes]]
+path = "/js/dnn.js"
+contains = "dnnJscriptVersion"
