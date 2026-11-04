@@ -1,7 +1,7 @@
 # Rabbit (WebMatrix Starter Site): migration notes
 
 Status: blocked (webForCore 0.7.0, webForCore-thirdparty 0.6.0, drawingForCore 0.2.0: 20/21 probes on Linux and Windows): one
-probe fails on a webForCore bug ([F74](../../FINDINGS.md#f74)).
+probe fails on a webForCore bug ([F79](../../FINDINGS.md#f74)).
 yysun/Rabbit at `a819ee23` (23 Jul 2011), MIT (`License.txt`). The repository has the Rabbit framework's class
 library and two sites; this is `WebSite`: WebMatrix's ASP.NET Web Pages 1 **Starter Site** (accounts with
 `WebSecurity`, `_SiteLayout`, `Account/*.cshtml`) with Yiyi Sun's Rabbit framework in `App_Code` (a module/hook
@@ -19,11 +19,11 @@ drawingForCore 0.2.0, `WEBFORCORE_VERSION=0.7.0 THIRDPARTY_VERSION=0.6.0 DRAWING
 - **Accounts:** `WebSecurity.InitializeDatabaseConnection("StarterSite", "UserProfile", "UserId", "Email", true)`
   (WebMatrix.WebData's SimpleMembership), `Database.Open("StarterSite")` in `Register.cshtml`, `Roles.IsUserInRole`
   in the layouts. No connection string: WebMatrix's `Database.Open("StarterSite")` falls back to
-  `App_Data/StarterSite.sdf`, SQL Server Compact ([F72](../../FINDINGS.md#f72)).
+  `App_Data/StarterSite.sdf`, SQL Server Compact ([F77](../../FINDINGS.md#f72)).
 - **Blockers:** none from `wfc.py assess`.
 - **Dependencies:** (a) replaced by webForCore: System.Web.WebPages(.Razor, .Deployment), System.Web.Razor,
   System.Web.Helpers. (b) Microsoft's `WebMatrix.Data` and `WebMatrix.WebData`, which the Web Pages 1 installer put in
-  the GAC; webForCore doesn't provide them ([F73](../../FINDINGS.md#f73)). (c) none. The site has no `bin`.
+  the GAC; webForCore doesn't provide them ([F78](../../FINDINGS.md#f73)). (c) none. The site has no `bin`.
 - **Go**, with the database on SQL Server.
 
 ## Migration
@@ -32,7 +32,7 @@ drawingForCore 0.2.0, `WEBFORCORE_VERSION=0.7.0 THIRDPARTY_VERSION=0.6.0 DRAWING
    `webForCore.Web.WebPages.Razor`, `.Web.WebPages.Deployment` and `.Web.Helpers` 0.7.0 packages, as MiniBlog's. And
    Microsoft's `Microsoft.AspNet.WebPages.Data` and `Microsoft.AspNet.WebPages.WebData` 3.2.9 for WebMatrix.Data and
    WebMatrix.WebData: their Web Pages and Razor dependencies lose to webForCore's (`bin_dotnet`'s
-   `System.Web.WebPages.dll` and the rest are webForCore's), and they run as they are (F73). `app.toml` gets
+   `System.Web.WebPages.dll` and the rest are webForCore's), and they run as they are (F78). `app.toml` gets
    `project`.
 2. `Program.cs` without session state, `HandleAllRequestsWithWebForms()` (extensionless URLs).
 3. `Web.config`: a `StarterSite` connection string to the test bed's SQL Server (database `RabbitStarterSite`,
@@ -62,12 +62,12 @@ view (`Accept: application/json` on `/Pages`).
 into a 302 to `/Account/Login`. `WebSecurity.RequireAuthenticatedUser()` sets 401 and calls `Response.End()`, and on
 webForCore `Response.End()` sends the response before `FormsAuthenticationModule` gets to EndRequest. A page with
 `Response.StatusCode = 401;` alone gets the 302; with `Response.End()` after it, the 401 (`.cshtml` and `.aspx`
-alike) ([F74](../../FINDINGS.md#f74), webForCore#129).
+alike) ([F79](../../FINDINGS.md#f74), webForCore#129).
 
 ## Open problems
 
-- F74 (above): every `WebSecurity.RequireAuthenticatedUser()`/`RequireRoles()` page shows anonymous users a blank 401.
-- F73: WebMatrix.Data/WebData come from Microsoft's packages; webForCore neither ships nor documents them.
+- F79 (above): every `WebSecurity.RequireAuthenticatedUser()`/`RequireRoles()` page shows anonymous users a blank 401.
+- F78: WebMatrix.Data/WebData come from Microsoft's packages; webForCore neither ships nor documents them.
 - Not the app's: one run on this machine, with other agents' apps running, failed 11 probes with "Failed to start
   monitoring changes" (the user's 128 inotify instances had run out; documented in webForCore's
   `docs/IIS-COMPATIBILITY.md`). The next run, with fewer running, was 20/21 again.
