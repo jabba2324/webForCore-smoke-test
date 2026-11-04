@@ -42,6 +42,16 @@ Windows (CI run 41905418748; eshop-legacy-mvc's Windows job didn't start its ser
 - **Rock RMS** (a candidate, assessed on 0.8.0): rejected, as the Rock Community License limits use, derivative works and
   distribution to faith-based organisations' internal use, so no overlay can be published here. Its assessment (a Web
   Site Project, Windows-only native spatial types, a named `EventWaitHandle`) is in its NOTES.md; F123 was found there.
+- **DNN Platform 9** (dnn-platform-9, a new app on 0.8.0, 9.13.10): the web project and its 19 libraries build on Linux
+  and Windows, but every request fails at start (7/11 on both, the forbidden paths only), because `BuildManager.GetType(name,
+  false)` throws for a missing assembly (F130); on Linux, DNN's Windows paths stop its install after that (F133).
+  F130–F133 were found there.
+- **Umbraco 7 unblocked** (on 0.8.0): with webForCore-thirdparty 0.6.0's `webForCore.AutoMapperLegacy` for AutoMapper
+  3.3.1, F22 no longer stops it: it boots, installs through `[setup]` and passes 21/21 on Linux and Windows (7/14 before). One
+  mapping needed a change for F104 (webForCore-thirdparty); F104 and F105 were found there.
+- **Kooboo CMS and Umbraco 8** (new apps, round 8, on 0.8.0 with drawingForCore 0.3.0): kooboo-cms 23/23 and
+  umbraco-8 21/21, on Linux and Windows (CI run 41920542509). kooboo-cms needs about half of Linux's default inotify
+  instances (F92), so its runs on the shared development machine were partial. F90–F94 were found there.
 
 Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
@@ -69,7 +79,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F19](#f19) | `System.Web.Abstractions`/`System.Web.Routing` 4.0.0.0 in web.config can't be loaded | webForCore bug | roadkill | [#20](https://github.com/xforcore/webForCore/issues/20) |
 | [F20](#f20) | `Assembly.LoadFrom` returns the default context's copy; WebActivatorEx start methods never run | webForCore bug | applicant-tracking, roadkill | [#21](https://github.com/xforcore/webForCore/issues/21) |
 | [F21](#f21) | Glimpse doesn't run on .NET | guide gap | realocate | [#22](https://github.com/xforcore/webForCore/issues/22) |
-| [F22](#f22) | AutoMapper before 12 doesn't run on .NET 11 or .NET 10 | app/environment | realocate, socialgoal, umbraco-7 | - |
+| [F22](#f22) | AutoMapper before 12 doesn't run on .NET 11 or .NET 10 (umbraco-7: fixed by webForCore-thirdparty 0.6.0's AutoMapperLegacy) | app/environment | realocate, socialgoal, umbraco-7 | - |
 | [F23](#f23) | `recaptcha` 1.0.5's lib folders aren't framework names (NU1202) | app/environment | roadkill | - |
 | [F24](#f24) | A transitive Microsoft.AspNet.Razor replaces webForCore's in the output with no build error | webForCore bug | bonobo-git-server, applicant-tracking, realocate, roadkill | [#23](https://github.com/xforcore/webForCore/issues/23) |
 | [F25](#f25) | .NET Framework builds of StructureMap 4.0 and NLog 4.2 need `AppDomainSetup` members .NET lacks; their .NET Standard builds work | app/environment | roadkill | - |
@@ -130,6 +140,11 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F80](#f80) | A request path with an escaped character (a space, non-ASCII) is answered 400 before the application | webForCore bug | aspnetdocs-wingtip-toys | [#126](https://github.com/xforcore/webForCore/issues/126) |
 | [F81](#f81) | `Request.RawUrl` is the default document's path for a directory request: FriendlyUrls 301s `/` to `/Default` | webForCore bug | aspnetdocs-wingtip-toys | [#127](https://github.com/xforcore/webForCore/issues/127) |
 | [F82](#f82) | Linux: `Server.MachineName` throws `DllNotFoundException` (kernel32); ELMAH's log pages fail | webForCore bug | aspnetdocs-wingtip-toys | [#128](https://github.com/xforcore/webForCore/issues/128) |
+| [F90](#f90) | The parameterless crypto factories (`KeyedHashAlgorithm.Create()`, `HashAlgorithm.Create()`, ...) throw on .NET | guide gap | kooboo-cms | [#151](https://github.com/xforcore/webForCore/issues/151) |
+| [F91](#f91) | DotNetZip 1.9 (`Ionic.Zip.Reduced`) can't extract on Linux | app/environment | kooboo-cms | - |
+| [F92](#f92) | Linux: every watched directory is an inotify instance on .NET 10; Kooboo's worker alone takes 48+ of the default 128 | webForCore bug | kooboo-cms (umbraco-8: 20) | [#152](https://github.com/xforcore/webForCore/issues/152) |
+| [F93](#f93) | CSharpTest.Net.Collections 14.906 (Umbraco 8's NuCache file store) reflects into `FileStream` and P/Invokes kernel32 | app/environment | umbraco-8 | - |
+| [F94](#f94) | An app's own `Microsoft.CodeAnalysis` (Roslyn) package conflicts with webForCore.Compilers' 5.9.0 (NU1107) | guide gap | umbraco-8 | [#153](https://github.com/xforcore/webForCore/issues/153) |
 | [F97](#f97) | Linux: each monitored folder takes an inotify instance of its own (two for many), so a site with many folders can't start | webForCore bug | orchard-1.10 | [#145](https://github.com/xforcore/webForCore/issues/145) |
 | [F98](#f98) | `<httpRuntime fcnMode>` is ignored: `Disabled` and `Single` still monitor every folder | webForCore bug | orchard-1.10 | [#146](https://github.com/xforcore/webForCore/issues/146) |
 | [F99](#f99) | web.config's `<probing privatePath>` isn't applied: `Assembly.Load` doesn't find the assemblies there | webForCore bug | orchard-1.10 | [#147](https://github.com/xforcore/webForCore/issues/147) |
@@ -137,6 +152,8 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F101](#f101) | `System.Data.Services.Client` isn't on .NET or in the guide; Microsoft.Data.Services.Client 5.8.4 has the same namespace | guide gap | orchard-1.10 | [#149](https://github.com/xforcore/webForCore/issues/149) |
 | [F102](#f102) | Plug-in class libraries built into their own folder lose their NuGet libraries (SDK libraries don't copy packages) | guide gap | orchard-1.10 | [#150](https://github.com/xforcore/webForCore/issues/150) |
 | [F103](#f103) | Orchard's run-time module compilation parses the old `.csproj` format, so it can't read the SDK projects | app/environment | orchard-1.10 | - |
+| [F104](#f104) | webForCore.AutoMapperLegacy on AutoMapper 12: a member mapped from a value already of its type is mapped again through a base-type map, and the whole configuration fails | app/environment (webForCore-thirdparty) | umbraco-7 | [thirdparty#11](https://github.com/xforcore/webForCore-thirdparty/issues/11) |
+| [F105](#f105) | `ApplicationSettingsBase` (Settings.settings, Web Reference SOAP clients) throws `TypeLoadException`: `ConfigurationManagerInternal` is looked up in `System.Configuration` 4.0.0.0 | webForCore bug | umbraco-7 | [#154](https://github.com/xforcore/webForCore/issues/154) |
 | [F116](#f116) | Windows Workflow Foundation 3 (`System.Workflow.*`) isn't on .NET, and the docs and blocker search don't say so | guide gap | composite-c1 | [#132](https://github.com/xforcore/webForCore/issues/132) |
 | [F117](#f117) | Run-time C# compilation in application code (`CodeDomProvider.CreateProvider("c#")`) throws `PlatformNotSupportedException`; no documented replacement | guide gap | composite-c1 | [#133](https://github.com/xforcore/webForCore/issues/133) |
 | [F118](#f118) | CoreWCF's source generator reaches applications: `CS8370`/`CS8107` for any `[ServiceContract]` with `LangVersion` below 11 | webForCore bug | composite-c1 | [#134](https://github.com/xforcore/webForCore/issues/134) |
@@ -144,6 +161,10 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F120](#f120) | C1's core needs LINQ to SQL (even with the XML data store) and WCF REST hosting | documented gap | composite-c1 | – |
 | [F121](#f121) | Types .NET added (`System.Collections.Generic.KeyValuePair`) make the app's own type ambiguous (`CS0104`) | guide gap | composite-c1 | [#136](https://github.com/xforcore/webForCore/issues/136) |
 | [F123](#f123) | A Web Site Project has no `.csproj`; the guide's template compiles its `CodeFile=` code (CS0103) | guide gap | rock-rms (assessed only) | [#131](https://github.com/xforcore/webForCore/issues/131) |
+| [F130](#f130) | `BuildManager.GetType(name, throwOnError: false)` throws `FileNotFoundException` for a missing assembly (.NET Framework returns `null`): ClientDependency and DNN fail at start | webForCore bug | dnn-platform-9 | [#137](https://github.com/xforcore/webForCore/issues/137) |
+| [F131](#f131) | `Thread.ResetAbort()` after `catch (ThreadAbortException)` throws `PlatformNotSupportedException`; the guide doesn't say to remove it | guide gap | dnn-platform-9 | [#143](https://github.com/xforcore/webForCore/issues/143) |
+| [F132](#f132) | An application's design-time classes (`System.Web.UI.Design.ExpressionEditor`, System.Design) don't compile | guide gap | dnn-platform-9 | [#144](https://github.com/xforcore/webForCore/issues/144) |
+| [F133](#f133) | Linux: DNN builds every physical path with `\` (`ApplicationMapPath` is `BaseDirectory.Replace("/", "\\")`), and QuickIO.NET is Win32 | app/environment | dnn-platform-9 | – |
 ---
 
 ## F1
@@ -667,7 +688,14 @@ console app). Found on 0.2.0.
   (`CoreBootManager.InitializeModelMappers` → `Mapper.Initialize`), and the first one,
   `CodeFileDisplayMapper.ConfigureMappings` line 41, throws the 3.x error, so `Application_Start` fails and every request
   is a 500. The repro fails with 3.3.1 on .NET 10.0.14 too. Upgrading means rewriting Umbraco's mapping layer (about 40
-  mapper classes), so the app is blocked here.
+  mapper classes), so the app was blocked here.
+- **Fixed for umbraco-7 by webForCore-thirdparty 0.6.0** (round 7, webForCore 0.8.0): its `webForCore.AutoMapperLegacy`
+  (AutoMapper 3.x's static API on AutoMapper 12.0.1) replaces AutoMapper 3.3.1 in Umbraco.Core, Umbraco.Web and
+  umbraco.businesslogic with the steps its README gives (the package, its global usings, one more alias for Umbraco's
+  own `MapperConfiguration`, C# 14, `AutoMapperLegacy.ITypeConverter<,>` in the 2 classes that implement it). The
+  rest of the 90 files that use AutoMapper compile unchanged, the boot configures every map, and the app installs
+  and passes 21/21 on Linux and Windows (7/14 before). One mapping had to change, for F104 (an AutoMapper 12 difference the
+  package passes through). socialgoal and realocate aren't moved to it here.
 
 ## F23
 
@@ -1501,7 +1529,7 @@ running at the same time as the same user.
   held 11 to 23 here (counted from `/proc/<pid>/fd`), though .NET 10 shares one inotify instance between a process's
   watchers (a test program with 5 watchers held 1). Where the others come from wasn't established, so this isn't
   raised as a webForCore bug. A server running many sites under one user may need a higher
-  `fs.inotify.max_user_instances`.
+  `fs.inotify.max_user_instances`. (Round 8: that test ran on .NET 11; on .NET 10 each watcher is an instance, F92.)
 - **In the runs:** `DOTNET_USE_POLLING_FILE_WATCHER=1` (ASP.NET Core's configuration watchers poll) for the final
   Linux runs; nothing committed changes.
 
@@ -1662,6 +1690,93 @@ round for the AspNetDocs tutorial apps.
 - **Repro:** a page with `<%= Server.MachineName %>`, on Linux.
 - **Suggested fix:** `Environment.MachineName` off Windows.
 
+## F90
+
+**The parameterless crypto factories (`KeyedHashAlgorithm.Create()`, `HashAlgorithm.Create()`, ...) throw on .NET.**
+Guide gap (.NET's behaviour, not webForCore's). Raised as [#151](https://github.com/xforcore/webForCore/issues/151).
+Found on 0.8.0, on Linux, in round 8.
+
+- **Apps:** kooboo-cms: its password hashing (`Kooboo.CMS.Account/Services/PasswordProvider.cs`) calls
+  `KeyedHashAlgorithm.Create()`, so every back-office log-in was a 500.
+- **Error:** `PlatformNotSupportedException: This platform does not allow the automatic selection of an algorithm.` at
+  `System.Security.Cryptography.KeyedHashAlgorithm.Create()`.
+- **Cause:** on .NET Framework the parameterless `Create()` of `HashAlgorithm`, `KeyedHashAlgorithm`, `HMAC`,
+  `SymmetricAlgorithm` and `AsymmetricAlgorithm` returned machine.config's default (`SHA1CryptoServiceProvider`,
+  `HMACSHA1`, `RijndaelManaged`, `RSACryptoServiceProvider`). .NET obsoletes them (SYSLIB0007) and throws; the named
+  overloads (`HashAlgorithm.Create("SHA256")`) still work. Hashes the old site stored were made with the default, so
+  the replacement has to be that class.
+- **Fix in the app:** `new HMACSHA1()`. The `admin` user shipped in Kooboo's `Cms_Data` then logs in (`admin`/`admin`).
+- **Repro:** a page with `<%= System.Security.Cryptography.KeyedHashAlgorithm.Create().GetType() %>`: `HMACSHA1` on
+  IIS, the exception on webForCore.
+
+## F91
+
+**DotNetZip 1.9 (`Ionic.Zip.Reduced`) can't extract on Linux.** App/environment. Found on 0.8.0, on Linux, in round 8.
+
+- **Apps:** kooboo-cms: creating a site from a template (a zip in `Cms_Data/SiteTemplates`) failed, so there was no site
+  to serve.
+- **Error:** `ArgumentException: The value cannot be an empty string. (Parameter 'path')` at
+  `System.IO.Directory.CreateDirectory` ← `Ionic.Zip.ZipEntry.InternalExtract` ← `ZipFile.ExtractAll`.
+- **Cause:** DotNetZip 1.9.1.8 (2011, .NET Framework) makes the output path with Windows separators, so on Linux the
+  entry's folder comes out empty. The .NET Standard releases (1.13 and later) extract correctly.
+- **Fix in the app:** the DotNetZip 1.16.0 package (the same `Ionic.Zip` namespace and API) for the checked-in
+  `Ionic.Zip.Reduced.dll`, in the three projects that use it.
+
+## F92
+
+**Linux: every directory ASP.NET watches is an inotify instance of its own on .NET 10, so one CMS's worker takes most
+of the default 128.** webForCore bug (the docs say about 15). Raised as
+[#152](https://github.com/xforcore/webForCore/issues/152). Found on 0.8.0, on Linux (Fedora,
+`fs.inotify.max_user_instances` = 128), in round 8.
+
+- **Apps:** kooboo-cms: its worker held 38 inotify instances after ten page types of one sample site and 48 when its
+  16 probe paths ran it out (counted from `/proc/<pid>/fd`; the host holds 1 more). Each Razor template folder it renders
+  from (under `Cms_Data/Sites/<site>/Templates`) adds one or two, so a bigger site or a second one takes more. With the
+  other processes of this machine's user holding about 70, its probes failed with `Configuration Error: Failed to start
+  monitoring changes to '<site>/Cms_Data/...'` and it never passed every probe here; twice its worker didn't start.
+  umbraco-8 (no content, `fcnMode="Single"` in its `web.config`) took 20.
+- **Where they go (Kooboo, one run):** 32 instances watching one directory each (the site root, `App_Data`, each level of
+  `Cms_Data` down to the template folders, most template folders twice), 4 watching the whole site recursively (464
+  directories each) and 1 watching `bin_dotnet/App_Data` recursively.
+- **Cause:** `DirMonCompletion` creates a `FileSystemWatcher` per directory (IIS had a `ReadDirectoryChangesW` handle per
+  directory), and on .NET 10 each `FileSystemWatcher` is its own inotify instance: a console program with ten watchers
+  on ten folders held ten on .NET 10.0.14, and one on .NET 11. F72's note that ".NET 10 shares one inotify instance" came
+  from a test run on .NET 11. `<httpRuntime fcnMode="Single" />` didn't change Kooboo's count (48 either way, the same
+  requests).
+- **Docs:** `docs/IIS-COMPATIBILITY.md` (process model): "Each worker also takes about 15 inotify instances".
+- **Suggested fix:** one watcher per application (a recursive one on its folder, which `fcnMode="Single"` meant on IIS)
+  or one inotify instance per process; at least document that the count grows with the directories a site serves and
+  compiles from.
+
+## F93
+
+**CSharpTest.Net.Collections 14.906 (Umbraco 8's NuCache file store) fails on .NET: it reflects into `FileStream` and
+P/Invokes kernel32.** App/environment. Found on 0.8.0, on Linux, in round 8.
+
+- **Apps:** umbraco-8: the first request after the install built NuCache's local B+ tree files
+  (`App_Data/TEMP/NuCache/*.db`) and failed: `NullReferenceException` at
+  `CSharpTest.Net.IO.TransactedCompoundFile.FlushStream` ← `BTreeFileStoreV2.CreateRoot` ← `BPlusTree..ctor` ←
+  `Umbraco.Web.PublishedCache.NuCache.DataSource.BTree.GetTree`.
+- **Cause:** that build's `FlushStream` reads `FileStream`'s private `_handle` field (which .NET's `FileStream` doesn't
+  have) and calls kernel32's `FlushFileBuffers`. Umbraco's own .NET build of the library (`Umbraco.CSharpTest.Net.Collections`,
+  for Umbraco 9 and later) uses `FileStream.Flush(true)` there.
+- **Fix in the app:** `Umbraco.CSharpTest.Net.Collections` 14.906.1403.1085 for `CSharpTest.Net.Collections`: the same
+  assembly name and API.
+
+## F94
+
+**An app's own `Microsoft.CodeAnalysis` (Roslyn) package conflicts with webForCore.Compilers' 5.9.0 (NU1107).** Guide
+gap. Raised as [#153](https://github.com/xforcore/webForCore/issues/153). Found on 0.8.0, in round 8.
+
+- **Apps:** umbraco-8: its embedded ModelsBuilder compiles models with Roslyn (`Microsoft.CodeAnalysis.CSharp` 2.10.0, in
+  `Umbraco.ModelsBuilder.Embedded` and the web project).
+- **Error:** `NU1107: Version conflict detected for Microsoft.CodeAnalysis.Common` (`webForCore 0.8.0 -> webForCore.Compilers
+  0.8.0 -> Microsoft.CodeAnalysis.VisualBasic 5.9.0 -> Microsoft.CodeAnalysis.Common (= 5.9.0)` against `Microsoft.CodeAnalysis.CSharp
+  2.10.0 -> Microsoft.CodeAnalysis.Common (= 2.10.0)`).
+- **Fix in the app:** `Microsoft.CodeAnalysis.CSharp` 5.9.0; it builds and the site runs. It's the guide's "every package
+  webForCore depends on is a floor", but Roslyn's packages pin each other exactly, so it's NU1107, not the NU1605 the
+  guide describes.
+
 ## F97
 
 **Linux: each monitored folder takes an inotify instance of its own (two for many), so a site with many folders can't
@@ -1769,6 +1884,79 @@ App/environment. Found on 0.8.0, migrating Orchard CMS 1.10.4.
   this test bed: Orchard's own run-time compilation of modules through `BuildManager` and its `.csproj` build provider
   isn't exercised (its Razor views still compile at run time).
 
+## F104
+
+**webForCore.AutoMapperLegacy on AutoMapper 12: a member mapped from a value that already has the member's type is
+mapped again, through a map between base types of its elements, and the whole configuration fails.** App/environment
+for webForCore (it isn't webForCore's: AutoMapper 12's behaviour, which webForCore-thirdparty's compatibility package
+passes through). Raised as
+[xforcore/webForCore-thirdparty#11](https://github.com/xforcore/webForCore-thirdparty/issues/11). Found on webForCore
+0.8.0 with webForCore-thirdparty 0.6.0 (Linux).
+
+- **Apps:** umbraco-7. `ContentTypeModelMapperExtensions.MapPropertyGroupBasicToPropertyGroupDisplay` maps
+  `PropertyGroupBasic<MemberPropertyTypeBasic>` to `PropertyGroupDisplay<MemberPropertyTypeDisplay>` with
+  `.ForMember(g => g.Properties, o => o.MapFrom(s => s.Properties.Select(Mapper.Map<MemberPropertyTypeDisplay>)))`, and
+  there's a `PropertyTypeBasic -> PropertyTypeDisplay` map (`MemberPropertyTypeDisplay : PropertyTypeDisplay :
+  PropertyTypeBasic`). AutoMapper 3.3.1 assigned the elements (no map for the element type to itself). AutoMapper
+  12.0.1 maps the `IEnumerable<MemberPropertyTypeDisplay>` again, element by element, picks the base-type map, and
+  can't add its `PropertyTypeDisplay` to the `List<MemberPropertyTypeDisplay>`.
+- **Error:** at the first `Mapper.Map` (the package builds one AutoMapper 12 configuration from every registered map,
+  on first use), whatever it maps: in Umbraco, `BackOfficeUserStore.FindByIdAsync` in the installer's last step, which
+  then fails on every retry.
+  ```
+  System.ArgumentException: Expression of type 'Umbraco.Web.Models.ContentEditing.PropertyTypeDisplay' cannot be used for parameter of type 'Umbraco.Web.Models.ContentEditing.MemberPropertyTypeDisplay' of method 'Void Add(Umbraco.Web.Models.ContentEditing.MemberPropertyTypeDisplay)' (Parameter 'arg0')
+     at AutoMapper.Internal.Mappers.CollectionMapper.<MapExpression>g__MapCollectionCore|3_1(...)
+     ...
+     at AutoMapper.TypeMap.Seal(IGlobalConfiguration configuration)
+     at AutoMapper.MapperConfiguration..ctor(Action`1 configure)
+     at AutoMapperLegacy.RootConfiguration.Build()
+     at AutoMapperLegacy.Mapper.get_Current()
+     at AutoMapperLegacy.Mapper.Map[TDestination](Object source)
+  ```
+- **Repro** (`dotnet run`, .NET 10, `#:package webForCore.AutoMapperLegacy@0.6.0`): `Mapper.CreateMap<PropertyBasic,
+  PropertyDisplay>()`, `Mapper.CreateMap<MemberPropertyBasic, MemberPropertyDisplay>()`,
+  `Mapper.CreateMap<GroupBasic<MemberPropertyBasic>, GroupDisplay<MemberPropertyDisplay>>().ForMember(d =>
+  d.Properties, o => o.MapFrom(s => s.Properties.Select(Mapper.Map<MemberPropertyDisplay>)))` and an unrelated
+  `Mapper.CreateMap<Unrelated, UnrelatedDto>()`; `Mapper.Map<UnrelatedDto>(new Unrelated())` throws the error above.
+  `ResolveUsing` instead of `MapFrom` fails the same way. Plain AutoMapper 12.0.1 (no facade) throws building the same
+  configuration. With AutoMapper 13.0.1 or 14.0.0 (also in the package's range) the configuration builds, but mapping
+  the member throws `NotSupportedException: Specified method is not supported` (plain 14.0.0 too).
+- **What worked:** in the app, `Ignore()` the member and assign it in an `AfterMap` (`dest.Properties =
+  source.Properties.Select(Mapper.Map<TPropertyTypeDisplay>).ToList()`): one change in Umbraco 7. Umbraco then installs,
+  and its back-office API (member types included) answers.
+- **Suggested fix (webForCore-thirdparty):** have the facade assign a resolved value that is already of the destination
+  member's type, as 3.x did, or document the rewrite under "What an application may still have to change"; and say in
+  the README that one faulty map makes every map fail.
+
+## F105
+
+**`ApplicationSettingsBase` throws `TypeLoadException`, so a Visual Studio settings class (`Settings.settings`, and every
+"Web Reference" SOAP client, which reads its URL from one) can't read a setting.** webForCore bug. Raised as
+[#154](https://github.com/xforcore/webForCore/issues/154). Found on 0.8.0 (Linux).
+
+- **Apps:** umbraco-7: `InstallHelper.InstallStatus`, in the installer's last step, creates
+  `org.umbraco.update.CheckForUpgrade` (a Web Reference client), whose constructor reads
+  `Settings.Default.umbraco_org_umbraco_update_CheckForUpgrade`. Umbraco catches and logs it, so the install goes on;
+  the back office's upgrade check uses the same client.
+- **Error:**
+  ```
+  System.TypeLoadException: Could not resolve type 'System.Configuration.Internal.ConfigurationManagerInternal' in assembly 'System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a'.
+     at System.Type.GetType(String typeName, Boolean throwOnError)
+     at System.Configuration.TypeUtil.CreateInstanceWithReflectionPermission(String typeString)
+     at System.Configuration.ConfigurationManagerInternalFactory.get_Instance()
+     at System.Configuration.ApplicationSettingsBase.get_Initializer()
+     ...
+     at Umbraco.Web.Properties.Settings.get_umbraco_org_umbraco_update_CheckForUpgrade()
+  ```
+- **Cause:** webForCore's System.Configuration is the reference source's, in the assembly
+  `System.Configuration.ConfigurationManager` 14.5.0.0. Its `ConfigurationManagerInternalFactory` creates
+  `ConfigurationManagerInternal` by name, `"System.Configuration.Internal.ConfigurationManagerInternal, " +
+  AssemblyRef.SystemConfiguration`; on .NET `System.Configuration` 4.0.0.0 is the runtime's forwarding facade, which
+  doesn't have the (internal) type. .NET Framework returns the setting.
+- **Repro:** a console app (or a page) with the `webForCore` 0.8.0 package and `class Settings :
+  ApplicationSettingsBase { [ApplicationScopedSetting, DefaultSettingValue("http://example.com/")] public string Url =>
+  (string)this["Url"]; }`: `new Settings().Url` throws.
+- **Suggested fix:** create the type directly, or name webForCore's own assembly in the type string.
 ## F116
 
 **Windows Workflow Foundation 3 (`System.Workflow.Runtime`, `.ComponentModel`, `.Activities`) isn't on .NET, and
@@ -1896,3 +2084,78 @@ assessing rock-rms (rejected for its licence, so not migrated).
 - **Suggested fix:** a "Web Site Project" paragraph in both guides: create the project in the site folder compiling only
   `Program.cs`; turn `Bin\*.dll.refresh` files into `PackageReference`s and the solution's copy-to-`Bin` projects into
   `ProjectReference`s (their copy targets go: the assemblies belong in `bin_dotnet/`); remove the old `Bin` DLLs.
+
+## F130
+
+**`BuildManager.GetType(name, throwOnError: false)` throws `FileNotFoundException` for an assembly that isn't there;
+.NET Framework returns `null`.** webForCore bug. Raised as [#137](https://github.com/xforcore/webForCore/issues/137).
+Found on 0.8.0 (Linux; the code is platform-independent), with DNN Platform 9.13.10.
+
+- **Apps:** dnn-platform-9: every request is a 500 in `HttpApplication.InitModules`, the static files included, so the
+  install can't start (7/11, the forbidden paths only). Twice before DNN's first page:
+  - ClientDependency 1.9.10 (`Dnn.ClientDependency`; Umbraco ships the same library): `ClientDependencyModule.Init`
+    loads its default filters with `BuildManager.GetType(type, false, true)`, one of them
+    `ClientDependency.Core.Mvc.MvcFilter, ClientDependency.Core.Mvc`, which DNN doesn't deploy;
+  - DNN's `ProviderInstaller.InstallProvider` (`Library/ComponentModel/ProviderInstaller.cs:86`), for every provider
+    in web.config, skipping a null type: DNN's default web.config names `DNNConnect.CKEditorProvider` (an optional
+    package) and the ADSI provider of `DotNetNuke.Authentication.ActiveDirectory` (not part of the platform).
+- **Error:** `FileNotFoundException: Could not load file or assembly 'ClientDependency.Core.Mvc, Culture=neutral,
+  PublicKeyToken=null'` at `AssemblyLoadContext.LoadFromAssemblyName` ← `BuildManager.<>c__DisplayClass144_0.<GetType>b__0`
+  ← `Type.GetType(String, Func, Func, Boolean, Boolean)` ← `BuildManager.GetType(String, Boolean, Boolean)`.
+- **Cause:** `BuildManager.GetType` passes `alc.LoadFromAssemblyName` as `Type.GetType`'s assembly resolver.
+  `LoadFromAssemblyName` throws when the assembly isn't found, and `Type.GetType` lets a resolver's exception through
+  whatever `throwOnError` is; a resolver should return `null` for "not found".
+- **Repro:** a page `<%= System.Web.Compilation.BuildManager.GetType("Missing.Type, Missing.Assembly", false) == null ? "null" : "found" %>`:
+  `null` on IIS, `FileNotFoundException` on webForCore.
+- **Suggested fix:** a resolver that returns `null` for `FileNotFoundException` (so `Type.GetType` returns `null`, or
+  throws its own exception when `throwOnError` is true); `FileLoadException` and `BadImageFormatException` still throw.
+
+## F131
+
+**`Thread.ResetAbort()` after `catch (ThreadAbortException)` throws `PlatformNotSupportedException`; the guide lists it
+but doesn't say to remove it.** Guide gap. Raised as [#143](https://github.com/xforcore/webForCore/issues/143). Found on
+0.8.0, with DNN Platform 9.13.10.
+
+- **Apps:** dnn-platform-9, in five places: its URL rewriter's top-level `catch` (`Library/Entities/Urls/AdvancedUrlRewriter.cs:2615`,
+  every request it redirects), `Exceptions.ThreadAbortCheck` (`Library/Services/Exceptions/Exceptions.cs:422`), module
+  loading (`Library/UI/Modules/ModuleHost.cs:345`), `ProfileModuleUserControlBase` and the module settings page. Found by
+  the assessment; not reached at run time (F130 comes first), as .NET throws on every `ResetAbort` call.
+- **Error:** `PlatformNotSupportedException: Thread abort is not supported on this platform.` from inside the `catch`, in
+  place of the `ThreadAbortException` the code swallowed.
+- **Gap:** AGENT-MIGRATION.md's blocker table says only "Different on .NET", NAMESPACES.md that such code "behaves
+  differently". On webForCore the call can go: the `ThreadAbortException` of `Response.End`/`Redirect(url, true)` is an
+  ordinary instance, not re-raised at the end of the `catch`. The overlay removes the five calls.
+- **Suggested fix:** a line in Phase 2 step 7 and MIGRATING.md section 6 ("remove `Thread.ResetAbort()` after
+  `catch (ThreadAbortException)`"), and the symptom in the Phase 3 table.
+
+## F132
+
+**An application's design-time classes don't compile: `System.Web.UI.Design.ExpressionEditor` and the rest of
+System.Design aren't on .NET.** Guide gap. Raised as [#144](https://github.com/xforcore/webForCore/issues/144). Found on
+0.8.0, with DNN Platform 9.13.10.
+
+- **Apps:** dnn-platform-9: `Library/Services/Localization/LocalizationExpressionBuilderEditor.cs`, the Visual Studio
+  editor of its `dnnLoc:` expression builder, derives from `ExpressionEditor`: `CS0234: The type or namespace name
+  'Design' does not exist in the namespace 'System.Web.UI'`. The overlay takes it out of the build;
+  `[ExpressionEditor("...")]` names it by string, so nothing at run time changes.
+- **Gap:** MIGRATING.md mentions System.Design only as a `<compilation><assemblies>` entry (F37). Control designers
+  (`ControlDesigner`, `DataSourceDesigner`) and System.Design's editors in app libraries are the same case.
+- **Suggested fix:** a line in MIGRATING.md section 2 or 6: remove the design-time classes from the build; attributes
+  that name them by string keep working.
+
+## F133
+
+**Linux: DNN builds every physical path with `\`, and its file utilities use QuickIO.NET's Win32 calls.**
+App/environment. Found on 0.8.0 (Linux), with DNN Platform 9.13.10, past F130 (with F130 worked around locally, not in
+the overlay).
+
+- **Apps:** dnn-platform-9. `Globals.ApplicationMapPath` is `AppDomain.CurrentDomain.BaseDirectory.Replace("/", "\\")`
+  (`Library/Application/ApplicationStatusInfo.cs`, with `HttpRuntime.AppDomainAppPath` in the overlay for F3), and
+  `HostMapPath` (`@"Portals\_default\"`), `InstallMapPath` (`"\\Install\\"`), the providers' `providerPath="~\..."`, the
+  skin and portal paths add `\`-separated parts to it: about 280 such literals in the projects the site builds.
+  `Install.aspx?mode=install` wrote a `web.config` into a folder named `\home\...\Website\Config\` inside the site, and
+  the error page then failed in `Config.Load` (`SecurityException: Unable to load config for "web.config"`).
+  `FileSystemUtils` aliases `Directory`, `DirectoryInfo` and `File` to QuickIO.NET 2.6.2's (`SchwabenCode.QuickIO`,
+  net40, P/Invoke to `kernel32`).
+- **Why it isn't webForCore's:** `\` isn't a separator on Linux (MIGRATING.md section 6). Portable paths would mean
+  rewriting DNN's file layer, so the app runs on Windows only (where it stops at F130 for now).

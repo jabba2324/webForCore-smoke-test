@@ -1,16 +1,207 @@
 {
   "id": "dnn-platform-9",
   "stages": {
+    "assess": {
+      "at": "2026-11-04T21:02:27+00:00",
+      "blockers": {
+        "appdomain-thread-abort": [
+          "admin/Modules/Modulesettings.ascx.cs:522",
+          "DNN Platform/DotNetNuke.Maintenance/Telerik/TelerikUtils.cs:57",
+          "DNN Platform/DotNetNuke.Maintenance/Telerik/TelerikUtils.cs:80",
+          "DNN Platform/Library/UI/Modules/ModuleHost.cs:345",
+          "DNN Platform/Library/UI/Modules/ProfileModuleUserControlBase.cs:72",
+          "DNN Platform/Library/Services/Exceptions/Exceptions.cs:422",
+          "DNN Platform/Library/Entities/Urls/AdvancedUrlRewriter.cs:2615"
+        ],
+        "linq-to-sql": [
+          "development.config:218",
+          "release.config:219",
+          "DNN Platform/Library/Services/Upgrade/Upgrade.cs:1257"
+        ],
+        "windows-auth": [
+          "DNN Platform/DotNetNuke.Log4net/log4net/Core/LoggingEvent.cs:781",
+          "DNN Platform/DotNetNuke.Log4net/log4net/Core/LoggingEvent.cs:791",
+          "DNN Platform/DotNetNuke.Log4net/log4net/Core/LoggingEvent.cs:804",
+          "DNN Platform/DotNetNuke.Log4net/log4net/Core/LoggingEvent.cs:808",
+          "DNN Platform/DotNetNuke.Log4net/log4net/Core/LoggingEvent.cs:814",
+          "DNN Platform/DotNetNuke.Log4net/log4net/Core/LoggingEvent.cs:837",
+          "DNN Platform/DotNetNuke.Log4net/log4net/Core/LoggingEvent.cs:846",
+          "DNN Platform/DotNetNuke.Log4net/log4net/Core/LoggingEvent.cs:846",
+          "DNN Platform/DotNetNuke.Log4net/log4net/Core/LoggingEvent.cs:853",
+          "DNN Platform/DotNetNuke.Log4net/log4net/Core/LoggingEvent.cs:875",
+          "DNN Platform/DotNetNuke.Log4net/log4net/Layout/PatternLayout.cs:553",
+          "DNN Platform/DotNetNuke.Log4net/log4net/Layout/PatternLayout.cs:557",
+          "DNN Platform/DotNetNuke.Log4net/log4net/Util/PatternString.cs:199",
+          "DNN Platform/DotNetNuke.Log4net/log4net/Util/WindowsSecurityContext.cs:22",
+          "DNN Platform/DotNetNuke.Log4net/log4net/Util/WindowsSecurityContext.cs:73",
+          "DNN Platform/DotNetNuke.Log4net/log4net/Util/WindowsSecurityContext.cs:235",
+          "DNN Platform/DotNetNuke.Log4net/log4net/Util/WindowsSecurityContext.cs:240",
+          "DNN Platform/DotNetNuke.Log4net/log4net/Util/WindowsSecurityContext.cs:244",
+          "DNN Platform/DotNetNuke.Log4net/log4net/Util/WindowsSecurityContext.cs:248",
+          "DNN Platform/DotNetNuke.Log4net/log4net/Util/WindowsSecurityContext.cs:255",
+          "... 6 more"
+        ]
+      },
+      "kinds": [
+        "mvc",
+        "webapi",
+        "webforms",
+        "webpages"
+      ],
+      "libraries": [
+        "DNN Platform/Controls/CountryListBox",
+        "DNN Platform/DotNetNuke.Abstractions",
+        "DNN Platform/DotNetNuke.DependencyInjection",
+        "DNN Platform/DotNetNuke.Instrumentation",
+        "DNN Platform/DotNetNuke.Log4net",
+        "DNN Platform/DotNetNuke.Maintenance",
+        "DNN Platform/DotNetNuke.ModulePipeline",
+        "DNN Platform/DotNetNuke.Web",
+        "DNN Platform/DotNetNuke.Web.Client",
+        "DNN Platform/DotNetNuke.Web.Mvc",
+        "DNN Platform/DotNetNuke.Web.Razor",
+        "DNN Platform/DotNetNuke.WebUtility",
+        "DNN Platform/HttpModules",
+        "DNN Platform/Library",
+        "DNN Platform/Modules/CoreMessaging",
+        "DNN Platform/Modules/DDRMenu",
+        "DNN Platform/Syndication",
+        "DotNetNuke.Internal.SourceGenerators"
+      ],
+      "notices": {
+        "binaryformatter": [
+          "DNN Platform/Library/Common/Globals.cs:16",
+          "DNN Platform/Library/Common/Globals.cs:3166",
+          "DNN Platform/Library/Common/Globals.cs:3214"
+        ],
+        "smtpclient-config": [
+          "DNN Platform/DotNetNuke.Log4net/log4net/Appender/SmtpAppender.cs:402",
+          "DNN Platform/DotNetNuke.Log4net/log4net/Appender/SmtpAppender.cs:405",
+          "DNN Platform/Library/Services/Mail/CoreMailProvider.cs:267",
+          "DNN Platform/Library/Services/Mail/MailKitMailProvider.cs:64",
+          "DNN Platform/Library/Services/Mail/MailKitMailProvider.cs:104"
+        ]
+      },
+      "status": "blocked",
+      "summary": "appdomain-thread-abort, linq-to-sql, windows-auth",
+      "target_frameworks": [
+        "v4.0",
+        "v4.7.2"
+      ]
+    },
     "build": {
-      "at": "2026-11-03T12:13:32+00:00",
-      "status": "skip",
-      "summary": "not migrated yet (no SDK-style project)"
+      "at": "2026-11-04T21:33:52+00:00",
+      "error_count": 0,
+      "errors": [],
+      "log": "apps/dnn-platform-9/logs/build.log",
+      "seconds": 96,
+      "status": "pass",
+      "summary": null,
+      "webforcore": "packages 0.8.0"
     },
     "fetch": {
-      "at": "2026-11-03T12:13:32+00:00",
-      "commit": "dd10c32f87b4fa2a6fccf1052706c5a81e59ca7d",
-      "overlay": false,
+      "at": "2026-11-04T21:32:16+00:00",
+      "commit": "53cdf4750477293b4e6316b4d91e1d5e43610127",
+      "overlay": true,
       "status": "pass"
+    },
+    "setup": {
+      "at": "2026-11-04T21:35:10+00:00",
+      "created": [
+        "dnn9"
+      ],
+      "date": "2026-11-04",
+      "status": "fail",
+      "steps": [
+        {
+          "ok": false,
+          "status": 500,
+          "step": "/Install/Install.aspx?mode=install"
+        }
+      ],
+      "summary": "0/1 steps"
+    },
+    "smoke": {
+      "at": "2026-11-04T21:35:14+00:00",
+      "checks": [
+        {
+          "expected_text": "Xcillion",
+          "ms": 6,
+          "ok": false,
+          "path": "/",
+          "status": 500,
+          "title": "Could not load file or assembly 'ClientDependency.Core.Mvc, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
+        },
+        {
+          "expected_text": "dnn_ctr_Login",
+          "ms": 4,
+          "ok": false,
+          "path": "/Login.aspx",
+          "status": 500,
+          "title": "Could not load file or assembly 'ClientDependency.Core.Mvc, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
+        },
+        {
+          "expected_text": "Canada",
+          "ms": 5,
+          "ok": false,
+          "path": "/API/InternalServices/CountryRegion/Countries",
+          "status": 500,
+          "title": "Could not load file or assembly 'ClientDependency.Core.Mvc, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
+        },
+        {
+          "expected_text": "dnnJscriptVersion",
+          "ms": 12,
+          "ok": false,
+          "path": "/js/dnn.js",
+          "status": 500,
+          "title": "Could not load file or assembly 'ClientDependency.Core.Mvc, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
+        },
+        {
+          "ms": 16,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 7,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 7,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 5,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "ms": 5,
+          "ok": true,
+          "path": "/packages.config",
+          "status": 404
+        },
+        {
+          "ms": 9,
+          "ok": true,
+          "path": "/bin_dotnet/DotNetNuke.Website.dll",
+          "status": 404
+        },
+        {
+          "ms": 5,
+          "ok": true,
+          "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
+          "status": 404
+        }
+      ],
+      "log": "apps/dnn-platform-9/logs/server.log",
+      "status": "fail",
+      "summary": "7/11 probes"
     }
   }
 }
