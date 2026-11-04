@@ -51,6 +51,9 @@ Windows (CI run 41905418748; eshop-legacy-mvc's Windows job didn't start its ser
   in the others, F89, intermittent). SmartStoreNET 4.x is blocked at build, on both platforms, by webForCore's
   System.Web.Optimization identity (F87). F83–F89 were found there; for F89 the runner now stops a server's whole
   process tree on Windows and records a failed probe's stack.
+- **Kooboo CMS and Umbraco 8** (new apps, round 8, on 0.8.0 with drawingForCore 0.3.0): kooboo-cms 23/23 and
+  umbraco-8 21/21, on Linux and Windows (CI run 41920542509). kooboo-cms needs about half of Linux's default inotify
+  instances (F92), so its runs on the shared development machine were partial. F90–F94 were found there.
 
 Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
@@ -144,8 +147,13 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F85](#f85) | System.Linq.Dynamic 1.0.7 (net40) needs .NET Framework's `System.Data.Entity` 4.0 | app/environment | nopcommerce-3.90 | – |
 | [F86](#f86) | Linux: a static file in another case is 404 until requested once in its own case, then 200 in any case | webForCore bug | nopcommerce-3.90 | [#140](https://github.com/xforcore/webForCore/issues/140) |
 | [F87](#f87) | `System.Web.Optimization` and `WebGrease` don't have Microsoft's identities: BundleTransformer fails with CS0012 | webForCore bug | smartstorenet | [#141](https://github.com/xforcore/webForCore/issues/141) |
-| [F88](#f88) | One inotify instance per watched folder: nopCommerce takes more than 50 of the user's 128 | documented gap | nopcommerce-3.90 | – |
+| [F88](#f88) | The same as F92: one inotify instance per watched folder; nopCommerce takes more than 50 of the user's 128 | webForCore bug | nopcommerce-3.90 | [#152](https://github.com/xforcore/webForCore/issues/152) |
 | [F89](#f89) | Windows, intermittent: nopCommerce's smoke after setup fails at start, "file is being used by another process" (cause not confirmed) | app/environment | nopcommerce-3.90 | – |
+| [F90](#f90) | The parameterless crypto factories (`KeyedHashAlgorithm.Create()`, `HashAlgorithm.Create()`, ...) throw on .NET | guide gap | kooboo-cms | [#151](https://github.com/xforcore/webForCore/issues/151) |
+| [F91](#f91) | DotNetZip 1.9 (`Ionic.Zip.Reduced`) can't extract on Linux | app/environment | kooboo-cms | - |
+| [F92](#f92) | Linux: every watched directory is an inotify instance on .NET 10; Kooboo's worker alone takes 48+ of the default 128 | webForCore bug | kooboo-cms (umbraco-8: 20) | [#152](https://github.com/xforcore/webForCore/issues/152) |
+| [F93](#f93) | CSharpTest.Net.Collections 14.906 (Umbraco 8's NuCache file store) reflects into `FileStream` and P/Invokes kernel32 | app/environment | umbraco-8 | - |
+| [F94](#f94) | An app's own `Microsoft.CodeAnalysis` (Roslyn) package conflicts with webForCore.Compilers' 5.9.0 (NU1107) | guide gap | umbraco-8 | [#153](https://github.com/xforcore/webForCore/issues/153) |
 | [F104](#f104) | webForCore.AutoMapperLegacy on AutoMapper 12: a member mapped from a value already of its type is mapped again through a base-type map, and the whole configuration fails | app/environment (webForCore-thirdparty) | umbraco-7 | [thirdparty#11](https://github.com/xforcore/webForCore-thirdparty/issues/11) |
 | [F105](#f105) | `ApplicationSettingsBase` (Settings.settings, Web Reference SOAP clients) throws `TypeLoadException`: `ConfigurationManagerInternal` is looked up in `System.Configuration` 4.0.0.0 | webForCore bug | umbraco-7 | [#154](https://github.com/xforcore/webForCore/issues/154) |
 | [F116](#f116) | Windows Workflow Foundation 3 (`System.Workflow.*`) isn't on .NET, and the docs and blocker search don't say so | guide gap | composite-c1 | [#132](https://github.com/xforcore/webForCore/issues/132) |
@@ -1524,7 +1532,7 @@ running at the same time as the same user.
   held 11 to 23 here (counted from `/proc/<pid>/fd`), though .NET 10 shares one inotify instance between a process's
   watchers (a test program with 5 watchers held 1). Where the others come from wasn't established, so this isn't
   raised as a webForCore bug. A server running many sites under one user may need a higher
-  `fs.inotify.max_user_instances`.
+  `fs.inotify.max_user_instances`. (Round 8: that test ran on .NET 11; on .NET 10 each watcher is an instance, F92.)
 - **In the runs:** `DOTNET_USE_POLLING_FILE_WATCHER=1` (ASP.NET Core's configuration watchers poll) for the final
   Linux runs; nothing committed changes.
 
@@ -1775,21 +1783,18 @@ problem as F40 (SignalR and DataVisualization at 0.0.0.0, #40).
 
 ## F88
 
-**webForCore takes one inotify instance per watched folder, and nopCommerce 3.90 watches more than 50 folders.**
-Documented gap (`docs/IIS-COMPATIBILITY.md`, "Restart on web.config, `bin` or `App_Code` change", #107). Found on 0.8.0
-(Linux), migrating nopCommerce 3.90.
+**The same as [F92](#f92) (found the same day with Kooboo CMS, raised as
+[#152](https://github.com/xforcore/webForCore/issues/152)): one inotify instance per watched folder; nopCommerce 3.90's
+worker takes more than 50 of the user's 128.** webForCore bug (`docs/IIS-COMPATIBILITY.md` says about 15). Found on
+0.8.0 (Linux), migrating nopCommerce 3.90.
 
-- **Apps:** nopcommerce-3.90: its worker had 48 inotify instances after a dozen store pages, and more after the
-  administration (each folder with a `web.config`: 23 in the site and its plugins; each folder of views its theme view
-  engine looks in). The default limit is 128 per user (`fs.inotify.max_user_instances`), so with a desktop session
-  (about 70 here) or another site under the same user, pages fail: `IOException: The configured user limit (128) on
-  the number of inotify instances has been reached` from `DirMonCompletion.StartManagedDirectoryWatch`, for whichever
-  folder comes next (a theme's `Content/Web.config`, `Administration/Web.config`). The docs' figure, "about 15
-  instances" per worker, is far from a large app's.
-- **Not tried as a fix:** `<httpRuntime fcnMode="Single">` doesn't change it (each folder still gets its own watcher).
-- **Suggestion:** off Windows, one inotify instance for the application (one `FileSystemWatcher` with
-  `IncludeSubdirectories` on the site, which takes watches, not instances, from the far larger
-  `max_user_watches`), or the docs' numbers for a large app.
+- **Apps:** nopcommerce-3.90: its worker had 48 inotify instances after a dozen store pages (from `/proc/<pid>/fd`), and
+  more after the administration: each folder with a `web.config` (23 in the site and its plugins) and each folder of
+  views its theme view engine looks in. With this machine's other processes holding about 70, pages fail with
+  `IOException: The configured user limit (128) on the number of inotify instances has been reached` from
+  `DirMonCompletion.StartManagedDirectoryWatch`, for whichever folder comes next (a theme's `Content/Web.config`,
+  `Administration/Web.config`); the local runs never passed every probe, CI's did.
+- `<httpRuntime fcnMode="Single">` didn't change it (each folder still got its own watcher), as F92 found for Kooboo.
 
 ## F89
 
@@ -1813,6 +1818,93 @@ cannot access the file because it is being used by another process".** App/envir
 - **Runner changes:** `Server.stop` ends the process tree on Windows; a failed probe now records the error page's
   exception lines and first stack frames (`stack` in the results), so the next failure says which file and call.
 - Not raised: no webForCore behaviour is shown to differ from IIS yet.
+
+## F90
+
+**The parameterless crypto factories (`KeyedHashAlgorithm.Create()`, `HashAlgorithm.Create()`, ...) throw on .NET.**
+Guide gap (.NET's behaviour, not webForCore's). Raised as [#151](https://github.com/xforcore/webForCore/issues/151).
+Found on 0.8.0, on Linux, in round 8.
+
+- **Apps:** kooboo-cms: its password hashing (`Kooboo.CMS.Account/Services/PasswordProvider.cs`) calls
+  `KeyedHashAlgorithm.Create()`, so every back-office log-in was a 500.
+- **Error:** `PlatformNotSupportedException: This platform does not allow the automatic selection of an algorithm.` at
+  `System.Security.Cryptography.KeyedHashAlgorithm.Create()`.
+- **Cause:** on .NET Framework the parameterless `Create()` of `HashAlgorithm`, `KeyedHashAlgorithm`, `HMAC`,
+  `SymmetricAlgorithm` and `AsymmetricAlgorithm` returned machine.config's default (`SHA1CryptoServiceProvider`,
+  `HMACSHA1`, `RijndaelManaged`, `RSACryptoServiceProvider`). .NET obsoletes them (SYSLIB0007) and throws; the named
+  overloads (`HashAlgorithm.Create("SHA256")`) still work. Hashes the old site stored were made with the default, so
+  the replacement has to be that class.
+- **Fix in the app:** `new HMACSHA1()`. The `admin` user shipped in Kooboo's `Cms_Data` then logs in (`admin`/`admin`).
+- **Repro:** a page with `<%= System.Security.Cryptography.KeyedHashAlgorithm.Create().GetType() %>`: `HMACSHA1` on
+  IIS, the exception on webForCore.
+
+## F91
+
+**DotNetZip 1.9 (`Ionic.Zip.Reduced`) can't extract on Linux.** App/environment. Found on 0.8.0, on Linux, in round 8.
+
+- **Apps:** kooboo-cms: creating a site from a template (a zip in `Cms_Data/SiteTemplates`) failed, so there was no site
+  to serve.
+- **Error:** `ArgumentException: The value cannot be an empty string. (Parameter 'path')` at
+  `System.IO.Directory.CreateDirectory` ← `Ionic.Zip.ZipEntry.InternalExtract` ← `ZipFile.ExtractAll`.
+- **Cause:** DotNetZip 1.9.1.8 (2011, .NET Framework) makes the output path with Windows separators, so on Linux the
+  entry's folder comes out empty. The .NET Standard releases (1.13 and later) extract correctly.
+- **Fix in the app:** the DotNetZip 1.16.0 package (the same `Ionic.Zip` namespace and API) for the checked-in
+  `Ionic.Zip.Reduced.dll`, in the three projects that use it.
+
+## F92
+
+**Linux: every directory ASP.NET watches is an inotify instance of its own on .NET 10, so one CMS's worker takes most
+of the default 128.** webForCore bug (the docs say about 15). Raised as
+[#152](https://github.com/xforcore/webForCore/issues/152). Found on 0.8.0, on Linux (Fedora,
+`fs.inotify.max_user_instances` = 128), in round 8.
+
+- **Apps:** kooboo-cms: its worker held 38 inotify instances after ten page types of one sample site and 48 when its
+  16 probe paths ran it out (counted from `/proc/<pid>/fd`; the host holds 1 more). Each Razor template folder it renders
+  from (under `Cms_Data/Sites/<site>/Templates`) adds one or two, so a bigger site or a second one takes more. With the
+  other processes of this machine's user holding about 70, its probes failed with `Configuration Error: Failed to start
+  monitoring changes to '<site>/Cms_Data/...'` and it never passed every probe here; twice its worker didn't start.
+  umbraco-8 (no content, `fcnMode="Single"` in its `web.config`) took 20.
+- **Where they go (Kooboo, one run):** 32 instances watching one directory each (the site root, `App_Data`, each level of
+  `Cms_Data` down to the template folders, most template folders twice), 4 watching the whole site recursively (464
+  directories each) and 1 watching `bin_dotnet/App_Data` recursively.
+- **Cause:** `DirMonCompletion` creates a `FileSystemWatcher` per directory (IIS had a `ReadDirectoryChangesW` handle per
+  directory), and on .NET 10 each `FileSystemWatcher` is its own inotify instance: a console program with ten watchers
+  on ten folders held ten on .NET 10.0.14, and one on .NET 11. F72's note that ".NET 10 shares one inotify instance" came
+  from a test run on .NET 11. `<httpRuntime fcnMode="Single" />` didn't change Kooboo's count (48 either way, the same
+  requests).
+- **Docs:** `docs/IIS-COMPATIBILITY.md` (process model): "Each worker also takes about 15 inotify instances".
+- **Suggested fix:** one watcher per application (a recursive one on its folder, which `fcnMode="Single"` meant on IIS)
+  or one inotify instance per process; at least document that the count grows with the directories a site serves and
+  compiles from.
+
+## F93
+
+**CSharpTest.Net.Collections 14.906 (Umbraco 8's NuCache file store) fails on .NET: it reflects into `FileStream` and
+P/Invokes kernel32.** App/environment. Found on 0.8.0, on Linux, in round 8.
+
+- **Apps:** umbraco-8: the first request after the install built NuCache's local B+ tree files
+  (`App_Data/TEMP/NuCache/*.db`) and failed: `NullReferenceException` at
+  `CSharpTest.Net.IO.TransactedCompoundFile.FlushStream` ← `BTreeFileStoreV2.CreateRoot` ← `BPlusTree..ctor` ←
+  `Umbraco.Web.PublishedCache.NuCache.DataSource.BTree.GetTree`.
+- **Cause:** that build's `FlushStream` reads `FileStream`'s private `_handle` field (which .NET's `FileStream` doesn't
+  have) and calls kernel32's `FlushFileBuffers`. Umbraco's own .NET build of the library (`Umbraco.CSharpTest.Net.Collections`,
+  for Umbraco 9 and later) uses `FileStream.Flush(true)` there.
+- **Fix in the app:** `Umbraco.CSharpTest.Net.Collections` 14.906.1403.1085 for `CSharpTest.Net.Collections`: the same
+  assembly name and API.
+
+## F94
+
+**An app's own `Microsoft.CodeAnalysis` (Roslyn) package conflicts with webForCore.Compilers' 5.9.0 (NU1107).** Guide
+gap. Raised as [#153](https://github.com/xforcore/webForCore/issues/153). Found on 0.8.0, in round 8.
+
+- **Apps:** umbraco-8: its embedded ModelsBuilder compiles models with Roslyn (`Microsoft.CodeAnalysis.CSharp` 2.10.0, in
+  `Umbraco.ModelsBuilder.Embedded` and the web project).
+- **Error:** `NU1107: Version conflict detected for Microsoft.CodeAnalysis.Common` (`webForCore 0.8.0 -> webForCore.Compilers
+  0.8.0 -> Microsoft.CodeAnalysis.VisualBasic 5.9.0 -> Microsoft.CodeAnalysis.Common (= 5.9.0)` against `Microsoft.CodeAnalysis.CSharp
+  2.10.0 -> Microsoft.CodeAnalysis.Common (= 2.10.0)`).
+- **Fix in the app:** `Microsoft.CodeAnalysis.CSharp` 5.9.0; it builds and the site runs. It's the guide's "every package
+  webForCore depends on is a floor", but Roslyn's packages pin each other exactly, so it's NU1107, not the NU1605 the
+  guide describes.
 
 ## F104
 

@@ -142,6 +142,7 @@ source files and `webforcore-host.dll` aren't served.
 - [F86](../../FINDINGS.md#f86) (webForCore bug): a static file requested in another case than its own is a 404 on
   Linux until it has been requested in its own case once; every product picture (`/content/images/thumbs/...`) on
   Linux.
-- [F88](../../FINDINGS.md#f88) (documented gap): inotify instances, one per watched folder.
+- [F88](../../FINDINGS.md#f88) (webForCore bug, the same as F92, webForCore#152): inotify instances, one per watched
+  folder.
 - [F89](../../FINDINGS.md#f89) (app/environment, cause not confirmed): Windows smoke after setup fails at start in some
   runs.
