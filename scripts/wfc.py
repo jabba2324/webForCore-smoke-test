@@ -178,7 +178,12 @@ def now():
 
 def scrub(log):
     """Logs are committed, so this machine's paths become placeholders."""
-    text = log.read_text(errors="replace")
+    text = scrub_text(log.read_text(errors="replace"))
+    log.write_text(text)
+    return text
+
+
+def scrub_text(text):
     # Longest first: the repo's path can start with webForCore's (../webForCore-smoke-test).
     pairs = [(str(WEBFORCORE), "$WEBFORCORE_DIR"), (str(ROOT), "<repo>"), (str(Path.home()), "~")]
     if CHECKOUTS:
@@ -186,7 +191,6 @@ def scrub(log):
     pairs += [(a.replace("\\", "/"), b) for a, b in pairs if "\\" in a]  # Windows paths, also written with /
     for path, name in sorted(pairs, key=lambda p: -len(p[0])):
         text = text.replace(path, name)
-    log.write_text(text)
     return text
 
 
@@ -588,7 +592,7 @@ def run_probe(base, probe, timeout, app_id=None, opener=OPENER):
         if "Stack Trace:" in body:
             trace = html.unescape(re.sub(r"<[^>]+>", "", body.split("Stack Trace:", 1)[1]))
             lines = [x.rstrip() for x in trace.splitlines() if x.lstrip().startswith(("[", "at "))]
-            check["stack"] = [x[:200] for x in lines[:40]]
+            check["stack"] = [scrub_text(x)[:200] for x in lines[:40]]
         if probe.get("contains"):
             check["expected_text"] = probe["contains"]
     return check
