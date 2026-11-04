@@ -40,7 +40,7 @@ Windows (CI run 41905418748; eshop-legacy-mvc's Windows job didn't start its ser
   distribution to faith-based organisations' internal use, so no overlay can be published here. Its assessment (a Web
   Site Project, Windows-only native spatial types, a named `EventWaitHandle`) is in its NOTES.md; F123 was found there.
 - **DNN Platform 9** (dnn-platform-9, a new app on 0.8.0, 9.13.10): the web project and its 19 libraries build on Linux
-  and Windows, but every request fails at start (7/11, the forbidden paths only), because `BuildManager.GetType(name,
+  and Windows, but every request fails at start (7/11 on both, the forbidden paths only), because `BuildManager.GetType(name,
   false)` throws for a missing assembly (F130); on Linux, DNN's Windows paths stop its install after that (F133).
   F130–F133 were found there.
 

@@ -208,8 +208,8 @@ deployed taken out of web.config, none of which is in the overlay):
   (app/environment, F133): about 280 such literals, and QuickIO.NET's Win32 calls behind `FileSystemUtils` besides.
   Making DNN's paths portable is a rewrite of its file layer, not a migration step, so Linux stops there.
 
-**Windows (CI):** see `results.windows.json`; F130 is platform-independent, so it stops at the same place. F133 doesn't
-apply there.
+**Windows (CI run 41917710466, webForCore 0.8.0): build pass, setup fail, smoke 7/11**, the same as Linux: every
+request is F130's `FileNotFoundException` for `ClientDependency.Core.Mvc`. F133 doesn't apply there.
 
 ## Open problems
 
