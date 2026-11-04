@@ -10,7 +10,7 @@ project = "Getting Started with ASP.NET 4.5 Web Forms and Visual Studio 2013 - W
 kinds = ["webforms", "owin", "identity"]
 licence = "Apache-2.0"
 status = "blocked"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): 16/19 on Linux, 17/19 on Windows. Blocked by webForCore bugs: paths with a space answer 400 (F80), FriendlyUrls redirects / (F81), Server.MachineName on Linux breaks ELMAH (F82). Needs SQL Server."
+notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): 18/21 on Linux, Windows pending (CI); the session-keyed shopping cart works (add, then view, with the session cookie). Blocked by webForCore bugs: paths with a space answer 400 (F80), FriendlyUrls redirects / (F81), Server.MachineName on Linux breaks ELMAH (F82). Needs SQL Server."
 needs = ["mssql"]
 # ExceptionUtility logs the errors the probes and by-hand checks cause.
 generated = ["**/App_Data/ErrorLog.txt"]
@@ -40,6 +40,20 @@ contains = "Old-time Car"
 [[probes]]
 path = "/ShoppingCart"
 contains = "Shopping Cart"
+
+# The cart: AddToCart keeps the cart's ID in Session["CartId"] (ShoppingCartActions.GetCartId) and redirects to the
+# cart, which shows the item only if the next request gets the same session (the ASP.NET_SessionId cookie). These two
+# probes share a cookie jar.
+[[probes]]
+path = "/AddToCart?productID=1"
+status = 302
+cookies = true
+
+[[probes]]
+path = "/ShoppingCart"
+contains = "Convertible Car"
+absent = "Shopping Cart is Empty"
+cookies = true
 
 [[probes]]
 path = "/Account/Login"
