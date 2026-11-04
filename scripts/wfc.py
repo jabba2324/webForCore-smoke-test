@@ -583,6 +583,12 @@ def run_probe(base, probe, timeout, app_id=None, opener=OPENER):
         # The ASP.NET error page's title is the most useful line.
         m = re.search(r"<title>(.*?)</title>", body, re.S | re.I)
         check["title"] = (m.group(1).strip() if m else body[:300])[:300]
+        # And, for an error page with a stack trace, where it was thrown (on CI there's no other way to see it): the
+        # exception lines ("[IOException: ...]") and the first frames under each.
+        if "Stack Trace:" in body:
+            trace = html.unescape(re.sub(r"<[^>]+>", "", body.split("Stack Trace:", 1)[1]))
+            lines = [x.rstrip() for x in trace.splitlines() if x.lstrip().startswith(("[", "at "))]
+            check["stack"] = [x[:200] for x in lines[:40]]
         if probe.get("contains"):
             check["expected_text"] = probe["contains"]
     return check
