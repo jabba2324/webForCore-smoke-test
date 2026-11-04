@@ -11,3 +11,7 @@ Appended by `scripts/wfc.py`, one line per stage run.
 - 2026-11-04T19:45:50+00:00 **fetch**: pass (existing checkout) at `e0c91fbfb405`
 - 2026-11-04T19:45:54+00:00 **build**: pass
 - 2026-11-04T19:46:23+00:00 **smoke**: fail (16/19 probes)
+- 2026-11-04T21:03:10+00:00 **fetch**: pass at `e0c91fbfb405`
+- 2026-11-04T21:03:25+00:00 **build**: pass
+- 2026-11-04T21:06:48+00:00 **smoke**: fail (server exited with -6)
+- 2026-11-04T21:07:14+00:00 **smoke**: fail (18/21 probes)
