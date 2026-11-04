@@ -1,0 +1,69 @@
+# SignalR 2 samples (SignalR's own sample site). Fields are described in README.md.
+
+name = "SignalR 2 samples"
+repo = "https://github.com/SignalR/SignalR"
+ref = "7f53f266daf1aad3dabb1b6d7a71d4c1501ec8dc"  # tag 2.4.3
+site = "samples/Microsoft.AspNet.SignalR.Samples"
+project = "samples/Microsoft.AspNet.SignalR.Samples/Microsoft.AspNet.SignalR.Samples.csproj"
+kinds = ["signalr", "owin", "webforms"]
+licence = "Apache-2.0"
+status = "migrated"
+notes = "webForCore 0.7.0: 18/19 on Linux; the failure is the hub proxy's [!VERSION!] header (F70). VB library needs MyType Empty (F71)."
+# The build writes Scripts/jquery.signalR*.js (CopyJs, as the original build did); the repository ignores them anyway.
+generated = ["samples/Microsoft.AspNet.SignalR.Samples/Scripts/jquery.signalR*.js"]
+
+# The first request compiles the site, so it gets 120 s.
+# The home page: Web Forms with a master page.
+[[probes]]
+path = "/"
+contains = "Real-time web library for ASP.NET with a simple API"
+
+# A sample's page in a folder (default document).
+[[probes]]
+path = "/Hubs/DemoHub/"
+contains = "ASP.NET SignalR: Demo Hub"
+
+# The generated hub proxy: every hub, the VB library's included.
+[[probes]]
+path = "/signalr/hubs"
+contains = "proxies['VBDemo'] = this.createHubProxy('VBDemo');"
+
+[[probes]]
+path = "/signalr/hubs"
+contains = "proxies['demo'] = this.createHubProxy('demo');"
+
+# Microsoft's SignalR 2.4.3 stamps its version into the proxy's header comment (F70).
+[[probes]]
+path = "/signalr/hubs"
+contains = "ASP.NET SignalR JavaScript Library 2.4.3"
+
+# Hub and persistent connection negotiation (JSON).
+[[probes]]
+path = "/signalr/negotiate?clientProtocol=1.5&connectionData=%5B%7B%22name%22%3A%22demo%22%7D%5D"
+contains = "\"Url\":\"/signalr\",\"ConnectionToken\":\""
+
+[[probes]]
+path = "/raw-connection/negotiate?clientProtocol=1.5"
+contains = "\"Url\":\"/raw-connection\",\"ConnectionToken\":\""
+
+[[probes]]
+path = "/signalr/ping"
+contains = "\"Response\": \"pong\""
+
+# OWIN branches: CORS (Microsoft.Owin.Cors) and cookie authentication's redirect to its log-in path.
+[[probes]]
+path = "/cors/signalr/negotiate?clientProtocol=1.5&connectionData=%5B%5D"
+contains = "\"Url\":\"/cors/signalr\""
+
+[[probes]]
+path = "/cookieauth/echo/negotiate?clientProtocol=1.5"
+status = 302
+
+# Static files: a sample's HTML page, and the client script the build copies in.
+[[probes]]
+path = "/Hubs/Chat/index.htm"
+contains = "<title>SignalR Chat</title>"
+
+[[probes]]
+path = "/Scripts/jquery.signalR.js"
+contains = "ASP.NET SignalR JavaScript Library 2.4.3"
