@@ -49,6 +49,7 @@ gh release download --repo xforcore/webForCore-thirdparty --pattern '*.nupkg' --
 | WebActivatorEx (directly, or through Unity.Mvc, Ninject.MVC, StructureMap.MVC, ...) | `webForCore.WebActivatorEx` | Its start methods never run (webForCore#21): the DI container is never set up, "No parameterless constructor defined" |
 | WebActivator 1.x (Ninject.MVC3 2.x and other MVC 3-era packages) | `webForCore.WebActivator` (0.4.1+) | Its start methods never run either (webForCore#38) |
 | AjaxControlToolkit | `webForCore.AjaxControlToolkit` (+ `.StaticResources`, `.HtmlEditor.Sanitizer`) | Not provided by webForCore; the original package is built for .NET Framework |
+| AutoMapper 3.x or 4.x (static API: `Mapper.CreateMap`, `Profile.Configure`, ...) | `webForCore.AutoMapperLegacy` (0.6.0+), with its global usings (its README; umbraco-7 has the steps) | Configuring a map throws on .NET (F22). Not a replacement: its own namespace on AutoMapper 12-14, which maps differently in places (F104) |
 
 Record in the app's `NOTES.md` which webForCore-thirdparty version it used. webForCore's own guide gives the
 workaround without these packages (calling WebActivatorEx's start methods from `Application_Start`); a problem only

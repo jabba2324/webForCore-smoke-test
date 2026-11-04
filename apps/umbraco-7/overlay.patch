@@ -1,5 +1,5 @@
 diff --git a/src/SQLCE4Umbraco/SqlCE4Umbraco.csproj b/src/SQLCE4Umbraco/SqlCE4Umbraco.csproj
-index c86c11c6d9..86795b3b3b 100644
+index c86c11c6d9..36adf3ed00 100644
 --- a/src/SQLCE4Umbraco/SqlCE4Umbraco.csproj
 +++ b/src/SQLCE4Umbraco/SqlCE4Umbraco.csproj
 @@ -1,101 +1,36 @@
@@ -487,10 +487,10 @@ index c15b2d0576..67c97368e9 100644
  using Umbraco.Core.Logging;
  
 diff --git a/src/Umbraco.Core/Umbraco.Core.csproj b/src/Umbraco.Core/Umbraco.Core.csproj
-index 69f6fb39b4..50ed45b1a9 100644
+index 69f6fb39b4..8426eaafa3 100644
 --- a/src/Umbraco.Core/Umbraco.Core.csproj
 +++ b/src/Umbraco.Core/Umbraco.Core.csproj
-@@ -1,1712 +1,56 @@
+@@ -1,1712 +1,64 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 +<Project Sdk="Microsoft.NET.Sdk">
@@ -504,8 +504,7 @@ index 69f6fb39b4..50ed45b1a9 100644
 -    <OutputType>Library</OutputType>
 -    <AppDesignerFolder>Properties</AppDesignerFolder>
 +    <TargetFramework>net10.0</TargetFramework>
-+    <!-- The C# the project was built with: "latest" meant 7.3 in the Visual Studio 2017/2019 it was built with, docs/MIGRATING.md section 2. -->
-+    <LangVersion>7.3</LangVersion>
++    <!-- C# 14 (net10.0's default), not 7.3: webForCore.AutoMapperLegacy gives 3.x's ResolutionContext members as extension properties. -->
 +    <!-- SolutionInfo.cs has AssemblyVersion("1.0.*") (CS8357 in a deterministic build). -->
 +    <Deterministic>false</Deterministic>
      <RootNamespace>Umbraco.Core</RootNamespace>
@@ -516,11 +515,7 @@ index 69f6fb39b4..50ed45b1a9 100644
 -    <RestorePackages>true</RestorePackages>
 -    <TargetFrameworkProfile />
 -    <LangVersion>latest</LangVersion>
-+    <ImplicitUsings>disable</ImplicitUsings>
-+    <Nullable>disable</Nullable>
-+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-+    <NoWarn>$(NoWarn);NU1701</NoWarn>
-   </PropertyGroup>
+-  </PropertyGroup>
 -  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
 -    <DebugSymbols>true</DebugSymbols>
 -    <DebugType>full</DebugType>
@@ -541,8 +536,13 @@ index 69f6fb39b4..50ed45b1a9 100644
 -    <WarningLevel>4</WarningLevel>
 -    <DocumentationFile>bin\Release\Umbraco.Core.xml</DocumentationFile>
 -    <Prefer32Bit>false</Prefer32Bit>
--  </PropertyGroup>
--  <ItemGroup>
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
++    <NoWarn>$(NoWarn);NU1701</NoWarn>
+   </PropertyGroup>
++
+   <ItemGroup>
 -    <Reference Include="AutoMapper, Version=3.3.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
 -      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
 -    </Reference>
@@ -635,7 +635,13 @@ index 69f6fb39b4..50ed45b1a9 100644
 -    <Reference Include="Microsoft.CSharp" />
 -    <Reference Include="System.Data" />
 -    <Reference Include="System.Xml" />
--  </ItemGroup>
++    <Compile Remove="bin/**;obj/**" />
++    <Compile Remove="Configuration/InfrastructureSettings/Infrastructure.cs" />
++    <Compile Remove="Packaging/DefaultPackageContext.cs" />
++    <Compile Remove="Packaging/IPackageContext.cs" />
++    <Compile Remove="Persistence/Querying/ExpressionHelper.cs" />
++    <Compile Include="../SolutionInfo.cs" Link="SolutionInfo.cs" />
+   </ItemGroup>
 +
    <ItemGroup>
 -    <Compile Include="..\SolutionInfo.cs">
@@ -2186,18 +2192,6 @@ index 69f6fb39b4..50ed45b1a9 100644
 -    <Compile Include="Xml\XmlNodeListFactory.cs" />
 -    <Compile Include="Xml\XPathNavigatorExtensions.cs" />
 -    <Compile Include="Xml\XPathVariable.cs" />
-+    <Compile Remove="bin/**;obj/**" />
-+    <Compile Remove="Configuration/InfrastructureSettings/Infrastructure.cs" />
-+    <Compile Remove="Packaging/DefaultPackageContext.cs" />
-+    <Compile Remove="Packaging/IPackageContext.cs" />
-+    <Compile Remove="Persistence/Querying/ExpressionHelper.cs" />
-+    <Compile Include="../SolutionInfo.cs" Link="SolutionInfo.cs" />
-   </ItemGroup>
-+
-   <ItemGroup>
--    <None Include="app.config" />
--    <None Include="FileResources\BlockingWeb.config" />
--    <None Include="packages.config" />
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
 +    <PackageReference Include="webForCore" Version="0.8.0" />
 +    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.8.0" />
@@ -2207,12 +2201,12 @@ index 69f6fb39b4..50ed45b1a9 100644
    </ItemGroup>
 +
    <ItemGroup>
--    <ProjectReference Include="..\umbraco.interfaces\umbraco.interfaces.csproj">
--      <Project>{511F6D8D-7717-440A-9A57-A507E9A8B27F}</Project>
--      <Name>umbraco.interfaces</Name>
--    </ProjectReference>
+-    <None Include="app.config" />
+-    <None Include="FileResources\BlockingWeb.config" />
+-    <None Include="packages.config" />
 +    <!-- The app's own libraries. -->
-+    <PackageReference Include="AutoMapper" Version="3.3.1" />
++    <!-- AutoMapper 3.3.1 doesn't run on .NET (F22): its static API on AutoMapper 12, from webForCore-thirdparty. -->
++    <PackageReference Include="webForCore.AutoMapperLegacy" Version="0.6.0" />
 +    <PackageReference Include="ClientDependency" Version="1.9.9" />
 +    <PackageReference Include="HtmlAgilityPack" Version="1.8.8" />
 +    <PackageReference Include="ImageProcessor" Version="2.7.0.100" />
@@ -2225,6 +2219,18 @@ index 69f6fb39b4..50ed45b1a9 100644
 +    <PackageReference Include="SqlServerCE" Version="4.0.0.1" />
 +    <PackageReference Include="System.ComponentModel.Composition" Version="10.0.14" />
 +    <PackageReference Include="System.DirectoryServices.AccountManagement" Version="10.0.14" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <ProjectReference Include="..\umbraco.interfaces\umbraco.interfaces.csproj">
+-      <Project>{511F6D8D-7717-440A-9A57-A507E9A8B27F}</Project>
+-      <Name>umbraco.interfaces</Name>
+-    </ProjectReference>
++    <!-- webForCore.AutoMapperLegacy's static Mapper for AutoMapper 3.x's (its README). -->
++    <Using Include="AutoMapperLegacy" />
++    <Using Include="AutoMapperLegacy.Mapper" Alias="Mapper" />
++    <!-- Umbraco's own MapperConfiguration, not AutoMapper 12's. -->
++    <Using Include="Umbraco.Core.Models.Mapping.MapperConfiguration" Alias="MapperConfiguration" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -3999,10 +4005,10 @@ index 0000000000..1a9143673b
 +    }
 +}
 diff --git a/src/Umbraco.Web.UI/Umbraco.Web.UI.csproj b/src/Umbraco.Web.UI/Umbraco.Web.UI.csproj
-index ff05f9b475..8b3e2c8fef 100644
+index ff05f9b475..3692a67cb2 100644
 --- a/src/Umbraco.Web.UI/Umbraco.Web.UI.csproj
 +++ b/src/Umbraco.Web.UI/Umbraco.Web.UI.csproj
-@@ -1,1102 +1,90 @@
+@@ -1,1102 +1,91 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
 -  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
@@ -5048,7 +5054,8 @@ index ff05f9b475..8b3e2c8fef 100644
 -    <Folder Include="Views\MacroPartials\" />
 +    <!-- The app's own libraries (without Microsoft.CodeAnalysis 1.0, which was there for the DotNetCompilerPlatform
 +         compiler, and MSBuild.Microsoft.VisualStudio.Web.targets: webForCore brings its compiler, the SDK its targets). -->
-+    <PackageReference Include="AutoMapper" Version="3.3.1" />
++    <!-- AutoMapper 3.3.1 doesn't run on .NET (F22): its static API on AutoMapper 12, from webForCore-thirdparty. -->
++    <PackageReference Include="webForCore.AutoMapperLegacy" Version="0.6.0" />
 +    <PackageReference Include="ClientDependency" Version="1.9.9" />
 +    <PackageReference Include="ClientDependency-Mvc5" Version="1.9.3" />
 +    <PackageReference Include="dotless" Version="1.5.2" />
@@ -6316,7 +6323,7 @@ similarity index 100%
 rename from src/Umbraco.Web.UI/packages.config
 rename to src/Umbraco.Web.UI/packages.config.netfx
 diff --git a/src/Umbraco.Web.UI/web.Template.config b/src/Umbraco.Web.UI/web.Template.config
-index e606cca446..59d9771ce6 100644
+index e606cca446..ec89c0bd54 100644
 --- a/src/Umbraco.Web.UI/web.Template.config
 +++ b/src/Umbraco.Web.UI/web.Template.config
 @@ -45,6 +45,8 @@
@@ -6338,15 +6345,6 @@ index e606cca446..59d9771ce6 100644
          <add key="owin:appStartup" value="UmbracoDefaultOwinStartup" />
  
          <add key="Umbraco.ModelsBuilder.Enable" value="true"/>
-@@ -65,7 +68,7 @@
-     </appSettings>
-     <connectionStrings>
-         <remove name="umbracoDbDSN" />
--        <add name="umbracoDbDSN" connectionString="" providerName="" />
-+        <add name="umbracoDbDSN" connectionString="Data Source=127.0.0.1,14330;Initial Catalog=umbraco7;User ID=sa;Password=Smoke_test_1234;TrustServerCertificate=True" providerName="System.Data.SqlClient" />
-         <!-- Important: If you're upgrading Umbraco, do not clear the connection string / provider name during your web.config merge. -->
-     </connectionStrings>
- 
 @@ -94,6 +97,9 @@
      <system.web>
          <customErrors mode="RemoteOnly" />
@@ -6453,6 +6451,48 @@ index e4038df4ab..9731c145fb 100644
              var xml = XDocument.Load(fileName, LoadOptions.PreserveWhitespace);
  
              var systemWeb = xml.Root.DescendantsAndSelf("system.web").Single();
+diff --git a/src/Umbraco.Web/Models/Mapping/ContentPropertyBasicConverter.cs b/src/Umbraco.Web/Models/Mapping/ContentPropertyBasicConverter.cs
+index dfff72a6f1..4983608cf6 100644
+--- a/src/Umbraco.Web/Models/Mapping/ContentPropertyBasicConverter.cs
++++ b/src/Umbraco.Web/Models/Mapping/ContentPropertyBasicConverter.cs
+@@ -15,7 +15,7 @@ namespace Umbraco.Web.Models.Mapping
+     /// Creates a base generic ContentPropertyBasic from a Property
+     /// </summary>
+     /// <typeparam name="T"></typeparam>
+-    internal class ContentPropertyBasicConverter<T> : ITypeConverter<Property, T>
++    internal class ContentPropertyBasicConverter<T> : AutoMapperLegacy.ITypeConverter<Property, T>
+         where T : ContentPropertyBasic, new()
+     {
+         protected IDataTypeService DataTypeService { get; }
+diff --git a/src/Umbraco.Web/Models/Mapping/ContentTypeModelMapperExtensions.cs b/src/Umbraco.Web/Models/Mapping/ContentTypeModelMapperExtensions.cs
+index fea46ddedb..1a7a38ce3b 100644
+--- a/src/Umbraco.Web/Models/Mapping/ContentTypeModelMapperExtensions.cs
++++ b/src/Umbraco.Web/Models/Mapping/ContentTypeModelMapperExtensions.cs
+@@ -45,7 +45,10 @@ public static IMappingExpression<TSource, PropertyGroupDisplay<TPropertyTypeDisp
+                 .ForMember(g => g.ContentTypeId, expression => expression.Ignore())
+                 .ForMember(g => g.ParentTabContentTypes, expression => expression.Ignore())
+                 .ForMember(g => g.ParentTabContentTypeNames, expression => expression.Ignore())
+-                .ForMember(g => g.Properties, expression => expression.MapFrom(display => display.Properties.Select(Mapper.Map<TPropertyTypeDisplay>)));
++                // webForCore smoke test: AutoMapper 12 maps MapFrom's IEnumerable<TPropertyTypeDisplay> again, element by
++                // element, through the PropertyTypeBasic -> PropertyTypeDisplay map, and fails for members (F104).
++                .ForMember(g => g.Properties, expression => expression.Ignore())
++                .AfterMap((source, dest) => dest.Properties = source.Properties.Select(Mapper.Map<TPropertyTypeDisplay>).ToList());
+         }
+ 
+         public static void AfterMapContentTypeSaveToEntity<TSource, TDestination>(
+diff --git a/src/Umbraco.Web/Models/Mapping/MemberModelMapper.cs b/src/Umbraco.Web/Models/Mapping/MemberModelMapper.cs
+index 9718f9ccf8..0270bf0a46 100644
+--- a/src/Umbraco.Web/Models/Mapping/MemberModelMapper.cs
++++ b/src/Umbraco.Web/Models/Mapping/MemberModelMapper.cs
+@@ -479,7 +479,7 @@ protected override IDictionary<string, string> ResolveCore(IMember source)
+         /// <summary>
+         /// A converter to go from a <see cref="MembershipUser"/> to a <see cref="MemberDisplay"/>
+         /// </summary>
+-        internal class MembershipUserTypeConverter : ITypeConverter<MembershipUser, MemberDisplay>
++        internal class MembershipUserTypeConverter : AutoMapperLegacy.ITypeConverter<MembershipUser, MemberDisplay>
+         {
+             public MemberDisplay Convert(ResolutionContext context)
+             {
 diff --git a/src/Umbraco.Web/Mvc/IRenderMvcController.cs b/src/Umbraco.Web/Mvc/IRenderMvcController.cs
 index 53865cd4ee..b88571444f 100644
 --- a/src/Umbraco.Web/Mvc/IRenderMvcController.cs
@@ -6547,10 +6587,10 @@ index a3e54b6805..8189b84157 100644
  </root>
 \ No newline at end of file
 diff --git a/src/Umbraco.Web/Umbraco.Web.csproj b/src/Umbraco.Web/Umbraco.Web.csproj
-index c110391d91..531b0bea50 100644
+index c110391d91..f4e15437ef 100644
 --- a/src/Umbraco.Web/Umbraco.Web.csproj
 +++ b/src/Umbraco.Web/Umbraco.Web.csproj
-@@ -1,2032 +1,74 @@
+@@ -1,2032 +1,82 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -6575,8 +6615,7 @@ index c110391d91..531b0bea50 100644
 -    <DelaySign>false</DelaySign>
 -    <OutputType>Library</OutputType>
 +    <TargetFramework>net10.0</TargetFramework>
-+    <!-- The C# the project was built with: "latest" meant 7.3 in the Visual Studio 2017/2019 it was built with, docs/MIGRATING.md section 2. -->
-+    <LangVersion>7.3</LangVersion>
++    <!-- C# 14 (net10.0's default), not 7.3: webForCore.AutoMapperLegacy gives 3.x's ResolutionContext members as extension properties. -->
 +    <!-- SolutionInfo.cs has AssemblyVersion("1.0.*") (CS8357 in a deterministic build). -->
 +    <Deterministic>false</Deterministic>
      <RootNamespace>Umbraco.Web</RootNamespace>
@@ -8594,7 +8633,8 @@ index c110391d91..531b0bea50 100644
 -      <CachedSettingsPropName>umbraco_org_umbraco_update_CheckForUpgrade</CachedSettingsPropName>
 -    </WebReferenceUrl>
 +    <!-- The app's own libraries. -->
-+    <PackageReference Include="AutoMapper" Version="3.3.1" />
++    <!-- AutoMapper 3.3.1 doesn't run on .NET (F22): its static API on AutoMapper 12, from webForCore-thirdparty. -->
++    <PackageReference Include="webForCore.AutoMapperLegacy" Version="0.6.0" />
 +    <PackageReference Include="ClientDependency" Version="1.9.9" />
 +    <PackageReference Include="dotless" Version="1.5.2" />
 +    <PackageReference Include="Examine" Version="0.1.90" />
@@ -8610,15 +8650,11 @@ index c110391d91..531b0bea50 100644
 +
    <ItemGroup>
 -    <Folder Include="umbraco.presentation\umbraco\settings\scripts\" />
-+    <ProjectReference Include="../UmbracoExamine/UmbracoExamine.csproj" />
-+    <ProjectReference Include="../SQLCE4Umbraco/SqlCE4Umbraco.csproj" />
-+    <ProjectReference Include="../Umbraco.Core/Umbraco.Core.csproj" />
-+    <ProjectReference Include="../umbraco.controls/umbraco.controls.csproj" />
-+    <ProjectReference Include="../umbraco.businesslogic/umbraco.businesslogic.csproj" />
-+    <ProjectReference Include="../umbraco.cms/umbraco.cms.csproj" />
-+    <ProjectReference Include="../umbraco.datalayer/umbraco.datalayer.csproj" />
-+    <ProjectReference Include="../umbraco.interfaces/umbraco.interfaces.csproj" />
-+    <ProjectReference Include="../umbraco.providers/umbraco.providers.csproj" />
++    <!-- webForCore.AutoMapperLegacy's static Mapper for AutoMapper 3.x's (its README). -->
++    <Using Include="AutoMapperLegacy" />
++    <Using Include="AutoMapperLegacy.Mapper" Alias="Mapper" />
++    <!-- Umbraco's own MapperConfiguration, not AutoMapper 12's. -->
++    <Using Include="Umbraco.Core.Models.Mapping.MapperConfiguration" Alias="MapperConfiguration" />
    </ItemGroup>
 -  <PropertyGroup>
 -    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
@@ -8643,6 +8679,18 @@ index c110391d91..531b0bea50 100644
 -  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
 -</Project>
 \ No newline at end of file
++
++  <ItemGroup>
++    <ProjectReference Include="../UmbracoExamine/UmbracoExamine.csproj" />
++    <ProjectReference Include="../SQLCE4Umbraco/SqlCE4Umbraco.csproj" />
++    <ProjectReference Include="../Umbraco.Core/Umbraco.Core.csproj" />
++    <ProjectReference Include="../umbraco.controls/umbraco.controls.csproj" />
++    <ProjectReference Include="../umbraco.businesslogic/umbraco.businesslogic.csproj" />
++    <ProjectReference Include="../umbraco.cms/umbraco.cms.csproj" />
++    <ProjectReference Include="../umbraco.datalayer/umbraco.datalayer.csproj" />
++    <ProjectReference Include="../umbraco.interfaces/umbraco.interfaces.csproj" />
++    <ProjectReference Include="../umbraco.providers/umbraco.providers.csproj" />
++  </ItemGroup>
 +
 +</Project>
 diff --git a/src/Umbraco.Web/Umbraco.Web.csproj.netfx b/src/Umbraco.Web/Umbraco.Web.csproj.netfx
@@ -10769,7 +10817,7 @@ index d4de749989..a7c2987794 100644
  using System.Web.Services;
  using Umbraco.Core;
 diff --git a/src/UmbracoExamine/UmbracoExamine.csproj b/src/UmbracoExamine/UmbracoExamine.csproj
-index afed7e804a..17d406809e 100644
+index afed7e804a..9b20c08d69 100644
 --- a/src/UmbracoExamine/UmbracoExamine.csproj
 +++ b/src/UmbracoExamine/UmbracoExamine.csproj
 @@ -1,199 +1,45 @@
@@ -11246,7 +11294,7 @@ similarity index 100%
 rename from src/umbraco.MacroEngines/packages.config
 rename to src/umbraco.MacroEngines/packages.config.netfx
 diff --git a/src/umbraco.MacroEngines/umbraco.MacroEngines.csproj b/src/umbraco.MacroEngines/umbraco.MacroEngines.csproj
-index 95730cfa07..0a88e03b35 100644
+index 95730cfa07..cc6c5a77fa 100644
 --- a/src/umbraco.MacroEngines/umbraco.MacroEngines.csproj
 +++ b/src/umbraco.MacroEngines/umbraco.MacroEngines.csproj
 @@ -1,231 +1,52 @@
@@ -11777,10 +11825,10 @@ similarity index 100%
 rename from src/umbraco.businesslogic/packages.config
 rename to src/umbraco.businesslogic/packages.config.netfx
 diff --git a/src/umbraco.businesslogic/umbraco.businesslogic.csproj b/src/umbraco.businesslogic/umbraco.businesslogic.csproj
-index aef9f365ad..49a5b8fd5b 100644
+index aef9f365ad..0a0bcabfe2 100644
 --- a/src/umbraco.businesslogic/umbraco.businesslogic.csproj
 +++ b/src/umbraco.businesslogic/umbraco.businesslogic.csproj
-@@ -1,287 +1,42 @@
+@@ -1,287 +1,48 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
 -  <PropertyGroup>
@@ -12073,8 +12121,7 @@ index aef9f365ad..49a5b8fd5b 100644
 +  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is umbraco.businesslogic.csproj.netfx. -->
 +  <PropertyGroup>
 +    <TargetFramework>net10.0</TargetFramework>
-+    <!-- The C# the project was built with (it set none: 7.3), docs/MIGRATING.md section 2. -->
-+    <LangVersion>7.3</LangVersion>
++    <!-- C# 14 (net10.0's default), not 7.3: webForCore.AutoMapperLegacy gives 3.x's ResolutionContext members as extension properties. -->
 +    <!-- SolutionInfo.cs has AssemblyVersion("1.0.*") (CS8357 in a deterministic build). -->
 +    <Deterministic>false</Deterministic>
 +    <RootNamespace>umbraco.businesslogic</RootNamespace>
@@ -12101,7 +12148,14 @@ index aef9f365ad..49a5b8fd5b 100644
 +
 +  <ItemGroup>
 +    <!-- The app's own libraries. -->
-+    <PackageReference Include="AutoMapper" Version="3.3.1" />
++    <!-- AutoMapper 3.3.1 doesn't run on .NET (F22): its static API on AutoMapper 12, from webForCore-thirdparty. -->
++    <PackageReference Include="webForCore.AutoMapperLegacy" Version="0.6.0" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <!-- webForCore.AutoMapperLegacy's static Mapper for AutoMapper 3.x's (its README). -->
++    <Using Include="AutoMapperLegacy" />
++    <Using Include="AutoMapperLegacy.Mapper" Alias="Mapper" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -12442,7 +12496,7 @@ similarity index 100%
 rename from src/umbraco.cms/packages.config
 rename to src/umbraco.cms/packages.config.netfx
 diff --git a/src/umbraco.cms/umbraco.cms.csproj b/src/umbraco.cms/umbraco.cms.csproj
-index ba0d180b1e..f2de731399 100644
+index ba0d180b1e..22a45d9711 100644
 --- a/src/umbraco.cms/umbraco.cms.csproj
 +++ b/src/umbraco.cms/umbraco.cms.csproj
 @@ -1,441 +1,42 @@
@@ -13383,7 +13437,7 @@ similarity index 100%
 rename from src/umbraco.controls/packages.config
 rename to src/umbraco.controls/packages.config.netfx
 diff --git a/src/umbraco.controls/umbraco.controls.csproj b/src/umbraco.controls/umbraco.controls.csproj
-index 4858b916db..dad1a78432 100644
+index 4858b916db..755e66594c 100644
 --- a/src/umbraco.controls/umbraco.controls.csproj
 +++ b/src/umbraco.controls/umbraco.controls.csproj
 @@ -1,185 +1,40 @@
@@ -13810,7 +13864,7 @@ similarity index 100%
 rename from src/umbraco.datalayer/packages.config
 rename to src/umbraco.datalayer/packages.config.netfx
 diff --git a/src/umbraco.datalayer/umbraco.datalayer.csproj b/src/umbraco.datalayer/umbraco.datalayer.csproj
-index 4e8a4b08ac..acc52772eb 100644
+index 4e8a4b08ac..220f25571d 100644
 --- a/src/umbraco.datalayer/umbraco.datalayer.csproj
 +++ b/src/umbraco.datalayer/umbraco.datalayer.csproj
 @@ -1,174 +1,37 @@
@@ -14212,7 +14266,7 @@ similarity index 100%
 rename from src/umbraco.editorControls/packages.config
 rename to src/umbraco.editorControls/packages.config.netfx
 diff --git a/src/umbraco.editorControls/umbraco.editorControls.csproj b/src/umbraco.editorControls/umbraco.editorControls.csproj
-index aabdc4bf63..9405f518ca 100644
+index aabdc4bf63..ed5718aed6 100644
 --- a/src/umbraco.editorControls/umbraco.editorControls.csproj
 +++ b/src/umbraco.editorControls/umbraco.editorControls.csproj
 @@ -1,498 +1,55 @@
@@ -15276,7 +15330,7 @@ index 0000000000..aabdc4bf63
 +</Project>
 \ No newline at end of file
 diff --git a/src/umbraco.interfaces/umbraco.interfaces.csproj b/src/umbraco.interfaces/umbraco.interfaces.csproj
-index d56d89bc31..89694e8815 100644
+index d56d89bc31..a64072f833 100644
 --- a/src/umbraco.interfaces/umbraco.interfaces.csproj
 +++ b/src/umbraco.interfaces/umbraco.interfaces.csproj
 @@ -1,202 +1,27 @@
@@ -15720,7 +15774,7 @@ index 0000000000..d56d89bc31
 +</Project>
 \ No newline at end of file
 diff --git a/src/umbraco.providers/umbraco.providers.csproj b/src/umbraco.providers/umbraco.providers.csproj
-index a55d92b58c..0c37371db6 100644
+index a55d92b58c..05ed8cf441 100644
 --- a/src/umbraco.providers/umbraco.providers.csproj
 +++ b/src/umbraco.providers/umbraco.providers.csproj
 @@ -1,144 +1,35 @@
