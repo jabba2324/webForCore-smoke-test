@@ -36,6 +36,9 @@ Windows (CI run 41905418748; eshop-legacy-mvc's Windows job didn't start its ser
   and the apps blocked before.
 - **C1 CMS** (composite-c1, a new app on 0.8.0): blocked at build, on Linux and Windows, by Windows Workflow
   Foundation 3 in its core library (F116) and by LINQ to SQL and WCF REST hosting (F120); F116–F121 were found there.
+- **Rock RMS** (a candidate, assessed on 0.8.0): rejected, as the Rock Community License limits use, derivative works and
+  distribution to faith-based organisations' internal use, so no overlay can be published here. Its assessment (a Web
+  Site Project, Windows-only native spatial types, a named `EventWaitHandle`) is in its NOTES.md; F123 was found there.
 
 Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
@@ -130,6 +133,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F119](#f119) | webForCore's `CSharpCodeProvider` with `GenerateInMemory` and no PDB throws `ArgumentNullException` | webForCore bug | composite-c1 | [#135](https://github.com/xforcore/webForCore/issues/135) |
 | [F120](#f120) | C1's core needs LINQ to SQL (even with the XML data store) and WCF REST hosting | documented gap | composite-c1 | – |
 | [F121](#f121) | Types .NET added (`System.Collections.Generic.KeyValuePair`) make the app's own type ambiguous (`CS0104`) | guide gap | composite-c1 | [#136](https://github.com/xforcore/webForCore/issues/136) |
+| [F123](#f123) | A Web Site Project has no `.csproj`; the guide's template compiles its `CodeFile=` code (CS0103) | guide gap | rock-rms (assessed only) | [#131](https://github.com/xforcore/webForCore/issues/131) |
 ---
 
 ## F1
@@ -1752,3 +1756,26 @@ Guide gap. Raised as [#136](https://github.com/xforcore/webForCore/issues/136). 
   parameters, so `KeyValuePair<TKey, TValue>` still binds to .NET's).
 - **Docs:** MIGRATING.md section 2 covers the method case (`DistinctBy`, CS0121, #93) and webForCore's newer
   versions' types (`SignInStatus`, #17), not types .NET added.
+
+## F123
+
+**A Web Site Project has no `.csproj`, and the guide's project template compiles its `CodeFile=` code files
+(CS0103).** Guide gap. Raised as [#131](https://github.com/xforcore/webForCore/issues/131). Found on 0.8.0 (Linux),
+assessing rock-rms (rejected for its licence, so not migrated).
+
+- **Apps:** rock-rms: `RockWeb` is a Visual Studio web site (`{E24C65DC-...}` in `Rock.sln`), with 364 `CodeFile=`
+  pages and controls and no `CodeBehind=`, `Global.asax`'s class in `App_Code`, and a `Bin` of 165 `*.dll.refresh`
+  files plus the assemblies the solution's libraries copy there after building (`CopyToRockWeb`).
+- **The gap:** `docs/MIGRATING.md` section 2 and `docs/AGENT-MIGRATION.md` Phase 2 convert an existing `.csproj`, and
+  the agent guide's source of truth for `Compile` is "the old project's `<Compile Include>` list", which a web site
+  hasn't got. The template removes only `App_Code\**` from `Compile`, so the SDK's glob compiles every `CodeFile=` file
+  into the project, where its controls aren't declared: `error CS0103: The name 'lbl' does not exist in the current
+  context`, and App_Code's classes aren't there either.
+- **Repro:** section 2's project and section 4's `Program.cs` in a folder with `Default.aspx` (`CodeFile=
+  "Default.aspx.cs" Inherits="DefaultPage"`, an `asp:Label ID="lbl"`), its `Default.aspx.cs` setting `lbl.Text` from
+  `App_Code/Helper.cs`; `dotnet build`. With `<Compile Remove="**\*.cs" />` and `<Compile Include="Program.cs" />` it
+  builds, and under `webforcore-host` the page renders with App_Code's text: webForCore runs the site, only the guide
+  is missing.
+- **Suggested fix:** a "Web Site Project" paragraph in both guides: create the project in the site folder compiling only
+  `Program.cs`; turn `Bin\*.dll.refresh` files into `PackageReference`s and the solution's copy-to-`Bin` projects into
+  `ProjectReference`s (their copy targets go: the assemblies belong in `bin_dotnet/`); remove the old `Bin` DLLs.
