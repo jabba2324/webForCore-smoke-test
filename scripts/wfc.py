@@ -4,7 +4,7 @@ migrated projects against webForCore, run them on Kestrel and probe them.
 
 Standard library only (Python 3.11+, for tomllib).
 
-    scripts/wfc.py packages [--version 0.7.0]  # download webForCore's (and webForCore-thirdparty's) release packages into .packages/
+    scripts/wfc.py packages [--version 0.8.0]  # download webForCore's (and webForCore-thirdparty's) release packages into .packages/
     scripts/wfc.py list
     scripts/wfc.py fetch <id>... | --all [--reset]
     scripts/wfc.py assess <id>... | --all
@@ -55,16 +55,16 @@ WEBFORCORE = Path(os.environ.get("WEBFORCORE_DIR", ROOT.parent / "webForCore")).
 # builds restore from it (apps reference the packages, docs/MIGRATING.md section 1). WEBFORCORE_DIR is only needed by
 # apps still migrated against webForCore's source.
 WEBFORCORE_REPO = "xforcore/webForCore"
-WEBFORCORE_VERSION = os.environ.get("WEBFORCORE_VERSION") or "0.7.0"
+WEBFORCORE_VERSION = os.environ.get("WEBFORCORE_VERSION") or "0.8.0"
 # Builds of third-party libraries for webForCore (WebActivatorEx, AjaxControlToolkit; CLAUDE.md), from
 # webForCore-thirdparty's releases, go in the same folder.
 THIRDPARTY_REPO = "xforcore/webForCore-thirdparty"
-THIRDPARTY_VERSION = os.environ.get("THIRDPARTY_VERSION") or "0.5.0"
+THIRDPARTY_VERSION = os.environ.get("THIRDPARTY_VERSION") or "0.6.0"
 THIRDPARTY_PACKAGES = ("webForCore.WebActivatorEx", "webForCore.AjaxControlToolkit")
 # System.Drawing, which the webForCore package depends on from 0.7.0 (drawingForCore and drawingForCore.Common), goes
 # there too.
 DRAWING_REPO = "xforcore/drawingForCore"
-DRAWING_VERSION = os.environ.get("DRAWING_VERSION") or "0.2.0"
+DRAWING_VERSION = os.environ.get("DRAWING_VERSION") or "0.3.0"
 PACKAGES = ROOT / ".packages"
 # The OS this run is on. Linux keeps the original file names; Windows' results sit beside them.
 PLATFORM = "windows" if os.name == "nt" else "linux"
@@ -811,7 +811,7 @@ def main():
     p.add_argument("--all", action="store_true")
     p.add_argument("--reset", action="store_true", help="fetch, run: discard the checkout's changes and reapply the overlay")
     p.add_argument("--changed-since", metavar="REF", help="ci-matrix: only the apps the changes since REF touch")
-    p.add_argument("--version", help="packages: the webForCore release (default: $WEBFORCORE_VERSION or 0.7.0; webForCore-thirdparty: $THIRDPARTY_VERSION or 0.5.0)")
+    p.add_argument("--version", help="packages: the webForCore release (default: $WEBFORCORE_VERSION or 0.8.0; webForCore-thirdparty: $THIRDPARTY_VERSION or 0.6.0)")
     a = p.parse_args()
     if a.command == "packages":
         global WEBFORCORE_VERSION
