@@ -39,6 +39,10 @@ Windows (CI run 41905418748; eshop-legacy-mvc's Windows job didn't start its ser
 - **Rock RMS** (a candidate, assessed on 0.8.0): rejected, as the Rock Community License limits use, derivative works and
   distribution to faith-based organisations' internal use, so no overlay can be published here. Its assessment (a Web
   Site Project, Windows-only native spatial types, a named `EventWaitHandle`) is in its NOTES.md; F123 was found there.
+- **DNN Platform 9** (dnn-platform-9, a new app on 0.8.0, 9.13.10): the web project and its 19 libraries build on Linux
+  and Windows, but every request fails at start (7/11 on both, the forbidden paths only), because `BuildManager.GetType(name,
+  false)` throws for a missing assembly (F130); on Linux, DNN's Windows paths stop its install after that (F133).
+  F130–F133 were found there.
 
 Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
@@ -134,6 +138,10 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F120](#f120) | C1's core needs LINQ to SQL (even with the XML data store) and WCF REST hosting | documented gap | composite-c1 | – |
 | [F121](#f121) | Types .NET added (`System.Collections.Generic.KeyValuePair`) make the app's own type ambiguous (`CS0104`) | guide gap | composite-c1 | [#136](https://github.com/xforcore/webForCore/issues/136) |
 | [F123](#f123) | A Web Site Project has no `.csproj`; the guide's template compiles its `CodeFile=` code (CS0103) | guide gap | rock-rms (assessed only) | [#131](https://github.com/xforcore/webForCore/issues/131) |
+| [F130](#f130) | `BuildManager.GetType(name, throwOnError: false)` throws `FileNotFoundException` for a missing assembly (.NET Framework returns `null`): ClientDependency and DNN fail at start | webForCore bug | dnn-platform-9 | [#137](https://github.com/xforcore/webForCore/issues/137) |
+| [F131](#f131) | `Thread.ResetAbort()` after `catch (ThreadAbortException)` throws `PlatformNotSupportedException`; the guide doesn't say to remove it | guide gap | dnn-platform-9 | [#143](https://github.com/xforcore/webForCore/issues/143) |
+| [F132](#f132) | An application's design-time classes (`System.Web.UI.Design.ExpressionEditor`, System.Design) don't compile | guide gap | dnn-platform-9 | [#144](https://github.com/xforcore/webForCore/issues/144) |
+| [F133](#f133) | Linux: DNN builds every physical path with `\` (`ApplicationMapPath` is `BaseDirectory.Replace("/", "\\")`), and QuickIO.NET is Win32 | app/environment | dnn-platform-9 | – |
 ---
 
 ## F1
@@ -1779,3 +1787,78 @@ assessing rock-rms (rejected for its licence, so not migrated).
 - **Suggested fix:** a "Web Site Project" paragraph in both guides: create the project in the site folder compiling only
   `Program.cs`; turn `Bin\*.dll.refresh` files into `PackageReference`s and the solution's copy-to-`Bin` projects into
   `ProjectReference`s (their copy targets go: the assemblies belong in `bin_dotnet/`); remove the old `Bin` DLLs.
+
+## F130
+
+**`BuildManager.GetType(name, throwOnError: false)` throws `FileNotFoundException` for an assembly that isn't there;
+.NET Framework returns `null`.** webForCore bug. Raised as [#137](https://github.com/xforcore/webForCore/issues/137).
+Found on 0.8.0 (Linux; the code is platform-independent), with DNN Platform 9.13.10.
+
+- **Apps:** dnn-platform-9: every request is a 500 in `HttpApplication.InitModules`, the static files included, so the
+  install can't start (7/11, the forbidden paths only). Twice before DNN's first page:
+  - ClientDependency 1.9.10 (`Dnn.ClientDependency`; Umbraco ships the same library): `ClientDependencyModule.Init`
+    loads its default filters with `BuildManager.GetType(type, false, true)`, one of them
+    `ClientDependency.Core.Mvc.MvcFilter, ClientDependency.Core.Mvc`, which DNN doesn't deploy;
+  - DNN's `ProviderInstaller.InstallProvider` (`Library/ComponentModel/ProviderInstaller.cs:86`), for every provider
+    in web.config, skipping a null type: DNN's default web.config names `DNNConnect.CKEditorProvider` (an optional
+    package) and the ADSI provider of `DotNetNuke.Authentication.ActiveDirectory` (not part of the platform).
+- **Error:** `FileNotFoundException: Could not load file or assembly 'ClientDependency.Core.Mvc, Culture=neutral,
+  PublicKeyToken=null'` at `AssemblyLoadContext.LoadFromAssemblyName` ← `BuildManager.<>c__DisplayClass144_0.<GetType>b__0`
+  ← `Type.GetType(String, Func, Func, Boolean, Boolean)` ← `BuildManager.GetType(String, Boolean, Boolean)`.
+- **Cause:** `BuildManager.GetType` passes `alc.LoadFromAssemblyName` as `Type.GetType`'s assembly resolver.
+  `LoadFromAssemblyName` throws when the assembly isn't found, and `Type.GetType` lets a resolver's exception through
+  whatever `throwOnError` is; a resolver should return `null` for "not found".
+- **Repro:** a page `<%= System.Web.Compilation.BuildManager.GetType("Missing.Type, Missing.Assembly", false) == null ? "null" : "found" %>`:
+  `null` on IIS, `FileNotFoundException` on webForCore.
+- **Suggested fix:** a resolver that returns `null` for `FileNotFoundException` (so `Type.GetType` returns `null`, or
+  throws its own exception when `throwOnError` is true); `FileLoadException` and `BadImageFormatException` still throw.
+
+## F131
+
+**`Thread.ResetAbort()` after `catch (ThreadAbortException)` throws `PlatformNotSupportedException`; the guide lists it
+but doesn't say to remove it.** Guide gap. Raised as [#143](https://github.com/xforcore/webForCore/issues/143). Found on
+0.8.0, with DNN Platform 9.13.10.
+
+- **Apps:** dnn-platform-9, in five places: its URL rewriter's top-level `catch` (`Library/Entities/Urls/AdvancedUrlRewriter.cs:2615`,
+  every request it redirects), `Exceptions.ThreadAbortCheck` (`Library/Services/Exceptions/Exceptions.cs:422`), module
+  loading (`Library/UI/Modules/ModuleHost.cs:345`), `ProfileModuleUserControlBase` and the module settings page. Found by
+  the assessment; not reached at run time (F130 comes first), as .NET throws on every `ResetAbort` call.
+- **Error:** `PlatformNotSupportedException: Thread abort is not supported on this platform.` from inside the `catch`, in
+  place of the `ThreadAbortException` the code swallowed.
+- **Gap:** AGENT-MIGRATION.md's blocker table says only "Different on .NET", NAMESPACES.md that such code "behaves
+  differently". On webForCore the call can go: the `ThreadAbortException` of `Response.End`/`Redirect(url, true)` is an
+  ordinary instance, not re-raised at the end of the `catch`. The overlay removes the five calls.
+- **Suggested fix:** a line in Phase 2 step 7 and MIGRATING.md section 6 ("remove `Thread.ResetAbort()` after
+  `catch (ThreadAbortException)`"), and the symptom in the Phase 3 table.
+
+## F132
+
+**An application's design-time classes don't compile: `System.Web.UI.Design.ExpressionEditor` and the rest of
+System.Design aren't on .NET.** Guide gap. Raised as [#144](https://github.com/xforcore/webForCore/issues/144). Found on
+0.8.0, with DNN Platform 9.13.10.
+
+- **Apps:** dnn-platform-9: `Library/Services/Localization/LocalizationExpressionBuilderEditor.cs`, the Visual Studio
+  editor of its `dnnLoc:` expression builder, derives from `ExpressionEditor`: `CS0234: The type or namespace name
+  'Design' does not exist in the namespace 'System.Web.UI'`. The overlay takes it out of the build;
+  `[ExpressionEditor("...")]` names it by string, so nothing at run time changes.
+- **Gap:** MIGRATING.md mentions System.Design only as a `<compilation><assemblies>` entry (F37). Control designers
+  (`ControlDesigner`, `DataSourceDesigner`) and System.Design's editors in app libraries are the same case.
+- **Suggested fix:** a line in MIGRATING.md section 2 or 6: remove the design-time classes from the build; attributes
+  that name them by string keep working.
+
+## F133
+
+**Linux: DNN builds every physical path with `\`, and its file utilities use QuickIO.NET's Win32 calls.**
+App/environment. Found on 0.8.0 (Linux), with DNN Platform 9.13.10, past F130 (with F130 worked around locally, not in
+the overlay).
+
+- **Apps:** dnn-platform-9. `Globals.ApplicationMapPath` is `AppDomain.CurrentDomain.BaseDirectory.Replace("/", "\\")`
+  (`Library/Application/ApplicationStatusInfo.cs`, with `HttpRuntime.AppDomainAppPath` in the overlay for F3), and
+  `HostMapPath` (`@"Portals\_default\"`), `InstallMapPath` (`"\\Install\\"`), the providers' `providerPath="~\..."`, the
+  skin and portal paths add `\`-separated parts to it: about 280 such literals in the projects the site builds.
+  `Install.aspx?mode=install` wrote a `web.config` into a folder named `\home\...\Website\Config\` inside the site, and
+  the error page then failed in `Config.Load` (`SecurityException: Unable to load config for "web.config"`).
+  `FileSystemUtils` aliases `Directory`, `DirectoryInfo` and `File` to QuickIO.NET 2.6.2's (`SchwabenCode.QuickIO`,
+  net40, P/Invoke to `kernel32`).
+- **Why it isn't webForCore's:** `\` isn't a separator on Linux (MIGRATING.md section 6). Portable paths would mean
+  rewriting DNN's file layer, so the app runs on Windows only (where it stops at F130 for now).
