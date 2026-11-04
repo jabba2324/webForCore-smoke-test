@@ -1,0 +1,47 @@
+# OData Web API samples: composite keys (Microsoft.AspNet.OData on Web API 2, IIS-hosted). Fields are described in README.md.
+
+name = "OData Web API samples: composite key"
+repo = "https://github.com/OData/ODataSamples"
+ref = "2e60476b62d411fbac8265b4e23a5d8f414676c7"
+site = "WebApiClassic/ODataCompositeKeySample/ODataCompositeKeySample.AspNet"
+project = "WebApiClassic/ODataCompositeKeySample/ODataCompositeKeySample.AspNet/ODataCompositeKeySample.AspNet.csproj"
+kinds = ["webapi"]
+licence = "MIT"
+status = "blocked"
+notes = "webForCore 0.7.0: builds; blocked: Microsoft.AspNet.OData 7.5.18 needs System.Data.Linq (F68). 8/15 on Linux."
+
+# The first request compiles the site, so it gets 120 s.
+# The service document.
+[[probes]]
+path = "/"
+contains = "\"name\":\"People\""
+
+[[probes]]
+path = "/$metadata"
+contains = "<Key><PropertyRef Name=\"FirstName\" /><PropertyRef Name=\"LastName\" /></Key>"
+
+[[probes]]
+path = "/People"
+contains = "\"FirstName\":\"Lewis\",\"LastName\":\"James\",\"Age\":6"
+
+# A composite key.
+[[probes]]
+path = "/People(FirstName='Kate',LastName='Jones')"
+contains = "\"Age\":5"
+
+[[probes]]
+path = "/People(FirstName='Kate',LastName='Nobody')"
+status = 404
+
+# Query options: $filter, $orderby, $select, $count.
+[[probes]]
+path = "/People?$filter=Age%20gt%205&$orderby=Age%20desc&$select=LastName"
+contains = "\"value\":[{\"LastName\":\"Park\"},{\"LastName\":\"James\"}]"
+
+[[probes]]
+path = "/People/$count"
+contains = "3"
+
+[[probes]]
+path = "/People?$format=application/xml"
+status = 406
