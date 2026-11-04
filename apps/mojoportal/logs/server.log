@@ -1,478 +1,618 @@
 info: WebFormsForCore.Host.WorkerPool[0]
-      Started worker 1 (process 663068) for $WFC_CHECKOUTS/mojoportal/Web/bin_dotnet/mojoPortal.Web.dll: the host started.
+      Started worker 1 (process 4188) for <repo>/apps/mojoportal/src/Web/bin_dotnet/mojoPortal.Web.dll: the host started.
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://127.0.0.1:55639
+      Now listening on: http://127.0.0.1:46539
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: $WFC_CHECKOUTS/mojoportal/Web
+      Content root path: <repo>/apps/mojoportal/src/Web
 info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
       User profile is available. Using '~/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[58]
+      Creating key {9a9731c6-8b18-4d77-9aa3-701247e71ed4} with creation date 2026-11-04 20:23:09Z, activation date 2026-11-04 20:23:09Z, and expiration date 2027-02-02 20:23:09Z.
+warn: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[35]
+      No XML encryptor configured. Key {9a9731c6-8b18-4d77-9aa3-701247e71ed4} may be persisted to storage in unencrypted form.
+info: Microsoft.AspNetCore.DataProtection.Repositories.FileSystemXmlRepository[39]
+      Writing data to file '~/.aspnet/DataProtection-Keys/key-9a9731c6-8b18-4d77-9aa3-701247e71ed4.xml'.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/ - - -
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application 3f133219 in process 663068 (worker 1 of webforcore-host).
+      Started application ebf9030a in process 4188 (worker 1 of webforcore-host).
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://unix:/tmp/webforcore-ScYdyw/worker-1.sock
+      Now listening on: http://unix:/tmp/webforcore-lUkBLy/worker-1.sock
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 1 (process 663068) is serving (3.5 s after it started).
+      Worker 1 (process 4188) is serving (5.3 s after it started).
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: $WFC_CHECKOUTS/mojoportal/Web
+      Content root path: <repo>/apps/mojoportal/src/Web
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/ - - -
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application 3f133219 is shutting down (BinDirChangeOrDirectoryRename).
+      Application ebf9030a is shutting down (BinDirChangeOrDirectoryRename).
 info: WebFormsForCore.Host.WorkerPool[0]
-      Recycling worker 1 (process 663068): BinDirChangeOrDirectoryRename.
+      Recycling worker 1 (process 4188): BinDirChangeOrDirectoryRename.
 info: WebFormsForCore.Host.WorkerPool[0]
-      Started worker 2 (process 663231) for $WFC_CHECKOUTS/mojoportal/Web/bin_dotnet/mojoPortal.Web.dll: worker 1 recycled.
+      Started worker 2 (process 4286) for <repo>/apps/mojoportal/src/Web/bin_dotnet/mojoPortal.Web.dll: worker 1 recycled.
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/Default.aspx - 500 5841 text/html;+charset=utf-8 214.5362ms
-info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
-      Received HTTP/1.1 response 500.
-info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/Setup/Default.aspx - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/ - 500 5841 text/html;+charset=utf-8 3414.0983ms
 info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
       User profile is available. Using '~/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 302.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/Default.aspx - 302 - text/html;+charset=utf-8 1682.6828ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/ - 302 - text/html;+charset=utf-8 6628.4099ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/Setup/Default.aspx - - -
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 1 (process 663068) exited (0).
+      Worker 1 (process 4188) exited (0).
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application 3f133219 in process 663231 (worker 2 of webforcore-host).
-info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://unix:/tmp/webforcore-ScYdyw/worker-2.sock
+      Application ebf9030a is shutting down (BinDirChangeOrDirectoryRename).
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 2 (process 663231) is serving (2.5 s after it started).
+      Recycling worker 2 (process 4286): BinDirChangeOrDirectoryRename.
+info: WebFormsForCore.Host.WorkerPool[0]
+      Started worker 3 (process 4323) for <repo>/apps/mojoportal/src/Web/bin_dotnet/mojoPortal.Web.dll: worker 2 recycled.
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application ebf9030a in process 4286 (worker 2 of webforcore-host).
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/webforcore-lUkBLy/worker-2.sock
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: <repo>/apps/mojoportal/src/Web
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 2 (process 4286) exited (0).
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '~/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application ebf9030a in process 4323 (worker 3 of webforcore-host).
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/webforcore-lUkBLy/worker-3.sock
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 3 (process 4323) is serving (3.5 s after it started).
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/Setup/Default.aspx HTTP/1.1 RequestVersionExact 
 info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: $WFC_CHECKOUTS/mojoportal/Web
+      Content root path: <repo>/apps/mojoportal/src/Web
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/Setup/Default.aspx - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/Setup/Default.aspx - - -
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application 3f133219 is shutting down (BinDirChangeOrDirectoryRename).
+      Application ebf9030a is shutting down (BinDirChangeOrDirectoryRename).
 info: WebFormsForCore.Host.WorkerPool[0]
-      Recycling worker 2 (process 663231): BinDirChangeOrDirectoryRename.
+      Recycling worker 3 (process 4323): BinDirChangeOrDirectoryRename.
 info: WebFormsForCore.Host.WorkerPool[0]
-      Started worker 3 (process 663391) for $WFC_CHECKOUTS/mojoportal/Web/bin_dotnet/mojoPortal.Web.dll: worker 2 recycled.
+      Started worker 4 (process 4390) for <repo>/apps/mojoportal/src/Web/bin_dotnet/mojoPortal.Web.dll: worker 3 recycled.
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
-info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
-      Received HTTP/1.1 response 500.
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/Setup/Default.aspx - 500 5841 text/html;+charset=utf-8 2662.1897ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/ - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/Setup/Default.aspx - 500 5841 text/html;+charset=utf-8 218.2137ms
 info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
       User profile is available. Using '~/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
-info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 2 (process 663231) exited (0).
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application 3f133219 in process 663391 (worker 3 of webforcore-host).
-info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://unix:/tmp/webforcore-ScYdyw/worker-3.sock
+      Application ebf9030a is shutting down (BinDirChangeOrDirectoryRename).
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 3 (process 663391) is serving (2.5 s after it started).
+      Recycling worker 4 (process 4390): BinDirChangeOrDirectoryRename.
+info: WebFormsForCore.Host.WorkerPool[0]
+      Started worker 5 (process 4452) for <repo>/apps/mojoportal/src/Web/bin_dotnet/mojoPortal.Web.dll: worker 4 recycled.
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application ebf9030a in process 4390 (worker 4 of webforcore-host).
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/webforcore-lUkBLy/worker-4.sock
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: <repo>/apps/mojoportal/src/Web
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 4 (process 4390) exited (0).
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '~/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application ebf9030a in process 4452 (worker 5 of webforcore-host).
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/webforcore-lUkBLy/worker-5.sock
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 5 (process 4452) is serving (5.0 s after it started).
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: <repo>/apps/mojoportal/src/Web
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Application ebf9030a is shutting down (BinDirChangeOrDirectoryRename).
+info: WebFormsForCore.Host.WorkerPool[0]
+      Recycling worker 5 (process 4452): BinDirChangeOrDirectoryRename.
+info: WebFormsForCore.Host.WorkerPool[0]
+      Started worker 6 (process 4523) for <repo>/apps/mojoportal/src/Web/bin_dotnet/mojoPortal.Web.dll: worker 5 recycled.
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 5 (process 4452) exited (0).
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '~/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/Setup/Default.aspx - 200 - text/html;+charset=utf-8 20843.4983ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/Setup/Default.aspx - 200 - text/html;+charset=utf-8 14340.7047ms
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 3 (process 4323) exited (0).
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Application ebf9030a is shutting down (BinDirChangeOrDirectoryRename).
+info: WebFormsForCore.Host.WorkerPool[0]
+      Recycling worker 6 (process 4523): BinDirChangeOrDirectoryRename.
+info: WebFormsForCore.Host.WorkerPool[0]
+      Started worker 7 (process 4581) for <repo>/apps/mojoportal/src/Web/bin_dotnet/mojoPortal.Web.dll: worker 6 recycled.
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application ebf9030a in process 4523 (worker 6 of webforcore-host).
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/webforcore-lUkBLy/worker-6.sock
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: <repo>/apps/mojoportal/src/Web
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 6 (process 4523) exited (0).
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '~/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application ebf9030a in process 4581 (worker 7 of webforcore-host).
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/webforcore-lUkBLy/worker-7.sock
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 7 (process 4581) is serving (3.5 s after it started).
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: <repo>/apps/mojoportal/src/Web
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
-info: Microsoft.Hosting.Lifetime[0]
-      Content root path: $WFC_CHECKOUTS/mojoportal/Web
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/ - - -
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application 3f133219 is shutting down (BinDirChangeOrDirectoryRename).
+      Application ebf9030a is shutting down (BinDirChangeOrDirectoryRename).
 info: WebFormsForCore.Host.WorkerPool[0]
-      Recycling worker 3 (process 663391): BinDirChangeOrDirectoryRename.
+      Recycling worker 7 (process 4581): BinDirChangeOrDirectoryRename.
 info: WebFormsForCore.Host.WorkerPool[0]
-      Started worker 4 (process 663479) for $WFC_CHECKOUTS/mojoportal/Web/bin_dotnet/mojoPortal.Web.dll: worker 3 recycled.
+      Started worker 8 (process 4645) for <repo>/apps/mojoportal/src/Web/bin_dotnet/mojoPortal.Web.dll: worker 7 recycled.
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
-info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
-      Received HTTP/1.1 response 500.
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/ - 500 5841 text/html;+charset=utf-8 2590.4742ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/Secure/Login.aspx - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/Default.aspx - 500 5841 text/html;+charset=utf-8 184.8176ms
 info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
       User profile is available. Using '~/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
-info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 3 (process 663391) exited (0).
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application 3f133219 in process 663479 (worker 4 of webforcore-host).
+      Started application ebf9030a in process 4645 (worker 8 of webforcore-host).
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://unix:/tmp/webforcore-ScYdyw/worker-4.sock
+      Now listening on: http://unix:/tmp/webforcore-lUkBLy/worker-8.sock
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 4 (process 663479) is serving (2.5 s after it started).
+      Worker 8 (process 4645) is serving (4.0 s after it started).
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: <repo>/apps/mojoportal/src/Web
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/ - 200 14032 text/html;+charset=utf-8 15671.1644ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/Secure/Login.aspx - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/Secure/Login.aspx HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/Default.aspx - 200 14032 text/html;+charset=utf-8 11307.8488ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/Secure/Login.aspx - - -
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Application ebf9030a is shutting down (BinDirChangeOrDirectoryRename).
+info: WebFormsForCore.Host.WorkerPool[0]
+      Recycling worker 8 (process 4645): BinDirChangeOrDirectoryRename.
+info: WebFormsForCore.Host.WorkerPool[0]
+      Started worker 9 (process 4772) for <repo>/apps/mojoportal/src/Web/bin_dotnet/mojoPortal.Web.dll: worker 8 recycled.
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 7 (process 4581) exited (0).
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '~/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application ebf9030a in process 4772 (worker 9 of webforcore-host).
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/webforcore-lUkBLy/worker-9.sock
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 9 (process 4772) is serving (3.8 s after it started).
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: $WFC_CHECKOUTS/mojoportal/Web
-info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/Secure/Login.aspx - - -
-info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application 3f133219 is shutting down (BinDirChangeOrDirectoryRename).
-info: WebFormsForCore.Host.WorkerPool[0]
-      Recycling worker 4 (process 663479): BinDirChangeOrDirectoryRename.
-info: WebFormsForCore.Host.WorkerPool[0]
-      Started worker 5 (process 663605) for $WFC_CHECKOUTS/mojoportal/Web/bin_dotnet/mojoPortal.Web.dll: worker 4 recycled.
-info: Microsoft.Hosting.Lifetime[0]
-      Application is shutting down...
+      Content root path: <repo>/apps/mojoportal/src/Web
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
-      Received HTTP/1.1 response 500.
+      Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/Secure/Login.aspx - 500 5841 text/html;+charset=utf-8 2683.6292ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/Secure/Login.aspx - 200 14145 text/html;+charset=utf-8 9861.9997ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/Secure/Register.aspx - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/Secure/Login.aspx - 500 5841 text/html;+charset=utf-8 213.4142ms
-info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
-      User profile is available. Using '~/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
-info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 4 (process 663479) exited (0).
-info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application 3f133219 in process 663605 (worker 5 of webforcore-host).
-info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://unix:/tmp/webforcore-ScYdyw/worker-5.sock
-info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 5 (process 663605) is serving (2.4 s after it started).
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/Secure/Register.aspx - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/Secure/Register.aspx HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/Secure/Login.aspx - 200 14145 text/html;+charset=utf-8 9838.1775ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/Secure/Register.aspx - - -
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 8 (process 4645) exited (0).
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Application ebf9030a is shutting down (BinDirChangeOrDirectoryRename).
+info: WebFormsForCore.Host.WorkerPool[0]
+      Recycling worker 9 (process 4772): BinDirChangeOrDirectoryRename.
+info: WebFormsForCore.Host.WorkerPool[0]
+      Started worker 10 (process 4895) for <repo>/apps/mojoportal/src/Web/bin_dotnet/mojoPortal.Web.dll: worker 9 recycled.
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '~/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application ebf9030a in process 4895 (worker 10 of webforcore-host).
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/webforcore-lUkBLy/worker-10.sock
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 10 (process 4895) is serving (4.4 s after it started).
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: $WFC_CHECKOUTS/mojoportal/Web
-info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/Secure/Register.aspx - - -
-info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application 3f133219 is shutting down (BinDirChangeOrDirectoryRename).
-info: WebFormsForCore.Host.WorkerPool[0]
-      Recycling worker 5 (process 663605): BinDirChangeOrDirectoryRename.
-info: WebFormsForCore.Host.WorkerPool[0]
-      Started worker 6 (process 663697) for $WFC_CHECKOUTS/mojoportal/Web/bin_dotnet/mojoPortal.Web.dll: worker 5 recycled.
-info: Microsoft.Hosting.Lifetime[0]
-      Application is shutting down...
+      Content root path: <repo>/apps/mojoportal/src/Web
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
-      Received HTTP/1.1 response 500.
+      Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/Secure/Register.aspx - 500 5841 text/html;+charset=utf-8 2583.9295ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/Secure/Register.aspx - 200 30773 text/html;+charset=utf-8 10536.4786ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/FileManager - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/Secure/Register.aspx - 500 5841 text/html;+charset=utf-8 224.2305ms
-info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
-      User profile is available. Using '~/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
-info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 5 (process 663605) exited (0).
-info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application 3f133219 in process 663697 (worker 6 of webforcore-host).
-info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://unix:/tmp/webforcore-ScYdyw/worker-6.sock
-info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 6 (process 663697) is serving (2.6 s after it started).
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/FileManager - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/FileManager HTTP/1.1 RequestVersionExact 
-info: Microsoft.Hosting.Lifetime[0]
-      Application started. Press Ctrl+C to shut down.
-info: Microsoft.Hosting.Lifetime[0]
-      Hosting environment: Production
-info: Microsoft.Hosting.Lifetime[0]
-      Content root path: $WFC_CHECKOUTS/mojoportal/Web
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/Secure/Register.aspx - 200 30773 text/html;+charset=utf-8 10506.9983ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/FileManager - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/FileManager - - -
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application 3f133219 is shutting down (BinDirChangeOrDirectoryRename).
+      Application ebf9030a is shutting down (BinDirChangeOrDirectoryRename).
 info: WebFormsForCore.Host.WorkerPool[0]
-      Recycling worker 6 (process 663697): BinDirChangeOrDirectoryRename.
+      Recycling worker 10 (process 4895): BinDirChangeOrDirectoryRename.
 info: WebFormsForCore.Host.WorkerPool[0]
-      Started worker 7 (process 663842) for $WFC_CHECKOUTS/mojoportal/Web/bin_dotnet/mojoPortal.Web.dll: worker 6 recycled.
+      Started worker 11 (process 5015) for <repo>/apps/mojoportal/src/Web/bin_dotnet/mojoPortal.Web.dll: worker 10 recycled.
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
-info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
-      Received HTTP/1.1 response 500.
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/FileManager - 500 5841 text/html;+charset=utf-8 2679.1244ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/api/UserProfile/Property/FirstName - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/FileManager - 500 5841 text/html;+charset=utf-8 177.9666ms
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 9 (process 4772) exited (0).
 info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
       User profile is available. Using '~/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
-info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 6 (process 663697) exited (0).
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application 3f133219 in process 663842 (worker 7 of webforcore-host).
+      Started application ebf9030a in process 5015 (worker 11 of webforcore-host).
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://unix:/tmp/webforcore-ScYdyw/worker-7.sock
+      Now listening on: http://unix:/tmp/webforcore-lUkBLy/worker-11.sock
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 7 (process 663842) is serving (2.6 s after it started).
+      Worker 11 (process 5015) is serving (4.1 s after it started).
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: $WFC_CHECKOUTS/mojoportal/Web
+      Content root path: <repo>/apps/mojoportal/src/Web
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/FileManager - 200 2682 text/html;+charset=utf-8 5417.4105ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/api/UserProfile/Property/FirstName - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/api/UserProfile/Property/FirstName HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/FileManager - 200 2682 text/html;+charset=utf-8 5385.5574ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/api/UserProfile/Property/FirstName - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/api/UserProfile/Property/FirstName - - -
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application 3f133219 is shutting down (BinDirChangeOrDirectoryRename).
+      Application ebf9030a is shutting down (BinDirChangeOrDirectoryRename).
 info: WebFormsForCore.Host.WorkerPool[0]
-      Recycling worker 7 (process 663842): BinDirChangeOrDirectoryRename.
+      Recycling worker 11 (process 5015): BinDirChangeOrDirectoryRename.
 info: WebFormsForCore.Host.WorkerPool[0]
-      Started worker 8 (process 663953) for $WFC_CHECKOUTS/mojoportal/Web/bin_dotnet/mojoPortal.Web.dll: worker 7 recycled.
+      Started worker 12 (process 5089) for <repo>/apps/mojoportal/src/Web/bin_dotnet/mojoPortal.Web.dll: worker 11 recycled.
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
-info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
-      Received HTTP/1.1 response 500.
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/api/UserProfile/Property/FirstName - 500 5841 text/html;+charset=utf-8 2754.5219ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/csshandler.ashx?s=1&skin=framework - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/api/UserProfile/Property/FirstName - 500 5841 text/html;+charset=utf-8 210.2843ms
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 10 (process 4895) exited (0).
 info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
       User profile is available. Using '~/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 401.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/api/UserProfile/Property/FirstName - 401 61 application/json;+charset=utf-8 1896.8700ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/csshandler.ashx?s=1&skin=framework - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/api/UserProfile/Property/FirstName - 401 61 application/json;+charset=utf-8 1877.1780ms
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 7 (process 663842) exited (0).
+      Worker 11 (process 5015) exited (0).
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application 3f133219 in process 663953 (worker 8 of webforcore-host).
-info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://unix:/tmp/webforcore-ScYdyw/worker-8.sock
+      Application ebf9030a is shutting down (BinDirChangeOrDirectoryRename).
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 8 (process 663953) is serving (2.5 s after it started).
+      Recycling worker 12 (process 5089): BinDirChangeOrDirectoryRename.
+info: WebFormsForCore.Host.WorkerPool[0]
+      Started worker 13 (process 5152) for <repo>/apps/mojoportal/src/Web/bin_dotnet/mojoPortal.Web.dll: worker 12 recycled.
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application ebf9030a in process 5089 (worker 12 of webforcore-host).
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/webforcore-lUkBLy/worker-12.sock
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: <repo>/apps/mojoportal/src/Web
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 12 (process 5089) exited (0).
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '~/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application ebf9030a in process 5152 (worker 13 of webforcore-host).
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/webforcore-lUkBLy/worker-13.sock
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 13 (process 5152) is serving (3.5 s after it started).
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: <repo>/apps/mojoportal/src/Web
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/csshandler.ashx?s=1&skin=framework HTTP/1.1 RequestVersionExact 
-info: Microsoft.Hosting.Lifetime[0]
-      Application started. Press Ctrl+C to shut down.
-info: Microsoft.Hosting.Lifetime[0]
-      Hosting environment: Production
-info: Microsoft.Hosting.Lifetime[0]
-      Content root path: $WFC_CHECKOUTS/mojoportal/Web
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/csshandler.ashx?s=1&skin=framework - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/csshandler.ashx?s=1&skin=framework - - -
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application 3f133219 is shutting down (BinDirChangeOrDirectoryRename).
+      Application ebf9030a is shutting down (BinDirChangeOrDirectoryRename).
 info: WebFormsForCore.Host.WorkerPool[0]
-      Recycling worker 8 (process 663953): BinDirChangeOrDirectoryRename.
+      Recycling worker 13 (process 5152): BinDirChangeOrDirectoryRename.
 info: WebFormsForCore.Host.WorkerPool[0]
-      Started worker 9 (process 664096) for $WFC_CHECKOUTS/mojoportal/Web/bin_dotnet/mojoPortal.Web.dll: worker 8 recycled.
+      Started worker 14 (process 5222) for <repo>/apps/mojoportal/src/Web/bin_dotnet/mojoPortal.Web.dll: worker 13 recycled.
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
-info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
-      Received HTTP/1.1 response 500.
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/csshandler.ashx?s=1&skin=framework - 500 5841 text/html;+charset=utf-8 2658.3660ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/SearchEngineInfo.ashx - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/csshandler.ashx?s=1&skin=framework - 500 5841 text/html;+charset=utf-8 217.5957ms
 info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
       User profile is available. Using '~/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/csshandler.ashx?s=1&skin=framework - 200 455518 text/css 7365.8137ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/SearchEngineInfo.ashx - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/csshandler.ashx?s=1&skin=framework - 200 455518 text/css 1622.8243ms
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 8 (process 663953) exited (0).
+      Worker 13 (process 5152) exited (0).
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application 3f133219 in process 664096 (worker 9 of webforcore-host).
-info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://unix:/tmp/webforcore-ScYdyw/worker-9.sock
+      Application ebf9030a is shutting down (BinDirChangeOrDirectoryRename).
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 9 (process 664096) is serving (2.5 s after it started).
+      Recycling worker 14 (process 5222): BinDirChangeOrDirectoryRename.
+info: WebFormsForCore.Host.WorkerPool[0]
+      Started worker 15 (process 5283) for <repo>/apps/mojoportal/src/Web/bin_dotnet/mojoPortal.Web.dll: worker 14 recycled.
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application ebf9030a in process 5222 (worker 14 of webforcore-host).
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/webforcore-lUkBLy/worker-14.sock
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: $WFC_CHECKOUTS/mojoportal/Web
+      Content root path: <repo>/apps/mojoportal/src/Web
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 14 (process 5222) exited (0).
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '~/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application ebf9030a in process 5283 (worker 15 of webforcore-host).
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/webforcore-lUkBLy/worker-15.sock
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 15 (process 5283) is serving (3.5 s after it started).
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: <repo>/apps/mojoportal/src/Web
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/SearchEngineInfo.ashx HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/SearchEngineInfo.ashx - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/SearchEngineInfo.ashx - - -
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application 3f133219 is shutting down (BinDirChangeOrDirectoryRename).
+      Application ebf9030a is shutting down (BinDirChangeOrDirectoryRename).
 info: WebFormsForCore.Host.WorkerPool[0]
-      Recycling worker 9 (process 664096): BinDirChangeOrDirectoryRename.
+      Recycling worker 15 (process 5283): BinDirChangeOrDirectoryRename.
 info: WebFormsForCore.Host.WorkerPool[0]
-      Started worker 10 (process 664188) for $WFC_CHECKOUTS/mojoportal/Web/bin_dotnet/mojoPortal.Web.dll: worker 9 recycled.
+      Started worker 16 (process 5326) for <repo>/apps/mojoportal/src/Web/bin_dotnet/mojoPortal.Web.dll: worker 15 recycled.
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
-info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
-      Received HTTP/1.1 response 500.
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/SearchEngineInfo.ashx - 500 5841 text/html;+charset=utf-8 2611.2895ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/Data/Sites/1/skins/framework/img/favicons/favicon-16x16.png - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/SearchEngineInfo.ashx - 500 5841 text/html;+charset=utf-8 180.7254ms
 info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
       User profile is available. Using '~/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
-info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 9 (process 664096) exited (0).
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application 3f133219 in process 664188 (worker 10 of webforcore-host).
+      Started application ebf9030a in process 5326 (worker 16 of webforcore-host).
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://unix:/tmp/webforcore-ScYdyw/worker-10.sock
+      Now listening on: http://unix:/tmp/webforcore-lUkBLy/worker-16.sock
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 10 (process 664188) is serving (2.6 s after it started).
+      Worker 16 (process 5326) is serving (4.9 s after it started).
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: <repo>/apps/mojoportal/src/Web
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/SearchEngineInfo.ashx - 200 934 application/xml 15682.7527ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/Data/Sites/1/skins/framework/img/favicons/favicon-16x16.png - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/Data/Sites/1/skins/framework/img/favicons/favicon-16x16.png HTTP/1.1 RequestVersionExact 
-info: Microsoft.Hosting.Lifetime[0]
-      Application started. Press Ctrl+C to shut down.
-info: Microsoft.Hosting.Lifetime[0]
-      Hosting environment: Production
-info: Microsoft.Hosting.Lifetime[0]
-      Content root path: $WFC_CHECKOUTS/mojoportal/Web
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/SearchEngineInfo.ashx - 200 934 application/xml 8998.0724ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/Data/Sites/1/skins/framework/img/favicons/favicon-16x16.png - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/Data/Sites/1/skins/framework/img/favicons/favicon-16x16.png - - -
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 15 (process 5283) exited (0).
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application 3f133219 is shutting down (BinDirChangeOrDirectoryRename).
+      Application ebf9030a is shutting down (BinDirChangeOrDirectoryRename).
 info: WebFormsForCore.Host.WorkerPool[0]
-      Recycling worker 10 (process 664188): BinDirChangeOrDirectoryRename.
+      Recycling worker 16 (process 5326): BinDirChangeOrDirectoryRename.
 info: WebFormsForCore.Host.WorkerPool[0]
-      Started worker 11 (process 664444) for $WFC_CHECKOUTS/mojoportal/Web/bin_dotnet/mojoPortal.Web.dll: worker 10 recycled.
+      Started worker 17 (process 5438) for <repo>/apps/mojoportal/src/Web/bin_dotnet/mojoPortal.Web.dll: worker 16 recycled.
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
-info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
-      Received HTTP/1.1 response 500.
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/Data/Sites/1/skins/framework/img/favicons/favicon-16x16.png - 500 5841 text/html;+charset=utf-8 2705.7809ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/Data/Sites/1/skins/framework/img/favicons/favicon-16x16.png - 500 5841 text/html;+charset=utf-8 181.5026ms
 info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
       User profile is available. Using '~/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/Data/Sites/1/skins/framework/img/favicons/favicon-16x16.png - 200 589 image/png 883.6149ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/Data/Sites/1/skins/framework/img/favicons/favicon-16x16.png - 200 589 image/png 856.0615ms
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 10 (process 664188) exited (0).
+      Worker 16 (process 5326) exited (0).
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/web.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/web.config - - -
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application 3f133219 in process 664444 (worker 11 of webforcore-host).
+      Started application ebf9030a in process 5438 (worker 17 of webforcore-host).
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://unix:/tmp/webforcore-ScYdyw/worker-11.sock
+      Now listening on: http://unix:/tmp/webforcore-lUkBLy/worker-17.sock
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 11 (process 664444) is serving (2.6 s after it started).
-info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
-      Proxying to http://localhost/web.config HTTP/1.1 RequestVersionExact 
+      Worker 17 (process 5438) is serving (3.9 s after it started).
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: $WFC_CHECKOUTS/mojoportal/Web
+      Content root path: <repo>/apps/mojoportal/src/Web
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/web.config HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/web.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/web.config - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/web.config - 404 252 text/html 1078.3031ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/web.config - 404 252 text/html 1765.9934ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/App_Data/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/App_Data/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/App_Data/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/web.config - 404 252 text/html 35.0823ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/web.config - 404 252 text/html 43.1561ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/App_Data/ - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/App_Data/ - 404 252 text/html 1.7370ms
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/App_Data/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/App_Data/ - 404 252 text/html 3.6747ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/App_Data/ - 404 252 text/html 2.2427ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/App_Data/ - 404 252 text/html 4.3184ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/Global.asax.cs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/Global.asax.cs - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/Global.asax.cs HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/Global.asax.cs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/Global.asax.cs - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/Global.asax.cs - 404 215 text/html 1.1706ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/Global.asax.cs - 404 215 text/html 1.2371ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/Global.asax.cs - 404 215 text/html 2.3494ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/Global.asax.cs - 404 215 text/html 2.5381ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/obj/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/obj/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/obj/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/obj/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/obj/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/obj/ - 404 252 text/html 0.7515ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/obj/ - 404 252 text/html 0.8243ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/obj/ - 404 252 text/html 1.3032ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/obj/ - 404 252 text/html 1.2333ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/packages.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/packages.config - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/packages.config HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/packages.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/packages.config - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/packages.config - 404 215 text/html 0.6989ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/packages.config - 404 215 text/html 0.8200ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/packages.config - 404 215 text/html 1.2455ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/packages.config - 404 215 text/html 1.1716ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/bin_dotnet/mojoPortal.Web.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/bin_dotnet/mojoPortal.Web.dll - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/bin_dotnet/mojoPortal.Web.dll HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/bin_dotnet/mojoPortal.Web.dll - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/bin_dotnet/mojoPortal.Web.dll - 404 252 text/html 2.5180ms
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/bin_dotnet/mojoPortal.Web.dll - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/bin_dotnet/mojoPortal.Web.dll - 404 252 text/html 3.2183ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/bin_dotnet/mojoPortal.Web.dll - 404 252 text/html 3.0157ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/bin_dotnet/mojoPortal.Web.dll - 404 252 text/html 2.6181ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/bin_dotnet/webforcore-host/webforcore-host.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/bin_dotnet/webforcore-host/webforcore-host.dll - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/bin_dotnet/webforcore-host/webforcore-host.dll HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55639/bin_dotnet/webforcore-host/webforcore-host.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:46539/bin_dotnet/webforcore-host/webforcore-host.dll - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 0.9528ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 1.1982ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55639/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 1.4058ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:46539/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 1.6171ms
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
 info: WebFormsForCore.Hosting.WorkerProcess.WorkerLifetime[0]
-      Worker 11: the host closed its connection: stopping.
+      Worker 17: the host closed its connection: stopping.
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application 3f133219 is shutting down (HostingEnvironment).
+      Application ebf9030a is shutting down (HostingEnvironment).
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 11 (process 664444) exited (0).
+      Worker 17 (process 5438) exited (0).

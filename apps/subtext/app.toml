@@ -10,7 +10,7 @@ generated = ["src/Subtext.Web/App_Data/**"]
 kinds = ["webforms", "mvc"]
 licence = "MIT"
 status = "blocked"
-notes = "On webForCore 0.7.0 (.NET 10, under webforcore-host) it builds and the install wizard runs: 16/17 probes on Linux and Windows; the log-in page's DotNetOpenAuth fails (F44, app/environment). Uses webForCore-thirdparty 0.5.0's WebActivator."
+notes = "On webForCore 0.8.0 (.NET 10, under webforcore-host) it builds and the install wizard runs: 16/17 probes on Linux and Windows; the log-in page's DotNetOpenAuth fails (F44, app/environment). Uses webForCore-thirdparty 0.5.0's WebActivator."
 needs = ["mssql"]
 
 # The first request compiles the site, so it gets 120 s. The probes need the compose SQL Server with a "SubtextData"

@@ -2,27 +2,27 @@
   "id": "identityserver3-example",
   "stages": {
     "build": {
-      "at": "2026-11-04T19:39:54+00:00",
+      "at": "2026-11-04T20:22:19+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\identityserver3-example\\logs.windows\\build.log",
-      "seconds": 34,
+      "seconds": 42,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.7.0"
+      "webforcore": "packages 0.8.0"
     },
     "fetch": {
-      "at": "2026-11-04T19:39:20+00:00",
+      "at": "2026-11-04T20:21:37+00:00",
       "commit": "4c8103344e5d42a9ccd87f6f57921f3b1e5a4ce1",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-04T19:40:00+00:00",
+      "at": "2026-11-04T20:22:26+00:00",
       "checks": [
         {
           "expected_text": "\"authorization_endpoint\":\"",
-          "ms": 26,
+          "ms": 40,
           "ok": false,
           "path": "/core/.well-known/openid-configuration",
           "status": 500,
@@ -30,57 +30,57 @@
         },
         {
           "expected_text": "\"kty\":\"RSA\"",
-          "ms": 24,
+          "ms": 40,
           "ok": false,
           "path": "/core/.well-known/jwks",
           "status": 500,
           "title": "Could not load file or assembly 'System.IdentityModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. The system cannot find the file specified."
         },
         {
-          "ms": 18,
+          "ms": 32,
           "ok": false,
           "path": "/core/connect/authorize?client_id=implicitclient&response_type=id_token&scope=openid&redirect_uri=https%3A%2F%2Flocalhost%3A44304%2Faccount%2FsignInCallback&nonce=n1",
           "status": 500,
           "title": "Could not load file or assembly 'System.IdentityModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. The system cannot find the file specified."
         },
         {
-          "ms": 10,
+          "ms": 12,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 8,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 6,
+          "ms": 8,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 7,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 5,
+          "ms": 8,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 8,
           "ok": true,
           "path": "/bin_dotnet/ScottBrady91.IdentityServer3.Example.dll",
           "status": 404
         },
         {
-          "ms": 5,
+          "ms": 6,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404

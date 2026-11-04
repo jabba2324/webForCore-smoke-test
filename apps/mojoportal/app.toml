@@ -11,8 +11,8 @@ also_build = ["mojoPortal.Features.Data.MSSQL/mojoPortal.Features.Data.MSSQL.csp
 generated = ["Web/Data/HelpFiles/**", "Web/Data/test.config"]
 kinds = ["webforms", "mvc", "webapi"]
 licence = "EPL-1.0"
-status = "blocked"
-notes = "On webForCore 0.7.0 (.NET 10, under webforcore-host) it builds and setup still fails on Assembly.Load(\"App_GlobalResources\") (F40, webForCore#33), so every page goes to setup: 7/16 on Linux and Windows."
+status = "migrated"
+notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 16/16 on Linux and Windows. 0.8.0 fixed F40 (Assembly.Load(\"App_GlobalResources\"), webForCore#33), which sent every page to setup on 0.7.0 (7/16)."
 needs = ["mssql"]
 
 # The first request compiles the site, so it gets 120 s. The probes need the compose SQL Server with an empty

@@ -2,27 +2,27 @@
   "id": "jabbr",
   "stages": {
     "build": {
-      "at": "2026-11-03T12:46:10+00:00",
+      "at": "2026-11-04T20:30:29+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\jabbr\\logs.windows\\build.log",
-      "seconds": 11,
+      "seconds": 90,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.7.0"
+      "webforcore": "packages 0.8.0"
     },
     "fetch": {
-      "at": "2026-11-03T12:45:59+00:00",
+      "at": "2026-11-04T20:28:59+00:00",
       "commit": "eb5b4e2f1e5bdbb1ea91230f1884716170a6976d",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-03T12:46:19+00:00",
+      "at": "2026-11-04T20:31:03+00:00",
       "checks": [
         {
           "expected_text": "JabbR",
-          "ms": 124,
+          "ms": 137,
           "ok": false,
           "path": "/",
           "status": 500,
@@ -30,7 +30,7 @@
         },
         {
           "expected_text": "password",
-          "ms": 123,
+          "ms": 104,
           "ok": false,
           "path": "/account/login",
           "status": 500,
@@ -38,57 +38,57 @@
         },
         {
           "expected_text": "$.hubConnection",
-          "ms": 121,
+          "ms": 70,
           "ok": false,
           "path": "/signalr/hubs",
           "status": 500,
           "title": "Could not load file or assembly 'Nancy, Version=0.21.1.0, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified."
         },
         {
-          "ms": 139,
+          "ms": 71,
           "ok": false,
           "path": "/Content/images/big-logo.png",
           "status": 500,
           "title": "Could not load file or assembly 'Nancy, Version=0.21.1.0, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified."
         },
         {
-          "ms": 16,
+          "ms": 5,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 1,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 16,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/JabbR.dll",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404

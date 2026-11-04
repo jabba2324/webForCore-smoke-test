@@ -66,7 +66,7 @@ index efb378f..bfde99f 100644
 -    <Compile Include="Serializing.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- BinaryFormatter: .NET 10's throws; webForCore's port replaces it (docs/NAMESPACES.md). From the 0.1.0 release. -->
-+    <PackageReference Include="webForCore.Serialization.Formatters" Version="0.7.0" />
++    <PackageReference Include="webForCore.Serialization.Formatters" Version="0.8.0" />
    </ItemGroup>
 -  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 -</Project>
@@ -826,10 +826,10 @@ index 503535d..b5cca60 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set; then MVC, Web API and bundling. -->
-+    <PackageReference Include="webForCore" Version="0.7.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.7.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.7.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.7.0" />
++    <PackageReference Include="webForCore" Version="0.8.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.8.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.8.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.8.0" />
 +    <ProjectReference Include="../../eShopLegacy.Utilities/eShopLegacy.Utilities.csproj" />
 +  </ItemGroup>
 +

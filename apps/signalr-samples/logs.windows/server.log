@@ -1,7 +1,7 @@
 info: WebFormsForCore.Host.WorkerPool[0]
-      Started worker 1 (process 6536) for $WFC_CHECKOUTS\signalr-samples\samples\Microsoft.AspNet.SignalR.Samples\bin_dotnet\Microsoft.AspNet.SignalR.Samples.dll: the host started.
+      Started worker 1 (process 2584) for $WFC_CHECKOUTS\signalr-samples\samples\Microsoft.AspNet.SignalR.Samples\bin_dotnet\Microsoft.AspNet.SignalR.Samples.dll: the host started.
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://127.0.0.1:55222
+      Now listening on: http://127.0.0.1:50074
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
@@ -9,13 +9,13 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Content root path: $WFC_CHECKOUTS\signalr-samples\samples\Microsoft.AspNet.SignalR.Samples
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/ - - -
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application ff806d21 in process 6536 (worker 1 of webforcore-host).
+      Started application ff806d21 in process 2584 (worker 1 of webforcore-host).
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://unix:~\AppData\Local\Temp\webforcore-3qy2hb3x.eba\worker-1.sock
+      Now listening on: http://unix:~\AppData\Local\Temp\webforcore-1ow3swxj.toj\worker-1.sock
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 1 (process 6536) is serving (10.5 s after it started).
+      Worker 1 (process 2584) is serving (4.3 s after it started).
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
@@ -25,241 +25,241 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/ - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/Default.aspx - 200 6935 text/html;+charset=utf-8 1492.3938ms
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/Default.aspx - 200 6935 text/html;+charset=utf-8 1245.3185ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/ - 200 6935 text/html;+charset=utf-8 4926.4913ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/ - 200 6935 text/html;+charset=utf-8 10821.1039ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/Default.aspx - 200 6935 text/html;+charset=utf-8 4.1865ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/Default.aspx - 200 6935 text/html;+charset=utf-8 3.5318ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/ - 200 6935 text/html;+charset=utf-8 6.4798ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/ - 200 6935 text/html;+charset=utf-8 7.5674ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/Hubs/DemoHub/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/Hubs/DemoHub/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/Hubs/DemoHub/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/Hubs/DemoHub/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/Hubs/DemoHub/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/Hubs/DemoHub/Default.aspx - 200 4212 text/html;+charset=utf-8 321.6807ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/Hubs/DemoHub/Default.aspx - 200 4212 text/html;+charset=utf-8 289.6820ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/Hubs/DemoHub/ - 200 4212 text/html;+charset=utf-8 322.9669ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/Hubs/DemoHub/ - 200 4212 text/html;+charset=utf-8 291.3040ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/signalr/hubs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/signalr/hubs - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/signalr/hubs HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/signalr/hubs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/signalr/hubs - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/signalr/hubs - 200 - application/javascript;+charset=UTF-8 954.2041ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/signalr/hubs - 200 - application/javascript;+charset=UTF-8 235.2391ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/signalr/hubs - 200 - application/javascript;+charset=UTF-8 955.1969ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/signalr/hubs - 200 - application/javascript;+charset=UTF-8 236.9699ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/signalr/hubs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/signalr/hubs - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/signalr/hubs HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/signalr/hubs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/signalr/hubs - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/signalr/hubs - 200 - application/javascript;+charset=UTF-8 3.2381ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/signalr/hubs - 200 - application/javascript;+charset=UTF-8 1.8911ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/signalr/hubs - 200 - application/javascript;+charset=UTF-8 4.0755ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/signalr/hubs - 200 - application/javascript;+charset=UTF-8 2.7977ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/signalr/hubs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/signalr/hubs - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/signalr/hubs HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/signalr/hubs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/signalr/hubs - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/signalr/hubs - 200 - application/javascript;+charset=UTF-8 1.3527ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/signalr/hubs - 200 - application/javascript;+charset=UTF-8 1.1921ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/signalr/hubs - 200 - application/javascript;+charset=UTF-8 2.1683ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/signalr/hubs - 200 - application/javascript;+charset=UTF-8 1.8720ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/signalr/negotiate?clientProtocol=1.5&connectionData=%5B%7B%22name%22%3A%22demo%22%7D%5D - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/signalr/negotiate?clientProtocol=1.5&connectionData=%5B%7B%22name%22%3A%22demo%22%7D%5D - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/signalr/negotiate?clientProtocol=1.5&connectionData=%5B%7B%22name%22%3A%22demo%22%7D%5D HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/signalr/negotiate?clientProtocol=1.5&connectionData=%5B%7B%22name%22%3A%22demo%22%7D%5D - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/signalr/negotiate?clientProtocol=1.5&connectionData=%5B%7B%22name%22%3A%22demo%22%7D%5D - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/signalr/negotiate?clientProtocol=1.5&connectionData=%5B%7B%22name%22%3A%22demo%22%7D%5D - 200 - application/json;+charset=UTF-8 46.3506ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/signalr/negotiate?clientProtocol=1.5&connectionData=%5B%7B%22name%22%3A%22demo%22%7D%5D - 200 - application/json;+charset=UTF-8 43.8307ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/signalr/negotiate?clientProtocol=1.5&connectionData=%5B%7B%22name%22%3A%22demo%22%7D%5D - 200 - application/json;+charset=UTF-8 47.4207ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/signalr/negotiate?clientProtocol=1.5&connectionData=%5B%7B%22name%22%3A%22demo%22%7D%5D - 200 - application/json;+charset=UTF-8 44.8185ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/raw-connection/negotiate?clientProtocol=1.5 - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/raw-connection/negotiate?clientProtocol=1.5 - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/raw-connection/negotiate?clientProtocol=1.5 HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/raw-connection/negotiate?clientProtocol=1.5 - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/raw-connection/negotiate?clientProtocol=1.5 - 200 - application/json;+charset=UTF-8 2.5351ms
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/raw-connection/negotiate?clientProtocol=1.5 - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/raw-connection/negotiate?clientProtocol=1.5 - 200 - application/json;+charset=UTF-8 3.2797ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/raw-connection/negotiate?clientProtocol=1.5 - 200 - application/json;+charset=UTF-8 2.9218ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/raw-connection/negotiate?clientProtocol=1.5 - 200 - application/json;+charset=UTF-8 3.6147ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/signalr/ping - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/signalr/ping - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/signalr/ping HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/signalr/ping - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/signalr/ping - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/signalr/ping - 200 - application/json;+charset=UTF-8 1.8945ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/signalr/ping - 200 - application/json;+charset=UTF-8 2.6768ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/signalr/ping - 200 - application/json;+charset=UTF-8 2.4666ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/signalr/ping - 200 - application/json;+charset=UTF-8 3.4474ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/cors/signalr/negotiate?clientProtocol=1.5&connectionData=%5B%5D - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/cors/signalr/negotiate?clientProtocol=1.5&connectionData=%5B%5D - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/cors/signalr/negotiate?clientProtocol=1.5&connectionData=%5B%5D HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/cors/signalr/negotiate?clientProtocol=1.5&connectionData=%5B%5D - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/cors/signalr/negotiate?clientProtocol=1.5&connectionData=%5B%5D - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/cors/signalr/negotiate?clientProtocol=1.5&connectionData=%5B%5D - 200 - application/json;+charset=UTF-8 2.8569ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/cors/signalr/negotiate?clientProtocol=1.5&connectionData=%5B%5D - 200 - application/json;+charset=UTF-8 3.3181ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/cors/signalr/negotiate?clientProtocol=1.5&connectionData=%5B%5D - 200 - application/json;+charset=UTF-8 3.3890ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/cors/signalr/negotiate?clientProtocol=1.5&connectionData=%5B%5D - 200 - application/json;+charset=UTF-8 3.9709ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/cookieauth/echo/negotiate?clientProtocol=1.5 - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/cookieauth/echo/negotiate?clientProtocol=1.5 - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/cookieauth/echo/negotiate?clientProtocol=1.5 HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/cookieauth/echo/negotiate?clientProtocol=1.5 - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/cookieauth/echo/negotiate?clientProtocol=1.5 - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/cookieauth/echo/negotiate?clientProtocol=1.5 - 302 0 - 17.2729ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/cookieauth/echo/negotiate?clientProtocol=1.5 - 302 0 - 22.4283ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 302.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/cookieauth/echo/negotiate?clientProtocol=1.5 - 302 0 - 18.1552ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/cookieauth/echo/negotiate?clientProtocol=1.5 - 302 0 - 23.6092ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/Hubs/Chat/index.htm - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/Hubs/Chat/index.htm - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/Hubs/Chat/index.htm HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/Hubs/Chat/index.htm - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/Hubs/Chat/index.htm - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/Hubs/Chat/index.htm - 200 1639 text/html 22.6452ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/Hubs/Chat/index.htm - 200 1639 text/html 17.7518ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/Hubs/Chat/index.htm - 200 1639 text/html 23.2280ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/Hubs/Chat/index.htm - 200 1639 text/html 18.5307ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/Scripts/jquery.signalR.js - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/Scripts/jquery.signalR.js - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/Scripts/jquery.signalR.js HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/Scripts/jquery.signalR.js - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/Scripts/jquery.signalR.js - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/Scripts/jquery.signalR.js - 200 139946 text/javascript 10.8720ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/Scripts/jquery.signalR.js - 200 139946 text/javascript 10.3511ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/Scripts/jquery.signalR.js - 200 139946 text/javascript 14.0304ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/Scripts/jquery.signalR.js - 200 139946 text/javascript 11.4100ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/web.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/web.config - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/web.config HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/web.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/web.config - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/web.config - 404 252 text/html 4.1571ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/web.config - 404 252 text/html 4.1489ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/web.config - 404 252 text/html 3.4925ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/web.config - 404 252 text/html 3.6083ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/App_Data/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/App_Data/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/App_Data/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/App_Data/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/App_Data/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/App_Data/ - 404 252 text/html 0.7664ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/App_Data/ - 404 252 text/html 0.7143ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/App_Data/ - 404 252 text/html 1.4460ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/App_Data/ - 404 252 text/html 1.2935ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/Global.asax.cs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/Global.asax.cs - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/Global.asax.cs HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/Global.asax.cs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/Global.asax.cs - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/Global.asax.cs - 404 215 text/html 0.5421ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/Global.asax.cs - 404 215 text/html 0.4452ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/Global.asax.cs - 404 215 text/html 1.1622ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/Global.asax.cs - 404 215 text/html 1.0020ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/obj/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/obj/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/obj/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/obj/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/obj/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/obj/ - 404 252 text/html 0.4472ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/obj/ - 404 252 text/html 0.4058ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/obj/ - 404 252 text/html 0.9572ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/obj/ - 404 252 text/html 0.9030ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/packages.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/packages.config - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/packages.config HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/packages.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/packages.config - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/packages.config - 404 215 text/html 0.3747ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/packages.config - 404 215 text/html 0.3856ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/packages.config - 404 215 text/html 0.8997ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/packages.config - 404 215 text/html 0.8778ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/bin_dotnet/Microsoft.AspNet.SignalR.Samples.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/bin_dotnet/Microsoft.AspNet.SignalR.Samples.dll - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/bin_dotnet/Microsoft.AspNet.SignalR.Samples.dll HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/bin_dotnet/Microsoft.AspNet.SignalR.Samples.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/bin_dotnet/Microsoft.AspNet.SignalR.Samples.dll - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/bin_dotnet/Microsoft.AspNet.SignalR.Samples.dll - 404 252 text/html 0.6786ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/bin_dotnet/Microsoft.AspNet.SignalR.Samples.dll - 404 252 text/html 0.6074ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/bin_dotnet/Microsoft.AspNet.SignalR.Samples.dll - 404 252 text/html 1.2628ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/bin_dotnet/Microsoft.AspNet.SignalR.Samples.dll - 404 252 text/html 1.1292ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/bin_dotnet/webforcore-host/webforcore-host.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/bin_dotnet/webforcore-host/webforcore-host.dll - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/bin_dotnet/webforcore-host/webforcore-host.dll HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:55222/bin_dotnet/webforcore-host/webforcore-host.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:50074/bin_dotnet/webforcore-host/webforcore-host.dll - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 0.4639ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 0.4622ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:55222/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 0.8929ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:50074/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 0.9169ms
 info: WebFormsForCore.Hosting.WorkerProcess.WorkerLifetime[0]
       Worker 1: the host closed its connection: stopping.
 info: Microsoft.Hosting.Lifetime[0]

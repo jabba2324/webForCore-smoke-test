@@ -7,8 +7,8 @@ site = "Opserver"
 project = "Opserver/Opserver.csproj"
 kinds = ["mvc"]
 licence = "MIT"
-status = "blocked"
-notes = "Blocked by F47 (System.Data.SqlClient 4.9.1's GetTypes() throws; webForCore#41): 10/11 probes on Linux and Windows on webForCore 0.7.0 (.NET 10, under webforcore-host). With the scan skipping those types (not in the overlay) it works."
+status = "migrated"
+notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 11/11 on Linux and Windows. 0.8.0 builds System.Data.SqlClient with GetTypes() fixed (F47, webForCore#41), which failed one probe on 0.7.0 (10/11)."
 needs = ["mssql"]
 
 # The first request compiles the site, so it gets 120 s. Config/SecuritySettings.config (provider "alladmin", the

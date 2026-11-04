@@ -16,27 +16,27 @@
       ]
     },
     "build": {
-      "at": "2026-11-04T19:37:39+00:00",
+      "at": "2026-11-04T20:25:21+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/odata-samples-compositekey/logs/build.log",
-      "seconds": 4,
+      "seconds": 15,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.7.0"
+      "webforcore": "packages 0.8.0"
     },
     "fetch": {
-      "at": "2026-11-04T19:37:35+00:00",
+      "at": "2026-11-04T20:25:05+00:00",
       "commit": "2e60476b62d411fbac8265b4e23a5d8f414676c7",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-04T19:37:42+00:00",
+      "at": "2026-11-04T20:25:26+00:00",
       "checks": [
         {
           "expected_text": "\"name\":\"People\"",
-          "ms": 25,
+          "ms": 29,
           "ok": false,
           "path": "/",
           "status": 404,
@@ -44,7 +44,7 @@
         },
         {
           "expected_text": "<Key><PropertyRef Name=\"FirstName\" /><PropertyRef Name=\"LastName\" /></Key>",
-          "ms": 4,
+          "ms": 5,
           "ok": false,
           "path": "/$metadata",
           "status": 404,
@@ -52,7 +52,7 @@
         },
         {
           "expected_text": "\"FirstName\":\"Lewis\",\"LastName\":\"James\",\"Age\":6",
-          "ms": 4,
+          "ms": 5,
           "ok": false,
           "path": "/People",
           "status": 404,
@@ -96,43 +96,43 @@
           "title": "The resource cannot be found."
         },
         {
-          "ms": 16,
+          "ms": 5,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 6,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 7,
+          "ms": 2,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 6,
+          "ms": 2,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 6,
+          "ms": 2,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 8,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/ODataCompositeKeySample.dll",
           "status": 404
         },
         {
-          "ms": 7,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404
