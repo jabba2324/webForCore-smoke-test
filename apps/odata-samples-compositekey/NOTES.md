@@ -1,6 +1,6 @@
 # OData Web API samples: composite key: migration notes
 
-Status: blocked (webForCore 0.7.0, 8/15 probes on Linux): Microsoft.AspNet.OData 7.5.18 needs System.Data.Linq
+Status: blocked (webForCore 0.7.0, 8/15 probes on Linux and on Windows): Microsoft.AspNet.OData 7.5.18 needs System.Data.Linq
 ([F68](../../FINDINGS.md#f68)).
 
 OData/ODataSamples at `2e60476b`, MIT (`License.txt`). `WebApiClassic/ODataCompositeKeySample/ODataCompositeKeySample.AspNet`:
@@ -32,7 +32,7 @@ The build passes with no warnings about it.
 
 ## Smoke
 
-Round 7 candidates (webForCore 0.7.0; Linux): **8/15**. The seven forbidden-path checks pass; every OData probe is a
+Round 7 candidates (webForCore 0.7.0): **8/15 on Linux and on Windows** (Windows: CI run 41898913795). The seven forbidden-path checks pass; every OData probe is a
 404 (`StaticFileHandler`: no route).
 
 `Application_Start` throws while building the EDM model, so `MapODataServiceRoute` never runs:
