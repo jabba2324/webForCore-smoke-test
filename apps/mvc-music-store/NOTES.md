@@ -1,7 +1,7 @@
 # MVC Music Store (MVC 3): migration notes
 
 Status: migrated (webForCore 0.7.0, webForCore-thirdparty 0.6.0, drawingForCore 0.2.0: 20/20 probes on Linux and Windows); log-on
-and registration blocked by [F75](../../FINDINGS.md#f70).
+and registration blocked by [F75](../../FINDINGS.md#f75).
 jongalloway/MvcMusicStore at `ea2552d6` (Oct 2025): Jon Galloway's copy of the CodePlex sample, with its MVC 3, 4 and
 5 versions; this is the MVC 3 one (`src/MVC3/MvcMusicStore-Completed`, "MVC 3 Tools Update"). Ms-PL
 (`src/MVC3/readme.txt`).
@@ -19,7 +19,7 @@ drawingForCore 0.2.0, `WEBFORCORE_VERSION=0.7.0 THIRDPARTY_VERSION=0.6.0 DRAWING
   `SqlMembershipProvider`/`SqlRoleProvider` from machine.config (`LocalSqlServer`: SQL Express user instance,
   `aspnetdb.mdf`), with `<roleManager enabled="true">`.
 - **Blockers:** none from `wfc.py assess`. SQL CE is Windows-native (no .NET build), and SQL Express user instances
-  don't exist on Linux: both need SQL Server ([F77](../../FINDINGS.md#f72)).
+  don't exist on Linux: both need SQL Server ([F77](../../FINDINGS.md#f77)).
 - **Dependencies:** (a) replaced by webForCore: MVC 3, Web Pages 1, Razor 1 (now MVC 5.3, Web Pages/Razor 3.3).
   (b) kept: EntityFramework (4.1 has no .NET build; 6.5.1, as the guide says), the jQuery/Modernizr content packages
   (their files are checked in). (c) none.
@@ -35,11 +35,11 @@ drawingForCore 0.2.0, `WEBFORCORE_VERSION=0.7.0 THIRDPARTY_VERSION=0.6.0 DRAWING
 2. Build: `CS0104: 'Compare' is an ambiguous reference between 'System.ComponentModel.DataAnnotations.CompareAttribute'
    and 'System.Web.Mvc.CompareAttribute'` in `Models/AccountModels.cs` (.NET 4.5 added the DataAnnotations one). A
    `using CompareAttribute = System.Web.Mvc.CompareAttribute;` there keeps what it compiled to on 4.0
-   ([F74](../../FINDINGS.md#f69)). Then it builds; EF 6 needed no code changes (`DbContext`, `DbSet`,
+   ([F74](../../FINDINGS.md#f74)). Then it builds; EF 6 needed no code changes (`DbContext`, `DbSet`,
    `DropCreateDatabaseIfModelChanges` are the same).
 3. First request: 500, `Conflicting versions of ASP.NET Web Pages detected: specified version is "1.0.0.0", but the
    version in bin is "3.0.0.0"`. `web.config`'s `webpages:Version` is now `3.0.0.0`, as Microsoft's MVC 3 → 5 upgrade
-   has it ([F73](../../FINDINGS.md#f68)). The other MVC 3 version numbers (`<compilation><assemblies>`,
+   has it ([F73](../../FINDINGS.md#f73)). The other MVC 3 version numbers (`<compilation><assemblies>`,
    `Views/Web.config`'s Razor section and host factory) needed no change.
 4. `MusicStoreEntities` connection string: SQL CE → the test bed's SQL Server (`127.0.0.1,14330`, database
    `MvcMusicStore3`, `TrustServerCertificate=True`), `providerName="System.Data.SqlClient"`. EF creates and seeds the
@@ -47,7 +47,7 @@ drawingForCore 0.2.0, `WEBFORCORE_VERSION=0.7.0 THIRDPARTY_VERSION=0.6.0 DRAWING
    `setup` would have no EF model metadata, and the initializer wouldn't seed it).
 5. `LocalSqlServer` (membership and roles) is left as machine.config has it: pointing it at SQL Server would need
    the `aspnetdb` schema, which `aspnet_regsql` creates on .NET Framework, and webForCore has neither the tool nor the
-   scripts `SqlServices.Install` reads ([F75](../../FINDINGS.md#f70)).
+   scripts `SqlServices.Install` reads ([F75](../../FINDINGS.md#f75)).
 
 ## Smoke
 
@@ -67,11 +67,11 @@ session) and the AJAX `POST /ShoppingCart/RemoveFromCart/1` (JSON).
 
 - **Log-on and registration:** posting either form is a 500, "SQLExpress database file auto-creation error": the
   default membership provider wants a SQL Express user instance. With a real SQL Server it would need `aspnet_regsql`'s
-  schema, which can't be made on webForCore ([F75](../../FINDINGS.md#f70), webForCore#123). So checkout and the store
+  schema, which can't be made on webForCore ([F75](../../FINDINGS.md#f75), webForCore#123). So checkout and the store
   manager (which need a user, and the Administrator role) are untested.
 - **Prices print with three decimals** (`8.990` for 8.99, `@String.Format("{0:F}", ...)` on the album page): .NET's
   ICU culture data has `NumberDecimalDigits` 3 for `en-GB`/`en-US` where Windows NLS had 2
-  ([F76](../../FINDINGS.md#f71), webForCore#124). The probes don't check prices.
+  ([F76](../../FINDINGS.md#f76), webForCore#124). The probes don't check prices.
 - On this machine, with other agents' apps running, the first run failed every view with "Failed to start monitoring
   changes to '.../Views/ShoppingCart'": the user's 128 inotify instances (`fs.inotify.max_user_instances`) had run out,
   each worker taking about 15. webForCore documents it (`docs/IIS-COMPATIBILITY.md`, process model); it passed once

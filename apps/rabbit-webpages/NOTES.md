@@ -1,7 +1,7 @@
 # Rabbit (WebMatrix Starter Site): migration notes
 
 Status: blocked (webForCore 0.7.0, webForCore-thirdparty 0.6.0, drawingForCore 0.2.0: 20/21 probes on Linux and Windows): one
-probe fails on a webForCore bug ([F79](../../FINDINGS.md#f74)).
+probe fails on a webForCore bug ([F79](../../FINDINGS.md#f79)).
 yysun/Rabbit at `a819ee23` (23 Jul 2011), MIT (`License.txt`). The repository has the Rabbit framework's class
 library and two sites; this is `WebSite`: WebMatrix's ASP.NET Web Pages 1 **Starter Site** (accounts with
 `WebSecurity`, `_SiteLayout`, `Account/*.cshtml`) with Yiyi Sun's Rabbit framework in `App_Code` (a module/hook
@@ -19,11 +19,11 @@ drawingForCore 0.2.0, `WEBFORCORE_VERSION=0.7.0 THIRDPARTY_VERSION=0.6.0 DRAWING
 - **Accounts:** `WebSecurity.InitializeDatabaseConnection("StarterSite", "UserProfile", "UserId", "Email", true)`
   (WebMatrix.WebData's SimpleMembership), `Database.Open("StarterSite")` in `Register.cshtml`, `Roles.IsUserInRole`
   in the layouts. No connection string: WebMatrix's `Database.Open("StarterSite")` falls back to
-  `App_Data/StarterSite.sdf`, SQL Server Compact ([F77](../../FINDINGS.md#f72)).
+  `App_Data/StarterSite.sdf`, SQL Server Compact ([F77](../../FINDINGS.md#f77)).
 - **Blockers:** none from `wfc.py assess`.
 - **Dependencies:** (a) replaced by webForCore: System.Web.WebPages(.Razor, .Deployment), System.Web.Razor,
   System.Web.Helpers. (b) Microsoft's `WebMatrix.Data` and `WebMatrix.WebData`, which the Web Pages 1 installer put in
-  the GAC; webForCore doesn't provide them ([F78](../../FINDINGS.md#f73)). (c) none. The site has no `bin`.
+  the GAC; webForCore doesn't provide them ([F78](../../FINDINGS.md#f78)). (c) none. The site has no `bin`.
 - **Go**, with the database on SQL Server.
 
 ## Migration
@@ -62,7 +62,7 @@ view (`Accept: application/json` on `/Pages`).
 into a 302 to `/Account/Login`. `WebSecurity.RequireAuthenticatedUser()` sets 401 and calls `Response.End()`, and on
 webForCore `Response.End()` sends the response before `FormsAuthenticationModule` gets to EndRequest. A page with
 `Response.StatusCode = 401;` alone gets the 302; with `Response.End()` after it, the 401 (`.cshtml` and `.aspx`
-alike) ([F79](../../FINDINGS.md#f74), webForCore#129).
+alike) ([F79](../../FINDINGS.md#f79), webForCore#129).
 
 ## Open problems
 

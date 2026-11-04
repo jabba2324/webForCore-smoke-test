@@ -1,0 +1,29 @@
+# IdentityServer3 example (Scott Brady), an OpenID Connect provider on Katana hosted in IIS. Fields are described in README.md.
+
+name = "IdentityServer3 example"
+repo = "https://github.com/scottbrady91/IdentityServer3-Example"
+ref = "4c8103344e5d42a9ccd87f6f57921f3b1e5a4ce1"
+site = "src/ScottBrady91.IdentityServer3.Example"
+project = "src/ScottBrady91.IdentityServer3.Example/ScottBrady91.IdentityServer3.Example.csproj"
+kinds = ["owin", "identity"]
+licence = "MIT"
+status = "blocked"
+notes = "webForCore 0.7.0: builds; blocked: IdentityServer3 2.5 needs System.IdentityModel (WIF), which .NET lacks (F69). 7/10 on Linux and Windows."
+# IdentityServer3 is configured with RequireSsl = true.
+https = true
+
+# The first request compiles the site, so it gets 120 s.
+# OpenID Connect discovery.
+[[probes]]
+path = "/core/.well-known/openid-configuration"
+contains = "\"authorization_endpoint\":\""
+
+# The signing key, from the embedded test certificate.
+[[probes]]
+path = "/core/.well-known/jwks"
+contains = "\"kty\":\"RSA\""
+
+# An authorization request redirects to the log-in page.
+[[probes]]
+path = "/core/connect/authorize?client_id=implicitclient&response_type=id_token&scope=openid&redirect_uri=https%3A%2F%2Flocalhost%3A44304%2Faccount%2FsignInCallback&nonce=n1"
+status = 302

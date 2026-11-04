@@ -92,13 +92,19 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F65](#f65) | Linux: named semaphores and events throw `PlatformNotSupportedException` (only named `Mutex` works) | guide gap | umbraco-7 | [#94](https://github.com/xforcore/webForCore/issues/94) |
 | [F66](#f66) | webForCore's `CallContext` doesn't reach prebuilt .NET Framework libraries: Log4Net.Async logs nothing | guide gap | umbraco-7 | [#95](https://github.com/xforcore/webForCore/issues/95) |
 | [F67](#f67) | Linux with no locale (`C`/`POSIX`: CI runners, containers): the culture is invariant, so apps that pick resources by culture find none | guide gap | umbraco-6 | [#97](https://github.com/xforcore/webForCore/issues/97) |
-| [F73](#f68) | MVC 3/4 apps: `webpages:Version` 1.0.0.0/2.0.0.0 fails every request ("Conflicting versions of ASP.NET Web Pages") | guide gap | mvc-music-store | [#122](https://github.com/xforcore/webForCore/issues/122) |
-| [F74](#f69) | MVC 3/4 apps: `[Compare]` is ambiguous (CS0104) between MVC's and DataAnnotations' `CompareAttribute` | guide gap | mvc-music-store | [#122](https://github.com/xforcore/webForCore/issues/122) |
-| [F75](#f70) | No `aspnet_regsql`: `SqlServices.Install` can't find `InstallCommon.sql`, so SQL membership/roles/profile apps can't create their database | webForCore bug | mvc-music-store | [#123](https://github.com/xforcore/webForCore/issues/123) |
-| [F76](#f71) | ICU: `en-US`/`en-GB` `NumberDecimalDigits` is 3, so `{0:F}` prints `8.990` for 8.99 | guide gap | mvc-music-store | [#124](https://github.com/xforcore/webForCore/issues/124) |
-| [F77](#f72) | Windows-only data stores (SQL CE, SQL Express user instances) and data written on Windows (`\` in a wiki's page index) | app/environment | screwturn-wiki, mvc-music-store, rabbit-webpages | - |
-| [F78](#f73) | WebMatrix.Data and WebMatrix.WebData aren't provided or documented (Microsoft's 3.2.9 packages work) | guide gap | rabbit-webpages | [#130](https://github.com/xforcore/webForCore/issues/130) |
-| [F79](#f74) | `Response.End()` after `StatusCode = 401` sends the 401: forms authentication doesn't redirect to the log-in page | webForCore bug | rabbit-webpages | [#129](https://github.com/xforcore/webForCore/issues/129) |
+| [F68](#f68) | Web API OData (Microsoft.AspNet.OData 7.5.18) needs System.Data.Linq to build any model | documented gap (consequence undocumented) | odata-samples-compositekey | [#120](https://github.com/xforcore/webForCore/issues/120) |
+| [F69](#f69) | Windows Identity Foundation (`System.IdentityModel`) isn't on .NET or in NAMESPACES.md: IdentityServer3 can't load | guide gap | identityserver3-example | [#119](https://github.com/xforcore/webForCore/issues/119) |
+| [F70](#f70) | `/signalr/hubs` serves the template's unreplaced `[!VERSION!]` | webForCore bug | signalr-samples | [#118](https://github.com/xforcore/webForCore/issues/118) |
+| [F71](#f71) | VB projects: `<MyType>Windows</MyType>` doesn't compile on .NET (BC30002 `My.Computer`, `My.User`) | guide gap | signalr-samples | [#121](https://github.com/xforcore/webForCore/issues/121) |
+| [F72](#f72) | Linux: the user's inotify instances (128 by default) run out with many apps running: "Failed to start monitoring changes" | app/environment | signalr-samples, identityserver3-example (on this machine) | - |
+
+| [F73](#f73) | MVC 3/4 apps: `webpages:Version` 1.0.0.0/2.0.0.0 fails every request ("Conflicting versions of ASP.NET Web Pages") | guide gap | mvc-music-store | [#122](https://github.com/xforcore/webForCore/issues/122) |
+| [F74](#f74) | MVC 3/4 apps: `[Compare]` is ambiguous (CS0104) between MVC's and DataAnnotations' `CompareAttribute` | guide gap | mvc-music-store | [#122](https://github.com/xforcore/webForCore/issues/122) |
+| [F75](#f75) | No `aspnet_regsql`: `SqlServices.Install` can't find `InstallCommon.sql`, so SQL membership/roles/profile apps can't create their database | webForCore bug | mvc-music-store | [#123](https://github.com/xforcore/webForCore/issues/123) |
+| [F76](#f76) | ICU: `en-US`/`en-GB` `NumberDecimalDigits` is 3, so `{0:F}` prints `8.990` for 8.99 | guide gap | mvc-music-store | [#124](https://github.com/xforcore/webForCore/issues/124) |
+| [F77](#f77) | Windows-only data stores (SQL CE, SQL Express user instances) and data written on Windows (`\` in a wiki's page index) | app/environment | screwturn-wiki, mvc-music-store, rabbit-webpages | - |
+| [F78](#f78) | WebMatrix.Data and WebMatrix.WebData aren't provided or documented (Microsoft's 3.2.9 packages work) | guide gap | rabbit-webpages | [#130](https://github.com/xforcore/webForCore/issues/130) |
+| [F79](#f79) | `Response.End()` after `StatusCode = 401` sends the 401: forms authentication doesn't redirect to the log-in page | webForCore bug | rabbit-webpages | [#129](https://github.com/xforcore/webForCore/issues/129) |
 ---
 
 ## F1
@@ -1368,6 +1374,97 @@ GitHub's `ubuntu-24.04` runner (its locale is `C`); it passed on this machine (`
   16/16 under `LANG=C`. Setting `LANG` for the server would do too.
 - **Guide:** `docs/MIGRATING.md` should say that a Linux server or container without a locale runs with the invariant
   culture, and to set `<globalization culture uiCulture>` or `LANG`.
+
+## F68
+
+**Web API OData (Microsoft.AspNet.OData 7.5.18) needs System.Data.Linq to build any model.** Documented gap
+(consequence undocumented). Raised as [#120](https://github.com/xforcore/webForCore/issues/120). Found on 0.7.0, on
+Linux (the same on any OS).
+
+- **Apps:** odata-samples-compositekey: `Application_Start` fails in `ODataConventionModelBuilder.GetEdmModel()`, so
+  `MapODataServiceRoute` never runs and every OData URL is a 404 (the first request gets the 500, as on IIS): 8/15.
+  ```
+  System.TypeInitializationException: The type initializer for 'Microsoft.AspNet.OData.Formatter.EdmLibHelpers' threw an exception.
+   ---> System.IO.FileNotFoundException: Could not load file or assembly 'System.Data.Linq, Version=4.0.0.0, ...'
+  ```
+- **Cause:** `EdmLibHelpers`' static CLR-to-EDM type table maps LINQ to SQL's `System.Data.Linq.Binary` to
+  `Edm.Binary`, so every model touches `System.Data.Linq`, whatever the app's data access. The package has only a
+  `net45` build. LINQ to SQL is listed as unavailable (`docs/NAMESPACES.md`), but not that it takes Web API OData with
+  it.
+- **Repro:** an SDK project with `webForCore`, `webForCore.Web.Http.WebHost` and `Microsoft.AspNet.OData` 7.5.18, and
+  `new ODataConventionModelBuilder().EntitySet<Person>("People"); builder.GetEdmModel();` in `Application_Start`.
+- **Options (for webForCore):** document it; or ship a `System.Data.Linq` 4.0.0.0 with just `Binary`; or build
+  Microsoft.AspNet.OData (Microsoft's, MIT) with the mapping compiled out, as MVC's `LinqBinaryModelBinder` is.
+
+## F69
+
+**Windows Identity Foundation (`System.IdentityModel`) isn't on .NET or in NAMESPACES.md: IdentityServer3 can't
+load.** Guide gap. Raised as [#119](https://github.com/xforcore/webForCore/issues/119). Found on 0.7.0, on Linux (the
+same on any OS).
+
+- **Apps:** identityserver3-example: IdentityServer3 2.5.0 (`lib/net45` only) on Katana under
+  `Microsoft.Owin.Host.SystemWeb`. The app builds and its OWIN startup runs, then fails at `UseIdentityServer`: every
+  request under `/core` is a 500 (7/10).
+  ```
+  System.IO.FileNotFoundException: Could not load file or assembly 'System.IdentityModel, Version=4.0.0.0, ...'
+     Owin.UseIdentityServerExtension.UseIdentityServer(IAppBuilder app, IdentityServerOptions options)
+  ```
+- **Cause:** IdentityServer3 uses WIF (`X509SigningCredentials`, `SecurityTokenHandler`, `X509SecurityToken`,
+  `System.IdentityModel.Protocols.WSTrust`), a .NET Framework assembly with no .NET build; webForCore doesn't provide
+  it. Not webForCore's to fix.
+- **Guide:** `docs/NAMESPACES.md` should list WIF (`System.IdentityModel`, `System.IdentityModel.Services`:
+  `<system.identityModel>`, `WSFederationAuthenticationModule`, `SessionAuthenticationModule`) as unavailable, with
+  the options (Katana's WS-Federation middleware, `Microsoft.IdentityModel.Tokens`), and the Phase 0 blocker search
+  should look for it.
+
+## F70
+
+**`/signalr/hubs` serves the template's unreplaced `[!VERSION!]`.** webForCore bug (minor). Raised as
+[#118](https://github.com/xforcore/webForCore/issues/118). Found on 0.7.0, on Linux (the same on any OS).
+
+- **Apps:** signalr-samples: the generated hub proxy starts `* ASP.NET SignalR JavaScript Library [!VERSION!]`;
+  Microsoft's `Microsoft.AspNet.SignalR.Core` 2.4.3 says `2.4.3` there. One probe: 18/19.
+- **Cause:** SignalR's build stamps the version into `Scripts/hubs.js` before embedding it;
+  `webForCore.Microsoft.AspNet.SignalR.Core` embeds the source file as it is.
+- **Repro:** any app with `app.MapSignalR()` and a hub: `curl /signalr/hubs | head -3`.
+- **Effect:** cosmetic for the JavaScript client, but a response that differs from IIS.
+
+## F71
+
+**VB projects: `<MyType>Windows</MyType>` doesn't compile on .NET.** Guide gap. Raised as
+[#121](https://github.com/xforcore/webForCore/issues/121). Found on 0.7.0.
+
+- **Apps:** signalr-samples: its VB class library (one hub) has Visual Studio's default `MyType` `Windows`. As an
+  SDK-style `net10.0` project:
+  ```
+  vbc : error BC30002: Type 'Global.Microsoft.VisualBasic.ApplicationServices.ApplicationBase' is not defined.
+  vbc : error BC30002: Type 'Global.Microsoft.VisualBasic.Devices.Computer' is not defined.
+  ```
+- **Cause:** the `My` namespace for `Windows` needs `Microsoft.VisualBasic.Forms`, which is Windows Desktop only on
+  .NET.
+- **Fix in the app:** `<MyType>Empty</MyType>` (nothing in the library uses `My.Computer`, `My.User` or
+  `My.Application`).
+- **Guide:** `docs/MIGRATING.md` section 2 shows only C# projects; it could say what a `.vbproj` needs (`MyType`, the
+  `<Import Include>` namespaces, `GenerateAssemblyInfo` false with `My Project/AssemblyInfo.vb`).
+
+## F72
+
+**Linux: the user's inotify instances (128 by default) run out with many apps running.** App/environment. Found on
+0.7.0, on this machine (Fedora, `fs.inotify.max_user_instances` = 128), with several smoke runs of other agents
+running at the same time as the same user.
+
+- **Apps:** signalr-samples (one run: `/Hubs/DemoHub/`, `/Hubs/Chat/index.htm` and `/Scripts/jquery.signalR.js` were
+  500s, `Configuration Error: Failed to start monitoring changes to '.../Hubs/DemoHub'` from
+  `System.Web.DirMonCompletion`), identityserver3-example (a run by hand didn't start: `IOException: The configured user
+  limit (128) on the number of inotify instances has been reached` from ASP.NET Core's configuration file watcher).
+  Both passed on a rerun once other processes had stopped.
+- **Cause:** every process with a `FileSystemWatcher` holds at least one inotify instance; each webForCore worker
+  held 11 to 23 here (counted from `/proc/<pid>/fd`), though .NET 10 shares one inotify instance between a process's
+  watchers (a test program with 5 watchers held 1). Where the others come from wasn't established, so this isn't
+  raised as a webForCore bug. A server running many sites under one user may need a higher
+  `fs.inotify.max_user_instances`.
+- **In the runs:** `DOTNET_USE_POLLING_FILE_WATCHER=1` (ASP.NET Core's configuration watchers poll) for the final
+  Linux runs; nothing committed changes.
 
 ## F73
 
