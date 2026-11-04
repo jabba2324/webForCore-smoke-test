@@ -34,6 +34,8 @@ Windows (CI run 41905418748; eshop-legacy-mvc's Windows job didn't start its ser
   documented.
 - **Still blocked:** umbraco-7 (7/14, F22: its overlay doesn't use webForCore-thirdparty 0.6.0's AutoMapper build yet),
   and the apps blocked before.
+- **C1 CMS** (composite-c1, a new app on 0.8.0): blocked at build, on Linux and Windows, by Windows Workflow
+  Foundation 3 in its core library (F116) and by LINQ to SQL and WCF REST hosting (F120); F116–F121 were found there.
 - **Rock RMS** (a candidate, assessed on 0.8.0): rejected, as the Rock Community License limits use, derivative works and
   distribution to faith-based organisations' internal use, so no overlay can be published here. Its assessment (a Web
   Site Project, Windows-only native spatial types, a named `EventWaitHandle`) is in its NOTES.md; F123 was found there.
@@ -125,6 +127,12 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F80](#f80) | A request path with an escaped character (a space, non-ASCII) is answered 400 before the application | webForCore bug | aspnetdocs-wingtip-toys | [#126](https://github.com/xforcore/webForCore/issues/126) |
 | [F81](#f81) | `Request.RawUrl` is the default document's path for a directory request: FriendlyUrls 301s `/` to `/Default` | webForCore bug | aspnetdocs-wingtip-toys | [#127](https://github.com/xforcore/webForCore/issues/127) |
 | [F82](#f82) | Linux: `Server.MachineName` throws `DllNotFoundException` (kernel32); ELMAH's log pages fail | webForCore bug | aspnetdocs-wingtip-toys | [#128](https://github.com/xforcore/webForCore/issues/128) |
+| [F116](#f116) | Windows Workflow Foundation 3 (`System.Workflow.*`) isn't on .NET, and the docs and blocker search don't say so | guide gap | composite-c1 | [#132](https://github.com/xforcore/webForCore/issues/132) |
+| [F117](#f117) | Run-time C# compilation in application code (`CodeDomProvider.CreateProvider("c#")`) throws `PlatformNotSupportedException`; no documented replacement | guide gap | composite-c1 | [#133](https://github.com/xforcore/webForCore/issues/133) |
+| [F118](#f118) | CoreWCF's source generator reaches applications: `CS8370`/`CS8107` for any `[ServiceContract]` with `LangVersion` below 11 | webForCore bug | composite-c1 | [#134](https://github.com/xforcore/webForCore/issues/134) |
+| [F119](#f119) | webForCore's `CSharpCodeProvider` with `GenerateInMemory` and no PDB throws `ArgumentNullException` | webForCore bug | composite-c1 | [#135](https://github.com/xforcore/webForCore/issues/135) |
+| [F120](#f120) | C1's core needs LINQ to SQL (even with the XML data store) and WCF REST hosting | documented gap | composite-c1 | – |
+| [F121](#f121) | Types .NET added (`System.Collections.Generic.KeyValuePair`) make the app's own type ambiguous (`CS0104`) | guide gap | composite-c1 | [#136](https://github.com/xforcore/webForCore/issues/136) |
 | [F123](#f123) | A Web Site Project has no `.csproj`; the guide's template compiles its `CodeFile=` code (CS0103) | guide gap | rock-rms (assessed only) | [#131](https://github.com/xforcore/webForCore/issues/131) |
 ---
 
@@ -1643,6 +1651,111 @@ round for the AspNetDocs tutorial apps.
   `HttpServerUtility.get_MachineName()`.
 - **Repro:** a page with `<%= Server.MachineName %>`, on Linux.
 - **Suggested fix:** `Environment.MachineName` off Windows.
+
+## F116
+
+**Windows Workflow Foundation 3 (`System.Workflow.Runtime`, `.ComponentModel`, `.Activities`) isn't on .NET, and
+neither `docs/NAMESPACES.md` nor the guide's blocker search mentions it.** Guide gap. Raised as
+[#132](https://github.com/xforcore/webForCore/issues/132). Found on 0.8.0 (Linux and Windows: a build error).
+
+- **Apps:** composite-c1 (C1 CMS 6.13). `Composite.dll` has 48 files on WF3 (`WorkflowFacade`, the console's flow
+  controllers, `FilePersistenceService`, the state machine base classes), and `GlobalInitializerFacade` starts the
+  workflow runtime at application start, so the public site needs it too. `Composite.Workflows.dll` (282 files) is
+  WF3 state machine workflows: every action in the admin console, and the data type and function editors.
+- **Error:** `CS0234: The type or namespace name 'Workflow' does not exist in the namespace 'System'` (105 times),
+  then `CS0246` for `Activity`, `StateActivity`, `SetStateActivity`, `WorkflowRuntime`, `WorkflowInstance`,
+  `DependencyProperty`, `HandleExternalEventActivity`, `ExternalDataExchangeService`, ... (about 450 errors in
+  `Composite.dll` alone).
+- **Why it can't be referenced:** WF3's assemblies exist only in .NET Framework's GAC on Windows (no package), and
+  there's no port: CoreWF is WF4 (`System.Activities`), a different API. Getting C1 past this is a rewrite of its
+  console's actions, not a migration.
+- **Also:** `scripts/wfc.py assess` doesn't look for `System.Workflow` either (its patterns follow the guide's table),
+  so it reported C1 without this blocker.
+- **Suggested docs:** a row in NAMESPACES.md's summary (WF3 `System.Workflow.*`, and WF4 `System.Activities`), and
+  `System.Workflow`/`System.Activities` in AGENT-MIGRATION.md's Phase 0 search, as for Windows Identity Foundation
+  (#119).
+
+## F117
+
+**Application code that compiles C# at run time through System.CodeDom gets `PlatformNotSupportedException`, and the
+docs don't say what to use instead.** Guide gap. Raised as [#133](https://github.com/xforcore/webForCore/issues/133).
+Found on 0.8.0, on Linux (it is .NET's System.CodeDom, the same on Windows).
+
+- **Apps:** composite-c1 (what it would hit after F116): `CodeGenerationManager` compiles the data types' classes at
+  application start with `(CSharpCodeProvider)CodeDomProvider.CreateProvider("c#")` and `CompileAssemblyFromDom`, and
+  `CodeCompatibilityChecker` compiles App_Code to check it. On IIS its web.config's `<system.codedom>` gave it
+  `Orckestra.AspNet.Roslyn.CSharpCodeProvider`; .NET's System.CodeDom reads no configuration.
+- **Repro:** a page in a minimal site:
+  `CodeDomProvider.CreateProvider("c#").CompileAssemblyFromSource(new CompilerParameters { GenerateInMemory = true }, "public class G {}")`
+  → provider `Microsoft.CSharp.CSharpCodeProvider, System.CodeDom, Version=10.0.0.0`,
+  `System.PlatformNotSupportedException: Operation is not supported on this platform.`
+- **What webForCore has:** `WebFormsForCore.CodeDom.Compiler.CSharpCodeProvider`, which compiles with Roslyn in
+  process, but it derives from webForCore's own `CodeDomProvider`, not System.CodeDom's, so code typed against
+  System.CodeDom can't get it, and it isn't documented for applications. Used directly it fails in memory (F119).
+
+## F118
+
+**CoreWCF's source generator reaches every application, and fails the build of any project with a `[ServiceContract]`
+and a `LangVersion` below 11.** webForCore bug. Raised as [#134](https://github.com/xforcore/webForCore/issues/134).
+Found on 0.8.0 (Linux; a build error, so the same on Windows).
+
+- **Apps:** composite-c1: `Composite.csproj` keeps its `<LangVersion>7</LangVersion>` (`docs/MIGRATING.md` section 2),
+  and its WCF log service's contract gets `CS8107: Feature 'file types' is not available in C# 7.0` and
+  `'module initializers'` in `obj/.../CoreWCF.BuildTools.OperationInvokerGenerator/OperationInvoker.g.cs`.
+- **Cause:** `webForCore.Web.Extensions` depends on `CoreWCF.Http` and `CoreWCF.Primitives` with
+  `exclude="Build,Analyzers"`, but `CoreWCF.Http`'s own dependency on `CoreWCF.Primitives` excludes nothing, so its
+  analyzers and `buildTransitive` targets flow to the app; the targets turn the generator on for net7.0 and later.
+- **Repro:** the minimal site with `<LangVersion>7.3</LangVersion>` and a `[ServiceContract] interface` with one
+  `[OperationContract]` and a class implementing it: 3 × `CS8370 'file types'`, 1 × `'module initializers'`.
+- **Workaround in the overlay (CoreWCF's documented switch, not webForCore's internals):**
+  `<EnableCoreWCFOperationInvokerGenerator>false</EnableCoreWCFOperationInvokerGenerator>` in the two libraries.
+
+## F119
+
+**webForCore's `CSharpCodeProvider` with `GenerateInMemory = true` and no debug information throws
+`ArgumentNullException: Value cannot be null. (Parameter 'buffer')`.** webForCore bug. Raised as
+[#135](https://github.com/xforcore/webForCore/issues/135). Found on 0.8.0, on Linux, checking what C1 could use instead
+of System.CodeDom's provider (F117).
+
+- **Apps:** none yet (composite-c1's `CodeCompatibilityChecker` compiles in memory, but C1 doesn't build: F116).
+- **Cause:** `Compiler.FromFileBatch` (`src/WebFormsForCore.Web/WebFormsForCore/CodeDom/Compiler.cs`) leaves
+  `symbolsBuff` null when there's no PDB, then calls `alc.LoadFromStream(new MemoryStream(assemblyBuff), new
+  MemoryStream(symbolsBuff))` in its .NET branch. .NET Framework's `Assembly.Load(bytes, null, evidence)` accepts it.
+- **Repro:** `new WebFormsForCore.CodeDom.Compiler.CSharpCodeProvider().CompileAssemblyFromSource(new CompilerParameters
+  { GenerateInMemory = true, CompilerOptions = "" }, "public class G {}")`. With `CompilerOptions` left null it fails
+  earlier, with a `NullReferenceException` in `CSharpCompiler.FixUpCompilerParameters` (code from Microsoft's
+  RoslynCodeDomProvider).
+
+## F120
+
+**C1 CMS's core needs LINQ to SQL, even with its XML data store, and hosts a WCF REST service.** Documented gap
+(`docs/NAMESPACES.md`: LINQ to SQL, WCF hosting). Not raised. Found on 0.8.0.
+
+- **Apps:** composite-c1. Behind F116's errors, `Composite.dll` has 10 more files that don't build:
+  - LINQ to SQL (`System.Data.Linq`): the SQL Server data provider (`MSSqlServerDataProvider`, expected), but also the
+    data layer's query pipeline (`DataFacadeQueryableExpressionVisitor` recognises `System.Data.Linq.Table<T>` queries
+    by type and reads their `DataContext`), and the run-time compilation of every data type references
+    `System.Data.Linq.Mapping.TableAttribute`'s assembly (`CodeGenerationCommon.AddCommonAssemblies`). So the XML data
+    store, which the starter sites use, still needs System.Data.Linq.
+  - WCF REST hosting: `Composite/services/LogService/LogService.svc` (`System.ServiceModel.Web`'s `[WebInvoke]`,
+    `System.ServiceModel.Activation`'s `[AspNetCompatibilityRequirements]`, a `<services>` entry in
+    `Composite/web.config`): the console's log viewer.
+- **Also:** `System.Configuration.Install` (an `installutil` installer for performance counters) isn't on .NET; the
+  overlay leaves that class out (`#if NETFRAMEWORK`), as it isn't used by the site.
+
+## F121
+
+**A type .NET added makes the application's own type of the same name ambiguous: `CS0104: 'KeyValuePair' is an
+ambiguous reference between 'Composite.Core.Types.KeyValuePair' and 'System.Collections.Generic.KeyValuePair'`.**
+Guide gap. Raised as [#136](https://github.com/xforcore/webForCore/issues/136). Found on 0.8.0 (a build error, any OS).
+
+- **Apps:** composite-c1: 12 files in `Composite.dll` import both `System.Collections.Generic` and
+  `Composite.Core.Types`. .NET Core 2.0 added a non-generic static `System.Collections.Generic.KeyValuePair`
+  (`KeyValuePair.Create`); .NET Framework 4.8 has only the generic struct.
+- **Fix in the overlay:** `using KeyValuePair = Composite.Core.Types.KeyValuePair;` in each file (an alias has no type
+  parameters, so `KeyValuePair<TKey, TValue>` still binds to .NET's).
+- **Docs:** MIGRATING.md section 2 covers the method case (`DistinctBy`, CS0121, #93) and webForCore's newer
+  versions' types (`SignInStatus`, #17), not types .NET added.
 
 ## F123
 

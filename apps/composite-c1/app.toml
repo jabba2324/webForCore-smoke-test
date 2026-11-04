@@ -2,14 +2,22 @@
 
 name = "C1 CMS (Composite C1)"
 repo = "https://github.com/Orckestra/C1-CMS-Foundation"
-ref = ""
+# v6.13-hotfix.862 (C1 CMS 6.13 Hotfix 862, the latest release, September 2026).
+ref = "98b7e87d03003e2dac1799f569da63789528dad8"
 site = "Website"
-kinds = ["webforms", "mvc"]
-licence = "MPL-2.0"
-status = "candidate"
+project = "Website/WebSite.csproj"
+kinds = ["webforms", "webpages"]
+# MPL 1.1, with Orckestra's amendment of section 11 (Danish law); license.txt.
+licence = "MPL-1.1"
+status = "blocked"
+notes = "Blocked at build (Linux and Windows): Composite.dll is built on Windows Workflow Foundation 3 (System.Workflow.*: 48 files, and all of Composite.Workflows), which .NET doesn't have (F116), and needs LINQ to SQL and WCF REST hosting (F120). Its run-time compilation of data types would fail next (F117, F119). Found F116-F121."
 
-# The first request compiles the site, so it gets 120 s.
-# [[probes]]
-# path = "/"
-# status = 200
-# contains = ""
+# Not run: the build is blocked (NOTES.md). What the probes would be, once it builds: the setup wizard, then a
+# starter site's page, the console's log-in, an XSLT function's output, and a static file.
+[[probes]]
+path = "/robots.txt"
+contains = "Sitemap: /sitemap.xml"
+
+[[probes]]
+path = "/Composite/Login.aspx"
+contains = "<title>Composite.Management</title>"
