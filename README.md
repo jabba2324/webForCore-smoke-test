@@ -147,7 +147,7 @@ as a pass: note it in `NOTES.md` and `FINDINGS.md`, and fix webForCore instead.
 | `licence` | SPDX id, or the project's own licence name |
 | `status` | `candidate` (listed, unchecked), `verified` (repo, ref, licence and paths checked), `migrating`, `migrated` (builds and passes its probes), `blocked` (needs something webForCore doesn't provide), `rejected` (not a fit; kept so it isn't added again) |
 | `needs` | Services from `services/compose.yml`: `mssql`, `mysql`, `postgres` (CI starts them for the app's job) |
-| `[setup]` | What the app's database needs before the probes, run by `setup` when a database it lists is new: `databases` (SQL Server databases to create, empty), `sql_files` (scripts in the checkout, run against the first), `[[setup.steps]]` (requests to the running app, such as an install wizard: `get` or `post` a path, with `fields`; `button` and `value` for a Web Forms postback; `contains`, `timeout`, `may_fail`) |
+| `[setup]` | What the app's database needs before the probes, run by `setup` when a database it lists is new: `databases` (SQL Server databases to create, empty), `sql_files` (scripts in the checkout, run against the first), `[[setup.steps]]` (requests to the running app, such as an install wizard: `get` or `post` a path, with `fields`; `button` and `value` for a Web Forms postback; `json` to post a JSON body instead (an AJAX page method, an MVC action); `contains`, `timeout`, `may_fail`, `retries`) |
 | `[ci]` | `linux = false` or `windows = false` to leave the app out of CI on that platform |
 | `env` | Extra environment for the server process (a table) |
 | `remove` | Globs of files `fetch` deletes before applying the overlay, kept out of the patch (the app's checked-in DLLs) |

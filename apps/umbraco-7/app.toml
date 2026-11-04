@@ -2,15 +2,60 @@
 
 name = "Umbraco 7"
 repo = "https://github.com/umbraco/Umbraco-CMS"
-ref = ""
+# release-7.15.11, the last 7.x release.
+ref = "bd60f4e2cea7ace2984dcfb8e61ef6512ea77c73"
 site = "src/Umbraco.Web.UI"
-kinds = ["mvc", "webapi", "webforms"]
+project = "src/Umbraco.Web.UI/Umbraco.Web.UI.csproj"
+# The build makes it from config/ClientDependency.Release.config, as the .NET Framework project did; Umbraco's
+# installer rewrites its version.
+generated = ["src/Umbraco.Web.UI/config/ClientDependency.config"]
+kinds = ["webforms", "mvc", "webapi", "webpages", "owin", "identity", "signalr"]
 licence = "MIT"
-status = "candidate"
-notes = "Pin the last 7.15.x release tag."
+status = "blocked"
+notes = "Builds on webForCore 0.7.0 (.NET 10), but Umbraco doesn't boot: its AutoMapper 3.3.1 throws configuring its first map (F22), so every request is a 500 and only the forbidden-path checks pass. Found F65 (named semaphores and events on Linux) and F66 (Log4Net.Async's CallContext)."
+needs = ["mssql"]
 
-# The first request compiles the site, so it gets 120 s.
-# [[probes]]
-# path = "/"
-# status = 200
-# contains = ""
+# web.config (made from web.Template.config at build) points at an "umbraco7" database on the compose SQL Server. The
+# install wizard can't run until Umbraco boots (F22): its JSON API (/install/api/GetSetup, PostPerformInstall) is where
+# the setup steps would go, as `json` steps (NOTES.md, "Smoke").
+[setup]
+databases = ["umbraco7"]
+
+# What a working, not yet installed Umbraco 7 answers (from its source; none has been seen to pass, NOTES.md). The
+# installer page (/install/) and the back office (/umbraco/) also need the AngularJS client built with npm and the
+# umbraco/Umbraco folders merged on Linux, so they aren't probed. The first request compiles, so it gets 120 s.
+
+# An uninstalled site sends every page to the installer.
+[[probes]]
+path = "/"
+status = 302
+
+# Web API: the installer's API (JSON, behind Angular's ")]}'," prefix).
+[[probes]]
+path = "/install/api/GetSetup"
+contains = "\"installId\""
+
+# MVC: the back office's localized text action (JSON from umbraco/config/lang/en.xml).
+[[probes]]
+path = "/umbraco/LocalizedText"
+contains = "\"general_login\": \"Login\""
+
+# Web Forms.
+[[probes]]
+path = "/umbraco/ping.aspx"
+contains = "I'm alive!"
+
+# ASMX: a script service's help page.
+[[probes]]
+path = "/umbraco/webservices/legacyAjaxCalls.asmx"
+contains = "legacyAjaxCalls Web Service"
+
+# ClientDependency's composite handler (an .axd in <handlers>), minifying /umbraco_client/modal/style.css.
+[[probes]]
+path = "/DependencyHandler.axd?s=L3VtYnJhY29fY2xpZW50L21vZGFsL3N0eWxlLmNzczs&t=Css&cdv=1"
+contains = "umbModalBox"
+
+# A static file.
+[[probes]]
+path = "/umbraco_client/modal/style.css"
+contains = "div.umbModalBox"

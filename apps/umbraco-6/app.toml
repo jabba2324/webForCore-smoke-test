@@ -1,0 +1,135 @@
+# Umbraco 6. Fields are described in README.md.
+
+name = "Umbraco 6"
+repo = "https://github.com/umbraco/Umbraco-CMS"
+# release-6.2.6, the last 6.x release.
+ref = "026805e4c126a1cb984cb0a25c95872b57ae4ddb"
+site = "src/Umbraco.Web.UI"
+project = "src/Umbraco.Web.UI/Umbraco.Web.UI.csproj"
+# The install wizard's last step rewrites ClientDependency's version number.
+generated = ["src/Umbraco.Web.UI/config/ClientDependency.config"]
+kinds = ["webforms", "mvc", "webapi", "webpages"]
+licence = "MIT"
+status = "migrated"
+notes = "On webForCore 0.7.0 (.NET 10, under webforcore-host) it builds, installs through [setup] and passes 16/16 on Linux: the back office, Web API, ASMX, handlers and an MVC template. Found F57-F63 (four webForCore bugs, three guide gaps) and F64."
+needs = ["mssql"]
+
+# The first request compiles the site, so it gets 120 s. The probes need the compose SQL Server with an "umbraco6"
+# database that Umbraco's install wizard has set up, and a published home page (NOTES.md, "Smoke").
+#
+# web.config (made from web.Template.config at build) already has the connection string, so the wizard's database
+# step goes straight to installing. Its install button calls a page method, InstallerRestService.aspx/Install, which
+# takes only a JSON POST: the `json` steps need the runner to send a raw JSON body (NOTES.md). Until it does, setup
+# stops at that step and the probes run against an uninstalled site.
+[setup]
+databases = ["umbraco6"]
+
+[[setup.steps]]
+get = "/install/default.aspx?installStep=database"
+contains = "Installing Umbraco"
+
+[[setup.steps]]
+post = "/install/InstallerRestService.aspx/Install"
+json = "{}"
+timeout = 300
+contains = "Installation completed!"
+
+# The admin user: a LinkButton postback (__EVENTTARGET, which a browser's __doPostBack sends).
+[[setup.steps]]
+post = "/install/default.aspx?installStep=defaultUser"
+button = "__EVENTTARGET"
+value = "ctl09$ctl12"
+fields = { "ctl09$tb_name" = "admin", "ctl09$tb_email" = "admin@example.com", "ctl09$tb_login" = "admin", "ctl09$tb_password" = "Smoke_test_1234", "ctl09$tb_password_confirm" = "Smoke_test_1234" }
+contains = "Starter Kit"
+
+# The starter kits come from our.umbraco.org, so that step is skipped. The last step writes the installed version to
+# web.config, which restarts the application.
+[[setup.steps]]
+get = "/install/default.aspx?installStep=theend"
+contains = "done...now what?"
+
+# Its first configured start creates App_Code and the other folders it uses, which restarts it once more; a request
+# caught by that restart fails (F59, NOTES.md). When the restart comes varies, so this request may fail, and the
+# log-in after it runs again until it gets past the restart.
+[[setup.steps]]
+get = "/umbraco/login.aspx"
+may_fail = true
+
+# Then, in the back office: a document type with its template (ids 1045 and 1046 on a new database), the template's
+# Razor (saved as Umbraco's editor does, a JSON POST to an MVC action), and a published home page (id 1047).
+[[setup.steps]]
+post = "/umbraco/login.aspx"
+button = "Button1"
+value = "Login"
+fields = { "lname" = "admin", "passw" = "Smoke_test_1234" }
+contains = "Logout:admin"
+retries = 4
+
+[[setup.steps]]
+post = "/umbraco/create.aspx?nodeId=init&nodeType=initnodeTypes&nodeName=Document%20Types&rnd=1"
+button = "ctl00$body$ctl00$sbmt"
+value = "Create"
+fields = { "ctl00$body$ctl00$rename" = "Home Page", "ctl00$body$ctl00$createTemplate" = "on", "ctl00$body$ctl00$masterType" = "0" }
+
+[[setup.steps]]
+post = "/umbraco/RestServices/SaveFile/SaveTemplate"
+json = '{"templateName": "Home Page", "templateAlias": "HomePage", "templateId": 1045, "masterTemplateId": 0, "templateContents": "@inherits Umbraco.Web.Mvc.UmbracoTemplatePage\n@{ Layout = null; }\n<!DOCTYPE html>\n<html><head><title>@Model.Content.Name</title></head>\n<body><h1>Rendered by Umbraco: @Umbraco.Field(\"pageName\")</h1><p>Page @Model.Content.Id at @Model.Content.Url</p></body></html>\n"}'
+contains = "\"success\":true"
+
+[[setup.steps]]
+post = "/umbraco/create.aspx?nodeId=-1&nodeType=content&nodeName=Content&rnd=1"
+button = "ctl00$body$ctl00$sbmt"
+value = "Create"
+fields = { "ctl00$body$ctl00$rename" = "Home", "ctl00$body$ctl00$nodeType" = "1046" }
+
+# Save and publish: the ImageButton's .x/.y.
+[[setup.steps]]
+post = "/umbraco/editContent.aspx?id=1047"
+button = "ctl00$body$TabView1_tab01layer_publish.x"
+value = "5"
+fields = { "ctl00$body$TabView1_tab01layer_publish.y" = "5", "ctl00$body$NameTxt" = "Home", "ctl00$body$ctl14" = "1045" }
+contains = "Last published"
+
+# The published home page, rendered by Umbraco's RenderMvcController with the template's Razor view (MVC).
+[[probes]]
+path = "/"
+contains = "Rendered by Umbraco: Home"
+
+# The back office's log-in form (Web Forms); "Login" comes from umbraco/config/lang/en.xml.
+[[probes]]
+path = "/umbraco/login.aspx"
+contains = "value=\"Login\""
+
+# The back office sends an anonymous visitor to log in.
+[[probes]]
+path = "/umbraco/"
+status = 302
+
+[[probes]]
+path = "/umbraco/ping.aspx"
+contains = "I'm alive!"
+
+# Web API: a back-office API controller, [UmbracoAuthorize].
+[[probes]]
+path = "/umbraco/BackOffice/Api/ExamineManagementApi/GetIndexerDetails"
+status = 401
+contains = "Authorization has been denied for this request."
+
+# ASMX: the ASP.NET AJAX client proxy of a script service, and a service's help page.
+[[probes]]
+path = "/umbraco/webservices/CheckForUpgrade.asmx/js"
+contains = "umbraco.presentation.webservices.CheckForUpgrade"
+
+[[probes]]
+path = "/umbraco/webservices/legacyAjaxCalls.asmx"
+contains = "legacyAjaxCalls Web Service"
+
+# ClientDependency's composite handler (an .axd in <handlers>), minifying /umbraco_client/ui/default.css.
+[[probes]]
+path = "/DependencyHandler.axd?s=L3VtYnJhY29fY2xpZW50L3VpL2RlZmF1bHQuY3NzOw&t=Css&cdv=1"
+contains = "body{font-family:Trebuchet MS"
+
+# A static file.
+[[probes]]
+path = "/umbraco_client/ui/default.css"
+contains = "font-family: Trebuchet MS"
