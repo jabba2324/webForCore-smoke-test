@@ -1,0 +1,766 @@
+info: WebFormsForCore.Host.WorkerPool[0]
+      Started worker 1 (process 2348) for $WFC_CHECKOUTS\orchard-1.10\src\Orchard.Web\bin_dotnet\Orchard.Web.dll: the host started.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://127.0.0.1:50354
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: $WFC_CHECKOUTS\orchard-1.10\src\Orchard.Web
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application 783e88bb in process 2348 (worker 1 of webforcore-host).
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:~\AppData\Local\Temp\webforcore-vxngxzpq.k3a\worker-1.sock
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 1 (process 2348) is serving (4.2 s after it started).
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: $WFC_CHECKOUTS\orchard-1.10\src\Orchard.Web
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 200 5775 text/html;+charset=utf-8 2841.8151ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 200 5775 text/html;+charset=utf-8 6420.1446ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 200 5775 text/html;+charset=utf-8 59.1964ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 200 5775 text/html;+charset=utf-8 79.8345ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:50354/ - application/x-www-form-urlencoded 313
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:50354/ - application/x-www-form-urlencoded 313
+orchard: 2026-11-04 22:29:27,180 [ASP.NET WorkerThread /] Orchard.Data.SessionConfigurationCache - WARN Error storing new NHibernate cache configuration: Type 'System.Type' in Assembly 'System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e' is not marked as serializable.
+orchard: 2026-11-04 22:29:29,095 [ASP.NET WorkerThread /] Orchard.Data.SessionConfigurationCache - WARN Error reading the cached NHibernate configuration: End of Stream encountered before parsing was completed.
+orchard: 2026-11-04 22:29:29,153 [ASP.NET WorkerThread /] Orchard.Data.SessionConfigurationCache - WARN Error storing new NHibernate cache configuration: Type 'System.Type' in Assembly 'System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e' is not marked as serializable.
+orchard: 2026-11-04 22:29:29,808 [ASP.NET WorkerThread /] Orchard.Exceptions.DefaultExceptionPolicy - ERROR An unexpected exception was caught
+System.MissingMethodException: Method not found: 'System.Type NHibernate.Persister.Entity.IEntityPersister.GetConcreteProxyClass(NHibernate.EntityMode)'.
+   at NHibernate.Linq.Util.SessionFactoryUtil.GetProxyMetaData(ISessionFactoryImplementor factory, IDictionary`2 metaData)
+   at NHibernate.Linq.Util.SessionFactoryUtil.GetProxyMetaData(ISessionFactoryImplementor factory, IDictionary`2 metaData)
+   at NHibernate.Linq.Visitors.AssociationVisitor..ctor(ISessionFactoryImplementor sessionFactory)
+   at NHibernate.Linq.NHibernateQueryProvider.TranslateExpression(Expression expression)
+   at Orchard.ContentManagement.DefaultContentQuery.OrderBy[TRecord,TKey](Expression`1 keySelector) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\ContentManagement\DefaultContentQuery.cs:line 147
+   at Orchard.ContentManagement.DefaultContentQuery.ContentQuery`2.Orchard.ContentManagement.IContentQuery<T,TR>.OrderBy[TKey](Expression`1 keySelector) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\ContentManagement\DefaultContentQuery.cs:line 353
+   at Orchard.Core.Navigation.Services.MainMenuService.GetMenus() in $WFC_CHECKOUTS\orchard-1.10\src\Orchard.Web\Core\Navigation\Services\MainMenuService.cs:line 64
+   at Orchard.Core.Navigation.DynamicPermissions.GetPermissions() in $WFC_CHECKOUTS\orchard-1.10\src\Orchard.Web\Core\Navigation\DynamicPermissions.cs:line 28
+   at Orchard.Roles.Services.RoleService.GetPermissionDescription(String permissionName)
+   at Orchard.Roles.Services.RoleService.CreatePermissionForRole(String roleName, String permissionName)
+   at Orchard.Roles.DefaultRoleUpdater.AddDefaultRolesForFeature(Feature feature)
+   at Orchard.Roles.DefaultRoleUpdater.Orchard.Environment.IFeatureEventHandler.Installed(Feature feature)
+   at Orchard.Events.DelegateHelper.<>c__DisplayClass14_0`2.<BuildAction>b__0(Object target, Object[] p) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Events\DelegateHelper.cs:line 116
+   at Orchard.Events.DefaultOrchardEventBus.TryInvokeMethod(IEventHandler eventHandler, Type interfaceType, String messageName, String interfaceName, String methodName, IDictionary`2 arguments, IEnumerable& returnValue) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Events\DefaultOrchardEventBus.cs:line 84
+   at Orchard.Events.DefaultOrchardEventBus.TryInvoke(IEventHandler eventHandler, String messageName, String interfaceName, String methodName, IDictionary`2 arguments, IEnumerable& returnValue) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Events\DefaultOrchardEventBus.cs:line 70
+   at Orchard.Events.DefaultOrchardEventBus.TryNotifyHandler(IEventHandler eventHandler, String messageName, String interfaceName, String methodName, IDictionary`2 eventData, IEnumerable& returnValue) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Events\DefaultOrchardEventBus.cs:line 53
+orchard: 2026-11-04 22:29:29,912 [ASP.NET WorkerThread /] Orchard.Exceptions.DefaultExceptionPolicy - ERROR An unexpected exception was caught
+System.MissingMethodException: Method not found: 'System.Type NHibernate.Persister.Entity.IEntityPersister.GetConcreteProxyClass(NHibernate.EntityMode)'.
+   at NHibernate.Linq.Util.SessionFactoryUtil.GetProxyMetaData(ISessionFactoryImplementor factory, IDictionary`2 metaData)
+   at NHibernate.Linq.Util.SessionFactoryUtil.GetProxyMetaData(ISessionFactoryImplementor factory, IDictionary`2 metaData)
+   at NHibernate.Linq.Visitors.AssociationVisitor..ctor(ISessionFactoryImplementor sessionFactory)
+   at NHibernate.Linq.NHibernateQueryProvider.TranslateExpression(Expression expression)
+   at Orchard.ContentManagement.DefaultContentQuery.OrderBy[TRecord,TKey](Expression`1 keySelector) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\ContentManagement\DefaultContentQuery.cs:line 147
+   at Orchard.ContentManagement.DefaultContentQuery.ContentQuery`2.Orchard.ContentManagement.IContentQuery<T,TR>.OrderBy[TKey](Expression`1 keySelector) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\ContentManagement\DefaultContentQuery.cs:line 353
+   at Orchard.Core.Navigation.Services.MainMenuService.GetMenus() in $WFC_CHECKOUTS\orchard-1.10\src\Orchard.Web\Core\Navigation\Services\MainMenuService.cs:line 64
+   at Orchard.Core.Navigation.DynamicPermissions.GetPermissions() in $WFC_CHECKOUTS\orchard-1.10\src\Orchard.Web\Core\Navigation\DynamicPermissions.cs:line 28
+   at Orchard.Roles.Services.RoleService.GetPermissionDescription(String permissionName)
+   at Orchard.Roles.Services.RoleService.CreatePermissionForRole(String roleName, String permissionName)
+   at Orchard.Roles.DefaultRoleUpdater.AddDefaultRolesForFeature(Feature feature)
+   at Orchard.Roles.DefaultRoleUpdater.Orchard.Environment.IFeatureEventHandler.Installed(Feature feature)
+   at Orchard.Events.DelegateHelper.<>c__DisplayClass14_0`2.<BuildAction>b__0(Object target, Object[] p) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Events\DelegateHelper.cs:line 116
+   at Orchard.Events.DefaultOrchardEventBus.TryInvokeMethod(IEventHandler eventHandler, Type interfaceType, String messageName, String interfaceName, String methodName, IDictionary`2 arguments, IEnumerable& returnValue) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Events\DefaultOrchardEventBus.cs:line 84
+   at Orchard.Events.DefaultOrchardEventBus.TryInvoke(IEventHandler eventHandler, String messageName, String interfaceName, String methodName, IDictionary`2 arguments, IEnumerable& returnValue) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Events\DefaultOrchardEventBus.cs:line 70
+   at Orchard.Events.DefaultOrchardEventBus.TryNotifyHandler(IEventHandler eventHandler, String messageName, String interfaceName, String methodName, IDictionary`2 eventData, IEnumerable& returnValue) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Events\DefaultOrchardEventBus.cs:line 53
+orchard: 2026-11-04 22:29:30,099 [ASP.NET WorkerThread /] Orchard.Data.SessionConfigurationCache - WARN Error storing new NHibernate cache configuration: Type 'System.Type' in Assembly 'System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e' is not marked as serializable.
+orchard: 2026-11-04 22:29:30,283 [ASP.NET WorkerThread /] Orchard.Data.SessionConfigurationCache - WARN Error storing new NHibernate cache configuration: Type 'System.Type' in Assembly 'System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e' is not marked as serializable.
+orchard: 2026-11-04 22:29:30,660 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeManager - INFO Executing recipe 'Core'.
+orchard: 2026-11-04 22:29:30,660 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeManager - INFO Executing recipe 'Core'.
+orchard: 2026-11-04 22:29:30,662 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Enqueuing recipe step 'Feature'.
+orchard: 2026-11-04 22:29:30,662 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Enqueuing recipe step 'Feature'.
+orchard: 2026-11-04 22:29:30,695 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Enqueuing recipe step 'ContentDefinition'.
+orchard: 2026-11-04 22:29:30,695 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Enqueuing recipe step 'ContentDefinition'.
+orchard: 2026-11-04 22:29:30,718 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Enqueuing recipe step 'Settings'.
+orchard: 2026-11-04 22:29:30,718 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Enqueuing recipe step 'Settings'.
+orchard: 2026-11-04 22:29:30,752 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Enqueuing recipe step 'Migration'.
+orchard: 2026-11-04 22:29:30,752 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Enqueuing recipe step 'Migration'.
+orchard: 2026-11-04 22:29:30,773 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Enqueuing recipe step 'Command'.
+orchard: 2026-11-04 22:29:30,773 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Enqueuing recipe step 'Command'.
+orchard: 2026-11-04 22:29:30,801 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Enqueuing recipe step 'ActivateShell'.
+orchard: 2026-11-04 22:29:30,801 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Enqueuing recipe step 'ActivateShell'.
+orchard: 2026-11-04 22:29:30,947 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe steps.
+orchard: 2026-11-04 22:29:30,947 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe steps.
+orchard: 2026-11-04 22:29:30,950 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe step 'Feature'.
+orchard: 2026-11-04 22:29:30,950 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe step 'Feature'.
+orchard: 2026-11-04 22:29:30,952 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepExecutor - INFO Executing recipe step 'Feature'.
+orchard: 2026-11-04 22:29:30,952 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepExecutor - INFO Executing recipe step 'Feature'.
+orchard: 2026-11-04 22:29:30,956 [ASP.NET WorkerThread /] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - INFO Executing recipe step 'Feature'.
+orchard: 2026-11-04 22:29:30,956 [ASP.NET WorkerThread /] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - INFO Executing recipe step 'Feature'.
+orchard: 2026-11-04 22:29:30,959 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeExecutionLogger - INFO FeatureStep: Disabling features: Feeds;Containers
+orchard: 2026-11-04 22:29:30,959 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeExecutionLogger - INFO FeatureStep: Disabling features: Feeds;Containers
+orchard: 2026-11-04 22:29:30,963 [ASP.NET WorkerThread /] Orchard.Data.SessionConfigurationCache - WARN Error reading the cached NHibernate configuration: End of Stream encountered before parsing was completed.
+orchard: 2026-11-04 22:29:31,079 [ASP.NET WorkerThread /] Orchard.Data.SessionConfigurationCache - WARN Error storing new NHibernate cache configuration: Type 'System.Type' in Assembly 'System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e' is not marked as serializable.
+orchard: 2026-11-04 22:29:31,150 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeExecutionLogger - INFO FeatureStep: Enabling features: Orchard.Resources;Orchard.Alias;Orchard.Autoroute
+orchard: 2026-11-04 22:29:31,150 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeExecutionLogger - INFO FeatureStep: Enabling features: Orchard.Resources;Orchard.Alias;Orchard.Autoroute
+orchard: 2026-11-04 22:29:31,159 [ASP.NET WorkerThread /] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - INFO Finished executing recipe step 'Feature'.
+orchard: 2026-11-04 22:29:31,159 [ASP.NET WorkerThread /] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - INFO Finished executing recipe step 'Feature'.
+orchard: 2026-11-04 22:29:31,209 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeScheduler - INFO Scheduling next step of recipe.
+orchard: 2026-11-04 22:29:31,209 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeScheduler - INFO Scheduling next step of recipe.
+orchard: 2026-11-04 22:29:31,299 [ASP.NET WorkerThread /] Orchard.Data.SessionConfigurationCache - WARN Error reading the cached NHibernate configuration: End of Stream encountered before parsing was completed.
+orchard: 2026-11-04 22:29:31,353 [ASP.NET WorkerThread /] Orchard.Data.SessionConfigurationCache - WARN Error storing new NHibernate cache configuration: Type 'System.Type' in Assembly 'System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e' is not marked as serializable.
+orchard: 2026-11-04 22:29:31,477 [ASP.NET WorkerThread /] Orchard.Data.SessionConfigurationCache - WARN Error reading the cached NHibernate configuration: End of Stream encountered before parsing was completed.
+orchard: 2026-11-04 22:29:31,542 [ASP.NET WorkerThread /] Orchard.Data.SessionConfigurationCache - WARN Error storing new NHibernate cache configuration: Type 'System.Type' in Assembly 'System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e' is not marked as serializable.
+orchard: 2026-11-04 22:29:31,688 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe steps.
+orchard: 2026-11-04 22:29:31,688 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe steps.
+orchard: 2026-11-04 22:29:31,690 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe step 'ContentDefinition'.
+orchard: 2026-11-04 22:29:31,690 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe step 'ContentDefinition'.
+orchard: 2026-11-04 22:29:31,692 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepExecutor - INFO Executing recipe step 'ContentDefinition'.
+orchard: 2026-11-04 22:29:31,692 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepExecutor - INFO Executing recipe step 'ContentDefinition'.
+orchard: 2026-11-04 22:29:31,693 [ASP.NET WorkerThread /] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - INFO Executing recipe step 'ContentDefinition'.
+orchard: 2026-11-04 22:29:31,693 [ASP.NET WorkerThread /] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - INFO Executing recipe step 'ContentDefinition'.
+orchard: 2026-11-04 22:29:31,695 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeExecutionLogger - INFO ContentDefinitionStep: Importing content type 'Page'.
+orchard: 2026-11-04 22:29:31,695 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeExecutionLogger - INFO ContentDefinitionStep: Importing content type 'Page'.
+orchard: 2026-11-04 22:29:31,743 [ASP.NET WorkerThread /] Orchard.Data.SessionConfigurationCache - WARN Error storing new NHibernate cache configuration: Type 'System.Type' in Assembly 'System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e' is not marked as serializable.
+orchard: 2026-11-04 22:29:31,790 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeExecutionLogger - INFO ContentDefinitionStep: Importing content part 'BodyPart'.
+orchard: 2026-11-04 22:29:31,790 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeExecutionLogger - INFO ContentDefinitionStep: Importing content part 'BodyPart'.
+orchard: 2026-11-04 22:29:31,797 [ASP.NET WorkerThread /] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - INFO Finished executing recipe step 'ContentDefinition'.
+orchard: 2026-11-04 22:29:31,797 [ASP.NET WorkerThread /] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - INFO Finished executing recipe step 'ContentDefinition'.
+orchard: 2026-11-04 22:29:31,804 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeScheduler - INFO Scheduling next step of recipe.
+orchard: 2026-11-04 22:29:31,804 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeScheduler - INFO Scheduling next step of recipe.
+orchard: 2026-11-04 22:29:31,866 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe steps.
+orchard: 2026-11-04 22:29:31,866 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe steps.
+orchard: 2026-11-04 22:29:31,868 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe step 'Settings'.
+orchard: 2026-11-04 22:29:31,868 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe step 'Settings'.
+orchard: 2026-11-04 22:29:31,869 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepExecutor - INFO Executing recipe step 'Settings'.
+orchard: 2026-11-04 22:29:31,869 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepExecutor - INFO Executing recipe step 'Settings'.
+orchard: 2026-11-04 22:29:31,870 [ASP.NET WorkerThread /] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - INFO Executing recipe step 'Settings'.
+orchard: 2026-11-04 22:29:31,870 [ASP.NET WorkerThread /] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - INFO Executing recipe step 'Settings'.
+orchard: 2026-11-04 22:29:31,873 [ASP.NET WorkerThread /] Orchard.Data.SessionConfigurationCache - WARN Error reading the cached NHibernate configuration: End of Stream encountered before parsing was completed.
+orchard: 2026-11-04 22:29:31,916 [ASP.NET WorkerThread /] Orchard.Data.SessionConfigurationCache - WARN Error storing new NHibernate cache configuration: Type 'System.Type' in Assembly 'System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e' is not marked as serializable.
+orchard: 2026-11-04 22:29:31,970 [ASP.NET WorkerThread /] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - INFO Finished executing recipe step 'Settings'.
+orchard: 2026-11-04 22:29:31,970 [ASP.NET WorkerThread /] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - INFO Finished executing recipe step 'Settings'.
+orchard: 2026-11-04 22:29:31,980 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeScheduler - INFO Scheduling next step of recipe.
+orchard: 2026-11-04 22:29:31,980 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeScheduler - INFO Scheduling next step of recipe.
+orchard: 2026-11-04 22:29:32,060 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe steps.
+orchard: 2026-11-04 22:29:32,060 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe steps.
+orchard: 2026-11-04 22:29:32,062 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe step 'Migration'.
+orchard: 2026-11-04 22:29:32,062 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe step 'Migration'.
+orchard: 2026-11-04 22:29:32,063 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepExecutor - INFO Executing recipe step 'Migration'.
+orchard: 2026-11-04 22:29:32,063 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepExecutor - INFO Executing recipe step 'Migration'.
+orchard: 2026-11-04 22:29:32,064 [ASP.NET WorkerThread /] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - INFO Executing recipe step 'Migration'.
+orchard: 2026-11-04 22:29:32,064 [ASP.NET WorkerThread /] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - INFO Executing recipe step 'Migration'.
+orchard: 2026-11-04 22:29:32,080 [ASP.NET WorkerThread /] Orchard.Data.SessionConfigurationCache - WARN Error reading the cached NHibernate configuration: End of Stream encountered before parsing was completed.
+orchard: 2026-11-04 22:29:32,136 [ASP.NET WorkerThread /] Orchard.Data.SessionConfigurationCache - WARN Error storing new NHibernate cache configuration: Type 'System.Type' in Assembly 'System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e' is not marked as serializable.
+orchard: 2026-11-04 22:29:32,161 [ASP.NET WorkerThread /] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - INFO Finished executing recipe step 'Migration'.
+orchard: 2026-11-04 22:29:32,161 [ASP.NET WorkerThread /] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - INFO Finished executing recipe step 'Migration'.
+orchard: 2026-11-04 22:29:32,168 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeScheduler - INFO Scheduling next step of recipe.
+orchard: 2026-11-04 22:29:32,168 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeScheduler - INFO Scheduling next step of recipe.
+orchard: 2026-11-04 22:29:32,248 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe steps.
+orchard: 2026-11-04 22:29:32,248 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe steps.
+orchard: 2026-11-04 22:29:32,250 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe step 'Command'.
+orchard: 2026-11-04 22:29:32,250 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe step 'Command'.
+orchard: 2026-11-04 22:29:32,251 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepExecutor - INFO Executing recipe step 'Command'.
+orchard: 2026-11-04 22:29:32,251 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepExecutor - INFO Executing recipe step 'Command'.
+orchard: 2026-11-04 22:29:32,251 [ASP.NET WorkerThread /] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - INFO Executing recipe step 'Command'.
+orchard: 2026-11-04 22:29:32,251 [ASP.NET WorkerThread /] Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler - INFO Executing recipe step 'Command'.
+orchard: 2026-11-04 22:29:32,253 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeExecutionLogger - INFO CommandStep: Executing command: menu create /MenuName:"Main Menu"
+orchard: 2026-11-04 22:29:32,253 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeExecutionLogger - INFO CommandStep: Executing command: menu create /MenuName:"Main Menu"
+orchard: 2026-11-04 22:29:32,268 [ASP.NET WorkerThread /] Orchard.Data.SessionConfigurationCache - WARN Error reading the cached NHibernate configuration: End of Stream encountered before parsing was completed.
+orchard: 2026-11-04 22:29:32,315 [ASP.NET WorkerThread /] Orchard.Data.SessionConfigurationCache - WARN Error storing new NHibernate cache configuration: Type 'System.Type' in Assembly 'System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e' is not marked as serializable.
+orchard: 2026-11-04 22:29:32,419 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeExecutionLogger - INFO CommandStep: Executing command: page create /Slug:"welcome-to-orchard" /Title:"Welcome to Orchard!" /Path:"welcome-to-orchard" /Homepage:true /Publish:true /Text:"Welcome To Orchard!"
+orchard: 2026-11-04 22:29:32,419 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeExecutionLogger - INFO CommandStep: Executing command: page create /Slug:"welcome-to-orchard" /Title:"Welcome to Orchard!" /Path:"welcome-to-orchard" /Homepage:true /Publish:true /Text:"Welcome To Orchard!"
+orchard: 2026-11-04 22:29:32,428 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeExecutionLogger - ERROR CommandStep: Error while executing command: page create /Slug:"welcome-to-orchard" /Title:"Welcome to Orchard!" /Path:"welcome-to-orchard" /Homepage:true /Publish:true /Text:"Welcome To Orchard!"
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation.
+ ---> System.MissingMethodException: Method not found: 'System.Type NHibernate.Persister.Entity.IEntityPersister.GetConcreteProxyClass(NHibernate.EntityMode)'.
+   at NHibernate.Linq.Util.SessionFactoryUtil.GetProxyMetaData(ISessionFactoryImplementor factory, IDictionary`2 metaData)
+   at NHibernate.Linq.Util.SessionFactoryUtil.GetProxyMetaData(ISessionFactoryImplementor factory, IDictionary`2 metaData)
+   at NHibernate.Linq.Visitors.AssociationVisitor..ctor(ISessionFactoryImplementor sessionFactory)
+   at NHibernate.Linq.NHibernateQueryProvider.TranslateExpression(Expression expression)
+   at Orchard.ContentManagement.DefaultContentQuery.Where[TRecord](Expression`1 predicate, ICriteria bindCriteria) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\ContentManagement\DefaultContentQuery.cs:line 131
+   at Orchard.ContentManagement.DefaultContentQuery.Where[TRecord](Expression`1 predicate) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\ContentManagement\DefaultContentQuery.cs:line 124
+   at Orchard.ContentManagement.DefaultContentQuery.ContentQuery`2.Orchard.ContentManagement.IContentQuery<T,TR>.Where(Expression`1 predicate) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\ContentManagement\DefaultContentQuery.cs:line 348
+   at Orchard.Users.Services.MembershipService.GetUser(String username)
+   at Orchard.Pages.Commands.PageCommands.Create()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+   --- End of inner exception stack trace ---
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at Orchard.Commands.DefaultOrchardCommandHandler.Invoke(CommandContext context) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Commands\DefaultOrchardCommandHandler.cs:line 67
+   at Orchard.Commands.DefaultOrchardCommandHandler.Execute(CommandContext context) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Commands\DefaultOrchardCommandHandler.cs:line 19
+   at Orchard.Commands.DefaultCommandManager.Execute(CommandParameters parameters) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Commands\DefaultCommandManager.cs:line 27
+   at Orchard.Recipes.Providers.Executors.CommandStep.Execute(RecipeExecutionContext context)
+orchard: 2026-11-04 22:29:32,428 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeExecutionLogger - ERROR CommandStep: Error while executing command: page create /Slug:"welcome-to-orchard" /Title:"Welcome to Orchard!" /Path:"welcome-to-orchard" /Homepage:true /Publish:true /Text:"Welcome To Orchard!"
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation.
+ ---> System.MissingMethodException: Method not found: 'System.Type NHibernate.Persister.Entity.IEntityPersister.GetConcreteProxyClass(NHibernate.EntityMode)'.
+   at NHibernate.Linq.Util.SessionFactoryUtil.GetProxyMetaData(ISessionFactoryImplementor factory, IDictionary`2 metaData)
+   at NHibernate.Linq.Util.SessionFactoryUtil.GetProxyMetaData(ISessionFactoryImplementor factory, IDictionary`2 metaData)
+   at NHibernate.Linq.Visitors.AssociationVisitor..ctor(ISessionFactoryImplementor sessionFactory)
+   at NHibernate.Linq.NHibernateQueryProvider.TranslateExpression(Expression expression)
+   at Orchard.ContentManagement.DefaultContentQuery.Where[TRecord](Expression`1 predicate, ICriteria bindCriteria) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\ContentManagement\DefaultContentQuery.cs:line 131
+   at Orchard.ContentManagement.DefaultContentQuery.Where[TRecord](Expression`1 predicate) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\ContentManagement\DefaultContentQuery.cs:line 124
+   at Orchard.ContentManagement.DefaultContentQuery.ContentQuery`2.Orchard.ContentManagement.IContentQuery<T,TR>.Where(Expression`1 predicate) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\ContentManagement\DefaultContentQuery.cs:line 348
+   at Orchard.Users.Services.MembershipService.GetUser(String username)
+   at Orchard.Pages.Commands.PageCommands.Create()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+   --- End of inner exception stack trace ---
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at Orchard.Commands.DefaultOrchardCommandHandler.Invoke(CommandContext context) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Commands\DefaultOrchardCommandHandler.cs:line 67
+   at Orchard.Commands.DefaultOrchardCommandHandler.Execute(CommandContext context) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Commands\DefaultOrchardCommandHandler.cs:line 19
+   at Orchard.Commands.DefaultCommandManager.Execute(CommandParameters parameters) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Commands\DefaultCommandManager.cs:line 27
+   at Orchard.Recipes.Providers.Executors.CommandStep.Execute(RecipeExecutionContext context)
+orchard: 2026-11-04 22:29:32,437 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepExecutor - ERROR Recipe execution failed because the step 'Command' failed.
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation.
+ ---> System.MissingMethodException: Method not found: 'System.Type NHibernate.Persister.Entity.IEntityPersister.GetConcreteProxyClass(NHibernate.EntityMode)'.
+   at NHibernate.Linq.Util.SessionFactoryUtil.GetProxyMetaData(ISessionFactoryImplementor factory, IDictionary`2 metaData)
+   at NHibernate.Linq.Util.SessionFactoryUtil.GetProxyMetaData(ISessionFactoryImplementor factory, IDictionary`2 metaData)
+   at NHibernate.Linq.Visitors.AssociationVisitor..ctor(ISessionFactoryImplementor sessionFactory)
+   at NHibernate.Linq.NHibernateQueryProvider.TranslateExpression(Expression expression)
+   at Orchard.ContentManagement.DefaultContentQuery.Where[TRecord](Expression`1 predicate, ICriteria bindCriteria) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\ContentManagement\DefaultContentQuery.cs:line 131
+   at Orchard.ContentManagement.DefaultContentQuery.Where[TRecord](Expression`1 predicate) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\ContentManagement\DefaultContentQuery.cs:line 124
+   at Orchard.ContentManagement.DefaultContentQuery.ContentQuery`2.Orchard.ContentManagement.IContentQuery<T,TR>.Where(Expression`1 predicate) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\ContentManagement\DefaultContentQuery.cs:line 348
+   at Orchard.Users.Services.MembershipService.GetUser(String username)
+   at Orchard.Pages.Commands.PageCommands.Create()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+   --- End of inner exception stack trace ---
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at Orchard.Commands.DefaultOrchardCommandHandler.Invoke(CommandContext context) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Commands\DefaultOrchardCommandHandler.cs:line 67
+   at Orchard.Commands.DefaultOrchardCommandHandler.Execute(CommandContext context) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Commands\DefaultOrchardCommandHandler.cs:line 19
+   at Orchard.Commands.DefaultCommandManager.Execute(CommandParameters parameters) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Commands\DefaultCommandManager.cs:line 27
+   at Orchard.Recipes.Providers.Executors.CommandStep.Execute(RecipeExecutionContext context)
+   at Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler.ExecuteRecipeStep(RecipeContext recipeContext)
+   at Orchard.Recipes.Services.RecipeStepExecutor.ExecuteNextStep(String executionId)
+orchard: 2026-11-04 22:29:32,437 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepExecutor - ERROR Recipe execution failed because the step 'Command' failed.
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation.
+ ---> System.MissingMethodException: Method not found: 'System.Type NHibernate.Persister.Entity.IEntityPersister.GetConcreteProxyClass(NHibernate.EntityMode)'.
+   at NHibernate.Linq.Util.SessionFactoryUtil.GetProxyMetaData(ISessionFactoryImplementor factory, IDictionary`2 metaData)
+   at NHibernate.Linq.Util.SessionFactoryUtil.GetProxyMetaData(ISessionFactoryImplementor factory, IDictionary`2 metaData)
+   at NHibernate.Linq.Visitors.AssociationVisitor..ctor(ISessionFactoryImplementor sessionFactory)
+   at NHibernate.Linq.NHibernateQueryProvider.TranslateExpression(Expression expression)
+   at Orchard.ContentManagement.DefaultContentQuery.Where[TRecord](Expression`1 predicate, ICriteria bindCriteria) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\ContentManagement\DefaultContentQuery.cs:line 131
+   at Orchard.ContentManagement.DefaultContentQuery.Where[TRecord](Expression`1 predicate) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\ContentManagement\DefaultContentQuery.cs:line 124
+   at Orchard.ContentManagement.DefaultContentQuery.ContentQuery`2.Orchard.ContentManagement.IContentQuery<T,TR>.Where(Expression`1 predicate) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\ContentManagement\DefaultContentQuery.cs:line 348
+   at Orchard.Users.Services.MembershipService.GetUser(String username)
+   at Orchard.Pages.Commands.PageCommands.Create()
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+   --- End of inner exception stack trace ---
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at Orchard.Commands.DefaultOrchardCommandHandler.Invoke(CommandContext context) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Commands\DefaultOrchardCommandHandler.cs:line 67
+   at Orchard.Commands.DefaultOrchardCommandHandler.Execute(CommandContext context) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Commands\DefaultOrchardCommandHandler.cs:line 19
+   at Orchard.Commands.DefaultCommandManager.Execute(CommandParameters parameters) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Commands\DefaultCommandManager.cs:line 27
+   at Orchard.Recipes.Providers.Executors.CommandStep.Execute(RecipeExecutionContext context)
+   at Orchard.Recipes.Providers.RecipeHandlers.RecipeExecutionStepHandler.ExecuteRecipeStep(RecipeContext recipeContext)
+   at Orchard.Recipes.Services.RecipeStepExecutor.ExecuteNextStep(String executionId)
+orchard: 2026-11-04 22:29:32,438 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe steps.
+orchard: 2026-11-04 22:29:32,438 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe steps.
+orchard: 2026-11-04 22:29:32,439 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe step 'ActivateShell'.
+orchard: 2026-11-04 22:29:32,439 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe step 'ActivateShell'.
+orchard: 2026-11-04 22:29:32,440 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe steps.
+orchard: 2026-11-04 22:29:32,440 [ASP.NET WorkerThread /] Orchard.Recipes.Services.RecipeStepQueue - INFO Dequeuing recipe steps.
+orchard: 2026-11-04 22:29:32,442 [ASP.NET WorkerThread /] Orchard.Exceptions.DefaultExceptionPolicy - ERROR An unexpected exception was caught
+Orchard.OrchardCoreException: Recipe execution with ID eaf2f9a74cd84e3daea446a62cd15d46 failed because the step 'Command' failed to execute. The following exception was thrown:
+Exception has been thrown by the target of an invocation.
+Refer to the error logs for more information.
+   at Orchard.Recipes.Services.RecipeStepExecutor.ExecuteNextStep(String executionId)
+   at Orchard.Recipes.Services.RecipeScheduler.ExecuteWork(String executionId)
+   at Orchard.Events.DelegateHelper.<>c__DisplayClass14_0`2.<BuildAction>b__0(Object target, Object[] p) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Events\DelegateHelper.cs:line 116
+   at Orchard.Events.DefaultOrchardEventBus.TryInvokeMethod(IEventHandler eventHandler, Type interfaceType, String messageName, String interfaceName, String methodName, IDictionary`2 arguments, IEnumerable& returnValue) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Events\DefaultOrchardEventBus.cs:line 84
+   at Orchard.Events.DefaultOrchardEventBus.TryInvoke(IEventHandler eventHandler, String messageName, String interfaceName, String methodName, IDictionary`2 arguments, IEnumerable& returnValue) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Events\DefaultOrchardEventBus.cs:line 70
+   at Orchard.Events.DefaultOrchardEventBus.TryNotifyHandler(IEventHandler eventHandler, String messageName, String interfaceName, String methodName, IDictionary`2 eventData, IEnumerable& returnValue) in $WFC_CHECKOUTS\orchard-1.10\src\Orchard\Events\DefaultOrchardEventBus.cs:line 53
+orchard: 2026-11-04 22:29:32,541 [ASP.NET WorkerThread /] Orchard.Data.SessionConfigurationCache - WARN Error storing new NHibernate cache configuration: Type 'System.Type' in Assembly 'System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e' is not marked as serializable.
+orchard: 2026-11-04 22:29:32,675 [ASP.NET WorkerThread /] Orchard.Data.SessionConfigurationCache - WARN Error storing new NHibernate cache configuration: Type 'System.Type' in Assembly 'System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e' is not marked as serializable.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:50354/ - 302 118 text/html;+charset=utf-8 6693.7667ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 302.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:50354/ - 302 118 text/html;+charset=utf-8 6702.2813ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 5.5695ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 15.1736ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.0911ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 6.5524ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 3.6824ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 5.0218ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.3350ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 4.1318ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.4403ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 3.5824ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.5175ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 3.6267ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.9239ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 4.2202ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.3924ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 3.3277ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.4147ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 3.1827ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 3.1723ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 4.5009ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.4497ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 3.5994ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.0586ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.8713ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 1.8667ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.9452ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 1.8531ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 3.6536ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.4829ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 3.8505ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.0221ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 3.2111ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.6680ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 3.7058ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 23.7870ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 31.5258ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 1.7767ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.5701ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 1.9435ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.7324ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 1.5847ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.2861ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 1.8611ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.6747ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.0465ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.8334ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 1.9876ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.8827ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 1.9973ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.8622ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 1.6594ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.4119ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 1.5804ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.4321ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 1.7002ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.5350ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 1.7041ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.5295ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 3.4048ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.7389ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 1.7903ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.5884ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.2696ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.9222ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.4508ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 3.2920ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 1.5473ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.0283ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 1.4797ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 1.9822ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 1.4846ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.0160ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 1.5665ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.1398ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:50354/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 1.4714ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 503.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:50354/ - 503 62 - 2.1000ms
+info: WebFormsForCore.Hosting.WorkerProcess.WorkerLifetime[0]
+      Worker 1: the host closed its connection: stopping.
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Application 783e88bb is shutting down (HostingEnvironment).
