@@ -1,6 +1,6 @@
 # AspNetDocs: Wingtip Toys (Web Forms 4.5 + EF 6 tutorial): migration notes
 
-Status: blocked (webForCore 0.8.0, 18/21 probes on Linux, Windows pending (CI); F80, F81 and F82 are webForCore bugs; the shopping cart works from 0.8.0). Source: the
+Status: blocked (webForCore 0.8.0, 18/21 probes on Linux, 19/21 on Windows; F80, F81 and F82 are webForCore bugs; the shopping cart works from 0.8.0). Source: the
 completed project of the AspNetDocs tutorial "Getting Started with ASP.NET 4.5 Web Forms and Visual Studio 2013"
 (`aspnet/web-forms/overview/getting-started/getting-started-with-aspnet-45-web-forms` in dotnet/AspNetDocs). The
 repository has only the tutorial's snippets; the tutorial links the project on the retired MSDN Code Gallery
@@ -106,7 +106,7 @@ No cookie of its own; the session's `ASP.NET_SessionId` is what ties requests to
 Probes added for it (they share a cookie jar: `cookies = true`, a small runner change, README.md):
 `/AddToCart?productID=1` answers 302, then `/ShoppingCart` contains "Convertible Car" and not "Shopping Cart is Empty".
 
-**Linux: 18/21** (the 16/19 plus both cart probes); Windows: pending (CI on this PR). The failures are
+**Linux: 18/21** (the 16/19 plus both cart probes); **Windows (CI run 41913198487): 19/21**, the cart probes passing there too. The failures are
 still F80, F81 and F82 (Linux).
 
 The currency is the process culture's, as on IIS with the server's culture (no `<globalization>` in `Web.config`),
