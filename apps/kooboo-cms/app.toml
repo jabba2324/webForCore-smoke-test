@@ -5,13 +5,113 @@ repo = "https://github.com/Kooboo/CMS"
 ref = "e5879728c817f37b275219636e7c24bf84a02830"
 site = "Kooboo.CMS/Kooboo.CMS.Web"
 project = "Kooboo.CMS/Kooboo.CMS.Web/Kooboo.CMS.Web.csproj"
+# Logging in records the date in the admin user's file, which is in the repository.
+generated = ["**/Cms_Data/Account/Users/admin.config"]
 kinds = ["mvc"]
 licence = "BSD-3-Clause"
-status = "verified"
-notes = "Large MVC CMS, .NET 4.0 (MVC 4 era: check the MVC version). Has a Mono project file, so it may already avoid Windows-only APIs."
+status = "migrated"
+notes = "Kooboo CMS 4.4 (MVC 4, .NET 4.0, file storage) on webForCore 0.8.0: builds, creates a site through [setup] and passes 23/23 on Linux and Windows (CI run 41920542509). Found F90 (crypto factories), F91 (DotNetZip 1.9) and F92 (inotify instances per directory: here it needs more than this machine had free)."
 
-# The first request compiles the site, so it gets 120 s.
-# [[probes]]
-# path = "/"
-# status = 200
-# contains = ""
+# Kooboo keeps its sites, content and users in files under Cms_Data. The setup logs in as the default admin
+# (admin/admin) and creates a site, "sample", from the SampleSite template, with its content database and membership.
+# Kooboo serves a site that has no domain bound under /dev~<site>/. On a second run the site already exists, so the
+# creation may fail there; the probes show whether the site is there.
+[setup]
+
+[[setup.steps]]
+post = "/Account/LogOn"
+fields = { UserName = "admin", Password = "admin", RememberMe = "false" }
+contains = "Site cluster"
+timeout = 180
+
+# The form posts by AJAX and gets JSON. The membership is the template's own: Kooboo 4.4 saves the site's membership
+# back to the template's name after creating one under another name (NOTES.md).
+[[setup.steps]]
+post = "/Sites/Site/Create"
+fields = { template = "SampleSite", Name = "sample", Repository = "sample", CreateNew = "true", Culture = "en-US", TimeZoneId = "UTC", Parent = "" }
+contains = "\"Success\":true"
+timeout = 300
+may_fail = true
+
+# A site created from a template has no search index: the back office's "Rebuild" (Contents > Search index) builds the
+# Article folder's in a background thread, and the search page shows hits once it's done (5 s between tries).
+[[setup.steps]]
+post = "/Contents/SearchIndex/Rebuild?repositoryName=sample"
+fields = { "model[0].FolderName" = "Article" }
+contains = "\"Success\":true"
+
+[[setup.steps]]
+get = "/dev~sample/search?key=Lorem"
+contains = "<strong class='highlight'>Lorem</strong> ipsum dolor sit amet 4"
+retries = 12
+
+# The first request compiles the site, so it gets 120 s. No site is bound to 127.0.0.1, so / goes to Kooboo's 404 page.
+[[probes]]
+path = "/"
+status = 302
+
+[[probes]]
+path = "/kooboo-404"
+contains = "Not Found - Kooboo CMS"
+
+# The front site: pages rendered from Razor templates in Cms_Data, with content from the file-based repository.
+[[probes]]
+path = "/dev~sample/"
+contains = "Lorem ipsum dolor sit amet 4"
+
+[[probes]]
+path = "/dev~sample/Articles/Detail/Lorem-ipsum-dolor-sit-amet-4"
+contains = "<title>Lorem ipsum dolor sit amet 4 - Sample site</title>"
+
+[[probes]]
+path = "/dev~sample/Articles/Chrome"
+contains = "<title>Articles - Sample site</title>"
+
+[[probes]]
+path = "/dev~sample/about"
+contains = "<title>About us - Sample site</title>"
+
+# Full-text search (Lucene.Net 2.9).
+[[probes]]
+path = "/dev~sample/search?key=Lorem"
+contains = "<strong class='highlight'>Lorem</strong> ipsum dolor sit amet 4"
+
+# Forms with anti-forgery tokens.
+[[probes]]
+path = "/dev~sample/Member/Login"
+contains = "<title>Member login - Sample site</title>"
+
+[[probes]]
+path = "/dev~sample/Member/Register"
+contains = "Kooboo-Submit/RegisterMember"
+
+# The back office: the sign-in form (an MVC area) and a page behind it.
+[[probes]]
+path = "/Account/LogOn"
+contains = "name=\"Password\""
+
+[[probes]]
+path = "/Sites/Home/Cluster"
+status = 302
+
+# Kooboo's own resource handlers: CSS and scripts combined from web.config's webResources.
+[[probes]]
+path = "/Account/WebResource?name=siteStyles&version=20140305"
+contains = ".ui-helper-hidden"
+
+[[probes]]
+path = "/Kooboo-WebResource/Index/jQuery/20130227"
+contains = "jQuery"
+
+# Static files: the site's theme, an uploaded file, and one of the application's scripts.
+[[probes]]
+path = "/Cms_Data/Sites/sample/Themes/Default/common.css"
+contains = "Main Container"
+
+[[probes]]
+path = "/Cms_Data/Sites/sample/Files/logo.png"
+status = 200
+
+[[probes]]
+path = "/Scripts/less.js"
+contains = "less"

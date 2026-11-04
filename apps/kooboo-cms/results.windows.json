@@ -1,0 +1,197 @@
+{
+  "id": "kooboo-cms",
+  "stages": {
+    "build": {
+      "at": "2026-11-04T21:57:18+00:00",
+      "error_count": 0,
+      "errors": [],
+      "log": "apps\\kooboo-cms\\logs.windows\\build.log",
+      "seconds": 76,
+      "status": "pass",
+      "summary": null,
+      "webforcore": "packages 0.8.0"
+    },
+    "fetch": {
+      "at": "2026-11-04T21:56:02+00:00",
+      "commit": "e5879728c817f37b275219636e7c24bf84a02830",
+      "overlay": true,
+      "status": "pass"
+    },
+    "setup": {
+      "at": "2026-11-04T21:57:31+00:00",
+      "created": [],
+      "date": "2026-11-04",
+      "status": "pass",
+      "steps": [
+        {
+          "ok": true,
+          "status": 200,
+          "step": "/Account/LogOn"
+        },
+        {
+          "may_fail": true,
+          "ok": true,
+          "status": 200,
+          "step": "/Sites/Site/Create"
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "step": "/Contents/SearchIndex/Rebuild?repositoryName=sample"
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "step": "/dev~sample/search?key=Lorem"
+        }
+      ],
+      "summary": "4/4 steps"
+    },
+    "smoke": {
+      "at": "2026-11-04T21:57:40+00:00",
+      "checks": [
+        {
+          "ms": 14,
+          "ok": true,
+          "path": "/",
+          "status": 302
+        },
+        {
+          "ms": 1042,
+          "ok": true,
+          "path": "/kooboo-404",
+          "status": 200
+        },
+        {
+          "ms": 891,
+          "ok": true,
+          "path": "/dev~sample/",
+          "status": 200
+        },
+        {
+          "ms": 1230,
+          "ok": true,
+          "path": "/dev~sample/Articles/Detail/Lorem-ipsum-dolor-sit-amet-4",
+          "status": 200
+        },
+        {
+          "ms": 62,
+          "ok": true,
+          "path": "/dev~sample/Articles/Chrome",
+          "status": 200
+        },
+        {
+          "ms": 253,
+          "ok": true,
+          "path": "/dev~sample/about",
+          "status": 200
+        },
+        {
+          "ms": 143,
+          "ok": true,
+          "path": "/dev~sample/search?key=Lorem",
+          "status": 200
+        },
+        {
+          "ms": 721,
+          "ok": true,
+          "path": "/dev~sample/Member/Login",
+          "status": 200
+        },
+        {
+          "ms": 281,
+          "ok": true,
+          "path": "/dev~sample/Member/Register",
+          "status": 200
+        },
+        {
+          "ms": 683,
+          "ok": true,
+          "path": "/Account/LogOn",
+          "status": 200
+        },
+        {
+          "ms": 15,
+          "ok": true,
+          "path": "/Sites/Home/Cluster",
+          "status": 302
+        },
+        {
+          "ms": 454,
+          "ok": true,
+          "path": "/Account/WebResource?name=siteStyles&version=20140305",
+          "status": 200
+        },
+        {
+          "ms": 25,
+          "ok": true,
+          "path": "/Kooboo-WebResource/Index/jQuery/20130227",
+          "status": 200
+        },
+        {
+          "ms": 24,
+          "ok": true,
+          "path": "/Cms_Data/Sites/sample/Themes/Default/common.css",
+          "status": 200
+        },
+        {
+          "ms": 6,
+          "ok": true,
+          "path": "/Cms_Data/Sites/sample/Files/logo.png",
+          "status": 200
+        },
+        {
+          "ms": 8,
+          "ok": true,
+          "path": "/Scripts/less.js",
+          "status": 200
+        },
+        {
+          "ms": 7,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 18,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 14,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/packages.config",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/bin_dotnet/Kooboo.CMS.Web.dll",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
+          "status": 404
+        }
+      ],
+      "log": "apps\\kooboo-cms\\logs.windows\\server.log",
+      "status": "pass",
+      "summary": "23/23 probes"
+    }
+  }
+}
