@@ -2,15 +2,102 @@
 
 name = "Umbraco 8"
 repo = "https://github.com/umbraco/Umbraco-CMS"
-ref = ""
+# release-8.18.15, the last 8.x release.
+ref = "4fbf8020bf08dc26bf93f01b02bc39852ee36553"
 site = "src/Umbraco.Web.UI"
-kinds = ["mvc", "webapi", "signalr"]
+project = "src/Umbraco.Web.UI/Umbraco.Web.UI.csproj"
+kinds = ["mvc", "webapi", "webforms", "owin", "identity", "signalr"]
 licence = "MIT"
-status = "candidate"
-notes = "Pin the last 8.18.x release tag. Supports SQL CE / SQL Server."
+status = "migrating"
+notes = "Umbraco 8.18.15 (.NET 4.7.2) with SQL Server, installed unattended."
+needs = ["mssql"]
+
+# The unattended install's back-office user (Umbraco reads these at its first start).
+[env]
+UnattendedUserName = "Smoke Admin"
+UnattendedUserEmail = "admin@example.com"
+UnattendedUserPassword = "Smoke_test_1234"
+
+# web.config (made from web.Template.config at build) points at an "umbraco8" database on the compose SQL Server and
+# has Umbraco.Core.RuntimeState.InstallUnattended: the first request installs the schema and the user above. Then the
+# back office's log-in (Web API, ASP.NET Identity and OWIN cookies) as Umbraco's AngularJS client posts it. Creating
+# content needs the back office's anti-forgery header (X-UMB-XSRF-TOKEN), which setup steps can't send, so the site
+# has no content (NOTES.md).
+[setup]
+databases = ["umbraco8"]
+
+[[setup.steps]]
+get = "/"
+timeout = 300
+contains = "Welcome to your Umbraco installation"
+
+[[setup.steps]]
+post = "/umbraco/backoffice/UmbracoApi/Authentication/PostLogin"
+json = '{"username": "admin@example.com", "password": "Smoke_test_1234"}'
+contains = "\"email\":\"admin@example.com\""
 
 # The first request compiles the site, so it gets 120 s.
-# [[probes]]
-# path = "/"
-# status = 200
-# contains = ""
+# Web Forms: with no published content, Umbraco's module serves its "no nodes" splash page for /.
+[[probes]]
+path = "/"
+contains = "Welcome to your Umbraco installation"
+
+[[probes]]
+path = "/config/splashes/noNodes.aspx"
+contains = "doesn't contain any published content yet"
+
+# Installed: the installer sends you to the back office.
+[[probes]]
+path = "/install/"
+status = 302
+
+# MVC: the back office's shell page and the script action it loads (the AngularJS client itself isn't built here).
+[[probes]]
+path = "/umbraco/"
+contains = "Application?umb__rnd="
+
+[[probes]]
+path = "/umbraco/Application"
+contains = "LazyLoad.js"
+
+# MVC: the back office's localized text (JSON from Umbraco/config/lang/en.xml).
+[[probes]]
+path = "/umbraco/LocalizedText"
+contains = "\"assignDomain\":\"Culture and Hostnames\""
+
+# Web API: anonymous, and behind authorization.
+[[probes]]
+path = "/umbraco/backoffice/UmbracoApi/Authentication/IsAuthenticated"
+contains = "false"
+
+[[probes]]
+path = "/umbraco/backoffice/UmbracoApi/Authentication/GetCurrentUser"
+status = 401
+contains = "Authorization has been denied for this request."
+
+# SignalR 2: the preview hub's proxies and a negotiation.
+[[probes]]
+path = "/umbraco/BackOffice/signalr/hubs"
+contains = "proxies['previewHub']"
+
+[[probes]]
+path = "/umbraco/BackOffice/signalr/negotiate?clientProtocol=1.5"
+contains = "\"ConnectionToken\""
+
+# ClientDependency's composite handler (DependencyHandler.axd), minifying /Umbraco/js/guiFunctions.js.
+[[probes]]
+path = "/DependencyHandler.axd?s=L1VtYnJhY28vanMvZ3VpRnVuY3Rpb25zLmpzOw&t=Javascript&cdv=1"
+contains = "toggleTree"
+
+# Static files.
+[[probes]]
+path = "/Umbraco/js/guiFunctions.js"
+contains = "function toggleTree(sender)"
+
+[[probes]]
+path = "/Umbraco/assets/img/login.jpg"
+status = 200
+
+[[probes]]
+path = "/Views/Web.config"
+status = 404
