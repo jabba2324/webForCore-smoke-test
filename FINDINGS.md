@@ -18,6 +18,11 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 - **Web Forms, Web Pages and MVC 3 candidates** (new apps, migrated on 0.7.0 with webForCore-thirdparty 0.6.0):
   screwturn-wiki (24/24 on Linux and Windows), mvc-music-store (20/20 on both; its accounts are blocked by F75) and
   rabbit-webpages (20/21 on both, F79); F73–F79 were found there.
+- **OWIN, SignalR and Web API candidates** (new apps, on 0.7.0): signalr-samples (18/19 on Linux and Windows, F70),
+  odata-samples-compositekey (8/15, F68) and identityserver3-example (7/10, F69); F68–F72 were found there.
+- **AspNetDocs tutorial candidates** (new apps, on 0.7.0): aspnetdocs-contoso-university (16/16 on Linux and Windows)
+  and aspnetdocs-wingtip-toys (16/19 on Linux, 17/19 on Windows, F80–F82); aspnetdocs-bookservice is rejected (no
+  licence).
 
 Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
@@ -37,7 +42,6 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F11](#f11) | One URL Rewrite feature ASP.NET Core lacks (Wildcard syntax, `{CACHE_URL}`) drops every rule, failing open | webForCore bug | miniblog | [#10](https://github.com/xforcore/webForCore/issues/10) |
 | [F12](#f12) | A rewrite to a query-only URL (`?slug={R:1}`) is a bare 500 (`IndexOutOfRangeException`) | webForCore bug | miniblog | [#11](https://github.com/xforcore/webForCore/issues/11) |
 | [F13](#f13) | `<handlers>` entries whose `path` starts with `/` never match | webForCore bug | miniblog | [#12](https://github.com/xforcore/webForCore/issues/12) |
-
 | [F14](#f14) | The trailing-slash 301 for a directory pre-empts routing with `RouteExistingFiles = true` | webForCore bug | clean-architecture-mvc5 | [#13](https://github.com/xforcore/webForCore/issues/13) |
 | [F15](#f15) | The VS template's social login packages (Facebook, Google, MicrosoftAccount, Twitter) aren't in webForCore | guide gap | aspnetdocs-mvcmovie | [#14](https://github.com/xforcore/webForCore/issues/14) |
 | [F16](#f16) | Replaced packages are one version; Identity 2.0 apps collide with 2.2's `SignInStatus` | guide gap | open-order-framework | [#17](https://github.com/xforcore/webForCore/issues/17) |
@@ -97,7 +101,6 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F70](#f70) | `/signalr/hubs` serves the template's unreplaced `[!VERSION!]` | webForCore bug | signalr-samples | [#118](https://github.com/xforcore/webForCore/issues/118) |
 | [F71](#f71) | VB projects: `<MyType>Windows</MyType>` doesn't compile on .NET (BC30002 `My.Computer`, `My.User`) | guide gap | signalr-samples | [#121](https://github.com/xforcore/webForCore/issues/121) |
 | [F72](#f72) | Linux: the user's inotify instances (128 by default) run out with many apps running: "Failed to start monitoring changes" | app/environment | signalr-samples, identityserver3-example (on this machine) | - |
-
 | [F73](#f73) | MVC 3/4 apps: `webpages:Version` 1.0.0.0/2.0.0.0 fails every request ("Conflicting versions of ASP.NET Web Pages") | guide gap | mvc-music-store | [#122](https://github.com/xforcore/webForCore/issues/122) |
 | [F74](#f74) | MVC 3/4 apps: `[Compare]` is ambiguous (CS0104) between MVC's and DataAnnotations' `CompareAttribute` | guide gap | mvc-music-store | [#122](https://github.com/xforcore/webForCore/issues/122) |
 | [F75](#f75) | No `aspnet_regsql`: `SqlServices.Install` can't find `InstallCommon.sql`, so SQL membership/roles/profile apps can't create their database | webForCore bug | mvc-music-store | [#123](https://github.com/xforcore/webForCore/issues/123) |
@@ -105,6 +108,9 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F77](#f77) | Windows-only data stores (SQL CE, SQL Express user instances) and data written on Windows (`\` in a wiki's page index) | app/environment | screwturn-wiki, mvc-music-store, rabbit-webpages | - |
 | [F78](#f78) | WebMatrix.Data and WebMatrix.WebData aren't provided or documented (Microsoft's 3.2.9 packages work) | guide gap | rabbit-webpages | [#130](https://github.com/xforcore/webForCore/issues/130) |
 | [F79](#f79) | `Response.End()` after `StatusCode = 401` sends the 401: forms authentication doesn't redirect to the log-in page | webForCore bug | rabbit-webpages | [#129](https://github.com/xforcore/webForCore/issues/129) |
+| [F80](#f80) | A request path with an escaped character (a space, non-ASCII) is answered 400 before the application | webForCore bug | aspnetdocs-wingtip-toys | [#126](https://github.com/xforcore/webForCore/issues/126) |
+| [F81](#f81) | `Request.RawUrl` is the default document's path for a directory request: FriendlyUrls 301s `/` to `/Default` | webForCore bug | aspnetdocs-wingtip-toys | [#127](https://github.com/xforcore/webForCore/issues/127) |
+| [F82](#f82) | Linux: `Server.MachineName` throws `DllNotFoundException` (kernel32); ELMAH's log pages fail | webForCore bug | aspnetdocs-wingtip-toys | [#128](https://github.com/xforcore/webForCore/issues/128) |
 ---
 
 ## F1
@@ -1576,3 +1582,49 @@ page.** webForCore bug. Raised as [#129](https://github.com/xforcore/webForCore/
   thread abort (documented), and its `End()` sends the response first.
 - **Affects:** every Web Pages page with `WebSecurity.RequireAuthenticatedUser()`/`RequireRoles()`, and Web Forms code
   that sends users to the log-in page with a 401 and `Response.End()`.
+
+## F80
+
+**A request path with a percent-escaped character (a space, any non-ASCII character) is answered 400 with an empty
+body, before the application sees it.** webForCore bug. Raised as
+[#126](https://github.com/xforcore/webForCore/issues/126). Found on 0.7.0 (Linux and Windows), in the candidates round for the
+AspNetDocs tutorial apps.
+
+- **Apps:** aspnetdocs-wingtip-toys: its product list links each product as
+  `GetRouteUrl("ProductByNameRoute", new { productName = Item.ProductName })`, `/Product/Convertible%20Car`, so every
+  product link answers 400 (IIS: 200). `/About%20x` is 400 too (IIS: 404).
+- **Cause:** `AspNetCoreWorkerRequest.ParseRequest` builds the path as `$"{Context.Request.PathBase}{Context.Request.Path}"`;
+  `PathString.ToString()` is the escaped form, so the path has `%20`, and `IsBadPath()` rejects any `%`.
+- **Repro:** any site, `GET /a%20b.htm` with a file `a b.htm`, or a page route with a value containing a space.
+- **Suggested fix:** the decoded `PathBase.Value + Path.Value`.
+
+## F81
+
+**`Request.RawUrl` is the default document's path for a directory request, so FriendlyUrls redirects `/` to
+`/Default`.** webForCore bug. Raised as [#127](https://github.com/xforcore/webForCore/issues/127). Found on 0.7.0
+(Linux and Windows), in the candidates round for the AspNetDocs tutorial apps.
+
+- **Apps:** aspnetdocs-wingtip-toys (the Visual Studio 2013 Web Forms template's
+  `EnableFriendlyUrls(new FriendlyUrlSettings { AutoRedirectMode = RedirectMode.Permanent })`): `GET /` is
+  `301 Location: /Default`; IIS serves `Default.aspx` with 200. `/Default` itself renders.
+- **Cause:** `AspNetCoreHost.IsLegacyRequest` rewrites `Request.Path` to `/Default.aspx`, and `GetRawUrl()` returns that
+  path. On IIS `RawUrl` stays `/`. FriendlyUrls' `FriendlyUrlsModule.RedirectToFriendlyUrl` redirects only when
+  `RawUrl` contains the `.aspx` path, so that default-document requests aren't redirected.
+- **Repro:** a Web Forms site with `Default.aspx` and `RouteTable.Routes.EnableFriendlyUrls(new FriendlyUrlSettings
+  { AutoRedirectMode = RedirectMode.Permanent })` (Microsoft.AspNet.FriendlyUrls 1.0.2); `GET /`.
+- **Suggested fix:** `RawUrl` from the request's raw target, taken before the default-document rewrite.
+
+## F82
+
+**Linux: `HttpServerUtility.MachineName` throws `DllNotFoundException` (`kernel32` `GetComputerName`).** webForCore
+bug. Raised as [#128](https://github.com/xforcore/webForCore/issues/128). Found on 0.7.0 (Linux), in the candidates
+round for the AspNetDocs tutorial apps.
+
+- **Apps:** aspnetdocs-wingtip-toys, through ELMAH 1.2.2 (`Elmah.Environment.TryGetMachineName`): `/elmah.axd/rss`
+  and `/json` fail with the exception (behind the app's custom error page), and `/elmah.axd`, the error log, answers
+  200 with an empty body. `/elmah.axd/about` and `/stylesheet` work. ELMAH is one of the most common ASP.NET packages.
+- **Error:** `DllNotFoundException: Unable to load shared library 'kernel32.dll'` at
+  `System.Web.UnsafeNativeMethods.GetComputerName` ← `HttpServerUtility.GetMachineNameInternal()` ←
+  `HttpServerUtility.get_MachineName()`.
+- **Repro:** a page with `<%= Server.MachineName %>`, on Linux.
+- **Suggested fix:** `Environment.MachineName` off Windows.

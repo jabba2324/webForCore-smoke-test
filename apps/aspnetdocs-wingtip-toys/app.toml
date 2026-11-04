@@ -1,0 +1,68 @@
+# AspNetDocs: Wingtip Toys (Web Forms 4.5 + EF 6 tutorial). Fields are described in README.md.
+# The tutorial (dotnet/AspNetDocs, aspnet/web-forms/overview/getting-started/getting-started-with-aspnet-45-web-forms)
+# links its completed project on the retired MSDN Code Gallery; Microsoft's archive of the gallery keeps it, Apache-2.0.
+
+name = "AspNetDocs: Wingtip Toys (Web Forms 4.5 + EF 6 tutorial)"
+repo = "https://github.com/microsoftarchive/msdn-code-gallery-community-d-l"
+ref = "e0c91fbfb40567858d48eb5cad5a7183d1e3a482"
+site = "Getting Started with ASP.NET 4.5 Web Forms and Visual Studio 2013 - Wingtip Toys/[C#]-Getting Started with ASP.NET 4.5 Web Forms and Visual Studio 2013 - Wingtip Toys/C#/WingtipToys"
+project = "Getting Started with ASP.NET 4.5 Web Forms and Visual Studio 2013 - Wingtip Toys/[C#]-Getting Started with ASP.NET 4.5 Web Forms and Visual Studio 2013 - Wingtip Toys/C#/WingtipToys/WingtipToys.csproj"
+kinds = ["webforms", "owin", "identity"]
+licence = "Apache-2.0"
+status = "blocked"
+notes = "webForCore 0.7.0 (.NET 10, under webforcore-host): 16/19 on Linux, 17/19 on Windows. Blocked by webForCore bugs: paths with a space answer 400 (F80), FriendlyUrls redirects / (F81), Server.MachineName on Linux breaks ELMAH (F82). Needs SQL Server."
+needs = ["mssql"]
+# ExceptionUtility logs the errors the probes and by-hand checks cause.
+generated = ["**/App_Data/ErrorLog.txt"]
+
+# The first request compiles the site, so it gets 120 s.
+
+[[probes]]
+path = "/"
+contains = "Wingtip Toys can help you find the perfect gift."
+
+[[probes]]
+path = "/ProductList"
+contains = "Convertible Car"
+
+[[probes]]
+path = "/Category/Planes"
+contains = "Ace Plane"
+
+[[probes]]
+path = "/Product/Convertible%20Car"
+contains = "Product Number"
+
+[[probes]]
+path = "/ProductDetails?productID=2"
+contains = "Old-time Car"
+
+[[probes]]
+path = "/ShoppingCart"
+contains = "Shopping Cart"
+
+[[probes]]
+path = "/Account/Login"
+contains = "__VIEWSTATE"
+
+[[probes]]
+path = "/Account/Register"
+contains = "Create a new account"
+
+[[probes]]
+path = "/About"
+contains = "Your application description page."
+
+[[probes]]
+path = "/Content/Site.css"
+contains = "body"
+
+# The Admin folder's <authorization> allows only the canEdit role: the OWIN cookie middleware turns the 401 into a
+# redirect to the login page, as on IIS.
+[[probes]]
+path = "/Admin/AdminPage"
+status = 302
+
+[[probes]]
+path = "/elmah.axd"
+contains = "Error Log for"

@@ -1,6 +1,6 @@
 # AspNetDocs samples (Contoso University, Wingtip Toys, Web API tutorials): migration notes
 
-Status: split into `apps/aspnetdocs-*`, the repo's three complete web projects (the other samples are snippets), so this entry is closed as rejected. Source: https://github.com/dotnet/AspNetDocs
+Status: split into `apps/aspnetdocs-*`, the repo's three complete web projects (the other samples are snippets), so this entry is closed as rejected. The tutorials' own completed projects that aren't in the repository are entries of their own too: Contoso University and Wingtip Toys from Microsoft's archive of the MSDN Code Gallery (`apps/aspnetdocs-contoso-university`, `apps/aspnetdocs-wingtip-toys`), and BookService (`apps/aspnetdocs-bookservice`, rejected: no licence). Source: https://github.com/dotnet/AspNetDocs
 
 ## Assessment
 
