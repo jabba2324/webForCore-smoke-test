@@ -2,74 +2,74 @@
   "id": "aspnet-samples-katana-webapi",
   "stages": {
     "build": {
-      "at": "2026-11-03T12:43:04+00:00",
+      "at": "2026-11-04T20:24:08+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\aspnet-samples-katana-webapi\\logs.windows\\build.log",
-      "seconds": 5,
+      "seconds": 86,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.7.0"
+      "webforcore": "packages 0.8.0"
     },
     "fetch": {
-      "at": "2026-11-03T12:42:59+00:00",
+      "at": "2026-11-04T20:22:41+00:00",
       "commit": "f7d4a776327df09c13b39489b122209c5d04693b",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-03T12:43:08+00:00",
+      "at": "2026-11-04T20:24:23+00:00",
       "checks": [
         {
-          "ms": 17,
+          "ms": 56,
           "ok": true,
           "path": "/Customer/7",
           "status": 200
         },
         {
-          "ms": 5,
+          "ms": 10,
           "ok": true,
           "path": "/Customer/7?$format=xml",
           "status": 200
         },
         {
-          "ms": 16,
+          "ms": 22,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 11,
+          "ms": 28,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 27,
+          "ms": 14,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 12,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 22,
+          "ms": 2,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/WebApi.dll",
           "status": 404
         },
         {
-          "ms": 29,
+          "ms": 17,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404

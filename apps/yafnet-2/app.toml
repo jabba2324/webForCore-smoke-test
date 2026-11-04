@@ -8,7 +8,7 @@ project = "yafsrc/YetAnotherForum.NET/YAF.csproj"
 kinds = ["webforms"]
 licence = "Apache-2.0"
 status = "blocked"
-notes = "Blocked: its vendored ServiceStack 5.9 fork only works as .NET Framework code (F49), and C# 11 ref safety (F48); on webForCore 0.7.0 (.NET 10, under webforcore-host) the restore fails first, with NU1605 in its Lucene.Net libraries (F54, webForCore#62). Linux and Windows."
+notes = "Blocked: its vendored ServiceStack 5.9 fork only works as .NET Framework code (F49), and C# 11 ref safety (F48); on webForCore 0.8.0 (.NET 10, under webforcore-host) the restore fails first, with NU1605 in its Lucene.Net libraries (F54, webForCore#62). Linux and Windows."
 
 # The first request compiles the site, so it gets 120 s.
 # [[probes]]

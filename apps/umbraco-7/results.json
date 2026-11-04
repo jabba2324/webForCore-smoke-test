@@ -60,36 +60,36 @@
       ]
     },
     "build": {
-      "at": "2026-11-03T20:02:01+00:00",
+      "at": "2026-11-04T20:28:10+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/umbraco-7/logs/build.log",
-      "seconds": 45,
+      "seconds": 75,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.7.0"
+      "webforcore": "packages 0.8.0"
     },
     "fetch": {
-      "at": "2026-11-03T20:01:16+00:00",
+      "at": "2026-11-04T20:26:54+00:00",
       "commit": "bd60f4e2cea7ace2984dcfb8e61ef6512ea77c73",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-03T20:02:01+00:00",
+      "at": "2026-11-04T20:28:10+00:00",
       "created": [
         "umbraco7"
       ],
-      "date": "2026-11-03",
+      "date": "2026-11-04",
       "status": "pass",
       "steps": [],
       "summary": "created umbraco7"
     },
     "smoke": {
-      "at": "2026-11-03T20:02:06+00:00",
+      "at": "2026-11-04T20:28:17+00:00",
       "checks": [
         {
-          "ms": 11,
+          "ms": 15,
           "ok": false,
           "path": "/",
           "status": 500,
@@ -97,7 +97,7 @@
         },
         {
           "expected_text": "\"installId\"",
-          "ms": 5,
+          "ms": 6,
           "ok": false,
           "path": "/install/api/GetSetup",
           "status": 500,
@@ -105,7 +105,7 @@
         },
         {
           "expected_text": "\"general_login\": \"Login\"",
-          "ms": 7,
+          "ms": 8,
           "ok": false,
           "path": "/umbraco/LocalizedText",
           "status": 500,
@@ -113,7 +113,7 @@
         },
         {
           "expected_text": "I'm alive!",
-          "ms": 5,
+          "ms": 4,
           "ok": false,
           "path": "/umbraco/ping.aspx",
           "status": 500,
@@ -121,7 +121,7 @@
         },
         {
           "expected_text": "legacyAjaxCalls Web Service",
-          "ms": 4,
+          "ms": 5,
           "ok": false,
           "path": "/umbraco/webservices/legacyAjaxCalls.asmx",
           "status": 500,
@@ -137,50 +137,50 @@
         },
         {
           "expected_text": "div.umbModalBox",
-          "ms": 9,
+          "ms": 10,
           "ok": false,
           "path": "/umbraco_client/modal/style.css",
           "status": 500,
           "title": "Resolution is not frozen, it is not yet possible to get values from it."
         },
         {
-          "ms": 16,
+          "ms": 6,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 7,
+          "ms": 3,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 7,
+          "ms": 2,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 7,
+          "ms": 2,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 7,
+          "ms": 2,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 6,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/Umbraco.Web.UI.dll",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404

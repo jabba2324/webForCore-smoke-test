@@ -12,7 +12,7 @@ generated = ["src/Umbraco.Web.UI/config/ClientDependency.config"]
 kinds = ["webforms", "mvc", "webapi", "webpages", "owin", "identity", "signalr"]
 licence = "MIT"
 status = "blocked"
-notes = "Builds on webForCore 0.7.0 (.NET 10), but Umbraco doesn't boot: its AutoMapper 3.3.1 throws configuring its first map (F22), so every request is a 500 and only the forbidden-path checks pass. Found F65 (named semaphores and events on Linux) and F66 (Log4Net.Async's CallContext)."
+notes = "Builds on webForCore 0.8.0 (.NET 10), but Umbraco doesn't boot: its AutoMapper 3.3.1 throws configuring its first map (F22), so every request is a 500 and only the forbidden-path checks pass. Found F65 (named semaphores and events on Linux) and F66 (Log4Net.Async's CallContext)."
 needs = ["mssql"]
 
 # web.config (made from web.Template.config at build) points at an "umbraco7" database on the compose SQL Server. The

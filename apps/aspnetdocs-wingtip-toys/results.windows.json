@@ -2,96 +2,96 @@
   "id": "aspnetdocs-wingtip-toys",
   "stages": {
     "build": {
-      "at": "2026-11-04T19:52:51+00:00",
+      "at": "2026-11-04T20:29:18+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\aspnetdocs-wingtip-toys\\logs.windows\\build.log",
-      "seconds": 68,
+      "seconds": 75,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.7.0"
+      "webforcore": "packages 0.8.0"
     },
     "fetch": {
-      "at": "2026-11-04T19:51:43+00:00",
+      "at": "2026-11-04T20:28:03+00:00",
       "commit": "e0c91fbfb40567858d48eb5cad5a7183d1e3a482",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-04T19:53:28+00:00",
+      "at": "2026-11-04T20:30:02+00:00",
       "checks": [
         {
           "expected_text": "Wingtip Toys can help you find the perfect gift.",
-          "ms": 8,
+          "ms": 20,
           "ok": false,
           "path": "/",
           "status": 301,
           "title": "Object moved"
         },
         {
-          "ms": 12107,
+          "ms": 11110,
           "ok": true,
           "path": "/ProductList",
           "status": 200
         },
         {
-          "ms": 66,
+          "ms": 50,
           "ok": true,
           "path": "/Category/Planes",
           "status": 200
         },
         {
           "expected_text": "Product Number",
-          "ms": 4,
+          "ms": 3,
           "ok": false,
           "path": "/Product/Convertible%20Car",
           "status": 400,
           "title": ""
         },
         {
-          "ms": 53,
+          "ms": 23,
           "ok": true,
           "path": "/ProductDetails?productID=2",
           "status": 200
         },
         {
-          "ms": 74,
+          "ms": 61,
           "ok": true,
           "path": "/ShoppingCart",
           "status": 200
         },
         {
-          "ms": 1200,
+          "ms": 743,
           "ok": true,
           "path": "/Account/Login",
           "status": 200
         },
         {
-          "ms": 20,
+          "ms": 12,
           "ok": true,
           "path": "/Account/Register",
           "status": 200
         },
         {
-          "ms": 12,
+          "ms": 32,
           "ok": true,
           "path": "/About",
           "status": 200
         },
         {
-          "ms": 18,
+          "ms": 35,
           "ok": true,
           "path": "/Content/Site.css",
           "status": 200
         },
         {
-          "ms": 19,
+          "ms": 10,
           "ok": true,
           "path": "/Admin/AdminPage",
           "status": 302
         },
         {
-          "ms": 23,
+          "ms": 16,
           "ok": true,
           "path": "/elmah.axd",
           "status": 200
@@ -103,19 +103,19 @@
           "status": 404
         },
         {
-          "ms": 30,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 5,
           "ok": true,
           "path": "/obj/",
           "status": 404
@@ -127,13 +127,13 @@
           "status": 404
         },
         {
-          "ms": 26,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/WingtipToys.dll",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 0,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404

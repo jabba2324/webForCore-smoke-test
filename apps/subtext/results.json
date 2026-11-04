@@ -29,124 +29,150 @@
       ]
     },
     "build": {
-      "at": "2026-11-03T12:32:21+00:00",
+      "at": "2026-11-04T20:27:16+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/subtext/logs/build.log",
-      "seconds": 15,
+      "seconds": 20,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.7.0"
+      "webforcore": "packages 0.8.0"
     },
     "fetch": {
-      "at": "2026-11-03T12:32:06+00:00",
+      "at": "2026-11-04T20:26:56+00:00",
       "commit": "87a2d90dae02022471cd52aa5f3004f778cc4c0b",
       "overlay": true,
       "status": "pass"
     },
+    "setup": {
+      "at": "2026-11-04T20:27:29+00:00",
+      "created": [
+        "SubtextData"
+      ],
+      "date": "2026-11-04",
+      "status": "pass",
+      "steps": [
+        {
+          "ok": true,
+          "status": 200,
+          "step": "/install/default.aspx"
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "step": "/install/Step02_ConfigureHost.aspx"
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "step": "/install/Step03_CreateBlog.aspx?email=admin%40example.com"
+        }
+      ],
+      "summary": "3/3 steps"
+    },
     "smoke": {
-      "at": "2026-11-03T12:38:35+00:00",
+      "at": "2026-11-04T20:27:34+00:00",
       "checks": [
         {
-          "ms": 10,
+          "ms": 8,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 52,
+          "ms": 96,
           "ok": true,
-          "path": "/archive/2026/11/03/welcome-to-subtext.aspx",
+          "path": "/archive/{setup_date}/welcome-to-subtext.aspx",
           "status": 200
         },
         {
-          "ms": 13,
+          "ms": 11,
           "ok": true,
           "path": "/archives.aspx",
           "status": 200
         },
         {
-          "ms": 11,
+          "ms": 6,
           "ok": true,
           "path": "/contact.aspx",
           "status": 200
         },
         {
           "expected_text": "Sign In with OpenID",
-          "ms": 51,
+          "ms": 39,
           "ok": false,
           "path": "/login.aspx",
           "status": 500,
           "title": "Object reference not set to an instance of an object."
         },
         {
-          "ms": 3512,
+          "ms": 1795,
           "ok": true,
           "path": "/admin/default.aspx",
           "status": 302
         },
         {
-          "ms": 27,
+          "ms": 17,
           "ok": true,
           "path": "/rss.aspx",
           "status": 200
         },
         {
-          "ms": 543,
+          "ms": 435,
           "ok": true,
           "path": "/wlwmanifest.xml.ashx",
           "status": 200
         },
         {
-          "ms": 9,
+          "ms": 8,
           "ok": true,
           "path": "/opensearchdesc.xml.ashx",
           "status": 200
         },
         {
-          "ms": 20,
+          "ms": 12,
           "ok": true,
           "path": "/css/lightbox.css",
           "status": 200
         },
         {
-          "ms": 11,
+          "ms": 36,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 3,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 3,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 2,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 5,
+          "ms": 3,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 6,
+          "ms": 4,
           "ok": true,
           "path": "/bin_dotnet/Subtext.Web.dll",
           "status": 404
         },
         {
-          "ms": 5,
+          "ms": 3,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404

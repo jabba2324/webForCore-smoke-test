@@ -2,88 +2,114 @@
   "id": "funnelweb",
   "stages": {
     "build": {
-      "at": "2026-11-03T12:45:46+00:00",
+      "at": "2026-11-04T20:24:13+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\funnelweb\\logs.windows\\build.log",
-      "seconds": 12,
+      "seconds": 64,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.7.0"
+      "webforcore": "packages 0.8.0"
     },
     "fetch": {
-      "at": "2026-11-03T12:45:33+00:00",
+      "at": "2026-11-04T20:23:08+00:00",
       "commit": "32f561e9bf991c141edd485905a6212ba194bd91",
       "overlay": true,
       "status": "pass"
     },
+    "setup": {
+      "at": "2026-11-04T20:24:25+00:00",
+      "created": [
+        "FunnelWeb"
+      ],
+      "date": "2026-11-04",
+      "status": "pass",
+      "steps": [
+        {
+          "ok": true,
+          "status": 200,
+          "step": "/admin/login"
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "step": "/admin/install"
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "step": "/admin/install/upgrade"
+        }
+      ],
+      "summary": "3/3 steps"
+    },
     "smoke": {
-      "at": "2026-11-03T12:45:59+00:00",
+      "at": "2026-11-04T20:24:33+00:00",
       "checks": [
         {
           "expected_text": "My FunnelWeb Site",
-          "ms": 7,
+          "ms": 54,
           "ok": false,
           "path": "/",
-          "status": 302,
-          "title": "Object moved"
+          "status": 500,
+          "title": "The following types may not be used as proxies:<br>FunnelWeb.Model.Authentication.Role: method MemberwiseClone should be 'public/protected virtual' or 'protected internal virtual'<br>FunnelWeb.Model.Authentication.User: method MemberwiseClone should be 'public/protected virtual' or 'protected intern"
         },
         {
-          "ms": 2787,
+          "ms": 2874,
           "ok": true,
           "path": "/admin/login",
           "status": 200
         },
         {
-          "ms": 22,
+          "ms": 18,
           "ok": true,
           "path": "/admin/install",
           "status": 302
         },
         {
-          "ms": 23,
+          "ms": 24,
           "ok": true,
           "path": "/Content/Images/external.png",
           "status": 200
         },
         {
-          "ms": 15,
+          "ms": 8,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 13,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 19,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 27,
+          "ms": 15,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 15,
+          "ms": 2,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 8,
+          "ms": 14,
           "ok": true,
           "path": "/bin_dotnet/FunnelWeb.Web.dll",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404

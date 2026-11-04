@@ -24,6 +24,17 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
   and aspnetdocs-wingtip-toys (16/19 on Linux, 17/19 on Windows, F80–F82); aspnetdocs-bookservice is rejected (no
   licence).
 
+Round 7 ran on the released 0.8.0 packages, with webForCore-thirdparty 0.6.0 and drawingForCore 0.3.0, on Linux and
+Windows (CI run 41905418748; eshop-legacy-mvc's Windows job didn't start its server on the first attempt and passed
+16/16 on the rerun):
+- **Results:** every app matches round 6 or the candidates' 0.7.0 results on both platforms, except two that 0.8.0
+  fixed.
+- **What 0.8.0 fixed:** F40 (mojoportal: 7/16 → 16/16) and F47 (opserver-mvc5: 10/11 → 11/11), on both platforms. Both
+  apps are now migrated. webForCore also closed the issues for F57–F63 and F65–F67 (#87–#95, #97) in 0.8.0, fixed or
+  documented.
+- **Still blocked:** umbraco-7 (7/14, F22: its overlay doesn't use webForCore-thirdparty 0.6.0's AutoMapper build yet),
+  and the apps blocked before.
+
 Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
 
@@ -68,14 +79,14 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F37](#f37) | `<compilation><assemblies>` lists .NET Framework assemblies .NET doesn't have (System.Design, System.Data.Linq) | guide gap | subtext, mojoportal, umbraco-7 | [#37](https://github.com/xforcore/webForCore/issues/37) |
 | [F38](#f38) | Types a shared-framework facade forwards to the app's assemblies (System.Data's SqlClient) are a second copy: MissingMethodException | webForCore bug | subtext | [#35](https://github.com/xforcore/webForCore/issues/35) |
 | [F39](#f39) | NHibernate 3.3 doesn't run on .NET (proxy validation, `SqlCommandSet` by reflection) | app/environment | funnelweb | - |
-| [F40](#f40) | `Assembly.Load("App_GlobalResources")` (Visual Studio's resource designer code) can't work: .NET requires the simple name to match | webForCore bug | mojoportal | [#33](https://github.com/xforcore/webForCore/issues/33) |
+| [F40](#f40) | `Assembly.Load("App_GlobalResources")` (Visual Studio's resource designer code) can't work: .NET requires the simple name to match (fixed in 0.8.0) | webForCore bug | mojoportal | [#33](https://github.com/xforcore/webForCore/issues/33) |
 | [F41](#f41) | WebActivator 1.x has WebActivatorEx's problem (#21), and the guide names only WebActivatorEx | guide gap | subtext | [#38](https://github.com/xforcore/webForCore/issues/38) |
 | [F42](#f42) | SDK-style project references are transitive: NU1605 from versions pinned per project, a namespace that hides a type (CS0118) | guide gap | funnelweb, mojoportal | [#39](https://github.com/xforcore/webForCore/issues/39) |
 | [F43](#f43) | Projects that deploy into the site with Windows `xcopy` post-build events | app/environment | mojoportal | - |
 | [F44](#f44) | DotNetOpenAuth 3.x reflects on .NET Framework's private `UriParser` fields | app/environment | subtext | - |
 | [F45](#f45) | Every package webForCore depends on is a version floor: System.Data.SqlClient 4.9.1, System.DirectoryServices 11.0 (NU1605) | guide gap | opserver-mvc5, yafnet-2 | [#42](https://github.com/xforcore/webForCore/issues/42) |
 | [F46](#f46) | webForCore's SignalR and System.Web.DataVisualization assemblies are 0.0.0.0: libraries built against Microsoft's are CS1705 | webForCore bug | jabbr | [#40](https://github.com/xforcore/webForCore/issues/40) |
-| [F47](#f47) | `GetTypes()` on System.Data.SqlClient 4.9.1 throws on .NET 11 and .NET 10: apps that scan all assemblies fail | webForCore bug (dependency) | opserver-mvc5 | [#41](https://github.com/xforcore/webForCore/issues/41) |
+| [F47](#f47) | `GetTypes()` on System.Data.SqlClient 4.9.1 throws on .NET 11 and .NET 10: apps that scan all assemblies fail (fixed in 0.8.0) | webForCore bug (dependency) | opserver-mvc5 | [#41](https://github.com/xforcore/webForCore/issues/41) |
 | [F48](#f48) | The C# version: C# 14's span conversions and C# 11's ref safety break code written for older C# | guide gap | yafnet-2 | [#43](https://github.com/xforcore/webForCore/issues/43) |
 | [F49](#f49) | YAF.NET's vendored ServiceStack 5.9 fork only works as .NET Framework code | app/environment | yafnet-2 | - |
 | [F50](#f50) | Nancy 0.20 needs `AppDomainSetup.PrivateBinPathProbe` | app/environment | jabbr | - |
@@ -942,7 +953,7 @@ Raised as [#35](https://github.com/xforcore/webForCore/issues/35). Found on 0.4.
 ## F40
 
 **`Assembly.Load("App_GlobalResources")` can't work on .NET.** webForCore bug. Raised as
-[#33](https://github.com/xforcore/webForCore/issues/33). Found on 0.4.0. Not fixed.
+[#33](https://github.com/xforcore/webForCore/issues/33). Found on 0.4.0. Fixed in 0.8.0: mojoportal passes 16/16 on Linux and Windows.
 
 - **Apps:** mojoportal. Its `App_GlobalResources/*.Designer.cs`, Visual Studio's generated code, does
   `new ResourceManager("Resources.Resource", Assembly.Load("App_GlobalResources"))`.
@@ -1054,7 +1065,7 @@ Raised as [#42](https://github.com/xforcore/webForCore/issues/42). Found on 0.5.
 ## F47
 
 **`GetTypes()` on System.Data.SqlClient 4.9.1 throws on .NET 11.** webForCore bug (its dependency). Raised as
-[#41](https://github.com/xforcore/webForCore/issues/41). Found on 0.5.0. Not fixed: the fix is a choice for webForCore.
+[#41](https://github.com/xforcore/webForCore/issues/41). Found on 0.5.0. Fixed in 0.8.0, which builds System.Data.SqlClient from Microsoft's source with `GetTypes()` fixed: opserver-mvc5 passes 11/11 on Linux and Windows.
 
 - **Apps:** opserver-mvc5. It builds its tabs by scanning every loaded assembly's types. Any app that scans all
   assemblies is affected: DI registration, AutoMapper profiles, MEF, plugin loaders.

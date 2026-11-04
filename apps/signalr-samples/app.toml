@@ -8,7 +8,7 @@ project = "samples/Microsoft.AspNet.SignalR.Samples/Microsoft.AspNet.SignalR.Sam
 kinds = ["signalr", "owin", "webforms"]
 licence = "Apache-2.0"
 status = "migrated"
-notes = "webForCore 0.7.0: 18/19 on Linux and Windows; the failure is the hub proxy's [!VERSION!] header (F70). VB library needs MyType Empty (F71)."
+notes = "webForCore 0.8.0: 18/19 on Linux and Windows; the failure is the hub proxy's [!VERSION!] header (F70). VB library needs MyType Empty (F71)."
 # The build writes Scripts/jquery.signalR*.js (CopyJs, as the original build did); the repository ignores them anyway.
 generated = ["samples/Microsoft.AspNet.SignalR.Samples/Scripts/jquery.signalR*.js"]
 
