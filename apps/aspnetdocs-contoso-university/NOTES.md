@@ -1,6 +1,6 @@
 # AspNetDocs: Contoso University (MVC 5 + EF 6 tutorial): migration notes
 
-Status: migrated (webForCore 0.7.0, 16/16 probes on Linux). Source: the completed project of the AspNetDocs tutorial
+Status: migrated (webForCore 0.7.0, 16/16 probes on Linux and Windows). Source: the completed project of the AspNetDocs tutorial
 "Getting Started with Entity Framework 6 Code First using MVC 5"
 (`aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc` in dotnet/AspNetDocs). The repository has
 only the tutorial's snippets; the tutorial links the project on the retired MSDN Code Gallery
@@ -45,7 +45,7 @@ No change to the code.
 
 ## Smoke
 
-**Linux, webForCore 0.7.0: 16/16.** The probes: the home page, `/Student` (the seeded students, sorted, paged with
+**Linux and Windows (CI run 41900268720), webForCore 0.7.0: 16/16.** The probes: the home page, `/Student` (the seeded students, sorted, paged with
 PagedList), `/Student` with a sort and a search (PagedList's pager), the Create form (anti-forgery token),
 `/Course`, `/Instructor` with an instructor and a course selected (eager and explicit loading, enrollments),
 `/Department` (async, the stored-procedure mapped entity), `/Home/About` (the raw SQL group-by), `Site.css`, and the
