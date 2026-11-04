@@ -1,6 +1,6 @@
 # Subtext: migration notes
 
-Status: verified. Source: https://github.com/haacked/Subtext at `87a2d90d`. Found by searching GitHub on 2026-10-31; the
+Status: blocked by DotNetOpenAuth on the log-in page (F44): 16/17 probes on Linux and Windows, webForCore 0.8.0. Source: https://github.com/haacked/Subtext at `87a2d90d`. Found by searching GitHub on 2026-10-31; the
 repo, licence (MIT), web project and its `<TargetFrameworkVersion>` were checked through the GitHub API.
 
 Round 3b, on webForCore 0.4.0 and webForCore-thirdparty 0.4.0. It also uses `webForCore.WebActivator` 0.4.1, a build of

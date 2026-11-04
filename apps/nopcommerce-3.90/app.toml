@@ -31,9 +31,9 @@ also_build = [
 ]
 kinds = ["mvc"]
 licence = "nopCommerce Public License 3.0 (GPL-3.0 with an attribution term)"
-status = "migrated"
+status = "blocked"
 needs = ["mssql"]
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host), with the administration and all 20 plugins: 22/23 on Linux (product thumbnails, F86), 23/23 on Windows in 2 of 5 runs, 7/23 in the others (F89). AutoMapper 12 (F22), LangVersion 7.3 (F83), DynamicDirectory (F84), System.Linq.Dynamic.Core (F85)."
+notes = "Blocked: not every probe passes. webForCore 0.8.0 (.NET 10, under webforcore-host), with the administration and all 20 plugins: 22/23 on Linux (product thumbnails, F86), 23/23 on Windows in 2 of 5 runs, 7/23 in the others (F89). AutoMapper 12 (F22), LangVersion 7.3 (F83), DynamicDirectory (F84), System.Linq.Dynamic.Core (F85)."
 
 # nopCommerce's install wizard: SQL Server, an existing (empty) database given as a connection string, with the
 # sample data. It installs every plugin in the site's Plugins folder, then restarts the application.

@@ -1,6 +1,6 @@
 # Opserver (MVC 5): migration notes
 
-Status: blocked. Source: https://github.com/opserver/Opserver at `ed57f51d`, the parent of its ASP.NET Core migration
+Status: migrated (webForCore 0.8.0: all 11 probes on Linux and Windows; F47 was fixed in 0.8.0). Source: https://github.com/opserver/Opserver at `ed57f51d`, the parent of its ASP.NET Core migration
 (`a47b1fc`, #355). Licence MIT. Round 4, on webForCore 0.5.0 and webForCore-thirdparty 0.4.1.
 
 ## Assessment

@@ -30,7 +30,7 @@ or solution.
    that proves the page rendered.
    Write up the smoke results in `NOTES.md`; the runner appends each run to `LOG.md` and keeps the latest logs in
    `logs/`.
-5. `scripts/wfc.py save-overlay <id>`, update `status` and `notes` in `app.toml`, `scripts/wfc.py report`, and
+5. `scripts/wfc.py save-overlay <id>`, update `status` and `notes` in `app.toml` (`migrated` only when every probe passes on both platforms, every time, and no feature is known to be broken by webForCore; otherwise `blocked`, with the reason. Features the probes can't reach go in the notes as untested), `scripts/wfc.py report`, and
    commit the app's folder (this repo only, one app per commit).
 
 ## Third-party libraries

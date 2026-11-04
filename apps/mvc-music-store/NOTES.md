@@ -1,7 +1,7 @@
 # MVC Music Store (MVC 3): migration notes
 
-Status: migrated (webForCore 0.7.0, webForCore-thirdparty 0.6.0, drawingForCore 0.2.0: 20/20 probes on Linux and Windows); log-on
-and registration blocked by [F75](../../FINDINGS.md#f75).
+Status: blocked by [F75](../../FINDINGS.md#f75) (webForCore#123): log-on and registration fail. It passes all 20 probes on Linux and Windows
+(webForCore 0.7.0 and 0.8.0), but the probes are GETs and can't reach those forms.
 jongalloway/MvcMusicStore at `ea2552d6` (Oct 2025): Jon Galloway's copy of the CodePlex sample, with its MVC 3, 4 and
 5 versions; this is the MVC 3 one (`src/MVC3/MvcMusicStore-Completed`, "MVC 3 Tools Update"). Ms-PL
 (`src/MVC3/readme.txt`).

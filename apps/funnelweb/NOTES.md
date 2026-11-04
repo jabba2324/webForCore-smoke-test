@@ -1,6 +1,6 @@
 # FunnelWeb: migration notes
 
-Status: verified. Source: https://github.com/funnelweblog/FunnelWeb at `32f561e9`. Found by searching GitHub on 2026-10-31; the
+Status: blocked by its NHibernate 3.3 (F39): 10/11 probes on Linux and Windows, webForCore 0.8.0. Source: https://github.com/funnelweblog/FunnelWeb at `32f561e9`. Found by searching GitHub on 2026-10-31; the
 repo, licence (BSD-3-Clause), web project and its `<TargetFrameworkVersion>` were checked through the GitHub API.
 
 Round 3b, on webForCore 0.4.0 (no webForCore-thirdparty packages).

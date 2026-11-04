@@ -1,6 +1,6 @@
 # MVCForum: migration notes
 
-Status: blocked (F28: `configSource` files in a subfolder can't be loaded; then F29). Source:
+Status: migrated (webForCore 0.8.0: all 15 probes on Linux and Windows; F28 and F29 were fixed in 0.5.0). Source:
 https://github.com/YodasMyDad/mvcforum at `8ce33799` (archived; the last commit). MIT. webForCore 0.4.0 packages,
 webForCore-thirdparty 0.4.0 (WebActivatorEx).
 
