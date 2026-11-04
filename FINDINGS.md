@@ -1957,6 +1957,7 @@ passes through). Raised as
   ApplicationSettingsBase { [ApplicationScopedSetting, DefaultSettingValue("http://example.com/")] public string Url =>
   (string)this["Url"]; }`: `new Settings().Url` throws.
 - **Suggested fix:** create the type directly, or name webForCore's own assembly in the type string.
+
 ## F116
 
 **Windows Workflow Foundation 3 (`System.Workflow.Runtime`, `.ComponentModel`, `.Activities`) isn't on .NET, and
