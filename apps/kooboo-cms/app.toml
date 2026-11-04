@@ -33,12 +33,17 @@ contains = "\"Success\":true"
 timeout = 300
 may_fail = true
 
-# Kooboo indexes the new site's content for its search in the background: wait for it (5 s between tries).
+# A site created from a template has no search index: the back office's "Rebuild" (Contents > Search index) builds the
+# Article folder's in a background thread, and the search page shows hits once it's done (5 s between tries).
+[[setup.steps]]
+post = "/Contents/SearchIndex/Rebuild?repositoryName=sample"
+fields = { "model[0].FolderName" = "Article" }
+contains = "\"Success\":true"
+
 [[setup.steps]]
 get = "/dev~sample/search?key=Lorem"
-contains = "Lorem ipsum dolor sit amet 4"
+contains = "<strong class='highlight'>Lorem</strong> ipsum dolor sit amet 4"
 retries = 12
-may_fail = true
 
 # The first request compiles the site, so it gets 120 s. No site is bound to 127.0.0.1, so / goes to Kooboo's 404 page.
 [[probes]]
@@ -69,7 +74,7 @@ contains = "<title>About us - Sample site</title>"
 # Full-text search (Lucene.Net 2.9).
 [[probes]]
 path = "/dev~sample/search?key=Lorem"
-contains = "Lorem ipsum dolor sit amet 4"
+contains = "<strong class='highlight'>Lorem</strong> ipsum dolor sit amet 4"
 
 # Forms with anti-forgery tokens.
 [[probes]]

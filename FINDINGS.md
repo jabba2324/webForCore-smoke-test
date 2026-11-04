@@ -1745,6 +1745,7 @@ gap. Raised as [#153](https://github.com/xforcore/webForCore/issues/153). Found 
 - **Fix in the app:** `Microsoft.CodeAnalysis.CSharp` 5.9.0; it builds and the site runs. It's the guide's "every package
   webForCore depends on is a floor", but Roslyn's packages pin each other exactly, so it's NU1107, not the NU1605 the
   guide describes.
+
 ## F116
 
 **Windows Workflow Foundation 3 (`System.Workflow.Runtime`, `.ComponentModel`, `.Activities`) isn't on .NET, and

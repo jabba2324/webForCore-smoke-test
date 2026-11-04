@@ -93,7 +93,10 @@ Go.
    membership name other than the template's points at the template's (`SampleSite`), which isn't there: the member
    pages throw a `NullReferenceException`. The setup creates the site with the template's membership name.
 9. `app.toml`: `[setup]` logs in as the default admin (`admin`/`admin`) and creates the `sample` site from the
-   `SampleSite` template (an AJAX form post answered with JSON); `generated` keeps the admin user's file (the log-in
+   `SampleSite` template (an AJAX form post answered with JSON), then rebuilds the search index of its `Article` folder
+   (Contents > Search index > Rebuild: a site created from a template has no index, here as on IIS, so the search finds
+   nothing until then; the first CI run, without this step, had 22/23) and waits for the search to find the articles;
+   `generated` keeps the admin user's file (the log-in
    records its date there) out of the overlay.
 
 Checked and left alone: `Web.config`'s `<system.serviceModel>` (the CMIS module isn't deployed), the MVC 4 version
