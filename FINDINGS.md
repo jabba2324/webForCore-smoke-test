@@ -39,6 +39,10 @@ Windows (CI run 41905418748; eshop-legacy-mvc's Windows job didn't start its ser
 - **Rock RMS** (a candidate, assessed on 0.8.0): rejected, as the Rock Community License limits use, derivative works and
   distribution to faith-based organisations' internal use, so no overlay can be published here. Its assessment (a Web
   Site Project, Windows-only native spatial types, a named `EventWaitHandle`) is in its NOTES.md; F123 was found there.
+- **Stores** (nopcommerce-3.90 and smartstorenet, new apps on 0.8.0): nopCommerce 3.90, with its administration and
+  20 plugins, is migrated: 22/23 on Linux (product thumbnails, F86) and 23/23 on Windows. SmartStoreNET 4.x is blocked
+  at build, on both platforms, by webForCore's System.Web.Optimization identity (F87). F83–F89 were found there (F89
+  in the runner, fixed: on Windows it now stops a server's whole process tree).
 
 Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
@@ -133,6 +137,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F86](#f86) | Linux: a static file in another case is 404 until requested once in its own case, then 200 in any case | webForCore bug | nopcommerce-3.90 | [#140](https://github.com/xforcore/webForCore/issues/140) |
 | [F87](#f87) | `System.Web.Optimization` and `WebGrease` don't have Microsoft's identities: BundleTransformer fails with CS0012 | webForCore bug | smartstorenet | [#141](https://github.com/xforcore/webForCore/issues/141) |
 | [F88](#f88) | One inotify instance per watched folder: nopCommerce takes more than 50 of the user's 128 | documented gap | nopcommerce-3.90 | – |
+| [F89](#f89) | Windows: the runner stopped only `webforcore-host`; its worker kept the compilation folder for the next stage (fixed in the runner) | app/environment | nopcommerce-3.90 | – |
 | [F116](#f116) | Windows Workflow Foundation 3 (`System.Workflow.*`) isn't on .NET, and the docs and blocker search don't say so | guide gap | composite-c1 | [#132](https://github.com/xforcore/webForCore/issues/132) |
 | [F117](#f117) | Run-time C# compilation in application code (`CodeDomProvider.CreateProvider("c#")`) throws `PlatformNotSupportedException`; no documented replacement | guide gap | composite-c1 | [#133](https://github.com/xforcore/webForCore/issues/133) |
 | [F118](#f118) | CoreWCF's source generator reaches applications: `CS8370`/`CS8107` for any `[ServiceContract]` with `LangVersion` below 11 | webForCore bug | composite-c1 | [#134](https://github.com/xforcore/webForCore/issues/134) |
@@ -1764,6 +1769,27 @@ Documented gap (`docs/IIS-COMPATIBILITY.md`, "Restart on web.config, `bin` or `A
 - **Suggestion:** off Windows, one inotify instance for the application (one `FileSystemWatcher` with
   `IncludeSubdirectories` on the site, which takes watches, not instances, from the far larger
   `max_user_watches`), or the docs' numbers for a large app.
+
+## F89
+
+**On Windows the runner stopped only `webforcore-host`, and the host's worker, still stopping, kept the site's
+compilation folder when the next stage started a server for the same site.** App/environment (the runner, fixed here).
+Found on 0.8.0 (Windows, CI), with nopCommerce 3.90.
+
+- **Apps:** nopcommerce-3.90 on Windows: setup passed (3/3), then every smoke request was a 500, "The process cannot
+  access the file because it is being used by another process" (7/23: only the forbidden-path checks passed).
+  nopCommerce's plugin manager copies its plugins into the compilation folder at start (F84), and setup's worker had
+  them loaded from there.
+- **Cause:** `Server.stop()` used `Popen.terminate()`, which on Windows is `TerminateProcess` for the host alone. The
+  worker notices its host is gone (stdin closes) and stops gracefully, which takes a while; smoke's host started at
+  once on the same site. `docs/MIGRATING.md` section 8 says it: "Several processes must not share one site folder:
+  they share the compilation folder." On Linux `terminate()` is a SIGTERM, which the host handles by stopping its
+  workers, and open files don't block a copy.
+- **Fix:** the runner ends the server's process tree on Windows first (`taskkill /T /F`), which is what SIGTERM comes to on Linux
+  here. With it, nopcommerce-3.90 is 23/23 on Windows (CI run 41918820640). No other app copies into the
+  compilation folder at start, which is why none showed it.
+- **For webForCore (not raised):** a worker whose host died abruptly could exit at once rather than drain requests
+  nobody will forward.
 
 ## F116
 

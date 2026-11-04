@@ -1,6 +1,6 @@
 # nopCommerce 3.90: migration notes
 
-Status: migrated (see "Smoke" for the numbers). Source: https://github.com/nopSolutions/nopCommerce at `12d1f013`
+Status: migrated: 22/23 probes on Linux (F86), 23/23 on Windows, webForCore 0.8.0. Source: https://github.com/nopSolutions/nopCommerce at `12d1f013`
 (tag `release-3.90`, the last MVC 5 release before nopCommerce moved to ASP.NET Core). Licence: the nopCommerce Public
 License 3.0, GPL-3.0 with an attribution term ("powered by nopCommerce" on every page, which the store keeps). The
 web project (`src/Presentation/Nop.Web`) targets .NET Framework 4.5.1 with System.Web.
@@ -103,7 +103,25 @@ the new worker.
 
 ## Smoke
 
-(Filled in below for each run.)
+Probes (23): the home page (with the NivoSlider plugin's widget), a category, a product, search, the blog, the log-in,
+register and contact forms, the news RSS feed and the XML sitemap, nopCommerce's own 404 page, `/admin` (302 to the
+log-in), the theme's CSS, a plugin's CSS, a product thumbnail at the URL the store writes, a plugin DLL (403, the
+site's `DenyAccessToPluginDLLs` handler), and the runner's checks that `web.config`, `App_Data`, `bin_dotnet`, `obj`,
+source files and `webforcore-host.dll` aren't served.
+
+- **webForCore 0.8.0, CI (Linux: ubuntu-24.04; Windows: windows-2025), run 41918820640: 22/23 on Linux, 23/23 on
+  Windows.** Setup 3/3 on both. The Linux failure is the thumbnail, `/content/images/thumbs/0000020_build-your-own-computer_415.jpeg`
+  (404; the file is `Content/Images/Thumbs/...`, F86).
+- The PR's first run (41916845600) had 22/23 on Linux and 7/23 on Windows: every page was a 500, "The process cannot
+  access the file because it is being used by another process." The runner stopped setup's server with
+  `terminate()`, which on Windows ends only `webforcore-host`; setup's worker was still stopping, with nopCommerce's
+  plugins loaded from the compilation folder, when smoke's host started and its plugin manager copied them there
+  again. The runner now ends the server's process tree on Windows (`scripts/wfc.py`, `Server.stop`); with it, 23/23.
+  [F89](../../FINDINGS.md#f89)
+- On the development machine (Linux) runs are unreliable for this app: its worker needs more than 50 inotify
+  instances (F88) and the user's 128 are shared with a desktop session and other servers, so some pages fail with
+  "The configured user limit (128) on the number of inotify instances has been reached" (the last local run, in
+  `LOG.md`: setup's last step and 4 probes). The committed `results*.json` and logs are CI's.
 
 ## Notes for testing by hand
 
@@ -123,3 +141,4 @@ the new worker.
   Linux until it has been requested in its own case once; every product picture (`/content/images/thumbs/...`) on
   Linux.
 - [F88](../../FINDINGS.md#f88) (documented gap): inotify instances, one per watched folder.
+- [F89](../../FINDINGS.md#f89) (app/environment, the runner): fixed in `scripts/wfc.py`.

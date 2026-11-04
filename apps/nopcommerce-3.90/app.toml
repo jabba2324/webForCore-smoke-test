@@ -31,9 +31,9 @@ also_build = [
 ]
 kinds = ["mvc"]
 licence = "nopCommerce Public License 3.0 (GPL-3.0 with an attribution term)"
-status = "migrating"
+status = "migrated"
 needs = ["mssql"]
-notes = "Last MVC 5 release before ASP.NET Core. Large: plugins, Autofac, EF6."
+notes = "webForCore 0.8.0 (.NET 10, under webforcore-host), with the administration and all 20 plugins: 22/23 on Linux (product thumbnails, F86), 23/23 on Windows. AutoMapper 12 (F22), LangVersion 7.3 (F83), DynamicDirectory (F84), System.Linq.Dynamic.Core (F85)."
 
 # nopCommerce's install wizard: SQL Server, an existing (empty) database given as a connection string, with the
 # sample data. It installs every plugin in the site's Plugins folder, then restarts the application.
