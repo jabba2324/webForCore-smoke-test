@@ -15,8 +15,9 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 - **Umbraco 6** (a new app, migrated on 0.7.0): F57–F64, and F67 from its first CI run (Ubuntu's `C` locale).
 - **Umbraco 7** (a new app, on 0.7.0, on Linux so far): builds, but is blocked at boot by AutoMapper 3.3.1 (F22); F65
   and F66, and more evidence for F37 and F61–F64.
-- **Web Forms and MVC 3 candidates** (new apps, migrated on 0.7.0 with webForCore-thirdparty 0.6.0): screwturn-wiki
-  (24/24 on Linux) and mvc-music-store (20/20 on Linux; its accounts are blocked by F70); F68–F72 were found there.
+- **Web Forms, Web Pages and MVC 3 candidates** (new apps, migrated on 0.7.0 with webForCore-thirdparty 0.6.0):
+  screwturn-wiki (24/24 on Linux), mvc-music-store (20/20 on Linux; its accounts are blocked by F70) and
+  rabbit-webpages (20/21 on Linux, F74); F68–F74 were found there.
 
 Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
@@ -95,7 +96,9 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F69](#f69) | MVC 3/4 apps: `[Compare]` is ambiguous (CS0104) between MVC's and DataAnnotations' `CompareAttribute` | guide gap | mvc-music-store | [#122](https://github.com/xforcore/webForCore/issues/122) |
 | [F70](#f70) | No `aspnet_regsql`: `SqlServices.Install` can't find `InstallCommon.sql`, so SQL membership/roles/profile apps can't create their database | webForCore bug | mvc-music-store | [#123](https://github.com/xforcore/webForCore/issues/123) |
 | [F71](#f71) | ICU: `en-US`/`en-GB` `NumberDecimalDigits` is 3, so `{0:F}` prints `8.990` for 8.99 | guide gap | mvc-music-store | [#124](https://github.com/xforcore/webForCore/issues/124) |
-| [F72](#f72) | Windows-only data stores (SQL CE, SQL Express user instances) and data written on Windows (`\` in a wiki's page index) | app/environment | screwturn-wiki, mvc-music-store | - |
+| [F72](#f72) | Windows-only data stores (SQL CE, SQL Express user instances) and data written on Windows (`\` in a wiki's page index) | app/environment | screwturn-wiki, mvc-music-store, rabbit-webpages | - |
+| [F73](#f73) | WebMatrix.Data and WebMatrix.WebData aren't provided or documented (Microsoft's 3.2.9 packages work) | guide gap | rabbit-webpages | [#130](https://github.com/xforcore/webForCore/issues/130) |
+| [F74](#f74) | `Response.End()` after `StatusCode = 401` sends the 401: forms authentication doesn't redirect to the log-in page | webForCore bug | rabbit-webpages | [#129](https://github.com/xforcore/webForCore/issues/129) |
 ---
 
 ## F1
@@ -1441,5 +1444,38 @@ index.** App/environment. Found on 0.7.0 (candidates round), on Linux.
     only data made on Windows has it (an existing wiki moved to Linux needs the same edit).
   - mvc-music-store: Entity Framework on SQL Server Compact 4.0 (Windows-native, no .NET build) and membership on a
     SQL Express user instance (`LocalSqlServer`). The catalogue uses the test bed's SQL Server; membership is F70.
+  - rabbit-webpages: WebMatrix's `Database.Open("StarterSite")` with no connection string opens
+    `App_Data/StarterSite.sdf` (SQL CE); a `StarterSite` connection string to SQL Server replaces it.
 - **Guide:** covered (section 5: "LocalDB doesn't exist on Linux"; section 6: file paths), except that the guide
   doesn't name SQL CE or `User Instance=true` (the SQL Express of the MVC 3/Web Forms 4.0 templates).
+
+## F73
+
+**WebMatrix.Data and WebMatrix.WebData aren't provided or documented; Microsoft's 3.2.9 packages work.** Guide gap.
+Raised as [#130](https://github.com/xforcore/webForCore/issues/130). Found on 0.7.0 (candidates round), on Linux.
+
+- **Apps:** rabbit-webpages (WebMatrix's Starter Site: `WebSecurity`, `Database.Open`). Every WebMatrix template site
+  and the MVC 4 Internet Application template use them.
+- **What's missing:** webForCore builds Web Pages, Razor, Deployment and Helpers from AspNetWebStack, but not
+  `WebMatrix.Data`, `WebMatrix.WebData` or `System.Web.WebPages.Administration` (its fork has them removed), and
+  `docs/NAMESPACES.md`/`docs/MIGRATING.md` don't say so. On WebMatrix sites they came from the GAC, so there's
+  nothing in the site's `bin`.
+- **What works:** `Microsoft.AspNet.WebPages.Data` and `Microsoft.AspNet.WebPages.WebData` 3.2.9, unchanged; their
+  Web Pages and Razor dependencies lose to webForCore's. SimpleMembership creates its tables on SQL Server; register,
+  log in, log out and an authenticated page work, and WebData's pre-start method runs.
+
+## F74
+
+**`Response.End()` after `StatusCode = 401` sends the 401, so forms authentication doesn't redirect to the log-in
+page.** webForCore bug. Raised as [#129](https://github.com/xforcore/webForCore/issues/129). Found on 0.7.0, on Linux.
+
+- **Apps:** rabbit-webpages: `Account/ChangePassword.cshtml` calls `WebSecurity.RequireAuthenticatedUser()`, which is
+  `Response.StatusCode = 401; Response.End();`; an anonymous request gets an empty 401, where IIS redirects to
+  `/Account/Login?ReturnUrl=...` (1 of 21 probes).
+- **Repro:** in a forms-authentication site, `@{ Response.StatusCode = 401; }` gets the 302 to the log-in page;
+  `@{ Response.StatusCode = 401; Response.End(); }` gets the 401. The same in `.aspx`.
+- **Cause (likely):** on .NET Framework, `Response.End()` in the handler aborts the thread and the response stays
+  buffered, so `FormsAuthenticationModule`'s EndRequest still replaces the 401 with its redirect. webForCore has no
+  thread abort (documented), and its `End()` sends the response first.
+- **Affects:** every Web Pages page with `WebSecurity.RequireAuthenticatedUser()`/`RequireRoles()`, and Web Forms code
+  that sends users to the log-in page with a 401 and `Response.End()`.

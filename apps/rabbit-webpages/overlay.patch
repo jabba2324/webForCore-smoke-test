@@ -1,0 +1,84 @@
+diff --git a/WebSite/Program.cs b/WebSite/Program.cs
+new file mode 100644
+index 0000000..2f21594
+--- /dev/null
++++ b/WebSite/Program.cs
+@@ -0,0 +1,18 @@
++using Microsoft.AspNetCore.Builder;
++using Microsoft.Extensions.DependencyInjection;
++using WebFormsForCore.Hosting.IIS;
++
++// webForCore host (docs/MIGRATING.md section 4). The site uses no session state; its extensionless URLs need every
++// request to reach System.Web.
++public class Program
++{
++    public static void Main(string[] args)
++    {
++        var builder = WebApplication.CreateBuilder(args);
++        builder.Services.AddWebForms();
++
++        var app = builder.Build();
++        app.UseWebForms(o => o.HandleAllRequestsWithWebForms());
++        app.Run();
++    }
++}
+diff --git a/WebSite/Web.config b/WebSite/Web.config
+index 6c81c37..06f601e 100644
+--- a/WebSite/Web.config
++++ b/WebSite/Web.config
+@@ -1,5 +1,8 @@
+ ﻿<?xml version="1.0"?>
+ <configuration>
++  <connectionStrings>
++    <add name="StarterSite" connectionString="Data Source=127.0.0.1,14330; Initial Catalog=RabbitStarterSite; User ID=sa; Password=Smoke_test_1234; TrustServerCertificate=True" providerName="System.Data.SqlClient"/>
++  </connectionStrings>
+   <system.web>
+     <compilation debug="true" targetFramework="4.0"/>
+   </system.web>
+diff --git a/WebSite/WebSite.csproj b/WebSite/WebSite.csproj
+new file mode 100644
+index 0000000..44d739d
+--- /dev/null
++++ b/WebSite/WebSite.csproj
+@@ -0,0 +1,41 @@
++<Project Sdk="Microsoft.NET.Sdk.Web">
++  <!-- Migrated to webForCore (.NET 10). The site was a WebMatrix (Visual Studio) web site with no project file; this
++       project hosts it. Pages (.cshtml) and App_Code are compiled at run time, as on IIS. -->
++  <PropertyGroup>
++    <TargetFramework>net10.0</TargetFramework>
++    <OutputType>Exe</OutputType>
++    <AssemblyName>RabbitSite</AssemblyName>
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <OutputPath>bin_dotnet</OutputPath>
++    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
++    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
++    <GenerateDependencyFile>true</GenerateDependencyFile>
++    <NoWarn>$(NoWarn);NU1701</NoWarn>
++    <PredefinedCulturesOnly>true</PredefinedCulturesOnly>
++    <EnableDefaultRazorGenerateItems>false</EnableDefaultRazorGenerateItems>
++    <RazorCompileOnBuild>false</RazorCompileOnBuild>
++    <RazorCompileOnPublish>false</RazorCompileOnPublish>
++  </PropertyGroup>
++
++  <ItemGroup>
++    <Compile Remove="App_Code/**;bin_dotnet/**;obj/**" />
++    <Content Remove="bin_dotnet/**" />
++    <None Remove="bin_dotnet/**" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <!-- webForCore packages: the "Always" set, Web Pages and Helpers (WebSecurity, WebMail, Json). -->
++    <PackageReference Include="webForCore" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Razor" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.7.0" />
++    <PackageReference Include="webForCore.Web.Helpers" Version="0.7.0" />
++  </ItemGroup>
++
++  <ItemGroup>
++    <!-- WebMatrix.Data and WebMatrix.WebData (Database.Open, WebSecurity, SimpleMembership): the ASP.NET Web Pages 1
++         installer put them in the GAC. webForCore doesn't provide them, so the site uses Microsoft's packages. -->
++    <PackageReference Include="Microsoft.AspNet.WebPages.Data" Version="3.2.9" />
++    <PackageReference Include="Microsoft.AspNet.WebPages.WebData" Version="3.2.9" />
++  </ItemGroup>
++</Project>
