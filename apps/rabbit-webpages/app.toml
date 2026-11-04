@@ -9,7 +9,7 @@ project = "WebSite/WebSite.csproj"
 kinds = ["webpages"]
 licence = "MIT"
 status = "blocked"
-notes = "webForCore 0.7.0 (.NET 10, under webforcore-host), webForCore-thirdparty 0.6.0, on SQL Server with Microsoft's WebMatrix.Data/WebData 3.2.9 (F73): 20/21 on Linux. WebSecurity.RequireAuthenticatedUser gives anonymous users a 401, not the log-in redirect (F74)."
+notes = "webForCore 0.7.0 (.NET 10, under webforcore-host), webForCore-thirdparty 0.6.0, on SQL Server with Microsoft's WebMatrix.Data/WebData 3.2.9 (F73): 20/21 on Linux and Windows (CI run 41900122122). WebSecurity.RequireAuthenticatedUser gives anonymous users a 401, not the log-in redirect (F74)."
 
 needs = ["mssql"]
 

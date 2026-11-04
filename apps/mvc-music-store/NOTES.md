@@ -1,6 +1,6 @@
 # MVC Music Store (MVC 3): migration notes
 
-Status: migrated (webForCore 0.7.0, webForCore-thirdparty 0.6.0, drawingForCore 0.2.0: 20/20 probes on Linux); log-on
+Status: migrated (webForCore 0.7.0, webForCore-thirdparty 0.6.0, drawingForCore 0.2.0: 20/20 probes on Linux and Windows); log-on
 and registration blocked by [F70](../../FINDINGS.md#f70).
 jongalloway/MvcMusicStore at `ea2552d6` (Oct 2025): Jon Galloway's copy of the CodePlex sample, with its MVC 3, 4 and
 5 versions; this is the MVC 3 one (`src/MVC3/MvcMusicStore-Completed`, "MVC 3 Tools Update"). Ms-PL
@@ -51,7 +51,7 @@ drawingForCore 0.2.0, `WEBFORCORE_VERSION=0.7.0 THIRDPARTY_VERSION=0.6.0 DRAWING
 
 ## Smoke
 
-**Round on webForCore 0.7.0 (Linux): 20/20 probes** (13 of the app's and the runner's 7 forbidden paths), also under
+**Round on webForCore 0.7.0: 20/20 probes on Linux, and 20/20 on Windows (CI run 41900122122)** (13 of the app's and the runner's 7 forbidden paths), also under
 `LANG=C LC_ALL=C`.
 
 Probes: the home page (top-selling albums from the database), the genre list, a genre's albums, an album's details,

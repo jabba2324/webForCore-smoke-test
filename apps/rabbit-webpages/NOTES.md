@@ -1,6 +1,6 @@
 # Rabbit (WebMatrix Starter Site): migration notes
 
-Status: blocked (webForCore 0.7.0, webForCore-thirdparty 0.6.0, drawingForCore 0.2.0: 20/21 probes on Linux): one
+Status: blocked (webForCore 0.7.0, webForCore-thirdparty 0.6.0, drawingForCore 0.2.0: 20/21 probes on Linux and Windows): one
 probe fails on a webForCore bug ([F74](../../FINDINGS.md#f74)).
 yysun/Rabbit at `a819ee23` (23 Jul 2011), MIT (`License.txt`). The repository has the Rabbit framework's class
 library and two sites; this is `WebSite`: WebMatrix's ASP.NET Web Pages 1 **Starter Site** (accounts with
@@ -43,7 +43,7 @@ Builds first time; no code changes.
 
 ## Smoke
 
-**Round on webForCore 0.7.0 (Linux): 20/21 probes** (14 of the app's and the runner's 7 forbidden paths); setup 3/3
+**Round on webForCore 0.7.0: 20/21 probes on Linux, and 20/21 on Windows (CI run 41900122122; the same probe fails)** (14 of the app's and the runner's 7 forbidden paths); setup 3/3
 steps.
 
 Setup: registers an account (`Database.Open` + `WebSecurity.CreateAccount`, then logged in: the layout shows the

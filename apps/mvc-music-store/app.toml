@@ -8,7 +8,7 @@ project = "src/MVC3/MvcMusicStore-Completed/MvcMusicStore/MvcMusicStore.csproj"
 kinds = ["mvc"]
 licence = "MS-PL"
 status = "migrated"
-notes = "webForCore 0.7.0 (.NET 10, under webforcore-host), webForCore-thirdparty 0.6.0, on SQL Server: passes all probes, 20/20 on Linux. Log-on and registration fail: no aspnet_regsql for the default membership provider (F70); prices print 8.990 (ICU, F71)."
+notes = "webForCore 0.7.0 (.NET 10, under webforcore-host), webForCore-thirdparty 0.6.0, on SQL Server: passes all probes, 20/20 on Linux and Windows (CI run 41900122122). Log-on and registration fail: no aspnet_regsql for the default membership provider (F70); prices print 8.990 (ICU, F71)."
 
 needs = ["mssql"]
 # No [setup]: Entity Framework creates and seeds the database (DropCreateDatabaseIfModelChanges) on the first request.

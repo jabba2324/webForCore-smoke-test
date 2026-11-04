@@ -1,6 +1,6 @@
 # ScrewTurn Wiki 3.0: migration notes
 
-Status: migrated (webForCore 0.7.0, webForCore-thirdparty 0.6.0, drawingForCore 0.2.0: 24/24 probes on Linux).
+Status: migrated (webForCore 0.7.0, webForCore-thirdparty 0.6.0, drawingForCore 0.2.0: 24/24 probes on Linux and Windows).
 MarkZither/ScrewTurnWiki at `7b1ccb46` (24 Feb 2019): ScrewTurn Wiki v3.0.4.560 retargeted to .NET Framework 4.7.2.
 GPLv2. Later commits of that fork replace Anthem.NET with Syncfusion's commercial Essential JS controls, so the pin is
 before them. (chsword/screwturn, also checked, is the 4.0 line, whose default storage is SQL Server Compact: a Windows
@@ -49,7 +49,7 @@ web.config is unchanged.
 
 ## Smoke
 
-**Round on webForCore 0.7.0 (Linux): 24/24 probes** (17 of the app's and the runner's 7 forbidden paths).
+**Round on webForCore 0.7.0: 24/24 probes on Linux, and 24/24 on Windows (CI run 41900122122)** (17 of the app's and the runner's 7 forbidden paths).
 
 Probes: the home page and `MainPage.ashx` (the wiki's rewritten URLs), a page in the `Dev` namespace, the page index,
 categories, page history, a search, the OpenSearch description, the RSS feed, the log-in and registration forms,

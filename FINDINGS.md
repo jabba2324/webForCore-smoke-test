@@ -16,8 +16,8 @@ with webForCore built from source at `4ec57209` and confirmed on the 0.1.0 relea
 - **Umbraco 7** (a new app, on 0.7.0, on Linux so far): builds, but is blocked at boot by AutoMapper 3.3.1 (F22); F65
   and F66, and more evidence for F37 and F61–F64.
 - **Web Forms, Web Pages and MVC 3 candidates** (new apps, migrated on 0.7.0 with webForCore-thirdparty 0.6.0):
-  screwturn-wiki (24/24 on Linux), mvc-music-store (20/20 on Linux; its accounts are blocked by F70) and
-  rabbit-webpages (20/21 on Linux, F74); F68–F74 were found there.
+  screwturn-wiki (24/24 on Linux and Windows), mvc-music-store (20/20 on both; its accounts are blocked by F70) and
+  rabbit-webpages (20/21 on both, F74); F68–F74 were found there.
 
 Repro sites are small enough to paste: a `Program.cs` as in
 `docs/MIGRATING.md` section 4, an SDK project referencing the `webForCore` package, and the page shown.
