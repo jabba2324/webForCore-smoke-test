@@ -1,6 +1,6 @@
 # SignalR 2 samples: migration notes
 
-Status: migrated (webForCore 0.7.0, 18/19 probes on Linux; the one failure is F70, a webForCore bug in the hub proxy's
+Status: migrated (webForCore 0.7.0, 18/19 probes on Linux and on Windows; the one failure is F70, a webForCore bug in the hub proxy's
 header comment).
 
 SignalR/SignalR at tag `2.4.3` (`7f53f266`), Apache-2.0 (`LICENSE.txt`). `samples/Microsoft.AspNet.SignalR.Samples`:
@@ -64,7 +64,7 @@ The build passes.
 
 ## Smoke
 
-Round 7 candidates (webForCore 0.7.0; Linux): **18/19**.
+Round 7 candidates (webForCore 0.7.0): **18/19 on Linux and on Windows** (Windows: CI run 41898913795, the same failure).
 
 - Web Forms: the home page and a sample's folder page (`/Hubs/DemoHub/`, default document, master page).
 - SignalR: `/signalr/hubs` lists every hub, `VBDemo` from the VB library included; hub negotiation and a persistent
