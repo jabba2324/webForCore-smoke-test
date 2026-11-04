@@ -12,7 +12,7 @@ also_build = ["src/Orchard.WebForCore.slnx"]
 kinds = ["mvc", "webapi"]
 licence = "BSD-3-Clause"
 status = "blocked"
-notes = "On webForCore 0.8.0 it builds (framework, Core, all 69 modules; NHibernate 5, Castle.Core 4) and sets up its database, but on Linux it runs out of inotify instances (F97): one per watched folder, and Orchard watches every module's. F98-F101; F99 has a workaround in Global.asax."
+notes = "On webForCore 0.8.0 it builds (framework, Core, all 69 modules; NHibernate 5, Castle.Core 4) and sets up its database, but on Linux it runs out of inotify instances (F97): one per watched folder, and Orchard watches every module's. F98-F101; F99 has a workaround in Global.asax. On Windows the setup recipe fails in the old NHibernate.Linq against NHibernate 5 (F100), so the tenant never initializes: 9/15 on both platforms."
 needs = ["mssql"]
 
 # Orchard's setup page (anonymous, so no anti-forgery token), with the compose SQL Server and the Core recipe: the

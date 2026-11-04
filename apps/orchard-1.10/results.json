@@ -86,23 +86,23 @@
       ]
     },
     "build": {
-      "at": "2026-11-04T21:33:57+00:00",
+      "at": "2026-11-04T22:24:18+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/orchard-1.10/logs/build.log",
-      "seconds": 31,
+      "seconds": 158,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.8.0"
     },
     "fetch": {
-      "at": "2026-11-04T20:47:54+00:00",
+      "at": "2026-11-04T22:21:39+00:00",
       "commit": "78ee4efb4f37b3ce75abd65692f64a7ea17e72e6",
-      "overlay": false,
+      "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-04T21:34:27+00:00",
+      "at": "2026-11-04T22:27:29+00:00",
       "created": [
         "orchard110"
       ],
@@ -110,112 +110,124 @@
       "status": "fail",
       "steps": [
         {
+          "ok": true,
+          "status": 200,
+          "step": "/"
+        },
+        {
+          "may_fail": true,
           "ok": false,
-          "status": 500,
+          "status": 503,
+          "step": "/"
+        },
+        {
+          "attempts": 37,
+          "ok": false,
+          "status": 503,
           "step": "/"
         }
       ],
-      "summary": "0/1 steps"
+      "summary": "1/3 steps, 1 allowed to fail"
     },
     "smoke": {
-      "at": "2026-11-04T21:34:45+00:00",
+      "at": "2026-11-04T22:29:32+00:00",
       "checks": [
         {
           "expected_text": "Welcome to Orchard!",
-          "ms": 6,
+          "ms": 2,
           "ok": false,
           "path": "/",
-          "status": 500,
-          "title": "The configured user limit (128) on the number of inotify instances has been reached, or the per-process limit on the number of open file descriptors has been reached."
+          "status": 503,
+          "title": "This tenant is currently initializing. Please try again later."
         },
         {
           "expected_text": "Welcome To Orchard!",
-          "ms": 19,
+          "ms": 3,
           "ok": false,
           "path": "/welcome-to-orchard",
-          "status": 500,
-          "title": "The configured user limit (128) on the number of inotify instances has been reached, or the per-process limit on the number of open file descriptors has been reached."
+          "status": 503,
+          "title": "This tenant is currently initializing. Please try again later."
         },
         {
           "expected_text": "name=\"userNameOrEmail\"",
-          "ms": 28,
+          "ms": 2,
           "ok": false,
           "path": "/Users/Account/LogOn",
-          "status": 500,
-          "title": "The configured user limit (128) on the number of inotify instances has been reached, or the per-process limit on the number of open file descriptors has been reached."
+          "status": 503,
+          "title": "This tenant is currently initializing. Please try again later."
         },
         {
-          "ms": 15,
+          "ms": 1,
           "ok": false,
           "path": "/Admin",
-          "status": 500,
-          "title": "The configured user limit (128) on the number of inotify instances has been reached, or the per-process limit on the number of open file descriptors has been reached."
+          "status": 503,
+          "title": "This tenant is currently initializing. Please try again later."
         },
         {
           "expected_text": "html, body, div, span",
-          "ms": 15,
+          "ms": 6,
           "ok": false,
           "path": "/Themes/SafeMode/Styles/site.css",
-          "status": 500,
-          "title": "Configuration Error"
+          "status": 503,
+          "title": "This tenant is currently initializing. Please try again later."
         },
         {
-          "ms": 4,
+          "ms": 3,
           "ok": true,
           "path": "/Modules/Orchard.Users/bin/Orchard.Users.dll",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 2,
           "ok": false,
           "path": "/Modules/Orchard.Users/Module.txt",
-          "status": 500,
-          "title": "Configuration Error"
+          "status": 503,
+          "title": "This tenant is currently initializing. Please try again later."
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/App_Data/Sites/Default/Settings.txt",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 2,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/Orchard.Web.dll",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404

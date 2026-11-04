@@ -127,7 +127,7 @@ instances), the setup page renders, the setup creates the schema with NHibernate
 recipe enables its features, imports its content types and runs the migrations, then fails at 128 on its first command
 (`menu create`, while Orchard looks for `.po` files in every module).
 
-**Windows (CI run 41918944385): 9/15.** It builds, and with all 69 modules (no inotify limit) the setup page renders; after the setup form the tenant stays "initializing" (503) for the whole wait (37 tries), so every page probe is 503 and only the paths that must not be served pass. Why isn't in the logs CI keeps (Orchard logs to App_Data/Logs); the overlay now also logs to the console, for the next run.
+**Windows (CI run 41918944385): 9/15.** It builds, and with all 69 modules (no inotify limit) the setup page renders; after the setup form the tenant stays "initializing" (503) for the whole wait (37 tries), so every page probe is 503 and only the paths that must not be served pass. With Orchard's log also on the console, CI run 41924348101 shows why: the Core recipe's first command (`page create ... /Homepage:true`) fails with `MissingMethodException: IEntityPersister.GetConcreteProxyClass(EntityMode)` in `NHibernate.Linq.Util.SessionFactoryUtil.GetProxyMetaData`. Orchard still uses the old separate `NHibernate.Linq` provider, built against NHibernate 2/3, and NHibernate 5 removed that method. The recipe fails, so the tenant never finishes initialising. This is the overlay's library upgrade (F100), not webForCore: the next step is moving Orchard's queries to NHibernate 5's built-in LINQ (`session.Query<T>()`). The same run logs F106 (webForCore's BinaryFormatter can't serialize a `Type`), which only costs Orchard its configuration cache.
 
 ## Open problems
 

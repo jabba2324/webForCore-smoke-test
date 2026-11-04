@@ -154,6 +154,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F103](#f103) | Orchard's run-time module compilation parses the old `.csproj` format, so it can't read the SDK projects | app/environment | orchard-1.10 | - |
 | [F104](#f104) | webForCore.AutoMapperLegacy on AutoMapper 12: a member mapped from a value already of its type is mapped again through a base-type map, and the whole configuration fails | app/environment (webForCore-thirdparty) | umbraco-7 | [thirdparty#11](https://github.com/xforcore/webForCore-thirdparty/issues/11) |
 | [F105](#f105) | `ApplicationSettingsBase` (Settings.settings, Web Reference SOAP clients) throws `TypeLoadException`: `ConfigurationManagerInternal` is looked up in `System.Configuration` 4.0.0.0 | webForCore bug | umbraco-7 | [#154](https://github.com/xforcore/webForCore/issues/154) |
+| [F106](#f106) | webForCore's BinaryFormatter port can't serialize a `System.Type` (.NET Framework writes `UnitySerializationHolder`) | webForCore bug | orchard-1.10 | [#156](https://github.com/xforcore/webForCore/issues/156) |
 | [F116](#f116) | Windows Workflow Foundation 3 (`System.Workflow.*`) isn't on .NET, and the docs and blocker search don't say so | guide gap | composite-c1 | [#132](https://github.com/xforcore/webForCore/issues/132) |
 | [F117](#f117) | Run-time C# compilation in application code (`CodeDomProvider.CreateProvider("c#")`) throws `PlatformNotSupportedException`; no documented replacement | guide gap | composite-c1 | [#133](https://github.com/xforcore/webForCore/issues/133) |
 | [F118](#f118) | CoreWCF's source generator reaches applications: `CS8370`/`CS8107` for any `[ServiceContract]` with `LangVersion` below 11 | webForCore bug | composite-c1 | [#134](https://github.com/xforcore/webForCore/issues/134) |
@@ -1845,6 +1846,10 @@ webForCore's; MIGRATING.md section 3's "Libraries that don't run on .NET" could 
   which Autofac.Configuration 4 needs, is a bigger change); Castle.Core 4.1.1 (the last before `ILogger.Trace`);
   NHibernate 5.1.7 with FluentNHibernate 2.1.2 and Iesi.Collections 4.0.4 (a few API changes: NOTES.md, step 7). With
   them Orchard builds and its setup creates its schema on SQL Server, batching included.
+- **Next problem (Windows, CI run 41924348101):** Orchard's prebuilt `NHibernate.Linq` (the old separate LINQ provider)
+  calls `IEntityPersister.GetConcreteProxyClass(EntityMode)`, which NHibernate 5 removed, so the Core recipe's first content
+  query throws `MissingMethodException` and the tenant stays "initializing" (503). Orchard's queries need moving to
+  NHibernate 5's built-in LINQ.
 
 ## F101
 
@@ -1957,6 +1962,20 @@ passes through). Raised as
   ApplicationSettingsBase { [ApplicationScopedSetting, DefaultSettingValue("http://example.com/")] public string Url =>
   (string)this["Url"]; }`: `new Settings().Url` throws.
 - **Suggested fix:** create the type directly, or name webForCore's own assembly in the type string.
+
+## F106
+
+**webForCore's BinaryFormatter port can't serialize a `System.Type`.** webForCore bug. Raised as
+[#156](https://github.com/xforcore/webForCore/issues/156). Found on 0.8.0, in orchard-1.10's Windows CI run 41924348101.
+
+- **Apps:** orchard-1.10. `Orchard.Data.SessionConfigurationCache` (switched to
+  `WebFormsForCore.Serialization.Formatters.Binary.BinaryFormatter`, as MIGRATING.md says) caches NHibernate's
+  `Configuration` in `App_Data`. Each start logs "Error storing new NHibernate cache configuration" and rebuilds it.
+- **Error:** `SerializationException: Type 'System.RuntimeType' in Assembly 'System.Private.CoreLib, ...' is not marked as
+  serializable.`
+- **Cause:** on .NET Framework, `RuntimeType` serializes itself as a `System.UnitySerializationHolder`. On .NET it isn't
+  serializable, and the port has no surrogate for it.
+- **Repro:** a `[Serializable]` class with a `Type` field, serialized with the port on the 0.8.0 packages (#156).
 
 ## F116
 

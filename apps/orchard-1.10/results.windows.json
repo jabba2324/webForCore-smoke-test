@@ -2,23 +2,23 @@
   "id": "orchard-1.10",
   "stages": {
     "build": {
-      "at": "2026-11-04T21:52:59+00:00",
+      "at": "2026-11-04T22:29:16+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\orchard-1.10\\logs.windows\\build.log",
-      "seconds": 256,
+      "seconds": 264,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.8.0"
     },
     "fetch": {
-      "at": "2026-11-04T21:48:42+00:00",
+      "at": "2026-11-04T22:24:52+00:00",
       "commit": "78ee4efb4f37b3ce75abd65692f64a7ea17e72e6",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-04T21:56:15+00:00",
+      "at": "2026-11-04T22:32:33+00:00",
       "created": [
         "orchard110"
       ],
@@ -46,11 +46,11 @@
       "summary": "1/3 steps, 1 allowed to fail"
     },
     "smoke": {
-      "at": "2026-11-04T21:58:17+00:00",
+      "at": "2026-11-04T22:34:35+00:00",
       "checks": [
         {
           "expected_text": "Welcome to Orchard!",
-          "ms": 15,
+          "ms": 3,
           "ok": false,
           "path": "/",
           "status": 503,
@@ -58,7 +58,7 @@
         },
         {
           "expected_text": "Welcome To Orchard!",
-          "ms": 4,
+          "ms": 3,
           "ok": false,
           "path": "/welcome-to-orchard",
           "status": 503,
@@ -81,7 +81,7 @@
         },
         {
           "expected_text": "html, body, div, span",
-          "ms": 6,
+          "ms": 5,
           "ok": false,
           "path": "/Themes/SafeMode/Styles/site.css",
           "status": 503,
@@ -94,7 +94,7 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 3,
           "ok": false,
           "path": "/Modules/Orchard.Users/Module.txt",
           "status": 503,
@@ -107,43 +107,43 @@
           "status": 404
         },
         {
-          "ms": 14,
+          "ms": 1,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 14,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 14,
+          "ms": 3,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/Orchard.Web.dll",
           "status": 404
         },
         {
-          "ms": 25,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404
