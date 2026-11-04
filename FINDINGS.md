@@ -89,9 +89,9 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F65](#f65) | Linux: named semaphores and events throw `PlatformNotSupportedException` (only named `Mutex` works) | guide gap | umbraco-7 | [#94](https://github.com/xforcore/webForCore/issues/94) |
 | [F66](#f66) | webForCore's `CallContext` doesn't reach prebuilt .NET Framework libraries: Log4Net.Async logs nothing | guide gap | umbraco-7 | [#95](https://github.com/xforcore/webForCore/issues/95) |
 | [F67](#f67) | Linux with no locale (`C`/`POSIX`: CI runners, containers): the culture is invariant, so apps that pick resources by culture find none | guide gap | umbraco-6 | [#97](https://github.com/xforcore/webForCore/issues/97) |
-| [F68](#f68) | A request path with an escaped character (a space, non-ASCII) is answered 400 before the application | webForCore bug | aspnetdocs-wingtip-toys | [#126](https://github.com/xforcore/webForCore/issues/126) |
-| [F69](#f69) | `Request.RawUrl` is the default document's path for a directory request: FriendlyUrls 301s `/` to `/Default` | webForCore bug | aspnetdocs-wingtip-toys | [#127](https://github.com/xforcore/webForCore/issues/127) |
-| [F70](#f70) | Linux: `Server.MachineName` throws `DllNotFoundException` (kernel32); ELMAH's log pages fail | webForCore bug | aspnetdocs-wingtip-toys | [#128](https://github.com/xforcore/webForCore/issues/128) |
+| [F80](#f80) | A request path with an escaped character (a space, non-ASCII) is answered 400 before the application | webForCore bug | aspnetdocs-wingtip-toys | [#126](https://github.com/xforcore/webForCore/issues/126) |
+| [F81](#f81) | `Request.RawUrl` is the default document's path for a directory request: FriendlyUrls 301s `/` to `/Default` | webForCore bug | aspnetdocs-wingtip-toys | [#127](https://github.com/xforcore/webForCore/issues/127) |
+| [F82](#f82) | Linux: `Server.MachineName` throws `DllNotFoundException` (kernel32); ELMAH's log pages fail | webForCore bug | aspnetdocs-wingtip-toys | [#128](https://github.com/xforcore/webForCore/issues/128) |
 ---
 
 ## F1
@@ -1362,7 +1362,7 @@ GitHub's `ubuntu-24.04` runner (its locale is `C`); it passed on this machine (`
 - **Guide:** `docs/MIGRATING.md` should say that a Linux server or container without a locale runs with the invariant
   culture, and to set `<globalization culture uiCulture>` or `LANG`.
 
-## F68
+## F80
 
 **A request path with a percent-escaped character (a space, any non-ASCII character) is answered 400 with an empty
 body, before the application sees it.** webForCore bug. Raised as
@@ -1377,7 +1377,7 @@ AspNetDocs tutorial apps.
 - **Repro:** any site, `GET /a%20b.htm` with a file `a b.htm`, or a page route with a value containing a space.
 - **Suggested fix:** the decoded `PathBase.Value + Path.Value`.
 
-## F69
+## F81
 
 **`Request.RawUrl` is the default document's path for a directory request, so FriendlyUrls redirects `/` to
 `/Default`.** webForCore bug. Raised as [#127](https://github.com/xforcore/webForCore/issues/127). Found on 0.7.0
@@ -1393,7 +1393,7 @@ AspNetDocs tutorial apps.
   { AutoRedirectMode = RedirectMode.Permanent })` (Microsoft.AspNet.FriendlyUrls 1.0.2); `GET /`.
 - **Suggested fix:** `RawUrl` from the request's raw target, taken before the default-document rewrite.
 
-## F70
+## F82
 
 **Linux: `HttpServerUtility.MachineName` throws `DllNotFoundException` (`kernel32` `GetComputerName`).** webForCore
 bug. Raised as [#128](https://github.com/xforcore/webForCore/issues/128). Found on 0.7.0 (Linux), in the candidates

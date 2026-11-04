@@ -1,6 +1,6 @@
 # AspNetDocs: Wingtip Toys (Web Forms 4.5 + EF 6 tutorial): migration notes
 
-Status: blocked (webForCore 0.7.0, 16/19 probes on Linux, 17/19 on Windows; F68, F69 and F70 are webForCore bugs). Source: the
+Status: blocked (webForCore 0.7.0, 16/19 probes on Linux, 17/19 on Windows; F80, F81 and F82 are webForCore bugs). Source: the
 completed project of the AspNetDocs tutorial "Getting Started with ASP.NET 4.5 Web Forms and Visual Studio 2013"
 (`aspnet/web-forms/overview/getting-started/getting-started-with-aspnet-45-web-forms` in dotnet/AspNetDocs). The
 repository has only the tutorial's snippets; the tutorial links the project on the retired MSDN Code Gallery
@@ -50,17 +50,17 @@ No change to the code.
 
 ## Smoke
 
-**Linux, webForCore 0.7.0: 16/19; Windows (CI run 41900268720): 17/19**, the same but for `/elmah.axd`, which works there (F70 is Linux only). Pass: `/ProductList` (the catalogue from the seeded database, model binding),
+**Linux, webForCore 0.7.0: 16/19; Windows (CI run 41900268720): 17/19**, the same but for `/elmah.axd`, which works there (F82 is Linux only). Pass: `/ProductList` (the catalogue from the seeded database, model binding),
 `/Category/Planes` (page route with `[RouteData]`), `/ProductDetails?productID=2` (`[QueryString]`), `/ShoppingCart`,
 `/Account/Login` and `/Account/Register` (Identity pages, view state), `/About` (FriendlyUrls' extensionless URL),
 `/Admin/AdminPage` (302 to the login page: `<authorization>` for the `canEdit` role and the OWIN cookie
 middleware's 401 handling), `Site.css`, and the paths that mustn't be served. Fail:
 
-- `/`: `301 Location: /Default` ([F69](../../FINDINGS.md#f69)); `/Default` renders.
-- `/Product/Convertible%20Car`: 400, empty body ([F68](../../FINDINGS.md#f68)). Every product link on the product list
+- `/`: `301 Location: /Default` ([F81](../../FINDINGS.md#f81)); `/Default` renders.
+- `/Product/Convertible%20Car`: 400, empty body ([F80](../../FINDINGS.md#f80)). Every product link on the product list
   is like this (the seeded names have spaces); a path without an escaped character, `/Product/Fast-Car`, is routed
   to the page.
-- `/elmah.axd`: 200 with an empty body ([F70](../../FINDINGS.md#f70)).
+- `/elmah.axd`: 200 with an empty body ([F82](../../FINDINGS.md#f82)).
 
 `/ProductDetails.aspx?productID=2` answers `301 Location: /ProductDetails?productID=2`: FriendlyUrls' permanent
 redirect for `.aspx` URLs, as on IIS, so the probe uses the extensionless URL.
@@ -76,7 +76,7 @@ By hand:
   replaces this provider (one cookie, state in the distributed cache).
 - `/AddToCart` without a product ID throws in the page; `Application_Error`'s `Server.Transfer` to `ErrorPage.aspx`
   renders the error page, as on IIS.
-- `/elmah.axd/about` and `/elmah.axd/stylesheet` work; `/rss` and `/json` fail with F70's exception.
+- `/elmah.axd/about` and `/elmah.axd/stylesheet` work; `/rss` and `/json` fail with F82's exception.
 
 Runs on this machine with several other agents' servers up also hit "Failed to start monitoring changes" (the user's
 128 inotify instances used up), the documented limit (webForCore `docs/IIS-COMPATIBILITY.md`, #107), not this app.
@@ -85,9 +85,9 @@ Not covered: the PayPal checkout (it calls PayPal's sandbox) and external logins
 
 ## Open problems
 
-- [F68](../../FINDINGS.md#f68) (webForCore bug, [#126](https://github.com/xforcore/webForCore/issues/126)): paths
+- [F80](../../FINDINGS.md#f80) (webForCore bug, [#126](https://github.com/xforcore/webForCore/issues/126)): paths
   with a space answer 400.
-- [F69](../../FINDINGS.md#f69) (webForCore bug, [#127](https://github.com/xforcore/webForCore/issues/127)): `RawUrl`
+- [F81](../../FINDINGS.md#f81) (webForCore bug, [#127](https://github.com/xforcore/webForCore/issues/127)): `RawUrl`
   after the default document; FriendlyUrls redirects `/`.
-- [F70](../../FINDINGS.md#f70) (webForCore bug, [#128](https://github.com/xforcore/webForCore/issues/128)):
+- [F82](../../FINDINGS.md#f82) (webForCore bug, [#128](https://github.com/xforcore/webForCore/issues/128)):
   `Server.MachineName` on Linux; ELMAH.
