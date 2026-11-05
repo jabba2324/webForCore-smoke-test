@@ -6,8 +6,6 @@ repo = "https://github.com/umbraco/Umbraco-CMS"
 ref = "4fbf8020bf08dc26bf93f01b02bc39852ee36553"
 site = "src/Umbraco.Web.UI"
 project = "src/Umbraco.Web.UI/Umbraco.Web.UI.csproj"
-# The template setup makes, written by Umbraco.
-generated = ["src/Umbraco.Web.UI/Views/SmokePage.cshtml"]
 kinds = ["mvc", "webapi", "webforms", "owin", "identity", "signalr"]
 licence = "MIT"
 status = "migrated"
@@ -136,7 +134,7 @@ status = 404
 # The back office's API with verbs: the log-in (a JSON POST; its UMB-XSRF-TOKEN cookie captured), the user it logged
 # in (the header goes with every call, as Umbraco's client sends it: a call without it gets new tokens), a page saved
 # and published without the X-UMB-XSRF-TOKEN header (refused) and with it (its id and URL captured),
-# the page on the front end, then deleted (DELETE, to the recycle bin) and gone. Each smoke run makes a new page.
+# and the page on the front end; then (below) edited, unpublished, deleted and purged.
 [[probes]]
 path = "/umbraco/backoffice/UmbracoApi/Authentication/PostLogin"
 method = "POST"
@@ -171,6 +169,36 @@ capture = { page = '\{"id":(\d+),"udi":"umb://document/', url = '"urls":\[\{[^}]
 path = "{url}"
 contains = "Rendered by Umbraco 8: Smoke Probe Page"
 
+# Round 0.9.0: the page edited and published again under a new name (its URL follows the name), unpublished
+# (PostUnpublish, JSON; the URL is then a 404), deleted (DELETE, to the recycle bin) and the content recycle bin emptied (DELETE; the page
+# is then gone from the API too), so a run leaves no page behind. Then a media folder: made (PostAddFolder, JSON),
+# listed, deleted (a POST: the media API's DeleteById takes no DELETE, which Web API answers 405), and the media
+# recycle bin emptied.
+[[probes]]
+path = "/umbraco/backoffice/UmbracoApi/Content/PostSave"
+method = "POST"
+cookies = true
+headers = { X-UMB-XSRF-TOKEN = "{xsrf}" }
+multipart = { contentItem = { id = "{page}", parentId = -1, contentTypeAlias = "smokePage", templateAlias = "SmokePage", action = "publish", variants = [{ name = "Smoke Probe Page Edited", properties = [], save = true, publish = true }] } }
+contains = "\"state\":\"Published\""
+capture = { edited = '"urls":\[\{[^}]*"text":"([^"]+)"' }
+
+[[probes]]
+path = "{edited}"
+contains = "Rendered by Umbraco 8: Smoke Probe Page Edited"
+
+[[probes]]
+path = "/umbraco/backoffice/UmbracoApi/Content/PostUnpublish"
+method = "POST"
+cookies = true
+headers = { X-UMB-XSRF-TOKEN = "{xsrf}" }
+json = { id = "{page}", cultures = [] }
+contains = "\"state\":\"Draft\""
+
+[[probes]]
+path = "{edited}"
+status = 404
+
 [[probes]]
 path = "/umbraco/backoffice/UmbracoApi/Content/DeleteById?id={page}"
 method = "DELETE"
@@ -178,5 +206,61 @@ cookies = true
 headers = { X-UMB-XSRF-TOKEN = "{xsrf}" }
 
 [[probes]]
-path = "{url}"
+path = "/umbraco/backoffice/UmbracoApi/Content/GetById?id={page}"
+cookies = true
+headers = { X-UMB-XSRF-TOKEN = "{xsrf}" }
+contains = "\"trashed\":true"
+
+[[probes]]
+path = "/umbraco/backoffice/UmbracoApi/Content/EmptyRecycleBin"
+method = "DELETE"
+cookies = true
+headers = { X-UMB-XSRF-TOKEN = "{xsrf}" }
+contains = "The recycle bin is now empty"
+
+[[probes]]
+path = "/umbraco/backoffice/UmbracoApi/Content/GetById?id={page}"
+cookies = true
+headers = { X-UMB-XSRF-TOKEN = "{xsrf}" }
+status = 404
+
+[[probes]]
+path = "/umbraco/backoffice/UmbracoApi/Media/PostAddFolder"
+method = "POST"
+cookies = true
+headers = { X-UMB-XSRF-TOKEN = "{xsrf}" }
+json = { parentId = "-1", name = "Smoke Probe Folder" }
+contains = "\"name\":\"Smoke Probe Folder\""
+capture = { folder = '"id":(\d+),"udi":"umb://media/' }
+
+[[probes]]
+path = "/umbraco/backoffice/UmbracoApi/Media/GetChildren?id=-1"
+cookies = true
+headers = { X-UMB-XSRF-TOKEN = "{xsrf}" }
+contains = "\"name\":\"Smoke Probe Folder\""
+
+[[probes]]
+path = "/umbraco/backoffice/UmbracoApi/Media/DeleteById?id={folder}"
+method = "DELETE"
+cookies = true
+headers = { X-UMB-XSRF-TOKEN = "{xsrf}" }
+status = 405
+
+[[probes]]
+path = "/umbraco/backoffice/UmbracoApi/Media/DeleteById?id={folder}"
+method = "POST"
+cookies = true
+headers = { X-UMB-XSRF-TOKEN = "{xsrf}" }
+
+[[probes]]
+path = "/umbraco/backoffice/UmbracoApi/Media/EmptyRecycleBin"
+method = "DELETE"
+cookies = true
+headers = { X-UMB-XSRF-TOKEN = "{xsrf}" }
+contains = "The recycle bin is now empty"
+
+[[probes]]
+path = "/umbraco/backoffice/UmbracoApi/Media/GetById?id={folder}"
+cookies = true
+headers = { X-UMB-XSRF-TOKEN = "{xsrf}" }
 status = 404
