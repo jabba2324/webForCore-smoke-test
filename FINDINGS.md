@@ -1253,6 +1253,9 @@ Linux and Windows.
   - the first with `<FrameworkReference Include="Microsoft.AspNetCore.App" />` added restores.
 - **Fix in the app:** mvcforum references Annotations 5.0.0 and passes 15/15. That's the guide step the issue
   proposes. yafnet-2 stays blocked on F48 and F49 regardless.
+- **Round 0.9.0:** MIGRATING.md has the step (#62, closed). yafnet-2's overlay adds
+  `<FrameworkReference Include="Microsoft.AspNetCore.App" />` to its 18 class libraries and its restore passes; its
+  build then stops only at F49.
 
 ## F55
 
