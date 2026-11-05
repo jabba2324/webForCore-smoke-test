@@ -1,6 +1,6 @@
 # Opserver (MVC 5): migration notes
 
-Status: migrated (webForCore 0.8.0: all 11 probes on Linux and Windows; F47 was fixed in 0.8.0). Source: https://github.com/opserver/Opserver at `ed57f51d`, the parent of its ASP.NET Core migration
+Status: migrated (webForCore 0.9.0: 16/16 on Linux and Windows, 1 verb probe). Source: https://github.com/opserver/Opserver at `ed57f51d`, the parent of its ASP.NET Core migration
 (`a47b1fc`, #355). Licence MIT. Round 4, on webForCore 0.5.0 and webForCore-thirdparty 0.4.1.
 
 ## Assessment
@@ -59,7 +59,7 @@ Redis, HAProxy or exceptions store, so they aren't probed. `/set-theme` (a POST)
 Not webForCore's: `/sql/instance?node=compose` is a 500 on Linux SQL Server
 (`Views/SQL/Instance.cshtml:255`, a volume with no logical name: `v.LogicalVolumeName` is null there); not probed.
 
-No overlay change. Results: RESULTS_PLACEHOLDER
+No overlay change. Results: **16/16 on Linux and Windows** (CI runs 42021158598 and 42026762740), the same in both runs; locally twice on Linux.
 
 ## Open problems
 
