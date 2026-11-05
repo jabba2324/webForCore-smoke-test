@@ -1,6 +1,6 @@
 # CarrotCake CMS (MVC): migration notes
 
-Status: migrating (webForCore 0.9.0: 39/39 on Linux; LINQ to SQL is provided now). Source: https://github.com/ninianne98/CarrotCakeCMS-MVC at `bfc5c38e`. Found by searching GitHub on 2026-10-31; the
+Status: migrated (webForCore 0.9.0: 39/39 on Linux and Windows; LINQ to SQL is provided now). Source: https://github.com/ninianne98/CarrotCakeCMS-MVC at `bfc5c38e`. Found by searching GitHub on 2026-10-31; the
 repo, licence (MIT), web project and its `<TargetFrameworkVersion>` were checked through the GitHub API.
 
 ## Assessment
@@ -52,6 +52,8 @@ the admin project and aren't built.
    `ArgumentNullException (Parameter 'path1')` (F159).
 
 ## Smoke
+
+**CI (Linux and Windows): 39/39 on both, in CI runs 42026922513 and (second).**
 
 **Round 0.9.0, Linux: 39/39** (32 of the app's probes and the runner's 7 forbidden paths), on a new database and again
 on the same one, and from a fresh checkout.
