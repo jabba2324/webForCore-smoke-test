@@ -118,11 +118,22 @@ are the reference.
 **CI run 41920542509: 23/23 on Linux and on Windows** (16 probes, the 7 forbidden paths), with the setup's 4 steps passing.
 The first CI run (41918977774) had 22/23 on both: the search found nothing until the setup rebuilt the index.
 
+**Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0; Linux):** 23/23 as committed, and Kooboo's worker
+now holds 7 inotify instances (webforcore-host 1; F92 is fixed). Then verbs: 17 probes (40 in all; 7 of them POSTs).
+The back office, as its AJAX forms post (`X-Requested-With`): the log-in, an article created in the sample site's
+Article folder (published), shown on the front end, edited (its id from the content list), shown edited, deleted,
+and gone from the front end and the list. The sample's detail template throws a `NullReferenceException` for a
+missing article (its own code, `ContentExtensions.GetRepository` on a null item), so that probe checks only that the
+article's text is gone. Then the front end's member forms (`Kooboo-Submit/RegisterMember` and `ValidateMember`, each
+with its anti-forgery token): a member registers, logs in and sees their profile, and the back office's membership
+list shows them and deletes them (`MembershipUser/Delete`). 40/40 twice in a row on the same site; a run leaves the
+site as it found it.
+
 ## Open problems
 
 - F90, guide gap: the parameterless crypto factories throw on .NET (worked around as .NET Framework behaved).
 - F91, app/environment: DotNetZip 1.9 can't extract on Linux (moved to 1.16).
-- F92, webForCore bug: the inotify instances Kooboo's worker takes on Linux.
+- F92 (fixed in 0.9.0): the inotify instances Kooboo's worker takes on Linux (7 now).
 - F73, F74 (MVC 4): applied.
 - Not exercised: `WindowsIdentity.GetCurrent()` in Kooboo's health-monitoring event wrapper, `new SmtpClient()`
-  (password reset, site mail), the back office beyond the log-in and site creation.
+  (password reset, site mail), the back office beyond the log-in, site creation, articles and members.

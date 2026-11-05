@@ -159,7 +159,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F89](#f89) | Windows, intermittent: nopCommerce's plugin manager can't replace a plugin copy in the compilation folder at start ("rename failed") | app/environment | nopcommerce-3.90 | – |
 | [F90](#f90) | The parameterless crypto factories (`KeyedHashAlgorithm.Create()`, `HashAlgorithm.Create()`, ...) throw on .NET | guide gap | kooboo-cms | [#151](https://github.com/xforcore/webForCore/issues/151) |
 | [F91](#f91) | DotNetZip 1.9 (`Ionic.Zip.Reduced`) can't extract on Linux | app/environment | kooboo-cms | - |
-| [F92](#f92) | Linux: every watched directory is an inotify instance on .NET 10; Kooboo's worker alone takes 48+ of the default 128 | webForCore bug | kooboo-cms (umbraco-8: 20) | [#152](https://github.com/xforcore/webForCore/issues/152) |
+| [F92](#f92) | Linux: every watched directory is an inotify instance on .NET 10; Kooboo's worker alone takes 48+ of the default 128 (fixed in 0.9.0) | webForCore bug | kooboo-cms (umbraco-8: 20) | [#152](https://github.com/xforcore/webForCore/issues/152) |
 | [F93](#f93) | CSharpTest.Net.Collections 14.906 (Umbraco 8's NuCache file store) reflects into `FileStream` and P/Invokes kernel32 | app/environment | umbraco-8 | - |
 | [F94](#f94) | An app's own `Microsoft.CodeAnalysis` (Roslyn) package conflicts with webForCore.Compilers' 5.9.0 (NU1107) | guide gap | umbraco-8 | [#153](https://github.com/xforcore/webForCore/issues/153) |
 | [F97](#f97) | Linux: each monitored folder takes an inotify instance of its own (two for many), so a site with many folders can't start | webForCore bug | orchard-1.10 | [#145](https://github.com/xforcore/webForCore/issues/145) |
@@ -1877,7 +1877,8 @@ Found on 0.8.0, on Linux, in round 8.
 **Linux: every directory ASP.NET watches is an inotify instance of its own on .NET 10, so one CMS's worker takes most
 of the default 128.** webForCore bug (the docs say about 15). Raised as
 [#152](https://github.com/xforcore/webForCore/issues/152). Found on 0.8.0, on Linux (Fedora,
-`fs.inotify.max_user_instances` = 128), in round 8.
+`fs.inotify.max_user_instances` = 128), in round 8. **Fixed in 0.9.0:** in round 0.9.0 Kooboo's worker holds 7 inotify
+instances (and webforcore-host 1), where it held 48 or more.
 
 - **Apps:** kooboo-cms: its worker held 38 inotify instances after ten page types of one sample site and 48 when its
   16 probe paths ran it out (counted from `/proc/<pid>/fd`; the host holds 1 more). Each Razor template folder it renders
