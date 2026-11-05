@@ -8,7 +8,7 @@ project = "samples/aspnet/WebApi/BSONSample/BSONSample/BSONSample.csproj"
 kinds = ["webapi", "mvc"]
 licence = "Apache-2.0"
 status = "migrated"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 8/8 on Linux and Windows."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 18/18 on Linux and Windows (CI runs 42021158598 and 42026762740), with the MyData API's POST, PUT and DELETE on SQL Server and a BSON read."
 needs = ["mssql"]
 
 # The first request compiles the site, so it gets 120 s. Web.config's MyDataContext points at the compose SQL Server
