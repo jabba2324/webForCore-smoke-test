@@ -2,23 +2,23 @@
   "id": "carrotcake-cms-mvc",
   "stages": {
     "build": {
-      "at": "2026-11-05T12:46:14+00:00",
+      "at": "2026-11-05T13:05:31+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\carrotcake-cms-mvc\\logs.windows\\build.log",
-      "seconds": 53,
+      "seconds": 54,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T12:45:21+00:00",
+      "at": "2026-11-05T13:04:37+00:00",
       "commit": "bfc5c38eba9564824a1c58d6ccd935a3755a2d61",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-05T12:46:33+00:00",
+      "at": "2026-11-05T13:05:53+00:00",
       "created": [
         "CarrotCakeMVC"
       ],
@@ -59,85 +59,85 @@
       "summary": "6/6 steps"
     },
     "smoke": {
-      "at": "2026-11-05T12:46:41+00:00",
+      "at": "2026-11-05T13:06:02+00:00",
       "checks": [
         {
-          "ms": 87,
+          "ms": 91,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 174,
+          "ms": 175,
           "ok": true,
           "path": "/index",
           "status": 200
         },
         {
-          "ms": 81,
+          "ms": 92,
           "ok": true,
           "path": "/rss.ashx",
           "status": 200
         },
         {
-          "ms": 15,
+          "ms": 19,
           "ok": true,
           "path": "/carrotwarewebresource.ashx?r=Q2Fycm90d2FyZS5XZWIuVUkuQ29tcG9uZW50cy5qcXVlcnliYXNpYy5qcXVlcnktdWktbGlnaHRncmVlbi5jc3M6Q2Fycm90d2FyZS5XZWIuVUkuQ29tcG9uZW50cy5kbGw=",
           "status": 200
         },
         {
-          "ms": 52,
+          "ms": 63,
           "ok": true,
           "path": "/c3-admin/Login",
-          "status": 200
-        },
-        {
-          "ms": 8,
-          "ok": true,
-          "path": "/c3-admin/",
-          "status": 302
-        },
-        {
-          "ms": 25,
-          "ok": true,
-          "path": "/Assets/Admin/skins/logon.classic.min.css",
           "status": 200
         },
         {
           "ms": 10,
           "ok": true,
-          "path": "/c3-admin/Login",
+          "path": "/c3-admin/",
+          "status": 302
+        },
+        {
+          "ms": 27,
+          "ok": true,
+          "path": "/Assets/Admin/skins/logon.classic.min.css",
           "status": 200
         },
         {
-          "method": "POST",
-          "ms": 1219,
+          "ms": 11,
           "ok": true,
           "path": "/c3-admin/Login",
           "status": 200
         },
         {
-          "ms": 6,
+          "method": "POST",
+          "ms": 1447,
+          "ok": true,
+          "path": "/c3-admin/Login",
+          "status": 200
+        },
+        {
+          "ms": 7,
           "ok": true,
           "path": "/c3-admin/Login",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 105,
+          "ms": 97,
           "ok": true,
           "path": "/c3-admin/Login",
           "status": 302
         },
         {
-          "ms": 90,
+          "ms": 111,
           "ok": true,
           "path": "/c3-admin/CategoryAddEdit",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 53,
+          "ms": 62,
           "ok": true,
           "path": "/c3-admin/CategoryAddEdit",
           "status": 302
@@ -150,57 +150,57 @@
         },
         {
           "method": "POST",
-          "ms": 37,
+          "ms": 38,
           "ok": true,
           "path": "/c3-admin/CategoryAddEdit/{category}",
           "status": 302
         },
         {
-          "ms": 32,
+          "ms": 47,
           "ok": true,
           "path": "/c3-admin/CategoryIndex",
           "status": 200
         },
         {
-          "ms": 6,
+          "ms": 7,
           "ok": true,
           "path": "/c3-admin/CategoryAddEdit/{category}",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 30,
+          "ms": 35,
           "ok": true,
           "path": "/c3-admin/CategoryDelete",
           "status": 302
         },
         {
-          "ms": 11,
+          "ms": 12,
           "ok": true,
           "path": "/c3-admin/CategoryIndex",
           "status": 200
         },
         {
-          "ms": 164,
+          "ms": 188,
           "ok": true,
           "path": "/c3-admin/BlogPostAddEdit",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 121,
+          "ms": 138,
           "ok": true,
           "path": "/c3-admin/BlogPostAddEdit",
           "status": 302
         },
         {
-          "ms": 133,
+          "ms": 169,
           "ok": true,
           "path": "/2026/01/02/smoke-probe-post",
           "status": 200
         },
         {
-          "ms": 82,
+          "ms": 89,
           "ok": true,
           "path": "/c3-admin/BlogPostAddEdit/{post}?mode=html",
           "status": 200
@@ -213,57 +213,57 @@
           "status": 302
         },
         {
-          "ms": 84,
+          "ms": 93,
           "ok": true,
           "path": "/2026/01/02/smoke-probe-post",
           "status": 200
         },
         {
-          "ms": 163,
+          "ms": 145,
           "ok": true,
           "path": "/archive/search?query=probe",
           "status": 200
         },
         {
-          "ms": 33,
+          "ms": 62,
           "ok": true,
           "path": "/c3-admin/BlogPostAddEdit/{post}?mode=html",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 120,
+          "ms": 131,
           "ok": true,
           "path": "/c3-admin/DeleteContentPage",
           "status": 302
         },
         {
-          "ms": 60,
+          "ms": 87,
           "ok": true,
           "path": "/c3-admin/BlogPostIndex",
           "status": 200
         },
         {
-          "ms": 77,
+          "ms": 112,
           "ok": true,
           "path": "/c3-admin/SiteInfo",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 6,
+          "ms": 7,
           "ok": true,
           "path": "/c3-admin/LogOff",
           "status": 302
         },
         {
-          "ms": 3,
+          "ms": 4,
           "ok": true,
           "path": "/c3-admin/",
           "status": 302
         },
         {
-          "ms": 5,
+          "ms": 6,
           "ok": true,
           "path": "/web.config",
           "status": 404
@@ -275,19 +275,19 @@
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/packages.config",
           "status": 404
@@ -299,7 +299,7 @@
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404

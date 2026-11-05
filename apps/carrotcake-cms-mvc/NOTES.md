@@ -53,7 +53,7 @@ the admin project and aren't built.
 
 ## Smoke
 
-**CI (Linux and Windows): 39/39 on both, in CI runs 42026922513 and (second).**
+**CI (Linux and Windows): 39/39 on both, in CI runs 42026922513 and 42030748535.**
 
 **Round 0.9.0, Linux: 39/39** (32 of the app's probes and the runner's 7 forbidden paths), on a new database and again
 on the same one, and from a fresh checkout.

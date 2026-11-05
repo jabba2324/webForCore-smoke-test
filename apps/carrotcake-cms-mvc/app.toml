@@ -8,7 +8,7 @@ project = "CMSAdmin/CMSAdminMVC.csproj"
 kinds = ["mvc", "owin", "identity", "webforms"]
 licence = "MIT"
 status = "migrated"
-notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 39/39 on Linux and Windows (CI runs 42026922513 and (second)), with categories and a blog post made, edited and deleted through the admin's MVC forms. Its LINQ to SQL data layer runs on 0.9.0 (F157-F159 fixed in the app). Needs SQL Server."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 39/39 on Linux and Windows (CI runs 42026922513 and 42030748535), with categories and a blog post made, edited and deleted through the admin's MVC forms. Its LINQ to SQL data layer runs on 0.9.0 (F157-F159 fixed in the app). Needs SQL Server."
 
 needs = ["mssql"]
 # The class libraries build into their own bin/; the app writes a trace of its routing to carrot_errors.txt.
