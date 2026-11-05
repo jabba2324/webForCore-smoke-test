@@ -77,6 +77,27 @@ All 18 probes pass on the released 0.2.0 packages (the overlay's `PackageReferen
 
 All 18 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0.
 
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+44/44 on Linux, twice in a row (the posts the probes make are deleted again). 25 probes more, for everything MiniBlog
+takes other than GET, as its pages' scripts send it:
+- **Log-in** (`views/login.cshtml`, forms authentication against web.config's `<credentials>`, the demo user
+  `demo`/`demo`), with the Web Pages anti-forgery token captured from the form: a wrong password ("Username or
+  password is incorrect"), the right one (302), the admin toolbar on the home page, and signing out (a post with
+  `signout`), after which the toolbar is gone.
+- **The post editor's AJAX calls** (`admin.js`): `POST /post.ashx?mode=save` before logging in is a 403; signed in it
+  makes a post (the response is its URL), and again with the post's id it edits it; `mode=delete` deletes it, and its
+  page is then a 404.
+- **Comments** (`comments.js`): `POST /comment.ashx` with `mode=save` adds one (the response is the rendered comment,
+  whose id is captured), `mode=delete` removes it. Posted signed in: an anonymous comment e-mails the blog's owner
+  through `smtp.live.com` (web.config), an outside service.
+- **MetaWeblog** (XML-RPC over `POST /metaweblog`, CookComputing.XmlRpc): a wrong password is a `<fault>`;
+  `getRecentPosts`; a post made with `newPost`, shown at its slug, changed with `editPost`, read with `getPost`, and
+  deleted with `blogger.deletePost`.
+
+The site's `WhitespaceModule` strips the quotes from attributes, so the captures match `name=__RequestVerificationToken
+type=hidden value=...` with or without them. No overlay change.
+
 ## Open problems
 
 Round 1 (webForCore 0.1.0); the webForCore bugs below are fixed in 0.2.0 (PR #16) and kept for the record.
