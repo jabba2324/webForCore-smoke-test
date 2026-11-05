@@ -1,6 +1,6 @@
 # Umbraco 6: migration notes
 
-Status: migrated (16/16 on Linux; four webForCore bugs and three guide gaps found on the way). Source:
+Status: migrated (round 0.9.0, webForCore 0.9.0: 32/32 on Linux and Windows in CI runs 42027500654 and 42032474244, 16 of them verb probes). Source:
 https://github.com/umbraco/Umbraco-CMS at `026805e4` (tag release-6.2.6, the last 6.x release). The repo, licence (MIT),
 web project and its `<TargetFrameworkVersion>` (v4.0) were checked when the app was added.
 

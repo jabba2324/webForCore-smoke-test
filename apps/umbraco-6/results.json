@@ -61,23 +61,23 @@
       ]
     },
     "build": {
-      "at": "2026-11-05T11:47:34+00:00",
+      "at": "2026-11-05T13:09:52+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/umbraco-6/logs/build.log",
-      "seconds": 45,
+      "seconds": 58,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T11:46:49+00:00",
+      "at": "2026-11-05T13:08:53+00:00",
       "commit": "026805e4c126a1cb984cb0a25c95872b57ae4ddb",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-05T11:47:50+00:00",
+      "at": "2026-11-05T13:10:09+00:00",
       "created": [
         "umbraco6"
       ],
@@ -139,116 +139,116 @@
       "summary": "10/10 steps"
     },
     "smoke": {
-      "at": "2026-11-05T11:50:37+00:00",
+      "at": "2026-11-05T13:10:16+00:00",
       "checks": [
         {
-          "ms": 12,
+          "ms": 13,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 28,
+          "ms": 79,
           "ok": true,
           "path": "/umbraco/login.aspx",
           "status": 200
         },
         {
-          "ms": 25,
+          "ms": 444,
           "ok": true,
           "path": "/umbraco/",
           "status": 302
         },
         {
-          "ms": 4,
+          "ms": 134,
           "ok": true,
           "path": "/umbraco/ping.aspx",
           "status": 200
         },
         {
-          "ms": 45,
+          "ms": 510,
           "ok": true,
           "path": "/umbraco/BackOffice/Api/ExamineManagementApi/GetIndexerDetails",
           "status": 401
         },
         {
-          "ms": 18,
+          "ms": 21,
           "ok": true,
           "path": "/umbraco/webservices/CheckForUpgrade.asmx/js",
           "status": 200
         },
         {
-          "ms": 52,
+          "ms": 524,
           "ok": true,
           "path": "/umbraco/webservices/legacyAjaxCalls.asmx",
           "status": 200
         },
         {
-          "ms": 24,
+          "ms": 21,
           "ok": true,
           "path": "/DependencyHandler.axd?s=L3VtYnJhY29fY2xpZW50L3VpL2RlZmF1bHQuY3NzOw&t=Css&cdv=1",
           "status": 200
         },
         {
-          "ms": 13,
+          "ms": 11,
           "ok": true,
           "path": "/umbraco_client/ui/default.css",
           "status": 200
         },
         {
-          "ms": 6,
+          "ms": 5,
           "ok": true,
           "path": "/umbraco/login.aspx",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 105,
+          "ms": 88,
           "ok": true,
           "path": "/umbraco/login.aspx",
           "status": 302
         },
         {
-          "ms": 97,
+          "ms": 78,
           "ok": true,
           "path": "/umbraco/create.aspx?nodeId=-1&nodeType=content&nodeName=Content&rnd=1",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 154,
+          "ms": 141,
           "ok": true,
           "path": "/umbraco/create.aspx?nodeId=-1&nodeType=content&nodeName=Content&rnd=1",
           "status": 200
         },
         {
-          "ms": 99,
+          "ms": 89,
           "ok": true,
           "path": "/umbraco/editContent.aspx?id={page}",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 82,
+          "ms": 61,
           "ok": true,
           "path": "/umbraco/editContent.aspx?id={page}",
           "status": 200
         },
         {
-          "ms": 6,
+          "ms": 5,
           "ok": true,
           "path": "/smoke-probe-page.aspx",
           "status": 200
         },
         {
-          "ms": 41,
+          "ms": 17,
           "ok": true,
           "path": "/umbraco/editContent.aspx?id={page}",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 46,
+          "ms": 41,
           "ok": true,
           "path": "/umbraco/editContent.aspx?id={page}",
           "status": 200
@@ -260,81 +260,81 @@
           "status": 200
         },
         {
-          "ms": 136,
+          "ms": 184,
           "ok": true,
           "path": "/umbraco/webservices/TreeDataService.ashx?rnd=1&id=-1&treeType=content&contextMenu=true&isDialog=false&app=content",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 82,
+          "ms": 103,
           "ok": true,
           "path": "/umbraco/webservices/legacyAjaxCalls.asmx/Delete",
           "status": 200
         },
         {
-          "ms": 36,
+          "ms": 33,
           "ok": true,
           "path": "/smoke-probe-page-edited.aspx",
           "status": 500
         },
         {
-          "ms": 22,
+          "ms": 20,
           "ok": true,
           "path": "/umbraco/webservices/TreeDataService.ashx?rnd=1&id=-20&treeType=contentRecycleBin&contextMenu=true&isDialog=false",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 41,
+          "ms": 157,
           "ok": true,
           "path": "/umbraco/webservices/trashcan.asmx/EmptyTrashcan",
           "status": 200
         },
         {
-          "ms": 8,
+          "ms": 7,
           "ok": true,
           "path": "/umbraco/webservices/TreeDataService.ashx?rnd=1&id=-20&treeType=contentRecycleBin&contextMenu=true&isDialog=false",
           "status": 200
         },
         {
-          "ms": 7,
+          "ms": 6,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/Umbraco.Web.UI.dll",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404
