@@ -1,6 +1,6 @@
 # AspNetDocs: MVCRandomAnswerGenerator (Docker tutorial): migration notes
 
-Status: migrated (webForCore 0.4.0, all probes pass).
+Status: migrated (webForCore 0.9.0, 13/13 probes on Linux and Windows).
 (`LICENSE-CODE`; the docs are CC-BY-4.0). Split out of the `aspnetdocs-samples` entry. webForCore 0.1.0 packages (0.2.0 from round 2).
 
 ## Assessment
@@ -26,6 +26,13 @@ All 8 probes pass on the released 0.2.0 packages (the overlay's `PackageReferenc
 ### Round 3: webForCore 0.4.0
 
 All 8 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0.
+
+### Round 0.9.0: verbs (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+The app has one form, the question (`[HttpPost, ValidateAntiForgeryToken] Index`). Added 4 probes, 2 of them POSTs: the
+page (its anti-forgery token captured), the question posted with the token and shown with its answer on the page it
+returns, the same post without the token refused (500, the anti-forgery error), and the page without that question.
+No other verbs: there is no API and nothing else to post. 13/13 on Linux (9 before), twice in a row.
 
 ## Open problems
 
