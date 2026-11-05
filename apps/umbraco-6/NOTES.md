@@ -117,6 +117,14 @@ Go, with SQL Server.
 - **First CI run (PR #14):** 16/16 on Windows; 14/16 on Linux, where the runner's `C` locale left the back office
   without its text (F67) and the log-in step was caught by the F59 restart. With the culture set and the log-in's
   `retries`, 16/16 locally under `LANG=C`, from a fresh checkout and database.
+- **Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0; Linux):** from a new database, setup 10/10 (every
+  step at its first attempt: the `may_fail` request after the install wasn't caught by a recycle, F59 being fixed in
+  0.8.0) and 16/16. Then verbs: 16 probes (32 in all; 7 of them POSTs) log in to the back office (the Web Forms log-in
+  postback with its view state), make a page with the create dialog (a postback), publish it from its editor (the
+  publish ImageButton's `.x`/`.y`), show it on the front end, rename and publish it again (the URL follows the name),
+  find it in the content tree (`TreeDataService.ashx`), delete it with `legacyAjaxCalls.asmx/Delete` (the JSON script
+  service the tree's menu calls), check it's gone from the front end and in the recycle bin, and empty the bin
+  (`trashcan.asmx/EmptyTrashcan`, JSON). 32/32 twice in a row on the same database.
 
 The probes cover:
 - the published home page, rendered by Umbraco's `RenderMvcController` with the template's Razor view (MVC);
@@ -125,7 +133,8 @@ The probes cover:
 - a back-office Web API controller (401 JSON);
 - an ASMX script service's JavaScript proxy and a service's help page;
 - ClientDependency's composite handler (`DependencyHandler.axd`, minifying a stylesheet);
-- a static file.
+- a static file;
+- (round 0.9.0) the verbs above: log-in, create, publish, rename, delete and the recycle bin.
 
 Also checked by hand on the installed site (not probes, as they need a log-in or content):
 - logging in, the back office's main page, dashboard, content tree (`TreeDataService.ashx` JSON), create dialogs;
@@ -151,7 +160,8 @@ Other differences seen:
 - `install/steps/theend.ascx` is Windows-1252 without a BOM: `You’re done` renders `You�re done` (F60, webForCore bug).
 - A URL with no content (`/no-such-page.aspx`) is a `NullReferenceException` in `library.GetCurrentNotFoundPageId`:
   the repository's development `config/umbracoSettings.config` has no `<error404>` (its `.Release.config` does). The
-  same code fails the same way on IIS, so it isn't probed.
+  same code fails the same way on IIS, so it isn't probed for its status: the probe of the deleted page checks only
+  that the page is gone (`absent`).
 - `bin_dotnet/App_Data` appears (empty) after a run, as in other apps' outputs (bonobo-git-server, mvcforum, roadkill):
   not Umbraco's doing.
 
