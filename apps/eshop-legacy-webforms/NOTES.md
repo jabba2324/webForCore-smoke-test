@@ -1,6 +1,6 @@
 # eShopLegacyWebForms (eShopModernizing): migration notes
 
-Status: migrated (webForCore 0.4.0, all probes pass).
+Status: migrated (webForCore 0.9.0: 26/26 on Linux and Windows).
 `63bc9ec4` (archived; same commit as eshop-legacy-mvc). webForCore 0.1.0
 from its GitHub release packages (first migrated against the source at `4ec57209`; the results are the same).
 
@@ -79,6 +79,8 @@ replaces the item without them), so Details after the edit comes after a list, a
 all, all passing on Linux and Windows (CI run 41940185337).
 
 ### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+**CI (Linux and Windows): 26/26 on both, in CI runs 42026922513 and (second).**
 
 26/26 on Linux, the same as on 0.8.0, twice in a row (the catalog is the in-memory mock, so each start begins from
 the same data). No overlay change. Verbs: the probes already post Create, Edit and Delete as postbacks (3 of the 19
