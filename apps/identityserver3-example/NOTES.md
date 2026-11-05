@@ -57,6 +57,14 @@ webForCore's OWIN host and the `OwinStartup` selection worked (the app's `Startu
 IdentityServer3 on a `System.IdentityModel` that .NET has: none exists for WIF (IdentityServer4 and later are
 ASP.NET Core only), so this is blocked until there's one (F69).
 
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+Unchanged: `UseIdentityServer` still needs `System.IdentityModel` (WIF), which .NET doesn't have. #119 (F69) was closed
+by documenting it in webForCore's NAMESPACES.md; the app can't run without replacing IdentityServer3. One verb probe
+added: the token endpoint (a form POST) with a client the example doesn't have should be OAuth's `invalid_client`
+(400); like every `/core` URL, it's the WIF 500 for now. The log-in and consent forms need a sign-in message from the
+authorize redirect, so they wait until the endpoints answer. Results: RESULTS_PLACEHOLDER
+
 ## Open problems
 
 - [F69](../../FINDINGS.md#f69) (guide gap, raised as [#119](https://github.com/xforcore/webForCore/issues/119)): `System.IdentityModel` (WIF) isn't on .NET, and webForCore's docs don't
