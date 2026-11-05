@@ -24,23 +24,23 @@
       ]
     },
     "build": {
-      "at": "2026-11-05T11:50:21+00:00",
+      "at": "2026-11-05T12:40:44+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/funnelweb/logs/build.log",
-      "seconds": 9,
+      "seconds": 12,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T11:50:12+00:00",
+      "at": "2026-11-05T12:40:31+00:00",
       "commit": "32f561e9bf991c141edd485905a6212ba194bd91",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-05T11:50:27+00:00",
+      "at": "2026-11-05T12:40:50+00:00",
       "created": [
         "FunnelWeb"
       ],
@@ -66,11 +66,11 @@
       "summary": "3/3 steps"
     },
     "smoke": {
-      "at": "2026-11-05T11:51:23+00:00",
+      "at": "2026-11-05T12:40:55+00:00",
       "checks": [
         {
           "expected_text": "My FunnelWeb Site",
-          "ms": 58,
+          "ms": 33,
           "ok": false,
           "path": "/",
           "stack": [
@@ -91,7 +91,7 @@
             "   at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Type serviceType, IEnumerable`1 parameters)",
             "   at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)",
             "   at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)",
-            "   at FunnelWeb.Model.Repositories.RepositoriesModule.<>c.b__0_0(IComponentContext c) in $WFC_CHECKOUTS/funnelweb/src/FunnelWeb/Model/Repositories/RepositoriesModule.cs:line 26",
+            "   at FunnelWeb.Model.Repositories.RepositoriesModule.<>c.b__0_0(IComponentContext c) in <repo>/apps/funnelweb/src/src/FunnelWeb/Model/Repositories/RepositoriesModule.cs:line 26",
             "   at Autofac.RegistrationExtensions.<>c__DisplayClass10`1.b__f(IComponentContext c, IEnumerable`1 p)",
             "   at Autofac.Builder.RegistrationBuilder.<>c__DisplayClass1`1.b__0(IComponentContext c, IEnumerable`1 p)",
             "   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)",
@@ -119,7 +119,7 @@
           "title": "The following types may not be used as proxies:<br>FunnelWeb.Model.Authentication.Role: method MemberwiseClone should be 'public/protected virtual' or 'protected internal virtual'<br>FunnelWeb.Model.Authentication.User: method MemberwiseClone should be 'public/protected virtual' or 'protected intern"
         },
         {
-          "ms": 672,
+          "ms": 1239,
           "ok": true,
           "path": "/admin/login",
           "status": 200
@@ -131,14 +131,14 @@
           "status": 302
         },
         {
-          "ms": 17,
+          "ms": 15,
           "ok": true,
           "path": "/Content/Images/external.png",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 30,
+          "ms": 27,
           "ok": false,
           "path": "/admin/login",
           "stack": [
@@ -158,7 +158,7 @@
             "   at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Type serviceType, IEnumerable`1 parameters)",
             "   at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)",
             "   at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)",
-            "   at FunnelWeb.Model.Repositories.RepositoriesModule.<>c.b__0_0(IComponentContext c) in $WFC_CHECKOUTS/funnelweb/src/FunnelWeb/Model/Repositories/RepositoriesModule.cs:line 26",
+            "   at FunnelWeb.Model.Repositories.RepositoriesModule.<>c.b__0_0(IComponentContext c) in <repo>/apps/funnelweb/src/src/FunnelWeb/Model/Repositories/RepositoriesModule.cs:line 26",
             "   at Autofac.RegistrationExtensions.<>c__DisplayClass10`1.b__f(IComponentContext c, IEnumerable`1 p)",
             "   at Autofac.Builder.RegistrationBuilder.<>c__DisplayClass1`1.b__0(IComponentContext c, IEnumerable`1 p)",
             "   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)",
@@ -188,7 +188,7 @@
         },
         {
           "expected_text": "Your database is up to date. No install is necessary.",
-          "ms": 12,
+          "ms": 14,
           "ok": false,
           "path": "/admin/install",
           "status": 302,
@@ -204,19 +204,19 @@
           "title": "Object moved"
         },
         {
-          "ms": 18,
+          "ms": 15,
           "ok": true,
           "path": "/admin/logout",
           "status": 302
         },
         {
-          "ms": 4,
+          "ms": 3,
           "ok": true,
           "path": "/admin/install",
           "status": 302
         },
         {
-          "ms": 4,
+          "ms": 5,
           "ok": true,
           "path": "/web.config",
           "status": 404
@@ -234,7 +234,7 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/obj/",
           "status": 404
@@ -246,13 +246,13 @@
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/FunnelWeb.Web.dll",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404

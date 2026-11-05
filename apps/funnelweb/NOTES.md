@@ -1,6 +1,6 @@
 # FunnelWeb: migration notes
 
-Status: blocked by its NHibernate 3.3 (F39): 10/11 probes on Linux and Windows, webForCore 0.8.0. Source: https://github.com/funnelweblog/FunnelWeb at `32f561e9`. Found by searching GitHub on 2026-10-31; the
+Status: blocked by its NHibernate 3.3 (F39): 12/16 probes on Linux and Windows, webForCore 0.9.0. Source: https://github.com/funnelweblog/FunnelWeb at `32f561e9`. Found by searching GitHub on 2026-10-31; the
 repo, licence (BSD-3-Clause), web project and its `<TargetFrameworkVersion>` were checked through the GitHub API.
 
 Round 3b, on webForCore 0.4.0 (no webForCore-thirdparty packages).
@@ -51,6 +51,8 @@ log-in form (MVC), the installer (forms authentication redirect) and a static fi
   System.Data's internal `SqlCommandSet`. NHibernate 3.3 doesn't run on .NET (F39, app/environment).
 
 ### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+**CI (Linux and Windows): 12/16 on both, in CI runs 42026922513 and (second).**
 
 12/16 on Linux; still blocked by NHibernate 3.3 (F39): the home page fails with "The following types may not be
 used as proxies", as before. Five probes more, for the admin area's MVC forms (no anti-forgery tokens): a log-in
