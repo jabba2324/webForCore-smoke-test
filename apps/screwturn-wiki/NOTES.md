@@ -1,6 +1,6 @@
 # ScrewTurn Wiki 3.0: migration notes
 
-Status: migrated (webForCore 0.7.0, webForCore-thirdparty 0.6.0, drawingForCore 0.2.0: 24/24 probes on Linux and Windows).
+Status: migrated (webForCore 0.9.0, webForCore-thirdparty 0.7.0: 45/45 on Linux and Windows).
 MarkZither/ScrewTurnWiki at `7b1ccb46` (24 Feb 2019): ScrewTurn Wiki v3.0.4.560 retargeted to .NET Framework 4.7.2.
 GPLv2. Later commits of that fork replace Anthem.NET with Syncfusion's commercial Essential JS controls, so the pin is
 before them. (chsword/screwturn, also checked, is the 4.0 line, whose default storage is SQL Server Compact: a Windows
@@ -62,6 +62,8 @@ the home page as "Administrator"; `Admin.aspx` then redirects to `AdminHome.aspx
 controls included), and `Edit.aspx?Page=MainPage` renders the editor.
 
 ### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0, drawingForCore 0.3.0)
+
+**CI (Linux and Windows): 45/45 on both, in CI runs 42026922513 and (second).**
 
 45/45 on Linux, twice in a row. 21 probes more, Web Forms postbacks each with the view state and event validation of
 its page's GET, in one cookie jar (the log-in is kept in session): a wrong password, the administrator's log-in
