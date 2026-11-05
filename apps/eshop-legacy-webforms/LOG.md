@@ -31,3 +31,7 @@ Appended by `scripts/wfc.py`, one line per stage run.
 - 2026-11-03T12:45:21+00:00 **fetch** (windows): pass at `63bc9ec4414d`
 - 2026-11-03T12:45:27+00:00 **build** (windows): pass
 - 2026-11-03T12:45:33+00:00 **smoke** (windows): pass (15/15 probes)
+- 2026-11-05T11:16:23+00:00 **fetch**: pass at `63bc9ec4414d`
+- 2026-11-05T11:16:29+00:00 **build**: pass
+- 2026-11-05T11:16:34+00:00 **smoke**: pass (26/26 probes)
+- 2026-11-05T11:18:19+00:00 **smoke**: pass (26/26 probes)

@@ -78,6 +78,13 @@ service sets an item's brand and type only when it lists the catalog (`ComposeCa
 replaces the item without them), so Details after the edit comes after a list, as it would for a user. 26 checks in
 all, all passing on Linux and Windows (CI run 41940185337).
 
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+26/26 on Linux, the same as on 0.8.0, twice in a row (the catalog is the in-memory mock, so each start begins from
+the same data). No overlay change. Verbs: the probes already post Create, Edit and Delete as postbacks (3 of the 19
+probes are POSTs, each after the GET that gives its view state). The app has no other form and no API, AJAX
+endpoint, `.asmx` or `.ashx`, so there's nothing more to post: the list's paging is links.
+
 ## Open problems
 
 Round 1 (webForCore 0.1.0); the webForCore bugs below are fixed in 0.2.0 (PR #16) and kept for the record.
