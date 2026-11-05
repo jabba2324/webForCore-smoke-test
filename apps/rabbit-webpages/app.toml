@@ -95,3 +95,96 @@ contains = "# WebMatrix 1.0"
 [[probes]]
 path = "/App_Data/Rabbit/Site"
 status = 404
+
+# Verbs. The Pages module's forms and its in-place editor's AJAX save: a page made (POST /Pages/Create), shown, its
+# editor (the Tags module's view, with its Razor 1 fix, F155), saved as the editor's jQuery post does it
+# (X-Requested-With, Accept: application/json; Rabbit answers JSON), read back as JSON (Accept: application/json, the
+# site's own switch), found by its tag, deleted (POST /Pages/Delete/<id>, the list's Delete link) and gone from the
+# list. Then the account setup made: a failed log-in, a log-in, its password changed and changed back (so a second
+# run logs in the same), and log-out.
+[[probes]]
+path = "/Pages/Create"
+contains = "Create Page"
+
+[[probes]]
+path = "/Pages/Create"
+method = "POST"
+status = 302
+form = { Title = "Smoke Probe Page", Content = "<p>Written by a probe</p>" }
+capture = { page = { header = "Location", regex = "/Pages/(Smoke-Probe-Page)$" } }
+
+[[probes]]
+path = "/Pages/{page}"
+contains = "Written by a probe"
+
+[[probes]]
+path = "/Pages/Edit/{page}"
+contains = "id=\"article-tags\""
+
+[[probes]]
+path = "/Pages/Edit"
+method = "POST"
+headers = { X-Requested-With = "XMLHttpRequest", Accept = "application/json, text/javascript, */*; q=0.01" }
+form = { Id = "{page}", OldId = "{page}", Title = "Smoke Probe Page", Content = "<p>Edited by a probe</p>", Tags = "smokeprobe, probe" }
+contains = "{\"d\":[]}"
+
+[[probes]]
+path = "/Pages/{page}"
+headers = { Accept = "application/json" }
+contains = "\"Tags\":[\"smokeprobe\",\"probe\"]"
+
+[[probes]]
+path = "/Pages/{page}"
+contains = "Edited by a probe"
+
+[[probes]]
+path = "/Tags/smokeprobe"
+contains = "Smoke Probe Page"
+
+[[probes]]
+path = "/Pages/Delete/{page}"
+method = "POST"
+status = 302
+
+[[probes]]
+path = "/Pages/List"
+contains = "/Pages/Edit/About"
+absent = "Smoke-Probe-Page"
+
+[[probes]]
+path = "/Account/Login"
+method = "POST"
+cookies = true
+form = { username = "smoke@example.com", password = "wrong" }
+contains = "There was a problem with your login"
+
+[[probes]]
+path = "/Account/Login"
+method = "POST"
+cookies = true
+status = 302
+form = { username = "smoke@example.com", password = "Passw0rd!" }
+
+[[probes]]
+path = "/Account/ChangePassword"
+method = "POST"
+cookies = true
+form = { currentPassword = "Passw0rd!", newPassword = "Passw0rd!2", confirmPassword = "Passw0rd!2" }
+contains = "Your password has been updated!"
+
+[[probes]]
+path = "/Account/ChangePassword"
+method = "POST"
+cookies = true
+form = { currentPassword = "Passw0rd!2", newPassword = "Passw0rd!", confirmPassword = "Passw0rd!" }
+contains = "Your password has been updated!"
+
+[[probes]]
+path = "/Account/Logout"
+cookies = true
+status = 302
+
+[[probes]]
+path = "/Account/ChangePassword"
+cookies = true
+status = 302

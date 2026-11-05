@@ -64,6 +64,24 @@ webForCore `Response.End()` sends the response before `FormsAuthenticationModule
 `Response.StatusCode = 401;` alone gets the 302; with `Response.End()` after it, the 401 (`.cshtml` and `.aspx`
 alike) ([F79](../../FINDINGS.md#f79), webForCore#129).
 
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+**21/21 on Linux, then 37/37 with the verb probes, twice in a row.** 0.9.0 fixed F79: `/Account/ChangePassword`
+sends an anonymous user to the log-in page.
+
+Overlay change: `Views/Tags/_Page_Edit.cshtml`, the Pages module's editor, had `@string.Join(", ", Page.Tags)` inside
+an `@if` block, which Web Pages 1's Razor accepted and Razor 3 refuses ("Unexpected "string" keyword after "@"
+character", F155): every `/Pages/Edit/<page>` was a parser error. It's `@(string.Join(", ", Page.Tags))` now.
+
+16 probes more, for verbs: a page made with the Pages module's form (`POST /Pages/Create`, 302 to the new page),
+shown; its editor; the editor's AJAX save (`POST /Pages/Edit` as its jQuery call sends it, with `X-Requested-With`
+and `Accept: application/json`, which Rabbit answers with JSON) with new content and tags; the page read back as JSON
+(`Accept: application/json`, the site's own switch) with the tags; the tag's page listing it; the page deleted (`POST
+/Pages/Delete/<id>`, the list's Delete link) and gone from the list. Then the account setup made: a failed log-in, a
+log-in, its password changed and changed back (so the next run logs in the same), and log-out, after which Change
+Password redirects to the log-in again. The pages live in `App_Data/Rabbit/Pages` (JSON files), deleted again by the
+probes.
+
 ## Open problems
 
 - F79 (above): every `WebSecurity.RequireAuthenticatedUser()`/`RequireRoles()` page shows anonymous users a blank 401.
