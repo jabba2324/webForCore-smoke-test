@@ -80,7 +80,7 @@ all, all passing on Linux and Windows (CI run 41940185337).
 
 ### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
 
-**CI (Linux and Windows): 26/26 on both, in CI runs 42026922513 and (second).**
+**CI (Linux and Windows): 26/26 on both, in CI runs 42026922513 and 42030748535.**
 
 26/26 on Linux, the same as on 0.8.0, twice in a row (the catalog is the in-memory mock, so each start begins from
 the same data). No overlay change. Verbs: the probes already post Create, Edit and Delete as postbacks (3 of the 19
