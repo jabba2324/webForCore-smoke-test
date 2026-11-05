@@ -29,6 +29,21 @@ All 7 probes pass on the released 0.2.0 packages (the overlay's `PackageReferenc
 
 All 7 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0.
 
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+The probes covered only `/` before (the runner's default). The app's API (`MyDataController`, Entity Framework 6) has
+GET, POST, PUT and DELETE, so:
+
+- **Web.config:** the `MyDataContext` connection string points at the compose SQL Server (database `BSONSample`)
+  instead of LocalDB, and `app.toml` says `needs = ["mssql"]`. `Global.asax` sets `DropCreateDatabaseAlways`, so each
+  start begins with an empty database: the probes leave nothing behind and need no `[setup]`.
+- **Probes (18; 4 with verbs):** the home page and the HelpPage area (`/Help` lists `PUT api/MyData/{id}`); a POST of
+  JSON (201, the entity, `Location`), the item read back as JSON and as BSON (`Accept: application/bson`, so
+  `BsonMediaTypeFormatter` writes it), a PUT (204) then the list shows the new values, a PUT whose id doesn't match the
+  body (the action's 400), a DELETE (200 with the entity), then the item is 404 and gone from the list.
+
+Results: RESULTS_PLACEHOLDER
+
 ## Open problems
 
 Round 1 (webForCore 0.1.0); the webForCore bugs below are fixed in 0.2.0 (PR #16) and kept for the record.
