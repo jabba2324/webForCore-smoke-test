@@ -73,7 +73,7 @@ listed; without the token it is a 500 (`HttpAntiForgeryException`), as on IIS. `
   with `concurrencyError=True`) and with the current one (redirected to the list), then 404.
 - The run deletes what it made. **37/37 on Linux** (16 before), twice in a row.
 
-**CI (round 0.9.0, run 42029051731):** 37/37 on Linux, 37/37 on Windows, the same in run 42024931148.
+**CI (round 0.9.0, run 42029051731, both attempts):** 37/37 on Linux, 37/37 on Windows, the same in run 42024931148.
 
 ## Open problems
 

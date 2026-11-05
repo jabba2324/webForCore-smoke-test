@@ -38,23 +38,23 @@
       ]
     },
     "build": {
-      "at": "2026-11-05T12:56:14+00:00",
+      "at": "2026-11-05T13:19:31+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/aspnet-mvc5-starter/logs/build.log",
-      "seconds": 38,
+      "seconds": 44,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T12:55:36+00:00",
+      "at": "2026-11-05T13:18:47+00:00",
       "commit": "885be06e42b575e6532204ce51ee63242f207708",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-05T12:56:16+00:00",
+      "at": "2026-11-05T13:19:32+00:00",
       "created": [
         "starterTemplateMVC5"
       ],
@@ -64,28 +64,28 @@
       "summary": "created starterTemplateMVC5"
     },
     "smoke": {
-      "at": "2026-11-05T12:56:28+00:00",
+      "at": "2026-11-05T13:19:47+00:00",
       "checks": [
         {
-          "ms": 20,
+          "ms": 18,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 13,
+          "ms": 10,
           "ok": true,
           "path": "/features/",
           "status": 302
         },
         {
-          "ms": 154,
+          "ms": 169,
           "ok": true,
           "path": "/features/overview/",
           "status": 200
         },
         {
-          "ms": 270,
+          "ms": 291,
           "ok": true,
           "path": "/users/account/login/",
           "status": 200
@@ -103,46 +103,46 @@
           "status": 302
         },
         {
-          "ms": 31,
+          "ms": 33,
           "ok": true,
           "path": "/Assets/vendor/bootstrap/css/bootstrap.min.css",
           "status": 200
         },
         {
-          "ms": 5,
+          "ms": 4,
           "ok": true,
           "path": "/Assets/stylesheet/app.css",
           "status": 200
         },
         {
-          "ms": 25,
+          "ms": 26,
           "ok": true,
           "path": "/signalr/hubs",
           "status": 200
         },
         {
-          "ms": 440,
+          "ms": 501,
           "ok": true,
           "path": "/features/forms-and-validation/",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 54,
+          "ms": 53,
           "ok": true,
           "path": "/features/forms-and-validation/",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 18,
+          "ms": 16,
           "ok": true,
           "path": "/features/forms-and-validation/",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 25,
+          "ms": 24,
           "ok": true,
           "path": "/features/forms-and-validation/redeem-code",
           "status": 200
@@ -155,7 +155,7 @@
         },
         {
           "method": "POST",
-          "ms": 179,
+          "ms": 153,
           "ok": true,
           "path": "/users/account/login/",
           "status": 200
@@ -168,39 +168,39 @@
           "status": 302
         },
         {
-          "ms": 644,
+          "ms": 1817,
           "ok": true,
           "path": "/management/users/",
           "status": 200
         },
         {
-          "ms": 1274,
+          "ms": 1711,
           "ok": true,
           "path": "/users/profile/edit",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 34,
+          "ms": 69,
           "ok": true,
           "path": "/users/profile/edit",
           "status": 302
         },
         {
-          "ms": 27,
+          "ms": 25,
           "ok": true,
           "path": "/users/profile/edit",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 21,
+          "ms": 23,
           "ok": true,
           "path": "/users/profile/edit",
           "status": 302
         },
         {
-          "ms": 26,
+          "ms": 28,
           "ok": true,
           "path": "/users/profile/edit",
           "status": 200
@@ -212,7 +212,7 @@
           "status": 200
         },
         {
-          "ms": 7,
+          "ms": 6,
           "ok": true,
           "path": "/users/account/logoff",
           "status": 302
@@ -230,7 +230,7 @@
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
@@ -248,13 +248,13 @@
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 2,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/Sarto.App.UI.Mvc5.dll",
           "status": 404

@@ -97,7 +97,7 @@ the resolver from `Global.asax`, so it passed without it).
   can't run on Linux), so on Windows the git probes can't start git either (app/environment).
 - **Results:** 33/34 on Linux (10 before): all but `info/refs`; 32/34 on Windows.
 
-**CI (round 0.9.0, run 42029051731):** 33/34 on Linux, 32/34 on Windows (Windows also fails the upload-pack POST: `GitPath` is `/usr/bin/git`).
+**CI (round 0.9.0, run 42029051731, both attempts):** 33/34 on Linux, 32/34 on Windows (Windows also fails the upload-pack POST: `GitPath` is `/usr/bin/git`).
 
 ## Open problems
 

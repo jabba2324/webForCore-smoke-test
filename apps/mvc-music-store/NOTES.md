@@ -88,7 +88,7 @@ session) and the AJAX `POST /ShoppingCart/RemoveFromCart/1` (JSON).
   (0)"); seen in SQL Server's trace (`WHERE AlbumId = 0`). The sample's own bug; the probe expects it.
 - **Results:** 44/44 on Linux (20 before), twice in a row, from a new membership database.
 
-**CI (round 0.9.0, run 42029051731):** 44/44 on Linux, 44/44 on Windows, the same in run 42024931148.
+**CI (round 0.9.0, run 42029051731, both attempts):** 44/44 on Linux, 44/44 on Windows, the same in run 42024931148.
 
 ## Open problems
 

@@ -34,7 +34,7 @@ page (its anti-forgery token captured), the question posted with the token and s
 returns, the same post without the token refused (500, the anti-forgery error), and the page without that question.
 No other verbs: there is no API and nothing else to post. 13/13 on Linux (9 before), twice in a row.
 
-**CI (round 0.9.0, run 42029051731):** 13/13 on Linux, 13/13 on Windows, the same in run 42024931148.
+**CI (round 0.9.0, run 42029051731, both attempts):** 13/13 on Linux, 13/13 on Windows, the same in run 42024931148.
 
 ## Open problems
 

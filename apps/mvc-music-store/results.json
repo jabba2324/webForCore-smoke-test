@@ -18,23 +18,23 @@
       ]
     },
     "build": {
-      "at": "2026-11-05T12:50:05+00:00",
+      "at": "2026-11-05T13:23:36+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/mvc-music-store/logs/build.log",
-      "seconds": 8,
+      "seconds": 9,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T12:49:57+00:00",
+      "at": "2026-11-05T13:23:26+00:00",
       "commit": "ea2552d6eda7c20e9477a512e5c615665618cf35",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-05T12:50:25+00:00",
+      "at": "2026-11-05T13:23:56+00:00",
       "created": [
         "MvcMusicStoreMembership"
       ],
@@ -50,10 +50,10 @@
       "summary": "1/1 steps"
     },
     "smoke": {
-      "at": "2026-11-05T12:50:33+00:00",
+      "at": "2026-11-05T13:24:03+00:00",
       "checks": [
         {
-          "ms": 21,
+          "ms": 25,
           "ok": true,
           "path": "/",
           "status": 200
@@ -65,19 +65,19 @@
           "status": 200
         },
         {
-          "ms": 115,
+          "ms": 106,
           "ok": true,
           "path": "/Store/Browse?genre=Jazz",
           "status": 200
         },
         {
-          "ms": 52,
+          "ms": 50,
           "ok": true,
           "path": "/Store/Details/1",
           "status": 200
         },
         {
-          "ms": 11,
+          "ms": 13,
           "ok": true,
           "path": "/Store/Details/1",
           "status": 200
@@ -89,75 +89,75 @@
           "status": 200
         },
         {
-          "ms": 65,
+          "ms": 61,
           "ok": true,
           "path": "/ShoppingCart",
           "status": 200
         },
         {
-          "ms": 784,
+          "ms": 699,
           "ok": true,
           "path": "/Account/LogOn",
           "status": 200
         },
         {
-          "ms": 22,
+          "ms": 19,
           "ok": true,
           "path": "/Account/Register",
           "status": 200
         },
         {
-          "ms": 14,
+          "ms": 11,
           "ok": true,
           "path": "/StoreManager",
           "status": 302
         },
         {
-          "ms": 5,
+          "ms": 4,
           "ok": true,
           "path": "/Checkout/AddressAndPayment",
           "status": 302
         },
         {
-          "ms": 26,
+          "ms": 21,
           "ok": true,
           "path": "/Store/GenreMenu",
           "status": 500
         },
         {
-          "ms": 19,
+          "ms": 17,
           "ok": true,
           "path": "/Content/Site.css",
           "status": 200
         },
         {
-          "ms": 8,
+          "ms": 10,
           "ok": true,
           "path": "/Scripts/jquery-1.5.1.min.js",
           "status": 200
         },
         {
-          "ms": 5,
+          "ms": 4,
           "ok": true,
           "path": "/no-such-controller",
           "status": 404
         },
         {
           "method": "POST",
-          "ms": 78,
+          "ms": 69,
           "ok": true,
           "path": "/Account/LogOn",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 27,
+          "ms": 24,
           "ok": true,
           "path": "/Account/LogOn",
           "status": 302
         },
         {
-          "ms": 124,
+          "ms": 114,
           "ok": true,
           "path": "/ShoppingCart/AddToCart/1",
           "status": 302
@@ -169,20 +169,20 @@
           "status": 302
         },
         {
-          "ms": 17,
+          "ms": 18,
           "ok": true,
           "path": "/ShoppingCart",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 35,
+          "ms": 34,
           "ok": true,
           "path": "/ShoppingCart/RemoveFromCart/{record}",
           "status": 200
         },
         {
-          "ms": 281,
+          "ms": 217,
           "ok": true,
           "path": "/Checkout/AddressAndPayment",
           "status": 200
@@ -196,96 +196,96 @@
         },
         {
           "method": "POST",
-          "ms": 93,
+          "ms": 43,
           "ok": true,
           "path": "/Checkout/AddressAndPayment",
           "status": 302
         },
         {
-          "ms": 281,
+          "ms": 31,
           "ok": true,
           "path": "/Checkout/Complete/{order}",
           "status": 200
         },
         {
-          "ms": 12,
+          "ms": 8,
           "ok": true,
           "path": "/ShoppingCart",
           "status": 200
         },
         {
-          "ms": 785,
+          "ms": 497,
           "ok": true,
           "path": "/StoreManager",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 16,
+          "ms": 12,
           "ok": true,
           "path": "/StoreManager/Create",
           "status": 302
         },
         {
-          "ms": 90,
+          "ms": 56,
           "ok": true,
           "path": "/StoreManager",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 27,
+          "ms": 22,
           "ok": true,
           "path": "/StoreManager/Edit/{album}",
           "status": 500
         },
         {
-          "ms": 21,
+          "ms": 15,
           "ok": true,
           "path": "/StoreManager/Details/{album}",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 17,
+          "ms": 13,
           "ok": true,
           "path": "/StoreManager/Delete/{album}",
           "status": 302
         },
         {
-          "ms": 104,
+          "ms": 62,
           "ok": true,
           "path": "/StoreManager",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 82,
+          "ms": 42,
           "ok": true,
           "path": "/Account/ChangePassword",
           "status": 302
         },
         {
           "method": "POST",
-          "ms": 13,
+          "ms": 12,
           "ok": true,
           "path": "/Account/ChangePassword",
           "status": 302
         },
         {
-          "ms": 20,
+          "ms": 17,
           "ok": true,
           "path": "/Account/LogOff",
           "status": 302
         },
         {
-          "ms": 5,
+          "ms": 3,
           "ok": true,
           "path": "/StoreManager",
           "status": 302
         },
         {
-          "ms": 5,
+          "ms": 6,
           "ok": true,
           "path": "/web.config",
           "status": 404
@@ -303,7 +303,7 @@
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/obj/",
           "status": 404

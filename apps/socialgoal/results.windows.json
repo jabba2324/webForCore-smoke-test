@@ -2,23 +2,23 @@
   "id": "socialgoal",
   "stages": {
     "build": {
-      "at": "2026-11-05T12:58:58+00:00",
+      "at": "2026-11-05T13:25:43+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\socialgoal\\logs.windows\\build.log",
-      "seconds": 45,
+      "seconds": 60,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T12:58:12+00:00",
+      "at": "2026-11-05T13:24:43+00:00",
       "commit": "42cfdb48c5a450793c19c0503ea0ce786eb8e46a",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-05T12:59:14+00:00",
+      "at": "2026-11-05T13:26:08+00:00",
       "created": [
         "SocialGoal"
       ],
@@ -39,112 +39,112 @@
       "summary": "2/2 steps"
     },
     "smoke": {
-      "at": "2026-11-05T12:59:28+00:00",
+      "at": "2026-11-05T13:26:18+00:00",
       "checks": [
         {
-          "ms": 28,
+          "ms": 16,
           "ok": true,
           "path": "/",
           "status": 302
         },
         {
-          "ms": 1524,
+          "ms": 916,
           "ok": true,
           "path": "/Account/Login",
           "status": 200
         },
         {
-          "ms": 35,
+          "ms": 21,
           "ok": true,
           "path": "/Content/bootstrap.css",
           "status": 200
         },
         {
-          "ms": 15,
+          "ms": 9,
           "ok": true,
           "path": "/Account/Login",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 1558,
+          "ms": 865,
           "ok": true,
           "path": "/Account/Login",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 99,
+          "ms": 57,
           "ok": true,
           "path": "/Account/Login",
           "status": 302
         },
         {
-          "ms": 1289,
+          "ms": 943,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 1290,
+          "ms": 1570,
           "ok": true,
           "path": "/Goal/Create",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 166,
+          "ms": 87,
           "ok": true,
           "path": "/Goal/Create",
           "status": 302
         },
         {
-          "ms": 2313,
+          "ms": 1395,
           "ok": true,
           "path": "/Goal/Index/{goal}",
           "status": 200
         },
         {
-          "ms": 1299,
+          "ms": 752,
           "ok": true,
           "path": "/Goal/Edit/{goal}",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 45,
+          "ms": 27,
           "ok": true,
           "path": "/Goal/Edit",
-          "status": 302
-        },
-        {
-          "ms": 24,
-          "ok": true,
-          "path": "/Goal/Index/{goal}",
-          "status": 200
-        },
-        {
-          "method": "POST",
-          "ms": 317,
-          "ok": true,
-          "path": "/Search/SearchAll",
-          "status": 200
-        },
-        {
-          "method": "POST",
-          "ms": 29,
-          "ok": true,
-          "path": "/Goal/Delete/{goal}",
           "status": 302
         },
         {
           "ms": 12,
           "ok": true,
           "path": "/Goal/Index/{goal}",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 365,
+          "ok": true,
+          "path": "/Search/SearchAll",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 23,
+          "ok": true,
+          "path": "/Goal/Delete/{goal}",
+          "status": 302
+        },
+        {
+          "ms": 9,
+          "ok": true,
+          "path": "/Goal/Index/{goal}",
           "status": 404
         },
         {
-          "ms": 15,
+          "ms": 10,
           "ok": true,
           "path": "/Account/LogOff",
           "status": 302
@@ -168,25 +168,25 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/SocialGoal.dll",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404

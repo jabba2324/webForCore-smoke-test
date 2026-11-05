@@ -36,7 +36,7 @@ values (`3`, `4`) and the `[Flags]` enum from its text box (`Eight, Sixteen`), f
 names (Trois, Quatre), edited (`Enum2` emptied, flags `3`, shown as "One, Two" and "Duex"), deleted, and then 404.
 **19/19 on Linux** (9 before), twice in a row.
 
-**CI (round 0.9.0, run 42029051731):** 19/19 on Linux, 19/19 on Windows, the same in run 42024931148.
+**CI (round 0.9.0, run 42029051731, both attempts):** 19/19 on Linux, 19/19 on Windows, the same in run 42024931148.
 
 ## Open problems
 

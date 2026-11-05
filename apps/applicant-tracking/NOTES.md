@@ -79,7 +79,7 @@ The 7 probes added (4 POSTs, over HTTPS) cover what the posts do before that: th
 token (500, the anti-forgery error), registration with a short password and log-in without a password (validation
 messages). No API. **18/18 on Linux** (11 before), twice in a row.
 
-**CI (round 0.9.0, run 42029051731):** 18/18 on Linux, 18/18 on Windows, the same in run 42024931148.
+**CI (round 0.9.0, run 42029051731, both attempts):** 18/18 on Linux, 18/18 on Windows, the same in run 42024931148.
 
 ## Open problems
 

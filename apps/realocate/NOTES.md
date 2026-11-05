@@ -80,7 +80,7 @@ All 13 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0, and its 4 
   nothing is deleted.
 - **Results:** 29/29 on Linux (14 before), twice in a row, from a new database.
 
-**CI (round 0.9.0, run 42029051731):** 29/29 on Linux, 29/29 on Windows (run 42024931148 had `needs` inside `[setup]` by mistake, so no SQL Server; fixed).
+**CI (round 0.9.0, run 42029051731, both attempts):** 29/29 on Linux, 29/29 on Windows (run 42024931148 had `needs` inside `[setup]` by mistake, so no SQL Server; fixed).
 
 ## Open problems
 

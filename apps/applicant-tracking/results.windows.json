@@ -2,64 +2,64 @@
   "id": "applicant-tracking",
   "stages": {
     "build": {
-      "at": "2026-11-05T12:56:55+00:00",
+      "at": "2026-11-05T13:25:02+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\applicant-tracking\\logs.windows\\build.log",
-      "seconds": 37,
+      "seconds": 49,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0, webForCore-thirdparty 0.7.0"
     },
     "fetch": {
-      "at": "2026-11-05T12:56:17+00:00",
+      "at": "2026-11-05T13:24:12+00:00",
       "commit": "ff9a2eb4b4f8fcf68efbab3b2f7857bb33ac307e",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-05T12:57:06+00:00",
+      "at": "2026-11-05T13:25:16+00:00",
       "checks": [
         {
-          "ms": 21,
+          "ms": 20,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 601,
+          "ms": 664,
           "ok": true,
           "path": "/Applicant/Create",
           "status": 200
         },
         {
-          "ms": 412,
+          "ms": 428,
           "ok": true,
           "path": "/Account/Login",
           "status": 200
         },
         {
-          "ms": 38,
+          "ms": 40,
           "ok": true,
           "path": "/Content/bootstrap.css",
           "status": 200
         },
         {
-          "ms": 13,
+          "ms": 12,
           "ok": true,
           "path": "/Applicant/Create",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 46,
+          "ms": 51,
           "ok": true,
           "path": "/Applicant/Create",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 31,
+          "ms": 35,
           "ok": true,
           "path": "/Applicant/Create",
           "status": 500
@@ -72,7 +72,7 @@
         },
         {
           "method": "POST",
-          "ms": 15,
+          "ms": 16,
           "ok": true,
           "path": "/Account/Register",
           "status": 200
@@ -91,13 +91,13 @@
           "status": 200
         },
         {
-          "ms": 12,
+          "ms": 10,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 6,
+          "ms": 5,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
