@@ -11,7 +11,7 @@ generated = ["src/Umbraco.Web.UI/Views/SmokePage.cshtml"]
 kinds = ["mvc", "webapi", "webforms", "owin", "identity", "signalr"]
 licence = "MIT"
 status = "migrated"
-notes = "Umbraco 8.18.15 on webForCore 0.8.0: builds, installs unattended on SQL Server and passes 21/21 on Linux and Windows (CI run 41920542509): Web Forms, MVC, Web API, OWIN/Identity log-in, SignalR. No content (the back office API needs an XSRF header) and no AngularJS client build. Found F93 (CSharpTest.Net.Collections) and F94 (Roslyn version)."
+notes = "Umbraco 8.18.15 on webForCore 0.8.0: builds, installs unattended on SQL Server, makes a template, document type and home page through the back office API (X-UMB-XSRF-TOKEN), and passes 28/28 on Linux and Windows (CI run 41940185337): Web Forms, MVC, Web API with POST and DELETE, OWIN/Identity log-in, SignalR, published content on the front end. No AngularJS client build. Found F93 (CSharpTest.Net.Collections) and F94 (Roslyn version)."
 needs = ["mssql"]
 
 # The unattended install's back-office user (Umbraco reads these at its first start).

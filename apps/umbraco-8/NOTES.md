@@ -123,10 +123,28 @@ hub's proxies and negotiation, ClientDependency's `DependencyHandler.axd`, two s
 
 **CI run 41920542509 (Linux and Windows): 21/21 on both.**
 
+### Content through the back office's API (C# runner, November 2026)
+
+With the C# runner's requests (README.md, "Requests"), setup now makes content as the AngularJS back office would: it
+logs in (capturing the `UMB-XSRF-TOKEN` cookie), then sends that value as `X-UMB-XSRF-TOKEN` with `Template/PostSave`
+(a Razor template, written to `Views/SmokePage.cshtml`, in `generated`), `ContentType/PostSave` (a document type using
+it) and `Content/PostSave` (a multipart form whose `contentItem` field is the item; `publishNew`), giving a published
+home page. Between the unattended install and the saves, setup restarts the application (`restart = true`): Umbraco
+composes the back office's services at the runtime level it boots at, so in the process that ran the unattended
+install `ContentType/PostSave` fails with "Unable to resolve type: Umbraco.Web.Editors.EditorValidatorCollection".
+That is Umbraco's own boot order (`CoreRuntime.Boot` composes, then installs), not webForCore's.
+
+The probes: `/` now renders the home page through the template (MVC); `noNodes.aspx` sends a visitor to it (302); and
+seven more probes use the API with verbs: the log-in (JSON `POST`, its XSRF cookie captured), `GetCurrentUser` with the
+header (a call without it gets new tokens, as Umbraco's `SetAngularAntiForgeryTokens` sets them), `Content/PostSave`
+without the header (417) and with it (published; the page's id and URL captured), the page on the front end, a
+`DELETE` of it (`DeleteById`, to the recycle bin) and a 404 for its URL. Each smoke run publishes and deletes a page
+of its own. 28 checks in all, all passing on Linux and Windows (CI run 41940185337).
+
 ## Open problems
 
 - F93, app/environment: CSharpTest.Net.Collections 14.906 doesn't run on .NET (replaced with Umbraco's .NET build).
 - F94, guide gap ([#153](https://github.com/xforcore/webForCore/issues/153)): Roslyn's version (NU1107).
 - F61, F62, F63, F64, F65 (as in Umbraco 6 and 7): applied; F65 through Umbraco's own SQL Server MainDom lock.
-- Not exercised: content and front-end templates, `new SmtpClient()` (mail), Windows authentication
+- Not exercised: `new SmtpClient()` (mail), Windows authentication
   (`FixWindowsAuthMiddlware`), the AngularJS UIs.
