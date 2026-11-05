@@ -81,6 +81,8 @@ workflow creates the database with `Update-Database`, which doesn't run that see
   the Admin role; checkout also mails the order through Mailgun.
 - **Results:** 23/23 on Linux (13 before), twice in a row, from a new database (setup: the first request times out as allowed, the restart and registration pass).
 
+**CI (round 0.9.0, run 42029051731):** 23/23 on Linux, 23/23 on Windows, the same in run 42024931148.
+
 ## Open problems
 
 - [F17](../../FINDINGS.md#f17) (guide gap): the Katana social providers webForCore doesn't lift fail at start-up

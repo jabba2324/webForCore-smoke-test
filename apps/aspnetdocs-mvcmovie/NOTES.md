@@ -54,6 +54,8 @@ All 11 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0, and its 2 
   deletes the movie it made, so runs repeat.
 - **Results:** 29/29 on Linux (12 before), twice in a row.
 
+**CI (round 0.9.0, run 42029051731):** 29/29 on Linux, 29/29 on Windows, the same in run 42024931148.
+
 ## Open problems
 
 Round 1 (webForCore 0.1.0); the webForCore bugs below are fixed in 0.2.0 (PR #16) and kept for the record.

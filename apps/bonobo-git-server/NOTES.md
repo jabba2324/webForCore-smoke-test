@@ -95,7 +95,9 @@ the resolver from `Global.asax`, so it passed without it).
   Bonobo's own race). The upload-pack POST, which writes nothing before turning buffering off, works.
 - **Windows:** `GitPath` is `/usr/bin/git` in the overlay (the app ships a Windows `git.exe` in `App_Data/Git`, which
   can't run on Linux), so on Windows the git probes can't start git either (app/environment).
-- **Results:** 33/34 on Linux (10 before): all but `info/refs`.
+- **Results:** 33/34 on Linux (10 before): all but `info/refs`; 32/34 on Windows.
+
+**CI (round 0.9.0, run 42029051731):** 33/34 on Linux, 32/34 on Windows (Windows also fails the upload-pack POST: `GitPath` is `/usr/bin/git`).
 
 ## Open problems
 

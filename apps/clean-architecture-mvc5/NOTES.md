@@ -58,6 +58,8 @@ All 11 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0.
 No probes added: the app has no forms (Contact is a static page), no API and no AJAX endpoints, so it takes nothing
 but GET. 12/12 on Linux, as before.
 
+**CI (round 0.9.0, run 42029051731):** 12/12 on Linux, 12/12 on Windows, the same in run 42024931148.
+
 ## Open problems
 
 Round 1 (webForCore 0.1.0); the webForCore bugs below are fixed in 0.2.0 (PR #16) and kept for the record.

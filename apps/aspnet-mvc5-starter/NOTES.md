@@ -73,6 +73,8 @@ need accounts, weren't exercised.
   new user per run, and the app can't delete one.
 - **Results:** 32/32 on Linux (16 before), twice in a row, from a new database.
 
+**CI (round 0.9.0, run 42029051731):** 32/32 on Linux, 32/32 on Windows, the same in run 42024931148.
+
 ## Open problems
 
 - [F33](../../FINDINGS.md#f33) (guide gap): WindowsAzure.Storage's .NET Standard build lacks the synchronous API; the net45 build is referenced.

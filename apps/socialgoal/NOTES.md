@@ -82,6 +82,8 @@ Unchanged: ELMAH and the Google provider work (0.3.0), and `/` fails on AutoMapp
   their text.
 - **Results:** 24/24 on Linux (9/10 before), twice in a row, from a new database.
 
+**CI (round 0.9.0, run 42029051731):** 24/24 on Linux, 24/24 on Windows, the same in run 42024931148.
+
 ## Open problems
 
 - **Round 0.9.0:** F18 and F17 were fixed in 0.3.0; F22 is resolved by webForCore.AutoMapperLegacy 0.7.0 (above). Nothing open.

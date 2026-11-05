@@ -30,23 +30,23 @@
       ]
     },
     "build": {
-      "at": "2026-11-05T11:57:37+00:00",
+      "at": "2026-11-05T12:58:24+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/roadkill/logs/build.log",
-      "seconds": 14,
+      "seconds": 20,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0, webForCore-thirdparty 0.7.0"
     },
     "fetch": {
-      "at": "2026-11-05T11:57:23+00:00",
+      "at": "2026-11-05T12:58:04+00:00",
       "commit": "1061add4a727c55793234e0a92f146c6f1db62cf",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-05T11:57:37+00:00",
+      "at": "2026-11-05T12:58:26+00:00",
       "created": [
         "Roadkill"
       ],
@@ -56,10 +56,10 @@
       "summary": "created Roadkill"
     },
     "smoke": {
-      "at": "2026-11-05T11:57:48+00:00",
+      "at": "2026-11-05T12:58:38+00:00",
       "checks": [
         {
-          "ms": 2082,
+          "ms": 1881,
           "ok": false,
           "path": "/",
           "stack": [
@@ -67,9 +67,9 @@
             "[TypeInitializationException: The type initializer for 'ActiveSharp.PropertyMapping.OffsetUtil' threw an exception.]",
             "[TypeInitializationException: The type initializer for 'OffsetInvoker`1' threw an exception.]",
             "   at System.Linq.Enumerable.ArrayWhereIterator`1.MoveNext()",
-            "   at Roadkill.Core.Text.TextPluginRunner.BeforeParse(String text, PageHtml pageHtml) in $WFC_CHECKOUTS/roadkill/src/Roadkill.Core/Text/TextPluginRunner.cs:line 50",
-            "   at Roadkill.Core.Converters.MarkupConverter.ToHtml(String text) in $WFC_CHECKOUTS/roadkill/src/Roadkill.Core/Text/MarkupConverter.cs:line 132",
-            "   at Roadkill.Core.Mvc.Controllers.HomeController.Index() in $WFC_CHECKOUTS/roadkill/src/Roadkill.Core/Mvc/Controllers/HomeController.cs:line 50",
+            "   at Roadkill.Core.Text.TextPluginRunner.BeforeParse(String text, PageHtml pageHtml) in <repo>/apps/roadkill/src/src/Roadkill.Core/Text/TextPluginRunner.cs:line 50",
+            "   at Roadkill.Core.Converters.MarkupConverter.ToHtml(String text) in <repo>/apps/roadkill/src/src/Roadkill.Core/Text/MarkupConverter.cs:line 132",
+            "   at Roadkill.Core.Mvc.Controllers.HomeController.Index() in <repo>/apps/roadkill/src/src/Roadkill.Core/Mvc/Controllers/HomeController.cs:line 50",
             "   at lambda_method26(Closure, ControllerBase, Object[])",
             "   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)",
             "   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)",
@@ -108,55 +108,55 @@
           "title": "Method not found: 'System.Reflection.Emit.AssemblyBuilder System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName, System.Reflection.Emit.AssemblyBuilderAccess)'."
         },
         {
-          "ms": 4337,
+          "ms": 4639,
           "ok": true,
           "path": "/User/Login",
           "status": 200
         },
         {
-          "ms": 32,
+          "ms": 31,
           "ok": true,
           "path": "/Assets/CSS/roadkill.css",
           "status": 200
         },
         {
-          "ms": 14,
+          "ms": 5,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 6,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 2,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 1,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 2,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/Roadkill.Web.dll",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404

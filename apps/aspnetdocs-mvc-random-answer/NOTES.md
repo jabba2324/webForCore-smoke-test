@@ -34,6 +34,8 @@ page (its anti-forgery token captured), the question posted with the token and s
 returns, the same post without the token refused (500, the anti-forgery error), and the page without that question.
 No other verbs: there is no API and nothing else to post. 13/13 on Linux (9 before), twice in a row.
 
+**CI (round 0.9.0, run 42029051731):** 13/13 on Linux, 13/13 on Windows, the same in run 42024931148.
+
 ## Open problems
 
 Round 1 (webForCore 0.1.0); the webForCore bugs below are fixed in 0.2.0 (PR #16) and kept for the record.

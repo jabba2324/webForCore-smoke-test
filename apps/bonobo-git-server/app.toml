@@ -7,7 +7,7 @@ site = "Bonobo.Git.Server"
 kinds = ["mvc"]
 licence = "MIT"
 status = "blocked"
-notes = "Blocked on F144 (webForCore 0.9.0): unbuffered Response.Write throws and never ends the response, so git smart HTTP (info/refs) never answers. 33/34 on Linux (10 POSTs: log-on, user/team/repository create, edit, delete, git-upload-pack). LibGit2Sharp 0.30.0 (F145), LangVersion 7.3 (F83)."
+notes = "Blocked on F144 (webForCore 0.9.0): unbuffered Response.Write throws and never ends the response, so git smart HTTP (info/refs) never answers. 33/34 on Linux, 32/34 on Windows (GitPath is /usr/bin/git there) (10 POSTs: log-on, user/team/repository create, edit, delete, git-upload-pack). LibGit2Sharp 0.30.0 (F145), LangVersion 7.3 (F83)."
 
 # The first request compiles the site, so it gets 120 s.
 [[probes]]

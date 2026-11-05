@@ -99,6 +99,8 @@ Unchanged: every page still fails in LightSpeed's `ActiveSharp.PropertyMapping.O
 [F27](../../FINDINGS.md#f27), app/environment; none of 0.9.0's fixes is about it). 9/10 on Linux. No verb probes: the
 wiki's forms (log-in, page edit, search) all go through LightSpeed, so none can be reached past that.
 
+**CI (round 0.9.0, run 42029051731):** 9/10 on Linux, 9/10 on Windows, the same in run 42024931148.
+
 ## Open problems
 
 - [F19](../../FINDINGS.md#f19) (webForCore bug): `System.Web.Abstractions`/`System.Web.Routing` 4.0.0.0 can't be loaded.

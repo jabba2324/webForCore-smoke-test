@@ -38,23 +38,23 @@
       ]
     },
     "build": {
-      "at": "2026-11-05T11:59:49+00:00",
+      "at": "2026-11-05T12:56:14+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/aspnet-mvc5-starter/logs/build.log",
-      "seconds": 28,
+      "seconds": 38,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T11:59:21+00:00",
+      "at": "2026-11-05T12:55:36+00:00",
       "commit": "885be06e42b575e6532204ce51ee63242f207708",
-      "status": "pass",
-      "summary": "existing checkout"
+      "overlay": true,
+      "status": "pass"
     },
     "setup": {
-      "at": "2026-11-05T11:59:49+00:00",
+      "at": "2026-11-05T12:56:16+00:00",
       "created": [
         "starterTemplateMVC5"
       ],
@@ -64,155 +64,155 @@
       "summary": "created starterTemplateMVC5"
     },
     "smoke": {
-      "at": "2026-11-05T11:59:59+00:00",
+      "at": "2026-11-05T12:56:28+00:00",
       "checks": [
         {
-          "ms": 14,
+          "ms": 20,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 11,
+          "ms": 13,
           "ok": true,
           "path": "/features/",
           "status": 302
         },
         {
-          "ms": 142,
+          "ms": 154,
           "ok": true,
           "path": "/features/overview/",
           "status": 200
         },
         {
-          "ms": 278,
+          "ms": 270,
           "ok": true,
           "path": "/users/account/login/",
           "status": 200
         },
         {
-          "ms": 22,
+          "ms": 19,
           "ok": true,
           "path": "/users/account/signup/",
           "status": 200
         },
         {
-          "ms": 16,
+          "ms": 13,
           "ok": true,
           "path": "/management/",
           "status": 302
         },
         {
-          "ms": 35,
+          "ms": 31,
           "ok": true,
           "path": "/Assets/vendor/bootstrap/css/bootstrap.min.css",
           "status": 200
         },
         {
-          "ms": 6,
+          "ms": 5,
           "ok": true,
           "path": "/Assets/stylesheet/app.css",
           "status": 200
         },
         {
-          "ms": 32,
+          "ms": 25,
           "ok": true,
           "path": "/signalr/hubs",
           "status": 200
         },
         {
-          "ms": 304,
+          "ms": 440,
           "ok": true,
           "path": "/features/forms-and-validation/",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 54,
+          "ok": true,
+          "path": "/features/forms-and-validation/",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 18,
+          "ok": true,
+          "path": "/features/forms-and-validation/",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 25,
+          "ok": true,
+          "path": "/features/forms-and-validation/redeem-code",
+          "status": 200
+        },
+        {
+          "ms": 7,
+          "ok": true,
+          "path": "/users/account/login/",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 179,
+          "ok": true,
+          "path": "/users/account/login/",
           "status": 200
         },
         {
           "method": "POST",
           "ms": 46,
           "ok": true,
-          "path": "/features/forms-and-validation/",
+          "path": "/users/account/login/",
+          "status": 302
+        },
+        {
+          "ms": 644,
+          "ok": true,
+          "path": "/management/users/",
+          "status": 200
+        },
+        {
+          "ms": 1274,
+          "ok": true,
+          "path": "/users/profile/edit",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 16,
+          "ms": 34,
           "ok": true,
-          "path": "/features/forms-and-validation/",
+          "path": "/users/profile/edit",
+          "status": 302
+        },
+        {
+          "ms": 27,
+          "ok": true,
+          "path": "/users/profile/edit",
           "status": 200
         },
         {
           "method": "POST",
           "ms": 21,
           "ok": true,
-          "path": "/features/forms-and-validation/redeem-code",
-          "status": 200
-        },
-        {
-          "ms": 6,
-          "ok": true,
-          "path": "/users/account/login/",
-          "status": 200
-        },
-        {
-          "method": "POST",
-          "ms": 145,
-          "ok": true,
-          "path": "/users/account/login/",
-          "status": 200
-        },
-        {
-          "method": "POST",
-          "ms": 44,
-          "ok": true,
-          "path": "/users/account/login/",
-          "status": 302
-        },
-        {
-          "ms": 589,
-          "ok": true,
-          "path": "/management/users/",
-          "status": 200
-        },
-        {
-          "ms": 780,
-          "ok": true,
-          "path": "/users/profile/edit",
-          "status": 200
-        },
-        {
-          "method": "POST",
-          "ms": 43,
-          "ok": true,
           "path": "/users/profile/edit",
           "status": 302
         },
         {
-          "ms": 25,
+          "ms": 26,
           "ok": true,
           "path": "/users/profile/edit",
           "status": 200
         },
         {
-          "method": "POST",
-          "ms": 20,
-          "ok": true,
-          "path": "/users/profile/edit",
-          "status": 302
-        },
-        {
-          "ms": 22,
-          "ok": true,
-          "path": "/users/profile/edit",
-          "status": 200
-        },
-        {
-          "ms": 29,
+          "ms": 35,
           "ok": true,
           "path": "/signalr/negotiate?clientProtocol=2.1&connectionData=%5B%7B%22name%22%3A%22databus%22%7D%5D",
           "status": 200
         },
         {
-          "ms": 6,
+          "ms": 7,
           "ok": true,
           "path": "/users/account/logoff",
           "status": 302
@@ -230,7 +230,7 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 3,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
@@ -248,7 +248,7 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 3,
           "ok": true,
           "path": "/packages.config",
           "status": 404
