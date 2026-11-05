@@ -79,7 +79,7 @@ web.config is unchanged.
 
 ## Smoke
 
-**CI (Linux and Windows): 48/48 on both, in CI runs 42026922513 and (second).**
+**CI (Linux and Windows): 48/48 on both, in CI runs 42026922513 and 42030748535.**
 
 **Round 0.9.0, Linux: 48/48** (41 of the app's probes and the runner's 7 forbidden paths), twice in a row, and from a
 fresh checkout.

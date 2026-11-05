@@ -8,7 +8,7 @@ project = "BlogEngine/BlogEngine.NET/BlogEngine.NET.csproj"
 kinds = ["webforms", "webapi", "webpages"]
 licence = "MS-RL"
 status = "migrated"
-notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 48/48 on Linux and Windows (CI runs 42026922513 and (second)), with a post, a comment (a client callback) and the trash through the admin's Web API. Its LINQ to SQL file store compiles on 0.9.0."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 48/48 on Linux and Windows (CI runs 42026922513 and 42030748535), with a post, a comment (a client callback) and the trash through the admin's Web API. Its LINQ to SQL file store compiles on 0.9.0."
 
 # The blog writes its log, and the probes' posts and comments, into App_Data (the posts and comments are deleted again).
 generated = ["BlogEngine/BlogEngine.NET/App_Data/logger.txt", "BlogEngine/BlogEngine.NET/App_Data/posts/*.xml"]
