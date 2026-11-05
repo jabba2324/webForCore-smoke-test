@@ -1,6 +1,6 @@
 # ASP.NET samples: Katana HelloWorld: migration notes
 
-Status: migrated (webForCore 0.4.0, all probes pass).
+Status: migrated (webForCore 0.9.0: 12/12 on Linux and Windows, 3 verb probes).
 (`LICENSE.txt`). Split out of the `aspnet-samples` entry. webForCore 0.1.0 packages (0.2.0 from round 2).
 
 ## Assessment
@@ -28,6 +28,12 @@ All 8 probes pass on the released 0.2.0 packages (the overlay's `PackageReferenc
 ### Round 3: webForCore 0.4.0
 
 All 8 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0.
+
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+The app has no forms or API: its OWIN `app.Run` answers every request with `Hello World`, whatever the method. Three
+verb probes check that requests with other methods and bodies reach it too: a POST with a form body, a PUT with JSON
+and a DELETE, each `Hello World`. No overlay change. Results: **12/12 on Linux and Windows** (CI runs 42021158598 and 42026762740), the same in both runs.
 
 ## Open problems
 

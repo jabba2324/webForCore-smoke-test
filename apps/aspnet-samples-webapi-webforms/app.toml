@@ -8,4 +8,187 @@ project = "samples/aspnet/WebApi/WebFormSample/WebForm/WebForm.csproj"
 kinds = ["webapi", "webforms"]
 licence = "Apache-2.0"
 status = "migrated"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 8/8 on Linux and Windows."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 29/29 on Linux and Windows (CI runs 42021158598 and 42026762740): Web API verbs, register/log-in/change-password postbacks and the AJAX log-in on Universal Providers."
+needs = ["mssql"]
+
+# Web.config's DefaultConnection (Universal Providers: membership, roles, profile) points at the compose SQL Server
+# (it was LocalDB). The providers create the WebFormSample database on first use, so setup lists no database (one it
+# made empty would have no tables) and registers the test user each time: on a database that has it, the step gets
+# the page back with "Please enter a different user name." (200), which is fine.
+[setup]
+
+[[setup.steps]]
+post = "/Account/Register.aspx"
+button = "ctl00$MainContent$RegisterUser$CreateUserStepContainer$ctl09"
+value = "Register"
+timeout = 180
+fields = { "ctl00$MainContent$RegisterUser$CreateUserStepContainer$UserName" = "smokeuser", "ctl00$MainContent$RegisterUser$CreateUserStepContainer$Email" = "smoke@example.com", "ctl00$MainContent$RegisterUser$CreateUserStepContainer$Password" = "Smoke_test_1234", "ctl00$MainContent$RegisterUser$CreateUserStepContainer$ConfirmPassword" = "Smoke_test_1234" }
+
+# The first request compiles the site, so it gets 120 s.
+[[probes]]
+path = "/"
+contains = "Modify this template to jump-start your ASP.NET application."
+
+[[probes]]
+path = "/About.aspx"
+contains = "Your quintessential app description page."
+
+# Pages under Account/ need a log-in (its Web.config denies anonymous users).
+[[probes]]
+path = "/Account/ChangePassword.aspx"
+status = 302
+
+# Web API inside Web Forms (the route is added in Global.asax): ValuesController's GET, POST, PUT and DELETE. Its
+# POST, PUT and DELETE do nothing with what they're sent (the template's), so they answer 204 and change nothing.
+[[probes]]
+path = "/api/values"
+contains = "[\"value1\",\"value2\"]"
+
+[[probes]]
+path = "/api/values"
+method = "POST"
+json = "\"smoke\""
+status = 204
+
+[[probes]]
+path = "/api/values/5"
+method = "PUT"
+json = "\"smoke\""
+status = 204
+
+[[probes]]
+path = "/api/values/5"
+method = "DELETE"
+status = 204
+
+[[probes]]
+path = "/api/values/5"
+contains = "\"value\""
+
+# Web Forms postbacks with view state and event validation, on the membership provider: registering the setup's user
+# again is refused (CreateUserWizard); a log-in with the wrong password is refused and with the right one sets the
+# forms-authentication cookie; the master page's LoginView then greets the user.
+[[probes]]
+path = "/Account/Register.aspx"
+cookies = true
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Account/Register.aspx"
+method = "POST"
+cookies = true
+contains = "Please enter a different user name."
+[probes.form]
+__VIEWSTATE = "{viewstate}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$MainContent$RegisterUser$CreateUserStepContainer$UserName" = "smokeuser"
+"ctl00$MainContent$RegisterUser$CreateUserStepContainer$Email" = "smoke@example.com"
+"ctl00$MainContent$RegisterUser$CreateUserStepContainer$Password" = "Smoke_test_1234"
+"ctl00$MainContent$RegisterUser$CreateUserStepContainer$ConfirmPassword" = "Smoke_test_1234"
+"ctl00$MainContent$RegisterUser$CreateUserStepContainer$ctl09" = "Register"
+
+[[probes]]
+path = "/Account/Login.aspx"
+cookies = true
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Account/Login.aspx"
+method = "POST"
+cookies = true
+contains = "Your login attempt was not successful. Please try again."
+[probes.form]
+__VIEWSTATE = "{viewstate}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$MainContent$Login1$UserName" = "smokeuser"
+"ctl00$MainContent$Login1$Password" = "wrong-password"
+"ctl00$MainContent$Login1$Button1" = "Log in"
+
+[[probes]]
+path = "/Account/Login.aspx"
+method = "POST"
+cookies = true
+status = 302
+capture = { auth = { cookie = ".ASPXAUTH" } }
+[probes.form]
+__VIEWSTATE = "{viewstate}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$MainContent$Login1$UserName" = "smokeuser"
+"ctl00$MainContent$Login1$Password" = "Smoke_test_1234"
+"ctl00$MainContent$Login1$Button1" = "Log in"
+
+[[probes]]
+path = "/"
+cookies = true
+contains = "<span class=\"username\">smokeuser</span>"
+
+# ChangePassword (a postback, logged in) to a new password; the AJAX log-in handler (LoginAjax.aspx, which answers
+# JSON to the page's script) then refuses the old one and takes the new; the password is changed back, so the next
+# run starts from setup's state.
+[[probes]]
+path = "/Account/ChangePassword.aspx"
+cookies = true
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Account/ChangePassword.aspx"
+method = "POST"
+cookies = true
+status = 302
+capture = { success = { header = "Location", regex = "(ChangePasswordSuccess\\.aspx)" } }
+[probes.form]
+__VIEWSTATE = "{viewstate}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$MainContent$ChangeUserPassword$ChangePasswordContainerID$CurrentPassword" = "Smoke_test_1234"
+"ctl00$MainContent$ChangeUserPassword$ChangePasswordContainerID$NewPassword" = "Smoke_test_5678"
+"ctl00$MainContent$ChangeUserPassword$ChangePasswordContainerID$ConfirmNewPassword" = "Smoke_test_5678"
+"ctl00$MainContent$ChangeUserPassword$ChangePasswordContainerID$ctl04" = "Change password"
+
+[[probes]]
+path = "/Account/ChangePasswordSuccess.aspx"
+cookies = true
+contains = "Your password has been changed successfully."
+
+[[probes]]
+path = "/Account/LoginAjax.aspx"
+method = "POST"
+headers = { X-Requested-With = "XMLHttpRequest" }
+form = { UserName = "smokeuser", Password = "Smoke_test_1234" }
+contains = "\"success\":false,\"errors\":[\"The user name or password provided is incorrect.\"]"
+
+[[probes]]
+path = "/Account/LoginAjax.aspx"
+method = "POST"
+headers = { X-Requested-With = "XMLHttpRequest" }
+form = { UserName = "smokeuser", Password = "Smoke_test_5678" }
+contains = "\"success\":true"
+
+[[probes]]
+path = "/Account/ChangePassword.aspx"
+cookies = true
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Account/ChangePassword.aspx"
+method = "POST"
+cookies = true
+status = 302
+[probes.form]
+__VIEWSTATE = "{viewstate}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$MainContent$ChangeUserPassword$ChangePasswordContainerID$CurrentPassword" = "Smoke_test_5678"
+"ctl00$MainContent$ChangeUserPassword$ChangePasswordContainerID$NewPassword" = "Smoke_test_1234"
+"ctl00$MainContent$ChangeUserPassword$ChangePasswordContainerID$ConfirmNewPassword" = "Smoke_test_1234"
+"ctl00$MainContent$ChangeUserPassword$ChangePasswordContainerID$ctl04" = "Change password"
+
+[[probes]]
+path = "/Account/LoginAjax.aspx"
+method = "POST"
+headers = { X-Requested-With = "XMLHttpRequest" }
+form = { UserName = "smokeuser", Password = "Smoke_test_1234" }
+contains = "\"success\":true"

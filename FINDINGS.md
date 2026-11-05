@@ -117,7 +117,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F47](#f47) | `GetTypes()` on System.Data.SqlClient 4.9.1 throws on .NET 11 and .NET 10: apps that scan all assemblies fail (fixed in 0.8.0) | webForCore bug (dependency) | opserver-mvc5 | [#41](https://github.com/xforcore/webForCore/issues/41) |
 | [F48](#f48) | The C# version: C# 14's span conversions and C# 11's ref safety break code written for older C# | guide gap | yafnet-2 | [#43](https://github.com/xforcore/webForCore/issues/43) |
 | [F49](#f49) | YAF.NET's vendored ServiceStack 5.9 fork only works as .NET Framework code | app/environment | yafnet-2 | - |
-| [F50](#f50) | Nancy 0.20 needs `AppDomainSetup.PrivateBinPathProbe` | app/environment | jabbr | - |
+| [F50](#f50) | Nancy 0.20 needs `AppDomainSetup.PrivateBinPathProbe` (reached only past F135) | app/environment | jabbr | - |
 | [F51](#f51) | A change while the next start is starting leaves the application dead: 503 for every request | webForCore bug | bonobo-git-server, mojoportal (Windows); any app | [#49](https://github.com/xforcore/webForCore/issues/49) |
 | [F52](#f52) | AppDomain data `DataDirectory` isn't set: `\|DataDirectory\|` resolves to `bin_dotnet/` | webForCore bug | bonobo-git-server | [#50](https://github.com/xforcore/webForCore/issues/50) |
 | [F53](#f53) | Linux: a change in `bin` or `App_Code` doesn't restart the application | webForCore bug | any app (seen on aspnetdocs-mvcmovie, miniblog) | [#51](https://github.com/xforcore/webForCore/issues/51) |
@@ -135,10 +135,10 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F65](#f65) | Linux: named semaphores and events throw `PlatformNotSupportedException` (only named `Mutex` works) | guide gap | umbraco-7 | [#94](https://github.com/xforcore/webForCore/issues/94) |
 | [F66](#f66) | webForCore's `CallContext` doesn't reach prebuilt .NET Framework libraries: Log4Net.Async logs nothing | guide gap | umbraco-7 | [#95](https://github.com/xforcore/webForCore/issues/95) |
 | [F67](#f67) | Linux with no locale (`C`/`POSIX`: CI runners, containers): the culture is invariant, so apps that pick resources by culture find none | guide gap | umbraco-6 | [#97](https://github.com/xforcore/webForCore/issues/97) |
-| [F68](#f68) | Web API OData (Microsoft.AspNet.OData 7.5.18) needs System.Data.Linq to build any model | documented gap (consequence undocumented) | odata-samples-compositekey | [#120](https://github.com/xforcore/webForCore/issues/120) |
-| [F69](#f69) | Windows Identity Foundation (`System.IdentityModel`) isn't on .NET or in NAMESPACES.md: IdentityServer3 can't load | guide gap | identityserver3-example | [#119](https://github.com/xforcore/webForCore/issues/119) |
-| [F70](#f70) | `/signalr/hubs` serves the template's unreplaced `[!VERSION!]` | webForCore bug | signalr-samples | [#118](https://github.com/xforcore/webForCore/issues/118) |
-| [F71](#f71) | VB projects: `<MyType>Windows</MyType>` doesn't compile on .NET (BC30002 `My.Computer`, `My.User`) | guide gap | signalr-samples | [#121](https://github.com/xforcore/webForCore/issues/121) |
+| [F68](#f68) | Web API OData (Microsoft.AspNet.OData 7.5.18) needs System.Data.Linq to build any model (fixed in 0.9.0) | documented gap (consequence undocumented) | odata-samples-compositekey | [#120](https://github.com/xforcore/webForCore/issues/120) |
+| [F69](#f69) | Windows Identity Foundation (`System.IdentityModel`) isn't on .NET or in NAMESPACES.md: IdentityServer3 can't load (documented in 0.9.0; the app stays blocked) | guide gap | identityserver3-example | [#119](https://github.com/xforcore/webForCore/issues/119) |
+| [F70](#f70) | `/signalr/hubs` serves the template's unreplaced `[!VERSION!]` (fixed in 0.9.0) | webForCore bug | signalr-samples | [#118](https://github.com/xforcore/webForCore/issues/118) |
+| [F71](#f71) | VB projects: `<MyType>Windows</MyType>` doesn't compile on .NET (BC30002 `My.Computer`, `My.User`) (documented in 0.9.0) | guide gap | signalr-samples | [#121](https://github.com/xforcore/webForCore/issues/121) |
 | [F72](#f72) | Linux: the user's inotify instances (128 by default) run out with many apps running: "Failed to start monitoring changes" | app/environment | signalr-samples, identityserver3-example (on this machine) | - |
 | [F73](#f73) | MVC 3/4 apps: `webpages:Version` 1.0.0.0/2.0.0.0 fails every request ("Conflicting versions of ASP.NET Web Pages") | guide gap | mvc-music-store | [#122](https://github.com/xforcore/webForCore/issues/122) |
 | [F74](#f74) | MVC 3/4 apps: `[Compare]` is ambiguous (CS0104) between MVC's and DataAnnotations' `CompareAttribute` | guide gap | mvc-music-store | [#122](https://github.com/xforcore/webForCore/issues/122) |
@@ -183,6 +183,8 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F131](#f131) | `Thread.ResetAbort()` after `catch (ThreadAbortException)` throws `PlatformNotSupportedException`; the guide doesn't say to remove it | guide gap | dnn-platform-9 | [#143](https://github.com/xforcore/webForCore/issues/143) |
 | [F132](#f132) | An application's design-time classes (`System.Web.UI.Design.ExpressionEditor`, System.Design) don't compile | guide gap | dnn-platform-9 | [#144](https://github.com/xforcore/webForCore/issues/144) |
 | [F133](#f133) | Linux: DNN builds every physical path with `\` (`ApplicationMapPath` is `BaseDirectory.Replace("/", "\\")`), and QuickIO.NET is Win32 | app/environment | dnn-platform-9 | – |
+| [F134](#f134) | A request whose path has a `(` (an OData key) reaches the app without its non-standard headers (`Prefer`, `X-Requested-With`, `X-...`) | webForCore bug | odata-samples-compositekey | [#170](https://github.com/xforcore/webForCore/issues/170) |
+| [F135](#f135) | An assembly without a strong name isn't loaded for a reference to a higher version (.NET Framework ignores the version): Nancy.SimpleAuthentication -> Nancy 0.21.1 with 0.20 deployed | webForCore bug | jabbr | [#171](https://github.com/xforcore/webForCore/issues/171) |
 ---
 
 ## F1
@@ -1184,6 +1186,8 @@ Found on 0.5.0. Documented in #44.
   System.AppDomainSetup.get_PrivateBinPathProbe()'`, from `Nancy.Bootstrapper.AppDomainAssemblyTypeScanner`.
 - **Cause:** Nancy 0.20 is .NET Framework only. Nancy 2.x has a .NET Standard build, but moving JabbR's modules to its API
   is a port, not a migration. Ninject 3.0 had the same kind of problem (`AppDomain.Evidence`); 3.3.6 fixed it.
+- **Round 0.9.0:** since 0.8.0 at least, JabbR stops before this, at [F135](#f135) (Nancy.SimpleAuthentication's
+  reference to Nancy 0.21.1.0); with F135 worked around locally (not in the overlay), startup reaches this error again.
 
 ## F51
 
@@ -1481,6 +1485,9 @@ Linux (the same on any OS).
   `new ODataConventionModelBuilder().EntitySet<Person>("People"); builder.GetEdmModel();` in `Application_Start`.
 - **Options (for webForCore):** document it; or ship a `System.Data.Linq` 4.0.0.0 with just `Binary`; or build
   Microsoft.AspNet.OData (Microsoft's, MIT) with the mapping compiled out, as MVC's `LinqBinaryModelBinder` is.
+- **Fixed in 0.9.0:** webForCore provides `System.Data.Linq` 4.0.0.0 (the `webForCore.Data.Linq` package, which
+  `webForCore` brings; #142). odata-samples-compositekey starts with no overlay change and its OData probes pass,
+  including POST, PATCH, PUT and DELETE; its one failure is [F134](#f134).
 
 ## F69
 
@@ -1502,6 +1509,8 @@ same on any OS).
   `<system.identityModel>`, `WSFederationAuthenticationModule`, `SessionAuthenticationModule`) as unavailable, with
   the options (Katana's WS-Federation middleware, `Microsoft.IdentityModel.Tokens`), and the Phase 0 blocker search
   should look for it.
+- **Round 0.9.0:** #119 is closed: NAMESPACES.md lists WIF. identityserver3-example is unchanged (7/10 before the new
+  token-endpoint probe) and stays blocked: replacing IdentityServer3 isn't a migration.
 
 ## F70
 
@@ -1514,6 +1523,7 @@ same on any OS).
   `webForCore.Microsoft.AspNet.SignalR.Core` embeds the source file as it is.
 - **Repro:** any app with `app.MapSignalR()` and a hub: `curl /signalr/hubs | head -3`.
 - **Effect:** cosmetic for the JavaScript client, but a response that differs from IIS.
+- **Fixed in 0.9.0:** the proxy begins `ASP.NET SignalR JavaScript Library 2.4.3`; signalr-samples passes every probe.
 
 ## F71
 
@@ -1532,6 +1542,7 @@ same on any OS).
   `My.Application`).
 - **Guide:** `docs/MIGRATING.md` section 2 shows only C# projects; it could say what a `.vbproj` needs (`MyType`, the
   `<Import Include>` namespaces, `GenerateAssemblyInfo` false with `My Project/AssemblyInfo.vb`).
+- **Documented in 0.9.0** (#121 closed): the overlay's `<MyType>Empty</MyType>` is the documented step.
 
 ## F72
 
@@ -2327,3 +2338,42 @@ the overlay).
   net40, P/Invoke to `kernel32`).
 - **Why it isn't webForCore's:** `\` isn't a separator on Linux (MIGRATING.md section 6). Portable paths would mean
   rewriting DNN's file layer, so the app runs on Windows only (where it stops at F130 for now).
+
+## F134
+
+**A request whose path has a `(` reaches the application without its non-standard headers.** webForCore bug. To be
+raised (round 0.9.0). Found on 0.9.0, on Linux (the code is the same on any OS).
+
+- **Apps:** odata-samples-compositekey. OData keys are in parentheses (`/People(FirstName='Kate',LastName='Jones')`),
+  so a PUT with `Prefer: return=representation` answers 204 instead of OData's 200 with the entity
+  (`UpdatedODataResult` reads `Prefer`): one probe, 26/27.
+- **What's lost:** every header System.Web doesn't know by index: `Prefer`, `X-Requested-With`, `X-HTTP-Method-Override`,
+  `OData-*`, any `X-...`. `Request.Headers`, `ServerVariables["ALL_RAW"]` and Web API's `HttpRequestMessage.Headers`
+  have only the known ones (Accept, Host, User-Agent, Content-Type, Cookie, ...). On IIS the path doesn't matter.
+- **Cause:** `AspNetCoreWorkerRequest.ParseHeaders()` looks for a cookieless session id (`/(S(...))/`) in the path
+  when it has a `(`, and `return`s when there's none, before it stores the unknown headers, so
+  `GetUnknownRequestHeaders()` is null.
+- **Repro:** any app with `Application_BeginRequest` writing `Request.ServerVariables["ALL_RAW"]`:
+  `curl -H 'X-Custom: one' /People(1)` has no `X-Custom`; `/People`, `/People,x` and `/a)` have it. The same with the
+  worker run without webforcore-host in front (checked by hand, not in the overlay).
+- **Fix belongs in webForCore:** skip only the `AspFilterSessionId` part when the pattern isn't there.
+
+## F135
+
+**An assembly without a strong name isn't loaded for a reference to a higher version.** webForCore bug. To be raised
+(round 0.9.0). Found on 0.9.0, on Linux; the 0.8.0 results show the same error (they were recorded as F50).
+
+- **Apps:** jabbr. It deploys Nancy 0.20.0 with Nancy.SimpleAuthentication 0.3.14, whose assembly references Nancy
+  0.21.1.0. OWIN startup fails on every request (7/12):
+  ```
+  FileNotFoundException: Could not load file or assembly 'Nancy, Version=0.21.1.0, Culture=neutral, PublicKeyToken=null'.
+  ```
+- **On .NET Framework:** fusion doesn't check the version of an assembly that has no strong name, so the reference binds
+  to the `Nancy.dll` 0.20.0.0 in `bin`, with no binding redirect.
+- **Cause:** .NET's default load context won't bind the request to the lower version and raises `Resolving`;
+  `AssemblyLoaderNetCore.Resolve` finds `bin_dotnet/Nancy.dll` and refuses it
+  (`assembly.GetName().Version >= name.Version`), whatever the request's public key token. Strong-named requests to a
+  lower version need a binding redirect on .NET Framework too (that's #158); this case needs nothing there.
+- **Checked:** with an `AppDomain.AssemblyResolve` handler that returns the loaded Nancy (exploration only, not in the
+  overlay), JabbR's startup gets past this to [F50](#f50).
+- **Fix belongs in webForCore:** in `Resolve`, accept an assembly of any version when the request has no public key token.

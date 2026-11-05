@@ -1,6 +1,6 @@
 # ASP.NET samples: Web API BSONSample: migration notes
 
-Status: migrated (webForCore 0.4.0, all probes pass).
+Status: migrated (webForCore 0.9.0: 18/18 on Linux and Windows, 4 verb probes).
 (`LICENSE.txt`). Split out of the `aspnet-samples` entry. webForCore 0.1.0 packages (0.2.0 from round 2).
 
 ## Assessment
@@ -28,6 +28,21 @@ All 7 probes pass on the released 0.2.0 packages (the overlay's `PackageReferenc
 ### Round 3: webForCore 0.4.0
 
 All 7 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0.
+
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+The probes covered only `/` before (the runner's default). The app's API (`MyDataController`, Entity Framework 6) has
+GET, POST, PUT and DELETE, so:
+
+- **Web.config:** the `MyDataContext` connection string points at the compose SQL Server (database `BSONSample`)
+  instead of LocalDB, and `app.toml` says `needs = ["mssql"]`. `Global.asax` sets `DropCreateDatabaseAlways`, so each
+  start begins with an empty database: the probes leave nothing behind and need no `[setup]`.
+- **Probes (18; 4 with verbs):** the home page and the HelpPage area (`/Help` lists `PUT api/MyData/{id}`); a POST of
+  JSON (201, the entity, `Location`), the item read back as JSON and as BSON (`Accept: application/bson`, so
+  `BsonMediaTypeFormatter` writes it), a PUT (204) then the list shows the new values, a PUT whose id doesn't match the
+  body (the action's 400), a DELETE (200 with the entity), then the item is 404 and gone from the list.
+
+Results: **18/18 on Linux and Windows** (CI runs 42021158598 and 42026762740), the same in both runs; locally twice in a row on Linux too.
 
 ## Open problems
 

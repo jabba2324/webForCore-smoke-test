@@ -1,6 +1,6 @@
 # Opserver (MVC 5): migration notes
 
-Status: migrated (webForCore 0.8.0: all 11 probes on Linux and Windows; F47 was fixed in 0.8.0). Source: https://github.com/opserver/Opserver at `ed57f51d`, the parent of its ASP.NET Core migration
+Status: migrated (webForCore 0.9.0: 16/16 on Linux and Windows, 1 verb probe). Source: https://github.com/opserver/Opserver at `ed57f51d`, the parent of its ASP.NET Core migration
 (`a47b1fc`, #355). Licence MIT. Round 4, on webForCore 0.5.0 and webForCore-thirdparty 0.4.1.
 
 ## Assessment
@@ -44,6 +44,22 @@ The probes cover the log-in page, two pages that need a log-in (redirects) and a
   - the SQL Server dashboard, live against the compose server, with version, uptime and CPU.
 - **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** 9/10 probes on Linux and on Windows; `/login` still fails in `GetTypes()` on System.Data.SqlClient 4.9.1 (F47, #41, 0.6.0's known issue).
 - **Round 6 (webForCore 0.7.0 on .NET 10, webForCore-thirdparty 0.5.0; under webforcore-host; Linux and Windows):** 10/11 probes on Linux and Windows. Unchanged: F47 (#41).
+
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+Verb probes (16 probes; 1 with a verb): the log-in form's POST (the `alladmin` provider accepts any user name and
+password) sets the forms-authentication cookie and redirects to the form's `url`; the SQL dashboard then lists the
+compose instance and `/debug` shows the user; `/logout` signs out, and the dashboard redirects again.
+
+Opserver's other POSTs are admin actions on what it monitors: SQL Agent jobs and cached plans, Redis, HAProxy, the
+exceptions store, dashboard nodes. This setup has no Agent jobs (SQL Server on Linux runs without the Agent), no
+Redis, HAProxy or exceptions store, so they aren't probed. `/set-theme` (a POST) sets a cookie that expires on
+1 January 2026 (Opserver's own joke date), so a browser drops it at once; not probed either.
+
+Not webForCore's: `/sql/instance?node=compose` is a 500 on Linux SQL Server
+(`Views/SQL/Instance.cshtml:255`, a volume with no logical name: `v.LogicalVolumeName` is null there); not probed.
+
+No overlay change. Results: **16/16 on Linux and Windows** (CI runs 42021158598 and 42026762740), the same in both runs; locally twice on Linux.
 
 ## Open problems
 

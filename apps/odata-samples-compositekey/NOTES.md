@@ -1,7 +1,6 @@
 # OData Web API samples: composite key: migration notes
 
-Status: blocked (webForCore 0.7.0, 8/15 probes on Linux and on Windows): Microsoft.AspNet.OData 7.5.18 needs System.Data.Linq
-([F68](../../FINDINGS.md#f68)).
+Status: blocked (webForCore 0.9.0: 26/27 on Linux and Windows, 7 verb probes): F68 is fixed; the failure is [F134](../../FINDINGS.md#f134), a webForCore bug.
 
 OData/ODataSamples at `2e60476b`, MIT (`License.txt`). `WebApiClassic/ODataCompositeKeySample/ODataCompositeKeySample.AspNet`:
 an OData v4 service on Web API 2 with Microsoft.AspNet.OData 7.5.18, hosted by System.Web (`Global.asax`,
@@ -49,6 +48,29 @@ As on IIS, the error is the first request's (a 500 with that exception, checked 
 request takes it, and later requests run with no routes. `EdmLibHelpers` maps `System.Data.Linq.Binary` to
 `Edm.Binary` in its static type table, so any OData model needs LINQ to SQL's assembly, which .NET doesn't have
 (F68).
+
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+F68 is fixed in 0.9.0: the `webForCore` package brings `webForCore.Data.Linq` (LINQ to SQL, #142), so
+`ODataConventionModelBuilder.GetEdmModel()` works and the service starts, with no overlay change. All of the 0.8.0
+probes but one pass at once (14/15).
+
+- **The `$format=application/xml` probe** expected 406. That was a guess written while OData couldn't start: Web API's
+  default content negotiation (`excludeMatchOnTypeOnly: false`) falls back to the formatter that can write the type, so
+  the answer is JSON, 200, which is what .NET Framework does too. The probe now checks for the JSON.
+- **Verbs (27 probes; 7 with verbs):** a person created (POST; 201 with the entity and `Location`), read back, changed
+  with PATCH (`Delta<Person>`, 204), replaced with PUT, filtered with `$filter`/`$select` to show the new age, deleted
+  (204), then 404, and `$count` back at 3; a POST whose `Age` doesn't convert is the model-validation filter's 400;
+  PATCH and DELETE of a key that isn't there are 404. The repository is static and in memory, so each start begins
+  from its three people.
+- **New: [F134](../../FINDINGS.md#f134), webForCore bug.** The PUT is sent with `Prefer: return=representation`, for
+  which OData answers 200 with the entity (`UpdatedODataResult`). It answers 204: on a request whose path has a `(`
+  (every OData key), the application gets none of the request's non-standard headers (`Prefer`, `X-Requested-With`,
+  any `X-...`). `AspNetCoreWorkerRequest.ParseHeaders` returns early when the path has a `(` that isn't a cookieless
+  session id, before it stores them. Checked with `Application_BeginRequest` writing `ALL_RAW` (exploration only):
+  `/People` has `X-Custom` and `Prefer`, `/People(1)` doesn't, with or without webforcore-host in front.
+
+Status: blocked by F134 (the one failing probe). Results: **26/27 on Linux and Windows** (CI runs 42021158598 and 42026762740), the same in both runs: the PUT with Prefer (F134).
 
 ## Open problems
 

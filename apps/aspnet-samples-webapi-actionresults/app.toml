@@ -8,7 +8,7 @@ project = "samples/aspnet/WebApi/ActionResults/ActionResults/ActionResults.cspro
 kinds = ["webapi"]
 licence = "Apache-2.0"
 status = "migrated"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 11/11 on Linux and Windows."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 14/14 on Linux and Windows (CI runs 42021158598 and 42026762740); the API is GET only (405 probes for DELETE and POST)."
 
 # The first request compiles the site, so it gets 120 s.
 [[probes]]
@@ -26,3 +26,22 @@ contains = "Bar"
 [[probes]]
 path = "/product/99"
 status = 404
+
+# Verbs: every action is a GET (attribute routes on `Get...` methods), so other methods get Web API's own 405, and the
+# product is still there after them.
+[[probes]]
+path = "/product/2"
+method = "DELETE"
+status = 405
+contains = "does not support http method 'DELETE'"
+
+[[probes]]
+path = "/text"
+method = "POST"
+form = { text = "smoke" }
+status = 405
+contains = "does not support http method 'POST'"
+
+[[probes]]
+path = "/product/2"
+contains = "Bar"
