@@ -67,3 +67,27 @@ contains = "<title>SignalR Chat</title>"
 [[probes]]
 path = "/Scripts/jquery.signalR.js"
 contains = "ASP.NET SignalR JavaScript Library 2.4.3"
+
+# Verbs: the /cookieauth branch's log-in (a form POST its own middleware answers, signing in with Katana's cookie
+# authentication) sets .AspNet.Cookies, and the authenticated persistent connection then negotiates instead of
+# redirecting. A send with no connection token is SignalR's protocol error (400). A hub call (connect, start, then
+# POST send) needs the negotiated connection token URL-encoded in the query, which a probe can't do with a captured
+# value; it works by hand (NOTES.md).
+[[probes]]
+path = "/cookieauth/Account/Login"
+method = "POST"
+cookies = true
+form = { UserName = "smoke", Password = "smoke" }
+capture = { auth = { cookie = ".AspNet.Cookies" } }
+
+[[probes]]
+path = "/cookieauth/echo/negotiate?clientProtocol=1.5"
+cookies = true
+contains = "\"Url\":\"/cookieauth/echo\",\"ConnectionToken\":\""
+
+[[probes]]
+path = "/signalr/send?transport=longPolling&clientProtocol=1.5"
+method = "POST"
+form = { data = "{\"H\":\"demo\",\"M\":\"SetStateValue\",\"A\":[\"Smoke Co\"],\"I\":0}" }
+status = 400
+contains = "Protocol error: Missing connection token."
