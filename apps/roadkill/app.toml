@@ -8,7 +8,7 @@ project = "src/Roadkill.Web/Roadkill.Web.csproj"
 kinds = ["mvc", "webapi", "owin"]
 licence = "MS-PL"
 status = "blocked"
-notes = "Blocked on its closed-source LightSpeed ORM (AppDomain.DefineDynamicAssembly; F27): 9/10 probes on Linux and Windows on webForCore 0.8.0 (.NET 10, under webforcore-host). With webForCore-thirdparty 0.5.0's WebActivatorEx, StructureMap 4.7.1 (F25) and NLog 4.7."
+notes = "Blocked on its closed-source LightSpeed ORM (AppDomain.DefineDynamicAssembly; F27), unchanged on webForCore 0.9.0: 9/10 probes on Linux. No verb probes: every form goes through LightSpeed. With webForCore-thirdparty 0.7.0's WebActivatorEx, StructureMap 4.7.1 (F25) and NLog 4.7."
 
 # The first request compiles the site, so it gets 120 s.
 needs = ["mssql"]

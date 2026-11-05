@@ -1,6 +1,6 @@
 # Roadkill: migration notes
 
-Status: blocked (F19: `System.Web.Abstractions` 4.0 in web.config; then F20). Source:
+Status: blocked (F27: LightSpeed needs `AppDomain.DefineDynamicAssembly`; unchanged on webForCore 0.9.0). Source:
 https://github.com/roadkillwiki/roadkill at `1061add4`. Found by searching GitHub on 2026-10-31; the repo, licence
 (MS-PL), web project and its `<TargetFrameworkVersion>` were checked through the GitHub API. webForCore 0.2.0 packages.
 
@@ -92,6 +92,12 @@ place of `AssembliesFromApplicationBaseDirectory`, is the next step.
    called by `Mindscape.LightSpeed.Entity.GetInferredFieldName`. LightSpeed (Mindscape, 2012) is closed source, checked
    into the app's `lib/` as .NET Framework DLLs, and is Roadkill's data layer for every SQL database (the only other
    backend is MongoDB). It can't be rebuilt, so Roadkill stops here (F27, app/environment).
+
+### Round 0.9.0: recheck (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+Unchanged: every page still fails in LightSpeed's `ActiveSharp.PropertyMapping.OffsetUtil` (`AppDomain.DefineDynamicAssembly`,
+[F27](../../FINDINGS.md#f27), app/environment; none of 0.9.0's fixes is about it). 9/10 on Linux. No verb probes: the
+wiki's forms (log-in, page edit, search) all go through LightSpeed, so none can be reached past that.
 
 ## Open problems
 

@@ -47,3 +47,7 @@ Appended by `scripts/wfc.py`, one line per stage run.
 - 2026-11-03T12:51:00+00:00 **fetch** (windows): pass at `1061add4a727`
 - 2026-11-03T12:51:22+00:00 **build** (windows): pass
 - 2026-11-03T12:51:43+00:00 **smoke** (windows): fail (9/10 probes)
+- 2026-11-05T11:57:23+00:00 **fetch**: pass at `1061add4a727`
+- 2026-11-05T11:57:37+00:00 **build**: pass
+- 2026-11-05T11:57:37+00:00 **setup**: pass (created Roadkill)
+- 2026-11-05T11:57:48+00:00 **smoke**: fail (9/10 probes)
