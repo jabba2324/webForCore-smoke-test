@@ -8,7 +8,7 @@ project = "samples/aspnet/Katana/WebApi/WebApi.csproj"
 kinds = ["webapi", "owin"]
 licence = "Apache-2.0"
 status = "migrated"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 9/9 on Linux and Windows."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 12/12 on Linux and Windows (CI runs 42021158598 and 42026762740); the API is GET only (405 probes for POST and DELETE)."
 
 # The first request compiles the site, so it gets 120 s.
 [[probes]]
