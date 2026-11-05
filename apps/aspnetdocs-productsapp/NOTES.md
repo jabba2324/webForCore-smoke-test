@@ -34,6 +34,11 @@ product's id captured from `Location`), a `GET` of it, a `PUT` (204), the change
 `?category=Hardware`), a `DELETE` (204) and a 404 after it; a form-encoded `POST` (Web API binds it like JSON), and a
 `PUT` to a product that isn't there (404). 20 checks in all (13 probes, 7 forbidden paths), all passing on Linux and Windows (CI run 41940185337).
 
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+No change to the overlay or the probes: the verb probes above (POST as JSON and as a form, PUT, DELETE, and a PUT to
+a product that isn't there; 5 of the 20 checks) already cover everything the API does. Results: RESULTS_PLACEHOLDER
+
 ## Open problems
 
 Round 1 (webForCore 0.1.0); the webForCore bugs below are fixed in 0.2.0 (PR #16) and kept for the record.
