@@ -16,38 +16,38 @@
       ]
     },
     "build": {
-      "at": "2026-11-04T20:20:02+00:00",
+      "at": "2026-11-05T00:31:22+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/aspnetdocs-productsapp/logs/build.log",
-      "seconds": 11,
+      "seconds": 9,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.8.0"
     },
     "fetch": {
-      "at": "2026-11-04T20:19:51+00:00",
+      "at": "2026-11-05T00:31:12+00:00",
       "commit": "546ffe728556a60591b93ab4fcbd4437f71e2449",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-04T20:20:06+00:00",
+      "at": "2026-11-05T00:31:28+00:00",
       "checks": [
         {
-          "ms": 69,
+          "ms": 98,
           "ok": true,
           "path": "/api/products",
           "status": 200
         },
         {
-          "ms": 11,
+          "ms": 15,
           "ok": true,
           "path": "/api/products/2",
           "status": 200
         },
         {
-          "ms": 6,
+          "ms": 8,
           "ok": true,
           "path": "/api/products?category=Hardware",
           "status": 200
@@ -59,13 +59,72 @@
           "status": 404
         },
         {
-          "ms": 4,
+          "method": "POST",
+          "ms": 43,
+          "ok": true,
+          "path": "/api/products",
+          "status": 201
+        },
+        {
+          "ms": 5,
+          "ok": true,
+          "path": "/api/products/{product}",
+          "status": 200
+        },
+        {
+          "method": "PUT",
+          "ms": 5,
+          "ok": true,
+          "path": "/api/products/{product}",
+          "status": 204
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/api/products/{product}",
+          "status": 200
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/api/products?category=Hardware",
+          "status": 200
+        },
+        {
+          "method": "DELETE",
+          "ms": 3,
+          "ok": true,
+          "path": "/api/products/{product}",
+          "status": 204
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/api/products/{product}",
+          "status": 404
+        },
+        {
+          "method": "POST",
+          "ms": 15,
+          "ok": true,
+          "path": "/api/products",
+          "status": 201
+        },
+        {
+          "method": "PUT",
+          "ms": 3,
+          "ok": true,
+          "path": "/api/products/99",
+          "status": 404
+        },
+        {
+          "ms": 5,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
@@ -89,7 +148,7 @@
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/ProductsApp.dll",
           "status": 404
@@ -103,7 +162,7 @@
       ],
       "log": "apps/aspnetdocs-productsapp/logs/server.log",
       "status": "pass",
-      "summary": "11/11 probes"
+      "summary": "20/20 probes"
     }
   }
 }

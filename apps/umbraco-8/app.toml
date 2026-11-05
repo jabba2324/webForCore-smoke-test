@@ -6,10 +6,12 @@ repo = "https://github.com/umbraco/Umbraco-CMS"
 ref = "4fbf8020bf08dc26bf93f01b02bc39852ee36553"
 site = "src/Umbraco.Web.UI"
 project = "src/Umbraco.Web.UI/Umbraco.Web.UI.csproj"
+# The template setup makes, written by Umbraco.
+generated = ["src/Umbraco.Web.UI/Views/SmokePage.cshtml"]
 kinds = ["mvc", "webapi", "webforms", "owin", "identity", "signalr"]
 licence = "MIT"
 status = "migrated"
-notes = "Umbraco 8.18.15 on webForCore 0.8.0: builds, installs unattended on SQL Server and passes 21/21 on Linux and Windows (CI run 41920542509): Web Forms, MVC, Web API, OWIN/Identity log-in, SignalR. No content (the back office API needs an XSRF header) and no AngularJS client build. Found F93 (CSharpTest.Net.Collections) and F94 (Roslyn version)."
+notes = "Umbraco 8.18.15 on webForCore 0.8.0: builds, installs unattended on SQL Server, makes a template, document type and home page through the back office API (X-UMB-XSRF-TOKEN), and passes 28/28 on Linux and Windows (CI run 41940185337): Web Forms, MVC, Web API with POST and DELETE, OWIN/Identity log-in, SignalR, published content on the front end. No AngularJS client build. Found F93 (CSharpTest.Net.Collections) and F94 (Roslyn version)."
 needs = ["mssql"]
 
 # The unattended install's back-office user (Umbraco reads these at its first start).
@@ -20,9 +22,11 @@ UnattendedUserPassword = "Smoke_test_1234"
 
 # web.config (made from web.Template.config at build) points at an "umbraco8" database on the compose SQL Server and
 # has Umbraco.Core.RuntimeState.InstallUnattended: the first request installs the schema and the user above. Then the
-# back office's log-in (Web API, ASP.NET Identity and OWIN cookies) as Umbraco's AngularJS client posts it. Creating
-# content needs the back office's anti-forgery header (X-UMB-XSRF-TOKEN), which setup steps can't send, so the site
-# has no content (NOTES.md).
+# back office's log-in after a restart (below), as Umbraco's AngularJS client posts it (Web API, ASP.NET Identity and
+# OWIN cookies), which sets the UMB-XSRF-TOKEN cookie; the back office's API calls after it send that value in the
+# X-UMB-XSRF-TOKEN header, as the client does. With it: a template (its Razor view, written to
+# Views/SmokePage.cshtml), a document type that uses it, and a published home page of that type (Content/PostSave
+# takes the item as a multipart form's contentItem field).
 [setup]
 databases = ["umbraco8"]
 
@@ -31,20 +35,47 @@ get = "/"
 timeout = 300
 contains = "Welcome to your Umbraco installation"
 
+# Umbraco composes the back office's services when it starts, at the level it starts at: after an unattended install
+# in the same process, saving a document type fails ("Unable to resolve type: ...EditorValidatorCollection") until
+# the application restarts.
+[[setup.steps]]
+restart = true
+
 [[setup.steps]]
 post = "/umbraco/backoffice/UmbracoApi/Authentication/PostLogin"
 json = '{"username": "admin@example.com", "password": "Smoke_test_1234"}'
 contains = "\"email\":\"admin@example.com\""
+capture = { xsrf = { cookie = "UMB-XSRF-TOKEN" } }
+
+[[setup.steps]]
+post = "/umbraco/backoffice/UmbracoApi/Template/PostSave"
+headers = { X-UMB-XSRF-TOKEN = "{xsrf}" }
+json = { id = 0, name = "Smoke Page", alias = "SmokePage", content = "@inherits Umbraco.Web.Mvc.UmbracoViewPage\n@{ Layout = null; }\n<!DOCTYPE html>\n<html><head><title>@Model.Name</title></head><body><h1>Rendered by Umbraco 8: @Model.Name</h1></body></html>\n" }
+contains = "\"virtualPath\":\"/Views/SmokePage.cshtml\""
+
+[[setup.steps]]
+post = "/umbraco/backoffice/UmbracoApi/ContentType/PostSave"
+headers = { X-UMB-XSRF-TOKEN = "{xsrf}" }
+json = { id = 0, parentId = -1, alias = "smokePage", name = "Smoke Page", icon = "icon-document", thumbnail = "folder.png", description = "", allowAsRoot = true, allowedTemplates = ["SmokePage"], defaultTemplate = "SmokePage", groups = [], compositeContentTypes = [], allowedContentTypes = [], isContainer = false, isElement = false, allowCultureVariant = false }
+contains = "\"alias\":\"smokePage\""
+
+[[setup.steps]]
+post = "/umbraco/backoffice/UmbracoApi/Content/PostSave"
+headers = { X-UMB-XSRF-TOKEN = "{xsrf}" }
+multipart = { contentItem = { id = 0, parentId = -1, contentTypeAlias = "smokePage", templateAlias = "SmokePage", action = "publishNew", variants = [{ name = "Smoke Home", properties = [], save = true, publish = true }] } }
+contains = "\"text\":\"/\""
 
 # The first request compiles the site, so it gets 120 s.
-# Web Forms: with no published content, Umbraco's module serves its "no nodes" splash page for /.
+# MVC: the published home page, rendered by Umbraco's RenderMvcController with the template setup made.
 [[probes]]
 path = "/"
-contains = "Welcome to your Umbraco installation"
+contains = "Rendered by Umbraco 8: Smoke Home"
 
+# Web Forms: Umbraco's "no nodes" splash page (served for / when nothing is published), which sends a visitor to
+# the home page now that there is one.
 [[probes]]
 path = "/config/splashes/noNodes.aspx"
-contains = "doesn't contain any published content yet"
+status = 302
 
 # Installed: the installer sends you to the back office.
 [[probes]]
@@ -100,4 +131,52 @@ status = 200
 
 [[probes]]
 path = "/Views/Web.config"
+status = 404
+
+# The back office's API with verbs: the log-in (a JSON POST; its UMB-XSRF-TOKEN cookie captured), the user it logged
+# in (the header goes with every call, as Umbraco's client sends it: a call without it gets new tokens), a page saved
+# and published without the X-UMB-XSRF-TOKEN header (refused) and with it (its id and URL captured),
+# the page on the front end, then deleted (DELETE, to the recycle bin) and gone. Each smoke run makes a new page.
+[[probes]]
+path = "/umbraco/backoffice/UmbracoApi/Authentication/PostLogin"
+method = "POST"
+cookies = true
+json = { username = "admin@example.com", password = "Smoke_test_1234" }
+contains = "\"email\":\"admin@example.com\""
+capture = { xsrf = { cookie = "UMB-XSRF-TOKEN" } }
+
+[[probes]]
+path = "/umbraco/backoffice/UmbracoApi/Authentication/GetCurrentUser"
+cookies = true
+headers = { X-UMB-XSRF-TOKEN = "{xsrf}" }
+contains = "\"email\":\"admin@example.com\""
+
+[[probes]]
+path = "/umbraco/backoffice/UmbracoApi/Content/PostSave"
+method = "POST"
+cookies = true
+status = 417
+multipart = { contentItem = { id = 0, parentId = -1, contentTypeAlias = "smokePage", templateAlias = "SmokePage", action = "publishNew", variants = [{ name = "Smoke Probe Page", properties = [], save = true, publish = true }] } }
+
+[[probes]]
+path = "/umbraco/backoffice/UmbracoApi/Content/PostSave"
+method = "POST"
+cookies = true
+headers = { X-UMB-XSRF-TOKEN = "{xsrf}" }
+multipart = { contentItem = { id = 0, parentId = -1, contentTypeAlias = "smokePage", templateAlias = "SmokePage", action = "publishNew", variants = [{ name = "Smoke Probe Page", properties = [], save = true, publish = true }] } }
+contains = "\"state\":\"Published\""
+capture = { page = '\{"id":(\d+),"udi":"umb://document/', url = '"urls":\[\{[^}]*"text":"([^"]+)"' }
+
+[[probes]]
+path = "{url}"
+contains = "Rendered by Umbraco 8: Smoke Probe Page"
+
+[[probes]]
+path = "/umbraco/backoffice/UmbracoApi/Content/DeleteById?id={page}"
+method = "DELETE"
+cookies = true
+headers = { X-UMB-XSRF-TOKEN = "{xsrf}" }
+
+[[probes]]
+path = "{url}"
 status = 404

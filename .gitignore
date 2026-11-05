@@ -1,9 +1,8 @@
 /apps/*/src/
-__pycache__/
 bin_dotnet/
 obj/
 /.packages/
 # W3C logs webForCore writes next to a site (logs/<site>/W3SVC1): for a site at apps/<id>/src, apps/<id>/logs/src/
 /apps/*/logs/*/W3SVC1/
-# What a CI job uploads (scripts/wfc.py ci-result)
+# What a CI job uploads (scripts/wfc.cs ci-result)
 /ci-out/

@@ -12,32 +12,34 @@ Coverage and accurate findings matter more than a green table.
 
 ## The loop, per app
 
-Each app is a folder, `apps/<id>/` (see README.md). Nothing goes at the top level except the runner (and `scripts/convert.py`), the services, the CI
+Each app is a folder, `apps/<id>/` (see README.md). Nothing goes at the top level except the runner (`scripts/wfc.cs`, and `scripts/convert.cs`), the services, the CI
 workflow (`.github/workflows/smoke.yml`), `FINDINGS.md` and the generated `RESULTS.md`; never add a top-level project
 or solution.
 
 1. **Verify `apps/<id>/app.toml`** before anything else: the repo exists, the licence is open source, the web project
    targets .NET Framework 4.x with System.Web, and `site`/`project` are right. Pin `ref` to a commit hash. Set
    `status` to `verified`, or `rejected` with the reason in `notes`.
-2. `scripts/wfc.py fetch <id>` and `scripts/wfc.py assess <id>`. Write the assessment in `apps/<id>/NOTES.md`.
+2. `dotnet run scripts/wfc.cs -- fetch <id>` and `dotnet run scripts/wfc.cs -- assess <id>`. Write the assessment in `apps/<id>/NOTES.md`.
 3. Migrate in `apps/<id>/src/` following `docs/AGENT-MIGRATION.md`, against webForCore's release packages
-   (`PackageReference Include="webForCore" Version="0.8.0"` and the framework packages; `scripts/wfc.py packages`
+   (`PackageReference Include="webForCore" Version="0.8.0"` and the framework packages; `dotnet run scripts/wfc.cs -- packages`
    downloads them), not its source. Keep changes minimal; don't modernise the app. Record each change and its
    reason in `NOTES.md` as you go, not afterwards.
-4. `scripts/wfc.py build <id>` and `scripts/wfc.py smoke <id>` on Linux while migrating, then the CI workflow for
+4. `dotnet run scripts/wfc.cs -- build <id>` and `dotnet run scripts/wfc.cs -- smoke <id>` on Linux while migrating, then the CI workflow for
    both platforms (README.md, "CI"): every round runs on Linux and Windows, and `RESULTS.md` shows both. An app whose database needs preparing gets a `[setup]` in `app.toml`, so `setup` (and CI) can do it. Add `[[probes]]` to `app.toml` for each kind of page the
    app has (home page, an MVC action, a Web API route returning JSON, a form, a static file), with `contains` text
-   that proves the page rendered.
+   that proves the page rendered. Where the app has forms or an API, probe them with the verbs they take, too:
+   a form posted (with its anti-forgery token or view state captured from the GET before it), an API's POST, PUT and
+   DELETE (README.md, "Requests: probes and setup steps").
    Write up the smoke results in `NOTES.md`; the runner appends each run to `LOG.md` and keeps the latest logs in
    `logs/`.
-5. `scripts/wfc.py save-overlay <id>`, update `status` and `notes` in `app.toml` (`migrated` only when every probe passes on both platforms, every time, and no feature is known to be broken by webForCore; otherwise `blocked`, with the reason. Features the probes can't reach go in the notes as untested), `scripts/wfc.py report`, and
+5. `dotnet run scripts/wfc.cs -- save-overlay <id>`, update `status` and `notes` in `app.toml` (`migrated` only when every probe passes on both platforms, every time, and no feature is known to be broken by webForCore; otherwise `blocked`, with the reason. Features the probes can't reach go in the notes as untested), `dotnet run scripts/wfc.cs -- report`, and
    commit the app's folder (this repo only, one app per commit).
 
 ## Third-party libraries
 
 webForCore ships only Microsoft assemblies. Builds of third-party libraries for it are in
 [webForCore-thirdparty](https://github.com/xforcore/webForCore-thirdparty), for this test bed: an app that uses one
-of them references the package from there. `scripts/wfc.py packages` downloads its release (`THIRDPARTY_VERSION`,
+of them references the package from there. `dotnet run scripts/wfc.cs -- packages` downloads its release (`THIRDPARTY_VERSION`,
 default 0.6.0) into the same folder as webForCore's; by hand:
 
 ```bash
@@ -90,6 +92,8 @@ webForCore's CONTRIBUTING.md holds every repository in the project to the same r
   `GCHandle`s, weak-reference polling) to get an app running. If an app seems to need one, that's a finding (a
   webForCore bug or a guide gap, raised as an issue), not an overlay change. Reflection over the app's own types,
   as the app already does, is fine.
+- **The runner and scripts are C#** (.NET file-based programs: `dotnet run scripts/wfc.cs -- <command>`), like
+  every other tool in the project; Python isn't needed (from November 2026; it was Python 3.11+ before).
 - **The runner and scripts: slow, stable and simple beat fast.** Every wait has a timeout and every external call
   fails rather than hangs (git runs with a stall timeout and no credential prompt, for example). No parallelism or
   caching tricks to save time inside the runner. CI's jobs running side by side is fine: each is one app on its own

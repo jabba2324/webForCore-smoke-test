@@ -1,7 +1,7 @@
 info: WebFormsForCore.Host.WorkerPool[0]
-      Started worker 1 (process 3168) for <repo>/apps/umbraco-8/src/src/Umbraco.Web.UI/bin_dotnet/Umbraco.Web.UI.dll: the host started.
+      Started worker 1 (process 3476) for <repo>/apps/umbraco-8/src/src/Umbraco.Web.UI/bin_dotnet/Umbraco.Web.UI.dll: the host started.
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://127.0.0.1:40211
+      Now listening on: http://127.0.0.1:33083
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
@@ -9,15 +9,15 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Content root path: <repo>/apps/umbraco-8/src/src/Umbraco.Web.UI
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40211/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:33083/ - - -
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application 483429cd in process 3168 (worker 1 of webforcore-host).
+      Started application 483429cd in process 3476 (worker 1 of webforcore-host).
 warn: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
       Application 483429cd runs with the invariant culture: the process has no locale (LANG and LC_ALL unset, or C, POSIX or C.UTF-8), which can't happen on IIS, so resources chosen by culture name aren't found. Set <globalization culture="en-US" uiCulture="en-US" /> in Web.config, or give the environment a locale (LANG=en_US.UTF-8): https://github.com/xforcore/webForCore/blob/main/docs/MIGRATING.md#6-code-changes
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://unix:/tmp/webforcore-0pygh3/worker-1.sock
+      Now listening on: http://unix:/tmp/webforcore-UXFS3R/worker-1.sock
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 1 (process 3168) is serving (5.2 s after it started).
+      Worker 1 (process 3476) is serving (1.8 s after it started).
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
@@ -27,37 +27,25 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40211/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:33083/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40211/ - 200 1818 text/html;+charset=utf-8 3387.5090ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:33083/ - 200 1818 text/html;+charset=utf-8 2947.5457ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:33083/ - 200 1818 text/html;+charset=utf-8 4349.6275ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40211/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:33083/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40211/ - 200 1818 text/html;+charset=utf-8 8308.5519ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40211/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:33083/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:33083/ - 200 1818 text/html;+charset=utf-8 3.6209ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40211/ - 200 1818 text/html;+charset=utf-8 4.2262ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40211/ - 200 1818 text/html;+charset=utf-8 8.9472ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 POST http://127.0.0.1:40211/umbraco/backoffice/UmbracoApi/Authentication/PostLogin - application/json;+charset=utf-8 64
-info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
-      Proxying to http://localhost/umbraco/backoffice/UmbracoApi/Authentication/PostLogin HTTP/1.1 RequestVersionExact 
-info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 POST http://127.0.0.1:40211/umbraco/backoffice/UmbracoApi/Authentication/PostLogin - application/json;+charset=utf-8 64
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 POST http://127.0.0.1:40211/umbraco/backoffice/UmbracoApi/Authentication/PostLogin - 200 353 application/json;+charset=utf-8 838.2101ms
-info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
-      Received HTTP/1.1 response 200.
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 POST http://127.0.0.1:40211/umbraco/backoffice/UmbracoApi/Authentication/PostLogin - 200 353 application/json;+charset=utf-8 842.3542ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:33083/ - 200 1818 text/html;+charset=utf-8 7.8508ms
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
 info: WebFormsForCore.Hosting.WorkerProcess.WorkerLifetime[0]
@@ -67,4 +55,98 @@ info: Microsoft.Hosting.Lifetime[0]
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
       Application 483429cd is shutting down (HostingEnvironment).
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 1 (process 3168) exited (0).
+      Worker 1 (process 3476) exited (0).
+info: WebFormsForCore.Host.WorkerPool[0]
+      Started worker 1 (process 3570) for <repo>/apps/umbraco-8/src/src/Umbraco.Web.UI/bin_dotnet/Umbraco.Web.UI.dll: the host started.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://127.0.0.1:40747
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: <repo>/apps/umbraco-8/src/src/Umbraco.Web.UI
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application 483429cd in process 3570 (worker 1 of webforcore-host).
+warn: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Application 483429cd runs with the invariant culture: the process has no locale (LANG and LC_ALL unset, or C, POSIX or C.UTF-8), which can't happen on IIS, so resources chosen by culture name aren't found. Set <globalization culture="en-US" uiCulture="en-US" /> in Web.config, or give the environment a locale (LANG=en_US.UTF-8): https://github.com/xforcore/webForCore/blob/main/docs/MIGRATING.md#6-code-changes
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/webforcore-J4UURr/worker-1.sock
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 1 (process 3570) is serving (0.4 s after it started).
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: <repo>/apps/umbraco-8/src/src/Umbraco.Web.UI
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:40747/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:40747/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:40747/ - 200 1818 text/html;+charset=utf-8 1942.0091ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:40747/ - 200 1818 text/html;+charset=utf-8 2010.1698ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:40747/umbraco/backoffice/UmbracoApi/Authentication/PostLogin - application/json;+charset=utf-8 64
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/umbraco/backoffice/UmbracoApi/Authentication/PostLogin HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:40747/umbraco/backoffice/UmbracoApi/Authentication/PostLogin - application/json;+charset=utf-8 64
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:40747/umbraco/backoffice/UmbracoApi/Authentication/PostLogin - 200 353 application/json;+charset=utf-8 885.6736ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:40747/umbraco/backoffice/UmbracoApi/Authentication/PostLogin - 200 353 application/json;+charset=utf-8 890.9409ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:40747/umbraco/backoffice/UmbracoApi/Template/PostSave - application/json;+charset=utf-8 252
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/umbraco/backoffice/UmbracoApi/Template/PostSave HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:40747/umbraco/backoffice/UmbracoApi/Template/PostSave - application/json;+charset=utf-8 252
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:40747/umbraco/backoffice/UmbracoApi/Template/PostSave - 200 436 application/json;+charset=utf-8 91.9013ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:40747/umbraco/backoffice/UmbracoApi/Template/PostSave - 200 436 application/json;+charset=utf-8 94.0971ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:40747/umbraco/backoffice/UmbracoApi/ContentType/PostSave - application/json;+charset=utf-8 339
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/umbraco/backoffice/UmbracoApi/ContentType/PostSave HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:40747/umbraco/backoffice/UmbracoApi/ContentType/PostSave - application/json;+charset=utf-8 339
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:40747/umbraco/backoffice/UmbracoApi/ContentType/PostSave - 200 2344 application/json;+charset=utf-8 323.5484ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:40747/umbraco/backoffice/UmbracoApi/ContentType/PostSave - 200 2344 application/json;+charset=utf-8 324.3495ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:40747/umbraco/backoffice/UmbracoApi/Content/PostSave - multipart/form-data;+boundary=webForCore-smoke-test-boundary 307
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/umbraco/backoffice/UmbracoApi/Content/PostSave HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:40747/umbraco/backoffice/UmbracoApi/Content/PostSave - multipart/form-data;+boundary=webForCore-smoke-test-boundary 307
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:40747/umbraco/backoffice/UmbracoApi/Content/PostSave - 200 2015 application/json;+charset=utf-8 946.6618ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:40747/umbraco/backoffice/UmbracoApi/Content/PostSave - 200 2015 application/json;+charset=utf-8 947.5499ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: WebFormsForCore.Hosting.WorkerProcess.WorkerLifetime[0]
+      Worker 1: the host closed its connection: stopping.
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Application 483429cd is shutting down (HostingEnvironment).
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 1 (process 3570) exited (0).

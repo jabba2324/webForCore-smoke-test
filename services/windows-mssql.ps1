@@ -1,6 +1,6 @@
 # services/compose.yml's SQL Server, on Windows: SQL Server Express with sa / Smoke_test_1234 (test-only) on
 # 127.0.0.1:14330, where the overlays' connection strings look for it. For a throwaway machine such as a CI runner,
-# where the compose file's Linux containers don't run. Also installs sqlcmd, which wfc.py's setup uses.
+# where the compose file's Linux containers don't run. Also installs sqlcmd, which wfc.cs's setup uses.
 $ErrorActionPreference = 'Stop'
 $password = 'Smoke_test_1234'
 
