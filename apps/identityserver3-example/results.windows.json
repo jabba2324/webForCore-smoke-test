@@ -2,27 +2,27 @@
   "id": "identityserver3-example",
   "stages": {
     "build": {
-      "at": "2026-11-05T11:16:08+00:00",
+      "at": "2026-11-05T12:34:38+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\identityserver3-example\\logs.windows\\build.log",
-      "seconds": 49,
+      "seconds": 30,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T11:15:18+00:00",
+      "at": "2026-11-05T12:34:07+00:00",
       "commit": "4c8103344e5d42a9ccd87f6f57921f3b1e5a4ce1",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-05T11:16:19+00:00",
+      "at": "2026-11-05T12:34:44+00:00",
       "checks": [
         {
           "expected_text": "\"authorization_endpoint\":\"",
-          "ms": 38,
+          "ms": 37,
           "ok": false,
           "path": "/core/.well-known/openid-configuration",
           "stack": [
@@ -57,7 +57,7 @@
         },
         {
           "expected_text": "\"kty\":\"RSA\"",
-          "ms": 31,
+          "ms": 33,
           "ok": false,
           "path": "/core/.well-known/jwks",
           "stack": [
@@ -91,9 +91,45 @@
           "title": "Could not load file or assembly 'System.IdentityModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. The system cannot find the file specified."
         },
         {
-          "ms": 25,
+          "ms": 26,
           "ok": false,
           "path": "/core/connect/authorize?client_id=implicitclient&response_type=id_token&scope=openid&redirect_uri=https%3A%2F%2Flocalhost%3A44304%2Faccount%2FsignInCallback&nonce=n1",
+          "stack": [
+            "[FileNotFoundException: Could not load file or assembly 'System.IdentityModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. The system cannot find the file specified.]",
+            "[TargetInvocationException: Exception has been thrown by the target of an invocation.]",
+            "   at Owin.MapExtensions.Map(IAppBuilder app, PathString pathMatch, Action`1 configuration)",
+            "   at Owin.MapExtensions.Map(IAppBuilder app, String pathMatch, Action`1 configuration)",
+            "   at ScottBrady91.IdentityServer3.Example.Startup.Configuration(IAppBuilder app) in $WFC_CHECKOUTS\\identityserver3-example\\src\\ScottBrady91.IdentityServer3.Example\\Startup.cs:line 15",
+            "   at InvokeStub_Startup.Configuration(Object, Span`1)",
+            "   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)",
+            "[TargetInvocationException]: Exception has been thrown by the target of an invocation.",
+            "   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)",
+            "   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)",
+            "   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)",
+            "   at Owin.Loader.DefaultLoader.<>c__DisplayClass19_1.b__0(IAppBuilder builder)",
+            "   at Owin.Loader.DefaultLoader.<>c__DisplayClass9_0.b__0(IAppBuilder builder)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinHttpModule.<>c__DisplayClass5_0.b__0(IAppBuilder builder)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinAppContext.Initialize(Action`1 startup)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinBuilder.Build(Action`1 startup)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinHttpModule.InitializeBlueprint()",
+            "   at System.Threading.LazyInitializer.EnsureInitializedCore[T](T& target, Boolean& initialized, Object& syncLock, Func`1 valueFactory)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinHttpModule.Init(HttpApplication context)",
+            "   at System.Web.HttpApplication.InitModulesCommon()",
+            "   at System.Web.HttpApplication.InitModules()",
+            "   at System.Web.HttpApplication.InitInternal(HttpContext context, HttpApplicationState state, MethodInfo[] handlers)",
+            "   at System.Web.HttpApplicationFactory.GetNormalApplicationInstance(HttpContext context)",
+            "   at System.Web.HttpApplicationFactory.GetApplicationInstance(HttpContext context)",
+            "   at System.Web.HttpRuntime.ProcessRequestInternal(HttpWorkerRequest wr)"
+          ],
+          "status": 500,
+          "title": "Could not load file or assembly 'System.IdentityModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. The system cannot find the file specified."
+        },
+        {
+          "expected_text": "\"error\":\"invalid_client\"",
+          "method": "POST",
+          "ms": 31,
+          "ok": false,
+          "path": "/core/connect/token",
           "stack": [
             "[FileNotFoundException: Could not load file or assembly 'System.IdentityModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'. The system cannot find the file specified.]",
             "[TargetInvocationException: Exception has been thrown by the target of an invocation.]",
@@ -131,37 +167,37 @@
           "status": 404
         },
         {
-          "ms": 6,
+          "ms": 5,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 6,
+          "ms": 4,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 5,
+          "ms": 4,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 5,
+          "ms": 4,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 5,
+          "ms": 4,
           "ok": true,
           "path": "/bin_dotnet/ScottBrady91.IdentityServer3.Example.dll",
           "status": 404
         },
         {
-          "ms": 5,
+          "ms": 4,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404
@@ -169,7 +205,7 @@
       ],
       "log": "apps\\identityserver3-example\\logs.windows\\server.log",
       "status": "fail",
-      "summary": "7/10 probes"
+      "summary": "7/11 probes"
     }
   }
 }

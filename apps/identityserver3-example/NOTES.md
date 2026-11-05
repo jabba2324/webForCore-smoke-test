@@ -1,7 +1,6 @@
 # IdentityServer3 example: migration notes
 
-Status: blocked (webForCore 0.7.0, 7/10 probes on Linux and on Windows): IdentityServer3 2.5.0 needs .NET Framework's
-`System.IdentityModel` (Windows Identity Foundation), which .NET doesn't have ([F69](../../FINDINGS.md#f69)).
+Status: blocked (webForCore 0.9.0, 7/11 probes on Linux and Windows): IdentityServer3 2.5.0 needs .NET Framework's `System.IdentityModel` (WIF), which .NET doesn't have ([F69](../../FINDINGS.md#f69)).
 
 scottbrady91/IdentityServer3-Example at `4c810334`, MIT (`LICENSE`). `src/ScottBrady91.IdentityServer3.Example`: an
 OpenID Connect provider, IdentityServer3 2.5.0 under `/core` on Katana 3.0.1 with `Microsoft.Owin.Host.SystemWeb`
@@ -63,7 +62,7 @@ Unchanged: `UseIdentityServer` still needs `System.IdentityModel` (WIF), which .
 by documenting it in webForCore's NAMESPACES.md; the app can't run without replacing IdentityServer3. One verb probe
 added: the token endpoint (a form POST) with a client the example doesn't have should be OAuth's `invalid_client`
 (400); like every `/core` URL, it's the WIF 500 for now. The log-in and consent forms need a sign-in message from the
-authorize redirect, so they wait until the endpoints answer. Results: RESULTS_PLACEHOLDER
+authorize redirect, so they wait until the endpoints answer. Results: **7/11 on Linux and Windows** (CI runs 42021158598 and 42026762740): the 7 forbidden-path checks pass, every `/core` probe is the WIF 500.
 
 ## Open problems
 
