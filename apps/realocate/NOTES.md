@@ -1,6 +1,6 @@
 # ReaLocate: migration notes
 
-Status: migrated (webForCore 0.4.0, all probes pass).
+Status: migrated (webForCore 0.9.0, 29/29 probes on Linux and Windows).
 `0c2a3bd7`. Found by searching GitHub on 2026-10-31; the repo, licence (MIT), web project and its
 `<TargetFrameworkVersion>` were checked through the GitHub API. webForCore 0.2.0 packages.
 
@@ -63,6 +63,22 @@ the same on .NET Framework. The PDF invoices (Rotativa, which runs `wkhtmltopdf.
 ### Round 3: webForCore 0.4.0
 
 All 13 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0, and its 4 `ExcludeAssets` references for transitive Microsoft packages were removed: webForCore's packages override them since 0.3.0 (webForCore#23).
+
+### Round 0.9.0: verbs (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+- **`[setup]` (new):** registers two regular users through the app's Register form (multipart, as the page sends it;
+  the second while the first is signed in, since log-off goes to `/`, which fails on an empty database, as above):
+  `smokeuser`, who logs in, and `smokeedit`, whom the administrator edits.
+- **Probes (15 added, 7 of them POSTs):** `smokeuser`'s log-in with a wrong password ("Invalid login attempt.") and the
+  right one, `/Manage` and the real-estate form (`[Authorize]`), log-off (POST) and `/Manage` redirecting again. Then
+  the seeded administrator (`admin@gmail.com`) and the administration area's Kendo grid, whose AJAX reads and updates
+  are form posts: `Users_Read` (JSON with both users), `Users_Update` renaming `smokeedit`, a filtered read showing the
+  new name, and the rename back. SignalR's negotiate for the chat hub.
+- **Not probed:** creating a real estate or an agency calls Google's geocoding API (`GetRealAddress`), and `/` fails on an
+  empty database (above). The grids' `Users_Update` writes the whole user from the five posted fields, password hash
+  included, which is why the edited user is a separate one; `Users_Destroy` never calls `SaveChanges` (the app's), so
+  nothing is deleted.
+- **Results:** 29/29 on Linux (14 before), twice in a row, from a new database.
 
 ## Open problems
 
