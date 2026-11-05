@@ -86,27 +86,27 @@
       ]
     },
     "build": {
-      "at": "2026-11-04T22:24:18+00:00",
+      "at": "2026-11-05T11:19:52+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/orchard-1.10/logs/build.log",
-      "seconds": 158,
+      "seconds": 149,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.8.0"
+      "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-04T22:21:39+00:00",
+      "at": "2026-11-05T11:17:22+00:00",
       "commit": "78ee4efb4f37b3ce75abd65692f64a7ea17e72e6",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-04T22:27:29+00:00",
+      "at": "2026-11-05T11:23:03+00:00",
       "created": [
         "orchard110"
       ],
-      "date": "2026-11-04",
+      "date": "2026-11-05",
       "status": "fail",
       "steps": [
         {
@@ -118,23 +118,25 @@
           "may_fail": true,
           "ok": false,
           "status": 503,
-          "step": "/"
+          "step": "/",
+          "title": "This tenant is currently initializing. Please try again later."
         },
         {
           "attempts": 37,
           "ok": false,
           "status": 503,
-          "step": "/"
+          "step": "/",
+          "title": "This tenant is currently initializing. Please try again later."
         }
       ],
       "summary": "1/3 steps, 1 allowed to fail"
     },
     "smoke": {
-      "at": "2026-11-04T22:29:32+00:00",
+      "at": "2026-11-05T11:25:05+00:00",
       "checks": [
         {
           "expected_text": "Welcome to Orchard!",
-          "ms": 2,
+          "ms": 5,
           "ok": false,
           "path": "/",
           "status": 503,
@@ -165,7 +167,7 @@
         },
         {
           "expected_text": "html, body, div, span",
-          "ms": 6,
+          "ms": 5,
           "ok": false,
           "path": "/Themes/SafeMode/Styles/site.css",
           "status": 503,
@@ -203,7 +205,7 @@
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
