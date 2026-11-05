@@ -1,6 +1,6 @@
 # ASP.NET samples: Web API WebFormSample: migration notes
 
-Status: migrated (webForCore 0.4.0, all probes pass).
+Status: migrated (webForCore 0.9.0: 29/29 on Linux and Windows, 12 verb probes).
 (`LICENSE.txt`). Split out of the `aspnet-samples` entry. webForCore 0.1.0 packages (0.2.0 from round 2).
 
 ## Assessment
@@ -52,7 +52,7 @@ profile), so:
     form POST with `X-Requested-With` answered with JSON) refuses the old password and accepts the new; the password
     is changed back, and the AJAX log-in accepts it. The run ends where setup left the database.
 
-Run twice locally on a fresh database and once more on the same one: 29/29 each time. Results: RESULTS_PLACEHOLDER
+Run twice locally on a fresh database and once more on the same one: 29/29 each time. Results: **29/29 on Linux and Windows** (CI runs 42021158598 and 42026762740), the same in both runs.
 
 ## Open problems
 

@@ -8,7 +8,7 @@ project = "samples/aspnet/WebApi/WebFormSample/WebForm/WebForm.csproj"
 kinds = ["webapi", "webforms"]
 licence = "Apache-2.0"
 status = "migrated"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 8/8 on Linux and Windows."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 29/29 on Linux and Windows (CI runs 42021158598 and 42026762740): Web API verbs, register/log-in/change-password postbacks and the AJAX log-in on Universal Providers."
 needs = ["mssql"]
 
 # Web.config's DefaultConnection (Universal Providers: membership, roles, profile) points at the compose SQL Server
