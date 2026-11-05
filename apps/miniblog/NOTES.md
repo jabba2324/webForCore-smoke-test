@@ -1,6 +1,6 @@
 # MiniBlog: migration notes
 
-Status: migrated (webForCore 0.4.0, all probes pass).
+Status: migrated (webForCore 0.9.0: 44/44 on Linux and Windows).
 (master, 2022; still the Web Pages version). Apache-2.0. webForCore 0.1.0 packages (0.2.0 from round 2).
 
 ## Assessment
@@ -78,6 +78,8 @@ All 18 probes pass on the released 0.2.0 packages (the overlay's `PackageReferen
 All 18 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0.
 
 ### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+**CI (Linux and Windows): 44/44 on both, in CI runs 42026922513 and (second).**
 
 44/44 on Linux, twice in a row (the posts the probes make are deleted again). 25 probes more, for everything MiniBlog
 takes other than GET, as its pages' scripts send it:
