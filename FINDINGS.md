@@ -183,8 +183,8 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F131](#f131) | `Thread.ResetAbort()` after `catch (ThreadAbortException)` throws `PlatformNotSupportedException`; the guide doesn't say to remove it | guide gap | dnn-platform-9 | [#143](https://github.com/xforcore/webForCore/issues/143) |
 | [F132](#f132) | An application's design-time classes (`System.Web.UI.Design.ExpressionEditor`, System.Design) don't compile | guide gap | dnn-platform-9 | [#144](https://github.com/xforcore/webForCore/issues/144) |
 | [F133](#f133) | Linux: DNN builds every physical path with `\` (`ApplicationMapPath` is `BaseDirectory.Replace("/", "\\")`), and QuickIO.NET is Win32 | app/environment | dnn-platform-9 | – |
-| [F134](#f134) | A request whose path has a `(` (an OData key) reaches the app without its non-standard headers (`Prefer`, `X-Requested-With`, `X-...`) | webForCore bug | odata-samples-compositekey | (to raise) |
-| [F135](#f135) | An assembly without a strong name isn't loaded for a reference to a higher version (.NET Framework ignores the version): Nancy.SimpleAuthentication -> Nancy 0.21.1 with 0.20 deployed | webForCore bug | jabbr | (to raise) |
+| [F134](#f134) | A request whose path has a `(` (an OData key) reaches the app without its non-standard headers (`Prefer`, `X-Requested-With`, `X-...`) | webForCore bug | odata-samples-compositekey | [#170](https://github.com/xforcore/webForCore/issues/170) |
+| [F135](#f135) | An assembly without a strong name isn't loaded for a reference to a higher version (.NET Framework ignores the version): Nancy.SimpleAuthentication -> Nancy 0.21.1 with 0.20 deployed | webForCore bug | jabbr | [#171](https://github.com/xforcore/webForCore/issues/171) |
 ---
 
 ## F1
