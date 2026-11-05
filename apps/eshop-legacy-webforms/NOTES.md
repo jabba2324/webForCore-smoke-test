@@ -68,6 +68,16 @@ All 14 probes pass on the released 0.2.0 packages (the overlay's `PackageReferen
 
 All 14 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0.
 
+### Probes with verbs (C# runner, November 2026)
+
+Eleven probes more, on webForCore 0.8.0: Create, Edit and Delete as Web Forms postbacks, as a browser makes them. Each
+page's `GET` gives its `__VIEWSTATE`, `__VIEWSTATEGENERATOR` and `__EVENTVALIDATION`, captured and posted back with the
+fields and the clicked button's name; each post answers 302 (`Response.Redirect("~")`). Between them, the list (the
+new item's id captured from its Edit link), Details, and the list without the item after the delete. The mock
+service sets an item's brand and type only when it lists the catalog (`ComposeCatalogItems`; its `UpdateCatalogItem`
+replaces the item without them), so Details after the edit comes after a list, as it would for a user. 26 checks in
+all, all passing on Linux and Windows (CI run 41940185337).
+
 ## Open problems
 
 Round 1 (webForCore 0.1.0); the webForCore bugs below are fixed in 0.2.0 (PR #16) and kept for the record.
