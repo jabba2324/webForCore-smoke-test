@@ -2,30 +2,25 @@
   "id": "yafnet-2",
   "stages": {
     "build": {
-      "at": "2026-11-05T11:23:11+00:00",
-      "error_count": 6,
+      "at": "2026-11-05T12:39:38+00:00",
+      "error_count": 1,
       "errors": [
-        "error NU1605:  YAF.Lucene.Net -> Microsoft.Extensions.Configuration.Abstractions (>= 5.0.0) ",
-        "error NU1605:  YAF.Lucene.Net -> Microsoft.Extensions.Primitives (>= 5.0.1) ",
-        "error NU1605:  YAF.Lucene.Net -> webForCore 0.9.0 -> webForCore.Web.Extensions 0.9.0 -> CoreWCF.Http 1.9.1 -> Microsoft.AspNetCore.Hosting.Server.Abstractions 2.3.10 -> Microsoft.Extensions.Configuration.Abstractions (>= 8.0.0)  ",
-        "error NU1605:  YAF.Lucene.Net -> webForCore 0.9.0 -> webForCore.Web.Extensions 0.9.0 -> CoreWCF.Http 1.9.1 -> Microsoft.Extensions.Primitives (>= 8.0.0)  ",
-        "error NU1605: Warning As Error: Detected package downgrade: Microsoft.Extensions.Configuration.Abstractions from 8.0.0 to 5.0.0. Reference the package directly from the project to select a different version.  ",
-        "error NU1605: Warning As Error: Detected package downgrade: Microsoft.Extensions.Primitives from 8.0.0 to 5.0.1. Reference the package directly from the project to select a different version.  "
+        "error CS0246: The type or namespace name 'NetStandardPclExport' could not be found (are you missing a using directive or an assembly reference?) "
       ],
       "log": "apps\\yafnet-2\\logs.windows\\build.log",
-      "seconds": 36,
+      "seconds": 53,
       "status": "fail",
-      "summary": "6 distinct errors",
+      "summary": "1 distinct errors",
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T11:22:34+00:00",
+      "at": "2026-11-05T12:38:44+00:00",
       "commit": "7435be389709e493854b09cdc622115e537544b8",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-05T11:23:12+00:00",
+      "at": "2026-11-05T12:39:39+00:00",
       "status": "skip",
       "summary": "not built ($WFC_CHECKOUTS/yafnet-2/yafsrc/YetAnotherForum.NET/bin_dotnet/YAF.dll missing)"
     }
