@@ -7,11 +7,267 @@ site = "CMSAdmin"
 project = "CMSAdmin/CMSAdminMVC.csproj"
 kinds = ["mvc", "owin", "identity", "webforms"]
 licence = "MIT"
-status = "blocked"
-notes = "Blocked: its data layer is LINQ to SQL (CarrotCMS.dbml and the plugins' .dbml files). webForCore recommends EF 6; that rewrite is the app's, not pursued here."
+status = "migrating"
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): 39/39 on Linux, with categories and a blog post made, edited and deleted through the admin's MVC forms. LINQ to SQL (its data layer) runs on 0.9.0. Needs SQL Server. Windows in CI."
+
+needs = ["mssql"]
+# The class libraries build into their own bin/; the app writes a trace of its routing to carrot_errors.txt.
+generated = ["*/bin/**", "CMSAdmin/carrot_errors.txt"]
+
+# An empty database. CarrotCake creates its tables, views and procedures when /c3-admin/DatabaseSetup is first asked
+# for (CMSDBUpdater), then asks for the first user (an MVC form with its anti-forgery token), who logs in and creates
+# the site (SiteInfo, with a home and an index page; time zone UTC, which both platforms know).
+[setup]
+databases = ["CarrotCakeMVC"]
+
+[[setup.steps]]
+get = "/c3-admin/DatabaseSetup"
+contains = "Database up-to-date"
+
+[[setup.steps]]
+get = "/c3-admin/CreateFirstAdmin"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[setup.steps]]
+post = "/c3-admin/CreateFirstAdmin"
+fields = { __RequestVerificationToken = "{token}", UserName = "smokeadmin", Email = "admin@example.com", Password = "Smoke_test_1234", ConfirmPassword = "Smoke_test_1234", btnCreate = "Create User" }
+contains = "cmdLogon"
+
+[[setup.steps]]
+get = "/c3-admin/Login"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[setup.steps]]
+post = "/c3-admin/Login"
+fields = { __RequestVerificationToken = "{token}", UserName = "smokeadmin", Password = "Smoke_test_1234", cmdLogon = "Logon", ReturnUrl = "/c3-admin/" }
+contains = "Create Site"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"', site = 'name="Site.SiteID" type="hidden" value="([^"]+)"' }
+
+[[setup.steps]]
+post = "/c3-admin/SiteInfo"
+fields = { __RequestVerificationToken = "{token}", "Site.SiteID" = "{site}", "Site.SiteName" = "Smoke Test Site", "Site.SiteTagline" = "A probe's site", "Site.SiteTitlebarPattern" = "[[CARROT_SITE_NAME]] - [[CARROT_PAGE_TITLEBAR]]", "Site.TimeZoneIdentifier" = "UTC", "Site.MainURL" = "http://127.0.0.1", "Site.BlockIndex" = "true", "Site.Blog_FolderPath" = "archive", "Site.Blog_CategoryPath" = "category", "Site.Blog_TagPath" = "tag", "Site.Blog_DatePath" = "date", "Site.Blog_EditorPath" = "author", "Site.Blog_DatePattern" = "yyyy/MM/dd", CreateHomePage = "true", CreateIndexPage = "true", btnSave = "Create" }
 
 # The first request compiles the site, so it gets 120 s.
-# [[probes]]
-# path = "/"
-# status = 200
-# contains = ""
+[[probes]]
+path = "/"
+contains = "Smoke Test Site - Home"
+
+[[probes]]
+path = "/index"
+contains = "Smoke Test Site"
+
+[[probes]]
+path = "/rss.ashx"
+contains = "<rss"
+
+# Its embedded resources (CSS, scripts) through an .ashx handler.
+[[probes]]
+path = "/carrotwarewebresource.ashx?r=Q2Fycm90d2FyZS5XZWIuVUkuQ29tcG9uZW50cy5qcXVlcnliYXNpYy5qcXVlcnktdWktbGlnaHRncmVlbi5jc3M6Q2Fycm90d2FyZS5XZWIuVUkuQ29tcG9uZW50cy5kbGw="
+contains = "ui-"
+
+[[probes]]
+path = "/c3-admin/Login"
+contains = "cmdLogon"
+
+# The admin area sends anonymous users to its log-in.
+[[probes]]
+path = "/c3-admin/"
+status = 302
+
+[[probes]]
+path = "/Assets/Admin/skins/logon.classic.min.css"
+contains = "{"
+
+# Verbs: MVC forms, each with the anti-forgery token of its GET (one cookie jar). The admin logs in (a wrong password
+# first); makes a category, renames it and deletes it; writes a blog post (BlogPostAddEdit: the dates in ISO form, which
+# every culture parses; the file name the editor's script would fill in), shows it, edits it, finds it with the site's
+# search, deletes it (DeleteContentPage), and logs off (a POST).
+[[probes]]
+path = "/c3-admin/Login"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/c3-admin/Login"
+method = "POST"
+cookies = true
+contains = "validation-summary-errors"
+form = { __RequestVerificationToken = "{token}", UserName = "smokeadmin", Password = "wrong", cmdLogon = "Logon", ReturnUrl = "/c3-admin/" }
+
+[[probes]]
+path = "/c3-admin/Login"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/c3-admin/Login"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", UserName = "smokeadmin", Password = "Smoke_test_1234", cmdLogon = "Logon", ReturnUrl = "/c3-admin/" }
+
+[[probes]]
+path = "/c3-admin/CategoryAddEdit"
+cookies = true
+contains = "CategoryText"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/c3-admin/CategoryAddEdit"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", CategoryText = "Smoke Probe Category", CategorySlug = "smoke-probe-category", IsPublic = "true", ContentCategoryID = "00000000-0000-0000-0000-000000000000", btnSave = "Save" }
+capture = { category = { header = "Location", regex = "/c3-admin/CategoryAddEdit/([0-9a-f-]{36})$" } }
+
+[[probes]]
+path = "/c3-admin/CategoryAddEdit/{category}"
+cookies = true
+contains = "value=\"Smoke Probe Category\""
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/c3-admin/CategoryAddEdit/{category}"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", CategoryText = "Smoke Probe Category II", CategorySlug = "smoke-probe-category", IsPublic = "true", ContentCategoryID = "{category}", btnSave = "Save" }
+
+[[probes]]
+path = "/c3-admin/CategoryIndex"
+cookies = true
+contains = "Smoke Probe Category II"
+
+[[probes]]
+path = "/c3-admin/CategoryAddEdit/{category}"
+cookies = true
+contains = "btnDelete"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/c3-admin/CategoryDelete"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", ContentCategoryID = "{category}", btnDelete = "Delete" }
+
+[[probes]]
+path = "/c3-admin/CategoryIndex"
+cookies = true
+contains = "CategoryAddEdit"
+absent = "Smoke Probe Category"
+
+[[probes]]
+path = "/c3-admin/BlogPostAddEdit"
+cookies = true
+contains = "ContentPage.PageText"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"', site = 'name="ContentPage.SiteID" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/c3-admin/BlogPostAddEdit"
+method = "POST"
+cookies = true
+status = 302
+capture = { post = { header = "Location", regex = "/c3-admin/BlogPostAddEdit/([0-9a-f-]{36})" } }
+[probes.form]
+__RequestVerificationToken = "{token}"
+"ContentPage.Root_ContentID" = "00000000-0000-0000-0000-000000000000"
+"ContentPage.PageText" = "<p>Written by a probe</p>"
+"ContentPage.EditDate" = "2026-01-02 03:04"
+"ContentPage.CreateDate" = "2026-01-02 03:04"
+"ContentPage.GoLiveDate" = "2026-01-02 03:04"
+"ContentPage.RetireDate" = "2226-01-02 03:04"
+"ContentPage.TitleBar" = "Smoke Probe Post"
+"ContentPage.FileName" = "/2026/01/02/smoke-probe-post.aspx"
+"ContentPage.PageSlug" = "smoke-probe-post"
+"ContentPage.NavMenuText" = "Smoke Probe Post"
+"ContentPage.PageHead" = "Smoke Probe Post"
+"ContentPage.PageActive" = "true"
+"ContentPage.BlockIndex" = "false"
+"ContentPage.ContentType" = "BlogEntry"
+"ContentPage.SiteID" = "{site}"
+"ContentPage.TemplateFile" = "~/views/cmscontent/plainpage/plainpageview.cshtml"
+Mode = "html"
+VisitPage = "False"
+btnSave = "Save"
+
+[[probes]]
+path = "/2026/01/02/smoke-probe-post"
+contains = "Written by a probe"
+
+[[probes]]
+path = "/c3-admin/BlogPostAddEdit/{post}?mode=html"
+cookies = true
+contains = "Written by a probe"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/c3-admin/BlogPostAddEdit/{post}?mode=html"
+method = "POST"
+cookies = true
+status = 302
+[probes.form]
+__RequestVerificationToken = "{token}"
+"ContentPage.Root_ContentID" = "{post}"
+"ContentPage.PageText" = "<p>Edited by a probe</p>"
+"ContentPage.EditDate" = "2026-01-02 03:04"
+"ContentPage.CreateDate" = "2026-01-02 03:04"
+"ContentPage.GoLiveDate" = "2026-01-02 03:04"
+"ContentPage.RetireDate" = "2226-01-02 03:04"
+"ContentPage.TitleBar" = "Smoke Probe Post"
+"ContentPage.FileName" = "/2026/01/02/smoke-probe-post.aspx"
+"ContentPage.PageSlug" = "smoke-probe-post"
+"ContentPage.NavMenuText" = "Smoke Probe Post"
+"ContentPage.PageHead" = "Smoke Probe Post"
+"ContentPage.PageActive" = "true"
+"ContentPage.BlockIndex" = "false"
+"ContentPage.ContentType" = "BlogEntry"
+"ContentPage.SiteID" = "{site}"
+"ContentPage.TemplateFile" = "~/views/cmscontent/plainpage/plainpageview.cshtml"
+Mode = "html"
+VisitPage = "False"
+btnSave = "Save"
+
+[[probes]]
+path = "/2026/01/02/smoke-probe-post"
+contains = "Edited by a probe"
+
+[[probes]]
+path = "/archive/search?query=probe"
+contains = "Smoke Probe Post"
+
+[[probes]]
+path = "/c3-admin/BlogPostAddEdit/{post}?mode=html"
+cookies = true
+contains = "btnDelete"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/c3-admin/DeleteContentPage"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", "ContentPage.Root_ContentID" = "{post}", "ContentPage.ContentType" = "BlogEntry", "ContentPage.FileName" = "/2026/01/02/smoke-probe-post", "ContentPage.PageSlug" = "smoke-probe-post", btnDelete = "Delete" }
+
+[[probes]]
+path = "/c3-admin/BlogPostIndex"
+cookies = true
+contains = "BlogPostAddEdit"
+absent = "Smoke Probe Post"
+
+[[probes]]
+path = "/c3-admin/SiteInfo"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/c3-admin/LogOff"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", btnLogout = "Logout" }
+
+[[probes]]
+path = "/c3-admin/"
+cookies = true
+status = 302

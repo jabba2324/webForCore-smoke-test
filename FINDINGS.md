@@ -186,6 +186,9 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F154](#f154) | A library's relative paths resolve against `BaseDirectory` (`bin_dotnet/`): log4net writes its log into `bin_dotnet`, and every log line restarts the application | guide gap | mojoportal | to raise |
 | [F155](#f155) | Web Pages 1 sites meet Razor 3's stricter parser: `@string.Join(...)` in a code block is a parser error | guide gap | rabbit-webpages | to raise |
 | [F156](#f156) | BlogEngine asks for a restart by touching `PhysicalApplicationPath + "\\web.config"`: on Linux the path doesn't exist | app/environment | blogengine | – |
+| [F157](#f157) | LINQ to SQL's generated SQL (`GetCommand().CommandText`) has the platform's newline: code that searches it for `\r\n` fails on Linux | guide gap | carrotcake-cms-mvc | to raise |
+| [F158](#f158) | `ServicePointManager.SecurityProtocol` with `SecurityProtocolType.Ssl3` throws `NotSupportedException` on .NET | guide gap | carrotcake-cms-mvc | to raise |
+| [F159](#f159) | `AppDomain.CurrentDomain.RelativeSearchPath` is null on .NET (the application's `bin` on IIS) | guide gap | carrotcake-cms-mvc | to raise |
 ---
 
 ## F1
@@ -2412,3 +2415,47 @@ Linux.
   enable or disable extensions.
 - **Fix in the app (not made):** `Path.Combine(HttpRuntime.AppDomainAppPath, "Web.Config")`, or
   `HttpRuntime.UnloadAppDomain()`, which the code has commented out.
+
+## F157
+
+**LINQ to SQL's generated SQL has the platform's newline, so code that parses it for `\r\n` fails on Linux.** Guide
+gap. Found on 0.9.0, on Linux.
+
+- **Apps:** carrotcake-cms-mvc. `CarrotCMSData/LinqHelper.cs` (a batch delete/update helper of the kind several
+  LINQ to SQL apps carry) takes `context.GetCommand(query).CommandText` and splices it:
+  `selectText.Substring(selectText.IndexOf("\r\nFROM "))`.
+- **Error:** `ArgumentOutOfRangeException: startIndex ('-1') must be a non-negative value` in
+  `LinqHelper.GetJoinQuery`, from `CMSConfigHelper.CleanUpSerialData`, which the admin's home page runs after every
+  log-in (500). On Windows the SQL has `\r\n` and it works.
+- **Cause:** referencesource's `SqlFormatter.NewLine()` is `sb.AppendLine()`, so the SQL has `Environment.NewLine`:
+  `\n` on Linux. webForCore keeps the platform's newline by decision; NAMESPACES.md says so for `DataContext.Log`
+  only.
+- **What worked (overlay):** `IndexOf(Environment.NewLine + "FROM ")` (and `"ORDER BY "`).
+- **Guide:** NAMESPACES.md's LINQ to SQL caveat could say the generated SQL itself (`GetCommand().CommandText`, the
+  `Log`) has `\n` on Linux, and MIGRATING.md's search list could add `"\r\n` in code that reads SQL text.
+
+## F158
+
+**`ServicePointManager.SecurityProtocol` with `SecurityProtocolType.Ssl3` throws on .NET.** Guide gap. Found on 0.9.0,
+on Linux (the same on Windows: it's .NET's).
+
+- **Apps:** carrotcake-cms-mvc: `CMSConfigHelper`'s constructor sets `SecurityProtocolType.Ssl3 | Tls | Tls11 |
+  Tls12`, so every page was `NotSupportedException: The requested security protocol is not supported.`
+- **Cause:** .NET Framework 4.8 accepts SSL 3 in the flags (whether a connection can use it is the OS's business);
+  .NET rejects it in the setter. Not webForCore's: it's `System.Net`'s.
+- **What worked (overlay):** the same flags without `Ssl3`.
+- **Guide:** a line in MIGRATING.md section 6 (search for `SecurityProtocolType.Ssl3`; remove it, or don't set the
+  property: .NET uses the OS's defaults).
+
+## F159
+
+**`AppDomain.CurrentDomain.RelativeSearchPath` is null on .NET.** Guide gap. Found on 0.9.0, on Linux (the same on
+Windows).
+
+- **Apps:** carrotcake-cms-mvc: `WebComponents/CarrotWeb.cs` loads the assembly named in an embedded resource's URL
+  from `Path.Combine(AppDomain.CurrentDomain.RelativeSearchPath, name + ".dll")`. On IIS `RelativeSearchPath` is the
+  application's `bin` (its AppDomain's private bin path); on .NET it's null, so `/carrotwarewebresource.ashx` (the
+  admin's and the templates' CSS and scripts) threw `ArgumentNullException (Parameter 'path1')`.
+- **What worked (overlay):** `HttpRuntime.BinDirectory`.
+- **Guide:** MIGRATING.md and NAMESPACES.md cover `DynamicDirectory` and `AppDomainSetup.PrivateBinPath` (#139) but not
+  `RelativeSearchPath`, which compiles and returns null; it belongs on the same line, with the same fix.
