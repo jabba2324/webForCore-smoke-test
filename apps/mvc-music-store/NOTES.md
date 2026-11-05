@@ -1,7 +1,7 @@
 # MVC Music Store (MVC 3): migration notes
 
-Status: blocked by [F75](../../FINDINGS.md#f75) (webForCore#123): log-on and registration fail. It passes all 20 probes on Linux and Windows
-(webForCore 0.7.0 and 0.8.0), but the probes are GETs and can't reach those forms.
+Status: migrated (webForCore 0.9.0, 44/44 probes on Linux and Windows; F75 fixed in 0.9.0).
+It was blocked by F75 (log-on and registration) on 0.7.0 and 0.8.0, which the GET-only probes then couldn't reach. Source:
 jongalloway/MvcMusicStore at `ea2552d6` (Oct 2025): Jon Galloway's copy of the CodePlex sample, with its MVC 3, 4 and
 5 versions; this is the MVC 3 one (`src/MVC3/MvcMusicStore-Completed`, "MVC 3 Tools Update"). Ms-PL
 (`src/MVC3/readme.txt`).
@@ -63,8 +63,34 @@ controller (404).
 Also checked by hand: `/ShoppingCart/AddToCart/1` (302 to the cart, which then lists the album, the cart id kept in
 session) and the AJAX `POST /ShoppingCart/RemoveFromCart/1` (JSON).
 
+### Round 0.9.0: F75 fixed, verbs (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+- **F75 is fixed in 0.9.0** (webForCore#123: System.Web carries aspnet_regsql's scripts, and `webforcore-regsql` is the
+  tool). Overlay, as `docs/MIGRATING.md` section 5 says:
+  - web.config: `LocalSqlServer` removed and added again on the compose SQL Server, database `MvcMusicStoreMembership`
+    (machine.config's providers, the app's own configuration otherwise unchanged);
+  - `src/MVC3/MvcMusicStore-Completed/aspnetdb-membership-roles.sql`: the script
+    `webforcore-regsql -d MvcMusicStoreMembership -A mr -sqlexportonly` writes (aspnet_regsql's, .NET Framework 4.8's
+    `InstallCommon.sql`, `InstallMembership.sql` and `InstallRoles.sql`), since the runner's setup runs SQL files, not
+    tools;
+  - `src/MVC3/MvcMusicStore-Completed/smoke-administrator.sql`: the `Administrator` role, with `smokeadmin` in it.
+- **F76:** `Views/Store/Details.cshtml`'s price is `{0:F2}` (was `{0:F}`, `8.990` on ICU), as the guide now says.
+- **`[setup]` (new):** creates the membership database, runs the two scripts and registers `smokeadmin` through the
+  app's Register form.
+- **Probes (24 added, 10 of them POSTs; MVC 3's template has no anti-forgery tokens):** the price (`8.99`, not
+  `8.990`); log-on with a wrong password ("The user name or password provided is incorrect.") and the right one; two
+  albums added to the cart, one removed by the cart page's AJAX post (JSON, "has been removed from your shopping
+  cart."), checkout with a wrong promo code (the form again) and with `FREE` (302 to the order, "Thanks for your
+  order!"), the cart empty; the store manager (`[Authorize(Roles = "Administrator")]`): an album created, its edit
+  posted, its details, deleted, gone; a password change and back; log-off and the store manager redirecting again.
+- **The album edit is a 500, as on .NET Framework:** `Album` has `[Bind(Exclude = "AlbumId")]`, so the posted album's
+  id is 0 and EF updates no row ("Store update, insert, or delete statement affected an unexpected number of rows
+  (0)"); seen in SQL Server's trace (`WHERE AlbumId = 0`). The sample's own bug; the probe expects it.
+- **Results:** 44/44 on Linux (20 before), twice in a row, from a new membership database.
+
 ## Open problems
 
+- **Round 0.9.0:** the first two are resolved (below, kept for the record): F75 is fixed in 0.9.0, and the album page uses `{0:F2}` as the guide now says for F76. Open: none; the album edit's 500 is the sample's own `[Bind(Exclude = "AlbumId")]`.
 - **Log-on and registration:** posting either form is a 500, "SQLExpress database file auto-creation error": the
   default membership provider wants a SQL Express user instance. With a real SQL Server it would need `aspnet_regsql`'s
   schema, which can't be made on webForCore ([F75](../../FINDINGS.md#f75), webForCore#123). So checkout and the store

@@ -1,0 +1,58 @@
+info: WebFormsForCore.Host.WorkerPool[0]
+      Started worker 1 (process 3346265) for $WFC_CHECKOUTS/mvc-music-store/src/MVC3/MvcMusicStore-Completed/MvcMusicStore/bin_dotnet/MvcMusicStore.dll: the host started.
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://127.0.0.1:45083
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: $WFC_CHECKOUTS/mvc-music-store/src/MVC3/MvcMusicStore-Completed/MvcMusicStore
+info: Microsoft.AspNetCore.DataProtection.KeyManagement.XmlKeyManager[62]
+      User profile is available. Using '~/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:45083/ - - -
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Started application 99e0e112 in process 3346265 (worker 1 of webforcore-host).
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://unix:/tmp/webforcore-EVq2U9/worker-1.sock
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 1 (process 3346265) is serving (1.6 s after it started).
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: $WFC_CHECKOUTS/mvc-music-store/src/MVC3/MvcMusicStore-Completed/MvcMusicStore
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:45083/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:45083/ - 200 2711 text/html;+charset=utf-8 2906.7210ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:45083/ - 200 2711 text/html;+charset=utf-8 4123.9120ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:45083/Account/Register - application/x-www-form-urlencoded 107
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/Account/Register HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:45083/Account/Register - application/x-www-form-urlencoded 107
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:45083/Account/Register - 302 118 text/html;+charset=utf-8 95.3163ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 302.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:45083/Account/Register - 302 118 text/html;+charset=utf-8 99.6372ms
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: WebFormsForCore.Hosting.WorkerProcess.WorkerLifetime[0]
+      Worker 1: the host closed its connection: stopping.
+info: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
+      Application 99e0e112 is shutting down (HostingEnvironment).
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 1 (process 3346265) exited (0).
