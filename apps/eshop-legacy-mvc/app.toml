@@ -8,7 +8,7 @@ project = "eShopLegacyMVCSolution/src/eShopLegacyMVC/eShopLegacyMVC.csproj"
 kinds = ["mvc", "webapi"]
 licence = "MIT"
 status = "migrated"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 26/26 on Linux and Windows (CI run 41940185337; Create, Edit and Delete posted with anti-forgery tokens; the CSS bundle is served unminified on both: WebGrease and Bootstrap 4's custom properties, as on .NET Framework)."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 30/30 on Linux and Windows (CI runs 42026922513 and (second)): Create, Edit and Delete posted with anti-forgery tokens, and the Web API's DELETE and POST."
 
 needs = ["mssql"]
 

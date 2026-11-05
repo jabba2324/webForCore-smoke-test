@@ -2,23 +2,23 @@
   "id": "eshop-legacy-mvc",
   "stages": {
     "build": {
-      "at": "2026-11-05T11:20:03+00:00",
+      "at": "2026-11-05T12:42:26+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\eshop-legacy-mvc\\logs.windows\\build.log",
-      "seconds": 40,
+      "seconds": 32,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T11:19:23+00:00",
+      "at": "2026-11-05T12:41:53+00:00",
       "commit": "63bc9ec4414d7e281dc9f9d7bdcf70030950457d",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-05T11:20:29+00:00",
+      "at": "2026-11-05T12:43:15+00:00",
       "checks": [
         {
           "ms": 29,
@@ -27,37 +27,37 @@
           "status": 200
         },
         {
-          "ms": 56,
+          "ms": 54,
           "ok": true,
           "path": "/Catalog/Details/1",
           "status": 200
         },
         {
-          "ms": 106,
+          "ms": 104,
           "ok": true,
           "path": "/Catalog/Create",
           "status": 200
         },
         {
-          "ms": 29,
+          "ms": 31,
           "ok": true,
           "path": "/items/1/pic",
           "status": 200
         },
         {
-          "ms": 138,
+          "ms": 133,
           "ok": true,
           "path": "/api/brands",
           "status": 200
         },
         {
-          "ms": 28,
+          "ms": 23,
           "ok": true,
           "path": "/api/brands/1",
           "status": 200
         },
         {
-          "ms": 27,
+          "ms": 23,
           "ok": true,
           "path": "/Content/base.css",
           "status": 200
@@ -69,64 +69,64 @@
           "status": 200
         },
         {
-          "ms": 4,
+          "ms": 5,
           "ok": true,
           "path": "/Images/brand.png",
           "status": 200
         },
         {
-          "ms": 10,
+          "ms": 12,
           "ok": true,
           "path": "/Catalog/Create",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 46,
+          "ms": 45,
           "ok": true,
           "path": "/Catalog/Create",
           "status": 302
         },
         {
-          "ms": 19,
+          "ms": 34,
           "ok": true,
           "path": "/Catalog/Index?pageSize=100",
           "status": 200
         },
         {
-          "ms": 15,
+          "ms": 18,
           "ok": true,
           "path": "/Catalog/Edit/{item}",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 21,
+          "ms": 22,
           "ok": true,
           "path": "/Catalog/Edit/{item}",
           "status": 302
         },
         {
-          "ms": 6,
+          "ms": 7,
           "ok": true,
           "path": "/Catalog/Details/{item}",
           "status": 200
         },
         {
-          "ms": 11,
+          "ms": 13,
           "ok": true,
           "path": "/Catalog/Delete/{item}",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 24,
+          "ms": 25,
           "ok": true,
           "path": "/Catalog/Delete/{item}",
           "status": 302
         },
         {
-          "ms": 5,
+          "ms": 10,
           "ok": true,
           "path": "/Catalog/Details/{item}",
           "status": 404
@@ -139,7 +139,34 @@
           "status": 500
         },
         {
-          "ms": 9,
+          "method": "DELETE",
+          "ms": 6,
+          "ok": true,
+          "path": "/api/brands/1",
+          "status": 200
+        },
+        {
+          "method": "DELETE",
+          "ms": 4,
+          "ok": true,
+          "path": "/api/brands/99",
+          "status": 404
+        },
+        {
+          "ms": 6,
+          "ok": true,
+          "path": "/api/brands/1",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 17,
+          "ok": true,
+          "path": "/api/brands",
+          "status": 405
+        },
+        {
+          "ms": 7,
           "ok": true,
           "path": "/web.config",
           "status": 404
@@ -183,7 +210,7 @@
       ],
       "log": "apps\\eshop-legacy-mvc\\logs.windows\\server.log",
       "status": "pass",
-      "summary": "26/26 probes"
+      "summary": "30/30 probes"
     }
   }
 }

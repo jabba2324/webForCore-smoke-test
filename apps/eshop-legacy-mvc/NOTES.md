@@ -1,6 +1,6 @@
 # eShopLegacyMVC (eShopModernizing): migration notes
 
-Status: migrated (webForCore 0.4.0, all probes pass).
+Status: migrated (webForCore 0.9.0: 30/30 on Linux and Windows).
 (the last commit; the repo is archived). webForCore 0.1.0, from its GitHub release packages (first migrated
 against the source at `4ec57209`, which the release differs from only in packaging; every result below was
 repeated on the packages).
@@ -110,6 +110,8 @@ the token, which MVC refuses (500, its anti-forgery error naming
 the seed scripts' `USE [Microsoft.eShopOnContainers.Services.CatalogDb]` has to change with the connection string.
 
 ### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+**CI (Linux and Windows): 30/30 on both, in CI runs 42026922513 and (second).**
 
 30/30 on Linux, twice in a row. Four probes more, for the Web API's verbs: `BrandsController` has `Get` and `Delete`
 only. `DELETE /api/brands/1` answers 200 and `DELETE /api/brands/99` 404, and `GET /api/brands/1` after it still has
