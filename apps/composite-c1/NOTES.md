@@ -1,6 +1,7 @@
 # C1 CMS (Composite C1): migration notes
 
-Status: blocked at build (Windows Workflow Foundation 3, F116; LINQ to SQL and WCF REST hosting, F120). Source:
+Status: blocked at build (Windows Workflow Foundation 3, F116; round 0.9.0, webForCore 0.9.0, where the LINQ to SQL and
+WCF REST errors of F120 are gone). Source:
 https://github.com/Orckestra/C1-CMS-Foundation at `98b7e87d` (tag v6.13-hotfix.862, "C1 CMS 6.13 Hotfix 862", the latest
 release, September 2026). Licence: MPL 1.1 with Orckestra's amendment of section 11 (`license.txt`; GitHub shows
 NOASSERTION because of the amendment). The web project `Website/WebSite.csproj` targets `v4.8` and references
@@ -99,6 +100,9 @@ anyway, so the build shows exactly what's left.
   and all WF3 (F116), LINQ to SQL or WCF REST hosting (F120); `smoke` is skipped (nothing built). `Composite.Workflows`
   and the site aren't reached: they depend on `Composite.dll`.
 - **Windows (CI run 41914624804, PR #21):** the same: `build` fails with the same 46 distinct errors, `smoke` skipped.
+- **Round 0.9.0 (webForCore 0.9.0, Linux):** still blocked at build, now with 41 distinct errors, all WF3 (F116,
+  documented in 0.9.0 as needing a rewrite): none of F120's LINQ to SQL or WCF REST errors remain (0.9.0 provides LINQ
+  to SQL, #142). Rewriting C1's 48 WF3 files and `Composite.Workflows` is beyond a migration, so nothing further was tried.
 - The probes in `app.toml` (`/robots.txt`, the console's `Login.aspx`) are for when it builds. The aim was the setup
   wizard with a starter site on the XML data store, a rendered public page, the console's log-in, an XSLT function's
   output and a static file; none can be reached.

@@ -10,7 +10,7 @@ kinds = ["webforms", "webpages"]
 # MPL 1.1, with Orckestra's amendment of section 11 (Danish law); license.txt.
 licence = "MPL-1.1"
 status = "blocked"
-notes = "Blocked at build (Linux and Windows): Composite.dll is built on Windows Workflow Foundation 3 (System.Workflow.*: 48 files, and all of Composite.Workflows), which .NET doesn't have (F116), and needs LINQ to SQL and WCF REST hosting (F120). Its run-time compilation of data types would fail next (F117, F119). Found F116-F121."
+notes = "Blocked at build (Linux and Windows): Composite.dll is built on Windows Workflow Foundation 3 (System.Workflow.*: 48 files, and all of Composite.Workflows), which .NET doesn't have (F116, documented in 0.9.0: a rewrite). On 0.9.0 its LINQ to SQL and WCF REST errors (F120) are gone; 41 distinct WF3 errors remain."
 
 # Not run: the build is blocked (NOTES.md). What the probes would be, once it builds: the setup wizard, then a
 # starter site's page, the console's log-in, an XSLT function's output, and a static file.

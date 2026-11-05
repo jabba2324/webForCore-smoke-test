@@ -172,7 +172,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F104](#f104) | webForCore.AutoMapperLegacy on AutoMapper 12: a member mapped from a value already of its type is mapped again through a base-type map, and the whole configuration fails (fixed in webForCore-thirdparty 0.7.0) | app/environment (webForCore-thirdparty) | umbraco-7 | [thirdparty#11](https://github.com/xforcore/webForCore-thirdparty/issues/11) |
 | [F105](#f105) | `ApplicationSettingsBase` (Settings.settings, Web Reference SOAP clients) throws `TypeLoadException`: `ConfigurationManagerInternal` is looked up in `System.Configuration` 4.0.0.0 (fixed in 0.9.0) | webForCore bug | umbraco-7 | [#154](https://github.com/xforcore/webForCore/issues/154) |
 | [F106](#f106) | webForCore's BinaryFormatter port can't serialize a `System.Type` (.NET Framework writes `UnitySerializationHolder`) (fixed in 0.9.0) | webForCore bug | orchard-1.10 | [#156](https://github.com/xforcore/webForCore/issues/156) |
-| [F116](#f116) | Windows Workflow Foundation 3 (`System.Workflow.*`) isn't on .NET, and the docs and blocker search don't say so | guide gap | composite-c1 | [#132](https://github.com/xforcore/webForCore/issues/132) |
+| [F116](#f116) | Windows Workflow Foundation 3 (`System.Workflow.*`) isn't on .NET, and the docs and blocker search don't say so (documented in 0.9.0) | guide gap | composite-c1 | [#132](https://github.com/xforcore/webForCore/issues/132) |
 | [F117](#f117) | Run-time C# compilation in application code (`CodeDomProvider.CreateProvider("c#")`) throws `PlatformNotSupportedException`; no documented replacement | guide gap | composite-c1 | [#133](https://github.com/xforcore/webForCore/issues/133) |
 | [F118](#f118) | CoreWCF's source generator reaches applications: `CS8370`/`CS8107` for any `[ServiceContract]` with `LangVersion` below 11 | webForCore bug | composite-c1 | [#134](https://github.com/xforcore/webForCore/issues/134) |
 | [F119](#f119) | webForCore's `CSharpCodeProvider` with `GenerateInMemory` and no PDB throws `ArgumentNullException` | webForCore bug | composite-c1 | [#135](https://github.com/xforcore/webForCore/issues/135) |
@@ -2144,7 +2144,8 @@ ignored by Umbraco, as on .NET Framework without that site).
 
 **Windows Workflow Foundation 3 (`System.Workflow.Runtime`, `.ComponentModel`, `.Activities`) isn't on .NET, and
 neither `docs/NAMESPACES.md` nor the guide's blocker search mentions it.** Guide gap. Raised as
-[#132](https://github.com/xforcore/webForCore/issues/132). Found on 0.8.0 (Linux and Windows: a build error).
+[#132](https://github.com/xforcore/webForCore/issues/132). Found on 0.8.0 (Linux and Windows: a build error). **Documented in 0.9.0**
+(NAMESPACES.md and the blocker search: WF3 needs a rewrite); C1 still stops there in round 0.9.0.
 
 - **Apps:** composite-c1 (C1 CMS 6.13). `Composite.dll` has 48 files on WF3 (`WorkflowFacade`, the console's flow
   controllers, `FilePersistenceService`, the state machine base classes), and `GlobalInitializerFacade` starts the
