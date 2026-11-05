@@ -1,6 +1,6 @@
 # MVCForum: migration notes
 
-Status: migrated (webForCore 0.8.0: all 15 probes on Linux and Windows; F28 and F29 were fixed in 0.5.0). Source:
+Status: migrated (round 0.9.0, webForCore 0.9.0: 39/39 on Linux and Windows in CI runs 42020729339, 42027500654 and 42032474244, with the plugins built and session state in process). Source:
 https://github.com/YodasMyDad/mvcforum at `8ce33799` (archived; the last commit). MIT. webForCore 0.4.0 packages,
 webForCore-thirdparty 0.4.0 (WebActivatorEx).
 

@@ -8,7 +8,7 @@ project = "MVCForum.Website/MvcForum.Web.csproj"
 kinds = ["mvc"]
 licence = "MIT"
 status = "migrated"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 15/15 on Linux and Windows, with System.ComponentModel.Annotations raised to 5.0.0 for .NET 10's package pruning (F54, webForCore#62)."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): 39/39 on Linux and Windows (CI runs 42020729339, 42027500654, 42032474244), with verbs: a member registered and deleted, the admin's log-on, a topic created, edited and deleted, an AJAX reply posted and deleted. MvcForum.Plugins now migrated (its pipelines save topics and posts); session state in process (F164: the guide's out-of-process provider can't serialize the forum's TempData)."
 needs = ["mssql"]
 # The forum's pipelines (creating, editing and deleting topics, posts and members) and badges: MvcForum.Plugins,
 # which copies itself into App_Data/Plugins, where the site looks for it (the copy is in the app's .gitignore).
