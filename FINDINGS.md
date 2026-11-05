@@ -154,7 +154,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F84](#f84) | `AppDomain.CurrentDomain.DynamicDirectory` is null: plugin managers that shadow-copy there fail at start | guide gap | nopcommerce-3.90, smartstorenet | [#139](https://github.com/xforcore/webForCore/issues/139) |
 | [F85](#f85) | System.Linq.Dynamic 1.0.7 (net40) needs .NET Framework's `System.Data.Entity` 4.0 | app/environment | nopcommerce-3.90 | – |
 | [F86](#f86) | Linux: a static file in another case is 404 until requested once in its own case, then 200 in any case (fixed in 0.9.0) | webForCore bug | nopcommerce-3.90 | [#140](https://github.com/xforcore/webForCore/issues/140) |
-| [F87](#f87) | `System.Web.Optimization` and `WebGrease` don't have Microsoft's identities: BundleTransformer fails with CS0012 | webForCore bug | smartstorenet | [#141](https://github.com/xforcore/webForCore/issues/141) |
+| [F87](#f87) | `System.Web.Optimization` and `WebGrease` don't have Microsoft's identities: BundleTransformer fails with CS0012 (fixed in 0.9.0) | webForCore bug | smartstorenet | [#141](https://github.com/xforcore/webForCore/issues/141) |
 | [F88](#f88) | The same as F92: one inotify instance per watched folder; nopCommerce takes more than 50 of the user's 128 (fixed in 0.9.0) | webForCore bug | nopcommerce-3.90 | [#152](https://github.com/xforcore/webForCore/issues/152) |
 | [F89](#f89) | Windows, intermittent: nopCommerce's plugin manager can't replace a plugin copy in the compilation folder at start ("rename failed") | app/environment | nopcommerce-3.90 | – |
 | [F90](#f90) | The parameterless crypto factories (`KeyedHashAlgorithm.Create()`, `HashAlgorithm.Create()`, ...) throw on .NET | guide gap | kooboo-cms | [#151](https://github.com/xforcore/webForCore/issues/151) |
@@ -185,6 +185,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F133](#f133) | Linux: DNN builds every physical path with `\` (`ApplicationMapPath` is `BaseDirectory.Replace("/", "\\")`), and QuickIO.NET is Win32 | app/environment | dnn-platform-9 | – |
 | [F164](#f164) | The guide adds `UseAspNetCoreSessionProvider()` (out-of-process, serialized session state) to every app that uses `Session`; an `InProc` app with values that aren't serializable (MVC `TempData`) fails | guide gap | mvcforum | to raise |
 | [F165](#f165) | webForCore.AutoMapperLegacy needs C# 14, so F83's `<LangVersion>` fix can't be used: `array.Contains(x)` in an expression tree becomes `MemoryExtensions.Contains(op_Implicit(array), x)`, which Umbraco 7's SQL expression visitor rejects | app/environment (webForCore-thirdparty) | umbraco-7 | to raise (thirdparty) |
+| [F166](#f166) | Telerik.Web.Mvc (SmartStoreNET's checked-in .NET Framework build) calls `AppDomain.DefineDynamicAssembly`, which .NET doesn't have: every administration page is a 500 | app/environment | smartstorenet | - |
 ---
 
 ## F1
@@ -1784,7 +1785,8 @@ Found on 0.8.0 (Linux), migrating nopCommerce 3.90. **Fixed in 0.9.0:** in round
 
 **webForCore's `System.Web.Optimization` and `WebGrease` don't have Microsoft's assembly identities**, so libraries
 built on Microsoft's bundling don't compile against them. webForCore bug. Raised as
-[#141](https://github.com/xforcore/webForCore/issues/141). Found on 0.8.0, migrating SmartStoreNET 4.x. The same kind of
+[#141](https://github.com/xforcore/webForCore/issues/141). Found on 0.8.0, migrating SmartStoreNET 4.x. **Fixed in 0.9.0:**
+in round 0.9.0 SmartStoreNET builds, BundleTransformer included, and its bundles and theme SCSS are served. The same kind of
 problem as F40 (SignalR and DataVisualization at 0.0.0.0, #40).
 
 - **Apps:** smartstorenet: all its bundles (and its themes' SCSS) go through BundleTransformer 1.10–1.12. The build
@@ -2396,3 +2398,23 @@ webForCore-thirdparty 0.7.0 (Linux; the code is platform-independent), with Umbr
   expression trees, so LINQ to Entities (EF 6), LINQ to SQL and an app's own visitors need either the array cast to
   `IEnumerable<T>` at those calls or a visitor that maps the span call back; and name Umbraco 7's visitor among the
   changes its Umbraco 7 note lists.
+
+## F166
+
+**Telerik.Web.Mvc (the Telerik Extensions for ASP.NET MVC that SmartStoreNET checks in as a .NET Framework DLL) calls
+`AppDomain.DefineDynamicAssembly`, which .NET doesn't have, so every page of the administration is a 500.**
+App/environment (the library's, the same kind as Castle.Core 3's in F100; webForCore can't provide the method). Found on
+0.9.0 (Linux), with SmartStoreNET 4.2.
+
+- **Apps:** smartstorenet: 1. `/admin` after logging in, and every administration page: their views build Telerik
+  grids, menus and windows, whose builders share a static `DynamicTypeBuilder`.
+- **Error:** `MissingMethodException: Method not found: 'System.Reflection.Emit.AssemblyBuilder
+  System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName, System.Reflection.Emit.AssemblyBuilderAccess)'`
+  ← `TypeInitializationException: The type initializer for 'Telerik.Web.Mvc.Infrastructure.DynamicTypeBuilder' threw`
+  ← `Telerik.Web.Mvc.UI.ComponentBuilderBase\`2`.
+- **Why it isn't webForCore's:** .NET has `AssemblyBuilder.DefineDynamicAssembly` instead; the library has to be built
+  for it. `lib/Telerik/Telerik.Web.Mvc.dll` is SmartStore's own build of the (discontinued, once GPL) Telerik
+  Extensions, with no source in the repository and no .NET build anywhere, so the administration needs that library
+  rebuilt or replaced, beyond a migration. The store front doesn't use it and works.
+- The guide's symptom table (AGENT-MIGRATION.md, MIGRATING.md) names this error for Autofac.Configuration 3, Castle.Core
+  3 and NHibernate 4 only; Telerik.Web.Mvc could join the list, but there is no newer version to point to.

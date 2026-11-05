@@ -1,7 +1,8 @@
 # SmartStoreNET: migration notes
 
-Status: blocked at build by [F87](../../FINDINGS.md#f87) (webForCore's System.Web.Optimization has another assembly
-identity than Microsoft's, so BundleTransformer, built against Microsoft's, doesn't compile against it). Source:
+Status: blocked (round 0.9.0, webForCore 0.9.0): it builds (F87 fixed), installs and serves the store, 27/27 on Linux, but
+the administration is a 500 on every page ([F166](../../FINDINGS.md#f166): Telerik.Web.Mvc on .NET), and nine of its
+twelve plugins aren't migrated. Source:
 https://github.com/smartstore/SmartStoreNET at `b6520754` (the head of the default branch, `4.x`: 4.2.x, the last
 release line on .NET Framework before Smartstore moved to ASP.NET Core). GPL-3.0. The web project
 (`src/Presentation/SmartStore.Web`) targets .NET Framework 4.7.2 with System.Web.
@@ -84,6 +85,42 @@ Version=5.3.1.0, PublicKeyToken=31bf3856ad364e35`, `System.Web.WebPages 3.0.0.0`
 why .NET Framework packages built on them work. Not worked around (no app change can make the compiler unify them).
 [F87](../../FINDINGS.md#f87)
 
+## Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+F87 is fixed (webForCore's System.Web.Optimization and WebGrease now have Microsoft's identities), so BundleTransformer
+compiles. Then, in order:
+
+7. `SmartStore.Admin`'s `Controllers/CommonController.cs`: the same `ReferenceEqualityComparer` alias as in step 5
+   (CS0104 against .NET's; F121's case, webForCore#136).
+8. The build passes. The install (`/install`, its AJAX `Install` action, with the sample data) then failed at
+   `PopulatePictures` ("Value cannot be null (Parameter 'entity')"): the seed data builds each sample file's path with
+   `Path.Combine(...).Replace('/', '\\')`, a file name with backslashes on Linux, so no picture was read. The same
+   `Replace` in the blog and news sample converters and in the theme virtual path provider
+   (`SmartVirtualPathProvider`, the themes' file inheritance) now uses `Path.DirectorySeparatorChar` (5 lines; the same
+   on Windows). App/environment (MIGRATING.md section 6).
+9. The theme's SCSS (`/Themes/Flex/Content/theme.scss`) was a 500: "Unable to load shared library 'libsass'". The app
+   references only the Windows natives of LibSassHost and of JavaScriptEngineSwitcher.V8 (Autoprefixer's engine);
+   `LibSassHost.Native.linux-x64` 1.2.6 and `JavaScriptEngineSwitcher.V8.Native.linux-x64` 3.5.5 are added to
+   `SmartStore.Web`. The theme then compiles on Linux.
+10. The cart was a 500 once it had an item: "At least one shipping rate computation method provider is required to be
+    active", from the order totals. Three plugins are migrated, as nopCommerce's were: `SmartStore.Shipping`,
+    `SmartStore.Tax` and `SmartStore.OfflinePayment` (SDK projects, the originals as `.netfx`; output into
+    `SmartStore.Web/Plugins/<name>/`, which the app's `.gitignore` keeps out; Core, Data, Services, Web.Framework and
+    Telerik.Web.Mvc referenced with `Private="false"`, as before; `AssemblySharedInfo.cs`/`AssemblyVersionInfo.cs`
+    linked, as before), built after the site (`also_build`). The install installs them, and the cart works. The other
+    nine (AmazonPay, Clickatell, DevTools, FacebookAuth, GoogleAnalytics, GoogleMerchantCenter, PayPal,
+    ShippingByWeight, WebApi) aren't migrated.
+11. `[setup]`: an empty `smartstore` database, the install wizard's AJAX `Install` (sample data, the admin user), then
+    `Finalize?restart=true` and the home page.
+
+The administration doesn't work: `/admin` after logging in, and every administration page, is a 500 from
+Telerik.Web.Mvc, SmartStore's checked-in .NET Framework build of the Telerik Extensions for ASP.NET MVC, which calls
+`AppDomain.DefineDynamicAssembly` ([F166](../../FINDINGS.md#f166), app/environment: no source and no .NET build to
+move to). The store front doesn't use it.
+
+Also seen: SmartStore's JSON answers carry Json.NET `$type` names, which say `System.Private.CoreLib` where .NET
+Framework said `mscorlib` (the runtime's names, not webForCore's).
+
 ## What's left after F87
 
 From the assessment, not reached yet:
@@ -99,9 +136,17 @@ From the assessment, not reached yet:
 
 - **webForCore 0.8.0, CI run 41916845600 (Linux and Windows):** the build fails the same way on both (F87, 7 distinct
   errors), so smoke is skipped: 0/1.
+- **webForCore 0.9.0 (Linux):** builds, setup 4/4 (install with sample data and three plugins), then 27/27 (20
+  probes and the 7 forbidden paths), twice in a row: the home page, a category, a product, search, the blog, the
+  forums, the log-in, register and contact pages, the theme's compiled SCSS, a script, `/admin` (302 to the log-in),
+  and verbs: a book added to the cart (AJAX POST), shown in the cart, removed (the cart's AJAX delete, POST) and the
+  cart empty again; the admin logs in (POST), sees their account page, logs out, and the page then sends them to log
+  in. The administration isn't probed beyond `/admin`'s redirect (F166).
 
 ## Open problems
 
-- [F87](../../FINDINGS.md#f87) (webForCore bug): webForCore's System.Web.Optimization and WebGrease don't have
-  Microsoft's assembly identities. Blocks the build.
+- [F166](../../FINDINGS.md#f166) (app/environment): Telerik.Web.Mvc calls `AppDomain.DefineDynamicAssembly`; the
+  administration is a 500 on every page.
+- Nine plugins not migrated (above).
+- [F87](../../FINDINGS.md#f87): fixed in 0.9.0.
 - [F84](../../FINDINGS.md#f84) (guide gap): `AppDomain.DynamicDirectory` is null; fixed in the overlay.
