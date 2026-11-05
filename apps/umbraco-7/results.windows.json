@@ -2,27 +2,27 @@
   "id": "umbraco-7",
   "stages": {
     "build": {
-      "at": "2026-11-04T21:54:21+00:00",
+      "at": "2026-11-05T11:28:31+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\umbraco-7\\logs.windows\\build.log",
-      "seconds": 131,
+      "seconds": 65,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.8.0"
+      "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-04T21:52:09+00:00",
+      "at": "2026-11-05T11:27:26+00:00",
       "commit": "bd60f4e2cea7ace2984dcfb8e61ef6512ea77c73",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-04T21:55:05+00:00",
+      "at": "2026-11-05T11:29:08+00:00",
       "created": [
         "umbraco7"
       ],
-      "date": "2026-11-04",
+      "date": "2026-11-05",
       "status": "pass",
       "steps": [
         {
@@ -55,94 +55,94 @@
       "summary": "5/5 steps"
     },
     "smoke": {
-      "at": "2026-11-04T21:55:15+00:00",
+      "at": "2026-11-05T11:29:14+00:00",
       "checks": [
         {
-          "ms": 9,
+          "ms": 13,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 2585,
+          "ms": 785,
           "ok": true,
           "path": "/umbraco/",
           "status": 200
         },
         {
-          "ms": 31,
+          "ms": 20,
           "ok": true,
           "path": "/install/",
           "status": 302
         },
         {
-          "ms": 147,
+          "ms": 46,
           "ok": true,
           "path": "/umbraco/backoffice/UmbracoApi/Authentication/IsAuthenticated",
           "status": 200
         },
         {
-          "ms": 18,
+          "ms": 9,
           "ok": true,
           "path": "/umbraco/backoffice/UmbracoApi/Section/GetSections",
           "status": 401
         },
         {
-          "ms": 65,
+          "ms": 32,
           "ok": true,
           "path": "/umbraco/LocalizedText",
           "status": 200
         },
         {
-          "ms": 94,
+          "ms": 41,
           "ok": true,
           "path": "/umbraco/Application",
           "status": 200
         },
         {
-          "ms": 48,
+          "ms": 28,
           "ok": true,
           "path": "/umbraco/BackOffice/signalr/hubs",
           "status": 200
         },
         {
-          "ms": 10,
+          "ms": 6,
           "ok": true,
           "path": "/umbraco/ping.aspx",
           "status": 200
         },
         {
-          "ms": 972,
+          "ms": 487,
           "ok": true,
           "path": "/umbraco/webservices/legacyAjaxCalls.asmx",
           "status": 200
         },
         {
-          "ms": 24,
+          "ms": 13,
           "ok": true,
           "path": "/umbraco/webservices/CheckForUpgrade.asmx/js",
           "status": 200
         },
         {
-          "ms": 38,
+          "ms": 20,
           "ok": true,
           "path": "/DependencyHandler.axd?s=L3VtYnJhY29fY2xpZW50L21vZGFsL3N0eWxlLmNzczs&t=Css&cdv=1",
           "status": 200
         },
         {
-          "ms": 14,
+          "ms": 8,
           "ok": true,
           "path": "/umbraco_client/modal/style.css",
           "status": 200
         },
         {
-          "ms": 4,
+          "ms": 3,
           "ok": true,
           "path": "/css/Smoke.css",
           "status": 200
         },
         {
-          "ms": 6,
+          "ms": 5,
           "ok": true,
           "path": "/web.config",
           "status": 404
@@ -160,19 +160,19 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 39,
           "ok": true,
           "path": "/bin_dotnet/Umbraco.Web.UI.dll",
           "status": 404

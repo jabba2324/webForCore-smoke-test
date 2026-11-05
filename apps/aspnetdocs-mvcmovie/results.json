@@ -20,38 +20,38 @@
       ]
     },
     "build": {
-      "at": "2026-11-04T20:22:59+00:00",
+      "at": "2026-11-05T11:21:14+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/aspnetdocs-mvcmovie/logs/build.log",
-      "seconds": 13,
+      "seconds": 10,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.8.0"
+      "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-04T20:22:46+00:00",
+      "at": "2026-11-05T11:21:04+00:00",
       "commit": "546ffe728556a60591b93ab4fcbd4437f71e2449",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-04T20:23:21+00:00",
+      "at": "2026-11-05T11:21:36+00:00",
       "checks": [
         {
-          "ms": 11,
+          "ms": 14,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 13022,
+          "ms": 11935,
           "ok": true,
           "path": "/Movies",
           "status": 200
         },
         {
-          "ms": 251,
+          "ms": 227,
           "ok": true,
           "path": "/HelloWorld/Welcome?name=Scott&numTimes=4",
           "status": 200
@@ -63,13 +63,13 @@
           "status": 200
         },
         {
-          "ms": 21,
+          "ms": 19,
           "ok": true,
           "path": "/Content/Site.css",
           "status": 200
         },
         {
-          "ms": 5,
+          "ms": 6,
           "ok": true,
           "path": "/web.config",
           "status": 404
@@ -87,13 +87,13 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/packages.config",
           "status": 404
@@ -105,7 +105,7 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404

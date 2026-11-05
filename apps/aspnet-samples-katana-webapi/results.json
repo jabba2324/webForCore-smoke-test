@@ -17,26 +17,26 @@
       ]
     },
     "build": {
-      "at": "2026-11-04T20:21:59+00:00",
+      "at": "2026-11-05T11:18:54+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/aspnet-samples-katana-webapi/logs/build.log",
-      "seconds": 27,
+      "seconds": 11,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.8.0"
+      "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-04T20:21:33+00:00",
+      "at": "2026-11-05T11:18:43+00:00",
       "commit": "f7d4a776327df09c13b39489b122209c5d04693b",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-04T20:22:07+00:00",
+      "at": "2026-11-05T11:19:00+00:00",
       "checks": [
         {
-          "ms": 68,
+          "ms": 46,
           "ok": true,
           "path": "/Customer/7",
           "status": 200
@@ -60,7 +60,7 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
@@ -72,7 +72,7 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/packages.config",
           "status": 404

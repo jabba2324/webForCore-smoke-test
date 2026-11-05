@@ -2,25 +2,25 @@
   "id": "kooboo-cms",
   "stages": {
     "build": {
-      "at": "2026-11-04T21:57:18+00:00",
+      "at": "2026-11-05T11:20:11+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\kooboo-cms\\logs.windows\\build.log",
-      "seconds": 76,
+      "seconds": 66,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.8.0"
+      "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-04T21:56:02+00:00",
+      "at": "2026-11-05T11:19:05+00:00",
       "commit": "e5879728c817f37b275219636e7c24bf84a02830",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-04T21:57:31+00:00",
+      "at": "2026-11-05T11:20:25+00:00",
       "created": [],
-      "date": "2026-11-04",
+      "date": "2026-11-05",
       "status": "pass",
       "steps": [
         {
@@ -48,88 +48,88 @@
       "summary": "4/4 steps"
     },
     "smoke": {
-      "at": "2026-11-04T21:57:40+00:00",
+      "at": "2026-11-05T11:20:39+00:00",
       "checks": [
         {
-          "ms": 14,
+          "ms": 24,
           "ok": true,
           "path": "/",
           "status": 302
         },
         {
-          "ms": 1042,
+          "ms": 5126,
           "ok": true,
           "path": "/kooboo-404",
           "status": 200
         },
         {
-          "ms": 891,
+          "ms": 1502,
           "ok": true,
           "path": "/dev~sample/",
           "status": 200
         },
         {
-          "ms": 1230,
+          "ms": 1246,
           "ok": true,
           "path": "/dev~sample/Articles/Detail/Lorem-ipsum-dolor-sit-amet-4",
           "status": 200
         },
         {
-          "ms": 62,
+          "ms": 97,
           "ok": true,
           "path": "/dev~sample/Articles/Chrome",
           "status": 200
         },
         {
-          "ms": 253,
+          "ms": 276,
           "ok": true,
           "path": "/dev~sample/about",
           "status": 200
         },
         {
-          "ms": 143,
+          "ms": 128,
           "ok": true,
           "path": "/dev~sample/search?key=Lorem",
           "status": 200
         },
         {
-          "ms": 721,
+          "ms": 769,
           "ok": true,
           "path": "/dev~sample/Member/Login",
           "status": 200
         },
         {
-          "ms": 281,
+          "ms": 239,
           "ok": true,
           "path": "/dev~sample/Member/Register",
           "status": 200
         },
         {
-          "ms": 683,
+          "ms": 664,
           "ok": true,
           "path": "/Account/LogOn",
           "status": 200
         },
         {
-          "ms": 15,
+          "ms": 13,
           "ok": true,
           "path": "/Sites/Home/Cluster",
           "status": 302
         },
         {
-          "ms": 454,
+          "ms": 484,
           "ok": true,
           "path": "/Account/WebResource?name=siteStyles&version=20140305",
           "status": 200
         },
         {
-          "ms": 25,
+          "ms": 31,
           "ok": true,
           "path": "/Kooboo-WebResource/Index/jQuery/20130227",
           "status": 200
         },
         {
-          "ms": 24,
+          "ms": 26,
           "ok": true,
           "path": "/Cms_Data/Sites/sample/Themes/Default/common.css",
           "status": 200
@@ -141,13 +141,13 @@
           "status": 200
         },
         {
-          "ms": 8,
+          "ms": 5,
           "ok": true,
           "path": "/Scripts/less.js",
           "status": 200
         },
         {
-          "ms": 7,
+          "ms": 6,
           "ok": true,
           "path": "/web.config",
           "status": 404
@@ -159,13 +159,13 @@
           "status": 404
         },
         {
-          "ms": 18,
+          "ms": 2,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 14,
+          "ms": 2,
           "ok": true,
           "path": "/obj/",
           "status": 404
