@@ -79,7 +79,7 @@ page, an admin page (forms authentication redirect), RSS, two MVC controllers ro
 
 ### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
 
-**CI (Linux and Windows): 27/28 on both, in CI runs 42026922513 and (second).**
+**CI (Linux and Windows): 27/28 on both, in CI runs 42026922513 and 42030748535.**
 
 27/28 on Linux, twice; still blocked by DotNetOpenAuth on the log-in page (F44, the same `TypeInitializationException`
 in `UriIdentifier`). System.Data.Linq, now provided, isn't in Subtext's web.config (its F37 entry was System.Design,

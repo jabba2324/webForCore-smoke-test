@@ -10,7 +10,7 @@ generated = ["src/Subtext.Web/App_Data/**"]
 kinds = ["webforms", "mvc"]
 licence = "MIT"
 status = "blocked"
-notes = "Blocked: the log-in page's DotNetOpenAuth fails (F44, app/environment). webForCore 0.9.0: 27/28 on Linux and Windows (CI runs 42026922513 and (second)), with the search postback and the MetaWeblog API's posts made, edited and deleted."
+notes = "Blocked: the log-in page's DotNetOpenAuth fails (F44, app/environment). webForCore 0.9.0: 27/28 on Linux and Windows (CI runs 42026922513 and 42030748535), with the search postback and the MetaWeblog API's posts made, edited and deleted."
 needs = ["mssql"]
 
 # The first request compiles the site, so it gets 120 s. The probes need the compose SQL Server with a "SubtextData"
