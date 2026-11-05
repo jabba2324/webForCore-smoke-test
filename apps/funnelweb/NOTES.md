@@ -50,6 +50,17 @@ log-in form (MVC), the installer (forms authentication redirect) and a static fi
   check bypassed (exploration only, reverted), `NHibernate.AdoNet.SqlClientSqlCommandSet` fails: it reflects on
   System.Data's internal `SqlCommandSet`. NHibernate 3.3 doesn't run on .NET (F39, app/environment).
 
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+12/16 on Linux; still blocked by NHibernate 3.3 (F39): the home page fails with "The following types may not be
+used as proxies", as before. Five probes more, for the admin area's MVC forms (no anti-forgery tokens): a log-in
+with web.config's credentials, the installer as the admin ("Your database is up to date"), its upgrade posted again
+("0 scripts were run"), log-out, and the installer redirecting to the log-in after it. Setup makes the same log-in
+and it works, but in the probes it comes after the home page has failed to build NHibernate's session factory, and
+the log-in, which builds it too, fails with the same error: the log-in, installer and upgrade probes fail with F39
+(log-out and the redirect pass). Not probed: a failed log-in and the blog's own forms (posts, comments, the wiki
+editor), which need NHibernate's entities too.
+
 ## Open problems
 
 - F39, app/environment: NHibernate 3.3. Moving to NHibernate 5.1+ and FluentNHibernate 3 is an upgrade of the app's

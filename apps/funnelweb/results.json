@@ -24,27 +24,27 @@
       ]
     },
     "build": {
-      "at": "2026-11-04T20:22:42+00:00",
+      "at": "2026-11-05T11:50:21+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/funnelweb/logs/build.log",
-      "seconds": 20,
+      "seconds": 9,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.8.0"
+      "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-04T20:22:22+00:00",
+      "at": "2026-11-05T11:50:12+00:00",
       "commit": "32f561e9bf991c141edd485905a6212ba194bd91",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-04T20:22:51+00:00",
+      "at": "2026-11-05T11:50:27+00:00",
       "created": [
         "FunnelWeb"
       ],
-      "date": "2026-11-04",
+      "date": "2026-11-05",
       "status": "pass",
       "steps": [
         {
@@ -66,36 +66,157 @@
       "summary": "3/3 steps"
     },
     "smoke": {
-      "at": "2026-11-04T20:22:56+00:00",
+      "at": "2026-11-05T11:51:23+00:00",
       "checks": [
         {
           "expected_text": "My FunnelWeb Site",
           "ms": 58,
           "ok": false,
           "path": "/",
+          "stack": [
+            "[InvalidProxyTypeException: The following types may not be used as proxies:",
+            "[FluentConfigurationException: An invalid or incomplete configuration was used while creating a SessionFactory. Check PotentialReasons collection, and InnerException for more detail.",
+            "[DependencyResolutionException: An exception was thrown while executing a resolve operation. See the InnerException for details.]",
+            "[InvalidOperationException: An error occurred when trying to create a controller of type 'FunnelWeb.Web.Controllers.WikiController'. Make sure that the controller has a parameterless public constructo",
+            "   at Autofac.Builder.RegistrationBuilder.<>c__DisplayClass1`1.b__0(IComponentContext c, IEnumerable`1 p)",
+            "   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)",
+            "   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)",
+            "   at Autofac.Core.Resolving.InstanceLookup.b__0()",
+            "   at Autofac.Core.Lifetime.LifetimeScope.GetOrCreateAndShare(Guid id, Func`1 creator)",
+            "   at Autofac.Core.Resolving.InstanceLookup.Execute()",
+            "   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)",
+            "   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)",
+            "   at Autofac.ResolutionExtensions.TryResolveService(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)",
+            "   at Autofac.ResolutionExtensions.ResolveService(IComponentContext context, Service service, IEnumerable`1 parameters)",
+            "   at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Type serviceType, IEnumerable`1 parameters)",
+            "   at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)",
+            "   at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)",
+            "   at FunnelWeb.Model.Repositories.RepositoriesModule.<>c.b__0_0(IComponentContext c) in $WFC_CHECKOUTS/funnelweb/src/FunnelWeb/Model/Repositories/RepositoriesModule.cs:line 26",
+            "   at Autofac.RegistrationExtensions.<>c__DisplayClass10`1.b__f(IComponentContext c, IEnumerable`1 p)",
+            "   at Autofac.Builder.RegistrationBuilder.<>c__DisplayClass1`1.b__0(IComponentContext c, IEnumerable`1 p)",
+            "   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)",
+            "   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)",
+            "   at Autofac.Core.Resolving.InstanceLookup.b__0()",
+            "   at Autofac.Core.Lifetime.LifetimeScope.GetOrCreateAndShare(Guid id, Func`1 creator)",
+            "   at Autofac.Core.Resolving.InstanceLookup.Execute()",
+            "   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)",
+            "   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)",
+            "   at Autofac.Core.Activators.Reflection.AutowiringParameter.<>c__DisplayClass2.b__0()",
+            "   at Autofac.Core.Activators.Reflection.ConstructorParameterBinding.Instantiate()",
+            "   at Autofac.Core.Activators.Reflection.ReflectionActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)",
+            "   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)",
+            "   at Autofac.Core.Resolving.InstanceLookup.b__0()",
+            "   at Autofac.Core.Lifetime.LifetimeScope.GetOrCreateAndShare(Guid id, Func`1 creator)",
+            "   at Autofac.Core.Resolving.InstanceLookup.Execute()",
+            "   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)",
+            "   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)",
+            "   at Autofac.ResolutionExtensions.TryResolveService(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)",
+            "   at Autofac.ResolutionExtensions.ResolveService(IComponentContext context, Service service, IEnumerable`1 parameters)",
+            "   at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Type serviceType, IEnumerable`1 parameters)",
+            "   at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Type serviceType)"
+          ],
           "status": 500,
           "title": "The following types may not be used as proxies:<br>FunnelWeb.Model.Authentication.Role: method MemberwiseClone should be 'public/protected virtual' or 'protected internal virtual'<br>FunnelWeb.Model.Authentication.User: method MemberwiseClone should be 'public/protected virtual' or 'protected intern"
         },
         {
-          "ms": 1797,
+          "ms": 672,
           "ok": true,
           "path": "/admin/login",
           "status": 200
         },
         {
-          "ms": 13,
+          "ms": 11,
           "ok": true,
           "path": "/admin/install",
           "status": 302
         },
         {
-          "ms": 20,
+          "ms": 17,
           "ok": true,
           "path": "/Content/Images/external.png",
           "status": 200
         },
         {
-          "ms": 7,
+          "method": "POST",
+          "ms": 30,
+          "ok": false,
+          "path": "/admin/login",
+          "stack": [
+            "[InvalidProxyTypeException: The following types may not be used as proxies:",
+            "[FluentConfigurationException: An invalid or incomplete configuration was used while creating a SessionFactory. Check PotentialReasons collection, and InnerException for more detail.",
+            "[DependencyResolutionException: An exception was thrown while executing a resolve operation. See the InnerException for details.]",
+            "   at Autofac.Builder.RegistrationBuilder.<>c__DisplayClass1`1.b__0(IComponentContext c, IEnumerable`1 p)",
+            "   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)",
+            "   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)",
+            "   at Autofac.Core.Resolving.InstanceLookup.b__0()",
+            "   at Autofac.Core.Lifetime.LifetimeScope.GetOrCreateAndShare(Guid id, Func`1 creator)",
+            "   at Autofac.Core.Resolving.InstanceLookup.Execute()",
+            "   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)",
+            "   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)",
+            "   at Autofac.ResolutionExtensions.TryResolveService(IComponentContext context, Service service, IEnumerable`1 parameters, Object& instance)",
+            "   at Autofac.ResolutionExtensions.ResolveService(IComponentContext context, Service service, IEnumerable`1 parameters)",
+            "   at Autofac.ResolutionExtensions.Resolve(IComponentContext context, Type serviceType, IEnumerable`1 parameters)",
+            "   at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context, IEnumerable`1 parameters)",
+            "   at Autofac.ResolutionExtensions.Resolve[TService](IComponentContext context)",
+            "   at FunnelWeb.Model.Repositories.RepositoriesModule.<>c.b__0_0(IComponentContext c) in $WFC_CHECKOUTS/funnelweb/src/FunnelWeb/Model/Repositories/RepositoriesModule.cs:line 26",
+            "   at Autofac.RegistrationExtensions.<>c__DisplayClass10`1.b__f(IComponentContext c, IEnumerable`1 p)",
+            "   at Autofac.Builder.RegistrationBuilder.<>c__DisplayClass1`1.b__0(IComponentContext c, IEnumerable`1 p)",
+            "   at Autofac.Core.Activators.Delegate.DelegateActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)",
+            "   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)",
+            "   at Autofac.Core.Resolving.InstanceLookup.b__0()",
+            "   at Autofac.Core.Lifetime.LifetimeScope.GetOrCreateAndShare(Guid id, Func`1 creator)",
+            "   at Autofac.Core.Resolving.InstanceLookup.Execute()",
+            "   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)",
+            "   at Autofac.Core.Resolving.InstanceLookup.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)",
+            "   at Autofac.Core.Activators.Reflection.AutowiringParameter.<>c__DisplayClass2.b__0()",
+            "   at Autofac.Core.Activators.Reflection.ConstructorParameterBinding.Instantiate()",
+            "   at Autofac.Core.Activators.Reflection.ReflectionActivator.ActivateInstance(IComponentContext context, IEnumerable`1 parameters)",
+            "   at Autofac.Core.Resolving.InstanceLookup.Activate(IEnumerable`1 parameters)",
+            "   at Autofac.Core.Resolving.InstanceLookup.b__0()",
+            "   at Autofac.Core.Lifetime.LifetimeScope.GetOrCreateAndShare(Guid id, Func`1 creator)",
+            "   at Autofac.Core.Resolving.InstanceLookup.Execute()",
+            "   at Autofac.Core.Resolving.ResolveOperation.GetOrCreateInstance(ISharingLifetimeScope currentOperationScope, IComponentRegistration registration, IEnumerable`1 parameters)",
+            "   at Autofac.Core.Resolving.ResolveOperation.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)",
+            "   at Autofac.Core.Resolving.ResolveOperation.Execute(IComponentRegistration registration, IEnumerable`1 parameters)",
+            "[DependencyResolutionException]: An exception was thrown while executing a resolve operation. See the InnerException for details.",
+            "   at Autofac.Core.Resolving.ResolveOperation.Execute(IComponentRegistration registration, IEnumerable`1 parameters)",
+            "   at Autofac.Core.Lifetime.LifetimeScope.ResolveComponent(IComponentRegistration registration, IEnumerable`1 parameters)",
+            "   at lambda_method21(Closure)"
+          ],
+          "status": 500,
+          "title": "The following types may not be used as proxies:<br>FunnelWeb.Model.Authentication.Role: method MemberwiseClone should be 'public/protected virtual' or 'protected internal virtual'<br>FunnelWeb.Model.Authentication.User: method MemberwiseClone should be 'public/protected virtual' or 'protected intern"
+        },
+        {
+          "expected_text": "Your database is up to date. No install is necessary.",
+          "ms": 12,
+          "ok": false,
+          "path": "/admin/install",
+          "status": 302,
+          "title": "Object moved"
+        },
+        {
+          "expected_text": "The upgrade completed successfully. 0 scripts were run.",
+          "method": "POST",
+          "ms": 4,
+          "ok": false,
+          "path": "/admin/install/upgrade",
+          "status": 302,
+          "title": "Object moved"
+        },
+        {
+          "ms": 18,
+          "ok": true,
+          "path": "/admin/logout",
+          "status": 302
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/admin/install",
+          "status": 302
+        },
+        {
+          "ms": 4,
           "ok": true,
           "path": "/web.config",
           "status": 404
@@ -125,7 +246,7 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 4,
           "ok": true,
           "path": "/bin_dotnet/FunnelWeb.Web.dll",
           "status": 404
@@ -139,7 +260,7 @@
       ],
       "log": "apps/funnelweb/logs/server.log",
       "status": "fail",
-      "summary": "10/11 probes"
+      "summary": "12/16 probes"
     }
   }
 }
