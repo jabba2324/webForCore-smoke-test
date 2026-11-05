@@ -11,8 +11,8 @@ project = "src/Umbraco.Web.UI/Umbraco.Web.UI.csproj"
 generated = ["src/Umbraco.Web.UI/config/ClientDependency.config"]
 kinds = ["webforms", "mvc", "webapi", "webpages", "owin", "identity", "signalr"]
 licence = "MIT"
-status = "migrated"
-notes = "On webForCore 0.8.0 (.NET 10) with webForCore-thirdparty 0.6.0's webForCore.AutoMapperLegacy for AutoMapper 3.3.1 (F22), it builds, installs through [setup] (the installer's JSON API, a back-office log-in and a Web Forms create dialog) and passes 21/21 on Linux and Windows: the front end, the back office's MVC page and actions, Web API, SignalR, Web Forms, ASMX and ClientDependency. One mapping changed for F104 (webForCore-thirdparty#11); found F105 (ApplicationSettingsBase, webForCore#154), F65 and F66. The AngularJS client isn't built (Node 10-12 gulp 3), and no content is made (the API needs an XSRF header)."
+status = "blocked"
+notes = "Blocked by an intermittent Windows failure (F168: 32/33 in 1 of 3 Windows runs). On webForCore 0.9.0 with webForCore-thirdparty 0.7.0 (AutoMapperLegacy, the F104 workaround gone) it installs through [setup] (and makes a template and document type through the back office API) and passes 33/33 on Linux in every run and on Windows in CI runs 42020729339 and 42032474244: the front end, MVC, Web API with verbs (a page published, edited, unpublished, deleted and purged with X-UMB-XSRF-TOKEN), SignalR, Web Forms, ASMX, ClientDependency. Umbraco's SQL visitor reads C# 14's span Contains (F165). F105 fixed in 0.9.0."
 needs = ["mssql"]
 
 # web.Template.config has Umbraco's own empty connection string, so the site starts uninstalled and the installer's

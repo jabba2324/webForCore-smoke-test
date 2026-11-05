@@ -60,25 +60,25 @@
       ]
     },
     "build": {
-      "at": "2026-11-05T11:35:57+00:00",
+      "at": "2026-11-05T13:09:43+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/umbraco-7/logs/build.log",
-      "seconds": 51,
+      "seconds": 48,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T11:35:06+00:00",
+      "at": "2026-11-05T13:08:55+00:00",
       "commit": "bd60f4e2cea7ace2984dcfb8e61ef6512ea77c73",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-05T11:36:34+00:00",
+      "at": "2026-11-05T13:10:19+00:00",
       "created": [
-        "umbraco7cms"
+        "umbraco7"
       ],
       "date": "2026-11-05",
       "status": "pass",
@@ -123,209 +123,209 @@
       "summary": "7/7 steps"
     },
     "smoke": {
-      "at": "2026-11-05T11:36:55+00:00",
+      "at": "2026-11-05T13:10:26+00:00",
       "checks": [
         {
-          "ms": 14,
+          "ms": 12,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 201,
+          "ms": 773,
           "ok": true,
           "path": "/umbraco/",
           "status": 200
         },
         {
-          "ms": 17,
+          "ms": 14,
           "ok": true,
           "path": "/install/",
           "status": 302
         },
         {
-          "ms": 69,
+          "ms": 57,
           "ok": true,
           "path": "/umbraco/backoffice/UmbracoApi/Authentication/IsAuthenticated",
           "status": 200
         },
         {
-          "ms": 14,
+          "ms": 10,
           "ok": true,
           "path": "/umbraco/backoffice/UmbracoApi/Section/GetSections",
           "status": 401
         },
         {
-          "ms": 48,
+          "ms": 32,
           "ok": true,
           "path": "/umbraco/LocalizedText",
           "status": 200
         },
         {
-          "ms": 47,
+          "ms": 32,
           "ok": true,
           "path": "/umbraco/Application",
           "status": 200
         },
         {
-          "ms": 666,
+          "ms": 29,
           "ok": true,
           "path": "/umbraco/BackOffice/signalr/hubs",
           "status": 200
         },
         {
-          "ms": 8,
+          "ms": 6,
           "ok": true,
           "path": "/umbraco/ping.aspx",
           "status": 200
         },
         {
-          "ms": 52,
+          "ms": 486,
           "ok": true,
           "path": "/umbraco/webservices/legacyAjaxCalls.asmx",
           "status": 200
         },
         {
-          "ms": 17,
+          "ms": 11,
           "ok": true,
           "path": "/umbraco/webservices/CheckForUpgrade.asmx/js",
           "status": 200
         },
         {
-          "ms": 15,
+          "ms": 17,
           "ok": true,
           "path": "/DependencyHandler.axd?s=L3VtYnJhY29fY2xpZW50L21vZGFsL3N0eWxlLmNzczs&t=Css&cdv=1",
           "status": 200
         },
         {
-          "ms": 16,
+          "ms": 7,
           "ok": true,
           "path": "/umbraco_client/modal/style.css",
           "status": 200
         },
         {
-          "ms": 7,
+          "ms": 3,
           "ok": true,
           "path": "/css/Smoke.css",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 626,
+          "ms": 408,
           "ok": true,
           "path": "/umbraco/backoffice/UmbracoApi/Authentication/PostLogin",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 236,
+          "ms": 52,
           "ok": true,
           "path": "/umbraco/backoffice/UmbracoApi/Content/PostSave",
           "status": 417
         },
         {
           "method": "POST",
-          "ms": 2000,
+          "ms": 555,
           "ok": true,
           "path": "/umbraco/backoffice/UmbracoApi/Content/PostSave",
           "status": 200
         },
         {
-          "ms": 385,
+          "ms": 126,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 177,
+          "ms": 183,
           "ok": true,
           "path": "/umbraco/backoffice/UmbracoApi/Content/PostSave",
           "status": 200
         },
         {
-          "ms": 19,
+          "ms": 7,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 108,
+          "ms": 69,
           "ok": true,
           "path": "/umbraco/backoffice/UmbracoApi/Content/PostUnPublish?id={page}",
           "status": 200
         },
         {
-          "ms": 9,
+          "ms": 3,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
           "method": "DELETE",
-          "ms": 112,
+          "ms": 49,
           "ok": true,
           "path": "/umbraco/backoffice/UmbracoApi/Content/DeleteById?id={page}",
           "status": 200
         },
         {
-          "ms": 33,
+          "ms": 17,
           "ok": true,
           "path": "/umbraco/backoffice/UmbracoApi/Content/GetById?id={page}",
           "status": 200
         },
         {
           "method": "DELETE",
-          "ms": 84,
+          "ms": 157,
           "ok": true,
           "path": "/umbraco/backoffice/UmbracoApi/Content/EmptyRecycleBin",
           "status": 200
         },
         {
-          "ms": 23,
+          "ms": 13,
           "ok": true,
           "path": "/umbraco/backoffice/UmbracoApi/Content/GetById?id={page}",
           "status": 404
         },
         {
-          "ms": 11,
+          "ms": 6,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 11,
+          "ms": 1,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 8,
+          "ms": 1,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 11,
+          "ms": 1,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 6,
+          "ms": 1,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/Umbraco.Web.UI.dll",
           "status": 404
         },
         {
-          "ms": 6,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404

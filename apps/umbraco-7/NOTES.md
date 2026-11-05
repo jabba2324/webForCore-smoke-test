@@ -1,7 +1,7 @@
 # Umbraco 7: migration notes
 
-Status: migrated (installs through `[setup]` and passes 21/21 on Linux and Windows, webForCore 0.8.0 with webForCore-thirdparty
-0.6.0's `webForCore.AutoMapperLegacy`). Source: https://github.com/umbraco/Umbraco-CMS at `bd60f4e2` (tag
+Status: blocked (round 0.9.0: 33/33 on Linux in every run, and on Windows in 2 of 3 CI runs; the third, 42027500654, had
+32/33, the second content save failing to map, [F168](../../FINDINGS.md#f168)). webForCore 0.9.0, webForCore-thirdparty 0.7.0. Source: https://github.com/umbraco/Umbraco-CMS at `bd60f4e2` (tag
 release-7.15.11, the last 7.x release). The repo, licence (MIT), web project and its `<TargetFrameworkVersion>` (v4.5.2)
 were checked when the app was added.
 
@@ -184,6 +184,11 @@ Not done:
   probes (33 in all; 7 of them POST or DELETE) make, publish, edit, unpublish, delete and purge a page; they needed
   step 10 (F165). 33/33 twice in a row on the same database, from a new one (`fetch --reset`, `build`, `setup`,
   `smoke`).
+- **Round 0.9.0, CI:** Linux 33/33 in runs 42020729339, 42022957921, 42027500654 and 42032474244; Windows 33/33 in
+  42020729339 and 42032474244, and 32/33 in 42027500654: the second `Content/PostSave` (the page saved again under a
+  new name) answered 500, "Error mapping types. IContent -> ContentItemDisplay" ([F168](../../FINDINGS.md#f168), cause
+  not found; Umbraco's own log, which would have the inner exception, isn't among CI's logs). Blocked until it's
+  understood.
 
 What round 6 saw (F22): Umbraco's boot threw in `CoreBootManager.InitializeModelMappers` → `Mapper.Initialize` →
 `CodeFileDisplayMapper.ConfigureMappings` line 41, `ArgumentException: The type or method has 3 generic parameter(s),
@@ -248,6 +253,7 @@ Other things seen:
 
 ## Open problems
 
+- F168: Windows, intermittent: the content save's mapping fails (1 of 3 runs).
 - F165, against webForCore-thirdparty (an issue to raise there): the package needs C# 14, whose span conversions
   change `array.Contains` in expression trees, which Umbraco's SQL visitor rejected. Handled in the visitor (step 10).
 - F104 (fixed in webForCore-thirdparty 0.7.0, [webForCore-thirdparty#11](https://github.com/xforcore/webForCore-thirdparty/issues/11)):

@@ -187,6 +187,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F165](#f165) | webForCore.AutoMapperLegacy needs C# 14, so F83's `<LangVersion>` fix can't be used: `array.Contains(x)` in an expression tree becomes `MemoryExtensions.Contains(op_Implicit(array), x)`, which Umbraco 7's SQL expression visitor rejects | app/environment (webForCore-thirdparty) | umbraco-7 | to raise (thirdparty) |
 | [F166](#f166) | Telerik.Web.Mvc (SmartStoreNET's checked-in .NET Framework build) calls `AppDomain.DefineDynamicAssembly`, which .NET doesn't have: every administration page is a 500 | app/environment | smartstorenet | - |
 | [F167](#f167) | Windows: a long request (DNN's install) is cut about 5 s after its own change to `bin` recycles the worker; .NET Framework drains in-flight requests for `<httpRuntime shutdownTimeout>` (DNN: 120 s) | webForCore bug (cause not confirmed) | dnn-platform-9 | to raise |
+| [F168](#f168) | Windows, intermittent: Umbraco 7's content save answers "Error mapping types. IContent -> ContentItemDisplay" (AutoMapper 12 through webForCore.AutoMapperLegacy) | not classified (cause not found) | umbraco-7 | - |
 ---
 
 ## F1
@@ -1843,6 +1844,8 @@ which copies the same way on IIS). Found on 0.8.0 (Windows, CI), with nopCommerc
   lines and first stack frames (`stack`, paths scrubbed as in the logs).
 - Not raised: nothing shown to differ from IIS, where nopCommerce copies the same way (its code's comments describe
   locked plugin files there, and the rename is its workaround).
+- **Round 0.9.0:** still there: 37/37 in Windows runs 42025207546 and 42032474244, 7/37 in 42027500654 (`Nop.Plugin.Shipping.FixedOrByWeight.dll`
+  this time).
 
 ## F90
 
@@ -2447,3 +2450,19 @@ cause not confirmed. Found on 0.9.0 (Windows, CI run 42027500654), with DNN Plat
 - **Not confirmed:** whether the worker aborts its requests on shutdown, or DNN's own code ends the response when it
   sees the application shutting down. A repro: a page that writes and flushes a line a second for 60 s and, after 2 s,
   touches a file in `bin_dotnet`; on IIS all 60 lines arrive.
+
+## F168
+
+**Windows, intermittent: saving a page again through Umbraco 7's back office answers "Error mapping types. IContent ->
+ContentItemDisplay".** Not classified: the cause isn't found. Found on webForCore 0.9.0 with webForCore-thirdparty 0.7.0
+(AutoMapper 12 through `webForCore.AutoMapperLegacy`), in Windows CI.
+
+- **Apps:** umbraco-7, in 1 of 3 Windows runs (CI run 42027500654: 32/33; 33/33 in 42020729339 and
+  42032474244), never on Linux (4 runs and the local ones). The probe is the second `Content/PostSave` (the page saved
+  again under a new name, `action = "publish"`); the first save and publish of the same page, the probe before it,
+  passed in the same run, and the probes after it (unpublish, delete, recycle bin) passed.
+- **Error:** a 500 from Web API, `AutoMapperMappingException`'s "Error mapping types. Mapping types: IContent ->
+  ContentItemDisplay ... Type Map configuration: IContent -> ContentItemDisplay" (the probe keeps only the first 300
+  characters; Umbraco's own log, which would have the inner exception, isn't among CI's logs).
+- **Next:** keep Umbraco's `App_Data/Logs` from a failing run (or run the probe in a loop on Windows) for the inner
+  exception: a member resolver that fails now and then (the page's URLs, its dates) or the facade's configuration.
