@@ -99,6 +99,16 @@ Overlay change for 0.2.0: `CatalogDBInitializer.ExecuteScript` builds the script
 
 All 15 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0, and its 6 `ExcludeAssets` references for transitive Microsoft packages were removed: webForCore's packages override them since 0.3.0 (webForCore#23).
 
+### Probes with verbs (C# runner, November 2026)
+
+Ten probes more, on webForCore 0.8.0: the catalog's Create, Edit and Delete forms, which are
+`[ValidateAntiForgeryToken]`. Each form's `GET` sets the anti-forgery cookie and renders the token, captured and posted
+with the fields (the probes share a cookie jar); each post answers 302 to the list. Between them, the list (the new
+item's id captured from its Edit link), Details with the edit, and a 404 for it after the delete; and a post without
+the token, which MVC refuses (500, its anti-forgery error naming
+`__RequestVerificationToken`). 26 checks in all, all passing on Linux and Windows (CI run 41940185337). On a database of one's own,
+the seed scripts' `USE [Microsoft.eShopOnContainers.Services.CatalogDb]` has to change with the connection string.
+
 ## Open problems
 
 Round 1 (webForCore 0.1.0); the webForCore bugs below are fixed in 0.2.0 (PR #16) and kept for the record.
