@@ -128,7 +128,7 @@ index c86c11c6d9..36adf3ed00 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -2193,11 +2193,11 @@ index 69f6fb39b4..8426eaafa3 100644
 -    <Compile Include="Xml\XPathNavigatorExtensions.cs" />
 -    <Compile Include="Xml\XPathVariable.cs" />
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.9.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.9.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.9.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.9.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -2206,7 +2206,7 @@ index 69f6fb39b4..8426eaafa3 100644
 -    <None Include="packages.config" />
 +    <!-- The app's own libraries. -->
 +    <!-- AutoMapper 3.3.1 doesn't run on .NET (F22): its static API on AutoMapper 12, from webForCore-thirdparty. -->
-+    <PackageReference Include="webForCore.AutoMapperLegacy" Version="0.6.0" />
++    <PackageReference Include="webForCore.AutoMapperLegacy" Version="0.7.0" />
 +    <PackageReference Include="ClientDependency" Version="1.9.9" />
 +    <PackageReference Include="HtmlAgilityPack" Version="1.8.8" />
 +    <PackageReference Include="ImageProcessor" Version="2.7.0.100" />
@@ -5038,15 +5038,15 @@ index ff05f9b475..3692a67cb2 100644
 -    <Content Include="Config\FileSystemProviders.config" />
 -    <Content Include="Config\EmbeddedMedia.config" />
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.9.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.9.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.9.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.9.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.9.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.9.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -5055,7 +5055,7 @@ index ff05f9b475..3692a67cb2 100644
 +    <!-- The app's own libraries (without Microsoft.CodeAnalysis 1.0, which was there for the DotNetCompilerPlatform
 +         compiler, and MSBuild.Microsoft.VisualStudio.Web.targets: webForCore brings its compiler, the SDK its targets). -->
 +    <!-- AutoMapper 3.3.1 doesn't run on .NET (F22): its static API on AutoMapper 12, from webForCore-thirdparty. -->
-+    <PackageReference Include="webForCore.AutoMapperLegacy" Version="0.6.0" />
++    <PackageReference Include="webForCore.AutoMapperLegacy" Version="0.7.0" />
 +    <PackageReference Include="ClientDependency" Version="1.9.9" />
 +    <PackageReference Include="ClientDependency-Mvc5" Version="1.9.3" />
 +    <PackageReference Include="dotless" Version="1.5.2" />
@@ -8597,16 +8597,16 @@ index c110391d91..f4e15437ef 100644
    <ItemGroup>
 -    <WebReferences Include="Web References\" />
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.SignalR.SystemWeb" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.9.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.9.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.9.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.9.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.9.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.9.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.SignalR.SystemWeb" Version="0.9.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -8634,7 +8634,7 @@ index c110391d91..f4e15437ef 100644
 -    </WebReferenceUrl>
 +    <!-- The app's own libraries. -->
 +    <!-- AutoMapper 3.3.1 doesn't run on .NET (F22): its static API on AutoMapper 12, from webForCore-thirdparty. -->
-+    <PackageReference Include="webForCore.AutoMapperLegacy" Version="0.6.0" />
++    <PackageReference Include="webForCore.AutoMapperLegacy" Version="0.7.0" />
 +    <PackageReference Include="ClientDependency" Version="1.9.9" />
 +    <PackageReference Include="dotless" Version="1.5.2" />
 +    <PackageReference Include="Examine" Version="0.1.90" />
@@ -11047,7 +11047,7 @@ index afed7e804a..9b20c08d69 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -11555,10 +11555,10 @@ index 95730cfa07..cc6c5a77fa 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -12140,16 +12140,16 @@ index aef9f365ad..0a0bcabfe2 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.9.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
 +    <!-- The app's own libraries. -->
 +    <!-- AutoMapper 3.3.1 doesn't run on .NET (F22): its static API on AutoMapper 12, from webForCore-thirdparty. -->
-+    <PackageReference Include="webForCore.AutoMapperLegacy" Version="0.6.0" />
++    <PackageReference Include="webForCore.AutoMapperLegacy" Version="0.7.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -12965,7 +12965,7 @@ index ba0d180b1e..22a45d9711 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -13650,7 +13650,7 @@ index 4858b916db..755e66594c 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -14066,7 +14066,7 @@ index 4e8a4b08ac..220f25571d 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -14805,7 +14805,7 @@ index aabdc4bf63..ed5718aed6 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -15560,7 +15560,7 @@ index d56d89bc31..a64072f833 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
 +  </ItemGroup>
 +
 +</Project>
@@ -15946,7 +15946,7 @@ index a55d92b58c..05ed8cf441 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>

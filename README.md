@@ -48,7 +48,7 @@ Apps reference webForCore's NuGet packages, which are attached to its GitHub rel
 `dotnet run scripts/wfc.cs -- packages` downloads a release into `.packages/v<version>/` (needs `gh`), and builds restore from
 there, together with webForCore-thirdparty's release (WebActivatorEx and AjaxControlToolkit built for webForCore; see
 CLAUDE.md) and, from webForCore 0.7.0, drawingForCore's (System.Drawing, which the `webForCore` package depends on).
-`WEBFORCORE_VERSION`, `THIRDPARTY_VERSION` and `DRAWING_VERSION` pick the releases (default 0.8.0, 0.6.0 and 0.3.0). An app migrated against webForCore's source instead
+`WEBFORCORE_VERSION`, `THIRDPARTY_VERSION` and `DRAWING_VERSION` pick the releases (default 0.9.0, 0.7.0 and 0.3.0). An app migrated against webForCore's source instead
 refers to it through `$(WEBFORCORE_DIR)` (default `../webForCore`).
 
 ```sh
@@ -90,7 +90,7 @@ It runs:
   ```sh
   gh workflow run smoke.yml                                  # every migrated app
   gh workflow run smoke.yml -f apps="miniblog bonobo-git-server"
-  gh workflow run smoke.yml -f webforcore_version=0.8.0 -f thirdparty_version=0.6.0 -f drawing_version=0.3.0
+  gh workflow run smoke.yml -f webforcore_version=0.9.0 -f thirdparty_version=0.7.0 -f drawing_version=0.3.0
   ```
 - **On a pull request or a push to `main`,** for the apps it changes (`apps/<id>/`), or for every app if it changes
   `scripts/`, `services/` or the workflow.
@@ -128,8 +128,8 @@ section 1). Reference the packages by version; the runner adds `.packages/` as a
 need no `nuget.config` and work on any machine:
 
 ```xml
-<PackageReference Include="webForCore" Version="0.8.0" />
-<PackageReference Include="webForCore.Web.Mvc" Version="0.8.0" />
+<PackageReference Include="webForCore" Version="0.9.0" />
+<PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
 ```
 
 Change only what the platform needs, as the guide says. A workaround in the app for a webForCore bug doesn't count

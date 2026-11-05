@@ -2,7 +2,7 @@
 // against webForCore, run them on Kestrel and probe them. A .NET file-based program (the .NET 10 SDK; Tomlyn reads
 // app.toml):
 //
-//     dotnet run scripts/wfc.cs -- packages [--version 0.8.0]  # download webForCore's (and webForCore-thirdparty's) release packages into .packages/
+//     dotnet run scripts/wfc.cs -- packages [--version 0.9.0]  # download webForCore's (and webForCore-thirdparty's) release packages into .packages/
 //     dotnet run scripts/wfc.cs -- list
 //     dotnet run scripts/wfc.cs -- fetch <id>... | --all [--reset]
 //     dotnet run scripts/wfc.cs -- assess <id>... | --all
@@ -63,11 +63,11 @@ static class Wfc
     // builds restore from it (apps reference the packages, docs/MIGRATING.md section 1). WEBFORCORE_DIR is only needed by
     // apps still migrated against webForCore's source.
     const string WebforcoreRepo = "xforcore/webForCore";
-    static string WebforcoreVersion = EnvOr("WEBFORCORE_VERSION", "0.8.0");
+    static string WebforcoreVersion = EnvOr("WEBFORCORE_VERSION", "0.9.0");
     // Builds of third-party libraries for webForCore (WebActivatorEx, AjaxControlToolkit; CLAUDE.md), from
     // webForCore-thirdparty's releases, go in the same folder.
     const string ThirdpartyRepo = "xforcore/webForCore-thirdparty";
-    static readonly string ThirdpartyVersion = EnvOr("THIRDPARTY_VERSION", "0.6.0");
+    static readonly string ThirdpartyVersion = EnvOr("THIRDPARTY_VERSION", "0.7.0");
     static readonly string[] ThirdpartyPackages = ["webForCore.WebActivatorEx", "webForCore.AjaxControlToolkit"];
     // System.Drawing, which the webForCore package depends on from 0.7.0 (drawingForCore and drawingForCore.Common),
     // goes there too.
