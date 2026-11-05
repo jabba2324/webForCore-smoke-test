@@ -10,7 +10,7 @@ generated = ["**/Cms_Data/Account/Users/admin.config"]
 kinds = ["mvc"]
 licence = "BSD-3-Clause"
 status = "migrated"
-notes = "Kooboo CMS 4.4 (MVC 4, .NET 4.0, file storage) on webForCore 0.8.0: builds, creates a site through [setup] and passes 23/23 on Linux and Windows (CI run 41920542509). Found F90 (crypto factories), F91 (DotNetZip 1.9) and F92 (inotify instances per directory: here it needs more than this machine had free)."
+notes = "Kooboo CMS 4.4 (MVC 4, .NET 4.0, file storage) on webForCore 0.9.0: builds, creates a site through [setup] and passes 40/40 on Linux and Windows (CI runs 42027500654, 42032474244), with verbs: an article created, edited and deleted through the back office's AJAX forms, a member registered, logged in and deleted. F90 and F91; F92 fixed in 0.9.0."
 
 # Kooboo keeps its sites, content and users in files under Cms_Data. The setup logs in as the default admin
 # (admin/admin) and creates a site, "sample", from the SampleSite template, with its content database and membership.
@@ -115,3 +115,111 @@ status = 200
 [[probes]]
 path = "/Scripts/less.js"
 contains = "less"
+
+# Verbs (round 0.9.0). The back office, as its AJAX forms post: the log-in, an article created in the sample site's
+# Article folder (published), shown on the front end, edited, deleted, and gone (the sample's detail template throws
+# for a missing article, so that probe checks only that the article's text is gone). Then the front end's member
+# forms (each with its anti-forgery token): a member registers and logs in, and the back office deletes them. A run
+# leaves the site as it found it.
+[[probes]]
+path = "/Account/LogOn"
+method = "POST"
+cookies = true
+status = 302
+form = { UserName = "admin", Password = "admin", RememberMe = "false" }
+
+[[probes]]
+path = "/Contents/TextContent/Create?siteName=sample&repositoryName=sample&folderName=Article"
+method = "POST"
+cookies = true
+headers = { X-Requested-With = "XMLHttpRequest" }
+form = { Title = "Smoke Probe Article", Summary = "Posted by the smoke test", Description = "<p>Smoke probe body</p>", Readings = "0", Published = "true", cat_Category_value = "", cat_Category_value_old = "" }
+contains = "\"Success\":true"
+
+[[probes]]
+path = "/dev~sample/Articles/Detail/Smoke-Probe-Article"
+contains = "<title>Smoke Probe Article - Sample site</title>"
+
+[[probes]]
+path = "/Contents/TextContent?siteName=sample&repositoryName=sample&folderName=Article"
+cookies = true
+contains = "Smoke Probe Article"
+capture = { article = 'UserKey=Smoke-Probe-Article&amp;UUID=([^&"]+)' }
+
+[[probes]]
+path = "/Contents/TextContent/Edit?siteName=sample&repositoryName=sample&folderName=Article&UUID={article}"
+method = "POST"
+cookies = true
+headers = { X-Requested-With = "XMLHttpRequest" }
+form = { Title = "Smoke Probe Article", Summary = "Edited by the smoke test", Description = "<p>Smoke probe body, edited</p>", Readings = "0", Published = "true", cat_Category_value = "", cat_Category_value_old = "" }
+contains = "\"Success\":true"
+
+[[probes]]
+path = "/dev~sample/Articles/Detail/Smoke-Probe-Article"
+contains = "Smoke probe body, edited"
+
+[[probes]]
+path = "/Contents/TextContent/Delete?siteName=sample&repositoryName=sample&folderName=Article"
+method = "POST"
+cookies = true
+headers = { X-Requested-With = "XMLHttpRequest" }
+form = { docs = "{article}" }
+contains = "\"Success\":true"
+
+[[probes]]
+path = "/dev~sample/Articles/Detail/Smoke-Probe-Article"
+absent = "Smoke probe body"
+
+[[probes]]
+path = "/Contents/TextContent?siteName=sample&repositoryName=sample&folderName=Article"
+cookies = true
+absent = "Smoke-Probe-Article"
+
+[[probes]]
+path = "/dev~sample/Member/Register"
+cookies = true
+capture = { token = 'RegisterMember" method="post">\s*<input name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/dev~sample/Kooboo-Submit/RegisterMember"
+method = "POST"
+cookies = true
+headers = { X-Requested-With = "XMLHttpRequest" }
+form = { __RequestVerificationToken = "{token}", UserName = "smokemember", Email = "smokemember@example.com", Password = "Smoke_1234", ConfirmPassword = "Smoke_1234" }
+contains = "\"Success\":true"
+
+[[probes]]
+path = "/dev~sample/Member/Login"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/dev~sample/Kooboo-Submit/ValidateMember"
+method = "POST"
+cookies = true
+headers = { X-Requested-With = "XMLHttpRequest" }
+form = { __RequestVerificationToken = "{token}", UserName = "smokemember", Password = "Smoke_1234", RememberMe = "false" }
+contains = "\"Model\":\"smokemember\""
+
+[[probes]]
+path = "/dev~sample/Member/Profile"
+cookies = true
+contains = "smokemember"
+
+[[probes]]
+path = "/Membership/MembershipUser?siteName=sample&membershipName=SampleSite"
+cookies = true
+contains = "smokemember"
+
+[[probes]]
+path = "/Membership/MembershipUser/Delete?siteName=sample&membershipName=SampleSite"
+method = "POST"
+cookies = true
+headers = { X-Requested-With = "XMLHttpRequest" }
+form = { "model[0].UUID" = "smokemember" }
+contains = "\"Success\":true"
+
+[[probes]]
+path = "/Membership/MembershipUser?siteName=sample&membershipName=SampleSite"
+cookies = true
+absent = "smokemember"

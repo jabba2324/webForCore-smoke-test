@@ -2,27 +2,226 @@
   "id": "smartstorenet",
   "stages": {
     "build": {
-      "at": "2026-11-05T11:30:46+00:00",
-      "error_count": 1,
-      "errors": [
-        "error CS0104: 'ReferenceEqualityComparer' is an ambiguous reference between 'SmartStore.ComponentModel.ReferenceEqualityComparer' and 'System.Collections.Generic.ReferenceEqualityComparer' "
-      ],
+      "at": "2026-11-05T13:58:43+00:00",
+      "error_count": 0,
+      "errors": [],
       "log": "apps\\smartstorenet\\logs.windows\\build.log",
-      "seconds": 88,
-      "status": "fail",
-      "summary": "1 distinct errors",
+      "seconds": 306,
+      "status": "pass",
+      "summary": null,
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T11:29:17+00:00",
+      "at": "2026-11-05T13:53:36+00:00",
       "commit": "b6520754a3793da1bd4157589459b6cac7f2ef8c",
       "overlay": true,
       "status": "pass"
     },
+    "setup": {
+      "at": "2026-11-05T13:59:51+00:00",
+      "created": [
+        "smartstore"
+      ],
+      "date": "2026-11-05",
+      "status": "pass",
+      "steps": [
+        {
+          "ok": true,
+          "status": 200,
+          "step": "/install"
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "step": "/install/Install"
+        },
+        {
+          "may_fail": true,
+          "ok": true,
+          "status": 200,
+          "step": "/install/Finalize?restart=true"
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "step": "/"
+        }
+      ],
+      "summary": "4/4 steps"
+    },
     "smoke": {
-      "at": "2026-11-05T11:30:47+00:00",
-      "status": "skip",
-      "summary": "not built ($WFC_CHECKOUTS/smartstorenet/src/Presentation/SmartStore.Web/bin_dotnet/SmartStore.Web.dll missing)"
+      "at": "2026-11-05T14:00:18+00:00",
+      "checks": [
+        {
+          "ms": 186,
+          "ok": true,
+          "path": "/",
+          "status": 200
+        },
+        {
+          "ms": 1948,
+          "ok": true,
+          "path": "/apple",
+          "status": 200
+        },
+        {
+          "ms": 2736,
+          "ok": true,
+          "path": "/charles-eames-lounge-chair-1956",
+          "status": 200
+        },
+        {
+          "ms": 535,
+          "ok": true,
+          "path": "/search?q=chair",
+          "status": 200
+        },
+        {
+          "ms": 1196,
+          "ok": true,
+          "path": "/blog",
+          "status": 200
+        },
+        {
+          "ms": 1042,
+          "ok": true,
+          "path": "/boards",
+          "status": 200
+        },
+        {
+          "ms": 1001,
+          "ok": true,
+          "path": "/login",
+          "status": 200
+        },
+        {
+          "ms": 155,
+          "ok": true,
+          "path": "/register",
+          "status": 200
+        },
+        {
+          "ms": 105,
+          "ok": true,
+          "path": "/contactus",
+          "status": 200
+        },
+        {
+          "ms": 354,
+          "ok": true,
+          "path": "/Themes/Flex/Content/theme.scss",
+          "status": 200
+        },
+        {
+          "ms": 18,
+          "ok": true,
+          "path": "/Content/vendors/jquery/jquery-3.4.1.js",
+          "status": 200
+        },
+        {
+          "ms": 211,
+          "ok": false,
+          "path": "/admin",
+          "status": 404,
+          "title": "\n<!DOCTYPE html>\n<html  id=\"\" lang=\"en\" dir=\"ltr\" data-pnotify-firstpos1=\"0\">\n<head>\n    <meta charset=\"utf-8\">\n    <title itemprop=\"name\">Shop. 404</title>\n    <meta http-equiv=\"x-ua-compatible\" content=\"ie=edge\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-sca"
+        },
+        {
+          "method": "POST",
+          "ms": 155,
+          "ok": true,
+          "path": "/cart/addproductsimple/24?forceredirection=False",
+          "status": 200
+        },
+        {
+          "ms": 976,
+          "ok": true,
+          "path": "/cart",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 41,
+          "ok": true,
+          "path": "/shoppingcart/deletecartitem?cartItemId={item}",
+          "status": 200
+        },
+        {
+          "ms": 41,
+          "ok": true,
+          "path": "/cart",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 54,
+          "ok": true,
+          "path": "/login",
+          "status": 302
+        },
+        {
+          "ms": 475,
+          "ok": true,
+          "path": "/customer/info",
+          "status": 200
+        },
+        {
+          "ms": 21,
+          "ok": true,
+          "path": "/logout",
+          "status": 302
+        },
+        {
+          "ms": 33,
+          "ok": true,
+          "path": "/customer/info",
+          "status": 302
+        },
+        {
+          "ms": 5,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 1,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "ms": 1,
+          "ok": true,
+          "path": "/packages.config",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/bin_dotnet/SmartStore.Web.dll",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
+          "status": 404
+        }
+      ],
+      "log": "apps\\smartstorenet\\logs.windows\\server.log",
+      "status": "fail",
+      "summary": "26/27 probes"
     }
   }
 }

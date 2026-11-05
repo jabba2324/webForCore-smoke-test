@@ -1,99 +1,97 @@
 info: WebFormsForCore.Host.WorkerPool[0]
-      Started worker 1 (process 2503) for <repo>/apps/kooboo-cms/src/Kooboo.CMS/Kooboo.CMS.Web/bin_dotnet/Kooboo.CMS.Web.dll: the host started.
+      Started worker 1 (process 3315355) for $WFC_CHECKOUTS/kooboo-cms/Kooboo.CMS/Kooboo.CMS.Web/bin_dotnet/Kooboo.CMS.Web.dll: the host started.
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://127.0.0.1:59299
+      Now listening on: http://127.0.0.1:41107
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: <repo>/apps/kooboo-cms/src/Kooboo.CMS/Kooboo.CMS.Web
+      Content root path: $WFC_CHECKOUTS/kooboo-cms/Kooboo.CMS/Kooboo.CMS.Web
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:59299/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:41107/ - - -
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application 8c2fc513 in process 2503 (worker 1 of webforcore-host).
-warn: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application 8c2fc513 runs with the invariant culture: the process has no locale (LANG and LC_ALL unset, or C, POSIX or C.UTF-8), which can't happen on IIS, so resources chosen by culture name aren't found. Set <globalization culture="en-US" uiCulture="en-US" /> in Web.config, or give the environment a locale (LANG=en_US.UTF-8): https://github.com/xforcore/webForCore/blob/main/docs/MIGRATING.md#6-code-changes
+      Started application 1ecd25b1 in process 3315355 (worker 1 of webforcore-host).
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://unix:/tmp/webforcore-Cz22ya/worker-1.sock
+      Now listening on: http://unix:/tmp/webforcore-dPhnEv/worker-1.sock
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 1 (process 2503) is serving (2.1 s after it started).
+      Worker 1 (process 3315355) is serving (1.8 s after it started).
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: <repo>/apps/kooboo-cms/src/Kooboo.CMS/Kooboo.CMS.Web
+      Content root path: $WFC_CHECKOUTS/kooboo-cms/Kooboo.CMS/Kooboo.CMS.Web
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:59299/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:41107/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:59299/ - 302 142 text/html;+charset=utf-8 812.7240ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:41107/ - 302 142 text/html;+charset=utf-8 860.7362ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 302.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:59299/ - 302 142 text/html;+charset=utf-8 2872.7897ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:41107/ - 302 142 text/html;+charset=utf-8 2245.3622ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 POST http://127.0.0.1:59299/Account/LogOn - application/x-www-form-urlencoded 46
+      Request starting HTTP/1.1 POST http://127.0.0.1:41107/Account/LogOn - application/x-www-form-urlencoded 46
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/Account/LogOn HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 POST http://127.0.0.1:59299/Account/LogOn - application/x-www-form-urlencoded 46
+      Request starting HTTP/1.1 POST http://127.0.0.1:41107/Account/LogOn - application/x-www-form-urlencoded 46
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 POST http://127.0.0.1:59299/Account/LogOn - 302 136 text/html;+charset=utf-8 144.1164ms
+      Request finished HTTP/1.1 POST http://127.0.0.1:41107/Account/LogOn - 302 136 text/html;+charset=utf-8 118.1334ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 302.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 POST http://127.0.0.1:59299/Account/LogOn - 302 136 text/html;+charset=utf-8 148.2609ms
+      Request finished HTTP/1.1 POST http://127.0.0.1:41107/Account/LogOn - 302 136 text/html;+charset=utf-8 122.7398ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:59299/Sites/Home/Cluster - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:41107/Sites/Home/Cluster - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/Sites/Home/Cluster HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:59299/Sites/Home/Cluster - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:41107/Sites/Home/Cluster - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:59299/Sites/Home/Cluster - 200 12278 text/html;+charset=utf-8 1397.8041ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:41107/Sites/Home/Cluster - 200 12293 text/html;+charset=utf-8 1881.0708ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:59299/Sites/Home/Cluster - 200 12278 text/html;+charset=utf-8 1399.4837ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:41107/Sites/Home/Cluster - 200 12293 text/html;+charset=utf-8 1882.7042ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 POST http://127.0.0.1:59299/Sites/Site/Create - application/x-www-form-urlencoded 101
+      Request starting HTTP/1.1 POST http://127.0.0.1:41107/Sites/Site/Create - application/x-www-form-urlencoded 101
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/Sites/Site/Create HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 POST http://127.0.0.1:59299/Sites/Site/Create - application/x-www-form-urlencoded 101
+      Request starting HTTP/1.1 POST http://127.0.0.1:41107/Sites/Site/Create - application/x-www-form-urlencoded 101
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 POST http://127.0.0.1:59299/Sites/Site/Create - 200 189 application/json;+charset=utf-8 177.6900ms
+      Request finished HTTP/1.1 POST http://127.0.0.1:41107/Sites/Site/Create - 200 189 application/json;+charset=utf-8 212.8143ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 POST http://127.0.0.1:59299/Sites/Site/Create - 200 189 application/json;+charset=utf-8 178.5409ms
+      Request finished HTTP/1.1 POST http://127.0.0.1:41107/Sites/Site/Create - 200 189 application/json;+charset=utf-8 214.1359ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 POST http://127.0.0.1:59299/Contents/SearchIndex/Rebuild?repositoryName=sample - application/x-www-form-urlencoded 31
+      Request starting HTTP/1.1 POST http://127.0.0.1:41107/Contents/SearchIndex/Rebuild?repositoryName=sample - application/x-www-form-urlencoded 31
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/Contents/SearchIndex/Rebuild?repositoryName=sample HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 POST http://127.0.0.1:59299/Contents/SearchIndex/Rebuild?repositoryName=sample - application/x-www-form-urlencoded 31
+      Request starting HTTP/1.1 POST http://127.0.0.1:41107/Contents/SearchIndex/Rebuild?repositoryName=sample - application/x-www-form-urlencoded 31
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 POST http://127.0.0.1:59299/Contents/SearchIndex/Rebuild?repositoryName=sample - 200 156 application/json;+charset=utf-8 21.4462ms
+      Request finished HTTP/1.1 POST http://127.0.0.1:41107/Contents/SearchIndex/Rebuild?repositoryName=sample - 200 156 application/json;+charset=utf-8 28.8864ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 POST http://127.0.0.1:59299/Contents/SearchIndex/Rebuild?repositoryName=sample - 200 156 application/json;+charset=utf-8 22.4995ms
+      Request finished HTTP/1.1 POST http://127.0.0.1:41107/Contents/SearchIndex/Rebuild?repositoryName=sample - 200 156 application/json;+charset=utf-8 29.7160ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:59299/dev~sample/search?key=Lorem - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:41107/dev~sample/search?key=Lorem - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/dev~sample/search?key=Lorem HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:59299/dev~sample/search?key=Lorem - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:41107/dev~sample/search?key=Lorem - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:59299/dev~sample/search?key=Lorem - 200 11574 text/html;+charset=utf-8 1273.8624ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:41107/dev~sample/search?key=Lorem - 200 11574 text/html;+charset=utf-8 1501.3090ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:59299/dev~sample/search?key=Lorem - 200 11574 text/html;+charset=utf-8 1274.8728ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:41107/dev~sample/search?key=Lorem - 200 11574 text/html;+charset=utf-8 1502.1766ms
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
 info: WebFormsForCore.Hosting.WorkerProcess.WorkerLifetime[0]
@@ -101,6 +99,6 @@ info: WebFormsForCore.Hosting.WorkerProcess.WorkerLifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application 8c2fc513 is shutting down (HostingEnvironment).
+      Application 1ecd25b1 is shutting down (HostingEnvironment).
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 1 (process 2503) exited (0).
+      Worker 1 (process 3315355) exited (0).

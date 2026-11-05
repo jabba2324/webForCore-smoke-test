@@ -1,6 +1,6 @@
 # Umbraco 8: migration notes
 
-Status: migrated (CI run 41920542509: 21/21 on Linux and Windows). Source: https://github.com/umbraco/Umbraco-CMS at `4fbf8020` (tag release-8.18.15, the last
+Status: migrated (round 0.9.0, webForCore 0.9.0: 40/40 on Linux and Windows in CI runs 42027500654 and 42032474244). Source: https://github.com/umbraco/Umbraco-CMS at `4fbf8020` (tag release-8.18.15, the last
 8.x release). The repo, licence (MIT), web project and its `<TargetFrameworkVersion>` (v4.7.2) were checked when the
 app was pinned.
 
@@ -127,7 +127,7 @@ hub's proxies and negotiation, ClientDependency's `DependencyHandler.axd`, two s
 
 With the C# runner's requests (README.md, "Requests"), setup now makes content as the AngularJS back office would: it
 logs in (capturing the `UMB-XSRF-TOKEN` cookie), then sends that value as `X-UMB-XSRF-TOKEN` with `Template/PostSave`
-(a Razor template, written to `Views/SmokePage.cshtml`, in `generated`), `ContentType/PostSave` (a document type using
+(a Razor template, written to `Views/SmokePage.cshtml`, which Umbraco's `.gitignore` keeps out of the overlay), `ContentType/PostSave` (a document type using
 it) and `Content/PostSave` (a multipart form whose `contentItem` field is the item; `publishNew`), giving a published
 home page. Between the unattended install and the saves, setup restarts the application (`restart = true`): Umbraco
 composes the back office's services at the runtime level it boots at, so in the process that ran the unattended
@@ -140,6 +140,19 @@ header (a call without it gets new tokens, as Umbraco's `SetAngularAntiForgeryTo
 without the header (417) and with it (published; the page's id and URL captured), the page on the front end, a
 `DELETE` of it (`DeleteById`, to the recycle bin) and a 404 for its URL. Each smoke run publishes and deletes a page
 of its own. 28 checks in all, all passing on Linux and Windows (CI run 41940185337).
+
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+28/28 on Linux as committed. Then 12 more probes (40 in all; 7 of the new ones POST or DELETE, 11 in all), and the
+page's `DELETE` and 404 moved after them: the page is saved again under a new name with `publish` (its URL follows the
+name, and the front end shows the new one), unpublished (`PostUnpublish`, JSON; the URL is then a 404), deleted, shown
+trashed by `GetById`, and the recycle bin emptied (`DELETE Content/EmptyRecycleBin`; `GetById` is then a 404). Then
+the media section: a folder made (`Media/PostAddFolder`, JSON) and listed, a `DELETE` of it refused with Web API's
+405 (the media API's `DeleteById` is POST-only), deleted with a `POST`, and the media recycle bin emptied (the folder
+is then a 404). A run now leaves no content or media behind. 40/40 on Linux, twice in a row on the same database (a
+new one, as CI's). `generated` (the template's view) is gone from `app.toml`: Umbraco's `.gitignore` already keeps it
+out, and the C# runner's `save-overlay` fails on an excluded path that git ignores (`git add -N` "paths are ignored").
+No overlay change.
 
 ## Open problems
 

@@ -39,23 +39,23 @@
       ]
     },
     "build": {
-      "at": "2026-11-05T11:21:17+00:00",
+      "at": "2026-11-05T13:12:08+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/nopcommerce-3.90/logs/build.log",
-      "seconds": 164,
+      "seconds": 161,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T11:18:33+00:00",
+      "at": "2026-11-05T13:09:26+00:00",
       "commit": "12d1f0139149a9d6e84964d325d62bae6ac748f6",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-05T11:22:16+00:00",
+      "at": "2026-11-05T13:13:05+00:00",
       "created": [
         "nop390"
       ],
@@ -82,88 +82,88 @@
       "summary": "3/3 steps"
     },
     "smoke": {
-      "at": "2026-11-05T11:22:35+00:00",
+      "at": "2026-11-05T13:13:32+00:00",
       "checks": [
         {
-          "ms": 137,
+          "ms": 143,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 711,
+          "ms": 694,
           "ok": true,
           "path": "/computers",
           "status": 200
         },
         {
-          "ms": 763,
+          "ms": 750,
           "ok": true,
           "path": "/apple-macbook-pro-13-inch",
           "status": 200
         },
         {
-          "ms": 233,
+          "ms": 258,
           "ok": true,
           "path": "/search?q=apple",
           "status": 200
         },
         {
-          "ms": 1094,
+          "ms": 1114,
           "ok": true,
           "path": "/blog",
           "status": 200
         },
         {
-          "ms": 1267,
+          "ms": 1300,
           "ok": true,
           "path": "/login",
           "status": 200
         },
         {
-          "ms": 991,
+          "ms": 1026,
           "ok": true,
           "path": "/register",
           "status": 200
         },
         {
-          "ms": 149,
+          "ms": 145,
           "ok": true,
           "path": "/contactus",
           "status": 200
         },
         {
-          "ms": 83,
+          "ms": 80,
           "ok": true,
           "path": "/news/rss/1",
           "status": 200
         },
         {
-          "ms": 88,
+          "ms": 98,
           "ok": true,
           "path": "/sitemap.xml",
           "status": 200
         },
         {
-          "ms": 114,
+          "ms": 116,
           "ok": true,
           "path": "/no-such-page",
           "status": 404
         },
         {
-          "ms": 56,
+          "ms": 50,
           "ok": true,
           "path": "/admin",
           "status": 302
         },
         {
-          "ms": 23,
+          "ms": 24,
           "ok": true,
           "path": "/Themes/DefaultClean/Content/css/styles.css",
           "status": 200
         },
         {
-          "ms": 7,
+          "ms": 6,
           "ok": true,
           "path": "/Plugins/Widgets.NivoSlider/Content/nivoslider/nivo-slider.css",
           "status": 200
@@ -175,10 +175,101 @@
           "status": 200
         },
         {
-          "ms": 90,
+          "ms": 67,
           "ok": true,
           "path": "/Plugins/Widgets.NivoSlider/Nop.Plugin.Widgets.NivoSlider.dll",
           "status": 403
+        },
+        {
+          "method": "POST",
+          "ms": 196,
+          "ok": true,
+          "path": "/addproducttocart/details/4/1",
+          "status": 200
+        },
+        {
+          "ms": 421,
+          "ok": true,
+          "path": "/cart",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 133,
+          "ok": true,
+          "path": "/cart",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 151,
+          "ok": true,
+          "path": "/login",
+          "status": 302
+        },
+        {
+          "ms": 5202,
+          "ok": true,
+          "path": "/Admin/Category/Create",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 231,
+          "ok": true,
+          "path": "/Admin/Category/Create",
+          "status": 302
+        },
+        {
+          "method": "POST",
+          "ms": 164,
+          "ok": true,
+          "path": "/Admin/Category/List",
+          "status": 200
+        },
+        {
+          "ms": 218,
+          "ok": true,
+          "path": "/{sename}",
+          "status": 200
+        },
+        {
+          "ms": 176,
+          "ok": true,
+          "path": "/Admin/Category/Edit/{category}",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 209,
+          "ok": true,
+          "path": "/Admin/Category/Edit/{category}",
+          "status": 302
+        },
+        {
+          "ms": 152,
+          "ok": true,
+          "path": "/{sename}",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 141,
+          "ok": true,
+          "path": "/Admin/Category/Delete/{category}",
+          "status": 302
+        },
+        {
+          "ms": 129,
+          "ok": true,
+          "path": "/{sename}",
+          "status": 404
+        },
+        {
+          "ms": 48,
+          "ok": true,
+          "path": "/logout",
+          "status": 302
         },
         {
           "ms": 5,
@@ -199,7 +290,7 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/obj/",
           "status": 404
@@ -225,7 +316,7 @@
       ],
       "log": "apps/nopcommerce-3.90/logs/server.log",
       "status": "pass",
-      "summary": "23/23 probes"
+      "summary": "37/37 probes"
     }
   }
 }

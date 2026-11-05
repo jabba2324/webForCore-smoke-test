@@ -1,291 +1,433 @@
 info: WebFormsForCore.Host.WorkerPool[0]
-      Started worker 1 (process 1147356) for <repo>/apps/umbraco-7/src/src/Umbraco.Web.UI/bin_dotnet/Umbraco.Web.UI.dll: the host started.
+      Started worker 1 (process 3269764) for $WFC_CHECKOUTS/umbraco-7/src/Umbraco.Web.UI/bin_dotnet/Umbraco.Web.UI.dll: the host started.
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://127.0.0.1:40137
+      Now listening on: http://127.0.0.1:40537
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: <repo>/apps/umbraco-7/src/src/Umbraco.Web.UI
+      Content root path: $WFC_CHECKOUTS/umbraco-7/src/Umbraco.Web.UI
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/ - - -
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application d792bc49 in process 1147356 (worker 1 of webforcore-host).
-warn: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application d792bc49 runs with the invariant culture: the process has no locale (LANG and LC_ALL unset, or C, POSIX or C.UTF-8), which can't happen on IIS, so resources chosen by culture name aren't found. Set <globalization culture="en-US" uiCulture="en-US" /> in Web.config, or give the environment a locale (LANG=en_US.UTF-8): https://github.com/xforcore/webForCore/blob/main/docs/MIGRATING.md#6-code-changes
+      Started application 54fa53dc in process 3269764 (worker 1 of webforcore-host).
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://unix:/tmp/webforcore-8lgenj/worker-1.sock
+      Now listening on: http://unix:/tmp/webforcore-xIhVt9/worker-1.sock
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 1 (process 1147356) is serving (0.4 s after it started).
+      Worker 1 (process 3269764) is serving (0.5 s after it started).
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: <repo>/apps/umbraco-7/src/src/Umbraco.Web.UI
-info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/ - - -
+      Content root path: $WFC_CHECKOUTS/umbraco-7/src/Umbraco.Web.UI
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/default.aspx - 200 1917 text/html;+charset=utf-8 1183.5499ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/default.aspx - 200 1917 text/html;+charset=utf-8 664.8230ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/ - 200 1917 text/html;+charset=utf-8 1336.2702ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/ - 200 1917 text/html;+charset=utf-8 707.9877ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/default.aspx - 200 1917 text/html;+charset=utf-8 3.5219ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/default.aspx - 200 1917 text/html;+charset=utf-8 4.1422ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/ - 200 1917 text/html;+charset=utf-8 5.0557ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/ - 200 1917 text/html;+charset=utf-8 6.2233ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/umbraco/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/umbraco/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/umbraco/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/umbraco/ - 200 4057 text/html;+charset=utf-8 190.4108ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco/ - 200 4057 text/html;+charset=utf-8 195.5637ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/umbraco/ - 200 4057 text/html;+charset=utf-8 192.1450ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco/ - 200 4057 text/html;+charset=utf-8 197.8505ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/install/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/install/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/install/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/install/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/install/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/install/ - 302 126 text/html;+charset=utf-8 12.8664ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/install/ - 302 126 text/html;+charset=utf-8 14.3590ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 302.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/install/ - 302 126 text/html;+charset=utf-8 13.5993ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/install/ - 302 126 text/html;+charset=utf-8 15.1889ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/umbraco/backoffice/UmbracoApi/Authentication/IsAuthenticated - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Authentication/IsAuthenticated - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/umbraco/backoffice/UmbracoApi/Authentication/IsAuthenticated HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/umbraco/backoffice/UmbracoApi/Authentication/IsAuthenticated - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Authentication/IsAuthenticated - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/umbraco/backoffice/UmbracoApi/Authentication/IsAuthenticated - 200 11 application/json;+charset=utf-8 72.5111ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Authentication/IsAuthenticated - 200 11 application/json;+charset=utf-8 66.3327ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/umbraco/backoffice/UmbracoApi/Authentication/IsAuthenticated - 200 11 application/json;+charset=utf-8 73.2085ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Authentication/IsAuthenticated - 200 11 application/json;+charset=utf-8 68.1666ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/umbraco/backoffice/UmbracoApi/Section/GetSections - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Section/GetSections - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/umbraco/backoffice/UmbracoApi/Section/GetSections HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/umbraco/backoffice/UmbracoApi/Section/GetSections - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Section/GetSections - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 401.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/umbraco/backoffice/UmbracoApi/Section/GetSections - 401 67 application/json;+charset=utf-8 9.5778ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Section/GetSections - 401 67 application/json;+charset=utf-8 13.0412ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/umbraco/LocalizedText - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco/LocalizedText - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/umbraco/LocalizedText HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/umbraco/backoffice/UmbracoApi/Section/GetSections - 401 67 application/json;+charset=utf-8 11.6118ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Section/GetSections - 401 67 application/json;+charset=utf-8 15.2183ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/umbraco/LocalizedText - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco/LocalizedText - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/umbraco/LocalizedText - 200 129412 application/json;+charset=utf-8 38.2027ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco/LocalizedText - 200 129412 application/json;+charset=utf-8 41.5996ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/umbraco/LocalizedText - 200 129412 application/json;+charset=utf-8 41.0650ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco/LocalizedText - 200 129412 application/json;+charset=utf-8 46.2087ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/umbraco/Application - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco/Application - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/umbraco/Application HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/umbraco/Application - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco/Application - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/umbraco/Application - 200 1891 application/x-javascript;+charset=utf-8 48.8352ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco/Application - 200 1891 application/x-javascript;+charset=utf-8 45.3123ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/umbraco/Application - 200 1891 application/x-javascript;+charset=utf-8 49.5815ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco/Application - 200 1891 application/x-javascript;+charset=utf-8 45.9880ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/umbraco/BackOffice/signalr/hubs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco/BackOffice/signalr/hubs - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/umbraco/BackOffice/signalr/hubs HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/umbraco/BackOffice/signalr/hubs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco/BackOffice/signalr/hubs - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco/BackOffice/signalr/hubs - 200 - application/javascript;+charset=UTF-8 663.1963ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/umbraco/BackOffice/signalr/hubs - 200 - application/javascript;+charset=UTF-8 640.4110ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/umbraco/BackOffice/signalr/hubs - 200 - application/javascript;+charset=UTF-8 642.2557ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco/BackOffice/signalr/hubs - 200 - application/javascript;+charset=UTF-8 665.1463ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/umbraco/ping.aspx - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco/ping.aspx - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/umbraco/ping.aspx HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/umbraco/ping.aspx - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco/ping.aspx - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/umbraco/ping.aspx - 200 12 text/html;+charset=utf-8 6.4384ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco/ping.aspx - 200 12 text/html;+charset=utf-8 6.4710ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/umbraco/ping.aspx - 200 12 text/html;+charset=utf-8 6.9876ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco/ping.aspx - 200 12 text/html;+charset=utf-8 7.1684ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/umbraco/webservices/legacyAjaxCalls.asmx - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco/webservices/legacyAjaxCalls.asmx - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/umbraco/webservices/legacyAjaxCalls.asmx HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/umbraco/webservices/legacyAjaxCalls.asmx - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco/webservices/legacyAjaxCalls.asmx - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/umbraco/webservices/legacyAjaxCalls.asmx - 200 2410 text/html;+charset=utf-8 55.8687ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco/webservices/legacyAjaxCalls.asmx - 200 2410 text/html;+charset=utf-8 49.9921ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/umbraco/webservices/legacyAjaxCalls.asmx - 200 2410 text/html;+charset=utf-8 56.2840ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco/webservices/legacyAjaxCalls.asmx - 200 2410 text/html;+charset=utf-8 50.6001ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/umbraco/webservices/CheckForUpgrade.asmx/js - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco/webservices/CheckForUpgrade.asmx/js - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/umbraco/webservices/CheckForUpgrade.asmx/js HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/umbraco/webservices/CheckForUpgrade.asmx/js - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco/webservices/CheckForUpgrade.asmx/js - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/umbraco/webservices/CheckForUpgrade.asmx/js - 200 4817 application/x-javascript;+charset=utf-8 15.0551ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco/webservices/CheckForUpgrade.asmx/js - 200 4817 application/x-javascript;+charset=utf-8 15.3106ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/umbraco/webservices/CheckForUpgrade.asmx/js - 200 4817 application/x-javascript;+charset=utf-8 15.5423ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco/webservices/CheckForUpgrade.asmx/js - 200 4817 application/x-javascript;+charset=utf-8 15.8969ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/DependencyHandler.axd?s=L3VtYnJhY29fY2xpZW50L21vZGFsL3N0eWxlLmNzczs&t=Css&cdv=1 - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/DependencyHandler.axd?s=L3VtYnJhY29fY2xpZW50L21vZGFsL3N0eWxlLmNzczs&t=Css&cdv=1 - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/DependencyHandler.axd?s=L3VtYnJhY29fY2xpZW50L21vZGFsL3N0eWxlLmNzczs&t=Css&cdv=1 HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/DependencyHandler.axd?s=L3VtYnJhY29fY2xpZW50L21vZGFsL3N0eWxlLmNzczs&t=Css&cdv=1 - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/DependencyHandler.axd?s=L3VtYnJhY29fY2xpZW50L21vZGFsL3N0eWxlLmNzczs&t=Css&cdv=1 - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/DependencyHandler.axd?s=L3VtYnJhY29fY2xpZW50L21vZGFsL3N0eWxlLmNzczs&t=Css&cdv=1 - 200 1146 text/css 13.7095ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/DependencyHandler.axd?s=L3VtYnJhY29fY2xpZW50L21vZGFsL3N0eWxlLmNzczs&t=Css&cdv=1 - 200 1146 text/css 14.9386ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/DependencyHandler.axd?s=L3VtYnJhY29fY2xpZW50L21vZGFsL3N0eWxlLmNzczs&t=Css&cdv=1 - 200 1146 text/css 14.6584ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/DependencyHandler.axd?s=L3VtYnJhY29fY2xpZW50L21vZGFsL3N0eWxlLmNzczs&t=Css&cdv=1 - 200 1146 text/css 14.2301ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/umbraco_client/modal/style.css - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco_client/modal/style.css - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/umbraco_client/modal/style.css HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/umbraco_client/modal/style.css - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco_client/modal/style.css - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/umbraco_client/modal/style.css - 200 1417 text/css 10.6091ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco_client/modal/style.css - 200 1417 text/css 10.3210ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/umbraco_client/modal/style.css - 200 1417 text/css 11.1276ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco_client/modal/style.css - 200 1417 text/css 11.0916ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/css/Smoke.css - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/css/Smoke.css - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/css/Smoke.css HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/css/Smoke.css - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/css/Smoke.css - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/css/Smoke.css - 200 0 text/css 3.1297ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/css/Smoke.css - 200 0 text/css 3.5891ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/css/Smoke.css - 200 0 text/css 3.7572ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/css/Smoke.css - 200 0 text/css 5.6779ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/web.config - - -
+      Request starting HTTP/1.1 POST http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Authentication/PostLogin - application/json;+charset=utf-8 61
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/umbraco/backoffice/UmbracoApi/Authentication/PostLogin HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Authentication/PostLogin - application/json;+charset=utf-8 61
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Authentication/PostLogin - 200 352 application/json;+charset=utf-8 593.9088ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Authentication/PostLogin - 200 352 application/json;+charset=utf-8 598.8547ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/PostSave - multipart/form-data;+boundary=webForCore-smoke-test-boundary 271
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/umbraco/backoffice/UmbracoApi/Content/PostSave HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/PostSave - multipart/form-data;+boundary=webForCore-smoke-test-boundary 271
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/PostSave - 417 0 - 212.7346ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 417.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/PostSave - 417 0 - 215.3450ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/PostSave - multipart/form-data;+boundary=webForCore-smoke-test-boundary 271
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/umbraco/backoffice/UmbracoApi/Content/PostSave HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/PostSave - multipart/form-data;+boundary=webForCore-smoke-test-boundary 271
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/PostSave - 200 1602 application/json;+charset=utf-8 1996.1614ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/PostSave - 200 1602 application/json;+charset=utf-8 1997.5809ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/default.aspx - 200 136 text/html;+charset=utf-8 381.0646ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/ - 200 136 text/html;+charset=utf-8 383.1712ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/PostSave - multipart/form-data;+boundary=webForCore-smoke-test-boundary 280
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/umbraco/backoffice/UmbracoApi/Content/PostSave HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/PostSave - multipart/form-data;+boundary=webForCore-smoke-test-boundary 280
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/PostSave - 200 1629 application/json;+charset=utf-8 172.6073ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/PostSave - 200 1629 application/json;+charset=utf-8 174.3926ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/default.aspx - 200 150 text/html;+charset=utf-8 16.0736ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/ - 200 150 text/html;+charset=utf-8 17.4335ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/PostUnPublish?id=1054 - - 0
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/umbraco/backoffice/UmbracoApi/Content/PostUnPublish?id=1054 HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/PostUnPublish?id=1054 - - 0
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/PostUnPublish?id=1054 - 200 1604 application/json;+charset=utf-8 101.1195ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/PostUnPublish?id=1054 - 200 1604 application/json;+charset=utf-8 102.5602ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/ - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/default.aspx - 200 1917 text/html;+charset=utf-8 5.6661ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/ - 200 1917 text/html;+charset=utf-8 7.8044ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 DELETE http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/DeleteById?id=1054 - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 DELETE http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/DeleteById?id=1054 - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/umbraco/backoffice/UmbracoApi/Content/DeleteById?id=1054 HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 DELETE http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/DeleteById?id=1054 - 200 0 - 107.7060ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 DELETE http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/DeleteById?id=1054 - 200 0 - 109.7369ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/GetById?id=1054 - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/umbraco/backoffice/UmbracoApi/Content/GetById?id=1054 HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/GetById?id=1054 - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/GetById?id=1054 - 200 1545 application/json;+charset=utf-8 30.4796ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/GetById?id=1054 - 200 1545 application/json;+charset=utf-8 31.3348ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 DELETE http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/EmptyRecycleBin - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/umbraco/backoffice/UmbracoApi/Content/EmptyRecycleBin HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 DELETE http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/EmptyRecycleBin - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 DELETE http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/EmptyRecycleBin - 200 130 application/json;+charset=utf-8 74.5610ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 200.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 DELETE http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/EmptyRecycleBin - 200 130 application/json;+charset=utf-8 77.1059ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/GetById?id=1054 - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/umbraco/backoffice/UmbracoApi/Content/GetById?id=1054 HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/GetById?id=1054 - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/GetById?id=1054 - 404 0 - 19.8095ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 404.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/umbraco/backoffice/UmbracoApi/Content/GetById?id=1054 - 404 0 - 21.2898ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/web.config - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/web.config HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/web.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/web.config - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/web.config - 404 252 text/html 9.5564ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/web.config - 404 252 text/html 5.4343ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/web.config - 404 252 text/html 13.1086ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/web.config - 404 252 text/html 7.2873ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/App_Data/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/App_Data/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/App_Data/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/App_Data/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/App_Data/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/App_Data/ - 404 252 text/html 0.9735ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/App_Data/ - 404 252 text/html 4.7650ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/App_Data/ - 404 252 text/html 1.9367ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/App_Data/ - 404 252 text/html 7.2243ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/Global.asax.cs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/Global.asax.cs - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/Global.asax.cs HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/Global.asax.cs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/Global.asax.cs - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/Global.asax.cs - 404 215 text/html 0.8972ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/Global.asax.cs - 404 215 text/html 0.8548ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/Global.asax.cs - 404 215 text/html 5.2987ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/Global.asax.cs - 404 215 text/html 7.0158ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/obj/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/obj/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/obj/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/obj/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/obj/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/obj/ - 404 252 text/html 0.8952ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/obj/ - 404 252 text/html 0.7175ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/obj/ - 404 252 text/html 4.2843ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/obj/ - 404 252 text/html 9.4243ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/packages.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/packages.config - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/packages.config HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/packages.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/packages.config - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/packages.config - 404 215 text/html 0.8689ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/packages.config - 404 215 text/html 1.9974ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/packages.config - 404 215 text/html 5.9538ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/packages.config - 404 215 text/html 4.8812ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/bin_dotnet/Umbraco.Web.UI.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/bin_dotnet/Umbraco.Web.UI.dll - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/bin_dotnet/Umbraco.Web.UI.dll HTTP/1.1 RequestVersionExact 
-info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/bin_dotnet/Umbraco.Web.UI.dll - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/bin_dotnet/Umbraco.Web.UI.dll - 404 252 text/html 1.0554ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/bin_dotnet/Umbraco.Web.UI.dll - 404 252 text/html 2.2018ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/bin_dotnet/webforcore-host/webforcore-host.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/bin_dotnet/Umbraco.Web.UI.dll - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/bin_dotnet/Umbraco.Web.UI.dll - 404 252 text/html 0.9647ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/bin_dotnet/Umbraco.Web.UI.dll - 404 252 text/html 2.0971ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/bin_dotnet/webforcore-host/webforcore-host.dll - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/bin_dotnet/webforcore-host/webforcore-host.dll HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:40137/bin_dotnet/webforcore-host/webforcore-host.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:40537/bin_dotnet/webforcore-host/webforcore-host.dll - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 4.8334ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 0.8914ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:40137/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 7.9103ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:40537/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 1.4190ms
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
 info: WebFormsForCore.Hosting.WorkerProcess.WorkerLifetime[0]
@@ -293,6 +435,6 @@ info: WebFormsForCore.Hosting.WorkerProcess.WorkerLifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application d792bc49 is shutting down (HostingEnvironment).
+      Application 54fa53dc is shutting down (HostingEnvironment).
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 1 (process 1147356) exited (0).
+      Worker 1 (process 3269764) exited (0).

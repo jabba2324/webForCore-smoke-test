@@ -5,12 +5,143 @@ repo = "https://github.com/smartstore/SmartStoreNET"
 # The head of the 4.x branch (4.2.x, the last .NET Framework release line, after 4.2.0).
 ref = "b6520754a3793da1bd4157589459b6cac7f2ef8c"
 site = "src/Presentation/SmartStore.Web"
+# The plugins the store's cart and checkout need (shipping, tax, offline payments): each builds into the site's
+# Plugins/<name> folder, as on .NET Framework (NOTES.md, "Migration"). The other nine aren't migrated.
+also_build = ["src/Plugins/SmartStore.Shipping/SmartStore.Shipping.csproj", "src/Plugins/SmartStore.Tax/SmartStore.Tax.csproj",
+              "src/Plugins/SmartStore.OfflinePayment/SmartStore.OfflinePayment.csproj"]
 kinds = ["mvc", "webapi"]
 licence = "GPL-3.0"
 status = "blocked"
 needs = ["mssql"]
-notes = "webForCore 0.8.0: doesn't build. Its bundling is BundleTransformer, built against Microsoft's System.Web.Optimization 1.1.0.0, and webForCore's has another identity (F87, CS0012). Plugins not migrated yet."
+notes = "webForCore 0.9.0: builds (F87 fixed), installs with its sample data through [setup] and serves the store (catalog, search, theme SCSS, cart, log-in) on Linux, with the three plugins the cart needs migrated. Blocked: the administration is a 500 on every page (Telerik.Web.Mvc, checked in as a .NET Framework DLL, calls AppDomain.DefineDynamicAssembly: F166), and nine plugins aren't migrated."
 
-# The first request compiles the site, so it gets 120 s. Until it builds, the probe is the home page.
+# SmartStore's install wizard, as its page posts it (an AJAX POST that runs the whole install and answers JSON), into
+# an empty database: the sample data (catalog, blog, news, forums), the admin user, and the plugins found in Plugins/.
+# Finalize restarts the application, as the wizard does; the home page then waits for the new worker.
+[setup]
+databases = ["smartstore"]
+
+[[setup.steps]]
+get = "/install"
+timeout = 300
+contains = "AdminEmail"
+
+[[setup.steps]]
+post = "/install/Install"
+headers = { X-Requested-With = "XMLHttpRequest" }
+fields = { AdminEmail = "admin@example.com", AdminPassword = "Smoke_test_1234", ConfirmPassword = "Smoke_test_1234", DataProvider = "sqlserver", SqlConnectionInfo = "sqlconnectioninfo_raw", DatabaseConnectionString = "Data Source=127.0.0.1,14330;Initial Catalog=smartstore;User ID=sa;Password=Smoke_test_1234;TrustServerCertificate=True", SqlAuthenticationType = "sqlauthentication", SqlServerCreateDatabase = "false", UseCustomCollation = "false", Collation = "SQL_Latin1_General_CP1_CI_AS", InstallSampleData = "true", PrimaryLanguage = "en-US", MediaStorage = "fs" }
+timeout = 900
+contains = "\"Success\":true"
+
+[[setup.steps]]
+post = "/install/Finalize?restart=true"
+fields = {}
+may_fail = true
+
+[[setup.steps]]
+get = "/"
+timeout = 300
+retries = 6
+contains = "Smartstore"
+
+# The first request compiles the site, so it gets 120 s. The store front with the sample data, in the Flex theme.
 [[probes]]
 path = "/"
+contains = "<meta name=\"generator\" content=\"Smartstore 4.2.0.0\" />"
+
+[[probes]]
+path = "/apple"
+contains = "Shop. Apple"
+
+[[probes]]
+path = "/charles-eames-lounge-chair-1956"
+contains = "Charles Eames Lounge Chair (1956)"
+
+[[probes]]
+path = "/search?q=chair"
+contains = "Charles Eames Lounge Chair"
+
+[[probes]]
+path = "/blog"
+contains = "<title itemprop=\"name\">Shop"
+
+[[probes]]
+path = "/boards"
+contains = "Shop. Forums"
+
+[[probes]]
+path = "/login"
+contains = "name=\"UsernameOrEmail\""
+
+[[probes]]
+path = "/register"
+contains = "Shop. Register"
+
+[[probes]]
+path = "/contactus"
+contains = "Shop. Contact Us"
+
+# The theme's SCSS, compiled by BundleTransformer and LibSassHost (its Linux native), then Autoprefixer (V8).
+[[probes]]
+path = "/Themes/Flex/Content/theme.scss"
+contains = "Theme: FLEX"
+
+[[probes]]
+path = "/Content/vendors/jquery/jquery-3.4.1.js"
+contains = "jQuery JavaScript Library v3.4.1"
+
+# The administration sends an anonymous visitor to log in.
+[[probes]]
+path = "/admin"
+status = 302
+
+# Verbs: a book (Überman) added to the cart from the catalog (the AJAX POST), the cart with it (its totals need the shipping
+# and tax plugins), the item removed (the cart's AJAX delete), and the cart empty again; then the admin logs in
+# (the log-in form; it has no anti-forgery token), sees their account page, and logs out (the page then sends them to
+# log in). The administration's pages aren't probed: every one is a 500 (F166).
+[[probes]]
+path = "/cart/addproductsimple/24?forceredirection=False"
+method = "POST"
+cookies = true
+headers = { X-Requested-With = "XMLHttpRequest" }
+contains = "\"success\":true"
+
+[[probes]]
+path = "/cart"
+cookies = true
+contains = "data-name=\"Überman: The novel\""
+capture = { item = 'deletecartitem\?cartItemId=(\d+)' }
+
+[[probes]]
+path = "/shoppingcart/deletecartitem?cartItemId={item}"
+method = "POST"
+cookies = true
+headers = { X-Requested-With = "XMLHttpRequest" }
+contains = "\"message\":\"The product has been removed.\""
+
+[[probes]]
+path = "/cart"
+cookies = true
+contains = "Your Shopping Cart is empty!"
+
+[[probes]]
+path = "/login"
+method = "POST"
+cookies = true
+status = 302
+form = { UsernameOrEmail = "admin@example.com", Password = "Smoke_test_1234", RememberMe = "false" }
+
+[[probes]]
+path = "/customer/info"
+cookies = true
+contains = "value=\"admin@example.com\""
+
+[[probes]]
+path = "/logout"
+cookies = true
+status = 302
+
+[[probes]]
+path = "/customer/info"
+cookies = true
+status = 302

@@ -11,7 +11,7 @@ generated = ["src/Umbraco.Web.UI/config/ClientDependency.config"]
 kinds = ["webforms", "mvc", "webapi", "webpages"]
 licence = "MIT"
 status = "migrated"
-notes = "On webForCore 0.8.0 (.NET 10, under webforcore-host) it builds, installs through [setup] and passes 16/16 on Linux: the back office, Web API, ASMX, handlers and an MVC template. Found F57-F63 (four webForCore bugs, three guide gaps) and F64."
+notes = "webForCore 0.9.0: installs through [setup] and passes 32/32 on Linux and Windows (CI runs 42027500654, 42032474244): the published page (MVC), the back office's Web Forms log-in, create dialog and editor postbacks (a page made, published, renamed, deleted, the recycle bin emptied, through the tree's ASMX script services), Web API, ASMX, handlers. F57-F64."
 needs = ["mssql"]
 
 # The first request compiles the site, so it gets 120 s. The probes need the compose SQL Server with an "umbraco6"
@@ -133,3 +133,123 @@ contains = "body{font-family:Trebuchet MS"
 [[probes]]
 path = "/umbraco_client/ui/default.css"
 contains = "font-family: Trebuchet MS"
+
+# Verbs (round 0.9.0), in the legacy back office as an editor uses it, in one cookie jar: the log-in form (a Web
+# Forms postback with its view state), a page made with the create dialog (a postback; the answer names the new
+# node's editor, whose id is captured), published from its editor (the publish ImageButton's .x/.y, with the
+# template), shown on the front end, renamed and published again (the URL follows the name), found in the content
+# tree (the tree's JSON service), deleted with the ASMX script service the tree's menu calls (JSON), gone from the
+# front end and in the recycle bin, and the recycle bin emptied (the trashcan script service). A run leaves the
+# database as it found it.
+[[probes]]
+path = "/umbraco/login.aspx"
+cookies = true
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"' }
+
+[[probes]]
+path = "/umbraco/login.aspx"
+method = "POST"
+cookies = true
+status = 302
+form = { __VIEWSTATE = "{viewstate}", __VIEWSTATEGENERATOR = "{generator}", lname = "admin", passw = "Smoke_test_1234", Button1 = "Login", hf_height = "", hf_width = "" }
+
+[[probes]]
+path = "/umbraco/create.aspx?nodeId=-1&nodeType=content&nodeName=Content&rnd=1"
+cookies = true
+contains = "<option value=\"1046\">Home Page"
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"' }
+
+[[probes]]
+path = "/umbraco/create.aspx?nodeId=-1&nodeType=content&nodeName=Content&rnd=1"
+method = "POST"
+cookies = true
+contains = "editContent.aspx?id="
+capture = { page = 'editContent\.aspx\?id=(\d+)' }
+[probes.form]
+__VIEWSTATE = "{viewstate}"
+__VIEWSTATEGENERATOR = "{generator}"
+"ctl00$body$ctl00$rename" = "Smoke Probe Page"
+"ctl00$body$ctl00$nodeType" = "1046"
+"ctl00$body$ctl00$Textbox1" = ""
+"ctl00$body$ctl00$sbmt" = "Create"
+
+[[probes]]
+path = "/umbraco/editContent.aspx?id={page}"
+cookies = true
+contains = "value=\"Smoke Probe Page\""
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"' }
+
+[[probes]]
+path = "/umbraco/editContent.aspx?id={page}"
+method = "POST"
+cookies = true
+contains = "Last published"
+[probes.form]
+__VIEWSTATE = "{viewstate}"
+__VIEWSTATEGENERATOR = "{generator}"
+"ctl00$body$TabView1_tab01layer_publish.x" = "5"
+"ctl00$body$TabView1_tab01layer_publish.y" = "5"
+"ctl00$body$NameTxt" = "Smoke Probe Page"
+"ctl00$body$ctl14" = "1045"
+
+[[probes]]
+path = "/smoke-probe-page.aspx"
+contains = "Rendered by Umbraco: Smoke Probe Page"
+
+[[probes]]
+path = "/umbraco/editContent.aspx?id={page}"
+cookies = true
+contains = "Last published"
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"' }
+
+[[probes]]
+path = "/umbraco/editContent.aspx?id={page}"
+method = "POST"
+cookies = true
+contains = "value=\"Smoke Probe Page Edited\""
+[probes.form]
+__VIEWSTATE = "{viewstate}"
+__VIEWSTATEGENERATOR = "{generator}"
+"ctl00$body$TabView1_tab01layer_publish.x" = "5"
+"ctl00$body$TabView1_tab01layer_publish.y" = "5"
+"ctl00$body$NameTxt" = "Smoke Probe Page Edited"
+"ctl00$body$ctl14" = "1045"
+
+[[probes]]
+path = "/smoke-probe-page-edited.aspx"
+contains = "Rendered by Umbraco: Smoke Probe Page Edited"
+
+[[probes]]
+path = "/umbraco/webservices/TreeDataService.ashx?rnd=1&id=-1&treeType=content&contextMenu=true&isDialog=false&app=content"
+cookies = true
+contains = "\"title\":\"Smoke Probe Page Edited\""
+
+[[probes]]
+path = "/umbraco/webservices/legacyAjaxCalls.asmx/Delete"
+method = "POST"
+cookies = true
+json = { nodeId = "{page}", alias = "Smoke Probe Page Edited", nodeType = "content" }
+contains = "{\"d\":null}"
+
+# Umbraco 6's own not-found handling then (no <error404> in the repository's umbracoSettings.config) is a
+# NullReferenceException in library.GetCurrentNotFoundPageId, as on .NET Framework: what matters is that the page is gone.
+[[probes]]
+path = "/smoke-probe-page-edited.aspx"
+absent = "Rendered by Umbraco: Smoke Probe Page Edited"
+
+[[probes]]
+path = "/umbraco/webservices/TreeDataService.ashx?rnd=1&id=-20&treeType=contentRecycleBin&contextMenu=true&isDialog=false"
+cookies = true
+contains = "\"title\":\"Smoke Probe Page Edited\""
+
+[[probes]]
+path = "/umbraco/webservices/trashcan.asmx/EmptyTrashcan"
+method = "POST"
+cookies = true
+json = { type = "Content" }
+contains = "{\"d\":null}"
+
+[[probes]]
+path = "/umbraco/webservices/TreeDataService.ashx?rnd=1&id=-20&treeType=contentRecycleBin&contextMenu=true&isDialog=false"
+cookies = true
+absent = "Smoke Probe Page"

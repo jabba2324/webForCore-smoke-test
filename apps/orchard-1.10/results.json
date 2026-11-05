@@ -86,23 +86,23 @@
       ]
     },
     "build": {
-      "at": "2026-11-05T11:19:52+00:00",
+      "at": "2026-11-05T12:56:12+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/orchard-1.10/logs/build.log",
-      "seconds": 149,
+      "seconds": 152,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T11:17:22+00:00",
+      "at": "2026-11-05T12:53:39+00:00",
       "commit": "78ee4efb4f37b3ce75abd65692f64a7ea17e72e6",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-05T11:23:03+00:00",
+      "at": "2026-11-05T12:59:24+00:00",
       "created": [
         "orchard110"
       ],
@@ -132,11 +132,11 @@
       "summary": "1/3 steps, 1 allowed to fail"
     },
     "smoke": {
-      "at": "2026-11-05T11:25:05+00:00",
+      "at": "2026-11-05T13:01:26+00:00",
       "checks": [
         {
           "expected_text": "Welcome to Orchard!",
-          "ms": 5,
+          "ms": 6,
           "ok": false,
           "path": "/",
           "status": 503,
@@ -144,7 +144,7 @@
         },
         {
           "expected_text": "Welcome To Orchard!",
-          "ms": 3,
+          "ms": 4,
           "ok": false,
           "path": "/welcome-to-orchard",
           "status": 503,
@@ -159,7 +159,7 @@
           "title": "This tenant is currently initializing. Please try again later."
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": false,
           "path": "/Admin",
           "status": 503,
@@ -205,7 +205,7 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404

@@ -19,3 +19,7 @@ Appended by `scripts/wfc.py`, one line per stage run.
 - 2026-11-04T21:33:54+00:00 **smoke**: fail (server exited with -6)
 - 2026-11-04T21:35:10+00:00 **setup**: fail (0/1 steps)
 - 2026-11-04T21:35:14+00:00 **smoke**: fail (7/11 probes)
+- 2026-11-05T12:26:43+00:00 **fetch**: pass at `53cdf4750477`
+- 2026-11-05T12:27:42+00:00 **build**: pass
+- 2026-11-05T12:28:25+00:00 **setup**: fail (0/1 steps)
+- 2026-11-05T12:28:29+00:00 **smoke**: fail (8/11 probes)
