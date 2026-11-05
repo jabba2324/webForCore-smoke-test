@@ -40,3 +40,16 @@ Appended by `scripts/wfc.py`, one line per stage run.
 - 2026-11-03T12:46:37+00:00 **fetch** (windows): pass at `31b4fb1efd12`
 - 2026-11-03T12:48:03+00:00 **build** (windows): pass
 - 2026-11-03T12:48:53+00:00 **smoke** (windows): fail (7/16 probes)
+- 2026-11-05T11:26:28+00:00 **fetch**: pass at `31b4fb1efd12`
+- 2026-11-05T11:27:25+00:00 **build**: pass
+- 2026-11-05T11:27:25+00:00 **setup**: pass (created mojoportal)
+- 2026-11-05T11:28:31+00:00 **smoke**: pass (16/16 probes)
+- 2026-11-05T11:32:04+00:00 **build**: pass
+- 2026-11-05T11:35:36+00:00 **smoke**: fail (40/48 probes)
+- 2026-11-05T11:37:55+00:00 **setup**: pass (created mojoportal)
+- 2026-11-05T11:38:22+00:00 **smoke**: pass (48/48 probes)
+- 2026-11-05T11:38:38+00:00 **smoke**: fail (47/48 probes)
+- 2026-11-05T11:39:12+00:00 **smoke**: pass (48/48 probes)
+- 2026-11-05T11:39:12+00:00 **setup**: pass (created mojoportal)
+- 2026-11-05T11:39:27+00:00 **smoke**: pass (48/48 probes)
+- 2026-11-05T11:39:45+00:00 **smoke**: pass (49/49 probes)
