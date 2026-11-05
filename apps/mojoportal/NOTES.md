@@ -1,6 +1,6 @@
 # mojoPortal: migration notes
 
-Status: migrated (webForCore 0.8.0: all 16 probes on Linux and Windows; F40 was fixed in 0.8.0). Source: https://github.com/i7MEDIA/mojoportal at `31b4fb1e`. Found by searching GitHub on 2026-10-31; the
+Status: migrated (webForCore 0.9.0: 49/49 on Linux and Windows). Source: https://github.com/i7MEDIA/mojoportal at `31b4fb1e`. Found by searching GitHub on 2026-10-31; the
 repo, licence (EPL-1.0), web project and its `<TargetFrameworkVersion>` were checked through the GitHub API.
 
 Round 3b, on webForCore 0.4.0 (no webForCore-thirdparty packages).
@@ -85,6 +85,36 @@ The probes cover:
 - **With `<compilation optimizeCompilations="true">`** (exploration only, not in the overlay; it gives App_Code and
   App_GlobalResources their fixed names), all 9 probes pass. Setup installs the schema (2.3.4.8 → 3.2.0.0) and the
   default site on SQL Server. Then the home page, log-in, register, MVC, Web API, handlers and static file all work.
+
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+**CI (Linux and Windows): 49/49 on both, in CI runs 42026922513 and 42030748535.**
+
+49/49 on Linux, on a new database and again on the same one. Changes:
+- **System.Data.Linq is back in web.config.** 0.9.0 provides it (F37), so the overlay no longer removes
+  `<add assembly="System.Data.Linq, Version=4.0.0.0, ...">`; every page compiles with it.
+- **log4net writes to the site's `Data` folder** (`log4net.config`: `<file value="../Data/currentlog.config" />`,
+  F154). log4net resolves its relative paths against `AppDomain.CurrentDomain.BaseDirectory`, which is
+  `bin_dotnet/`, so the log went to `bin_dotnet/Data/currentlog.config`, and each line written into the
+  application's `bin` restarted it (`BinDirChangeOrDirectoryRename`). mojoPortal logs "Application Started" at each
+  start, so it restarted in a loop: 14 restarts in a smoke run (16 in round 0.8.0's server log), with the probes
+  passing on whichever worker was up. Now there are none, and the admin's Server Log page shows the log (a probe).
+- **The setup probe** looks for "Setup has finished successfully" instead of "Your installation is up to date",
+  which `Setup/Default.aspx` shows only on its first run on a new database (`newInstall`): a second run on the same
+  database failed it.
+
+33 probes more, for verbs, all Web Forms postbacks (Admin pages check that a post's `Referer` is the same host,
+`SiteUtils.IsFishyPost`, so they send one, as a browser does). mojoPortal splits its view state into fields of 500
+characters (`maxPageStateFieldLength`), as many as a page needs (from 3 to more than 16 here), so each GET captures
+`__VIEWSTATEFIELDCOUNT` and up to 40 `__VIEWSTATE<n>` fields, each with a regex that captures nothing when the
+field isn't there, and its post sends them all (ASP.NET reads as many as the count says). The flow:
+- a visitor registers (`Secure/Register.aspx`, the CreateUserWizard: "Your account has been created."), logs out,
+  fails to log in, logs in, reads and sets a profile property through the Web API (`GET` and `POST
+  /api/UserProfile/Property/FirstName`), checks a string with `POST /BadWord/CheckString`, and logs out;
+- the administrator (`admin@admin.com`) logs in, reads the server log, makes a page (`Admin/PageSettings.aspx`), adds
+  an HTML module to it (`Admin/PageLayout.aspx`), writes its content (`HtmlEdit.aspx`; anonymous users see it),
+  deletes the page (404 after), finds the visitor in the member list and deletes the account
+  (`Admin/ManageUsers.aspx`), and logs out, after which the admin pages redirect to the log-in.
 
 ## Open problems
 

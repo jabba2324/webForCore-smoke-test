@@ -8,7 +8,7 @@ project = "eShopLegacyMVCSolution/src/eShopLegacyMVC/eShopLegacyMVC.csproj"
 kinds = ["mvc", "webapi"]
 licence = "MIT"
 status = "migrated"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 26/26 on Linux and Windows (CI run 41940185337; Create, Edit and Delete posted with anti-forgery tokens; the CSS bundle is served unminified on both: WebGrease and Bootstrap 4's custom properties, as on .NET Framework)."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 30/30 on Linux and Windows (CI runs 42026922513 and 42030748535): Create, Edit and Delete posted with anti-forgery tokens, and the Web API's DELETE and POST."
 
 needs = ["mssql"]
 
@@ -111,3 +111,27 @@ method = "POST"
 status = 500
 form = { Name = "No token" }
 contains = "__RequestVerificationToken"
+
+# Web API verbs: BrandsController has Get and Delete only. Its Delete answers 200 for a brand that exists and 404 for
+# one that doesn't, and deletes nothing ("demo only"), so the brand is still listed after it; a POST, which it has no
+# action for, is Web API's 405.
+[[probes]]
+path = "/api/brands/1"
+method = "DELETE"
+status = 200
+
+[[probes]]
+path = "/api/brands/99"
+method = "DELETE"
+status = 404
+
+[[probes]]
+path = "/api/brands/1"
+contains = "\"Brand\":\"Azure\""
+
+[[probes]]
+path = "/api/brands"
+method = "POST"
+json = { Id = 9, Brand = "Smoke" }
+status = 405
+contains = "does not support http method 'POST'"

@@ -12,7 +12,7 @@ generated = ["Web/Data/HelpFiles/**", "Web/Data/test.config"]
 kinds = ["webforms", "mvc", "webapi"]
 licence = "EPL-1.0"
 status = "migrated"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 16/16 on Linux and Windows. 0.8.0 fixed F40 (Assembly.Load(\"App_GlobalResources\"), webForCore#33), which sent every page to setup on 0.7.0 (7/16)."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 49/49 on Linux and Windows (CI runs 42026922513 and 42030748535), with registration, log-in, the Web API, a page and its content made and deleted, and an account deleted. log4net's log moved out of bin_dotnet (F154)."
 needs = ["mssql"]
 
 # The first request compiles the site, so it gets 120 s. The probes need the compose SQL Server with an empty
@@ -23,7 +23,7 @@ databases = ["mojoportal"]
 
 [[probes]]
 path = "/Setup/Default.aspx"
-contains = "Your installation is up to date"
+contains = "Setup has finished successfully"
 
 [[probes]]
 path = "/"
@@ -61,3 +61,646 @@ contains = "mojoPortal Site Search"
 # A static file from the skin.
 [[probes]]
 path = "/Data/Sites/1/skins/framework/img/favicons/favicon-16x16.png"
+
+# Verbs: Web Forms postbacks, each with the hidden fields of the page's GET before it. mojoPortal splits its view
+# state into fields of 500 characters (maxPageStateFieldLength): __VIEWSTATEFIELDCOUNT, __VIEWSTATE, __VIEWSTATE1, ...
+# Each GET captures up to 40 of them (the ones a page doesn't have are captured empty, and ASP.NET reads only as many
+# as the count says) and its post sends them all. Admin pages refuse a post without a Referer from the same host
+# (SiteUtils.IsFishyPost), as a browser sends one. A visitor registers, logs in, sets a profile property through the
+# Web API and logs out; the administrator logs in, makes a page with an HTML module, writes its content, deletes the
+# page and the visitor's account, and logs out.
+[[probes]]
+path = "/Secure/Register.aspx"
+cookies = true
+contains = "ctl00$mainContent$RegisterUser$CreateUserStepContainer$UserName"
+capture = { count = 'id="__VIEWSTATEFIELDCOUNT" value="(\d+)"', vs0 = 'id="__VIEWSTATE" value="([^"]*)"', vs1 = '^(?:[\s\S]*?id="__VIEWSTATE1" value="([^"]*)")?', vs2 = '^(?:[\s\S]*?id="__VIEWSTATE2" value="([^"]*)")?', vs3 = '^(?:[\s\S]*?id="__VIEWSTATE3" value="([^"]*)")?', vs4 = '^(?:[\s\S]*?id="__VIEWSTATE4" value="([^"]*)")?', vs5 = '^(?:[\s\S]*?id="__VIEWSTATE5" value="([^"]*)")?', vs6 = '^(?:[\s\S]*?id="__VIEWSTATE6" value="([^"]*)")?', vs7 = '^(?:[\s\S]*?id="__VIEWSTATE7" value="([^"]*)")?', vs8 = '^(?:[\s\S]*?id="__VIEWSTATE8" value="([^"]*)")?', vs9 = '^(?:[\s\S]*?id="__VIEWSTATE9" value="([^"]*)")?', vs10 = '^(?:[\s\S]*?id="__VIEWSTATE10" value="([^"]*)")?', vs11 = '^(?:[\s\S]*?id="__VIEWSTATE11" value="([^"]*)")?', vs12 = '^(?:[\s\S]*?id="__VIEWSTATE12" value="([^"]*)")?', vs13 = '^(?:[\s\S]*?id="__VIEWSTATE13" value="([^"]*)")?', vs14 = '^(?:[\s\S]*?id="__VIEWSTATE14" value="([^"]*)")?', vs15 = '^(?:[\s\S]*?id="__VIEWSTATE15" value="([^"]*)")?', vs16 = '^(?:[\s\S]*?id="__VIEWSTATE16" value="([^"]*)")?', vs17 = '^(?:[\s\S]*?id="__VIEWSTATE17" value="([^"]*)")?', vs18 = '^(?:[\s\S]*?id="__VIEWSTATE18" value="([^"]*)")?', vs19 = '^(?:[\s\S]*?id="__VIEWSTATE19" value="([^"]*)")?', vs20 = '^(?:[\s\S]*?id="__VIEWSTATE20" value="([^"]*)")?', vs21 = '^(?:[\s\S]*?id="__VIEWSTATE21" value="([^"]*)")?', vs22 = '^(?:[\s\S]*?id="__VIEWSTATE22" value="([^"]*)")?', vs23 = '^(?:[\s\S]*?id="__VIEWSTATE23" value="([^"]*)")?', vs24 = '^(?:[\s\S]*?id="__VIEWSTATE24" value="([^"]*)")?', vs25 = '^(?:[\s\S]*?id="__VIEWSTATE25" value="([^"]*)")?', vs26 = '^(?:[\s\S]*?id="__VIEWSTATE26" value="([^"]*)")?', vs27 = '^(?:[\s\S]*?id="__VIEWSTATE27" value="([^"]*)")?', vs28 = '^(?:[\s\S]*?id="__VIEWSTATE28" value="([^"]*)")?', vs29 = '^(?:[\s\S]*?id="__VIEWSTATE29" value="([^"]*)")?', vs30 = '^(?:[\s\S]*?id="__VIEWSTATE30" value="([^"]*)")?', vs31 = '^(?:[\s\S]*?id="__VIEWSTATE31" value="([^"]*)")?', vs32 = '^(?:[\s\S]*?id="__VIEWSTATE32" value="([^"]*)")?', vs33 = '^(?:[\s\S]*?id="__VIEWSTATE33" value="([^"]*)")?', vs34 = '^(?:[\s\S]*?id="__VIEWSTATE34" value="([^"]*)")?', vs35 = '^(?:[\s\S]*?id="__VIEWSTATE35" value="([^"]*)")?', vs36 = '^(?:[\s\S]*?id="__VIEWSTATE36" value="([^"]*)")?', vs37 = '^(?:[\s\S]*?id="__VIEWSTATE37" value="([^"]*)")?', vs38 = '^(?:[\s\S]*?id="__VIEWSTATE38" value="([^"]*)")?', vs39 = '^(?:[\s\S]*?id="__VIEWSTATE39" value="([^"]*)")?', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Secure/Register.aspx"
+method = "POST"
+cookies = true
+contains = "Your account has been created."
+[probes.form]
+__VIEWSTATEFIELDCOUNT = "{count}"
+__VIEWSTATE = "{vs0}"
+__VIEWSTATE1 = "{vs1}"
+__VIEWSTATE2 = "{vs2}"
+__VIEWSTATE3 = "{vs3}"
+__VIEWSTATE4 = "{vs4}"
+__VIEWSTATE5 = "{vs5}"
+__VIEWSTATE6 = "{vs6}"
+__VIEWSTATE7 = "{vs7}"
+__VIEWSTATE8 = "{vs8}"
+__VIEWSTATE9 = "{vs9}"
+__VIEWSTATE10 = "{vs10}"
+__VIEWSTATE11 = "{vs11}"
+__VIEWSTATE12 = "{vs12}"
+__VIEWSTATE13 = "{vs13}"
+__VIEWSTATE14 = "{vs14}"
+__VIEWSTATE15 = "{vs15}"
+__VIEWSTATE16 = "{vs16}"
+__VIEWSTATE17 = "{vs17}"
+__VIEWSTATE18 = "{vs18}"
+__VIEWSTATE19 = "{vs19}"
+__VIEWSTATE20 = "{vs20}"
+__VIEWSTATE21 = "{vs21}"
+__VIEWSTATE22 = "{vs22}"
+__VIEWSTATE23 = "{vs23}"
+__VIEWSTATE24 = "{vs24}"
+__VIEWSTATE25 = "{vs25}"
+__VIEWSTATE26 = "{vs26}"
+__VIEWSTATE27 = "{vs27}"
+__VIEWSTATE28 = "{vs28}"
+__VIEWSTATE29 = "{vs29}"
+__VIEWSTATE30 = "{vs30}"
+__VIEWSTATE31 = "{vs31}"
+__VIEWSTATE32 = "{vs32}"
+__VIEWSTATE33 = "{vs33}"
+__VIEWSTATE34 = "{vs34}"
+__VIEWSTATE35 = "{vs35}"
+__VIEWSTATE36 = "{vs36}"
+__VIEWSTATE37 = "{vs37}"
+__VIEWSTATE38 = "{vs38}"
+__VIEWSTATE39 = "{vs39}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$mainContent$RegisterUser$CreateUserStepContainer$UserName" = "smokeprobe"
+"ctl00$mainContent$RegisterUser$CreateUserStepContainer$Email" = "smokeprobe@example.com"
+"ctl00$mainContent$RegisterUser$CreateUserStepContainer$Password" = "Smoke_test_1234"
+"ctl00$mainContent$RegisterUser$CreateUserStepContainer$ConfirmPassword" = "Smoke_test_1234"
+"ctl00$mainContent$RegisterUser$CreateUserStepContainer$Question" = "Who made this?"
+"ctl00$mainContent$RegisterUser$CreateUserStepContainer$Answer" = "A probe"
+"ctl00$mainContent$RegisterUser$CreateUserStepContainer$iscTimeZoneId$dd" = "Eastern Standard Time"
+"ctl00$mainContent$RegisterUser$CreateUserStepContainer$txtFirstName" = "Smoke"
+"ctl00$mainContent$RegisterUser$CreateUserStepContainer$txtLastName" = "Probe"
+"ctl00$mainContent$RegisterUser$__CustomNav0$StepNextButtonButton" = "Create Account"
+
+[[probes]]
+path = "/Logoff.aspx"
+cookies = true
+status = 302
+
+[[probes]]
+path = "/Secure/Login.aspx"
+cookies = true
+contains = "LoginCtrl_Password"
+capture = { count = 'id="__VIEWSTATEFIELDCOUNT" value="(\d+)"', vs0 = 'id="__VIEWSTATE" value="([^"]*)"', vs1 = '^(?:[\s\S]*?id="__VIEWSTATE1" value="([^"]*)")?', vs2 = '^(?:[\s\S]*?id="__VIEWSTATE2" value="([^"]*)")?', vs3 = '^(?:[\s\S]*?id="__VIEWSTATE3" value="([^"]*)")?', vs4 = '^(?:[\s\S]*?id="__VIEWSTATE4" value="([^"]*)")?', vs5 = '^(?:[\s\S]*?id="__VIEWSTATE5" value="([^"]*)")?', vs6 = '^(?:[\s\S]*?id="__VIEWSTATE6" value="([^"]*)")?', vs7 = '^(?:[\s\S]*?id="__VIEWSTATE7" value="([^"]*)")?', vs8 = '^(?:[\s\S]*?id="__VIEWSTATE8" value="([^"]*)")?', vs9 = '^(?:[\s\S]*?id="__VIEWSTATE9" value="([^"]*)")?', vs10 = '^(?:[\s\S]*?id="__VIEWSTATE10" value="([^"]*)")?', vs11 = '^(?:[\s\S]*?id="__VIEWSTATE11" value="([^"]*)")?', vs12 = '^(?:[\s\S]*?id="__VIEWSTATE12" value="([^"]*)")?', vs13 = '^(?:[\s\S]*?id="__VIEWSTATE13" value="([^"]*)")?', vs14 = '^(?:[\s\S]*?id="__VIEWSTATE14" value="([^"]*)")?', vs15 = '^(?:[\s\S]*?id="__VIEWSTATE15" value="([^"]*)")?', vs16 = '^(?:[\s\S]*?id="__VIEWSTATE16" value="([^"]*)")?', vs17 = '^(?:[\s\S]*?id="__VIEWSTATE17" value="([^"]*)")?', vs18 = '^(?:[\s\S]*?id="__VIEWSTATE18" value="([^"]*)")?', vs19 = '^(?:[\s\S]*?id="__VIEWSTATE19" value="([^"]*)")?', vs20 = '^(?:[\s\S]*?id="__VIEWSTATE20" value="([^"]*)")?', vs21 = '^(?:[\s\S]*?id="__VIEWSTATE21" value="([^"]*)")?', vs22 = '^(?:[\s\S]*?id="__VIEWSTATE22" value="([^"]*)")?', vs23 = '^(?:[\s\S]*?id="__VIEWSTATE23" value="([^"]*)")?', vs24 = '^(?:[\s\S]*?id="__VIEWSTATE24" value="([^"]*)")?', vs25 = '^(?:[\s\S]*?id="__VIEWSTATE25" value="([^"]*)")?', vs26 = '^(?:[\s\S]*?id="__VIEWSTATE26" value="([^"]*)")?', vs27 = '^(?:[\s\S]*?id="__VIEWSTATE27" value="([^"]*)")?', vs28 = '^(?:[\s\S]*?id="__VIEWSTATE28" value="([^"]*)")?', vs29 = '^(?:[\s\S]*?id="__VIEWSTATE29" value="([^"]*)")?', vs30 = '^(?:[\s\S]*?id="__VIEWSTATE30" value="([^"]*)")?', vs31 = '^(?:[\s\S]*?id="__VIEWSTATE31" value="([^"]*)")?', vs32 = '^(?:[\s\S]*?id="__VIEWSTATE32" value="([^"]*)")?', vs33 = '^(?:[\s\S]*?id="__VIEWSTATE33" value="([^"]*)")?', vs34 = '^(?:[\s\S]*?id="__VIEWSTATE34" value="([^"]*)")?', vs35 = '^(?:[\s\S]*?id="__VIEWSTATE35" value="([^"]*)")?', vs36 = '^(?:[\s\S]*?id="__VIEWSTATE36" value="([^"]*)")?', vs37 = '^(?:[\s\S]*?id="__VIEWSTATE37" value="([^"]*)")?', vs38 = '^(?:[\s\S]*?id="__VIEWSTATE38" value="([^"]*)")?', vs39 = '^(?:[\s\S]*?id="__VIEWSTATE39" value="([^"]*)")?', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Secure/Login.aspx"
+method = "POST"
+cookies = true
+contains = "LoginCtrl_Password"
+absent = "Logoff.aspx"
+[probes.form]
+__VIEWSTATEFIELDCOUNT = "{count}"
+__VIEWSTATE = "{vs0}"
+__VIEWSTATE1 = "{vs1}"
+__VIEWSTATE2 = "{vs2}"
+__VIEWSTATE3 = "{vs3}"
+__VIEWSTATE4 = "{vs4}"
+__VIEWSTATE5 = "{vs5}"
+__VIEWSTATE6 = "{vs6}"
+__VIEWSTATE7 = "{vs7}"
+__VIEWSTATE8 = "{vs8}"
+__VIEWSTATE9 = "{vs9}"
+__VIEWSTATE10 = "{vs10}"
+__VIEWSTATE11 = "{vs11}"
+__VIEWSTATE12 = "{vs12}"
+__VIEWSTATE13 = "{vs13}"
+__VIEWSTATE14 = "{vs14}"
+__VIEWSTATE15 = "{vs15}"
+__VIEWSTATE16 = "{vs16}"
+__VIEWSTATE17 = "{vs17}"
+__VIEWSTATE18 = "{vs18}"
+__VIEWSTATE19 = "{vs19}"
+__VIEWSTATE20 = "{vs20}"
+__VIEWSTATE21 = "{vs21}"
+__VIEWSTATE22 = "{vs22}"
+__VIEWSTATE23 = "{vs23}"
+__VIEWSTATE24 = "{vs24}"
+__VIEWSTATE25 = "{vs25}"
+__VIEWSTATE26 = "{vs26}"
+__VIEWSTATE27 = "{vs27}"
+__VIEWSTATE28 = "{vs28}"
+__VIEWSTATE29 = "{vs29}"
+__VIEWSTATE30 = "{vs30}"
+__VIEWSTATE31 = "{vs31}"
+__VIEWSTATE32 = "{vs32}"
+__VIEWSTATE33 = "{vs33}"
+__VIEWSTATE34 = "{vs34}"
+__VIEWSTATE35 = "{vs35}"
+__VIEWSTATE36 = "{vs36}"
+__VIEWSTATE37 = "{vs37}"
+__VIEWSTATE38 = "{vs38}"
+__VIEWSTATE39 = "{vs39}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$mainContent$login1$LoginCtrl$UserName" = "smokeprobe@example.com"
+"ctl00$mainContent$login1$LoginCtrl$Password" = "wrong"
+"ctl00$mainContent$login1$LoginCtrl$Login" = "Login"
+
+[[probes]]
+path = "/Secure/Login.aspx"
+cookies = true
+contains = "LoginCtrl_Password"
+capture = { count = 'id="__VIEWSTATEFIELDCOUNT" value="(\d+)"', vs0 = 'id="__VIEWSTATE" value="([^"]*)"', vs1 = '^(?:[\s\S]*?id="__VIEWSTATE1" value="([^"]*)")?', vs2 = '^(?:[\s\S]*?id="__VIEWSTATE2" value="([^"]*)")?', vs3 = '^(?:[\s\S]*?id="__VIEWSTATE3" value="([^"]*)")?', vs4 = '^(?:[\s\S]*?id="__VIEWSTATE4" value="([^"]*)")?', vs5 = '^(?:[\s\S]*?id="__VIEWSTATE5" value="([^"]*)")?', vs6 = '^(?:[\s\S]*?id="__VIEWSTATE6" value="([^"]*)")?', vs7 = '^(?:[\s\S]*?id="__VIEWSTATE7" value="([^"]*)")?', vs8 = '^(?:[\s\S]*?id="__VIEWSTATE8" value="([^"]*)")?', vs9 = '^(?:[\s\S]*?id="__VIEWSTATE9" value="([^"]*)")?', vs10 = '^(?:[\s\S]*?id="__VIEWSTATE10" value="([^"]*)")?', vs11 = '^(?:[\s\S]*?id="__VIEWSTATE11" value="([^"]*)")?', vs12 = '^(?:[\s\S]*?id="__VIEWSTATE12" value="([^"]*)")?', vs13 = '^(?:[\s\S]*?id="__VIEWSTATE13" value="([^"]*)")?', vs14 = '^(?:[\s\S]*?id="__VIEWSTATE14" value="([^"]*)")?', vs15 = '^(?:[\s\S]*?id="__VIEWSTATE15" value="([^"]*)")?', vs16 = '^(?:[\s\S]*?id="__VIEWSTATE16" value="([^"]*)")?', vs17 = '^(?:[\s\S]*?id="__VIEWSTATE17" value="([^"]*)")?', vs18 = '^(?:[\s\S]*?id="__VIEWSTATE18" value="([^"]*)")?', vs19 = '^(?:[\s\S]*?id="__VIEWSTATE19" value="([^"]*)")?', vs20 = '^(?:[\s\S]*?id="__VIEWSTATE20" value="([^"]*)")?', vs21 = '^(?:[\s\S]*?id="__VIEWSTATE21" value="([^"]*)")?', vs22 = '^(?:[\s\S]*?id="__VIEWSTATE22" value="([^"]*)")?', vs23 = '^(?:[\s\S]*?id="__VIEWSTATE23" value="([^"]*)")?', vs24 = '^(?:[\s\S]*?id="__VIEWSTATE24" value="([^"]*)")?', vs25 = '^(?:[\s\S]*?id="__VIEWSTATE25" value="([^"]*)")?', vs26 = '^(?:[\s\S]*?id="__VIEWSTATE26" value="([^"]*)")?', vs27 = '^(?:[\s\S]*?id="__VIEWSTATE27" value="([^"]*)")?', vs28 = '^(?:[\s\S]*?id="__VIEWSTATE28" value="([^"]*)")?', vs29 = '^(?:[\s\S]*?id="__VIEWSTATE29" value="([^"]*)")?', vs30 = '^(?:[\s\S]*?id="__VIEWSTATE30" value="([^"]*)")?', vs31 = '^(?:[\s\S]*?id="__VIEWSTATE31" value="([^"]*)")?', vs32 = '^(?:[\s\S]*?id="__VIEWSTATE32" value="([^"]*)")?', vs33 = '^(?:[\s\S]*?id="__VIEWSTATE33" value="([^"]*)")?', vs34 = '^(?:[\s\S]*?id="__VIEWSTATE34" value="([^"]*)")?', vs35 = '^(?:[\s\S]*?id="__VIEWSTATE35" value="([^"]*)")?', vs36 = '^(?:[\s\S]*?id="__VIEWSTATE36" value="([^"]*)")?', vs37 = '^(?:[\s\S]*?id="__VIEWSTATE37" value="([^"]*)")?', vs38 = '^(?:[\s\S]*?id="__VIEWSTATE38" value="([^"]*)")?', vs39 = '^(?:[\s\S]*?id="__VIEWSTATE39" value="([^"]*)")?', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Secure/Login.aspx"
+method = "POST"
+cookies = true
+status = 302
+[probes.form]
+__VIEWSTATEFIELDCOUNT = "{count}"
+__VIEWSTATE = "{vs0}"
+__VIEWSTATE1 = "{vs1}"
+__VIEWSTATE2 = "{vs2}"
+__VIEWSTATE3 = "{vs3}"
+__VIEWSTATE4 = "{vs4}"
+__VIEWSTATE5 = "{vs5}"
+__VIEWSTATE6 = "{vs6}"
+__VIEWSTATE7 = "{vs7}"
+__VIEWSTATE8 = "{vs8}"
+__VIEWSTATE9 = "{vs9}"
+__VIEWSTATE10 = "{vs10}"
+__VIEWSTATE11 = "{vs11}"
+__VIEWSTATE12 = "{vs12}"
+__VIEWSTATE13 = "{vs13}"
+__VIEWSTATE14 = "{vs14}"
+__VIEWSTATE15 = "{vs15}"
+__VIEWSTATE16 = "{vs16}"
+__VIEWSTATE17 = "{vs17}"
+__VIEWSTATE18 = "{vs18}"
+__VIEWSTATE19 = "{vs19}"
+__VIEWSTATE20 = "{vs20}"
+__VIEWSTATE21 = "{vs21}"
+__VIEWSTATE22 = "{vs22}"
+__VIEWSTATE23 = "{vs23}"
+__VIEWSTATE24 = "{vs24}"
+__VIEWSTATE25 = "{vs25}"
+__VIEWSTATE26 = "{vs26}"
+__VIEWSTATE27 = "{vs27}"
+__VIEWSTATE28 = "{vs28}"
+__VIEWSTATE29 = "{vs29}"
+__VIEWSTATE30 = "{vs30}"
+__VIEWSTATE31 = "{vs31}"
+__VIEWSTATE32 = "{vs32}"
+__VIEWSTATE33 = "{vs33}"
+__VIEWSTATE34 = "{vs34}"
+__VIEWSTATE35 = "{vs35}"
+__VIEWSTATE36 = "{vs36}"
+__VIEWSTATE37 = "{vs37}"
+__VIEWSTATE38 = "{vs38}"
+__VIEWSTATE39 = "{vs39}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$mainContent$login1$LoginCtrl$UserName" = "smokeprobe@example.com"
+"ctl00$mainContent$login1$LoginCtrl$Password" = "Smoke_test_1234"
+"ctl00$mainContent$login1$LoginCtrl$Login" = "Login"
+
+[[probes]]
+path = "/api/UserProfile/Property/FirstName"
+cookies = true
+contains = "Smoke"
+
+[[probes]]
+path = "/api/UserProfile/Property/FirstName"
+method = "POST"
+cookies = true
+json = "\"Smokey\""
+status = 200
+
+[[probes]]
+path = "/api/UserProfile/Property/FirstName"
+cookies = true
+contains = "Smokey"
+
+[[probes]]
+path = "/BadWord/CheckString"
+method = "POST"
+cookies = true
+json = { StringToCheck = "A perfectly polite sentence" }
+contains = "false"
+
+[[probes]]
+path = "/Logoff.aspx"
+cookies = true
+status = 302
+
+[[probes]]
+path = "/Secure/Login.aspx"
+cookies = true
+contains = "LoginCtrl_Password"
+capture = { count = 'id="__VIEWSTATEFIELDCOUNT" value="(\d+)"', vs0 = 'id="__VIEWSTATE" value="([^"]*)"', vs1 = '^(?:[\s\S]*?id="__VIEWSTATE1" value="([^"]*)")?', vs2 = '^(?:[\s\S]*?id="__VIEWSTATE2" value="([^"]*)")?', vs3 = '^(?:[\s\S]*?id="__VIEWSTATE3" value="([^"]*)")?', vs4 = '^(?:[\s\S]*?id="__VIEWSTATE4" value="([^"]*)")?', vs5 = '^(?:[\s\S]*?id="__VIEWSTATE5" value="([^"]*)")?', vs6 = '^(?:[\s\S]*?id="__VIEWSTATE6" value="([^"]*)")?', vs7 = '^(?:[\s\S]*?id="__VIEWSTATE7" value="([^"]*)")?', vs8 = '^(?:[\s\S]*?id="__VIEWSTATE8" value="([^"]*)")?', vs9 = '^(?:[\s\S]*?id="__VIEWSTATE9" value="([^"]*)")?', vs10 = '^(?:[\s\S]*?id="__VIEWSTATE10" value="([^"]*)")?', vs11 = '^(?:[\s\S]*?id="__VIEWSTATE11" value="([^"]*)")?', vs12 = '^(?:[\s\S]*?id="__VIEWSTATE12" value="([^"]*)")?', vs13 = '^(?:[\s\S]*?id="__VIEWSTATE13" value="([^"]*)")?', vs14 = '^(?:[\s\S]*?id="__VIEWSTATE14" value="([^"]*)")?', vs15 = '^(?:[\s\S]*?id="__VIEWSTATE15" value="([^"]*)")?', vs16 = '^(?:[\s\S]*?id="__VIEWSTATE16" value="([^"]*)")?', vs17 = '^(?:[\s\S]*?id="__VIEWSTATE17" value="([^"]*)")?', vs18 = '^(?:[\s\S]*?id="__VIEWSTATE18" value="([^"]*)")?', vs19 = '^(?:[\s\S]*?id="__VIEWSTATE19" value="([^"]*)")?', vs20 = '^(?:[\s\S]*?id="__VIEWSTATE20" value="([^"]*)")?', vs21 = '^(?:[\s\S]*?id="__VIEWSTATE21" value="([^"]*)")?', vs22 = '^(?:[\s\S]*?id="__VIEWSTATE22" value="([^"]*)")?', vs23 = '^(?:[\s\S]*?id="__VIEWSTATE23" value="([^"]*)")?', vs24 = '^(?:[\s\S]*?id="__VIEWSTATE24" value="([^"]*)")?', vs25 = '^(?:[\s\S]*?id="__VIEWSTATE25" value="([^"]*)")?', vs26 = '^(?:[\s\S]*?id="__VIEWSTATE26" value="([^"]*)")?', vs27 = '^(?:[\s\S]*?id="__VIEWSTATE27" value="([^"]*)")?', vs28 = '^(?:[\s\S]*?id="__VIEWSTATE28" value="([^"]*)")?', vs29 = '^(?:[\s\S]*?id="__VIEWSTATE29" value="([^"]*)")?', vs30 = '^(?:[\s\S]*?id="__VIEWSTATE30" value="([^"]*)")?', vs31 = '^(?:[\s\S]*?id="__VIEWSTATE31" value="([^"]*)")?', vs32 = '^(?:[\s\S]*?id="__VIEWSTATE32" value="([^"]*)")?', vs33 = '^(?:[\s\S]*?id="__VIEWSTATE33" value="([^"]*)")?', vs34 = '^(?:[\s\S]*?id="__VIEWSTATE34" value="([^"]*)")?', vs35 = '^(?:[\s\S]*?id="__VIEWSTATE35" value="([^"]*)")?', vs36 = '^(?:[\s\S]*?id="__VIEWSTATE36" value="([^"]*)")?', vs37 = '^(?:[\s\S]*?id="__VIEWSTATE37" value="([^"]*)")?', vs38 = '^(?:[\s\S]*?id="__VIEWSTATE38" value="([^"]*)")?', vs39 = '^(?:[\s\S]*?id="__VIEWSTATE39" value="([^"]*)")?', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Secure/Login.aspx"
+method = "POST"
+cookies = true
+status = 302
+[probes.form]
+__VIEWSTATEFIELDCOUNT = "{count}"
+__VIEWSTATE = "{vs0}"
+__VIEWSTATE1 = "{vs1}"
+__VIEWSTATE2 = "{vs2}"
+__VIEWSTATE3 = "{vs3}"
+__VIEWSTATE4 = "{vs4}"
+__VIEWSTATE5 = "{vs5}"
+__VIEWSTATE6 = "{vs6}"
+__VIEWSTATE7 = "{vs7}"
+__VIEWSTATE8 = "{vs8}"
+__VIEWSTATE9 = "{vs9}"
+__VIEWSTATE10 = "{vs10}"
+__VIEWSTATE11 = "{vs11}"
+__VIEWSTATE12 = "{vs12}"
+__VIEWSTATE13 = "{vs13}"
+__VIEWSTATE14 = "{vs14}"
+__VIEWSTATE15 = "{vs15}"
+__VIEWSTATE16 = "{vs16}"
+__VIEWSTATE17 = "{vs17}"
+__VIEWSTATE18 = "{vs18}"
+__VIEWSTATE19 = "{vs19}"
+__VIEWSTATE20 = "{vs20}"
+__VIEWSTATE21 = "{vs21}"
+__VIEWSTATE22 = "{vs22}"
+__VIEWSTATE23 = "{vs23}"
+__VIEWSTATE24 = "{vs24}"
+__VIEWSTATE25 = "{vs25}"
+__VIEWSTATE26 = "{vs26}"
+__VIEWSTATE27 = "{vs27}"
+__VIEWSTATE28 = "{vs28}"
+__VIEWSTATE29 = "{vs29}"
+__VIEWSTATE30 = "{vs30}"
+__VIEWSTATE31 = "{vs31}"
+__VIEWSTATE32 = "{vs32}"
+__VIEWSTATE33 = "{vs33}"
+__VIEWSTATE34 = "{vs34}"
+__VIEWSTATE35 = "{vs35}"
+__VIEWSTATE36 = "{vs36}"
+__VIEWSTATE37 = "{vs37}"
+__VIEWSTATE38 = "{vs38}"
+__VIEWSTATE39 = "{vs39}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$mainContent$login1$LoginCtrl$UserName" = "admin@admin.com"
+"ctl00$mainContent$login1$LoginCtrl$Password" = "admin"
+"ctl00$mainContent$login1$LoginCtrl$Login" = "Login"
+
+# The server log, which log4net writes to Data/currentlog.config (overlay: in the site's Data folder, not
+# bin_dotnet's, F154).
+[[probes]]
+path = "/Admin/ServerLog.aspx"
+cookies = true
+contains = "Application Started"
+
+[[probes]]
+path = "/Admin/PageSettings.aspx?start=1"
+cookies = true
+contains = "ctl00$mainContent$txtPageName"
+capture = { count = 'id="__VIEWSTATEFIELDCOUNT" value="(\d+)"', vs0 = 'id="__VIEWSTATE" value="([^"]*)"', vs1 = '^(?:[\s\S]*?id="__VIEWSTATE1" value="([^"]*)")?', vs2 = '^(?:[\s\S]*?id="__VIEWSTATE2" value="([^"]*)")?', vs3 = '^(?:[\s\S]*?id="__VIEWSTATE3" value="([^"]*)")?', vs4 = '^(?:[\s\S]*?id="__VIEWSTATE4" value="([^"]*)")?', vs5 = '^(?:[\s\S]*?id="__VIEWSTATE5" value="([^"]*)")?', vs6 = '^(?:[\s\S]*?id="__VIEWSTATE6" value="([^"]*)")?', vs7 = '^(?:[\s\S]*?id="__VIEWSTATE7" value="([^"]*)")?', vs8 = '^(?:[\s\S]*?id="__VIEWSTATE8" value="([^"]*)")?', vs9 = '^(?:[\s\S]*?id="__VIEWSTATE9" value="([^"]*)")?', vs10 = '^(?:[\s\S]*?id="__VIEWSTATE10" value="([^"]*)")?', vs11 = '^(?:[\s\S]*?id="__VIEWSTATE11" value="([^"]*)")?', vs12 = '^(?:[\s\S]*?id="__VIEWSTATE12" value="([^"]*)")?', vs13 = '^(?:[\s\S]*?id="__VIEWSTATE13" value="([^"]*)")?', vs14 = '^(?:[\s\S]*?id="__VIEWSTATE14" value="([^"]*)")?', vs15 = '^(?:[\s\S]*?id="__VIEWSTATE15" value="([^"]*)")?', vs16 = '^(?:[\s\S]*?id="__VIEWSTATE16" value="([^"]*)")?', vs17 = '^(?:[\s\S]*?id="__VIEWSTATE17" value="([^"]*)")?', vs18 = '^(?:[\s\S]*?id="__VIEWSTATE18" value="([^"]*)")?', vs19 = '^(?:[\s\S]*?id="__VIEWSTATE19" value="([^"]*)")?', vs20 = '^(?:[\s\S]*?id="__VIEWSTATE20" value="([^"]*)")?', vs21 = '^(?:[\s\S]*?id="__VIEWSTATE21" value="([^"]*)")?', vs22 = '^(?:[\s\S]*?id="__VIEWSTATE22" value="([^"]*)")?', vs23 = '^(?:[\s\S]*?id="__VIEWSTATE23" value="([^"]*)")?', vs24 = '^(?:[\s\S]*?id="__VIEWSTATE24" value="([^"]*)")?', vs25 = '^(?:[\s\S]*?id="__VIEWSTATE25" value="([^"]*)")?', vs26 = '^(?:[\s\S]*?id="__VIEWSTATE26" value="([^"]*)")?', vs27 = '^(?:[\s\S]*?id="__VIEWSTATE27" value="([^"]*)")?', vs28 = '^(?:[\s\S]*?id="__VIEWSTATE28" value="([^"]*)")?', vs29 = '^(?:[\s\S]*?id="__VIEWSTATE29" value="([^"]*)")?', vs30 = '^(?:[\s\S]*?id="__VIEWSTATE30" value="([^"]*)")?', vs31 = '^(?:[\s\S]*?id="__VIEWSTATE31" value="([^"]*)")?', vs32 = '^(?:[\s\S]*?id="__VIEWSTATE32" value="([^"]*)")?', vs33 = '^(?:[\s\S]*?id="__VIEWSTATE33" value="([^"]*)")?', vs34 = '^(?:[\s\S]*?id="__VIEWSTATE34" value="([^"]*)")?', vs35 = '^(?:[\s\S]*?id="__VIEWSTATE35" value="([^"]*)")?', vs36 = '^(?:[\s\S]*?id="__VIEWSTATE36" value="([^"]*)")?', vs37 = '^(?:[\s\S]*?id="__VIEWSTATE37" value="([^"]*)")?', vs38 = '^(?:[\s\S]*?id="__VIEWSTATE38" value="([^"]*)")?', vs39 = '^(?:[\s\S]*?id="__VIEWSTATE39" value="([^"]*)")?', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Admin/PageSettings.aspx?start=1"
+method = "POST"
+cookies = true
+status = 302
+headers = { Referer = "http://127.0.0.1/Admin/PageSettings.aspx?start=1" }
+[probes.form]
+__VIEWSTATEFIELDCOUNT = "{count}"
+__VIEWSTATE = "{vs0}"
+__VIEWSTATE1 = "{vs1}"
+__VIEWSTATE2 = "{vs2}"
+__VIEWSTATE3 = "{vs3}"
+__VIEWSTATE4 = "{vs4}"
+__VIEWSTATE5 = "{vs5}"
+__VIEWSTATE6 = "{vs6}"
+__VIEWSTATE7 = "{vs7}"
+__VIEWSTATE8 = "{vs8}"
+__VIEWSTATE9 = "{vs9}"
+__VIEWSTATE10 = "{vs10}"
+__VIEWSTATE11 = "{vs11}"
+__VIEWSTATE12 = "{vs12}"
+__VIEWSTATE13 = "{vs13}"
+__VIEWSTATE14 = "{vs14}"
+__VIEWSTATE15 = "{vs15}"
+__VIEWSTATE16 = "{vs16}"
+__VIEWSTATE17 = "{vs17}"
+__VIEWSTATE18 = "{vs18}"
+__VIEWSTATE19 = "{vs19}"
+__VIEWSTATE20 = "{vs20}"
+__VIEWSTATE21 = "{vs21}"
+__VIEWSTATE22 = "{vs22}"
+__VIEWSTATE23 = "{vs23}"
+__VIEWSTATE24 = "{vs24}"
+__VIEWSTATE25 = "{vs25}"
+__VIEWSTATE26 = "{vs26}"
+__VIEWSTATE27 = "{vs27}"
+__VIEWSTATE28 = "{vs28}"
+__VIEWSTATE29 = "{vs29}"
+__VIEWSTATE30 = "{vs30}"
+__VIEWSTATE31 = "{vs31}"
+__VIEWSTATE32 = "{vs32}"
+__VIEWSTATE33 = "{vs33}"
+__VIEWSTATE34 = "{vs34}"
+__VIEWSTATE35 = "{vs35}"
+__VIEWSTATE36 = "{vs36}"
+__VIEWSTATE37 = "{vs37}"
+__VIEWSTATE38 = "{vs38}"
+__VIEWSTATE39 = "{vs39}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$mainContent$ddPages" = "-1"
+"ctl00$mainContent$txtPageName" = "Smoke Probe Page"
+"ctl00$mainContent$txtPageTitle" = "Smoke Probe Page"
+"ctl00$mainContent$txtUrl" = "~/smoke-probe-page"
+"ctl00$mainContent$chkIsClickable" = "on"
+"ctl00$mainContent$chkIncludeInMenu" = "on"
+"ctl00$mainContent$chkIncludeInSiteMap" = "on"
+"ctl00$mainContent$rdoviewroles" = "rbViewUseRoles"
+"ctl00$mainContent$chkListAuthRoles$0" = "All Users"
+"ctl00$mainContent$rdoeditroles" = "rbEditUseRoles"
+"ctl00$mainContent$chkListEditRoles$2" = "Content Publishers"
+"ctl00$mainContent$rdochildpageroles" = "rbCreateChildUseRoles"
+"ctl00$mainContent$ddChangeFrequency" = "Monthly"
+"ctl00$mainContent$ddSiteMapPriority" = "0.5"
+"ctl00$mainContent$applyBtn" = "Create New Page"
+
+[[probes]]
+path = "/smoke-probe-page"
+cookies = true
+contains = "Smoke Probe Page"
+capture = { page = 'PageLayout\.aspx\?pageid=(\d+)' }
+
+[[probes]]
+path = "/Admin/PageLayout.aspx?pageid={page}"
+cookies = true
+contains = "ctl00$mainContent$btnCreateNewContent"
+capture = { count = 'id="__VIEWSTATEFIELDCOUNT" value="(\d+)"', vs0 = 'id="__VIEWSTATE" value="([^"]*)"', vs1 = '^(?:[\s\S]*?id="__VIEWSTATE1" value="([^"]*)")?', vs2 = '^(?:[\s\S]*?id="__VIEWSTATE2" value="([^"]*)")?', vs3 = '^(?:[\s\S]*?id="__VIEWSTATE3" value="([^"]*)")?', vs4 = '^(?:[\s\S]*?id="__VIEWSTATE4" value="([^"]*)")?', vs5 = '^(?:[\s\S]*?id="__VIEWSTATE5" value="([^"]*)")?', vs6 = '^(?:[\s\S]*?id="__VIEWSTATE6" value="([^"]*)")?', vs7 = '^(?:[\s\S]*?id="__VIEWSTATE7" value="([^"]*)")?', vs8 = '^(?:[\s\S]*?id="__VIEWSTATE8" value="([^"]*)")?', vs9 = '^(?:[\s\S]*?id="__VIEWSTATE9" value="([^"]*)")?', vs10 = '^(?:[\s\S]*?id="__VIEWSTATE10" value="([^"]*)")?', vs11 = '^(?:[\s\S]*?id="__VIEWSTATE11" value="([^"]*)")?', vs12 = '^(?:[\s\S]*?id="__VIEWSTATE12" value="([^"]*)")?', vs13 = '^(?:[\s\S]*?id="__VIEWSTATE13" value="([^"]*)")?', vs14 = '^(?:[\s\S]*?id="__VIEWSTATE14" value="([^"]*)")?', vs15 = '^(?:[\s\S]*?id="__VIEWSTATE15" value="([^"]*)")?', vs16 = '^(?:[\s\S]*?id="__VIEWSTATE16" value="([^"]*)")?', vs17 = '^(?:[\s\S]*?id="__VIEWSTATE17" value="([^"]*)")?', vs18 = '^(?:[\s\S]*?id="__VIEWSTATE18" value="([^"]*)")?', vs19 = '^(?:[\s\S]*?id="__VIEWSTATE19" value="([^"]*)")?', vs20 = '^(?:[\s\S]*?id="__VIEWSTATE20" value="([^"]*)")?', vs21 = '^(?:[\s\S]*?id="__VIEWSTATE21" value="([^"]*)")?', vs22 = '^(?:[\s\S]*?id="__VIEWSTATE22" value="([^"]*)")?', vs23 = '^(?:[\s\S]*?id="__VIEWSTATE23" value="([^"]*)")?', vs24 = '^(?:[\s\S]*?id="__VIEWSTATE24" value="([^"]*)")?', vs25 = '^(?:[\s\S]*?id="__VIEWSTATE25" value="([^"]*)")?', vs26 = '^(?:[\s\S]*?id="__VIEWSTATE26" value="([^"]*)")?', vs27 = '^(?:[\s\S]*?id="__VIEWSTATE27" value="([^"]*)")?', vs28 = '^(?:[\s\S]*?id="__VIEWSTATE28" value="([^"]*)")?', vs29 = '^(?:[\s\S]*?id="__VIEWSTATE29" value="([^"]*)")?', vs30 = '^(?:[\s\S]*?id="__VIEWSTATE30" value="([^"]*)")?', vs31 = '^(?:[\s\S]*?id="__VIEWSTATE31" value="([^"]*)")?', vs32 = '^(?:[\s\S]*?id="__VIEWSTATE32" value="([^"]*)")?', vs33 = '^(?:[\s\S]*?id="__VIEWSTATE33" value="([^"]*)")?', vs34 = '^(?:[\s\S]*?id="__VIEWSTATE34" value="([^"]*)")?', vs35 = '^(?:[\s\S]*?id="__VIEWSTATE35" value="([^"]*)")?', vs36 = '^(?:[\s\S]*?id="__VIEWSTATE36" value="([^"]*)")?', vs37 = '^(?:[\s\S]*?id="__VIEWSTATE37" value="([^"]*)")?', vs38 = '^(?:[\s\S]*?id="__VIEWSTATE38" value="([^"]*)")?', vs39 = '^(?:[\s\S]*?id="__VIEWSTATE39" value="([^"]*)")?', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Admin/PageLayout.aspx?pageid={page}"
+method = "POST"
+cookies = true
+contains = "Smoke Probe Content"
+headers = { Referer = "http://127.0.0.1/Admin/PageLayout.aspx?pageid={page}" }
+[probes.form]
+__VIEWSTATEFIELDCOUNT = "{count}"
+__VIEWSTATE = "{vs0}"
+__VIEWSTATE1 = "{vs1}"
+__VIEWSTATE2 = "{vs2}"
+__VIEWSTATE3 = "{vs3}"
+__VIEWSTATE4 = "{vs4}"
+__VIEWSTATE5 = "{vs5}"
+__VIEWSTATE6 = "{vs6}"
+__VIEWSTATE7 = "{vs7}"
+__VIEWSTATE8 = "{vs8}"
+__VIEWSTATE9 = "{vs9}"
+__VIEWSTATE10 = "{vs10}"
+__VIEWSTATE11 = "{vs11}"
+__VIEWSTATE12 = "{vs12}"
+__VIEWSTATE13 = "{vs13}"
+__VIEWSTATE14 = "{vs14}"
+__VIEWSTATE15 = "{vs15}"
+__VIEWSTATE16 = "{vs16}"
+__VIEWSTATE17 = "{vs17}"
+__VIEWSTATE18 = "{vs18}"
+__VIEWSTATE19 = "{vs19}"
+__VIEWSTATE20 = "{vs20}"
+__VIEWSTATE21 = "{vs21}"
+__VIEWSTATE22 = "{vs22}"
+__VIEWSTATE23 = "{vs23}"
+__VIEWSTATE24 = "{vs24}"
+__VIEWSTATE25 = "{vs25}"
+__VIEWSTATE26 = "{vs26}"
+__VIEWSTATE27 = "{vs27}"
+__VIEWSTATE28 = "{vs28}"
+__VIEWSTATE29 = "{vs29}"
+__VIEWSTATE30 = "{vs30}"
+__VIEWSTATE31 = "{vs31}"
+__VIEWSTATE32 = "{vs32}"
+__VIEWSTATE33 = "{vs33}"
+__VIEWSTATE34 = "{vs34}"
+__VIEWSTATE35 = "{vs35}"
+__VIEWSTATE36 = "{vs36}"
+__VIEWSTATE37 = "{vs37}"
+__VIEWSTATE38 = "{vs38}"
+__VIEWSTATE39 = "{vs39}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$mainContent$moduleType" = "1"
+"ctl00$mainContent$moduleTitle" = "Smoke Probe Content"
+"ctl00$mainContent$ddPaneNames" = "contentpane"
+"ctl00$mainContent$btnCreateNewContent" = "Create New Content"
+
+[[probes]]
+path = "/smoke-probe-page"
+cookies = true
+contains = "Smoke Probe Content"
+capture = { module = 'HtmlEdit\.aspx\?pageid=\d+&amp;mid=(\d+)' }
+
+[[probes]]
+path = "/HtmlEdit.aspx?pageid={page}&mid={module}"
+cookies = true
+contains = "ctl00$mainContent$edContentinnerEditor"
+capture = { count = 'id="__VIEWSTATEFIELDCOUNT" value="(\d+)"', vs0 = 'id="__VIEWSTATE" value="([^"]*)"', vs1 = '^(?:[\s\S]*?id="__VIEWSTATE1" value="([^"]*)")?', vs2 = '^(?:[\s\S]*?id="__VIEWSTATE2" value="([^"]*)")?', vs3 = '^(?:[\s\S]*?id="__VIEWSTATE3" value="([^"]*)")?', vs4 = '^(?:[\s\S]*?id="__VIEWSTATE4" value="([^"]*)")?', vs5 = '^(?:[\s\S]*?id="__VIEWSTATE5" value="([^"]*)")?', vs6 = '^(?:[\s\S]*?id="__VIEWSTATE6" value="([^"]*)")?', vs7 = '^(?:[\s\S]*?id="__VIEWSTATE7" value="([^"]*)")?', vs8 = '^(?:[\s\S]*?id="__VIEWSTATE8" value="([^"]*)")?', vs9 = '^(?:[\s\S]*?id="__VIEWSTATE9" value="([^"]*)")?', vs10 = '^(?:[\s\S]*?id="__VIEWSTATE10" value="([^"]*)")?', vs11 = '^(?:[\s\S]*?id="__VIEWSTATE11" value="([^"]*)")?', vs12 = '^(?:[\s\S]*?id="__VIEWSTATE12" value="([^"]*)")?', vs13 = '^(?:[\s\S]*?id="__VIEWSTATE13" value="([^"]*)")?', vs14 = '^(?:[\s\S]*?id="__VIEWSTATE14" value="([^"]*)")?', vs15 = '^(?:[\s\S]*?id="__VIEWSTATE15" value="([^"]*)")?', vs16 = '^(?:[\s\S]*?id="__VIEWSTATE16" value="([^"]*)")?', vs17 = '^(?:[\s\S]*?id="__VIEWSTATE17" value="([^"]*)")?', vs18 = '^(?:[\s\S]*?id="__VIEWSTATE18" value="([^"]*)")?', vs19 = '^(?:[\s\S]*?id="__VIEWSTATE19" value="([^"]*)")?', vs20 = '^(?:[\s\S]*?id="__VIEWSTATE20" value="([^"]*)")?', vs21 = '^(?:[\s\S]*?id="__VIEWSTATE21" value="([^"]*)")?', vs22 = '^(?:[\s\S]*?id="__VIEWSTATE22" value="([^"]*)")?', vs23 = '^(?:[\s\S]*?id="__VIEWSTATE23" value="([^"]*)")?', vs24 = '^(?:[\s\S]*?id="__VIEWSTATE24" value="([^"]*)")?', vs25 = '^(?:[\s\S]*?id="__VIEWSTATE25" value="([^"]*)")?', vs26 = '^(?:[\s\S]*?id="__VIEWSTATE26" value="([^"]*)")?', vs27 = '^(?:[\s\S]*?id="__VIEWSTATE27" value="([^"]*)")?', vs28 = '^(?:[\s\S]*?id="__VIEWSTATE28" value="([^"]*)")?', vs29 = '^(?:[\s\S]*?id="__VIEWSTATE29" value="([^"]*)")?', vs30 = '^(?:[\s\S]*?id="__VIEWSTATE30" value="([^"]*)")?', vs31 = '^(?:[\s\S]*?id="__VIEWSTATE31" value="([^"]*)")?', vs32 = '^(?:[\s\S]*?id="__VIEWSTATE32" value="([^"]*)")?', vs33 = '^(?:[\s\S]*?id="__VIEWSTATE33" value="([^"]*)")?', vs34 = '^(?:[\s\S]*?id="__VIEWSTATE34" value="([^"]*)")?', vs35 = '^(?:[\s\S]*?id="__VIEWSTATE35" value="([^"]*)")?', vs36 = '^(?:[\s\S]*?id="__VIEWSTATE36" value="([^"]*)")?', vs37 = '^(?:[\s\S]*?id="__VIEWSTATE37" value="([^"]*)")?', vs38 = '^(?:[\s\S]*?id="__VIEWSTATE38" value="([^"]*)")?', vs39 = '^(?:[\s\S]*?id="__VIEWSTATE39" value="([^"]*)")?', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/HtmlEdit.aspx?pageid={page}&mid={module}"
+method = "POST"
+cookies = true
+status = 302
+headers = { Referer = "http://127.0.0.1/HtmlEdit.aspx?pageid={page}&mid={module}" }
+[probes.form]
+__VIEWSTATEFIELDCOUNT = "{count}"
+__VIEWSTATE = "{vs0}"
+__VIEWSTATE1 = "{vs1}"
+__VIEWSTATE2 = "{vs2}"
+__VIEWSTATE3 = "{vs3}"
+__VIEWSTATE4 = "{vs4}"
+__VIEWSTATE5 = "{vs5}"
+__VIEWSTATE6 = "{vs6}"
+__VIEWSTATE7 = "{vs7}"
+__VIEWSTATE8 = "{vs8}"
+__VIEWSTATE9 = "{vs9}"
+__VIEWSTATE10 = "{vs10}"
+__VIEWSTATE11 = "{vs11}"
+__VIEWSTATE12 = "{vs12}"
+__VIEWSTATE13 = "{vs13}"
+__VIEWSTATE14 = "{vs14}"
+__VIEWSTATE15 = "{vs15}"
+__VIEWSTATE16 = "{vs16}"
+__VIEWSTATE17 = "{vs17}"
+__VIEWSTATE18 = "{vs18}"
+__VIEWSTATE19 = "{vs19}"
+__VIEWSTATE20 = "{vs20}"
+__VIEWSTATE21 = "{vs21}"
+__VIEWSTATE22 = "{vs22}"
+__VIEWSTATE23 = "{vs23}"
+__VIEWSTATE24 = "{vs24}"
+__VIEWSTATE25 = "{vs25}"
+__VIEWSTATE26 = "{vs26}"
+__VIEWSTATE27 = "{vs27}"
+__VIEWSTATE28 = "{vs28}"
+__VIEWSTATE29 = "{vs29}"
+__VIEWSTATE30 = "{vs30}"
+__VIEWSTATE31 = "{vs31}"
+__VIEWSTATE32 = "{vs32}"
+__VIEWSTATE33 = "{vs33}"
+__VIEWSTATE34 = "{vs34}"
+__VIEWSTATE35 = "{vs35}"
+__VIEWSTATE36 = "{vs36}"
+__VIEWSTATE37 = "{vs37}"
+__VIEWSTATE38 = "{vs38}"
+__VIEWSTATE39 = "{vs39}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$mainContent$edContentinnerEditor" = "<p>Written by a probe</p>"
+"ctl00$mainContent$btnUpdate" = "Update"
+
+[[probes]]
+path = "/smoke-probe-page"
+contains = "Written by a probe"
+
+[[probes]]
+path = "/Admin/PageSettings.aspx?pageid={page}"
+cookies = true
+contains = "ctl00$mainContent$btnDelete"
+capture = { count = 'id="__VIEWSTATEFIELDCOUNT" value="(\d+)"', vs0 = 'id="__VIEWSTATE" value="([^"]*)"', vs1 = '^(?:[\s\S]*?id="__VIEWSTATE1" value="([^"]*)")?', vs2 = '^(?:[\s\S]*?id="__VIEWSTATE2" value="([^"]*)")?', vs3 = '^(?:[\s\S]*?id="__VIEWSTATE3" value="([^"]*)")?', vs4 = '^(?:[\s\S]*?id="__VIEWSTATE4" value="([^"]*)")?', vs5 = '^(?:[\s\S]*?id="__VIEWSTATE5" value="([^"]*)")?', vs6 = '^(?:[\s\S]*?id="__VIEWSTATE6" value="([^"]*)")?', vs7 = '^(?:[\s\S]*?id="__VIEWSTATE7" value="([^"]*)")?', vs8 = '^(?:[\s\S]*?id="__VIEWSTATE8" value="([^"]*)")?', vs9 = '^(?:[\s\S]*?id="__VIEWSTATE9" value="([^"]*)")?', vs10 = '^(?:[\s\S]*?id="__VIEWSTATE10" value="([^"]*)")?', vs11 = '^(?:[\s\S]*?id="__VIEWSTATE11" value="([^"]*)")?', vs12 = '^(?:[\s\S]*?id="__VIEWSTATE12" value="([^"]*)")?', vs13 = '^(?:[\s\S]*?id="__VIEWSTATE13" value="([^"]*)")?', vs14 = '^(?:[\s\S]*?id="__VIEWSTATE14" value="([^"]*)")?', vs15 = '^(?:[\s\S]*?id="__VIEWSTATE15" value="([^"]*)")?', vs16 = '^(?:[\s\S]*?id="__VIEWSTATE16" value="([^"]*)")?', vs17 = '^(?:[\s\S]*?id="__VIEWSTATE17" value="([^"]*)")?', vs18 = '^(?:[\s\S]*?id="__VIEWSTATE18" value="([^"]*)")?', vs19 = '^(?:[\s\S]*?id="__VIEWSTATE19" value="([^"]*)")?', vs20 = '^(?:[\s\S]*?id="__VIEWSTATE20" value="([^"]*)")?', vs21 = '^(?:[\s\S]*?id="__VIEWSTATE21" value="([^"]*)")?', vs22 = '^(?:[\s\S]*?id="__VIEWSTATE22" value="([^"]*)")?', vs23 = '^(?:[\s\S]*?id="__VIEWSTATE23" value="([^"]*)")?', vs24 = '^(?:[\s\S]*?id="__VIEWSTATE24" value="([^"]*)")?', vs25 = '^(?:[\s\S]*?id="__VIEWSTATE25" value="([^"]*)")?', vs26 = '^(?:[\s\S]*?id="__VIEWSTATE26" value="([^"]*)")?', vs27 = '^(?:[\s\S]*?id="__VIEWSTATE27" value="([^"]*)")?', vs28 = '^(?:[\s\S]*?id="__VIEWSTATE28" value="([^"]*)")?', vs29 = '^(?:[\s\S]*?id="__VIEWSTATE29" value="([^"]*)")?', vs30 = '^(?:[\s\S]*?id="__VIEWSTATE30" value="([^"]*)")?', vs31 = '^(?:[\s\S]*?id="__VIEWSTATE31" value="([^"]*)")?', vs32 = '^(?:[\s\S]*?id="__VIEWSTATE32" value="([^"]*)")?', vs33 = '^(?:[\s\S]*?id="__VIEWSTATE33" value="([^"]*)")?', vs34 = '^(?:[\s\S]*?id="__VIEWSTATE34" value="([^"]*)")?', vs35 = '^(?:[\s\S]*?id="__VIEWSTATE35" value="([^"]*)")?', vs36 = '^(?:[\s\S]*?id="__VIEWSTATE36" value="([^"]*)")?', vs37 = '^(?:[\s\S]*?id="__VIEWSTATE37" value="([^"]*)")?', vs38 = '^(?:[\s\S]*?id="__VIEWSTATE38" value="([^"]*)")?', vs39 = '^(?:[\s\S]*?id="__VIEWSTATE39" value="([^"]*)")?', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Admin/PageSettings.aspx?pageid={page}"
+method = "POST"
+cookies = true
+status = 302
+headers = { Referer = "http://127.0.0.1/Admin/PageSettings.aspx?pageid={page}" }
+[probes.form]
+__VIEWSTATEFIELDCOUNT = "{count}"
+__VIEWSTATE = "{vs0}"
+__VIEWSTATE1 = "{vs1}"
+__VIEWSTATE2 = "{vs2}"
+__VIEWSTATE3 = "{vs3}"
+__VIEWSTATE4 = "{vs4}"
+__VIEWSTATE5 = "{vs5}"
+__VIEWSTATE6 = "{vs6}"
+__VIEWSTATE7 = "{vs7}"
+__VIEWSTATE8 = "{vs8}"
+__VIEWSTATE9 = "{vs9}"
+__VIEWSTATE10 = "{vs10}"
+__VIEWSTATE11 = "{vs11}"
+__VIEWSTATE12 = "{vs12}"
+__VIEWSTATE13 = "{vs13}"
+__VIEWSTATE14 = "{vs14}"
+__VIEWSTATE15 = "{vs15}"
+__VIEWSTATE16 = "{vs16}"
+__VIEWSTATE17 = "{vs17}"
+__VIEWSTATE18 = "{vs18}"
+__VIEWSTATE19 = "{vs19}"
+__VIEWSTATE20 = "{vs20}"
+__VIEWSTATE21 = "{vs21}"
+__VIEWSTATE22 = "{vs22}"
+__VIEWSTATE23 = "{vs23}"
+__VIEWSTATE24 = "{vs24}"
+__VIEWSTATE25 = "{vs25}"
+__VIEWSTATE26 = "{vs26}"
+__VIEWSTATE27 = "{vs27}"
+__VIEWSTATE28 = "{vs28}"
+__VIEWSTATE29 = "{vs29}"
+__VIEWSTATE30 = "{vs30}"
+__VIEWSTATE31 = "{vs31}"
+__VIEWSTATE32 = "{vs32}"
+__VIEWSTATE33 = "{vs33}"
+__VIEWSTATE34 = "{vs34}"
+__VIEWSTATE35 = "{vs35}"
+__VIEWSTATE36 = "{vs36}"
+__VIEWSTATE37 = "{vs37}"
+__VIEWSTATE38 = "{vs38}"
+__VIEWSTATE39 = "{vs39}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$mainContent$btnDelete" = "Delete"
+
+[[probes]]
+path = "/smoke-probe-page"
+cookies = true
+status = 404
+
+[[probes]]
+path = "/MemberList.aspx?search=smokeprobe"
+cookies = true
+contains = "ProfileView.aspx?userid="
+capture = { user = 'ManageUsers\.aspx\?userid=(\d+)"' }
+
+[[probes]]
+path = "/Admin/ManageUsers.aspx?userid={user}"
+cookies = true
+contains = "ctl00$mainContent$btnDelete"
+capture = { count = 'id="__VIEWSTATEFIELDCOUNT" value="(\d+)"', vs0 = 'id="__VIEWSTATE" value="([^"]*)"', vs1 = '^(?:[\s\S]*?id="__VIEWSTATE1" value="([^"]*)")?', vs2 = '^(?:[\s\S]*?id="__VIEWSTATE2" value="([^"]*)")?', vs3 = '^(?:[\s\S]*?id="__VIEWSTATE3" value="([^"]*)")?', vs4 = '^(?:[\s\S]*?id="__VIEWSTATE4" value="([^"]*)")?', vs5 = '^(?:[\s\S]*?id="__VIEWSTATE5" value="([^"]*)")?', vs6 = '^(?:[\s\S]*?id="__VIEWSTATE6" value="([^"]*)")?', vs7 = '^(?:[\s\S]*?id="__VIEWSTATE7" value="([^"]*)")?', vs8 = '^(?:[\s\S]*?id="__VIEWSTATE8" value="([^"]*)")?', vs9 = '^(?:[\s\S]*?id="__VIEWSTATE9" value="([^"]*)")?', vs10 = '^(?:[\s\S]*?id="__VIEWSTATE10" value="([^"]*)")?', vs11 = '^(?:[\s\S]*?id="__VIEWSTATE11" value="([^"]*)")?', vs12 = '^(?:[\s\S]*?id="__VIEWSTATE12" value="([^"]*)")?', vs13 = '^(?:[\s\S]*?id="__VIEWSTATE13" value="([^"]*)")?', vs14 = '^(?:[\s\S]*?id="__VIEWSTATE14" value="([^"]*)")?', vs15 = '^(?:[\s\S]*?id="__VIEWSTATE15" value="([^"]*)")?', vs16 = '^(?:[\s\S]*?id="__VIEWSTATE16" value="([^"]*)")?', vs17 = '^(?:[\s\S]*?id="__VIEWSTATE17" value="([^"]*)")?', vs18 = '^(?:[\s\S]*?id="__VIEWSTATE18" value="([^"]*)")?', vs19 = '^(?:[\s\S]*?id="__VIEWSTATE19" value="([^"]*)")?', vs20 = '^(?:[\s\S]*?id="__VIEWSTATE20" value="([^"]*)")?', vs21 = '^(?:[\s\S]*?id="__VIEWSTATE21" value="([^"]*)")?', vs22 = '^(?:[\s\S]*?id="__VIEWSTATE22" value="([^"]*)")?', vs23 = '^(?:[\s\S]*?id="__VIEWSTATE23" value="([^"]*)")?', vs24 = '^(?:[\s\S]*?id="__VIEWSTATE24" value="([^"]*)")?', vs25 = '^(?:[\s\S]*?id="__VIEWSTATE25" value="([^"]*)")?', vs26 = '^(?:[\s\S]*?id="__VIEWSTATE26" value="([^"]*)")?', vs27 = '^(?:[\s\S]*?id="__VIEWSTATE27" value="([^"]*)")?', vs28 = '^(?:[\s\S]*?id="__VIEWSTATE28" value="([^"]*)")?', vs29 = '^(?:[\s\S]*?id="__VIEWSTATE29" value="([^"]*)")?', vs30 = '^(?:[\s\S]*?id="__VIEWSTATE30" value="([^"]*)")?', vs31 = '^(?:[\s\S]*?id="__VIEWSTATE31" value="([^"]*)")?', vs32 = '^(?:[\s\S]*?id="__VIEWSTATE32" value="([^"]*)")?', vs33 = '^(?:[\s\S]*?id="__VIEWSTATE33" value="([^"]*)")?', vs34 = '^(?:[\s\S]*?id="__VIEWSTATE34" value="([^"]*)")?', vs35 = '^(?:[\s\S]*?id="__VIEWSTATE35" value="([^"]*)")?', vs36 = '^(?:[\s\S]*?id="__VIEWSTATE36" value="([^"]*)")?', vs37 = '^(?:[\s\S]*?id="__VIEWSTATE37" value="([^"]*)")?', vs38 = '^(?:[\s\S]*?id="__VIEWSTATE38" value="([^"]*)")?', vs39 = '^(?:[\s\S]*?id="__VIEWSTATE39" value="([^"]*)")?', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Admin/ManageUsers.aspx?userid={user}"
+method = "POST"
+cookies = true
+status = 302
+headers = { Referer = "http://127.0.0.1/Admin/ManageUsers.aspx?userid={user}" }
+[probes.form]
+__VIEWSTATEFIELDCOUNT = "{count}"
+__VIEWSTATE = "{vs0}"
+__VIEWSTATE1 = "{vs1}"
+__VIEWSTATE2 = "{vs2}"
+__VIEWSTATE3 = "{vs3}"
+__VIEWSTATE4 = "{vs4}"
+__VIEWSTATE5 = "{vs5}"
+__VIEWSTATE6 = "{vs6}"
+__VIEWSTATE7 = "{vs7}"
+__VIEWSTATE8 = "{vs8}"
+__VIEWSTATE9 = "{vs9}"
+__VIEWSTATE10 = "{vs10}"
+__VIEWSTATE11 = "{vs11}"
+__VIEWSTATE12 = "{vs12}"
+__VIEWSTATE13 = "{vs13}"
+__VIEWSTATE14 = "{vs14}"
+__VIEWSTATE15 = "{vs15}"
+__VIEWSTATE16 = "{vs16}"
+__VIEWSTATE17 = "{vs17}"
+__VIEWSTATE18 = "{vs18}"
+__VIEWSTATE19 = "{vs19}"
+__VIEWSTATE20 = "{vs20}"
+__VIEWSTATE21 = "{vs21}"
+__VIEWSTATE22 = "{vs22}"
+__VIEWSTATE23 = "{vs23}"
+__VIEWSTATE24 = "{vs24}"
+__VIEWSTATE25 = "{vs25}"
+__VIEWSTATE26 = "{vs26}"
+__VIEWSTATE27 = "{vs27}"
+__VIEWSTATE28 = "{vs28}"
+__VIEWSTATE29 = "{vs29}"
+__VIEWSTATE30 = "{vs30}"
+__VIEWSTATE31 = "{vs31}"
+__VIEWSTATE32 = "{vs32}"
+__VIEWSTATE33 = "{vs33}"
+__VIEWSTATE34 = "{vs34}"
+__VIEWSTATE35 = "{vs35}"
+__VIEWSTATE36 = "{vs36}"
+__VIEWSTATE37 = "{vs37}"
+__VIEWSTATE38 = "{vs38}"
+__VIEWSTATE39 = "{vs39}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$mainContent$btnDelete" = "Delete"
+
+[[probes]]
+path = "/MemberList.aspx"
+cookies = true
+contains = "ManageUsers.aspx?userid=1\""
+absent = "ManageUsers.aspx?userid={user}\""
+
+[[probes]]
+path = "/Logoff.aspx"
+cookies = true
+status = 302
+
+[[probes]]
+path = "/Admin/PageSettings.aspx?start=1"
+cookies = true
+status = 302

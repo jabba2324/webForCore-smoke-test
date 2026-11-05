@@ -1,8 +1,8 @@
 diff --git a/yafsrc/Lucene.Net/Lucene.Net.Analysis.Common/YAF.Lucene.Net.Analysis.Common.csproj b/yafsrc/Lucene.Net/Lucene.Net.Analysis.Common/YAF.Lucene.Net.Analysis.Common.csproj
-index cf6eb8a8b..54c081fe2 100644
+index cf6eb8a8b..a25e63992 100644
 --- a/yafsrc/Lucene.Net/Lucene.Net.Analysis.Common/YAF.Lucene.Net.Analysis.Common.csproj
 +++ b/yafsrc/Lucene.Net/Lucene.Net.Analysis.Common/YAF.Lucene.Net.Analysis.Common.csproj
-@@ -1,49 +1,447 @@
+@@ -1,49 +1,450 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<!--
 -
@@ -485,6 +485,9 @@ index cf6eb8a8b..54c081fe2 100644
 +    <ProjectReference Include="../Lucene.Net/YAF.Lucene.Net.csproj" />
    </ItemGroup>
  
++  <ItemGroup>
++    <FrameworkReference Include="Microsoft.AspNetCore.App" />
++  </ItemGroup>
  </Project>
 diff --git a/yafsrc/Lucene.Net/Lucene.Net.Analysis.Common/YAF.Lucene.Net.Analysis.Common.csproj.netfx b/yafsrc/Lucene.Net/Lucene.Net.Analysis.Common/YAF.Lucene.Net.Analysis.Common.csproj.netfx
 new file mode 100644
@@ -542,10 +545,10 @@ index 000000000..cf6eb8a8b
 +
 +</Project>
 diff --git a/yafsrc/Lucene.Net/Lucene.Net.Highlighter/YAF.Lucene.Net.Highlighter.csproj b/yafsrc/Lucene.Net/Lucene.Net.Highlighter/YAF.Lucene.Net.Highlighter.csproj
-index 024e40a80..f78ccbf2d 100644
+index 024e40a80..1118541f8 100644
 --- a/yafsrc/Lucene.Net/Lucene.Net.Highlighter/YAF.Lucene.Net.Highlighter.csproj
 +++ b/yafsrc/Lucene.Net/Lucene.Net.Highlighter/YAF.Lucene.Net.Highlighter.csproj
-@@ -1,43 +1,76 @@
+@@ -1,43 +1,79 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<!--
 -
@@ -654,6 +657,9 @@ index 024e40a80..f78ccbf2d 100644
 +    <ProjectReference Include="../Lucene.Net.Queries/YAF.Lucene.Net.Queries.csproj" />
    </ItemGroup>
  
++  <ItemGroup>
++    <FrameworkReference Include="Microsoft.AspNetCore.App" />
++  </ItemGroup>
  </Project>
 diff --git a/yafsrc/Lucene.Net/Lucene.Net.Highlighter/YAF.Lucene.Net.Highlighter.csproj.netfx b/yafsrc/Lucene.Net/Lucene.Net.Highlighter/YAF.Lucene.Net.Highlighter.csproj.netfx
 new file mode 100644
@@ -705,10 +711,10 @@ index 000000000..024e40a80
 +
 +</Project>
 diff --git a/yafsrc/Lucene.Net/Lucene.Net.Queries/YAF.Lucene.Net.Queries.csproj b/yafsrc/Lucene.Net/Lucene.Net.Queries/YAF.Lucene.Net.Queries.csproj
-index 34f918f42..1bff6b8cc 100644
+index 34f918f42..a3b0c9593 100644
 --- a/yafsrc/Lucene.Net/Lucene.Net.Queries/YAF.Lucene.Net.Queries.csproj
 +++ b/yafsrc/Lucene.Net/Lucene.Net.Queries/YAF.Lucene.Net.Queries.csproj
-@@ -1,43 +1,95 @@
+@@ -1,43 +1,98 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<!--
 -
@@ -836,6 +842,9 @@ index 34f918f42..1bff6b8cc 100644
 +    <ProjectReference Include="../Lucene.Net/YAF.Lucene.Net.csproj" />
    </ItemGroup>
  
++  <ItemGroup>
++    <FrameworkReference Include="Microsoft.AspNetCore.App" />
++  </ItemGroup>
  </Project>
 diff --git a/yafsrc/Lucene.Net/Lucene.Net.Queries/YAF.Lucene.Net.Queries.csproj.netfx b/yafsrc/Lucene.Net/Lucene.Net.Queries/YAF.Lucene.Net.Queries.csproj.netfx
 new file mode 100644
@@ -887,10 +896,10 @@ index 000000000..34f918f42
 +
 +</Project>
 diff --git a/yafsrc/Lucene.Net/Lucene.Net.QueryParser/YAF.Lucene.Net.QueryParser.csproj b/yafsrc/Lucene.Net/Lucene.Net.QueryParser/YAF.Lucene.Net.QueryParser.csproj
-index d0b7abf37..589ba103c 100644
+index d0b7abf37..ddeb3fee5 100644
 --- a/yafsrc/Lucene.Net/Lucene.Net.QueryParser/YAF.Lucene.Net.QueryParser.csproj
 +++ b/yafsrc/Lucene.Net/Lucene.Net.QueryParser/YAF.Lucene.Net.QueryParser.csproj
-@@ -1,45 +1,233 @@
+@@ -1,45 +1,236 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<!--
 -
@@ -1159,6 +1168,9 @@ index d0b7abf37..589ba103c 100644
 +    <ProjectReference Include="../Lucene.Net.Queries/YAF.Lucene.Net.Queries.csproj" />
    </ItemGroup>
  
++  <ItemGroup>
++    <FrameworkReference Include="Microsoft.AspNetCore.App" />
++  </ItemGroup>
  </Project>
 diff --git a/yafsrc/Lucene.Net/Lucene.Net.QueryParser/YAF.Lucene.Net.QueryParser.csproj.netfx b/yafsrc/Lucene.Net/Lucene.Net.QueryParser/YAF.Lucene.Net.QueryParser.csproj.netfx
 new file mode 100644
@@ -1212,10 +1224,10 @@ index 000000000..d0b7abf37
 +
 +</Project>
 diff --git a/yafsrc/Lucene.Net/Lucene.Net/YAF.Lucene.Net.csproj b/yafsrc/Lucene.Net/Lucene.Net/YAF.Lucene.Net.csproj
-index d622c64ab..2235455a0 100644
+index d622c64ab..b24b98d13 100644
 --- a/yafsrc/Lucene.Net/Lucene.Net/YAF.Lucene.Net.csproj
 +++ b/yafsrc/Lucene.Net/Lucene.Net/YAF.Lucene.Net.csproj
-@@ -1,65 +1,838 @@
+@@ -1,65 +1,841 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<!--
 -
@@ -1262,11 +1274,6 @@ index d622c64ab..2235455a0 100644
 -  <ItemGroup Condition=" '$(TargetFramework)' == 'net472' ">
 -    <Reference Include="System" />
 -    <Reference Include="Microsoft.CSharp" />
--  </ItemGroup>
--
--  <ItemGroup>
--    <Folder Include="Index\Memory\" />
--    <Folder Include="Sandbox\" />
 +    <Compile Remove="bin/**;obj/**" />
 +    <Compile Remove="Analysis/Analyzer.cs" />
 +    <Compile Remove="Analysis/AnalyzerWrapper.cs" />
@@ -2083,11 +2090,20 @@ index d622c64ab..2235455a0 100644
    </ItemGroup>
  
    <ItemGroup>
+-    <Folder Include="Index\Memory\" />
+-    <Folder Include="Sandbox\" />
++    <!-- webForCore 0.5.0 packages (GitHub release): "webForCore" is the "Always" set. -->
++    <PackageReference Include="webForCore" Version="0.9.0" />
+   </ItemGroup>
+ 
+   <ItemGroup>
 -    <None Update="C:\Users\Watcher\Documents\GitHub\lucenenet\branding\logo\lucene-net-icon-128x128.png" Link="Sandbox\lucene-net-icon-128x128.png" />
 -    <None Update="C:\Users\Watcher\Documents\GitHub\lucenenet\LICENSE.txt" Link="Sandbox\LICENSE.txt" />
 -    <None Update="C:\Users\Watcher\Documents\GitHub\lucenenet\NOTICE.txt" Link="Sandbox\NOTICE.txt" />
-+    <!-- webForCore 0.5.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
++    <!-- The app's own libraries. -->
++    <PackageReference Include="J2N" Version="2.0.0-beta-0012" />
++    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
++    <PackageReference Include="Microsoft.Extensions.Primitives" Version="5.0.1" />
    </ItemGroup>
  
    <ItemGroup>
@@ -2098,12 +2114,9 @@ index d622c64ab..2235455a0 100644
 -    <InternalsVisibleTo Include="YAF.Lucene.Net.Analysis.Common" />
 -    <InternalsVisibleTo Include="YAF.Lucene.Net.Support" />
 -
-+    <!-- The app's own libraries. -->
-+    <PackageReference Include="J2N" Version="2.0.0-beta-0012" />
-+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="5.0.0" />
-+    <PackageReference Include="Microsoft.Extensions.Primitives" Version="5.0.1" />
++    <FrameworkReference Include="Microsoft.AspNetCore.App" />
    </ItemGroup>
- 
+-
  </Project>
 diff --git a/yafsrc/Lucene.Net/Lucene.Net/YAF.Lucene.Net.csproj.netfx b/yafsrc/Lucene.Net/Lucene.Net/YAF.Lucene.Net.csproj.netfx
 new file mode 100644
@@ -2177,7 +2190,7 @@ index 000000000..d622c64ab
 +
 +</Project>
 diff --git a/yafsrc/ServiceStack/ServiceStack.Common/ServiceStack.Common.csproj b/yafsrc/ServiceStack/ServiceStack.Common/ServiceStack.Common.csproj
-index e29d402bf..a671ce2c0 100644
+index e29d402bf..3f065c465 100644
 --- a/yafsrc/ServiceStack/ServiceStack.Common/ServiceStack.Common.csproj
 +++ b/yafsrc/ServiceStack/ServiceStack.Common/ServiceStack.Common.csproj
 @@ -1,8 +1,12 @@
@@ -2195,7 +2208,7 @@ index e29d402bf..a671ce2c0 100644
      <RootNamespace>ServiceStack</RootNamespace>
      <Title>Common libraries for ServiceStack projects</Title>
      <PackageDescription>
-@@ -13,6 +17,9 @@
+@@ -13,6 +17,12 @@
    <ItemGroup>
      <ProjectReference Include="..\ServiceStack.Interfaces\ServiceStack.Interfaces.csproj" />
  	  <ProjectReference Include="..\ServiceStack.Text\ServiceStack.Text.csproj" />
@@ -2204,6 +2217,9 @@ index e29d402bf..a671ce2c0 100644
 +  <ItemGroup>
 +    <!-- Migrated to webForCore (.NET 10) in place; the .NET Framework project is ServiceStack.Common.csproj.netfx. -->
 +    <PackageReference Include="webForCore" Version="0.9.0" />
++  </ItemGroup>
++  <ItemGroup>
++    <FrameworkReference Include="Microsoft.AspNetCore.App" />
    </ItemGroup>
  </Project>
 \ No newline at end of file
@@ -2233,7 +2249,7 @@ index 000000000..e29d402bf
 +</Project>
 \ No newline at end of file
 diff --git a/yafsrc/ServiceStack/ServiceStack.Interfaces/ServiceStack.Interfaces.csproj b/yafsrc/ServiceStack/ServiceStack.Interfaces/ServiceStack.Interfaces.csproj
-index 3d4ed93fd..6a8037c70 100644
+index 3d4ed93fd..dfa8a86d8 100644
 --- a/yafsrc/ServiceStack/ServiceStack.Interfaces/ServiceStack.Interfaces.csproj
 +++ b/yafsrc/ServiceStack/ServiceStack.Interfaces/ServiceStack.Interfaces.csproj
 @@ -1,10 +1,14 @@
@@ -2253,13 +2269,16 @@ index 3d4ed93fd..6a8037c70 100644
          <Title>Lightweight and implementation-free interfaces for ServiceStack</Title>
          <PackageDescription>
              Lightweight and implementation-free interfaces for DTO's, providers and adapters.
-@@ -16,4 +20,8 @@
+@@ -16,4 +20,11 @@
          <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
      </ItemGroup>
  
 +  <ItemGroup>
 +    <!-- Migrated to webForCore (.NET 10) in place; the .NET Framework project is ServiceStack.Interfaces.csproj.netfx. -->
 +    <PackageReference Include="webForCore" Version="0.9.0" />
++  </ItemGroup>
++  <ItemGroup>
++    <FrameworkReference Include="Microsoft.AspNetCore.App" />
 +  </ItemGroup>
  </Project>
 \ No newline at end of file
@@ -2290,7 +2309,7 @@ index 000000000..3d4ed93fd
 +</Project>
 \ No newline at end of file
 diff --git a/yafsrc/ServiceStack/ServiceStack.OrmLite.SqlServer/ServiceStack.OrmLite.SqlServer.csproj b/yafsrc/ServiceStack/ServiceStack.OrmLite.SqlServer/ServiceStack.OrmLite.SqlServer.csproj
-index c27a32c6c..4f94b3511 100644
+index c27a32c6c..025d95d3b 100644
 --- a/yafsrc/ServiceStack/ServiceStack.OrmLite.SqlServer/ServiceStack.OrmLite.SqlServer.csproj
 +++ b/yafsrc/ServiceStack/ServiceStack.OrmLite.SqlServer/ServiceStack.OrmLite.SqlServer.csproj
 @@ -1,9 +1,13 @@
@@ -2309,7 +2328,7 @@ index c27a32c6c..4f94b3511 100644
      <Title>OrmLite.SqlServer - Fast, code-first, config-free POCO ORM</Title>
      <PackageDescription>
        Light, simple and fast convention-based code-first POCO ORM for Sql Server.
-@@ -19,7 +23,11 @@
+@@ -19,7 +23,14 @@
    </ItemGroup>
  
    <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
@@ -2320,6 +2339,9 @@ index c27a32c6c..4f94b3511 100644
 +  <ItemGroup>
 +    <!-- Migrated to webForCore (.NET 10) in place; the .NET Framework project is ServiceStack.OrmLite.SqlServer.csproj.netfx. -->
 +    <PackageReference Include="webForCore" Version="0.9.0" />
++  </ItemGroup>
++  <ItemGroup>
++    <FrameworkReference Include="Microsoft.AspNetCore.App" />
 +  </ItemGroup>
  </Project>
 diff --git a/yafsrc/ServiceStack/ServiceStack.OrmLite.SqlServer/ServiceStack.OrmLite.SqlServer.csproj.netfx b/yafsrc/ServiceStack/ServiceStack.OrmLite.SqlServer/ServiceStack.OrmLite.SqlServer.csproj.netfx
@@ -2354,7 +2376,7 @@ index 000000000..c27a32c6c
 +
 +</Project>
 diff --git a/yafsrc/ServiceStack/ServiceStack.OrmLite/ServiceStack.OrmLite.csproj b/yafsrc/ServiceStack/ServiceStack.OrmLite/ServiceStack.OrmLite.csproj
-index 7165ce159..a57d8464d 100644
+index 7165ce159..cc28b8b65 100644
 --- a/yafsrc/ServiceStack/ServiceStack.OrmLite/ServiceStack.OrmLite.csproj
 +++ b/yafsrc/ServiceStack/ServiceStack.OrmLite/ServiceStack.OrmLite.csproj
 @@ -1,9 +1,13 @@
@@ -2387,13 +2409,16 @@ index 7165ce159..a57d8464d 100644
    </ItemGroup>
  
    <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-@@ -35,4 +36,8 @@
+@@ -35,4 +36,11 @@
      <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
    </ItemGroup>
  
 +  <ItemGroup>
 +    <!-- Migrated to webForCore (.NET 10) in place; the .NET Framework project is ServiceStack.OrmLite.csproj.netfx. -->
 +    <PackageReference Include="webForCore" Version="0.9.0" />
++  </ItemGroup>
++  <ItemGroup>
++    <FrameworkReference Include="Microsoft.AspNetCore.App" />
 +  </ItemGroup>
  </Project>
 diff --git a/yafsrc/ServiceStack/ServiceStack.OrmLite/ServiceStack.OrmLite.csproj.netfx b/yafsrc/ServiceStack/ServiceStack.OrmLite/ServiceStack.OrmLite.csproj.netfx
@@ -2440,8 +2465,30 @@ index 000000000..7165ce159
 +  </ItemGroup>
 +
 +</Project>
+diff --git a/yafsrc/ServiceStack/ServiceStack.Text/Json/JsonTypeSerializer.cs b/yafsrc/ServiceStack/ServiceStack.Text/Json/JsonTypeSerializer.cs
+index 7101a82fc..6c7c5981b 100644
+--- a/yafsrc/ServiceStack/ServiceStack.Text/Json/JsonTypeSerializer.cs
++++ b/yafsrc/ServiceStack/ServiceStack.Text/Json/JsonTypeSerializer.cs
+@@ -426,7 +426,7 @@ private static string UnescapeJsonString(string json, ref int index)
+                 : null;
+         }
+ 
+-        private static ReadOnlySpan<char> UnescapeJsonString(ReadOnlySpan<char> json, ref int index) =>
++        private static ReadOnlySpan<char> UnescapeJsonString(ReadOnlySpan<char> json, scoped ref int index) =>
+             UnescapeJsString(json, JsonUtils.QuoteChar, removeQuotes:true, ref index);
+ 
+         public static ReadOnlySpan<char> UnescapeJsString(ReadOnlySpan<char> json, char quoteChar)
+@@ -435,7 +435,7 @@ public static ReadOnlySpan<char> UnescapeJsString(ReadOnlySpan<char> json, char
+             return UnescapeJsString(json, quoteChar, removeQuotes:false, ref ignore);
+         }
+         
+-        public static ReadOnlySpan<char> UnescapeJsString(ReadOnlySpan<char> json, char quoteChar, bool removeQuotes, ref int index)
++        public static ReadOnlySpan<char> UnescapeJsString(ReadOnlySpan<char> json, char quoteChar, bool removeQuotes, scoped ref int index)
+         {
+             if (json.IsNullOrEmpty()) return json;
+             var jsonLength = json.Length;
 diff --git a/yafsrc/ServiceStack/ServiceStack.Text/ServiceStack.Text.csproj b/yafsrc/ServiceStack/ServiceStack.Text/ServiceStack.Text.csproj
-index 2dea4d77b..b3ab2e4ea 100644
+index 2dea4d77b..d5748f461 100644
 --- a/yafsrc/ServiceStack/ServiceStack.Text/ServiceStack.Text.csproj
 +++ b/yafsrc/ServiceStack/ServiceStack.Text/ServiceStack.Text.csproj
 @@ -1,8 +1,12 @@
@@ -2459,7 +2506,7 @@ index 2dea4d77b..b3ab2e4ea 100644
      <Title>.NET's fastest JSON Serializer by ServiceStack</Title>
      <PackageDescription>
        .NET's fastest JSON, JSV and CSV Text Serializers. Fast, Light, Resilient.
-@@ -15,18 +19,17 @@
+@@ -15,18 +19,20 @@
      <DefineConstants>$(DefineConstants);NETSTANDARD;NETCORE2_1</DefineConstants>
    </PropertyGroup>
    <ItemGroup>
@@ -2480,6 +2527,9 @@ index 2dea4d77b..b3ab2e4ea 100644
 +  <ItemGroup>
 +    <!-- Migrated to webForCore (.NET 10) in place; the .NET Framework project is ServiceStack.Text.csproj.netfx. -->
 +    <PackageReference Include="webForCore" Version="0.9.0" />
++  </ItemGroup>
++  <ItemGroup>
++    <FrameworkReference Include="Microsoft.AspNetCore.App" />
 +  </ItemGroup>
  </Project>
 \ No newline at end of file
@@ -2523,7 +2573,7 @@ index 000000000..2dea4d77b
 +</Project>
 \ No newline at end of file
 diff --git a/yafsrc/YAF.Configuration/YAF.Configuration.csproj b/yafsrc/YAF.Configuration/YAF.Configuration.csproj
-index b591e6bcb..cf5226a1e 100644
+index b591e6bcb..2c00ca760 100644
 --- a/yafsrc/YAF.Configuration/YAF.Configuration.csproj
 +++ b/yafsrc/YAF.Configuration/YAF.Configuration.csproj
 @@ -1,9 +1,13 @@
@@ -2564,13 +2614,16 @@ index b591e6bcb..cf5226a1e 100644
    </ItemGroup>
    <ItemGroup>
      <Compile Include="..\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
-@@ -57,4 +57,8 @@
+@@ -57,4 +57,11 @@
    <ItemGroup>
      <ProjectReference Include="..\YAF.Types\YAF.Types.csproj" />
    </ItemGroup>
 +  <ItemGroup>
 +    <!-- Migrated to webForCore (.NET 10) in place; the .NET Framework project is YAF.Configuration.csproj.netfx. -->
 +    <PackageReference Include="webForCore" Version="0.9.0" />
++  </ItemGroup>
++  <ItemGroup>
++    <FrameworkReference Include="Microsoft.AspNetCore.App" />
 +  </ItemGroup>
  </Project>
 \ No newline at end of file
@@ -2642,7 +2695,7 @@ index 000000000..b591e6bcb
 +</Project>
 \ No newline at end of file
 diff --git a/yafsrc/YAF.Core/YAF.Core.csproj b/yafsrc/YAF.Core/YAF.Core.csproj
-index 14912af48..e972542ac 100644
+index 14912af48..16bfb2cdb 100644
 --- a/yafsrc/YAF.Core/YAF.Core.csproj
 +++ b/yafsrc/YAF.Core/YAF.Core.csproj
 @@ -1,7 +1,11 @@
@@ -2687,7 +2740,7 @@ index 14912af48..e972542ac 100644
    </ItemGroup>
    <ItemGroup>
      <Compile Include="..\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
-@@ -83,4 +76,10 @@
+@@ -83,4 +76,13 @@
      <PackageReference Include="Autofac" Version="6.2.0" />
      <PackageReference Include="Farsi.Library" Version="2.7.0" />
    </ItemGroup>
@@ -2696,6 +2749,9 @@ index 14912af48..e972542ac 100644
 +    <PackageReference Include="webForCore" Version="0.9.0" />
 +    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.9.0" />
 +    <PackageReference Include="System.ServiceModel.Syndication" Version="10.0.14" />
++  </ItemGroup>
++  <ItemGroup>
++    <FrameworkReference Include="Microsoft.AspNetCore.App" />
 +  </ItemGroup>
  </Project>
 \ No newline at end of file
@@ -2793,7 +2849,7 @@ index 000000000..14912af48
 +</Project>
 \ No newline at end of file
 diff --git a/yafsrc/YAF.Data.MsSql/YAF.Data.MsSql.csproj b/yafsrc/YAF.Data.MsSql/YAF.Data.MsSql.csproj
-index 7804d0711..f7ebf735c 100644
+index 7804d0711..097195b9d 100644
 --- a/yafsrc/YAF.Data.MsSql/YAF.Data.MsSql.csproj
 +++ b/yafsrc/YAF.Data.MsSql/YAF.Data.MsSql.csproj
 @@ -1,7 +1,11 @@
@@ -2821,13 +2877,16 @@ index 7804d0711..f7ebf735c 100644
    </ItemGroup>
    <ItemGroup>
      <Compile Include="..\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
-@@ -45,4 +47,8 @@
+@@ -45,4 +47,11 @@
    <ItemGroup>
      <PackageReference Include="Autofac" Version="6.2.0" />
    </ItemGroup>
 +  <ItemGroup>
 +    <!-- Migrated to webForCore (.NET 10) in place; the .NET Framework project is YAF.Data.MsSql.csproj.netfx. -->
 +    <PackageReference Include="webForCore" Version="0.9.0" />
++  </ItemGroup>
++  <ItemGroup>
++    <FrameworkReference Include="Microsoft.AspNetCore.App" />
 +  </ItemGroup>
  </Project>
 \ No newline at end of file
@@ -2887,7 +2946,7 @@ index 000000000..7804d0711
 +</Project>
 \ No newline at end of file
 diff --git a/yafsrc/YAF.Providers/YAF.Providers.csproj b/yafsrc/YAF.Providers/YAF.Providers.csproj
-index 2a0f34c33..62c3b3b4c 100644
+index 2a0f34c33..77c1bbdb0 100644
 --- a/yafsrc/YAF.Providers/YAF.Providers.csproj
 +++ b/yafsrc/YAF.Providers/YAF.Providers.csproj
 @@ -1,10 +1,14 @@
@@ -2927,13 +2986,16 @@ index 2a0f34c33..62c3b3b4c 100644
    </ItemGroup>
    <ItemGroup>
      <Compile Include="..\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
-@@ -55,4 +55,8 @@
+@@ -55,4 +55,11 @@
      <ProjectReference Include="..\YAF.Data.MsSql\YAF.Data.MsSql.csproj" />
      <ProjectReference Include="..\YAF.Types\YAF.Types.csproj" />
    </ItemGroup>
 +  <ItemGroup>
 +    <!-- Migrated to webForCore (.NET 10) in place; the .NET Framework project is YAF.Providers.csproj.netfx. -->
 +    <PackageReference Include="webForCore" Version="0.9.0" />
++  </ItemGroup>
++  <ItemGroup>
++    <FrameworkReference Include="Microsoft.AspNetCore.App" />
 +  </ItemGroup>
  </Project>
 \ No newline at end of file
@@ -3002,428 +3064,8 @@ index 000000000..2a0f34c33
 +  </ItemGroup>
 +</Project>
 \ No newline at end of file
-diff --git a/yafsrc/YAF.Types/Models/Activity.cs b/yafsrc/YAF.Types/Models/Activity.cs
-index 5f6572680..6719712d5 100644
---- a/yafsrc/YAF.Types/Models/Activity.cs
-+++ b/yafsrc/YAF.Types/Models/Activity.cs
-@@ -24,7 +24,6 @@
- namespace YAF.Types.Models
- {
-     using System;
--    using System.Data.Linq.Mapping;
- 
-     using ServiceStack.DataAnnotations;
- 
-@@ -35,7 +34,6 @@ namespace YAF.Types.Models
-     /// A class which represents the Activity table.
-     /// </summary>
-     [Serializable]
--    [Table(Name = "Activity")]
-     public class Activity : IEntity, IHaveID
-     {
-         #region Properties
-diff --git a/yafsrc/YAF.Types/Models/FavoriteTopic.cs b/yafsrc/YAF.Types/Models/FavoriteTopic.cs
-index 44734ee5f..406ee8253 100644
---- a/yafsrc/YAF.Types/Models/FavoriteTopic.cs
-+++ b/yafsrc/YAF.Types/Models/FavoriteTopic.cs
-@@ -24,7 +24,6 @@
- namespace YAF.Types.Models
- {
-     using System;
--    using System.Data.Linq.Mapping;
- 
-     using ServiceStack.DataAnnotations;
- 
-@@ -34,7 +33,6 @@ namespace YAF.Types.Models
-     /// A class which represents the FavoriteTopic table.
-     /// </summary>
-     [Serializable]
--    [Table(Name = "FavoriteTopic")]
-     public partial class FavoriteTopic : IEntity, IHaveID
-     {
-         partial void OnCreated();
-diff --git a/yafsrc/YAF.Types/Models/Group.cs b/yafsrc/YAF.Types/Models/Group.cs
-index 3679a90e9..439caaabd 100644
---- a/yafsrc/YAF.Types/Models/Group.cs
-+++ b/yafsrc/YAF.Types/Models/Group.cs
-@@ -24,7 +24,6 @@
- namespace YAF.Types.Models
- {
-     using System;
--    using System.Data.Linq.Mapping;
- 
-     using ServiceStack.DataAnnotations;
- 
-@@ -36,7 +35,6 @@ namespace YAF.Types.Models
-     /// A class which represents the Group table.
-     /// </summary>
-     [Serializable]
--    [Table(Name = "Group")]
- 
-     [UniqueConstraint(nameof(BoardID), nameof(Name))]
-     public partial class Group : IEntity, IHaveID, IHaveBoardID
-diff --git a/yafsrc/YAF.Types/Models/GroupMedal.cs b/yafsrc/YAF.Types/Models/GroupMedal.cs
-index 58b9e0912..0dd83d6a4 100644
---- a/yafsrc/YAF.Types/Models/GroupMedal.cs
-+++ b/yafsrc/YAF.Types/Models/GroupMedal.cs
-@@ -24,7 +24,6 @@
- namespace YAF.Types.Models
- {
-     using System;
--    using System.Data.Linq.Mapping;
- 
-     using ServiceStack.DataAnnotations;
- 
-@@ -34,7 +33,6 @@ namespace YAF.Types.Models
-     /// A class which represents the yaf_GroupMedal table.
-     /// </summary>
-     [Serializable]
--    [Table(Name = "GroupMedal")]
-     public partial class GroupMedal : IEntity
-     {
-         partial void OnCreated();
-diff --git a/yafsrc/YAF.Types/Models/IgnoreUser.cs b/yafsrc/YAF.Types/Models/IgnoreUser.cs
-index 2cfe888f3..89d97a4a4 100644
---- a/yafsrc/YAF.Types/Models/IgnoreUser.cs
-+++ b/yafsrc/YAF.Types/Models/IgnoreUser.cs
-@@ -24,7 +24,6 @@
- namespace YAF.Types.Models
- {
-     using System;
--    using System.Data.Linq.Mapping;
- 
-     using ServiceStack.DataAnnotations;
- 
-@@ -34,7 +33,6 @@ namespace YAF.Types.Models
-     /// A class which represents the IgnoreUser table.
-     /// </summary>
-     [Serializable]
--    [Table(Name = "IgnoreUser")]
-     public partial class IgnoreUser : IEntity
-     {
-         partial void OnCreated();
-diff --git a/yafsrc/YAF.Types/Models/Message.cs b/yafsrc/YAF.Types/Models/Message.cs
-index 85b71fec2..7936b1c58 100644
---- a/yafsrc/YAF.Types/Models/Message.cs
-+++ b/yafsrc/YAF.Types/Models/Message.cs
-@@ -25,7 +25,6 @@ namespace YAF.Types.Models
- {
-     using System;
-     using System.Data;
--    using System.Data.Linq.Mapping;
- 
-     using ServiceStack.DataAnnotations;
- 
-@@ -36,7 +35,6 @@ namespace YAF.Types.Models
-     /// A class which represents the Message table.
-     /// </summary>
-     [Serializable]
--    [Table(Name = "Message")]
-     public partial class Message : IEntity, IHaveID
-     {
-         partial void OnCreated();
-diff --git a/yafsrc/YAF.Types/Models/MessageHistory.cs b/yafsrc/YAF.Types/Models/MessageHistory.cs
-index 1d85feb67..35a861a28 100644
---- a/yafsrc/YAF.Types/Models/MessageHistory.cs
-+++ b/yafsrc/YAF.Types/Models/MessageHistory.cs
-@@ -24,7 +24,6 @@
- namespace YAF.Types.Models
- {
-     using System;
--    using System.Data.Linq.Mapping;
- 
-     using ServiceStack.DataAnnotations;
- 
-@@ -34,7 +33,6 @@ namespace YAF.Types.Models
-     /// A class which represents the yaf_MessageHistory table.
-     /// </summary>
-     [Serializable]
--    [Table(Name = "MessageHistory")]
-     public partial class MessageHistory : IEntity
-     {
-         partial void OnCreated();
-diff --git a/yafsrc/YAF.Types/Models/MessageReported.cs b/yafsrc/YAF.Types/Models/MessageReported.cs
-index bb17cf11a..f0dea82f3 100644
---- a/yafsrc/YAF.Types/Models/MessageReported.cs
-+++ b/yafsrc/YAF.Types/Models/MessageReported.cs
-@@ -24,7 +24,6 @@
- namespace YAF.Types.Models
- {
-     using System;
--    using System.Data.Linq.Mapping;
- 
-     using ServiceStack.DataAnnotations;
- 
-@@ -34,7 +33,6 @@ namespace YAF.Types.Models
-     /// A class which represents the yaf_MessageReported table.
-     /// </summary>
-     [Serializable]
--    [Table(Name = "MessageReported")]
-     public partial class MessageReported : IEntity, IHaveID
-     {
-         partial void OnCreated();
-diff --git a/yafsrc/YAF.Types/Models/MessageReportedAudit.cs b/yafsrc/YAF.Types/Models/MessageReportedAudit.cs
-index abc246ced..9cbacb85f 100644
---- a/yafsrc/YAF.Types/Models/MessageReportedAudit.cs
-+++ b/yafsrc/YAF.Types/Models/MessageReportedAudit.cs
-@@ -24,7 +24,6 @@
- namespace YAF.Types.Models
- {
-     using System;
--    using System.Data.Linq.Mapping;
- 
-     using ServiceStack.DataAnnotations;
- 
-@@ -34,7 +33,6 @@ namespace YAF.Types.Models
-     /// A class which represents the yaf_MessageReportedAudit table.
-     /// </summary>
-     [Serializable]
--    [Table(Name = "MessageReportedAudit")]
-     public partial class MessageReportedAudit : IEntity
-     {
-         partial void OnCreated();
-diff --git a/yafsrc/YAF.Types/Models/NntpForum.cs b/yafsrc/YAF.Types/Models/NntpForum.cs
-index dcc7be2e2..0b5a180e6 100644
---- a/yafsrc/YAF.Types/Models/NntpForum.cs
-+++ b/yafsrc/YAF.Types/Models/NntpForum.cs
-@@ -24,7 +24,6 @@
- namespace YAF.Types.Models
- {
-     using System;
--    using System.Data.Linq.Mapping;
- 
-     using ServiceStack.DataAnnotations;
- 
-@@ -34,7 +33,6 @@ namespace YAF.Types.Models
-     /// A class which represents the yaf_NntpForum table.
-     /// </summary>
-     [Serializable]
--    [Table(Name = "NntpForum")]
-     public partial class NntpForum : IEntity, IHaveID
-     {
-         partial void OnCreated();
-diff --git a/yafsrc/YAF.Types/Models/NntpServer.cs b/yafsrc/YAF.Types/Models/NntpServer.cs
-index 8862c5689..b5e7fcc01 100644
---- a/yafsrc/YAF.Types/Models/NntpServer.cs
-+++ b/yafsrc/YAF.Types/Models/NntpServer.cs
-@@ -24,7 +24,6 @@
- namespace YAF.Types.Models
- {
-     using System;
--    using System.Data.Linq.Mapping;
- 
-     using ServiceStack.DataAnnotations;
- 
-@@ -35,7 +34,6 @@ namespace YAF.Types.Models
-     /// A class which represents the yaf_NntpServer table.
-     /// </summary>
-     [Serializable]
--    [Table(Name = "NntpServer")]
-     public partial class NntpServer : IEntity, IHaveID, IHaveBoardID
-     {
-         partial void OnCreated();
-diff --git a/yafsrc/YAF.Types/Models/NntpTopic.cs b/yafsrc/YAF.Types/Models/NntpTopic.cs
-index e069ab619..cf71307ae 100644
---- a/yafsrc/YAF.Types/Models/NntpTopic.cs
-+++ b/yafsrc/YAF.Types/Models/NntpTopic.cs
-@@ -24,7 +24,6 @@
- namespace YAF.Types.Models
- {
-     using System;
--    using System.Data.Linq.Mapping;
- 
-     using ServiceStack.DataAnnotations;
- 
-@@ -34,7 +33,6 @@ namespace YAF.Types.Models
-     /// A class which represents the yaf_NntpTopic table.
-     /// </summary>
-     [Serializable]
--    [Table(Name = "NntpTopic")]
-     public partial class NntpTopic : IEntity, IHaveID
-     {
-         partial void OnCreated();
-diff --git a/yafsrc/YAF.Types/Models/PMessage.cs b/yafsrc/YAF.Types/Models/PMessage.cs
-index 89f12d68a..17fe2102c 100644
---- a/yafsrc/YAF.Types/Models/PMessage.cs
-+++ b/yafsrc/YAF.Types/Models/PMessage.cs
-@@ -24,7 +24,6 @@
- namespace YAF.Types.Models
- {
-     using System;
--    using System.Data.Linq.Mapping;
- 
-     using ServiceStack.DataAnnotations;
- 
-@@ -34,7 +33,6 @@ namespace YAF.Types.Models
-     /// A class which represents the yaf_PMessage table.
-     /// </summary>
-     [Serializable]
--    [Table(Name = "PMessage")]
-     public partial class PMessage : IEntity, IHaveID
-     {
-         partial void OnCreated();
-diff --git a/yafsrc/YAF.Types/Models/Poll.cs b/yafsrc/YAF.Types/Models/Poll.cs
-index 58d5c33a4..dec880fa7 100644
---- a/yafsrc/YAF.Types/Models/Poll.cs
-+++ b/yafsrc/YAF.Types/Models/Poll.cs
-@@ -24,7 +24,6 @@
- namespace YAF.Types.Models
- {
-     using System;
--    using System.Data.Linq.Mapping;
- 
-     using ServiceStack.DataAnnotations;
- 
-@@ -34,7 +33,6 @@ namespace YAF.Types.Models
-     /// A class which represents the yaf_Poll table.
-     /// </summary>
-     [Serializable]
--    [Table(Name = "Poll")]
-     public partial class Poll : IEntity, IHaveID
-     {
-         partial void OnCreated();
-diff --git a/yafsrc/YAF.Types/Models/PollGroupCluster.cs b/yafsrc/YAF.Types/Models/PollGroupCluster.cs
-index 1aa5a8dd9..afd69051b 100644
---- a/yafsrc/YAF.Types/Models/PollGroupCluster.cs
-+++ b/yafsrc/YAF.Types/Models/PollGroupCluster.cs
-@@ -24,7 +24,6 @@
- namespace YAF.Types.Models
- {
-     using System;
--    using System.Data.Linq.Mapping;
- 
-     using ServiceStack.DataAnnotations;
- 
-@@ -34,7 +33,6 @@ namespace YAF.Types.Models
-     /// A class which represents the yaf_PollGroupCluster table.
-     /// </summary>
-     [Serializable]
--    [Table(Name = "PollGroupCluster")]
-     public partial class PollGroupCluster : IEntity, IHaveID
-     {
-         partial void OnCreated();
-diff --git a/yafsrc/YAF.Types/Models/ReputationVote.cs b/yafsrc/YAF.Types/Models/ReputationVote.cs
-index 4a1c497f9..c245254d7 100644
---- a/yafsrc/YAF.Types/Models/ReputationVote.cs
-+++ b/yafsrc/YAF.Types/Models/ReputationVote.cs
-@@ -24,7 +24,6 @@
- namespace YAF.Types.Models
- {
-     using System;
--    using System.Data.Linq.Mapping;
- 
-     using ServiceStack.DataAnnotations;
- 
-@@ -34,7 +33,6 @@ namespace YAF.Types.Models
-     /// A class which represents the yaf_ReputationVote table.
-     /// </summary>
-     [Serializable]
--    [Table(Name = "ReputationVote")]
-     public partial class ReputationVote : IEntity
-     {
-         partial void OnCreated();
-diff --git a/yafsrc/YAF.Types/Models/User.cs b/yafsrc/YAF.Types/Models/User.cs
-index 04bfa8783..13374be1d 100644
---- a/yafsrc/YAF.Types/Models/User.cs
-+++ b/yafsrc/YAF.Types/Models/User.cs
-@@ -25,7 +25,6 @@
- namespace YAF.Types.Models
- {
-     using System;
--    using System.Data.Linq.Mapping;
- 
-     using ServiceStack.DataAnnotations;
- 
-@@ -39,7 +38,6 @@ namespace YAF.Types.Models
-     [Serializable]
- 
-     [UniqueConstraint(nameof(BoardID), nameof(Name))]
--    [Table(Name = "User")]
-     public partial class User : IEntity, IHaveBoardID, IHaveID
-     {
-         partial void OnCreated();
-diff --git a/yafsrc/YAF.Types/Models/UserGroup.cs b/yafsrc/YAF.Types/Models/UserGroup.cs
-index a053fa564..130be16e1 100644
---- a/yafsrc/YAF.Types/Models/UserGroup.cs
-+++ b/yafsrc/YAF.Types/Models/UserGroup.cs
-@@ -24,7 +24,6 @@
- namespace YAF.Types.Models
- {
-     using System;
--    using System.Data.Linq.Mapping;
- 
-     using ServiceStack.DataAnnotations;
- 
-@@ -34,7 +33,6 @@ namespace YAF.Types.Models
-     /// A class which represents the yaf_UserGroup table.
-     /// </summary>
-     [Serializable]
--    [Table(Name = "UserGroup")]
-     public partial class UserGroup : IEntity
-     {
-         partial void OnCreated();
-diff --git a/yafsrc/YAF.Types/Models/UserMedal.cs b/yafsrc/YAF.Types/Models/UserMedal.cs
-index 758b04544..cbaf8c03f 100644
---- a/yafsrc/YAF.Types/Models/UserMedal.cs
-+++ b/yafsrc/YAF.Types/Models/UserMedal.cs
-@@ -24,7 +24,6 @@
- namespace YAF.Types.Models
- {
-     using System;
--    using System.Data.Linq.Mapping;
- 
-     using ServiceStack.DataAnnotations;
- 
-@@ -34,7 +33,6 @@ namespace YAF.Types.Models
-     /// A class which represents the yaf_UserMedal table.
-     /// </summary>
-     [Serializable]
--    [Table(Name = "UserMedal")]
-     public partial class UserMedal : IEntity
-     {
-         partial void OnCreated();
-diff --git a/yafsrc/YAF.Types/Models/UserPMessage.cs b/yafsrc/YAF.Types/Models/UserPMessage.cs
-index d8ea83d85..a211b454d 100644
---- a/yafsrc/YAF.Types/Models/UserPMessage.cs
-+++ b/yafsrc/YAF.Types/Models/UserPMessage.cs
-@@ -24,7 +24,6 @@
- namespace YAF.Types.Models
- {
-     using System;
--    using System.Data.Linq.Mapping;
- 
-     using ServiceStack.DataAnnotations;
- 
-@@ -34,7 +33,6 @@ namespace YAF.Types.Models
-     /// A class which represents the yaf_UserPMessage table.
-     /// </summary>
-     [Serializable]
--    [Table(Name = "UserPMessage")]
-     public partial class UserPMessage : IEntity, IHaveID
-     {
-         partial void OnCreated();
-diff --git a/yafsrc/YAF.Types/Models/UserProfile.cs b/yafsrc/YAF.Types/Models/UserProfile.cs
-index 581e85374..f44cf7157 100644
---- a/yafsrc/YAF.Types/Models/UserProfile.cs
-+++ b/yafsrc/YAF.Types/Models/UserProfile.cs
-@@ -24,7 +24,6 @@
- namespace YAF.Types.Models
- {
-     using System;
--    using System.Data.Linq.Mapping;
- 
-     using ServiceStack.DataAnnotations;
- 
-@@ -35,7 +34,6 @@ namespace YAF.Types.Models
-     /// </summary>
-     [Serializable]
-     [UniqueConstraint(nameof(ID), nameof(ApplicationName))]
--    [Table(Name = "UserProfile")]
-     public partial class UserProfile : IEntity, IHaveID
-     {
-         partial void OnCreated();
 diff --git a/yafsrc/YAF.Types/YAF.Types.csproj b/yafsrc/YAF.Types/YAF.Types.csproj
-index 43e51adc0..fbca772d2 100644
+index 43e51adc0..d3dab4503 100644
 --- a/yafsrc/YAF.Types/YAF.Types.csproj
 +++ b/yafsrc/YAF.Types/YAF.Types.csproj
 @@ -1,9 +1,13 @@
@@ -3458,13 +3100,16 @@ index 43e51adc0..fbca772d2 100644
    </ItemGroup>
    <ItemGroup>
      <Compile Include="..\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
-@@ -32,4 +31,8 @@
+@@ -32,4 +31,11 @@
    <ItemGroup>
      <ProjectReference Include="..\ServiceStack\ServiceStack.OrmLite\ServiceStack.OrmLite.csproj" />
    </ItemGroup>
 +  <ItemGroup>
 +    <!-- Migrated to webForCore (.NET 10) in place; the .NET Framework project is YAF.Types.csproj.netfx. -->
 +    <PackageReference Include="webForCore" Version="0.9.0" />
++  </ItemGroup>
++  <ItemGroup>
++    <FrameworkReference Include="Microsoft.AspNetCore.App" />
 +  </ItemGroup>
  </Project>
 \ No newline at end of file
@@ -3511,7 +3156,7 @@ index 000000000..43e51adc0
 +</Project>
 \ No newline at end of file
 diff --git a/yafsrc/YAF.UrlRewriter/YAF.UrlRewriter.csproj b/yafsrc/YAF.UrlRewriter/YAF.UrlRewriter.csproj
-index 56650920c..24529048b 100644
+index 56650920c..2c5f0a883 100644
 --- a/yafsrc/YAF.UrlRewriter/YAF.UrlRewriter.csproj
 +++ b/yafsrc/YAF.UrlRewriter/YAF.UrlRewriter.csproj
 @@ -1,4 +1,4 @@
@@ -3546,13 +3191,16 @@ index 56650920c..24529048b 100644
    </ItemGroup>
    <ItemGroup>
      <EmbeddedResource Update="Messages.resx">
-@@ -91,4 +93,8 @@
+@@ -91,4 +93,11 @@
    <ItemGroup>
      <ProjectReference Include="..\YAF.Configuration\YAF.Configuration.csproj" />
    </ItemGroup>
 +  <ItemGroup>
 +    <!-- Migrated to webForCore (.NET 10) in place; the .NET Framework project is YAF.UrlRewriter.csproj.netfx. -->
 +    <PackageReference Include="webForCore" Version="0.9.0" />
++  </ItemGroup>
++  <ItemGroup>
++    <FrameworkReference Include="Microsoft.AspNetCore.App" />
 +  </ItemGroup>
  </Project>
 \ No newline at end of file
@@ -3658,7 +3306,7 @@ index 000000000..56650920c
 +</Project>
 \ No newline at end of file
 diff --git a/yafsrc/YAF.Utils/YAF.Utils.csproj b/yafsrc/YAF.Utils/YAF.Utils.csproj
-index a69cf3907..6b3c1deb4 100644
+index a69cf3907..984a1b08c 100644
 --- a/yafsrc/YAF.Utils/YAF.Utils.csproj
 +++ b/yafsrc/YAF.Utils/YAF.Utils.csproj
 @@ -1,10 +1,14 @@
@@ -3694,13 +3342,16 @@ index a69cf3907..6b3c1deb4 100644
    </ItemGroup>
    <ItemGroup>
      <Compile Include="..\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
-@@ -34,4 +33,8 @@
+@@ -34,4 +33,11 @@
      <ProjectReference Include="..\YAF.Configuration\YAF.Configuration.csproj" />
      <ProjectReference Include="..\YAF.Types\YAF.Types.csproj" />
    </ItemGroup>
 +  <ItemGroup>
 +    <!-- Migrated to webForCore (.NET 10) in place; the .NET Framework project is YAF.Utils.csproj.netfx. -->
 +    <PackageReference Include="webForCore" Version="0.9.0" />
++  </ItemGroup>
++  <ItemGroup>
++    <FrameworkReference Include="Microsoft.AspNetCore.App" />
 +  </ItemGroup>
  </Project>
 \ No newline at end of file
@@ -3749,7 +3400,7 @@ index 000000000..a69cf3907
 +</Project>
 \ No newline at end of file
 diff --git a/yafsrc/YAF.Web/YAF.Web.csproj b/yafsrc/YAF.Web/YAF.Web.csproj
-index f0374955c..7d47fe3dc 100644
+index f0374955c..dc1fec82e 100644
 --- a/yafsrc/YAF.Web/YAF.Web.csproj
 +++ b/yafsrc/YAF.Web/YAF.Web.csproj
 @@ -1,9 +1,13 @@
@@ -3788,13 +3439,16 @@ index f0374955c..7d47fe3dc 100644
    </ItemGroup>
    <ItemGroup>
      <Compile Include="..\GlobalAssemblyInfo.cs" Link="Properties\GlobalAssemblyInfo.cs" />
-@@ -68,4 +66,8 @@
+@@ -68,4 +66,11 @@
      <ProjectReference Include="..\YAF.UrlRewriter\YAF.UrlRewriter.csproj" />
      <ProjectReference Include="..\YAF.Utils\YAF.Utils.csproj" />
    </ItemGroup>
 +  <ItemGroup>
 +    <!-- Migrated to webForCore (.NET 10) in place; the .NET Framework project is YAF.Web.csproj.netfx. -->
 +    <PackageReference Include="webForCore" Version="0.9.0" />
++  </ItemGroup>
++  <ItemGroup>
++    <FrameworkReference Include="Microsoft.AspNetCore.App" />
 +  </ItemGroup>
  </Project>
 \ No newline at end of file
@@ -3908,7 +3562,7 @@ index 000000000..a6bb37046
 +    }
 +}
 diff --git a/yafsrc/YetAnotherForum.NET/YAF.csproj b/yafsrc/YetAnotherForum.NET/YAF.csproj
-index 1964eb4e7..2bc029e5c 100644
+index 1964eb4e7..e58c60b6f 100644
 --- a/yafsrc/YetAnotherForum.NET/YAF.csproj
 +++ b/yafsrc/YetAnotherForum.NET/YAF.csproj
 @@ -1,3572 +1,67 @@

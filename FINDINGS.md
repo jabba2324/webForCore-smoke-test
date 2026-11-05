@@ -104,7 +104,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F34](#f34) | Build-time tools that don't run on Linux or the .NET 11 SDK (BuildWebCompiler, LibMan.Build 2.0) | app/environment | mvcforum, aspnet-mvc5-starter | - |
 | [F35](#f35) | `WsiProfiles`/`SoapBindingUse` in app code are CS0433: the System.Web.Services.Description package (from CoreWCF) has them too | webForCore bug | subtext, mojoportal | [#34](https://github.com/xforcore/webForCore/issues/34) |
 | [F36](#f36) | A `.resx` with non-string resources needs System.Resources.Extensions (MSB3822) | guide gap | subtext | [#36](https://github.com/xforcore/webForCore/issues/36) |
-| [F37](#f37) | `<compilation><assemblies>` lists .NET Framework assemblies .NET doesn't have (System.Design, System.Data.Linq) | guide gap | subtext, mojoportal, umbraco-7 | [#37](https://github.com/xforcore/webForCore/issues/37) |
+| [F37](#f37) | `<compilation><assemblies>` lists .NET Framework assemblies .NET doesn't have (System.Design, System.Data.Linq; System.Data.Linq is provided from 0.9.0) | guide gap | subtext, mojoportal, umbraco-7 | [#37](https://github.com/xforcore/webForCore/issues/37) |
 | [F38](#f38) | Types a shared-framework facade forwards to the app's assemblies (System.Data's SqlClient) are a second copy: MissingMethodException | webForCore bug | subtext | [#35](https://github.com/xforcore/webForCore/issues/35) |
 | [F39](#f39) | NHibernate 3.3 doesn't run on .NET (proxy validation, `SqlCommandSet` by reflection) | app/environment | funnelweb | - |
 | [F40](#f40) | `Assembly.Load("App_GlobalResources")` (Visual Studio's resource designer code) can't work: .NET requires the simple name to match (fixed in 0.8.0) | webForCore bug | mojoportal | [#33](https://github.com/xforcore/webForCore/issues/33) |
@@ -133,7 +133,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F63](#f63) | Calls that become ambiguous on .NET 10 (CS0121): the app's own `DistinctBy`, empty `params` calls | guide gap | umbraco-6, umbraco-7 | [#93](https://github.com/xforcore/webForCore/issues/93) |
 | [F64](#f64) | Umbraco on Linux: Windows file names, packages only on its MyGet feed, an installer that needs a JSON POST | app/environment | umbraco-6, umbraco-7 | - |
 | [F65](#f65) | Linux: named semaphores and events throw `PlatformNotSupportedException` (only named `Mutex` works) | guide gap | umbraco-7 | [#94](https://github.com/xforcore/webForCore/issues/94) |
-| [F66](#f66) | webForCore's `CallContext` doesn't reach prebuilt .NET Framework libraries: Log4Net.Async logs nothing | guide gap | umbraco-7 | [#95](https://github.com/xforcore/webForCore/issues/95) |
+| [F66](#f66) | webForCore's `CallContext` doesn't reach prebuilt .NET Framework libraries: Log4Net.Async logs nothing; SimpleInjector 3.1's Web API scopes fail | guide gap | umbraco-7, blogengine | [#95](https://github.com/xforcore/webForCore/issues/95), [#178](https://github.com/xforcore/webForCore/issues/178) |
 | [F67](#f67) | Linux with no locale (`C`/`POSIX`: CI runners, containers): the culture is invariant, so apps that pick resources by culture find none | guide gap | umbraco-6 | [#97](https://github.com/xforcore/webForCore/issues/97) |
 | [F68](#f68) | Web API OData (Microsoft.AspNet.OData 7.5.18) needs System.Data.Linq to build any model (fixed in 0.9.0) | documented gap (consequence undocumented) | odata-samples-compositekey | [#120](https://github.com/xforcore/webForCore/issues/120) |
 | [F69](#f69) | Windows Identity Foundation (`System.IdentityModel`) isn't on .NET or in NAMESPACES.md: IdentityServer3 can't load (documented in 0.9.0; the app stays blocked) | guide gap | identityserver3-example | [#119](https://github.com/xforcore/webForCore/issues/119) |
@@ -146,10 +146,10 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F76](#f76) | ICU: `en-US`/`en-GB` `NumberDecimalDigits` is 3, so `{0:F}` prints `8.990` for 8.99 | guide gap | mvc-music-store | [#124](https://github.com/xforcore/webForCore/issues/124) |
 | [F77](#f77) | Windows-only data stores (SQL CE, SQL Express user instances) and data written on Windows (`\` in a wiki's page index) | app/environment | screwturn-wiki, mvc-music-store, rabbit-webpages | - |
 | [F78](#f78) | WebMatrix.Data and WebMatrix.WebData aren't provided or documented (Microsoft's 3.2.9 packages work) | guide gap | rabbit-webpages | [#130](https://github.com/xforcore/webForCore/issues/130) |
-| [F79](#f79) | `Response.End()` after `StatusCode = 401` sends the 401: forms authentication doesn't redirect to the log-in page | webForCore bug | rabbit-webpages | [#129](https://github.com/xforcore/webForCore/issues/129) |
-| [F80](#f80) | A request path with an escaped character (a space, non-ASCII) is answered 400 before the application | webForCore bug | aspnetdocs-wingtip-toys | [#126](https://github.com/xforcore/webForCore/issues/126) |
-| [F81](#f81) | `Request.RawUrl` is the default document's path for a directory request: FriendlyUrls 301s `/` to `/Default` | webForCore bug | aspnetdocs-wingtip-toys | [#127](https://github.com/xforcore/webForCore/issues/127) |
-| [F82](#f82) | Linux: `Server.MachineName` throws `DllNotFoundException` (kernel32); ELMAH's log pages fail | webForCore bug | aspnetdocs-wingtip-toys | [#128](https://github.com/xforcore/webForCore/issues/128) |
+| [F79](#f79) | `Response.End()` after `StatusCode = 401` sends the 401: forms authentication doesn't redirect to the log-in page (fixed in 0.9.0) | webForCore bug | rabbit-webpages | [#129](https://github.com/xforcore/webForCore/issues/129) |
+| [F80](#f80) | A request path with an escaped character (a space, non-ASCII) is answered 400 before the application (fixed in 0.9.0) | webForCore bug | aspnetdocs-wingtip-toys | [#126](https://github.com/xforcore/webForCore/issues/126) |
+| [F81](#f81) | `Request.RawUrl` is the default document's path for a directory request: FriendlyUrls 301s `/` to `/Default` (fixed in 0.9.0) | webForCore bug | aspnetdocs-wingtip-toys | [#127](https://github.com/xforcore/webForCore/issues/127) |
+| [F82](#f82) | Linux: `Server.MachineName` throws `DllNotFoundException` (kernel32); ELMAH's log pages fail (fixed in 0.9.0) | webForCore bug | aspnetdocs-wingtip-toys | [#128](https://github.com/xforcore/webForCore/issues/128) |
 | [F83](#f83) | C# 14's span conversions break LINQ to Entities at run time (`Contains(ReadOnlySpan)`), not only the build | guide gap | nopcommerce-3.90 | [#138](https://github.com/xforcore/webForCore/issues/138) |
 | [F84](#f84) | `AppDomain.CurrentDomain.DynamicDirectory` is null: plugin managers that shadow-copy there fail at start | guide gap | nopcommerce-3.90, smartstorenet | [#139](https://github.com/xforcore/webForCore/issues/139) |
 | [F85](#f85) | System.Linq.Dynamic 1.0.7 (net40) needs .NET Framework's `System.Data.Entity` 4.0 | app/environment | nopcommerce-3.90 | – |
@@ -185,6 +185,12 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F133](#f133) | Linux: DNN builds every physical path with `\` (`ApplicationMapPath` is `BaseDirectory.Replace("/", "\\")`), and QuickIO.NET is Win32 | app/environment | dnn-platform-9 | – |
 | [F134](#f134) | A request whose path has a `(` (an OData key) reaches the app without its non-standard headers (`Prefer`, `X-Requested-With`, `X-...`) | webForCore bug | odata-samples-compositekey | [#170](https://github.com/xforcore/webForCore/issues/170) |
 | [F135](#f135) | An assembly without a strong name isn't loaded for a reference to a higher version (.NET Framework ignores the version): Nancy.SimpleAuthentication -> Nancy 0.21.1 with 0.20 deployed | webForCore bug | jabbr | [#171](https://github.com/xforcore/webForCore/issues/171) |
+| [F154](#f154) | A library's relative paths resolve against `BaseDirectory` (`bin_dotnet/`): log4net writes its log into `bin_dotnet`, and every log line restarts the application | guide gap | mojoportal | [#173](https://github.com/xforcore/webForCore/issues/173) |
+| [F155](#f155) | Web Pages 1 sites meet Razor 3's stricter parser: `@string.Join(...)` in a code block is a parser error | guide gap | rabbit-webpages | [#174](https://github.com/xforcore/webForCore/issues/174) |
+| [F156](#f156) | BlogEngine asks for a restart by touching `PhysicalApplicationPath + "\\web.config"`: on Linux the path doesn't exist | app/environment | blogengine | – |
+| [F157](#f157) | LINQ to SQL's generated SQL (`GetCommand().CommandText`) has the platform's newline: code that searches it for `\r\n` fails on Linux | guide gap | carrotcake-cms-mvc | [#175](https://github.com/xforcore/webForCore/issues/175) |
+| [F158](#f158) | `ServicePointManager.SecurityProtocol` with `SecurityProtocolType.Ssl3` throws `NotSupportedException` on .NET | guide gap | carrotcake-cms-mvc | [#176](https://github.com/xforcore/webForCore/issues/176) |
+| [F159](#f159) | `AppDomain.CurrentDomain.RelativeSearchPath` is null on .NET (the application's `bin` on IIS) | guide gap | carrotcake-cms-mvc | [#177](https://github.com/xforcore/webForCore/issues/177) |
 | [F164](#f164) | The guide adds `UseAspNetCoreSessionProvider()` (out-of-process, serialized session state) to every app that uses `Session`; an `InProc` app with values that aren't serializable (MVC `TempData`) fails | guide gap | mvcforum | [#180](https://github.com/xforcore/webForCore/issues/180) |
 | [F165](#f165) | webForCore.AutoMapperLegacy needs C# 14, so F83's `<LangVersion>` fix can't be used: `array.Contains(x)` in an expression tree becomes `MemoryExtensions.Contains(op_Implicit(array), x)`, which Umbraco 7's SQL expression visitor rejects | app/environment (webForCore-thirdparty) | umbraco-7 | [thirdparty#14](https://github.com/xforcore/webForCore-thirdparty/issues/14) |
 | [F166](#f166) | Telerik.Web.Mvc (SmartStoreNET's checked-in .NET Framework build) calls `AppDomain.DefineDynamicAssembly`, which .NET doesn't have: every administration page is a 500 | app/environment | smartstorenet | - |
@@ -982,6 +988,9 @@ as [#37](https://github.com/xforcore/webForCore/issues/37). Found on 0.4.0.
 - **Cause:** `docs/NAMESPACES.md` lists both assemblies as not on .NET. The guide doesn't say an `<add assembly>` entry
   for one is a Configuration Error even when no page uses it. The apps' pages don't use either.
 - **What worked:** removing the entries.
+- **0.9.0:** System.Data.Linq is provided (`webForCore.Data.Linq`, webForCore#142), and both 3.5.0.0 and 4.0.0.0 entries
+  resolve: mojoportal's overlay puts its `<add assembly="System.Data.Linq, ...">` back, and it passes 49/49 on Linux.
+  System.Design is still not on .NET, so Subtext's entry stays removed.
 
 ## F38
 
@@ -1257,6 +1266,9 @@ Linux and Windows.
   - the first with `<FrameworkReference Include="Microsoft.AspNetCore.App" />` added restores.
 - **Fix in the app:** mvcforum references Annotations 5.0.0 and passes 15/15. That's the guide step the issue
   proposes. yafnet-2 stays blocked on F48 and F49 regardless.
+- **Round 0.9.0:** MIGRATING.md has the step (#62, closed). yafnet-2's overlay adds
+  `<FrameworkReference Include="Microsoft.AspNetCore.App" />` to its 18 class libraries and its restore passes; its
+  build then stops only at F49.
 
 ## F55
 
@@ -1452,6 +1464,14 @@ Raised as [#95](https://github.com/xforcore/webForCore/issues/95). Found on 0.7.
 - **Fix in the app:** the root logger writes through the file appender directly (synchronous logging).
 - **Guide:** `docs/NAMESPACES.md` should say the carried types serve code compiled against webForCore, and
   Log4Net.Async belongs in `docs/MIGRATING.md`'s "Libraries that don't run on .NET".
+- **Round 0.9.0, blogengine:** SimpleInjector.Extensions.ExecutionContextScoping 3.1.0 (net45 only), which
+  SimpleInjector.Integration.WebApi 3.1.0's `BeginScope` uses: every Web API controller failed ("Make sure that the
+  controller has a parameterless public constructor"), inner `TypeLoadException` for `CallContext` at
+  `ExecutionContextScopeManager.get_CurrentScope()`. Fix in the app: the three SimpleInjector packages at 3.3.2,
+  whose ExecutionContextScoping has a .NET Standard 1.3 build (`AsyncLocal`). MIGRATING.md names only
+  Log4Net.Async; a general line (a prebuilt .NET Framework library that uses `CallContext` throws this
+  `TypeLoadException`: look for a version with a .NET Standard or .NET build) would cover both. Not raised again:
+  #95 is closed; listed in this round's report for a docs follow-up.
 
 ## F67
 
@@ -1678,6 +1698,8 @@ page.** webForCore bug. Raised as [#129](https://github.com/xforcore/webForCore/
   thread abort (documented), and its `End()` sends the response first.
 - **Affects:** every Web Pages page with `WebSecurity.RequireAuthenticatedUser()`/`RequireRoles()`, and Web Forms code
   that sends users to the log-in page with a 401 and `Response.End()`.
+- **Fixed in 0.9.0** (webForCore#129): `Response.End()` leaves the response to `EndRequest`, so forms authentication
+  turns the 401 into its redirect; rabbit-webpages passes 37/37 on Linux, Change Password included.
 
 ## F80
 
@@ -1693,6 +1715,8 @@ AspNetDocs tutorial apps.
   `PathString.ToString()` is the escaped form, so the path has `%20`, and `IsBadPath()` rejects any `%`.
 - **Repro:** any site, `GET /a%20b.htm` with a file `a b.htm`, or a page route with a value containing a space.
 - **Suggested fix:** the decoded `PathBase.Value + Path.Value`.
+- **Fixed in 0.9.0** (webForCore#126): the path reaches the application decoded, as on IIS;
+  `/Product/Convertible%20Car` renders the product.
 
 ## F81
 
@@ -1709,6 +1733,8 @@ AspNetDocs tutorial apps.
 - **Repro:** a Web Forms site with `Default.aspx` and `RouteTable.Routes.EnableFriendlyUrls(new FriendlyUrlSettings
   { AutoRedirectMode = RedirectMode.Permanent })` (Microsoft.AspNet.FriendlyUrls 1.0.2); `GET /`.
 - **Suggested fix:** `RawUrl` from the request's raw target, taken before the default-document rewrite.
+- **Fixed in 0.9.0** (webForCore#127): `RawUrl` is `/` for the directory, and FriendlyUrls serves `/`;
+  aspnetdocs-wingtip-toys' home page probe passes.
 
 ## F82
 
@@ -1724,6 +1750,8 @@ round for the AspNetDocs tutorial apps.
   `HttpServerUtility.get_MachineName()`.
 - **Repro:** a page with `<%= Server.MachineName %>`, on Linux.
 - **Suggested fix:** `Environment.MachineName` off Windows.
+- **Fixed in 0.9.0** (webForCore#128): `Server.MachineName` is `Environment.MachineName`. On Linux `/elmah.axd`, its RSS and
+  JSON work; aspnetdocs-wingtip-toys passes 39/39 on Linux.
 
 ## F83
 
@@ -2400,6 +2428,110 @@ the overlay).
 - **Checked:** with an `AppDomain.AssemblyResolve` handler that returns the loaded Nancy (exploration only, not in the
   overlay), JabbR's startup gets past this to [F50](#f50).
 - **Fix belongs in webForCore:** in `Resolve`, accept an assembly of any version when the request has no public key token.
+
+## F154
+
+**A library's relative paths resolve against `AppDomain.CurrentDomain.BaseDirectory`, which is `bin_dotnet/`: log4net
+writes its log there, and each write restarts the application.** Guide gap. Found on 0.9.0 (and in round 0.8.0's
+logs), on Linux; the cause is the same on Windows.
+
+- **Apps:** mojoportal. `Global.asax.cs` has `[assembly: log4net.Config.XmlConfigurator(ConfigFile = "log4net.config",
+  Watch = true)]`, and `log4net.config`'s `RollingFileAppender` has `<file value="Data/currentlog.config" />`. log4net
+  resolves both against `AppDomain.CurrentDomain.BaseDirectory` (`SystemInfo.ApplicationBaseDirectory`): on IIS the
+  site, here `bin_dotnet/` (the build copies `log4net.config` there, so the configuration is found).
+- **What happens:** the log goes to `bin_dotnet/Data/currentlog.config`. `bin_dotnet` is the application's `bin`, so
+  each write is a `BinDirChangeOrDirectoryRename` and the application restarts, as IIS would for a file written into
+  `bin`. mojoPortal logs "Application Started" when it starts, so it restarts in a loop: 14 restarts in one smoke run
+  (16 in round 0.8.0's committed server log), the probes served by whichever worker was up. Session state goes with
+  each restart, and starting a worker a second takes inotify instances on a shared machine (a by-hand run ended with
+  "The configured user limit (128) on the number of inotify instances has been reached" and 503s). The admin's Server
+  Log page (`~/Data/currentlog.config`) showed nothing.
+- **What worked (overlay):** `<file value="../Data/currentlog.config" />`, the site's `Data` folder, as on IIS. No more
+  restarts (0 in a run of 49 probes), and `/Admin/ServerLog.aspx` shows the log (a probe).
+- **Guide:** MIGRATING.md section 6 and NAMESPACES.md say `BaseDirectory` is `bin_dotnet/` and to find the site's
+  files with `HttpRuntime.AppDomainAppPath`; they don't say that libraries resolve their relative paths there too
+  (log4net's `ConfigFile` and appender files; NLog's and Enterprise Library's are the same kind), nor that a file
+  written there restarts the application. A line for each, with log4net's fix, would have found it.
+
+## F155
+
+**Web Pages 1 sites meet Razor 3's stricter parser.** Guide gap. Found on 0.9.0, on Linux (the parser is the same on
+Windows).
+
+- **Apps:** rabbit-webpages (WebMatrix 1.0, 2011): `Views/Tags/_Page_Edit.cshtml`, the Pages module's editor, has
+  ```cshtml
+  @if (Page.Tags != null && Page.Tags.Length > 0)
+  {
+      @string.Join(", ", Page.Tags)
+  }
+  ```
+- **Error:** `/Pages/Edit/About`: `Parser Error Message: Unexpected "string" keyword after "@" character. Once inside
+  code, you do not need to prefix constructs like "string" with "@".` Web Pages 1's Razor accepted it (the app shipped
+  this editor); Razor 2 and 3 tokenize every C# keyword and refuse one after `@` in a code block. webForCore has Razor
+  3 only, so a Web Pages 1 or 2 site runs on 3, as the guide's MVC 3 and 4 section says for `webpages:Version`.
+- **What worked (overlay):** `@(string.Join(", ", Page.Tags))`. The editor renders, and its AJAX save, a read back
+  as JSON and the tag page pass (probes).
+- **Guide:** the MVC 3/4 step in MIGRATING.md (#122) covers the version setting; Razor 1's parsing differences (this
+  one: `@` before a C# keyword inside code) aren't mentioned, nor the fix.
+
+## F156
+
+**BlogEngine.NET asks for a restart by touching a Windows path to web.config.** App/environment. Found on 0.9.0, on
+Linux.
+
+- **Apps:** blogengine. `Utils.RecycleIIS()` (BlogEngine.Core), called when an extension is enabled or disabled
+  (`ExtensionManager.ChangeStatus`), first tries IIS's ADSI (`IIS://.../W3SVC/AppPools/...`, Windows), then
+  `File.SetLastWriteTimeUtc(Request.PhysicalApplicationPath + "\\web.config", ...)`.
+- **Error:** `App_Data/logger.txt`: `Utils.RecycleIIS() : Could not find file '<site>\web.config'`. On Linux `\` isn't a
+  separator and the file is `Web.Config`, so nothing is touched and the application doesn't restart; touching the
+  real file would restart it, as on IIS. Seen once, at the first start, with nothing visibly wrong; the probes don't
+  enable or disable extensions.
+- **Fix in the app (not made):** `Path.Combine(HttpRuntime.AppDomainAppPath, "Web.Config")`, or
+  `HttpRuntime.UnloadAppDomain()`, which the code has commented out.
+
+## F157
+
+**LINQ to SQL's generated SQL has the platform's newline, so code that parses it for `\r\n` fails on Linux.** Guide
+gap. Found on 0.9.0, on Linux.
+
+- **Apps:** carrotcake-cms-mvc. `CarrotCMSData/LinqHelper.cs` (a batch delete/update helper of the kind several
+  LINQ to SQL apps carry) takes `context.GetCommand(query).CommandText` and splices it:
+  `selectText.Substring(selectText.IndexOf("\r\nFROM "))`.
+- **Error:** `ArgumentOutOfRangeException: startIndex ('-1') must be a non-negative value` in
+  `LinqHelper.GetJoinQuery`, from `CMSConfigHelper.CleanUpSerialData`, which the admin's home page runs after every
+  log-in (500). On Windows the SQL has `\r\n` and it works.
+- **Cause:** referencesource's `SqlFormatter.NewLine()` is `sb.AppendLine()`, so the SQL has `Environment.NewLine`:
+  `\n` on Linux. webForCore keeps the platform's newline by decision; NAMESPACES.md says so for `DataContext.Log`
+  only.
+- **What worked (overlay):** `IndexOf(Environment.NewLine + "FROM ")` (and `"ORDER BY "`).
+- **Guide:** NAMESPACES.md's LINQ to SQL caveat could say the generated SQL itself (`GetCommand().CommandText`, the
+  `Log`) has `\n` on Linux, and MIGRATING.md's search list could add `"\r\n` in code that reads SQL text.
+
+## F158
+
+**`ServicePointManager.SecurityProtocol` with `SecurityProtocolType.Ssl3` throws on .NET.** Guide gap. Found on 0.9.0,
+on Linux (the same on Windows: it's .NET's).
+
+- **Apps:** carrotcake-cms-mvc: `CMSConfigHelper`'s constructor sets `SecurityProtocolType.Ssl3 | Tls | Tls11 |
+  Tls12`, so every page was `NotSupportedException: The requested security protocol is not supported.`
+- **Cause:** .NET Framework 4.8 accepts SSL 3 in the flags (whether a connection can use it is the OS's business);
+  .NET rejects it in the setter. Not webForCore's: it's `System.Net`'s.
+- **What worked (overlay):** the same flags without `Ssl3`.
+- **Guide:** a line in MIGRATING.md section 6 (search for `SecurityProtocolType.Ssl3`; remove it, or don't set the
+  property: .NET uses the OS's defaults).
+
+## F159
+
+**`AppDomain.CurrentDomain.RelativeSearchPath` is null on .NET.** Guide gap. Found on 0.9.0, on Linux (the same on
+Windows).
+
+- **Apps:** carrotcake-cms-mvc: `WebComponents/CarrotWeb.cs` loads the assembly named in an embedded resource's URL
+  from `Path.Combine(AppDomain.CurrentDomain.RelativeSearchPath, name + ".dll")`. On IIS `RelativeSearchPath` is the
+  application's `bin` (its AppDomain's private bin path); on .NET it's null, so `/carrotwarewebresource.ashx` (the
+  admin's and the templates' CSS and scripts) threw `ArgumentNullException (Parameter 'path1')`.
+- **What worked (overlay):** `HttpRuntime.BinDirectory`.
+- **Guide:** MIGRATING.md and NAMESPACES.md cover `DynamicDirectory` and `AppDomainSetup.PrivateBinPath` (#139) but not
+  `RelativeSearchPath`, which compiles and returns null; it belongs on the same line, with the same fix.
 
 ## F164
 
