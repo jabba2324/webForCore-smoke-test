@@ -10,7 +10,7 @@ generated = ["**/Cms_Data/Account/Users/admin.config"]
 kinds = ["mvc"]
 licence = "BSD-3-Clause"
 status = "migrated"
-notes = "Kooboo CMS 4.4 (MVC 4, .NET 4.0, file storage) on webForCore 0.8.0: builds, creates a site through [setup] and passes 23/23 on Linux and Windows (CI run 41920542509). Found F90 (crypto factories), F91 (DotNetZip 1.9) and F92 (inotify instances per directory: here it needs more than this machine had free)."
+notes = "Kooboo CMS 4.4 (MVC 4, .NET 4.0, file storage) on webForCore 0.9.0: builds, creates a site through [setup] and passes 40/40 on Linux and Windows (CI runs 42027500654, 42032474244), with verbs: an article created, edited and deleted through the back office's AJAX forms, a member registered, logged in and deleted. F90 and F91; F92 fixed in 0.9.0."
 
 # Kooboo keeps its sites, content and users in files under Cms_Data. The setup logs in as the default admin
 # (admin/admin) and creates a site, "sample", from the SampleSite template, with its content database and membership.

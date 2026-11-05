@@ -1,6 +1,6 @@
 # Kooboo CMS: migration notes
 
-Status: migrated (CI run 41920542509: 23/23 on Linux and Windows). Source: https://github.com/Kooboo/CMS at `e5879728` (Kooboo CMS 4.4.0.813). Found by
+Status: migrated (round 0.9.0, webForCore 0.9.0: 40/40 on Linux and Windows in CI runs 42027500654 and 42032474244). Source: https://github.com/Kooboo/CMS at `e5879728` (Kooboo CMS 4.4.0.813). Found by
 searching GitHub on 2026-10-31; the repo, licence (BSD-3-Clause), web project and its `<TargetFrameworkVersion>` were
 checked through the GitHub API.
 
