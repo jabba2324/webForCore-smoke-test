@@ -1,6 +1,7 @@
 # Orchard CMS 1.x: migration notes
 
-Status: blocked on Linux (F97: it runs out of inotify instances); on Windows see "Smoke". Source:
+Status: blocked on Linux and Windows (F100: the setup recipe fails in Orchard's old NHibernate.Linq against NHibernate 5;
+round 0.9.0, webForCore 0.9.0, where F97 and F99 are fixed). Source:
 https://github.com/OrchardCMS/Orchard at `78ee4efb` (tag 1.10.4, the last 1.10.x release). The repo, licence (BSD
 3-Clause, `LICENSE.txt`), web project (`src/Orchard.Web`) and its `<TargetFrameworkVersion>` (v4.8, with System.Web)
 were checked when the app was verified.
@@ -99,8 +100,10 @@ Go, with SQL Server and the setup's Core recipe.
    Email, Lucene, ...) would need the same when enabled; the Core recipe doesn't enable them.
 10. `Config/HostComponents.config`: the dynamic extension loader disabled (F103): it parses each module's `.csproj` in
     the old MSBuild format, and fails on the SDK ones at every start.
-11. `Global.asax.cs`: an `AppDomain.AssemblyResolve` handler that loads `App_Data/Dependencies/<name>.dll`, as web.config's
-    `<probing privatePath>` did on IIS. **A workaround for a webForCore bug (F99, webForCore#147).**
+11. Until round 0.9.0: `Global.asax.cs` had an `AppDomain.AssemblyResolve` handler that loaded
+    `App_Data/Dependencies/<name>.dll`, as web.config's `<probing privatePath>` did on IIS, a workaround for a webForCore
+    bug (F99, webForCore#147). 0.9.0 applies `<probing privatePath>`, and the handler is gone: `Global.asax.cs` is
+    Orchard's own again.
 
 Tried and reverted: `<httpRuntime fcnMode="Single">` and `"Disabled"` (F98: ignored); Orchard's own monitoring
 switches in `HostComponents.config` (they don't reduce the monitors ASP.NET's virtual path provider creates); keeping
@@ -131,13 +134,11 @@ recipe enables its features, imports its content types and runs the migrations, 
 
 ## Open problems
 
-- [F97](../../FINDINGS.md#f97) (webForCore bug, webForCore#145): one inotify instance per monitored folder (two for
-  many); Orchard can't start on Linux.
-- [F98](../../FINDINGS.md#f98) (webForCore bug, webForCore#146): `<httpRuntime fcnMode>` is ignored.
-- [F99](../../FINDINGS.md#f99) (webForCore bug, webForCore#147): `<probing privatePath>` isn't applied; worked around
-  in `Global.asax.cs`.
+- [F97](../../FINDINGS.md#f97), [F98](../../FINDINGS.md#f98), [F99](../../FINDINGS.md#f99), [F106](../../FINDINGS.md#f106):
+  fixed in 0.9.0 (F99's workaround removed).
 - [F100](../../FINDINGS.md#f100) (guide gap, webForCore#148): Autofac.Configuration 3.x, Castle.Core 3.x and
-  NHibernate 4.x don't run on .NET.
+  NHibernate 4.x don't run on .NET. Upgraded; the old NHibernate.Linq that Orchard's queries use doesn't run against
+  NHibernate 5, which blocks the setup recipe on both platforms (Orchard's, not webForCore's).
 - [F101](../../FINDINGS.md#f101) (guide gap, webForCore#149): `System.Data.Services.Client`.
 - [F102](../../FINDINGS.md#f102) (guide gap, webForCore#150): plug-in libraries built into their own folder lose their
   packages.

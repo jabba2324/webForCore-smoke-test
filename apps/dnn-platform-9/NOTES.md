@@ -1,6 +1,6 @@
 # DNN Platform 9: migration notes
 
-Status: blocked (F130). Source: https://github.com/dnnsoftware/Dnn.Platform at `v9.13.10` (`53cdf475`, 29 April 2025), the
+Status: blocked (round 0.9.0: F130 is fixed; Linux stops at F133, DNN's Windows paths; Windows at F167, its install cut by a recycle). Source: https://github.com/dnnsoftware/Dnn.Platform at `v9.13.10` (`53cdf475`, 29 April 2025), the
 last 9.x release. MIT licence. Packages: webForCore 0.8.0, drawingForCore 0.3.0; webForCore-thirdparty 0.6.0 isn't
 needed (no WebActivatorEx, no AjaxControlToolkit).
 
@@ -211,12 +211,23 @@ deployed taken out of web.config, none of which is in the overlay):
 **Windows (CI run 41917710466, webForCore 0.8.0): build pass, setup fail, smoke 7/11**, the same as Linux: every
 request is F130's `FileNotFoundException` for `ClientDependency.Core.Mvc`. F133 doesn't apply there.
 
+**Round 0.9.0 (webForCore 0.9.0; Linux): build pass, setup fail, smoke 8/11.** F130 is fixed: DNN starts with its
+default web.config (ClientDependency's MVC filter and the two providers whose assemblies aren't deployed are skipped,
+as on IIS), the static file is served, and `/`, `/Login.aspx` and the Services Framework route redirect to the
+installer. `Install.aspx?mode=install` then stops at F133, as foreseen: "Unable to load config for \"web.config\""
+(DNN's `\`-built paths). Linux stays blocked by DNN's own Windows paths; Windows is CI's (below).
+
+**Round 0.9.0, Windows (CI run 42027500654): build pass, setup fail, smoke 8/11.** Past F130 on Windows too: the
+requests reach the installer, and `Install.aspx?mode=install` starts installing. DNN's install then changes `bin`, the
+worker is recycled (`BinDirChangeOrDirectoryRename`), and the install request, which DNN streams, is cut about 5 s
+later ("An existing connection was forcibly closed"), so the site stays uninstalled. .NET Framework lets a running
+request finish in the old AppDomain for `<httpRuntime shutdownTimeout>` (DNN sets 120 s): [F167](../../FINDINGS.md#f167),
+a webForCore bug whose cause isn't confirmed yet.
+
 ## Open problems
 
-- [F130](../../FINDINGS.md#f130): `BuildManager.GetType(name, throwOnError: false)` throws `FileNotFoundException` for an
-  assembly that isn't there (.NET Framework returns `null`); ClientDependency's module and DNN's provider registration
-  rely on it, so every request fails. webForCore bug, [#137](https://github.com/xforcore/webForCore/issues/137). Blocks
-  the app on both platforms.
+- [F167](../../FINDINGS.md#f167): Windows, the install request is cut after a `bin` recycle (cause not confirmed).
+- [F130](../../FINDINGS.md#f130): fixed in 0.9.0.
 - [F131](../../FINDINGS.md#f131): `Thread.ResetAbort()` throws `PlatformNotSupportedException`; the guide lists it but
   doesn't say to remove it. Guide gap, [#143](https://github.com/xforcore/webForCore/issues/143).
 - [F132](../../FINDINGS.md#f132): an application's design-time classes (`System.Web.UI.Design.ExpressionEditor`) don't

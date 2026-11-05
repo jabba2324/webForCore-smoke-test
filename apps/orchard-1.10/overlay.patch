@@ -1,5 +1,5 @@
 diff --git a/src/Orchard.WarmupStarter/Orchard.WarmupStarter.csproj b/src/Orchard.WarmupStarter/Orchard.WarmupStarter.csproj
-index 4cf5ab96d..c369437ab 100644
+index 4cf5ab96d..02446dfbc 100644
 --- a/src/Orchard.WarmupStarter/Orchard.WarmupStarter.csproj
 +++ b/src/Orchard.WarmupStarter/Orchard.WarmupStarter.csproj
 @@ -1,57 +1,23 @@
@@ -216,7 +216,7 @@ index 55cdac153..cf13f91ac 100644
          <!-- Immediate flush on error log, to avoid data loss with sudden termination. -->
          <immediateFlush value="true" />
 diff --git a/src/Orchard.Web/Core/Orchard.Core.csproj b/src/Orchard.Web/Core/Orchard.Core.csproj
-index 4bbad852e..4d571d79a 100644
+index 4bbad852e..2e455becf 100644
 --- a/src/Orchard.Web/Core/Orchard.Core.csproj
 +++ b/src/Orchard.Web/Core/Orchard.Core.csproj
 @@ -1,670 +1,29 @@
@@ -1613,45 +1613,8 @@ diff --git a/src/Orchard.Web/Core/packages.config b/src/Orchard.Web/Core/package
 similarity index 100%
 rename from src/Orchard.Web/Core/packages.config
 rename to src/Orchard.Web/Core/packages.config.netfx
-diff --git a/src/Orchard.Web/Global.asax.cs b/src/Orchard.Web/Global.asax.cs
-index 5400dd0be..e6a680d2b 100644
---- a/src/Orchard.Web/Global.asax.cs
-+++ b/src/Orchard.Web/Global.asax.cs
-@@ -1,4 +1,7 @@
--﻿using System.Web;
-+﻿using System;
-+using System.IO;
-+using System.Reflection;
-+using System.Web;
- using System.Web.Mvc;
- using System.Web.Routing;
- using Autofac;
-@@ -20,6 +23,11 @@ namespace Orchard.Web {
-         }
- 
-         protected void Application_Start() {
-+            // webForCore workaround (FINDINGS.md F98): .NET Framework found the modules' assemblies that Orchard copies into
-+            // App_Data/Dependencies through web.config's <probing privatePath="App_Data/Dependencies" />, which webForCore
-+            // doesn't apply. This resolves them from there, as the probing did.
-+            AppDomain.CurrentDomain.AssemblyResolve += ResolveFromDependencies;
-+
-             RegisterRoutes(RouteTable.Routes);
-             _starter = new Starter<IOrchardHost>(HostInitialization, HostBeginRequest, HostEndRequest);
-             _starter.OnApplicationStart(this);
-@@ -54,6 +62,11 @@ namespace Orchard.Web {
-             return host;
-         }
- 
-+        private static Assembly ResolveFromDependencies(object sender, ResolveEventArgs args) {
-+            var path = Path.Combine(HttpRuntime.AppDomainAppPath, "App_Data", "Dependencies", new AssemblyName(args.Name).Name + ".dll");
-+            return File.Exists(path) ? Assembly.LoadFrom(path) : null;
-+        }
-+
-         static void MvcSingletons(ContainerBuilder builder) {
-             builder.Register(ctx => RouteTable.Routes).SingleInstance();
-             builder.Register(ctx => ModelBinders.Binders).SingleInstance();
 diff --git a/src/Orchard.Web/Modules/Lucene/Lucene.csproj b/src/Orchard.Web/Modules/Lucene/Lucene.csproj
-index 2cb6301e8..a5cec37e0 100644
+index 2cb6301e8..c60b4a414 100644
 --- a/src/Orchard.Web/Modules/Lucene/Lucene.csproj
 +++ b/src/Orchard.Web/Modules/Lucene/Lucene.csproj
 @@ -1,170 +1,38 @@
@@ -2056,7 +2019,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Lucene/packages.config
 rename to src/Orchard.Web/Modules/Lucene/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Markdown/Markdown.csproj b/src/Orchard.Web/Modules/Markdown/Markdown.csproj
-index d5a4305cc..25afcd13e 100644
+index d5a4305cc..505ac94d2 100644
 --- a/src/Orchard.Web/Modules/Markdown/Markdown.csproj
 +++ b/src/Orchard.Web/Modules/Markdown/Markdown.csproj
 @@ -1,234 +1,39 @@
@@ -2590,7 +2553,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Markdown/packages.config
 rename to src/Orchard.Web/Modules/Markdown/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Alias/Orchard.Alias.csproj b/src/Orchard.Web/Modules/Orchard.Alias/Orchard.Alias.csproj
-index a6c2a950e..bbbd9d245 100644
+index a6c2a950e..eddf0df1d 100644
 --- a/src/Orchard.Web/Modules/Orchard.Alias/Orchard.Alias.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Alias/Orchard.Alias.csproj
 @@ -1,196 +1,33 @@
@@ -3041,7 +3004,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Alias/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Alias/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.AntiSpam/Orchard.AntiSpam.csproj b/src/Orchard.Web/Modules/Orchard.AntiSpam/Orchard.AntiSpam.csproj
-index 56a43eda4..7e1348ed2 100644
+index 56a43eda4..2ddefe556 100644
 --- a/src/Orchard.Web/Modules/Orchard.AntiSpam/Orchard.AntiSpam.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.AntiSpam/Orchard.AntiSpam.csproj
 @@ -1,253 +1,39 @@
@@ -3613,7 +3576,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.AntiSpam/packages.config
 rename to src/Orchard.Web/Modules/Orchard.AntiSpam/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.ArchiveLater/Orchard.ArchiveLater.csproj b/src/Orchard.Web/Modules/Orchard.ArchiveLater/Orchard.ArchiveLater.csproj
-index 0e65319c7..ec44d9258 100644
+index 0e65319c7..df300ec5c 100644
 --- a/src/Orchard.Web/Modules/Orchard.ArchiveLater/Orchard.ArchiveLater.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.ArchiveLater/Orchard.ArchiveLater.csproj
 @@ -1,169 +1,33 @@
@@ -4010,7 +3973,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.ArchiveLater/packages.config
 rename to src/Orchard.Web/Modules/Orchard.ArchiveLater/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.AuditTrail/Orchard.AuditTrail.csproj b/src/Orchard.Web/Modules/Orchard.AuditTrail/Orchard.AuditTrail.csproj
-index e0098aa0e..9ef6e57b0 100644
+index e0098aa0e..fea8e0b0e 100644
 --- a/src/Orchard.Web/Modules/Orchard.AuditTrail/Orchard.AuditTrail.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.AuditTrail/Orchard.AuditTrail.csproj
 @@ -1,401 +1,45 @@
@@ -4884,7 +4847,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.AuditTrail/packages.config
 rename to src/Orchard.Web/Modules/Orchard.AuditTrail/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Autoroute/Orchard.Autoroute.csproj b/src/Orchard.Web/Modules/Orchard.Autoroute/Orchard.Autoroute.csproj
-index 236d79d72..817563876 100644
+index 236d79d72..557042483 100644
 --- a/src/Orchard.Web/Modules/Orchard.Autoroute/Orchard.Autoroute.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Autoroute/Orchard.Autoroute.csproj
 @@ -1,216 +1,36 @@
@@ -5378,7 +5341,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Autoroute/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Autoroute/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Azure.MediaServices/Orchard.Azure.MediaServices.csproj b/src/Orchard.Web/Modules/Orchard.Azure.MediaServices/Orchard.Azure.MediaServices.csproj
-index 822f95b4f..b41a66ff0 100644
+index 822f95b4f..30d3c9781 100644
 --- a/src/Orchard.Web/Modules/Orchard.Azure.MediaServices/Orchard.Azure.MediaServices.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Azure.MediaServices/Orchard.Azure.MediaServices.csproj
 @@ -1,591 +1,64 @@
@@ -6659,7 +6622,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Azure.MediaServices/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Azure.MediaServices/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Azure/Orchard.Azure.csproj b/src/Orchard.Web/Modules/Orchard.Azure/Orchard.Azure.csproj
-index ed3b9bcf0..a042bab23 100644
+index ed3b9bcf0..73a00be52 100644
 --- a/src/Orchard.Web/Modules/Orchard.Azure/Orchard.Azure.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Azure/Orchard.Azure.csproj
 @@ -1,221 +1,50 @@
@@ -7210,7 +7173,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Azure/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Azure/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Blogs/Orchard.Blogs.csproj b/src/Orchard.Web/Modules/Orchard.Blogs/Orchard.Blogs.csproj
-index 393b7e099..99b2887ee 100644
+index 393b7e099..c2ee338fb 100644
 --- a/src/Orchard.Web/Modules/Orchard.Blogs/Orchard.Blogs.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Blogs/Orchard.Blogs.csproj
 @@ -1,274 +1,37 @@
@@ -7824,7 +7787,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Blogs/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Blogs/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Caching/Orchard.Caching.csproj b/src/Orchard.Web/Modules/Orchard.Caching/Orchard.Caching.csproj
-index 5ba73e1ec..02ba80f9d 100644
+index 5ba73e1ec..f98164e7f 100644
 --- a/src/Orchard.Web/Modules/Orchard.Caching/Orchard.Caching.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Caching/Orchard.Caching.csproj
 @@ -1,151 +1,32 @@
@@ -8174,7 +8137,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Caching/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Caching/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.CodeGeneration/Orchard.CodeGeneration.csproj b/src/Orchard.Web/Modules/Orchard.CodeGeneration/Orchard.CodeGeneration.csproj
-index 6565c15f6..e7b2663c9 100644
+index 6565c15f6..02ac8b696 100644
 --- a/src/Orchard.Web/Modules/Orchard.CodeGeneration/Orchard.CodeGeneration.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.CodeGeneration/Orchard.CodeGeneration.csproj
 @@ -1,162 +1,33 @@
@@ -8550,7 +8513,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.CodeGeneration/packages.config
 rename to src/Orchard.Web/Modules/Orchard.CodeGeneration/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Comments/Orchard.Comments.csproj b/src/Orchard.Web/Modules/Orchard.Comments/Orchard.Comments.csproj
-index e0302d375..00a2da7eb 100644
+index e0302d375..160bc51b6 100644
 --- a/src/Orchard.Web/Modules/Orchard.Comments/Orchard.Comments.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Comments/Orchard.Comments.csproj
 @@ -1,257 +1,35 @@
@@ -9125,7 +9088,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Comments/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Comments/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Conditions/Orchard.Conditions.csproj b/src/Orchard.Web/Modules/Orchard.Conditions/Orchard.Conditions.csproj
-index 12f420c38..878408497 100644
+index 12f420c38..b804920c6 100644
 --- a/src/Orchard.Web/Modules/Orchard.Conditions/Orchard.Conditions.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Conditions/Orchard.Conditions.csproj
 @@ -1,165 +1,34 @@
@@ -9505,7 +9468,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Conditions/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Conditions/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.ContentPermissions/Orchard.ContentPermissions.csproj b/src/Orchard.Web/Modules/Orchard.ContentPermissions/Orchard.ContentPermissions.csproj
-index aec275035..6362012a6 100644
+index aec275035..7f6c52a24 100644
 --- a/src/Orchard.Web/Modules/Orchard.ContentPermissions/Orchard.ContentPermissions.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.ContentPermissions/Orchard.ContentPermissions.csproj
 @@ -1,204 +1,34 @@
@@ -9973,7 +9936,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.ContentPermissions/packages.config
 rename to src/Orchard.Web/Modules/Orchard.ContentPermissions/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.ContentPicker/Orchard.ContentPicker.csproj b/src/Orchard.Web/Modules/Orchard.ContentPicker/Orchard.ContentPicker.csproj
-index 4cfff7dac..715d76ebf 100644
+index 4cfff7dac..c91a7b8fc 100644
 --- a/src/Orchard.Web/Modules/Orchard.ContentPicker/Orchard.ContentPicker.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.ContentPicker/Orchard.ContentPicker.csproj
 @@ -1,251 +1,41 @@
@@ -10543,7 +10506,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.ContentPicker/packages.config
 rename to src/Orchard.Web/Modules/Orchard.ContentPicker/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.ContentTypes/Orchard.ContentTypes.csproj b/src/Orchard.Web/Modules/Orchard.ContentTypes/Orchard.ContentTypes.csproj
-index de1ea2388..840252953 100644
+index de1ea2388..528a28a38 100644
 --- a/src/Orchard.Web/Modules/Orchard.ContentTypes/Orchard.ContentTypes.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.ContentTypes/Orchard.ContentTypes.csproj
 @@ -1,248 +1,34 @@
@@ -11099,7 +11062,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.ContentTypes/packages.config
 rename to src/Orchard.Web/Modules/Orchard.ContentTypes/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.CustomForms/Orchard.CustomForms.csproj b/src/Orchard.Web/Modules/Orchard.CustomForms/Orchard.CustomForms.csproj
-index 9e86b52fc..b820de647 100644
+index 9e86b52fc..8df844179 100644
 --- a/src/Orchard.Web/Modules/Orchard.CustomForms/Orchard.CustomForms.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.CustomForms/Orchard.CustomForms.csproj
 @@ -1,225 +1,36 @@
@@ -11611,7 +11574,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.CustomForms/packages.config
 rename to src/Orchard.Web/Modules/Orchard.CustomForms/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Dashboards/Orchard.Dashboards.csproj b/src/Orchard.Web/Modules/Orchard.Dashboards/Orchard.Dashboards.csproj
-index 7f1905ca2..c03b56eef 100644
+index 7f1905ca2..c3ef55979 100644
 --- a/src/Orchard.Web/Modules/Orchard.Dashboards/Orchard.Dashboards.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Dashboards/Orchard.Dashboards.csproj
 @@ -1,191 +1,34 @@
@@ -12056,7 +12019,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Dashboards/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Dashboards/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.DesignerTools/Orchard.DesignerTools.csproj b/src/Orchard.Web/Modules/Orchard.DesignerTools/Orchard.DesignerTools.csproj
-index 1ee8d67a4..a10625d92 100644
+index 1ee8d67a4..776cdb5e8 100644
 --- a/src/Orchard.Web/Modules/Orchard.DesignerTools/Orchard.DesignerTools.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.DesignerTools/Orchard.DesignerTools.csproj
 @@ -1,193 +1,33 @@
@@ -12501,7 +12464,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.DesignerTools/packages.config
 rename to src/Orchard.Web/Modules/Orchard.DesignerTools/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.DynamicForms/Orchard.DynamicForms.csproj b/src/Orchard.Web/Modules/Orchard.DynamicForms/Orchard.DynamicForms.csproj
-index df2c9dd01..297689018 100644
+index df2c9dd01..0c6ac3e91 100644
 --- a/src/Orchard.Web/Modules/Orchard.DynamicForms/Orchard.DynamicForms.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.DynamicForms/Orchard.DynamicForms.csproj
 @@ -1,607 +1,51 @@
@@ -13801,7 +13764,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.DynamicForms/packages.config
 rename to src/Orchard.Web/Modules/Orchard.DynamicForms/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Email/Orchard.Email.csproj b/src/Orchard.Web/Modules/Orchard.Email/Orchard.Email.csproj
-index 7c9775b1e..87faf5529 100644
+index 7c9775b1e..4afd35d96 100644
 --- a/src/Orchard.Web/Modules/Orchard.Email/Orchard.Email.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Email/Orchard.Email.csproj
 @@ -1,250 +1,45 @@
@@ -14373,7 +14336,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Email/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Email/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Fields/Orchard.Fields.csproj b/src/Orchard.Web/Modules/Orchard.Fields/Orchard.Fields.csproj
-index 239ad497d..c0382a27d 100644
+index 239ad497d..08e9f07b9 100644
 --- a/src/Orchard.Web/Modules/Orchard.Fields/Orchard.Fields.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Fields/Orchard.Fields.csproj
 @@ -1,222 +1,34 @@
@@ -14880,7 +14843,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Fields/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Fields/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Forms/Orchard.Forms.csproj b/src/Orchard.Web/Modules/Orchard.Forms/Orchard.Forms.csproj
-index 17d3fa58b..d35909d82 100644
+index 17d3fa58b..400573b69 100644
 --- a/src/Orchard.Web/Modules/Orchard.Forms/Orchard.Forms.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Forms/Orchard.Forms.csproj
 @@ -1,175 +1,38 @@
@@ -15285,7 +15248,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Forms/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Forms/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.ImageEditor/Orchard.ImageEditor.csproj b/src/Orchard.Web/Modules/Orchard.ImageEditor/Orchard.ImageEditor.csproj
-index 709c424ca..888dbd18b 100644
+index 709c424ca..fc7d69603 100644
 --- a/src/Orchard.Web/Modules/Orchard.ImageEditor/Orchard.ImageEditor.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.ImageEditor/Orchard.ImageEditor.csproj
 @@ -1,232 +1,34 @@
@@ -15809,7 +15772,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.ImageEditor/packages.config
 rename to src/Orchard.Web/Modules/Orchard.ImageEditor/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.ImportExport/Orchard.ImportExport.csproj b/src/Orchard.Web/Modules/Orchard.ImportExport/Orchard.ImportExport.csproj
-index c602370ee..282bb5f41 100644
+index c602370ee..3f6be36f2 100644
 --- a/src/Orchard.Web/Modules/Orchard.ImportExport/Orchard.ImportExport.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.ImportExport/Orchard.ImportExport.csproj
 @@ -1,226 +1,42 @@
@@ -16330,7 +16293,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.ImportExport/packages.config
 rename to src/Orchard.Web/Modules/Orchard.ImportExport/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Indexing/Orchard.Indexing.csproj b/src/Orchard.Web/Modules/Orchard.Indexing/Orchard.Indexing.csproj
-index c78226286..3d3d47dce 100644
+index c78226286..2554bda1d 100644
 --- a/src/Orchard.Web/Modules/Orchard.Indexing/Orchard.Indexing.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Indexing/Orchard.Indexing.csproj
 @@ -1,184 +1,37 @@
@@ -16764,7 +16727,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Indexing/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Indexing/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.JobsQueue/Orchard.JobsQueue.csproj b/src/Orchard.Web/Modules/Orchard.JobsQueue/Orchard.JobsQueue.csproj
-index 7d665223d..b89a24a82 100644
+index 7d665223d..aad431ca7 100644
 --- a/src/Orchard.Web/Modules/Orchard.JobsQueue/Orchard.JobsQueue.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.JobsQueue/Orchard.JobsQueue.csproj
 @@ -1,199 +1,45 @@
@@ -17234,7 +17197,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.JobsQueue/packages.config
 rename to src/Orchard.Web/Modules/Orchard.JobsQueue/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Layouts/Orchard.Layouts.csproj b/src/Orchard.Web/Modules/Orchard.Layouts/Orchard.Layouts.csproj
-index aeaf2d938..acbefe662 100644
+index aeaf2d938..b241d11b7 100644
 --- a/src/Orchard.Web/Modules/Orchard.Layouts/Orchard.Layouts.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Layouts/Orchard.Layouts.csproj
 @@ -1,631 +1,48 @@
@@ -18573,7 +18536,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Layouts/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Layouts/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Lists/Orchard.Lists.csproj b/src/Orchard.Web/Modules/Orchard.Lists/Orchard.Lists.csproj
-index f8b3eb32f..1d1fd375a 100644
+index f8b3eb32f..e6dee3d6c 100644
 --- a/src/Orchard.Web/Modules/Orchard.Lists/Orchard.Lists.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Lists/Orchard.Lists.csproj
 @@ -1,274 +1,33 @@
@@ -19183,7 +19146,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Lists/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Lists/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Localization/Orchard.Localization.csproj b/src/Orchard.Web/Modules/Orchard.Localization/Orchard.Localization.csproj
-index 771a933d6..102a31155 100644
+index 771a933d6..0bb13bb48 100644
 --- a/src/Orchard.Web/Modules/Orchard.Localization/Orchard.Localization.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Localization/Orchard.Localization.csproj
 @@ -1,237 +1,53 @@
@@ -19734,7 +19697,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Localization/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Localization/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Media/Orchard.Media.csproj b/src/Orchard.Web/Modules/Orchard.Media/Orchard.Media.csproj
-index c4a391378..98b872cad 100644
+index c4a391378..3f2562f9a 100644
 --- a/src/Orchard.Web/Modules/Orchard.Media/Orchard.Media.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Media/Orchard.Media.csproj
 @@ -1,205 +1,33 @@
@@ -20206,7 +20169,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Media/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Media/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.MediaLibrary/Orchard.MediaLibrary.csproj b/src/Orchard.Web/Modules/Orchard.MediaLibrary/Orchard.MediaLibrary.csproj
-index bf6e595e4..4adb7792c 100644
+index bf6e595e4..d36b7b5c4 100644
 --- a/src/Orchard.Web/Modules/Orchard.MediaLibrary/Orchard.MediaLibrary.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.MediaLibrary/Orchard.MediaLibrary.csproj
 @@ -1,456 +1,39 @@
@@ -21184,7 +21147,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.MediaLibrary/packages.config
 rename to src/Orchard.Web/Modules/Orchard.MediaLibrary/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.MediaPicker/Orchard.MediaPicker.csproj b/src/Orchard.Web/Modules/Orchard.MediaPicker/Orchard.MediaPicker.csproj
-index 39fa5efa6..97f4fd736 100644
+index 39fa5efa6..2e611d10f 100644
 --- a/src/Orchard.Web/Modules/Orchard.MediaPicker/Orchard.MediaPicker.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.MediaPicker/Orchard.MediaPicker.csproj
 @@ -1,232 +1,34 @@
@@ -21708,7 +21671,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.MediaPicker/packages.config
 rename to src/Orchard.Web/Modules/Orchard.MediaPicker/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.MediaProcessing/Orchard.MediaProcessing.csproj b/src/Orchard.Web/Modules/Orchard.MediaProcessing/Orchard.MediaProcessing.csproj
-index 64566bec4..e065d661a 100644
+index 64566bec4..a78849851 100644
 --- a/src/Orchard.Web/Modules/Orchard.MediaProcessing/Orchard.MediaProcessing.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.MediaProcessing/Orchard.MediaProcessing.csproj
 @@ -1,239 +1,41 @@
@@ -22254,7 +22217,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.MediaProcessing/packages.config
 rename to src/Orchard.Web/Modules/Orchard.MediaProcessing/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.MessageBus/Orchard.MessageBus.csproj b/src/Orchard.Web/Modules/Orchard.MessageBus/Orchard.MessageBus.csproj
-index 8883e76b8..ba461a43c 100644
+index 8883e76b8..4bb23cd81 100644
 --- a/src/Orchard.Web/Modules/Orchard.MessageBus/Orchard.MessageBus.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.MessageBus/Orchard.MessageBus.csproj
 @@ -1,176 +1,39 @@
@@ -22659,7 +22622,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.MessageBus/packages.config
 rename to src/Orchard.Web/Modules/Orchard.MessageBus/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Migrations/Orchard.Migrations.csproj b/src/Orchard.Web/Modules/Orchard.Migrations/Orchard.Migrations.csproj
-index 27fe5c561..93a1be1ce 100644
+index 27fe5c561..ac1d896ea 100644
 --- a/src/Orchard.Web/Modules/Orchard.Migrations/Orchard.Migrations.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Migrations/Orchard.Migrations.csproj
 @@ -1,142 +1,33 @@
@@ -22992,7 +22955,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Migrations/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Migrations/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Modules/Orchard.Modules.csproj b/src/Orchard.Web/Modules/Orchard.Modules/Orchard.Modules.csproj
-index dcbb62eae..ab81af393 100644
+index dcbb62eae..e6b6a5b5a 100644
 --- a/src/Orchard.Web/Modules/Orchard.Modules/Orchard.Modules.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Modules/Orchard.Modules.csproj
 @@ -1,204 +1,37 @@
@@ -23461,7 +23424,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Modules/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Modules/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.MultiTenancy/Orchard.MultiTenancy.csproj b/src/Orchard.Web/Modules/Orchard.MultiTenancy/Orchard.MultiTenancy.csproj
-index 1c4f0616d..5ad168ef9 100644
+index 1c4f0616d..30eaedb82 100644
 --- a/src/Orchard.Web/Modules/Orchard.MultiTenancy/Orchard.MultiTenancy.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.MultiTenancy/Orchard.MultiTenancy.csproj
 @@ -1,199 +1,39 @@
@@ -23925,7 +23888,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.MultiTenancy/packages.config
 rename to src/Orchard.Web/Modules/Orchard.MultiTenancy/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.OutputCache/Orchard.OutputCache.csproj b/src/Orchard.Web/Modules/Orchard.OutputCache/Orchard.OutputCache.csproj
-index 9bc851d6b..0376b83db 100644
+index 9bc851d6b..a8f34f446 100644
 --- a/src/Orchard.Web/Modules/Orchard.OutputCache/Orchard.OutputCache.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.OutputCache/Orchard.OutputCache.csproj
 @@ -1,206 +1,38 @@
@@ -24412,7 +24375,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.OutputCache/packages.config
 rename to src/Orchard.Web/Modules/Orchard.OutputCache/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Packaging/Orchard.Packaging.csproj b/src/Orchard.Web/Modules/Orchard.Packaging/Orchard.Packaging.csproj
-index fcfebca6c..8038d1457 100644
+index fcfebca6c..3562f1eb2 100644
 --- a/src/Orchard.Web/Modules/Orchard.Packaging/Orchard.Packaging.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Packaging/Orchard.Packaging.csproj
 @@ -1,253 +1,53 @@
@@ -24995,7 +24958,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Packaging/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Packaging/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Pages/Orchard.Pages.csproj b/src/Orchard.Web/Modules/Orchard.Pages/Orchard.Pages.csproj
-index 82716ffd4..b29a2b096 100644
+index 82716ffd4..19152880f 100644
 --- a/src/Orchard.Web/Modules/Orchard.Pages/Orchard.Pages.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Pages/Orchard.Pages.csproj
 @@ -1,132 +1,33 @@
@@ -25304,7 +25267,7 @@ index 6295ffe08..f61b28f00 100644
                  <add assembly="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
                  <add assembly="Orchard.Framework" />
 diff --git a/src/Orchard.Web/Modules/Orchard.Projections/Orchard.Projections.csproj b/src/Orchard.Web/Modules/Orchard.Projections/Orchard.Projections.csproj
-index 4e302c2aa..069d94b91 100644
+index 4e302c2aa..b761f2ead 100644
 --- a/src/Orchard.Web/Modules/Orchard.Projections/Orchard.Projections.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Projections/Orchard.Projections.csproj
 @@ -1,383 +1,45 @@
@@ -26142,7 +26105,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Projections/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Projections/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.PublishLater/Orchard.PublishLater.csproj b/src/Orchard.Web/Modules/Orchard.PublishLater/Orchard.PublishLater.csproj
-index 3c58eeb12..df7254ea1 100644
+index 3c58eeb12..d588b45d9 100644
 --- a/src/Orchard.Web/Modules/Orchard.PublishLater/Orchard.PublishLater.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.PublishLater/Orchard.PublishLater.csproj
 @@ -1,186 +1,33 @@
@@ -26573,7 +26536,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.PublishLater/packages.config
 rename to src/Orchard.Web/Modules/Orchard.PublishLater/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Recipes/Orchard.Recipes.csproj b/src/Orchard.Web/Modules/Orchard.Recipes/Orchard.Recipes.csproj
-index 9566c46f8..18d50466f 100644
+index 9566c46f8..d8ee4f010 100644
 --- a/src/Orchard.Web/Modules/Orchard.Recipes/Orchard.Recipes.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Recipes/Orchard.Recipes.csproj
 @@ -1,215 +1,40 @@
@@ -27067,7 +27030,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Recipes/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Recipes/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Redis/Orchard.Redis.csproj b/src/Orchard.Web/Modules/Orchard.Redis/Orchard.Redis.csproj
-index 766beb457..31b782c1f 100644
+index 766beb457..73cd9668e 100644
 --- a/src/Orchard.Web/Modules/Orchard.Redis/Orchard.Redis.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Redis/Orchard.Redis.csproj
 @@ -1,164 +1,42 @@
@@ -27467,7 +27430,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Redis/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Redis/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Resources/Orchard.Resources.csproj b/src/Orchard.Web/Modules/Orchard.Resources/Orchard.Resources.csproj
-index 8bc825b35..0a7c5e433 100644
+index 8bc825b35..50ea34fd0 100644
 --- a/src/Orchard.Web/Modules/Orchard.Resources/Orchard.Resources.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Resources/Orchard.Resources.csproj
 @@ -1,1104 +1,33 @@
@@ -29734,7 +29697,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Resources/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Resources/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Roles/Orchard.Roles.csproj b/src/Orchard.Web/Modules/Orchard.Roles/Orchard.Roles.csproj
-index 7009ca63a..37c245757 100644
+index 7009ca63a..8d4ec32c9 100644
 --- a/src/Orchard.Web/Modules/Orchard.Roles/Orchard.Roles.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Roles/Orchard.Roles.csproj
 @@ -1,250 +1,35 @@
@@ -30295,7 +30258,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Roles/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Roles/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Rules/Orchard.Rules.csproj b/src/Orchard.Web/Modules/Orchard.Rules/Orchard.Rules.csproj
-index bcfb65dde..c29821ec8 100644
+index bcfb65dde..05e0ae07d 100644
 --- a/src/Orchard.Web/Modules/Orchard.Rules/Orchard.Rules.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Rules/Orchard.Rules.csproj
 @@ -1,243 +1,36 @@
@@ -30843,7 +30806,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Rules/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Rules/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Scripting.CSharp/Orchard.Scripting.CSharp.csproj b/src/Orchard.Web/Modules/Orchard.Scripting.CSharp/Orchard.Scripting.CSharp.csproj
-index c43d66d0e..4897e667c 100644
+index c43d66d0e..0d2e45027 100644
 --- a/src/Orchard.Web/Modules/Orchard.Scripting.CSharp/Orchard.Scripting.CSharp.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Scripting.CSharp/Orchard.Scripting.CSharp.csproj
 @@ -1,197 +1,40 @@
@@ -31301,7 +31264,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Scripting.CSharp/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Scripting.CSharp/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Scripting.Dlr/Orchard.Scripting.Dlr.csproj b/src/Orchard.Web/Modules/Orchard.Scripting.Dlr/Orchard.Scripting.Dlr.csproj
-index 0cba61bc4..6541ce52f 100644
+index 0cba61bc4..96047f02b 100644
 --- a/src/Orchard.Web/Modules/Orchard.Scripting.Dlr/Orchard.Scripting.Dlr.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Scripting.Dlr/Orchard.Scripting.Dlr.csproj
 @@ -1,141 +1,36 @@
@@ -31633,7 +31596,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Scripting.Dlr/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Scripting.Dlr/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Scripting/Orchard.Scripting.csproj b/src/Orchard.Web/Modules/Orchard.Scripting/Orchard.Scripting.csproj
-index ce3ec11cf..977a706f2 100644
+index ce3ec11cf..24b51da18 100644
 --- a/src/Orchard.Web/Modules/Orchard.Scripting/Orchard.Scripting.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Scripting/Orchard.Scripting.csproj
 @@ -1,132 +1,30 @@
@@ -31939,7 +31902,7 @@ index b2bd44ec1..71af6d990 100644
                  <add assembly="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
              </assemblies>
 diff --git a/src/Orchard.Web/Modules/Orchard.Search/Orchard.Search.csproj b/src/Orchard.Web/Modules/Orchard.Search/Orchard.Search.csproj
-index ac22e2c9c..39467a559 100644
+index ac22e2c9c..721547fee 100644
 --- a/src/Orchard.Web/Modules/Orchard.Search/Orchard.Search.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Search/Orchard.Search.csproj
 @@ -1,248 +1,36 @@
@@ -32500,7 +32463,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Search/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Search/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.SecureSocketsLayer/Orchard.SecureSocketsLayer.csproj b/src/Orchard.Web/Modules/Orchard.SecureSocketsLayer/Orchard.SecureSocketsLayer.csproj
-index d2cc69fb5..079c59177 100644
+index d2cc69fb5..564659acc 100644
 --- a/src/Orchard.Web/Modules/Orchard.SecureSocketsLayer/Orchard.SecureSocketsLayer.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.SecureSocketsLayer/Orchard.SecureSocketsLayer.csproj
 @@ -1,186 +1,33 @@
@@ -32934,7 +32897,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.SecureSocketsLayer/packages.config
 rename to src/Orchard.Web/Modules/Orchard.SecureSocketsLayer/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Setup/Orchard.Setup.csproj b/src/Orchard.Web/Modules/Orchard.Setup/Orchard.Setup.csproj
-index adb4bd108..bc32a07e5 100644
+index adb4bd108..ff7e4bd5d 100644
 --- a/src/Orchard.Web/Modules/Orchard.Setup/Orchard.Setup.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Setup/Orchard.Setup.csproj
 @@ -1,208 +1,40 @@
@@ -33414,7 +33377,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Setup/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Setup/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Tags/Orchard.Tags.csproj b/src/Orchard.Web/Modules/Orchard.Tags/Orchard.Tags.csproj
-index f298088e4..b35873dcb 100644
+index f298088e4..964126ca5 100644
 --- a/src/Orchard.Web/Modules/Orchard.Tags/Orchard.Tags.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Tags/Orchard.Tags.csproj
 @@ -1,240 +1,41 @@
@@ -33962,7 +33925,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Tags/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Tags/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.TaskLease/Orchard.TaskLease.csproj b/src/Orchard.Web/Modules/Orchard.TaskLease/Orchard.TaskLease.csproj
-index 17d228fe2..91d0013e4 100644
+index 17d228fe2..99337aeef 100644
 --- a/src/Orchard.Web/Modules/Orchard.TaskLease/Orchard.TaskLease.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.TaskLease/Orchard.TaskLease.csproj
 @@ -1,139 +1,39 @@
@@ -34293,7 +34256,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.TaskLease/packages.config
 rename to src/Orchard.Web/Modules/Orchard.TaskLease/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Taxonomies/Orchard.Taxonomies.csproj b/src/Orchard.Web/Modules/Orchard.Taxonomies/Orchard.Taxonomies.csproj
-index eeceab2c3..109aa0694 100644
+index eeceab2c3..ab15cb01a 100644
 --- a/src/Orchard.Web/Modules/Orchard.Taxonomies/Orchard.Taxonomies.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Taxonomies/Orchard.Taxonomies.csproj
 @@ -1,291 +1,42 @@
@@ -34946,7 +34909,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Taxonomies/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Taxonomies/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Templates/Orchard.Templates.csproj b/src/Orchard.Web/Modules/Orchard.Templates/Orchard.Templates.csproj
-index ef210ae27..a32d30868 100644
+index ef210ae27..1e3aabb26 100644
 --- a/src/Orchard.Web/Modules/Orchard.Templates/Orchard.Templates.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Templates/Orchard.Templates.csproj
 @@ -1,275 +1,35 @@
@@ -35557,7 +35520,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Templates/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Templates/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Themes/Orchard.Themes.csproj b/src/Orchard.Web/Modules/Orchard.Themes/Orchard.Themes.csproj
-index 1da62dff2..a637ef4b0 100644
+index 1da62dff2..4019705b8 100644
 --- a/src/Orchard.Web/Modules/Orchard.Themes/Orchard.Themes.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Themes/Orchard.Themes.csproj
 @@ -1,205 +1,34 @@
@@ -36027,7 +35990,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Themes/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Themes/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Tokens/Orchard.Tokens.csproj b/src/Orchard.Web/Modules/Orchard.Tokens/Orchard.Tokens.csproj
-index 017a01e38..fa5583d37 100644
+index 017a01e38..1ab10af3e 100644
 --- a/src/Orchard.Web/Modules/Orchard.Tokens/Orchard.Tokens.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Tokens/Orchard.Tokens.csproj
 @@ -1,208 +1,44 @@
@@ -36519,7 +36482,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Tokens/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Tokens/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Users/Orchard.Users.csproj b/src/Orchard.Web/Modules/Orchard.Users/Orchard.Users.csproj
-index b7abb99be..d72f5995e 100644
+index b7abb99be..3121ab5a0 100644
 --- a/src/Orchard.Web/Modules/Orchard.Users/Orchard.Users.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Users/Orchard.Users.csproj
 @@ -1,281 +1,35 @@
@@ -37142,7 +37105,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Users/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Users/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Warmup/Orchard.Warmup.csproj b/src/Orchard.Web/Modules/Orchard.Warmup/Orchard.Warmup.csproj
-index ac1bc7551..b0e7e95f0 100644
+index ac1bc7551..b91c10263 100644
 --- a/src/Orchard.Web/Modules/Orchard.Warmup/Orchard.Warmup.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Warmup/Orchard.Warmup.csproj
 @@ -1,196 +1,33 @@
@@ -37593,7 +37556,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Warmup/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Warmup/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Widgets/Orchard.Widgets.csproj b/src/Orchard.Web/Modules/Orchard.Widgets/Orchard.Widgets.csproj
-index 508576b18..66fcb876e 100644
+index 508576b18..666bd0041 100644
 --- a/src/Orchard.Web/Modules/Orchard.Widgets/Orchard.Widgets.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Widgets/Orchard.Widgets.csproj
 @@ -1,283 +1,38 @@
@@ -38223,7 +38186,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Widgets/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Widgets/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.Workflows/Orchard.Workflows.csproj b/src/Orchard.Web/Modules/Orchard.Workflows/Orchard.Workflows.csproj
-index 3e85f4f0b..65f3e137d 100644
+index 3e85f4f0b..6715bef7f 100644
 --- a/src/Orchard.Web/Modules/Orchard.Workflows/Orchard.Workflows.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.Workflows/Orchard.Workflows.csproj
 @@ -1,310 +1,40 @@
@@ -38910,7 +38873,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.Workflows/packages.config
 rename to src/Orchard.Web/Modules/Orchard.Workflows/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Orchard.jQuery/Orchard.jQuery.csproj b/src/Orchard.Web/Modules/Orchard.jQuery/Orchard.jQuery.csproj
-index baf14676b..17ce2411e 100644
+index baf14676b..8890778ac 100644
 --- a/src/Orchard.Web/Modules/Orchard.jQuery/Orchard.jQuery.csproj
 +++ b/src/Orchard.Web/Modules/Orchard.jQuery/Orchard.jQuery.csproj
 @@ -1,661 +1,33 @@
@@ -40291,7 +40254,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Orchard.jQuery/packages.config
 rename to src/Orchard.Web/Modules/Orchard.jQuery/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/SysCache/SysCache.csproj b/src/Orchard.Web/Modules/SysCache/SysCache.csproj
-index 810b978fe..73e07089c 100644
+index 810b978fe..ea1157991 100644
 --- a/src/Orchard.Web/Modules/SysCache/SysCache.csproj
 +++ b/src/Orchard.Web/Modules/SysCache/SysCache.csproj
 @@ -1,141 +1,38 @@
@@ -40625,7 +40588,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/SysCache/packages.config
 rename to src/Orchard.Web/Modules/SysCache/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/TinyMce/TinyMce.csproj b/src/Orchard.Web/Modules/TinyMce/TinyMce.csproj
-index 9e02b2dc0..09debddbe 100644
+index 9e02b2dc0..902207872 100644
 --- a/src/Orchard.Web/Modules/TinyMce/TinyMce.csproj
 +++ b/src/Orchard.Web/Modules/TinyMce/TinyMce.csproj
 @@ -1,430 +1,32 @@
@@ -41546,7 +41509,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/TinyMce/packages.config
 rename to src/Orchard.Web/Modules/TinyMce/packages.config.netfx
 diff --git a/src/Orchard.Web/Modules/Upgrade/Upgrade.csproj b/src/Orchard.Web/Modules/Upgrade/Upgrade.csproj
-index 002f58771..97b60fd80 100644
+index 002f58771..80337fe5b 100644
 --- a/src/Orchard.Web/Modules/Upgrade/Upgrade.csproj
 +++ b/src/Orchard.Web/Modules/Upgrade/Upgrade.csproj
 @@ -1,228 +1,46 @@
@@ -42077,7 +42040,7 @@ similarity index 100%
 rename from src/Orchard.Web/Modules/Upgrade/packages.config
 rename to src/Orchard.Web/Modules/Upgrade/packages.config.netfx
 diff --git a/src/Orchard.Web/Orchard.Web.csproj b/src/Orchard.Web/Orchard.Web.csproj
-index 0707cfd68..75c5c1801 100644
+index 0707cfd68..e6d9722ab 100644
 --- a/src/Orchard.Web/Orchard.Web.csproj
 +++ b/src/Orchard.Web/Orchard.Web.csproj
 @@ -1,301 +1,57 @@
@@ -43147,7 +43110,7 @@ index 1fd8236ca..0f22e71d1 100644
  
                  // HACK: For inserting names in internal dictionary when inserting route to RouteCollection.
 diff --git a/src/Orchard/Orchard.Framework.csproj b/src/Orchard/Orchard.Framework.csproj
-index e15e2689f..b6bad3727 100644
+index e15e2689f..8edae842b 100644
 --- a/src/Orchard/Orchard.Framework.csproj
 +++ b/src/Orchard/Orchard.Framework.csproj
 @@ -1,1069 +1,48 @@

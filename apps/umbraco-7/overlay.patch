@@ -1,5 +1,5 @@
 diff --git a/src/SQLCE4Umbraco/SqlCE4Umbraco.csproj b/src/SQLCE4Umbraco/SqlCE4Umbraco.csproj
-index c86c11c6d9..36adf3ed00 100644
+index c86c11c6d9..01595fdaa3 100644
 --- a/src/SQLCE4Umbraco/SqlCE4Umbraco.csproj
 +++ b/src/SQLCE4Umbraco/SqlCE4Umbraco.csproj
 @@ -1,101 +1,36 @@
@@ -456,6 +456,39 @@ index 8d708a18ea..b1600fa1bb 100644
  using System.Text;
  using System.Threading.Tasks;
  using Umbraco.Core.Logging;
+diff --git a/src/Umbraco.Core/Persistence/Querying/ExpressionVisitorBase.cs b/src/Umbraco.Core/Persistence/Querying/ExpressionVisitorBase.cs
+index fe73638b4b..3d21e14fc9 100644
+--- a/src/Umbraco.Core/Persistence/Querying/ExpressionVisitorBase.cs
++++ b/src/Umbraco.Core/Persistence/Querying/ExpressionVisitorBase.cs
+@@ -482,8 +482,28 @@ protected virtual string BindOperant(ExpressionType e)
+             }
+         }
+ 
++        private static MethodCallExpression WithoutSpanConversion(MethodCallExpression m)
++        {
++            if (m.Method.DeclaringType == typeof(MemoryExtensions) && m.Method.Name == "Contains" && m.Arguments.Count == 2
++                && m.Arguments[0] is MethodCallExpression conversion && conversion.Method.Name == "op_Implicit"
++                && conversion.Arguments.Count == 1 && conversion.Arguments[0].Type.IsArray)
++            {
++                var array = conversion.Arguments[0];
++                var contains = typeof(Enumerable).GetMethods()
++                    .Single(x => x.Name == "Contains" && x.GetParameters().Length == 2)
++                    .MakeGenericMethod(array.Type.GetElementType());
++                return Expression.Call(contains, array, m.Arguments[1]);
++            }
++            return m;
++        }
++
+         protected virtual string VisitMethodCall(MethodCallExpression m)
+         {
++            // webForCore smoke test: C# 14 (which webForCore.AutoMapperLegacy needs) binds array.Contains(x) to
++            // MemoryExtensions.Contains(ReadOnlySpan<T>, T) through an implicit conversion; read it as Enumerable.Contains
++            // (the SQL IN below), as C# 7.3 compiled it (FINDINGS.md F165).
++            m = WithoutSpanConversion(m);
++
+             //Here's what happens with a MethodCallExpression:
+             //  If a method is called that contains a single argument,
+             //      then m.Object is the object on the left hand side of the method call, example:
 diff --git a/src/Umbraco.Core/PropertyEditors/LegacyParameterEditorAliasConverter.cs b/src/Umbraco.Core/PropertyEditors/LegacyParameterEditorAliasConverter.cs
 index 9e2fb5d10a..c298f90433 100644
 --- a/src/Umbraco.Core/PropertyEditors/LegacyParameterEditorAliasConverter.cs
@@ -487,7 +520,7 @@ index c15b2d0576..67c97368e9 100644
  using Umbraco.Core.Logging;
  
 diff --git a/src/Umbraco.Core/Umbraco.Core.csproj b/src/Umbraco.Core/Umbraco.Core.csproj
-index 69f6fb39b4..8426eaafa3 100644
+index 69f6fb39b4..3ac72d5a60 100644
 --- a/src/Umbraco.Core/Umbraco.Core.csproj
 +++ b/src/Umbraco.Core/Umbraco.Core.csproj
 @@ -1,1712 +1,64 @@
@@ -4005,7 +4038,7 @@ index 0000000000..1a9143673b
 +    }
 +}
 diff --git a/src/Umbraco.Web.UI/Umbraco.Web.UI.csproj b/src/Umbraco.Web.UI/Umbraco.Web.UI.csproj
-index ff05f9b475..3692a67cb2 100644
+index ff05f9b475..1bc7798c4b 100644
 --- a/src/Umbraco.Web.UI/Umbraco.Web.UI.csproj
 +++ b/src/Umbraco.Web.UI/Umbraco.Web.UI.csproj
 @@ -1,1102 +1,91 @@
@@ -6464,22 +6497,6 @@ index dfff72a6f1..4983608cf6 100644
          where T : ContentPropertyBasic, new()
      {
          protected IDataTypeService DataTypeService { get; }
-diff --git a/src/Umbraco.Web/Models/Mapping/ContentTypeModelMapperExtensions.cs b/src/Umbraco.Web/Models/Mapping/ContentTypeModelMapperExtensions.cs
-index fea46ddedb..1a7a38ce3b 100644
---- a/src/Umbraco.Web/Models/Mapping/ContentTypeModelMapperExtensions.cs
-+++ b/src/Umbraco.Web/Models/Mapping/ContentTypeModelMapperExtensions.cs
-@@ -45,7 +45,10 @@ public static IMappingExpression<TSource, PropertyGroupDisplay<TPropertyTypeDisp
-                 .ForMember(g => g.ContentTypeId, expression => expression.Ignore())
-                 .ForMember(g => g.ParentTabContentTypes, expression => expression.Ignore())
-                 .ForMember(g => g.ParentTabContentTypeNames, expression => expression.Ignore())
--                .ForMember(g => g.Properties, expression => expression.MapFrom(display => display.Properties.Select(Mapper.Map<TPropertyTypeDisplay>)));
-+                // webForCore smoke test: AutoMapper 12 maps MapFrom's IEnumerable<TPropertyTypeDisplay> again, element by
-+                // element, through the PropertyTypeBasic -> PropertyTypeDisplay map, and fails for members (F104).
-+                .ForMember(g => g.Properties, expression => expression.Ignore())
-+                .AfterMap((source, dest) => dest.Properties = source.Properties.Select(Mapper.Map<TPropertyTypeDisplay>).ToList());
-         }
- 
-         public static void AfterMapContentTypeSaveToEntity<TSource, TDestination>(
 diff --git a/src/Umbraco.Web/Models/Mapping/MemberModelMapper.cs b/src/Umbraco.Web/Models/Mapping/MemberModelMapper.cs
 index 9718f9ccf8..0270bf0a46 100644
 --- a/src/Umbraco.Web/Models/Mapping/MemberModelMapper.cs
@@ -6587,7 +6604,7 @@ index a3e54b6805..8189b84157 100644
  </root>
 \ No newline at end of file
 diff --git a/src/Umbraco.Web/Umbraco.Web.csproj b/src/Umbraco.Web/Umbraco.Web.csproj
-index c110391d91..f4e15437ef 100644
+index c110391d91..f28e3dbba8 100644
 --- a/src/Umbraco.Web/Umbraco.Web.csproj
 +++ b/src/Umbraco.Web/Umbraco.Web.csproj
 @@ -1,2032 +1,82 @@
@@ -10817,7 +10834,7 @@ index d4de749989..a7c2987794 100644
  using System.Web.Services;
  using Umbraco.Core;
 diff --git a/src/UmbracoExamine/UmbracoExamine.csproj b/src/UmbracoExamine/UmbracoExamine.csproj
-index afed7e804a..9b20c08d69 100644
+index afed7e804a..99400cabca 100644
 --- a/src/UmbracoExamine/UmbracoExamine.csproj
 +++ b/src/UmbracoExamine/UmbracoExamine.csproj
 @@ -1,199 +1,45 @@
@@ -11294,7 +11311,7 @@ similarity index 100%
 rename from src/umbraco.MacroEngines/packages.config
 rename to src/umbraco.MacroEngines/packages.config.netfx
 diff --git a/src/umbraco.MacroEngines/umbraco.MacroEngines.csproj b/src/umbraco.MacroEngines/umbraco.MacroEngines.csproj
-index 95730cfa07..cc6c5a77fa 100644
+index 95730cfa07..f2ebb4cf24 100644
 --- a/src/umbraco.MacroEngines/umbraco.MacroEngines.csproj
 +++ b/src/umbraco.MacroEngines/umbraco.MacroEngines.csproj
 @@ -1,231 +1,52 @@
@@ -11825,7 +11842,7 @@ similarity index 100%
 rename from src/umbraco.businesslogic/packages.config
 rename to src/umbraco.businesslogic/packages.config.netfx
 diff --git a/src/umbraco.businesslogic/umbraco.businesslogic.csproj b/src/umbraco.businesslogic/umbraco.businesslogic.csproj
-index aef9f365ad..0a0bcabfe2 100644
+index aef9f365ad..263490e257 100644
 --- a/src/umbraco.businesslogic/umbraco.businesslogic.csproj
 +++ b/src/umbraco.businesslogic/umbraco.businesslogic.csproj
 @@ -1,287 +1,48 @@
@@ -12496,7 +12513,7 @@ similarity index 100%
 rename from src/umbraco.cms/packages.config
 rename to src/umbraco.cms/packages.config.netfx
 diff --git a/src/umbraco.cms/umbraco.cms.csproj b/src/umbraco.cms/umbraco.cms.csproj
-index ba0d180b1e..22a45d9711 100644
+index ba0d180b1e..bf178281a9 100644
 --- a/src/umbraco.cms/umbraco.cms.csproj
 +++ b/src/umbraco.cms/umbraco.cms.csproj
 @@ -1,441 +1,42 @@
@@ -13437,7 +13454,7 @@ similarity index 100%
 rename from src/umbraco.controls/packages.config
 rename to src/umbraco.controls/packages.config.netfx
 diff --git a/src/umbraco.controls/umbraco.controls.csproj b/src/umbraco.controls/umbraco.controls.csproj
-index 4858b916db..755e66594c 100644
+index 4858b916db..34a331a067 100644
 --- a/src/umbraco.controls/umbraco.controls.csproj
 +++ b/src/umbraco.controls/umbraco.controls.csproj
 @@ -1,185 +1,40 @@
@@ -13864,7 +13881,7 @@ similarity index 100%
 rename from src/umbraco.datalayer/packages.config
 rename to src/umbraco.datalayer/packages.config.netfx
 diff --git a/src/umbraco.datalayer/umbraco.datalayer.csproj b/src/umbraco.datalayer/umbraco.datalayer.csproj
-index 4e8a4b08ac..220f25571d 100644
+index 4e8a4b08ac..aeb788be72 100644
 --- a/src/umbraco.datalayer/umbraco.datalayer.csproj
 +++ b/src/umbraco.datalayer/umbraco.datalayer.csproj
 @@ -1,174 +1,37 @@
@@ -14266,7 +14283,7 @@ similarity index 100%
 rename from src/umbraco.editorControls/packages.config
 rename to src/umbraco.editorControls/packages.config.netfx
 diff --git a/src/umbraco.editorControls/umbraco.editorControls.csproj b/src/umbraco.editorControls/umbraco.editorControls.csproj
-index aabdc4bf63..ed5718aed6 100644
+index aabdc4bf63..2cab8ff734 100644
 --- a/src/umbraco.editorControls/umbraco.editorControls.csproj
 +++ b/src/umbraco.editorControls/umbraco.editorControls.csproj
 @@ -1,498 +1,55 @@
@@ -15330,7 +15347,7 @@ index 0000000000..aabdc4bf63
 +</Project>
 \ No newline at end of file
 diff --git a/src/umbraco.interfaces/umbraco.interfaces.csproj b/src/umbraco.interfaces/umbraco.interfaces.csproj
-index d56d89bc31..a64072f833 100644
+index d56d89bc31..70732fd0ae 100644
 --- a/src/umbraco.interfaces/umbraco.interfaces.csproj
 +++ b/src/umbraco.interfaces/umbraco.interfaces.csproj
 @@ -1,202 +1,27 @@
@@ -15774,7 +15791,7 @@ index 0000000000..d56d89bc31
 +</Project>
 \ No newline at end of file
 diff --git a/src/umbraco.providers/umbraco.providers.csproj b/src/umbraco.providers/umbraco.providers.csproj
-index a55d92b58c..05ed8cf441 100644
+index a55d92b58c..068eef686e 100644
 --- a/src/umbraco.providers/umbraco.providers.csproj
 +++ b/src/umbraco.providers/umbraco.providers.csproj
 @@ -1,144 +1,35 @@

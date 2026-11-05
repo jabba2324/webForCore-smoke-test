@@ -73,7 +73,7 @@ index d8a3f158a..315bc0563 100644
  
              Logger.DebugFormat("Setting native DLL path to '{0}'.", dir);
 diff --git a/src/Libraries/SmartStore.Core/SmartStore.Core.csproj b/src/Libraries/SmartStore.Core/SmartStore.Core.csproj
-index cd84ae426..7869378e0 100644
+index cd84ae426..f8d4dfd18 100644
 --- a/src/Libraries/SmartStore.Core/SmartStore.Core.csproj
 +++ b/src/Libraries/SmartStore.Core/SmartStore.Core.csproj
 @@ -1,810 +1,51 @@
@@ -1770,8 +1770,21 @@ diff --git a/src/Libraries/SmartStore.Core/packages.config b/src/Libraries/Smart
 similarity index 100%
 rename from src/Libraries/SmartStore.Core/packages.config
 rename to src/Libraries/SmartStore.Core/packages.config.netfx
+diff --git a/src/Libraries/SmartStore.Data/Setup/SeedData/InvariantSeedData.cs b/src/Libraries/SmartStore.Data/Setup/SeedData/InvariantSeedData.cs
+index 8f1ac6d21..85b53d004 100644
+--- a/src/Libraries/SmartStore.Data/Setup/SeedData/InvariantSeedData.cs
++++ b/src/Libraries/SmartStore.Data/Setup/SeedData/InvariantSeedData.cs
+@@ -1569,7 +1569,7 @@ namespace SmartStore.Data.Setup
+             try
+             {
+                 var ext = Path.GetExtension(fileName);
+-                var path = Path.Combine(_sampleImagesPath, fileName).Replace('/', '\\');
++                var path = Path.Combine(_sampleImagesPath, fileName).Replace('/', Path.DirectorySeparatorChar);
+                 var mimeType = MimeTypes.MapNameToMimeType(ext);
+                 var buffer = File.ReadAllBytes(path);
+                 var now = DateTime.UtcNow;
 diff --git a/src/Libraries/SmartStore.Data/SmartStore.Data.csproj b/src/Libraries/SmartStore.Data/SmartStore.Data.csproj
-index fb594ed6a..363ec5e31 100644
+index fb594ed6a..0f94a5786 100644
 --- a/src/Libraries/SmartStore.Data/SmartStore.Data.csproj
 +++ b/src/Libraries/SmartStore.Data/SmartStore.Data.csproj
 @@ -1,1016 +1,51 @@
@@ -3852,6 +3865,32 @@ index 000000000..fb594ed6a
 +  -->
 +</Project>
 \ No newline at end of file
+diff --git a/src/Libraries/SmartStore.Data/Utilities/BlogPostConverter.cs b/src/Libraries/SmartStore.Data/Utilities/BlogPostConverter.cs
+index 235e02056..ec52535b4 100644
+--- a/src/Libraries/SmartStore.Data/Utilities/BlogPostConverter.cs
++++ b/src/Libraries/SmartStore.Data/Utilities/BlogPostConverter.cs
+@@ -194,7 +194,7 @@ namespace SmartStore.Data.Utilities
+             {
+                 var ext = Path.GetExtension(fileName);
+                 var mimeType = MimeTypes.MapNameToMimeType(ext);
+-                var path = Path.Combine(CommonHelper.MapPath("~/App_Data/Samples/blog/"), fileName).Replace('/', '\\');
++                var path = Path.Combine(CommonHelper.MapPath("~/App_Data/Samples/blog/"), fileName).Replace('/', Path.DirectorySeparatorChar);
+                 var buffer = File.ReadAllBytes(path);
+                 var now = DateTime.UtcNow;
+ 
+diff --git a/src/Libraries/SmartStore.Data/Utilities/NewsItemConverter.cs b/src/Libraries/SmartStore.Data/Utilities/NewsItemConverter.cs
+index b9552f88a..09be07afa 100644
+--- a/src/Libraries/SmartStore.Data/Utilities/NewsItemConverter.cs
++++ b/src/Libraries/SmartStore.Data/Utilities/NewsItemConverter.cs
+@@ -177,7 +177,7 @@ namespace SmartStore.Data.Utilities
+             {
+                 var ext = Path.GetExtension(fileName);
+                 var mimeType = MimeTypes.MapNameToMimeType(ext);
+-                var path = Path.Combine(CommonHelper.MapPath("~/App_Data/Samples/news/"), fileName).Replace('/', '\\');
++                var path = Path.Combine(CommonHelper.MapPath("~/App_Data/Samples/news/"), fileName).Replace('/', Path.DirectorySeparatorChar);
+                 var buffer = File.ReadAllBytes(path);
+                 var now = DateTime.UtcNow;
+ 
 diff --git a/src/Libraries/SmartStore.Data/packages.config b/src/Libraries/SmartStore.Data/packages.config.netfx
 similarity index 100%
 rename from src/Libraries/SmartStore.Data/packages.config
@@ -3869,7 +3908,7 @@ index 37045b041..1ddaac229 100644
  namespace SmartStore.Services.Messages
  {
 diff --git a/src/Libraries/SmartStore.Services/SmartStore.Services.csproj b/src/Libraries/SmartStore.Services/SmartStore.Services.csproj
-index 377945466..9fd113880 100644
+index 377945466..fb87be09d 100644
 --- a/src/Libraries/SmartStore.Services/SmartStore.Services.csproj
 +++ b/src/Libraries/SmartStore.Services/SmartStore.Services.csproj
 @@ -1,845 +1,60 @@
@@ -5631,6 +5670,1809 @@ diff --git a/src/Libraries/SmartStore.Services/packages.config b/src/Libraries/S
 similarity index 100%
 rename from src/Libraries/SmartStore.Services/packages.config
 rename to src/Libraries/SmartStore.Services/packages.config.netfx
+diff --git a/src/Plugins/SmartStore.OfflinePayment/SmartStore.OfflinePayment.csproj b/src/Plugins/SmartStore.OfflinePayment/SmartStore.OfflinePayment.csproj
+index b392fe891..fa100dfd9 100644
+--- a/src/Plugins/SmartStore.OfflinePayment/SmartStore.OfflinePayment.csproj
++++ b/src/Plugins/SmartStore.OfflinePayment/SmartStore.OfflinePayment.csproj
+@@ -1,271 +1,52 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+-  <ItemDefinitionGroup>
+-    <Reference>
+-      <Private>False</Private>
+-    </Reference>
+-    <ProjectReference>
+-      <Private>False</Private>
+-    </ProjectReference>
+-  </ItemDefinitionGroup>
++<Project Sdk="Microsoft.NET.Sdk">
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is SmartStore.OfflinePayment.csproj.netfx. -->
+   <PropertyGroup>
+-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+-    <ProductVersion>8.0.30703</ProductVersion>
+-    <SchemaVersion>2.0</SchemaVersion>
+-    <ProjectGuid>{692E9D31-1393-47BF-B372-63F671052F89}</ProjectGuid>
+-    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+-    <OutputType>Library</OutputType>
+-    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <TargetFramework>net10.0</TargetFramework>
++    <!-- The C# the project was written for: "latest" then, 13 (the last before C# 14's span conversions; FINDINGS.md F83). -->
++    <LangVersion>13.0</LangVersion>
+     <RootNamespace>SmartStore.OfflinePayment</RootNamespace>
+     <AssemblyName>SmartStore.OfflinePayment</AssemblyName>
+-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+-    <FileAlignment>512</FileAlignment>
+-    <SccProjectName>
+-    </SccProjectName>
+-    <SccLocalPath>
+-    </SccLocalPath>
+-    <SccAuxPath>
+-    </SccAuxPath>
+-    <SccProvider>
+-    </SccProvider>
+-    <TargetFrameworkProfile />
+-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+-    <RestorePackages>true</RestorePackages>
+-    <FileUpgradeFlags>
+-    </FileUpgradeFlags>
+-    <OldToolsVersion>4.0</OldToolsVersion>
+-    <UseIISExpress>true</UseIISExpress>
+-    <UpgradeBackupLocation />
+-    <IISExpressSSLPort />
+-    <IISExpressAnonymousAuthentication />
+-    <IISExpressWindowsAuthentication />
+-    <IISExpressUseClassicPipelineMode />
+-    <UseGlobalApplicationHostFile />
+-    <Use64BitIISExpress />
+-    <NuGetPackageImportStamp>
+-    </NuGetPackageImportStamp>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+-    <DebugSymbols>true</DebugSymbols>
+-    <DebugType>full</DebugType>
+-    <Optimize>false</Optimize>
+-    <OutputPath>..\..\Presentation\SmartStore.Web\Plugins\SmartStore.OfflinePayment\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-    <Prefer32Bit>false</Prefer32Bit>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+-    <DebugType>pdbonly</DebugType>
+-    <Optimize>true</Optimize>
+-    <OutputPath>..\..\Presentation\SmartStore.Web\Plugins\SmartStore.OfflinePayment\</OutputPath>
+-    <DefineConstants>TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-    <Prefer32Bit>false</Prefer32Bit>
+-  </PropertyGroup>
+-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'EFMigrations|AnyCPU'">
+-    <DebugSymbols>true</DebugSymbols>
+-    <OutputPath>bin\EFMigrations\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <DebugType>full</DebugType>
+-    <PlatformTarget>AnyCPU</PlatformTarget>
+-    <ErrorReport>prompt</ErrorReport>
+-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+-  </PropertyGroup>
+-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'PluginDev|AnyCPU'">
+-    <DebugSymbols>true</DebugSymbols>
+-    <OutputPath>bin\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <DebugType>full</DebugType>
+-    <PlatformTarget>AnyCPU</PlatformTarget>
+-    <ErrorReport>prompt</ErrorReport>
+-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
++    <NoWarn>$(NoWarn);NU1701</NoWarn>
++    <!-- Built into the site's Plugins folder, as before; the plugin manager loads it from there. -->
++    <OutputPath>../../Presentation/SmartStore.Web/Plugins/SmartStore.OfflinePayment/</OutputPath>
++    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+   </PropertyGroup>
++
+   <ItemGroup>
+-    <Reference Include="Autofac, Version=5.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Autofac.5.2.0\lib\net461\Autofac.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="FluentValidation, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\FluentValidation.7.4.0\lib\net45\FluentValidation.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System" />
+-    <Reference Include="System.ComponentModel.Composition" />
+-    <Reference Include="System.ComponentModel.DataAnnotations" />
+-    <Reference Include="System.Data.DataSetExtensions" />
+-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web" />
+-    <Reference Include="System.Web.ApplicationServices" />
+-    <Reference Include="System.Web.DynamicData" />
+-    <Reference Include="System.Web.Entity" />
+-    <Reference Include="Microsoft.CSharp" />
+-    <Reference Include="System.Data" />
+-    <Reference Include="System.Web.Extensions" />
+-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="System.Xml" />
+-    <Reference Include="System.Xml.Linq" />
++    <Compile Remove="bin/**;obj/**" />
++    <Compile Include="../../AssemblySharedInfo.cs" Link="Properties/AssemblySharedInfo.cs" />
++    <Compile Include="../../AssemblyVersionInfo.cs" Link="Properties/AssemblyVersionInfo.cs" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <Compile Include="..\..\AssemblySharedInfo.cs">
+-      <Link>Properties\AssemblySharedInfo.cs</Link>
+-    </Compile>
+-    <Compile Include="..\..\AssemblyVersionInfo.cs">
+-      <Link>Properties\AssemblyVersionInfo.cs</Link>
+-    </Compile>
+-    <Compile Include="Controllers\OfflinePaymentController.cs" />
+-    <Compile Include="Models\ConfigurationModel.cs" />
+-    <Compile Include="Models\PaymentInfoModel.cs" />
+-    <Compile Include="Plugin.cs" />
+-    <Compile Include="Properties\AssemblyInfo.cs" />
+-    <Compile Include="Providers\DirectDebitProvider.cs" />
+-    <Compile Include="Providers\ManualProvider.cs" />
+-    <Compile Include="Providers\PurchaseOrderNumberProvider.cs" />
+-    <Compile Include="Providers\PrepaymentStoreProvider.cs" />
+-    <Compile Include="Providers\PayInStoreProvider.cs" />
+-    <Compile Include="Providers\InvoiceProvider.cs" />
+-    <Compile Include="Providers\OfflinePaymentProviderBase.cs" />
+-    <Compile Include="Providers\CashOnDeliveryProvider.cs" />
+-    <Compile Include="RouteProvider.cs" />
+-    <Compile Include="Settings\OfflinePaymentSettings.cs" />
++    <None Update="Description.txt;web.config;Views/**/*.cshtml;Views/Web.config;Localization/*.xml;*.png" CopyToOutputDirectory="PreserveNewest" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <ProjectReference Include="..\..\Libraries\SmartStore.Core\SmartStore.Core.csproj">
+-      <Project>{6bda8332-939f-45b7-a25e-7a797260ae59}</Project>
+-      <Name>SmartStore.Core</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\..\Libraries\SmartStore.Services\SmartStore.Services.csproj">
+-      <Project>{210541AD-F659-47DA-8763-16F36C5CD2F4}</Project>
+-      <Name>SmartStore.Services</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\..\Presentation\SmartStore.Web.Framework\SmartStore.Web.Framework.csproj">
+-      <Project>{75fd4163-333c-4dd5-854d-2ef294e45d94}</Project>
+-      <Name>SmartStore.Web.Framework</Name>
+-    </ProjectReference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Content Include="Content\icon-Payments.CashOnDelivery.png">
+-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Description.txt">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Localization\resources.de-de.xml">
+-      <SubType>Designer</SubType>
+-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Localization\resources.en-us.xml">
+-      <SubType>Designer</SubType>
+-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+-    </Content>
++    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
++    <PackageReference Include="Autofac" Version="5.2.0" />
++    <PackageReference Include="Autofac.Mvc5" Version="5.0.0" />
++    <PackageReference Include="EntityFramework" Version="6.5.1" />
++    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
++    <PackageReference Include="FluentValidation" Version="7.4.0" />
++    <Reference Include="Telerik.Web.Mvc" HintPath="../../../lib/Telerik/Telerik.Web.Mvc.dll" Private="false" />
+   </ItemGroup>
++
++  <!-- Private=false, as before: the site has these assemblies. -->
++  <ItemDefinitionGroup>
++    <ProjectReference>
++      <Private>false</Private>
++    </ProjectReference>
++  </ItemDefinitionGroup>
++
+   <ItemGroup>
+-    <Content Include="changelog.md">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <None Include="packages.config" />
+-    <Content Include="web.config">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Views\Web.config">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Views\OfflinePayment\GenericConfigure.cshtml">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Views\OfflinePayment\GenericPaymentInfo.cshtml">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Views\OfflinePayment\ManualConfigure.cshtml">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Views\OfflinePayment\ManualPaymentInfo.cshtml">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Views\OfflinePayment\DirectDebitPaymentInfo.cshtml">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Views\OfflinePayment\PurchaseOrderNumberPaymentInfo.cshtml">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
++    <ProjectReference Include="../../Libraries/SmartStore.Core/SmartStore.Core.csproj" />
++    <ProjectReference Include="../../Libraries/SmartStore.Services/SmartStore.Services.csproj" />
++    <ProjectReference Include="../../Libraries/SmartStore.Data/SmartStore.Data.csproj" />
++    <ProjectReference Include="../../Presentation/SmartStore.Web.Framework/SmartStore.Web.Framework.csproj" />
+   </ItemGroup>
+-  <ItemGroup />
+-  <PropertyGroup>
+-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+-  </PropertyGroup>
+-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+-  <Import Project="$(SolutionDir)\FixRazorIntellisense.targets" Condition="'$(Configuration)' == 'PluginDev'" />
+-  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+-  <ProjectExtensions>
+-    <VisualStudio>
+-      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+-        <WebProjectProperties>
+-          <UseIIS>False</UseIIS>
+-          <AutoAssignPort>True</AutoAssignPort>
+-          <DevelopmentServerPort>51143</DevelopmentServerPort>
+-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+-          <IISUrl>http://localhost:56865/</IISUrl>
+-          <NTLMAuthentication>False</NTLMAuthentication>
+-          <UseCustomServer>True</UseCustomServer>
+-          <CustomServerUrl>http://www.smartstore.net</CustomServerUrl>
+-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+-        </WebProjectProperties>
+-      </FlavorProperties>
+-    </VisualStudio>
+-  </ProjectExtensions>
+-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+-       Other similar extension points exist, see Microsoft.Common.targets.
+-  <Target Name="BeforeBuild">
+-  </Target>
+-  <Target Name="AfterBuild">
+-  </Target>
+-  -->
+-</Project>
+\ No newline at end of file
++</Project>
+diff --git a/src/Plugins/SmartStore.OfflinePayment/SmartStore.OfflinePayment.csproj.netfx b/src/Plugins/SmartStore.OfflinePayment/SmartStore.OfflinePayment.csproj.netfx
+new file mode 100644
+index 000000000..b392fe891
+--- /dev/null
++++ b/src/Plugins/SmartStore.OfflinePayment/SmartStore.OfflinePayment.csproj.netfx
+@@ -0,0 +1,271 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++  <ItemDefinitionGroup>
++    <Reference>
++      <Private>False</Private>
++    </Reference>
++    <ProjectReference>
++      <Private>False</Private>
++    </ProjectReference>
++  </ItemDefinitionGroup>
++  <PropertyGroup>
++    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
++    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
++    <ProductVersion>8.0.30703</ProductVersion>
++    <SchemaVersion>2.0</SchemaVersion>
++    <ProjectGuid>{692E9D31-1393-47BF-B372-63F671052F89}</ProjectGuid>
++    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
++    <OutputType>Library</OutputType>
++    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <RootNamespace>SmartStore.OfflinePayment</RootNamespace>
++    <AssemblyName>SmartStore.OfflinePayment</AssemblyName>
++    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
++    <FileAlignment>512</FileAlignment>
++    <SccProjectName>
++    </SccProjectName>
++    <SccLocalPath>
++    </SccLocalPath>
++    <SccAuxPath>
++    </SccAuxPath>
++    <SccProvider>
++    </SccProvider>
++    <TargetFrameworkProfile />
++    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
++    <RestorePackages>true</RestorePackages>
++    <FileUpgradeFlags>
++    </FileUpgradeFlags>
++    <OldToolsVersion>4.0</OldToolsVersion>
++    <UseIISExpress>true</UseIISExpress>
++    <UpgradeBackupLocation />
++    <IISExpressSSLPort />
++    <IISExpressAnonymousAuthentication />
++    <IISExpressWindowsAuthentication />
++    <IISExpressUseClassicPipelineMode />
++    <UseGlobalApplicationHostFile />
++    <Use64BitIISExpress />
++    <NuGetPackageImportStamp>
++    </NuGetPackageImportStamp>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
++    <DebugSymbols>true</DebugSymbols>
++    <DebugType>full</DebugType>
++    <Optimize>false</Optimize>
++    <OutputPath>..\..\Presentation\SmartStore.Web\Plugins\SmartStore.OfflinePayment\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++    <Prefer32Bit>false</Prefer32Bit>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
++    <DebugType>pdbonly</DebugType>
++    <Optimize>true</Optimize>
++    <OutputPath>..\..\Presentation\SmartStore.Web\Plugins\SmartStore.OfflinePayment\</OutputPath>
++    <DefineConstants>TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++    <Prefer32Bit>false</Prefer32Bit>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'EFMigrations|AnyCPU'">
++    <DebugSymbols>true</DebugSymbols>
++    <OutputPath>bin\EFMigrations\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <DebugType>full</DebugType>
++    <PlatformTarget>AnyCPU</PlatformTarget>
++    <ErrorReport>prompt</ErrorReport>
++    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'PluginDev|AnyCPU'">
++    <DebugSymbols>true</DebugSymbols>
++    <OutputPath>bin\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <DebugType>full</DebugType>
++    <PlatformTarget>AnyCPU</PlatformTarget>
++    <ErrorReport>prompt</ErrorReport>
++    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
++  </PropertyGroup>
++  <ItemGroup>
++    <Reference Include="Autofac, Version=5.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Autofac.5.2.0\lib\net461\Autofac.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="FluentValidation, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\FluentValidation.7.4.0\lib\net45\FluentValidation.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
++    </Reference>
++    <Reference Include="System" />
++    <Reference Include="System.ComponentModel.Composition" />
++    <Reference Include="System.ComponentModel.DataAnnotations" />
++    <Reference Include="System.Data.DataSetExtensions" />
++    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web" />
++    <Reference Include="System.Web.ApplicationServices" />
++    <Reference Include="System.Web.DynamicData" />
++    <Reference Include="System.Web.Entity" />
++    <Reference Include="Microsoft.CSharp" />
++    <Reference Include="System.Data" />
++    <Reference Include="System.Web.Extensions" />
++    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="System.Xml" />
++    <Reference Include="System.Xml.Linq" />
++  </ItemGroup>
++  <ItemGroup>
++    <Compile Include="..\..\AssemblySharedInfo.cs">
++      <Link>Properties\AssemblySharedInfo.cs</Link>
++    </Compile>
++    <Compile Include="..\..\AssemblyVersionInfo.cs">
++      <Link>Properties\AssemblyVersionInfo.cs</Link>
++    </Compile>
++    <Compile Include="Controllers\OfflinePaymentController.cs" />
++    <Compile Include="Models\ConfigurationModel.cs" />
++    <Compile Include="Models\PaymentInfoModel.cs" />
++    <Compile Include="Plugin.cs" />
++    <Compile Include="Properties\AssemblyInfo.cs" />
++    <Compile Include="Providers\DirectDebitProvider.cs" />
++    <Compile Include="Providers\ManualProvider.cs" />
++    <Compile Include="Providers\PurchaseOrderNumberProvider.cs" />
++    <Compile Include="Providers\PrepaymentStoreProvider.cs" />
++    <Compile Include="Providers\PayInStoreProvider.cs" />
++    <Compile Include="Providers\InvoiceProvider.cs" />
++    <Compile Include="Providers\OfflinePaymentProviderBase.cs" />
++    <Compile Include="Providers\CashOnDeliveryProvider.cs" />
++    <Compile Include="RouteProvider.cs" />
++    <Compile Include="Settings\OfflinePaymentSettings.cs" />
++  </ItemGroup>
++  <ItemGroup>
++    <ProjectReference Include="..\..\Libraries\SmartStore.Core\SmartStore.Core.csproj">
++      <Project>{6bda8332-939f-45b7-a25e-7a797260ae59}</Project>
++      <Name>SmartStore.Core</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\..\Libraries\SmartStore.Services\SmartStore.Services.csproj">
++      <Project>{210541AD-F659-47DA-8763-16F36C5CD2F4}</Project>
++      <Name>SmartStore.Services</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\..\Presentation\SmartStore.Web.Framework\SmartStore.Web.Framework.csproj">
++      <Project>{75fd4163-333c-4dd5-854d-2ef294e45d94}</Project>
++      <Name>SmartStore.Web.Framework</Name>
++    </ProjectReference>
++  </ItemGroup>
++  <ItemGroup>
++    <Content Include="Content\icon-Payments.CashOnDelivery.png">
++      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Description.txt">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Localization\resources.de-de.xml">
++      <SubType>Designer</SubType>
++      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Localization\resources.en-us.xml">
++      <SubType>Designer</SubType>
++      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
++    </Content>
++  </ItemGroup>
++  <ItemGroup>
++    <Content Include="changelog.md">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++    <None Include="packages.config" />
++    <Content Include="web.config">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Views\Web.config">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Views\OfflinePayment\GenericConfigure.cshtml">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Views\OfflinePayment\GenericPaymentInfo.cshtml">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Views\OfflinePayment\ManualConfigure.cshtml">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Views\OfflinePayment\ManualPaymentInfo.cshtml">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Views\OfflinePayment\DirectDebitPaymentInfo.cshtml">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Views\OfflinePayment\PurchaseOrderNumberPaymentInfo.cshtml">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++  </ItemGroup>
++  <ItemGroup />
++  <PropertyGroup>
++    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
++    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
++  </PropertyGroup>
++  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
++  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
++  <Import Project="$(SolutionDir)\FixRazorIntellisense.targets" Condition="'$(Configuration)' == 'PluginDev'" />
++  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
++  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
++  <ProjectExtensions>
++    <VisualStudio>
++      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
++        <WebProjectProperties>
++          <UseIIS>False</UseIIS>
++          <AutoAssignPort>True</AutoAssignPort>
++          <DevelopmentServerPort>51143</DevelopmentServerPort>
++          <DevelopmentServerVPath>/</DevelopmentServerVPath>
++          <IISUrl>http://localhost:56865/</IISUrl>
++          <NTLMAuthentication>False</NTLMAuthentication>
++          <UseCustomServer>True</UseCustomServer>
++          <CustomServerUrl>http://www.smartstore.net</CustomServerUrl>
++          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
++        </WebProjectProperties>
++      </FlavorProperties>
++    </VisualStudio>
++  </ProjectExtensions>
++  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
++       Other similar extension points exist, see Microsoft.Common.targets.
++  <Target Name="BeforeBuild">
++  </Target>
++  <Target Name="AfterBuild">
++  </Target>
++  -->
++</Project>
+\ No newline at end of file
+diff --git a/src/Plugins/SmartStore.Shipping/SmartStore.Shipping.csproj b/src/Plugins/SmartStore.Shipping/SmartStore.Shipping.csproj
+index 77449e7c9..799edaa7c 100644
+--- a/src/Plugins/SmartStore.Shipping/SmartStore.Shipping.csproj
++++ b/src/Plugins/SmartStore.Shipping/SmartStore.Shipping.csproj
+@@ -1,275 +1,50 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+-  <ItemDefinitionGroup>
+-    <Reference>
+-      <Private>False</Private>
+-    </Reference>
+-    <ProjectReference>
+-      <Private>False</Private>
+-    </ProjectReference>
+-  </ItemDefinitionGroup>
++<Project Sdk="Microsoft.NET.Sdk">
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is SmartStore.Shipping.csproj.netfx. -->
+   <PropertyGroup>
+-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+-    <ProductVersion>8.0.30703</ProductVersion>
+-    <SchemaVersion>2.0</SchemaVersion>
+-    <ProjectGuid>{ACC1E122-B2C8-4441-BDED-D4A77763331A}</ProjectGuid>
+-    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+-    <OutputType>Library</OutputType>
+-    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <TargetFramework>net10.0</TargetFramework>
++    <!-- The C# the project was written for: "latest" then, 13 (the last before C# 14's span conversions; FINDINGS.md F83). -->
++    <LangVersion>13.0</LangVersion>
+     <RootNamespace>SmartStore.Shipping</RootNamespace>
+     <AssemblyName>SmartStore.Shipping</AssemblyName>
+-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+-    <FileAlignment>512</FileAlignment>
+-    <TargetFrameworkProfile />
+-    <SccProjectName>
+-    </SccProjectName>
+-    <SccLocalPath>
+-    </SccLocalPath>
+-    <SccAuxPath>
+-    </SccAuxPath>
+-    <SccProvider>
+-    </SccProvider>
+-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+-    <RestorePackages>true</RestorePackages>
+-    <FileUpgradeFlags>
+-    </FileUpgradeFlags>
+-    <OldToolsVersion>4.0</OldToolsVersion>
+-    <UseIISExpress>true</UseIISExpress>
+-    <UpgradeBackupLocation />
+-    <IISExpressSSLPort />
+-    <IISExpressAnonymousAuthentication />
+-    <IISExpressWindowsAuthentication />
+-    <IISExpressUseClassicPipelineMode />
+-    <UseGlobalApplicationHostFile />
+-    <Use64BitIISExpress />
+-    <NuGetPackageImportStamp>
+-    </NuGetPackageImportStamp>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+-    <DebugSymbols>true</DebugSymbols>
+-    <DebugType>full</DebugType>
+-    <Optimize>false</Optimize>
+-    <OutputPath>..\..\Presentation\SmartStore.Web\Plugins\SmartStore.Shipping\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-    <Prefer32Bit>false</Prefer32Bit>
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
++    <NoWarn>$(NoWarn);NU1701</NoWarn>
++    <!-- Built into the site's Plugins folder, as before; the plugin manager loads it from there. -->
++    <OutputPath>../../Presentation/SmartStore.Web/Plugins/SmartStore.Shipping/</OutputPath>
++    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+   </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+-    <DebugType>pdbonly</DebugType>
+-    <Optimize>true</Optimize>
+-    <OutputPath>..\..\Presentation\SmartStore.Web\Plugins\SmartStore.Shipping\</OutputPath>
+-    <DefineConstants>TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-    <Prefer32Bit>false</Prefer32Bit>
+-  </PropertyGroup>
+-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'EFMigrations|AnyCPU'">
+-    <DebugSymbols>true</DebugSymbols>
+-    <OutputPath>..\..\Presentation\SmartStore.Web\bin\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <DebugType>full</DebugType>
+-    <PlatformTarget>AnyCPU</PlatformTarget>
+-    <ErrorReport>prompt</ErrorReport>
+-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+-  </PropertyGroup>
+-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'PluginDev|AnyCPU'">
+-    <DebugSymbols>true</DebugSymbols>
+-    <OutputPath>bin\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <DebugType>full</DebugType>
+-    <PlatformTarget>AnyCPU</PlatformTarget>
+-    <ErrorReport>prompt</ErrorReport>
+-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+-  </PropertyGroup>
+-  <ItemGroup>
+-    <Reference Include="Autofac, Version=5.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Autofac.5.2.0\lib\net461\Autofac.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="Autofac.Integration.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Autofac.Mvc5.5.0.0\lib\net461\Autofac.Integration.Mvc.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="System" />
+-    <Reference Include="System.ComponentModel.Composition" />
+-    <Reference Include="System.ComponentModel.DataAnnotations" />
+-    <Reference Include="System.Data.DataSetExtensions" />
+-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web" />
+-    <Reference Include="System.Web.ApplicationServices" />
+-    <Reference Include="System.Web.DynamicData" />
+-    <Reference Include="System.Web.Entity" />
+-    <Reference Include="Microsoft.CSharp" />
+-    <Reference Include="System.Data" />
+-    <Reference Include="System.Web.Extensions" />
+-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="System.Xml" />
+-    <Reference Include="System.Xml.Linq" />
+-    <Reference Include="Telerik.Web.Mvc">
+-      <HintPath>..\..\..\lib\Telerik\Telerik.Web.Mvc.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-  </ItemGroup>
++
+   <ItemGroup>
+-    <Compile Include="..\..\AssemblySharedInfo.cs">
+-      <Link>Properties\AssemblySharedInfo.cs</Link>
+-    </Compile>
+-    <Compile Include="..\..\AssemblyVersionInfo.cs">
+-      <Link>Properties\AssemblyVersionInfo.cs</Link>
+-    </Compile>
+-    <Compile Include="Controllers\FixedRateController.cs" />
+-    <Compile Include="Models\FixedRateModel.cs" />
+-    <Compile Include="Plugin.cs" />
+-    <Compile Include="Controllers\ByTotalController.cs" />
+-    <Compile Include="Data\Migrations\201403072202413_Initial.cs" />
+-    <Compile Include="Data\Migrations\201403072202413_Initial.Designer.cs">
+-      <DependentUpon>201403072202413_Initial.cs</DependentUpon>
+-    </Compile>
+-    <Compile Include="Data\Migrations\Configuration.cs" />
+-    <Compile Include="Data\ByTotalObjectContext.cs" />
+-    <Compile Include="Data\ByTotalRecordMap.cs" />
+-    <Compile Include="DependencyRegistrar.cs" />
+-    <Compile Include="Domain\ShippingByTotalRecord.cs" />
+-    <Compile Include="Models\ByTotalListModel.cs" />
+-    <Compile Include="Models\ByTotalModel.cs" />
+-    <Compile Include="Properties\AssemblyInfo.cs" />
+-    <Compile Include="Providers\ByTotalProvider.cs" />
+-    <Compile Include="Providers\FixedRateProvider.cs" />
+-    <Compile Include="RouteProvider.cs" />
+-    <Compile Include="Services\IShippingByTotalService.cs" />
+-    <Compile Include="Services\ShippingByTotalService.cs" />
+-    <Compile Include="Settings\ShippingByTotalSettings.cs" />
++    <Compile Remove="bin/**;obj/**" />
++    <Compile Include="../../AssemblySharedInfo.cs" Link="Properties/AssemblySharedInfo.cs" />
++    <Compile Include="../../AssemblyVersionInfo.cs" Link="Properties/AssemblyVersionInfo.cs" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <ProjectReference Include="..\..\Libraries\SmartStore.Core\SmartStore.Core.csproj">
+-      <Project>{6bda8332-939f-45b7-a25e-7a797260ae59}</Project>
+-      <Name>SmartStore.Core</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\..\Libraries\SmartStore.Services\SmartStore.Services.csproj">
+-      <Project>{210541AD-F659-47DA-8763-16F36C5CD2F4}</Project>
+-      <Name>SmartStore.Services</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\..\Libraries\SmartStore.Data\SmartStore.Data.csproj">
+-      <Project>{ccd7f2c9-6a2c-4cf0-8e89-076b8fc0f144}</Project>
+-      <Name>SmartStore.Data</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\..\Presentation\SmartStore.Web.Framework\SmartStore.Web.Framework.csproj">
+-      <Project>{75fd4163-333c-4dd5-854d-2ef294e45d94}</Project>
+-      <Name>SmartStore.Web.Framework</Name>
+-    </ProjectReference>
++    <None Update="Description.txt;web.config;Views/**/*.cshtml;Views/Web.config;Localization/*.xml;*.png" CopyToOutputDirectory="PreserveNewest" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <EmbeddedResource Include="Data\Migrations\201403072202413_Initial.resx">
+-      <DependentUpon>201403072202413_Initial.cs</DependentUpon>
+-    </EmbeddedResource>
+-    <Content Include="Views\ByTotal\Configure.cshtml">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <None Include="packages.config" />
+-    <Content Include="web.config">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Views\Web.config">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Views\FixedRate\Configure.cshtml">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
++    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
++    <PackageReference Include="Autofac" Version="5.2.0" />
++    <PackageReference Include="Autofac.Mvc5" Version="5.0.0" />
++    <PackageReference Include="EntityFramework" Version="6.5.1" />
++    <Reference Include="Telerik.Web.Mvc" HintPath="../../../lib/Telerik/Telerik.Web.Mvc.dll" Private="false" />
+   </ItemGroup>
++
++  <!-- Private=false, as before: the site has these assemblies. -->
++  <ItemDefinitionGroup>
++    <ProjectReference>
++      <Private>false</Private>
++    </ProjectReference>
++  </ItemDefinitionGroup>
++
+   <ItemGroup>
+-    <Content Include="Description.txt">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Localization\resources.de-de.xml">
+-      <SubType>Designer</SubType>
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Localization\resources.en-us.xml">
+-      <SubType>Designer</SubType>
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
++    <ProjectReference Include="../../Libraries/SmartStore.Core/SmartStore.Core.csproj" />
++    <ProjectReference Include="../../Libraries/SmartStore.Services/SmartStore.Services.csproj" />
++    <ProjectReference Include="../../Libraries/SmartStore.Data/SmartStore.Data.csproj" />
++    <ProjectReference Include="../../Presentation/SmartStore.Web.Framework/SmartStore.Web.Framework.csproj" />
+   </ItemGroup>
+-  <PropertyGroup>
+-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+-  </PropertyGroup>
+-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+-  <Import Project="$(SolutionDir)\FixRazorIntellisense.targets" Condition="'$(Configuration)' == 'PluginDev'" />
+-  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+-  <ProjectExtensions>
+-    <VisualStudio>
+-      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+-        <WebProjectProperties>
+-          <UseIIS>False</UseIIS>
+-          <AutoAssignPort>True</AutoAssignPort>
+-          <DevelopmentServerPort>51377</DevelopmentServerPort>
+-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+-          <IISUrl>http://localhost:53076/</IISUrl>
+-          <NTLMAuthentication>False</NTLMAuthentication>
+-          <UseCustomServer>True</UseCustomServer>
+-          <CustomServerUrl>http://www.smartstore.net</CustomServerUrl>
+-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+-        </WebProjectProperties>
+-      </FlavorProperties>
+-    </VisualStudio>
+-  </ProjectExtensions>
+-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+-       Other similar extension points exist, see Microsoft.Common.targets.
+-  <Target Name="BeforeBuild">
+-  </Target>
+-  <Target Name="AfterBuild">
+-  </Target>
+-  -->
+-</Project>
+\ No newline at end of file
++</Project>
+diff --git a/src/Plugins/SmartStore.Shipping/SmartStore.Shipping.csproj.netfx b/src/Plugins/SmartStore.Shipping/SmartStore.Shipping.csproj.netfx
+new file mode 100644
+index 000000000..77449e7c9
+--- /dev/null
++++ b/src/Plugins/SmartStore.Shipping/SmartStore.Shipping.csproj.netfx
+@@ -0,0 +1,275 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++  <ItemDefinitionGroup>
++    <Reference>
++      <Private>False</Private>
++    </Reference>
++    <ProjectReference>
++      <Private>False</Private>
++    </ProjectReference>
++  </ItemDefinitionGroup>
++  <PropertyGroup>
++    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
++    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
++    <ProductVersion>8.0.30703</ProductVersion>
++    <SchemaVersion>2.0</SchemaVersion>
++    <ProjectGuid>{ACC1E122-B2C8-4441-BDED-D4A77763331A}</ProjectGuid>
++    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
++    <OutputType>Library</OutputType>
++    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <RootNamespace>SmartStore.Shipping</RootNamespace>
++    <AssemblyName>SmartStore.Shipping</AssemblyName>
++    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
++    <FileAlignment>512</FileAlignment>
++    <TargetFrameworkProfile />
++    <SccProjectName>
++    </SccProjectName>
++    <SccLocalPath>
++    </SccLocalPath>
++    <SccAuxPath>
++    </SccAuxPath>
++    <SccProvider>
++    </SccProvider>
++    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
++    <RestorePackages>true</RestorePackages>
++    <FileUpgradeFlags>
++    </FileUpgradeFlags>
++    <OldToolsVersion>4.0</OldToolsVersion>
++    <UseIISExpress>true</UseIISExpress>
++    <UpgradeBackupLocation />
++    <IISExpressSSLPort />
++    <IISExpressAnonymousAuthentication />
++    <IISExpressWindowsAuthentication />
++    <IISExpressUseClassicPipelineMode />
++    <UseGlobalApplicationHostFile />
++    <Use64BitIISExpress />
++    <NuGetPackageImportStamp>
++    </NuGetPackageImportStamp>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
++    <DebugSymbols>true</DebugSymbols>
++    <DebugType>full</DebugType>
++    <Optimize>false</Optimize>
++    <OutputPath>..\..\Presentation\SmartStore.Web\Plugins\SmartStore.Shipping\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++    <Prefer32Bit>false</Prefer32Bit>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
++    <DebugType>pdbonly</DebugType>
++    <Optimize>true</Optimize>
++    <OutputPath>..\..\Presentation\SmartStore.Web\Plugins\SmartStore.Shipping\</OutputPath>
++    <DefineConstants>TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++    <Prefer32Bit>false</Prefer32Bit>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'EFMigrations|AnyCPU'">
++    <DebugSymbols>true</DebugSymbols>
++    <OutputPath>..\..\Presentation\SmartStore.Web\bin\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <DebugType>full</DebugType>
++    <PlatformTarget>AnyCPU</PlatformTarget>
++    <ErrorReport>prompt</ErrorReport>
++    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'PluginDev|AnyCPU'">
++    <DebugSymbols>true</DebugSymbols>
++    <OutputPath>bin\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <DebugType>full</DebugType>
++    <PlatformTarget>AnyCPU</PlatformTarget>
++    <ErrorReport>prompt</ErrorReport>
++    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
++  </PropertyGroup>
++  <ItemGroup>
++    <Reference Include="Autofac, Version=5.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Autofac.5.2.0\lib\net461\Autofac.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="Autofac.Integration.Mvc, Version=5.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Autofac.Mvc5.5.0.0\lib\net461\Autofac.Integration.Mvc.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="System" />
++    <Reference Include="System.ComponentModel.Composition" />
++    <Reference Include="System.ComponentModel.DataAnnotations" />
++    <Reference Include="System.Data.DataSetExtensions" />
++    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web" />
++    <Reference Include="System.Web.ApplicationServices" />
++    <Reference Include="System.Web.DynamicData" />
++    <Reference Include="System.Web.Entity" />
++    <Reference Include="Microsoft.CSharp" />
++    <Reference Include="System.Data" />
++    <Reference Include="System.Web.Extensions" />
++    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="System.Xml" />
++    <Reference Include="System.Xml.Linq" />
++    <Reference Include="Telerik.Web.Mvc">
++      <HintPath>..\..\..\lib\Telerik\Telerik.Web.Mvc.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++  </ItemGroup>
++  <ItemGroup>
++    <Compile Include="..\..\AssemblySharedInfo.cs">
++      <Link>Properties\AssemblySharedInfo.cs</Link>
++    </Compile>
++    <Compile Include="..\..\AssemblyVersionInfo.cs">
++      <Link>Properties\AssemblyVersionInfo.cs</Link>
++    </Compile>
++    <Compile Include="Controllers\FixedRateController.cs" />
++    <Compile Include="Models\FixedRateModel.cs" />
++    <Compile Include="Plugin.cs" />
++    <Compile Include="Controllers\ByTotalController.cs" />
++    <Compile Include="Data\Migrations\201403072202413_Initial.cs" />
++    <Compile Include="Data\Migrations\201403072202413_Initial.Designer.cs">
++      <DependentUpon>201403072202413_Initial.cs</DependentUpon>
++    </Compile>
++    <Compile Include="Data\Migrations\Configuration.cs" />
++    <Compile Include="Data\ByTotalObjectContext.cs" />
++    <Compile Include="Data\ByTotalRecordMap.cs" />
++    <Compile Include="DependencyRegistrar.cs" />
++    <Compile Include="Domain\ShippingByTotalRecord.cs" />
++    <Compile Include="Models\ByTotalListModel.cs" />
++    <Compile Include="Models\ByTotalModel.cs" />
++    <Compile Include="Properties\AssemblyInfo.cs" />
++    <Compile Include="Providers\ByTotalProvider.cs" />
++    <Compile Include="Providers\FixedRateProvider.cs" />
++    <Compile Include="RouteProvider.cs" />
++    <Compile Include="Services\IShippingByTotalService.cs" />
++    <Compile Include="Services\ShippingByTotalService.cs" />
++    <Compile Include="Settings\ShippingByTotalSettings.cs" />
++  </ItemGroup>
++  <ItemGroup>
++    <ProjectReference Include="..\..\Libraries\SmartStore.Core\SmartStore.Core.csproj">
++      <Project>{6bda8332-939f-45b7-a25e-7a797260ae59}</Project>
++      <Name>SmartStore.Core</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\..\Libraries\SmartStore.Services\SmartStore.Services.csproj">
++      <Project>{210541AD-F659-47DA-8763-16F36C5CD2F4}</Project>
++      <Name>SmartStore.Services</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\..\Libraries\SmartStore.Data\SmartStore.Data.csproj">
++      <Project>{ccd7f2c9-6a2c-4cf0-8e89-076b8fc0f144}</Project>
++      <Name>SmartStore.Data</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\..\Presentation\SmartStore.Web.Framework\SmartStore.Web.Framework.csproj">
++      <Project>{75fd4163-333c-4dd5-854d-2ef294e45d94}</Project>
++      <Name>SmartStore.Web.Framework</Name>
++    </ProjectReference>
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="Data\Migrations\201403072202413_Initial.resx">
++      <DependentUpon>201403072202413_Initial.cs</DependentUpon>
++    </EmbeddedResource>
++    <Content Include="Views\ByTotal\Configure.cshtml">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++    <None Include="packages.config" />
++    <Content Include="web.config">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Views\Web.config">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Views\FixedRate\Configure.cshtml">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++  </ItemGroup>
++  <ItemGroup>
++    <Content Include="Description.txt">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Localization\resources.de-de.xml">
++      <SubType>Designer</SubType>
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Localization\resources.en-us.xml">
++      <SubType>Designer</SubType>
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++  </ItemGroup>
++  <PropertyGroup>
++    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
++    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
++  </PropertyGroup>
++  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
++  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
++  <Import Project="$(SolutionDir)\FixRazorIntellisense.targets" Condition="'$(Configuration)' == 'PluginDev'" />
++  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
++  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
++  <ProjectExtensions>
++    <VisualStudio>
++      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
++        <WebProjectProperties>
++          <UseIIS>False</UseIIS>
++          <AutoAssignPort>True</AutoAssignPort>
++          <DevelopmentServerPort>51377</DevelopmentServerPort>
++          <DevelopmentServerVPath>/</DevelopmentServerVPath>
++          <IISUrl>http://localhost:53076/</IISUrl>
++          <NTLMAuthentication>False</NTLMAuthentication>
++          <UseCustomServer>True</UseCustomServer>
++          <CustomServerUrl>http://www.smartstore.net</CustomServerUrl>
++          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
++        </WebProjectProperties>
++      </FlavorProperties>
++    </VisualStudio>
++  </ProjectExtensions>
++  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
++       Other similar extension points exist, see Microsoft.Common.targets.
++  <Target Name="BeforeBuild">
++  </Target>
++  <Target Name="AfterBuild">
++  </Target>
++  -->
++</Project>
+\ No newline at end of file
+diff --git a/src/Plugins/SmartStore.Tax/SmartStore.Tax.csproj b/src/Plugins/SmartStore.Tax/SmartStore.Tax.csproj
+index 4f0f0c8a6..1b8d8e871 100644
+--- a/src/Plugins/SmartStore.Tax/SmartStore.Tax.csproj
++++ b/src/Plugins/SmartStore.Tax/SmartStore.Tax.csproj
+@@ -1,277 +1,52 @@
+-﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+-  <ItemDefinitionGroup>
+-    <Reference>
+-      <Private>False</Private>
+-    </Reference>
+-    <ProjectReference>
+-      <Private>False</Private>
+-    </ProjectReference>
+-  </ItemDefinitionGroup>
++<Project Sdk="Microsoft.NET.Sdk">
++  <!-- Migrated to webForCore (.NET 10). The .NET Framework project is SmartStore.Tax.csproj.netfx. -->
+   <PropertyGroup>
+-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+-    <ProductVersion>8.0.30703</ProductVersion>
+-    <SchemaVersion>2.0</SchemaVersion>
+-    <ProjectGuid>{94D1BEEB-64A3-4EB6-9017-D66AFAF4F2B2}</ProjectGuid>
+-    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+-    <OutputType>Library</OutputType>
+-    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <TargetFramework>net10.0</TargetFramework>
++    <!-- The C# the project was written for: "latest" then, 13 (the last before C# 14's span conversions; FINDINGS.md F83). -->
++    <LangVersion>13.0</LangVersion>
+     <RootNamespace>SmartStore.Tax</RootNamespace>
+     <AssemblyName>SmartStore.Tax</AssemblyName>
+-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+-    <FileAlignment>512</FileAlignment>
+-    <SccProjectName>
+-    </SccProjectName>
+-    <SccLocalPath>
+-    </SccLocalPath>
+-    <SccAuxPath>
+-    </SccAuxPath>
+-    <SccProvider>
+-    </SccProvider>
+-    <TargetFrameworkProfile />
+-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+-    <RestorePackages>true</RestorePackages>
+-    <FileUpgradeFlags>
+-    </FileUpgradeFlags>
+-    <OldToolsVersion>4.0</OldToolsVersion>
+-    <UseIISExpress>true</UseIISExpress>
+-    <UpgradeBackupLocation />
+-    <IISExpressSSLPort />
+-    <IISExpressAnonymousAuthentication />
+-    <IISExpressWindowsAuthentication />
+-    <IISExpressUseClassicPipelineMode />
+-    <UseGlobalApplicationHostFile />
+-    <Use64BitIISExpress />
+-    <NuGetPackageImportStamp>
+-    </NuGetPackageImportStamp>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+-    <DebugSymbols>true</DebugSymbols>
+-    <DebugType>full</DebugType>
+-    <Optimize>false</Optimize>
+-    <OutputPath>..\..\Presentation\SmartStore.Web\Plugins\SmartStore.Tax\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-    <Prefer32Bit>false</Prefer32Bit>
+-  </PropertyGroup>
+-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+-    <DebugType>pdbonly</DebugType>
+-    <Optimize>true</Optimize>
+-    <OutputPath>..\..\Presentation\SmartStore.Web\Plugins\SmartStore.Tax\</OutputPath>
+-    <DefineConstants>TRACE</DefineConstants>
+-    <ErrorReport>prompt</ErrorReport>
+-    <WarningLevel>4</WarningLevel>
+-    <Prefer32Bit>false</Prefer32Bit>
++    <ImplicitUsings>disable</ImplicitUsings>
++    <Nullable>disable</Nullable>
++    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
++    <NoWarn>$(NoWarn);NU1701</NoWarn>
++    <!-- Built into the site's Plugins folder, as before; the plugin manager loads it from there. -->
++    <OutputPath>../../Presentation/SmartStore.Web/Plugins/SmartStore.Tax/</OutputPath>
++    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+   </PropertyGroup>
+-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'EFMigrations|AnyCPU'">
+-    <DebugSymbols>true</DebugSymbols>
+-    <OutputPath>..\..\Presentation\SmartStore.Web\bin\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <DebugType>full</DebugType>
+-    <PlatformTarget>AnyCPU</PlatformTarget>
+-    <ErrorReport>prompt</ErrorReport>
+-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+-  </PropertyGroup>
+-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'PluginDev|AnyCPU'">
+-    <DebugSymbols>true</DebugSymbols>
+-    <OutputPath>bin\</OutputPath>
+-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+-    <DebugType>full</DebugType>
+-    <PlatformTarget>AnyCPU</PlatformTarget>
+-    <ErrorReport>prompt</ErrorReport>
+-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+-  </PropertyGroup>
+-  <ItemGroup>
+-    <Reference Include="Autofac, Version=5.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Autofac.5.2.0\lib\net461\Autofac.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+-    </Reference>
+-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System" />
+-    <Reference Include="System.ComponentModel.Composition" />
+-    <Reference Include="System.ComponentModel.DataAnnotations" />
+-    <Reference Include="System.Data.DataSetExtensions" />
+-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+-    </Reference>
+-    <Reference Include="System.Web" />
+-    <Reference Include="System.Web.ApplicationServices" />
+-    <Reference Include="System.Web.DynamicData" />
+-    <Reference Include="System.Web.Entity" />
+-    <Reference Include="Microsoft.CSharp" />
+-    <Reference Include="System.Data" />
+-    <Reference Include="System.Web.Extensions" />
+-    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+-      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-    <Reference Include="System.Xml" />
+-    <Reference Include="System.Xml.Linq" />
+-    <Reference Include="Telerik.Web.Mvc, Version=2012.2.607.340, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+-      <SpecificVersion>False</SpecificVersion>
+-      <HintPath>..\..\..\lib\Telerik\Telerik.Web.Mvc.dll</HintPath>
+-      <Private>False</Private>
+-    </Reference>
+-  </ItemGroup>
+-  <ItemGroup>
+-    <Compile Include="..\..\AssemblySharedInfo.cs">
+-      <Link>Properties\AssemblySharedInfo.cs</Link>
+-    </Compile>
+-    <Compile Include="..\..\AssemblyVersionInfo.cs">
+-      <Link>Properties\AssemblyVersionInfo.cs</Link>
+-    </Compile>
+-    <Compile Include="Controllers\TaxByRegionController.cs" />
+-    <Compile Include="Controllers\TaxFixedRateController.cs" />
+-    <Compile Include="Data\Migrations\201403112350417_Initial.cs" />
+-    <Compile Include="Data\Migrations\201403112350417_Initial.Designer.cs">
+-      <DependentUpon>201403112350417_Initial.cs</DependentUpon>
+-    </Compile>
+-    <Compile Include="Data\Migrations\Configuration.cs" />
+-    <Compile Include="Data\TaxRateMap.cs" />
+-    <Compile Include="Data\TaxRateObjectContext.cs" />
+-    <Compile Include="DependencyRegistrar.cs" />
+-    <Compile Include="Domain\TaxRate.cs" />
+-    <Compile Include="Models\FixedTaxRateModel.cs" />
+-    <Compile Include="Models\ByRegionTaxRateListModel.cs" />
+-    <Compile Include="Models\ByRegionTaxRateModel.cs" />
+-    <Compile Include="Plugin.cs" />
+-    <Compile Include="Properties\AssemblyInfo.cs" />
+-    <Compile Include="Providers\ByRegionTaxProvider.cs" />
+-    <Compile Include="Providers\FixedRateTaxProvider.cs" />
+-    <Compile Include="RouteProvider.cs" />
+-    <Compile Include="Services\Extensions.cs" />
+-    <Compile Include="Services\ITaxRateService.cs" />
+-    <Compile Include="Services\TaxRateService.cs" />
+-  </ItemGroup>
++
+   <ItemGroup>
+-    <ProjectReference Include="..\..\Libraries\SmartStore.Core\SmartStore.Core.csproj">
+-      <Project>{6bda8332-939f-45b7-a25e-7a797260ae59}</Project>
+-      <Name>SmartStore.Core</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\..\Libraries\SmartStore.Data\SmartStore.Data.csproj">
+-      <Project>{ccd7f2c9-6a2c-4cf0-8e89-076b8fc0f144}</Project>
+-      <Name>SmartStore.Data</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\..\Libraries\SmartStore.Services\SmartStore.Services.csproj">
+-      <Project>{210541AD-F659-47DA-8763-16F36C5CD2F4}</Project>
+-      <Name>SmartStore.Services</Name>
+-    </ProjectReference>
+-    <ProjectReference Include="..\..\Presentation\SmartStore.Web.Framework\SmartStore.Web.Framework.csproj">
+-      <Project>{75fd4163-333c-4dd5-854d-2ef294e45d94}</Project>
+-      <Name>SmartStore.Web.Framework</Name>
+-    </ProjectReference>
++    <Compile Remove="bin/**;obj/**" />
++    <Compile Include="../../AssemblySharedInfo.cs" Link="Properties/AssemblySharedInfo.cs" />
++    <Compile Include="../../AssemblyVersionInfo.cs" Link="Properties/AssemblyVersionInfo.cs" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <Content Include="Description.txt">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Localization\resources.de-de.xml">
+-      <SubType>Designer</SubType>
+-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Localization\resources.en-us.xml">
+-      <SubType>Designer</SubType>
+-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+-    </Content>
++    <None Update="Description.txt;web.config;Views/**/*.cshtml;Views/Web.config;Localization/*.xml;*.png" CopyToOutputDirectory="PreserveNewest" />
+   </ItemGroup>
++
+   <ItemGroup>
+-    <None Include="packages.config" />
+-    <Content Include="web.config">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Views\Web.config">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Views\TaxFixedRate\Configure.cshtml">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
+-    <Content Include="Views\TaxByRegion\Configure.cshtml">
+-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+-    </Content>
++    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
++    <PackageReference Include="Autofac" Version="5.2.0" />
++    <PackageReference Include="Autofac.Mvc5" Version="5.0.0" />
++    <PackageReference Include="EntityFramework" Version="6.5.1" />
++    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
++    <PackageReference Include="FluentValidation" Version="7.4.0" />
++    <Reference Include="Telerik.Web.Mvc" HintPath="../../../lib/Telerik/Telerik.Web.Mvc.dll" Private="false" />
+   </ItemGroup>
++
++  <!-- Private=false, as before: the site has these assemblies. -->
++  <ItemDefinitionGroup>
++    <ProjectReference>
++      <Private>false</Private>
++    </ProjectReference>
++  </ItemDefinitionGroup>
++
+   <ItemGroup>
+-    <EmbeddedResource Include="Data\Migrations\201403112350417_Initial.resx">
+-      <DependentUpon>201403112350417_Initial.cs</DependentUpon>
+-    </EmbeddedResource>
++    <ProjectReference Include="../../Libraries/SmartStore.Core/SmartStore.Core.csproj" />
++    <ProjectReference Include="../../Libraries/SmartStore.Services/SmartStore.Services.csproj" />
++    <ProjectReference Include="../../Libraries/SmartStore.Data/SmartStore.Data.csproj" />
++    <ProjectReference Include="../../Presentation/SmartStore.Web.Framework/SmartStore.Web.Framework.csproj" />
+   </ItemGroup>
+-  <PropertyGroup>
+-    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+-    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+-  </PropertyGroup>
+-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
+-  <Import Project="$(SolutionDir)\FixRazorIntellisense.targets" Condition="'$(Configuration)' == 'PluginDev'" />
+-  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+-  <ProjectExtensions>
+-    <VisualStudio>
+-      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+-        <WebProjectProperties>
+-          <UseIIS>False</UseIIS>
+-          <AutoAssignPort>True</AutoAssignPort>
+-          <DevelopmentServerPort>51143</DevelopmentServerPort>
+-          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+-          <IISUrl>http://localhost:56865/</IISUrl>
+-          <NTLMAuthentication>False</NTLMAuthentication>
+-          <UseCustomServer>True</UseCustomServer>
+-          <CustomServerUrl>http://www.smartstore.net</CustomServerUrl>
+-          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+-        </WebProjectProperties>
+-      </FlavorProperties>
+-    </VisualStudio>
+-  </ProjectExtensions>
+-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+-       Other similar extension points exist, see Microsoft.Common.targets.
+-  <Target Name="BeforeBuild">
+-  </Target>
+-  <Target Name="AfterBuild">
+-  </Target>
+-  -->
+-</Project>
+\ No newline at end of file
++</Project>
+diff --git a/src/Plugins/SmartStore.Tax/SmartStore.Tax.csproj.netfx b/src/Plugins/SmartStore.Tax/SmartStore.Tax.csproj.netfx
+new file mode 100644
+index 000000000..4f0f0c8a6
+--- /dev/null
++++ b/src/Plugins/SmartStore.Tax/SmartStore.Tax.csproj.netfx
+@@ -0,0 +1,277 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
++  <ItemDefinitionGroup>
++    <Reference>
++      <Private>False</Private>
++    </Reference>
++    <ProjectReference>
++      <Private>False</Private>
++    </ProjectReference>
++  </ItemDefinitionGroup>
++  <PropertyGroup>
++    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
++    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
++    <ProductVersion>8.0.30703</ProductVersion>
++    <SchemaVersion>2.0</SchemaVersion>
++    <ProjectGuid>{94D1BEEB-64A3-4EB6-9017-D66AFAF4F2B2}</ProjectGuid>
++    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
++    <OutputType>Library</OutputType>
++    <AppDesignerFolder>Properties</AppDesignerFolder>
++    <RootNamespace>SmartStore.Tax</RootNamespace>
++    <AssemblyName>SmartStore.Tax</AssemblyName>
++    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
++    <FileAlignment>512</FileAlignment>
++    <SccProjectName>
++    </SccProjectName>
++    <SccLocalPath>
++    </SccLocalPath>
++    <SccAuxPath>
++    </SccAuxPath>
++    <SccProvider>
++    </SccProvider>
++    <TargetFrameworkProfile />
++    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
++    <RestorePackages>true</RestorePackages>
++    <FileUpgradeFlags>
++    </FileUpgradeFlags>
++    <OldToolsVersion>4.0</OldToolsVersion>
++    <UseIISExpress>true</UseIISExpress>
++    <UpgradeBackupLocation />
++    <IISExpressSSLPort />
++    <IISExpressAnonymousAuthentication />
++    <IISExpressWindowsAuthentication />
++    <IISExpressUseClassicPipelineMode />
++    <UseGlobalApplicationHostFile />
++    <Use64BitIISExpress />
++    <NuGetPackageImportStamp>
++    </NuGetPackageImportStamp>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
++    <DebugSymbols>true</DebugSymbols>
++    <DebugType>full</DebugType>
++    <Optimize>false</Optimize>
++    <OutputPath>..\..\Presentation\SmartStore.Web\Plugins\SmartStore.Tax\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++    <Prefer32Bit>false</Prefer32Bit>
++  </PropertyGroup>
++  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
++    <DebugType>pdbonly</DebugType>
++    <Optimize>true</Optimize>
++    <OutputPath>..\..\Presentation\SmartStore.Web\Plugins\SmartStore.Tax\</OutputPath>
++    <DefineConstants>TRACE</DefineConstants>
++    <ErrorReport>prompt</ErrorReport>
++    <WarningLevel>4</WarningLevel>
++    <Prefer32Bit>false</Prefer32Bit>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'EFMigrations|AnyCPU'">
++    <DebugSymbols>true</DebugSymbols>
++    <OutputPath>..\..\Presentation\SmartStore.Web\bin\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <DebugType>full</DebugType>
++    <PlatformTarget>AnyCPU</PlatformTarget>
++    <ErrorReport>prompt</ErrorReport>
++    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'PluginDev|AnyCPU'">
++    <DebugSymbols>true</DebugSymbols>
++    <OutputPath>bin\</OutputPath>
++    <DefineConstants>DEBUG;TRACE</DefineConstants>
++    <DebugType>full</DebugType>
++    <PlatformTarget>AnyCPU</PlatformTarget>
++    <ErrorReport>prompt</ErrorReport>
++    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
++  </PropertyGroup>
++  <ItemGroup>
++    <Reference Include="Autofac, Version=5.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Autofac.5.2.0\lib\net461\Autofac.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
++    </Reference>
++    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
++    </Reference>
++    <Reference Include="System" />
++    <Reference Include="System.ComponentModel.Composition" />
++    <Reference Include="System.ComponentModel.DataAnnotations" />
++    <Reference Include="System.Data.DataSetExtensions" />
++    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
++    </Reference>
++    <Reference Include="System.Web" />
++    <Reference Include="System.Web.ApplicationServices" />
++    <Reference Include="System.Web.DynamicData" />
++    <Reference Include="System.Web.Entity" />
++    <Reference Include="Microsoft.CSharp" />
++    <Reference Include="System.Data" />
++    <Reference Include="System.Web.Extensions" />
++    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
++      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++    <Reference Include="System.Xml" />
++    <Reference Include="System.Xml.Linq" />
++    <Reference Include="Telerik.Web.Mvc, Version=2012.2.607.340, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
++      <SpecificVersion>False</SpecificVersion>
++      <HintPath>..\..\..\lib\Telerik\Telerik.Web.Mvc.dll</HintPath>
++      <Private>False</Private>
++    </Reference>
++  </ItemGroup>
++  <ItemGroup>
++    <Compile Include="..\..\AssemblySharedInfo.cs">
++      <Link>Properties\AssemblySharedInfo.cs</Link>
++    </Compile>
++    <Compile Include="..\..\AssemblyVersionInfo.cs">
++      <Link>Properties\AssemblyVersionInfo.cs</Link>
++    </Compile>
++    <Compile Include="Controllers\TaxByRegionController.cs" />
++    <Compile Include="Controllers\TaxFixedRateController.cs" />
++    <Compile Include="Data\Migrations\201403112350417_Initial.cs" />
++    <Compile Include="Data\Migrations\201403112350417_Initial.Designer.cs">
++      <DependentUpon>201403112350417_Initial.cs</DependentUpon>
++    </Compile>
++    <Compile Include="Data\Migrations\Configuration.cs" />
++    <Compile Include="Data\TaxRateMap.cs" />
++    <Compile Include="Data\TaxRateObjectContext.cs" />
++    <Compile Include="DependencyRegistrar.cs" />
++    <Compile Include="Domain\TaxRate.cs" />
++    <Compile Include="Models\FixedTaxRateModel.cs" />
++    <Compile Include="Models\ByRegionTaxRateListModel.cs" />
++    <Compile Include="Models\ByRegionTaxRateModel.cs" />
++    <Compile Include="Plugin.cs" />
++    <Compile Include="Properties\AssemblyInfo.cs" />
++    <Compile Include="Providers\ByRegionTaxProvider.cs" />
++    <Compile Include="Providers\FixedRateTaxProvider.cs" />
++    <Compile Include="RouteProvider.cs" />
++    <Compile Include="Services\Extensions.cs" />
++    <Compile Include="Services\ITaxRateService.cs" />
++    <Compile Include="Services\TaxRateService.cs" />
++  </ItemGroup>
++  <ItemGroup>
++    <ProjectReference Include="..\..\Libraries\SmartStore.Core\SmartStore.Core.csproj">
++      <Project>{6bda8332-939f-45b7-a25e-7a797260ae59}</Project>
++      <Name>SmartStore.Core</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\..\Libraries\SmartStore.Data\SmartStore.Data.csproj">
++      <Project>{ccd7f2c9-6a2c-4cf0-8e89-076b8fc0f144}</Project>
++      <Name>SmartStore.Data</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\..\Libraries\SmartStore.Services\SmartStore.Services.csproj">
++      <Project>{210541AD-F659-47DA-8763-16F36C5CD2F4}</Project>
++      <Name>SmartStore.Services</Name>
++    </ProjectReference>
++    <ProjectReference Include="..\..\Presentation\SmartStore.Web.Framework\SmartStore.Web.Framework.csproj">
++      <Project>{75fd4163-333c-4dd5-854d-2ef294e45d94}</Project>
++      <Name>SmartStore.Web.Framework</Name>
++    </ProjectReference>
++  </ItemGroup>
++  <ItemGroup>
++    <Content Include="Description.txt">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Localization\resources.de-de.xml">
++      <SubType>Designer</SubType>
++      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Localization\resources.en-us.xml">
++      <SubType>Designer</SubType>
++      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
++    </Content>
++  </ItemGroup>
++  <ItemGroup>
++    <None Include="packages.config" />
++    <Content Include="web.config">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Views\Web.config">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Views\TaxFixedRate\Configure.cshtml">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++    <Content Include="Views\TaxByRegion\Configure.cshtml">
++      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
++    </Content>
++  </ItemGroup>
++  <ItemGroup>
++    <EmbeddedResource Include="Data\Migrations\201403112350417_Initial.resx">
++      <DependentUpon>201403112350417_Initial.cs</DependentUpon>
++    </EmbeddedResource>
++  </ItemGroup>
++  <PropertyGroup>
++    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
++    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
++  </PropertyGroup>
++  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
++  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
++  <Import Project="$(SolutionDir)\FixRazorIntellisense.targets" Condition="'$(Configuration)' == 'PluginDev'" />
++  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
++  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
++  <ProjectExtensions>
++    <VisualStudio>
++      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
++        <WebProjectProperties>
++          <UseIIS>False</UseIIS>
++          <AutoAssignPort>True</AutoAssignPort>
++          <DevelopmentServerPort>51143</DevelopmentServerPort>
++          <DevelopmentServerVPath>/</DevelopmentServerVPath>
++          <IISUrl>http://localhost:56865/</IISUrl>
++          <NTLMAuthentication>False</NTLMAuthentication>
++          <UseCustomServer>True</UseCustomServer>
++          <CustomServerUrl>http://www.smartstore.net</CustomServerUrl>
++          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
++        </WebProjectProperties>
++      </FlavorProperties>
++    </VisualStudio>
++  </ProjectExtensions>
++  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
++       Other similar extension points exist, see Microsoft.Common.targets.
++  <Target Name="BeforeBuild">
++  </Target>
++  <Target Name="AfterBuild">
++  </Target>
++  -->
++</Project>
+\ No newline at end of file
 diff --git a/src/Presentation/SmartStore.Web.Framework/Security/FilePermissionHelper.cs b/src/Presentation/SmartStore.Web.Framework/Security/FilePermissionHelper.cs
 index 1ee8d1b69..63ec85ea8 100644
 --- a/src/Presentation/SmartStore.Web.Framework/Security/FilePermissionHelper.cs
@@ -5657,7 +7499,7 @@ index 1ee8d1b69..63ec85ea8 100644
              {
                  foreach (FileSystemAccessRule rule in rules)
 diff --git a/src/Presentation/SmartStore.Web.Framework/SmartStore.Web.Framework.csproj b/src/Presentation/SmartStore.Web.Framework/SmartStore.Web.Framework.csproj
-index 3af5f9ff8..e3f3d9b9f 100644
+index 3af5f9ff8..c150162e6 100644
 --- a/src/Presentation/SmartStore.Web.Framework/SmartStore.Web.Framework.csproj
 +++ b/src/Presentation/SmartStore.Web.Framework/SmartStore.Web.Framework.csproj
 @@ -1,521 +1,70 @@
@@ -6769,12 +8611,46 @@ index 000000000..3af5f9ff8
 +  -->
 +</Project>
 \ No newline at end of file
+diff --git a/src/Presentation/SmartStore.Web.Framework/Theming/SmartVirtualPathProvider.cs b/src/Presentation/SmartStore.Web.Framework/Theming/SmartVirtualPathProvider.cs
+index f05bcca22..e202ece7a 100644
+--- a/src/Presentation/SmartStore.Web.Framework/Theming/SmartVirtualPathProvider.cs
++++ b/src/Presentation/SmartStore.Web.Framework/Theming/SmartVirtualPathProvider.cs
+@@ -97,7 +97,7 @@ namespace SmartStore.Web.Framework.Theming
+                 {
+                     // Linked theme folders cannot compute cache dependencies correctly when
+                     // working with source paths. We must determine the link target path, 
+-                    var finalPath = Path.Combine(theme.Path, relativePath.Replace('/', '\\'));
++                    var finalPath = Path.Combine(theme.Path, relativePath.Replace('/', Path.DirectorySeparatorChar));
+                     return File.Exists(finalPath) ? finalPath : null;
+                 }
+             }
+@@ -111,7 +111,7 @@ namespace SmartStore.Web.Framework.Theming
+                     var pluginDir = new DirectoryInfo(Path.Combine(_pluginsDebugDir.FullName, folder));
+                     if (pluginDir != null && pluginDir.Exists)
+                     {
+-                        var result = Path.Combine(pluginDir.FullName, relativePath).Replace("/", "\\");
++                        var result = Path.Combine(pluginDir.FullName, relativePath).Replace('/', Path.DirectorySeparatorChar);
+                         return File.Exists(result) ? result : null;
+                     }
+                 }
 diff --git a/src/Presentation/SmartStore.Web.Framework/packages.config b/src/Presentation/SmartStore.Web.Framework/packages.config.netfx
 similarity index 100%
 rename from src/Presentation/SmartStore.Web.Framework/packages.config
 rename to src/Presentation/SmartStore.Web.Framework/packages.config.netfx
+diff --git a/src/Presentation/SmartStore.Web/Administration/Controllers/CommonController.cs b/src/Presentation/SmartStore.Web/Administration/Controllers/CommonController.cs
+index 88b2d9018..e31d0ec40 100644
+--- a/src/Presentation/SmartStore.Web/Administration/Controllers/CommonController.cs
++++ b/src/Presentation/SmartStore.Web/Administration/Controllers/CommonController.cs
+@@ -49,6 +49,7 @@ using SmartStore.Web.Framework.Filters;
+ using SmartStore.Web.Framework.Security;
+ using SmartStore.Web.Framework.UI;
+ using Telerik.Web.Mvc;
++using ReferenceEqualityComparer = SmartStore.ComponentModel.ReferenceEqualityComparer; // webForCore: .NET 5 added one to System.Collections.Generic
+ 
+ namespace SmartStore.Admin.Controllers
+ {
 diff --git a/src/Presentation/SmartStore.Web/Administration/SmartStore.Admin.csproj b/src/Presentation/SmartStore.Web/Administration/SmartStore.Admin.csproj
-index 27cf819bd..37499a934 100644
+index 27cf819bd..46d05f10a 100644
 --- a/src/Presentation/SmartStore.Web/Administration/SmartStore.Admin.csproj
 +++ b/src/Presentation/SmartStore.Web/Administration/SmartStore.Admin.csproj
 @@ -1,1390 +1,55 @@
@@ -9651,10 +11527,10 @@ index 000000000..5d40232a1
 +    }
 +}
 diff --git a/src/Presentation/SmartStore.Web/SmartStore.Web.csproj b/src/Presentation/SmartStore.Web/SmartStore.Web.csproj
-index c96f601e5..fef235697 100644
+index c96f601e5..ceedbe069 100644
 --- a/src/Presentation/SmartStore.Web/SmartStore.Web.csproj
 +++ b/src/Presentation/SmartStore.Web/SmartStore.Web.csproj
-@@ -1,2170 +1,94 @@
+@@ -1,2170 +1,97 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
@@ -11713,9 +13589,12 @@ index c96f601e5..fef235697 100644
 +    <PackageReference Include="JavaScriptEngineSwitcher.V8" Version="3.5.5" />
 +    <PackageReference Include="JavaScriptEngineSwitcher.V8.Native.win-x64" Version="3.5.5" />
 +    <PackageReference Include="JavaScriptEngineSwitcher.V8.Native.win-x86" Version="3.5.5" />
++    <!-- webForCore smoke test: the Linux natives (V8 for Autoprefixer, libsass for the themes' SCSS); the app had only Windows'. -->
++    <PackageReference Include="JavaScriptEngineSwitcher.V8.Native.linux-x64" Version="3.5.5" />
 +    <PackageReference Include="LibSassHost" Version="1.2.6" />
 +    <PackageReference Include="LibSassHost.Native.win-x64" Version="1.2.6" />
 +    <PackageReference Include="LibSassHost.Native.win-x86" Version="1.2.6" />
++    <PackageReference Include="LibSassHost.Native.linux-x64" Version="1.2.6" />
 +    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
 +    <PackageReference Include="Microsoft.SqlServer.Compact" Version="4.0.8876.1" />
 +    <PackageReference Include="MsieJavaScriptEngine" Version="3.0.7" />

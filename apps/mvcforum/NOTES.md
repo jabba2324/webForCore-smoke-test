@@ -1,6 +1,6 @@
 # MVCForum: migration notes
 
-Status: migrated (webForCore 0.8.0: all 15 probes on Linux and Windows; F28 and F29 were fixed in 0.5.0). Source:
+Status: migrated (round 0.9.0, webForCore 0.9.0: 39/39 on Linux and Windows in CI runs 42020729339, 42027500654 and 42032474244, with the plugins built and session state in process). Source:
 https://github.com/YodasMyDad/mvcforum at `8ce33799` (archived; the last commit). MIT. webForCore 0.4.0 packages,
 webForCore-thirdparty 0.4.0 (WebActivatorEx).
 
@@ -63,11 +63,30 @@ migrations and a seed, Unity, Hangfire, ImageProcessor, SquishIt, .NET Framework
      doesn't bring `webForCore.Web.Helpers`, so it's added (and `scripts/convert.py` now adds it for MVC apps).
 
    [F30](../../FINDINGS.md#f30)
-8. `App_Data/Plugins` created, empty (with a README): `AssemblyProvider` enumerates it, and the plugins project that
-   fills it on .NET Framework isn't migrated.
+8. `App_Data/Plugins` created (with a README): `AssemblyProvider` enumerates it. Until round 0.9.0 it stayed empty: the plugins project that
+   fills it on .NET Framework wasn't migrated (step 10).
 9. `webForCore.WebActivatorEx` (webForCore-thirdparty 0.4.0) added: SquishIt.AspNet registers its platform from a
    WebActivatorEx start method. Without it, `SquishIt.Framework.Bundle.Css()` throws a `NullReferenceException` in
    every layout. WebActivatorEx arrives transitively, so the converter didn't add it.
+
+10. **Round 0.9.0:** `MvcForum.Plugins` migrated (`MvcForum.Plugins.csproj`, the original kept as `.netfx`), and built
+    after the site (`also_build`). It holds the forum's pipelines (creating, editing and deleting topics, posts and
+    members) and its badges, which `ImplementationManager` finds in `App_Data/Plugins` (forum.config's
+    `PluginSearchLocations`). Without it, creating a topic redirected to the new topic's URL but saved nothing (the
+    pipeline had no pipes), and the page then redirected home. The project copies `MvcForum.Plugins.dll` into
+    `App_Data/Plugins` after the build (an MSBuild `Copy`, for the .NET Framework project's `xcopy`; the copy is in the
+    app's `.gitignore`), references MvcForum.Core with `Private="false"` (it's in the site's `bin_dotnet` already),
+    and keeps `webForCore.Web.ApplicationServices` out of the compilation as Core does (F31: `MembershipUser` was
+    ambiguous in `UserLoginPipe.cs`). Loaded with `Assembly.LoadFile`, it works as it is.
+11. **Round 0.9.0:** session state in process. `Program.cs` had `UseAspNetCoreSessionProvider()` (the converter's
+    template for an app that uses `Session`), which keeps session state out of process, serialized, as
+    `mode="StateServer"` did on IIS. web.config has no `<sessionState>`, so on IIS it was `InProc`, where nothing is
+    serialized. The forum keeps a `GenericMessageViewModel` (not `[Serializable]`) in `TempData` after creating a
+    topic, deleting a member and more, so the next request was a 500: `Unable to serialize the session state ...
+    Type 'MvcForum.Web.ViewModels.GenericMessageViewModel' ... is not marked as serializable`. `AddDistributedMemoryCache`,
+    `AddSession`, `UseSession` and `UseAspNetCoreSessionProvider()` removed, so it's in process, as on IIS.
+    [F164](../../FINDINGS.md#f164) (guide gap: the guide's template and step 6 say to add the provider whenever the app
+    uses `Session`).
 
 ## Smoke
 
@@ -78,6 +97,16 @@ migrations and a seed, Unity, Hangfire, ImageProcessor, SquishIt, .NET Framework
   project's 4.4.1. .NET 11 pruned both as part of the framework; .NET 10 prunes only up to 4.3.0 (F54, guide gap,
   [#62](https://github.com/xforcore/webForCore/issues/62)). MvcForum.Core and MvcForum.Web now reference 5.0.0
   (MvcForum.Plugins isn't built). Then 15/15 (the new probe is that `webforcore-host.dll` isn't served).
+- **Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0):** 15/15 on Linux as committed. Then verbs: 24 probes
+  added (39 in all), 7 of them POSTs, with steps 10 and 11 above, which the new probes needed (nothing the old ones
+  reached). The seed's "Read Me" topic gives the admin's generated password; a member registers (the form with its
+  anti-forgery token, which logs them in) and logs off; the admin logs on, creates a topic (the multipart form), replies
+  (the AJAX post form, `X-Requested-With`), edits the topic's post, deletes the reply, finds the topic with the
+  search, deletes the topic (deleting its first post) and deletes the member through the admin area (a GET, as the
+  app has it). Each change is checked with a GET (the reply appears, the edit shows, the deleted reply and topic are
+  gone, the member is no longer listed), and a run leaves the database as it found it: 39/39 on Linux, twice in a
+  row, from a fresh database and on the same one. Not probed: private messages, polls, file uploads (they need a
+  second member or files), the Web API's TinyMCE upload (a file).
 
 Probes:
 - the home page, a topic and a category (from the seed);
@@ -122,3 +151,4 @@ reference removed. The `Config\imageprocessor\*.config` sections load (#26), `Ma
 - [F30](../../FINDINGS.md#f30) (webForCore bug): `webForCore.Web.Mvc` doesn't bring System.Web.Helpers.
 - [F31](../../FINDINGS.md#f31) (guide gap): System.Web.ApplicationServices is visible to every project.
 - [F33](../../FINDINGS.md#f33) (guide gap): the .NET Standard builds of Hangfire 1.6 lack what the app uses.
+- [F164](../../FINDINGS.md#f164) (guide gap): the guide adds the out-of-process session provider to every app that uses `Session`; an `InProc` app with values that aren't serializable (here in `TempData`) fails. Worked around as the guide should say: in-process session state.

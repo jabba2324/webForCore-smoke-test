@@ -1,6 +1,7 @@
 # nopCommerce 3.90: migration notes
 
-Status: blocked (webForCore 0.8.0): 22/23 probes on Linux (F86, webForCore#140), and on Windows 23/23 in only 2 of 5 runs (F89). An app is migrated only when every probe passes on both platforms every time.
+Status: blocked until CI shows Windows (F89) passing every time: 37/37 on Linux on webForCore 0.9.0 (F86 and F88 fixed); on
+0.8.0, Windows passed 23/23 in only 2 of 5 runs (F89). An app is migrated only when every probe passes on both platforms every time.
 Source: https://github.com/nopSolutions/nopCommerce at `12d1f013`
 (tag `release-3.90`, the last MVC 5 release before nopCommerce moved to ASP.NET Core). Licence: the nopCommerce Public
 License 3.0, GPL-3.0 with an attribution term ("powered by nopCommerce" on every page, which the store keeps). The
@@ -124,6 +125,18 @@ source files and `webforcore-host.dll` aren't served.
   instances (F88) and the user's 128 are shared with a desktop session and other servers, so some pages fail with
   "The configured user limit (128) on the number of inotify instances has been reached" (the last local run, in
   `LOG.md`: setup's last step and 4 probes). The committed `results*.json` and logs are CI's.
+- **Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0; Linux):** from a new database, setup 3/3 and 23/23:
+  the thumbnail passes (F86 fixed), and the inotify limit no longer gets in the way (F88 fixed). Then verbs: 14 probes
+  (37 in all; 7 of them POSTs). The cart, anonymously: the MacBook added from its page (the AJAX add-to-cart, with the
+  quantity its form sends, 2 being its minimum), shown in the cart, and removed with the cart form's "update cart"
+  post (the cart is then empty). The administration: the admin logs in, creates a category (the admin form with its
+  anti-forgery token; every admin POST checks one), finds it in the category grid (Kendo's AJAX POST, JSON: its id
+  and SEO name captured), sees it on the front end, edits its description (shown on the front end), deletes it (then
+  a 404), and logs out. nopCommerce marks a deleted category deleted and keeps its SEO name taken, so a second run's
+  category gets another name; the probes use the one the grid gives. 37/37 twice in a row on the same database.
+- **Round 0.9.0, CI:** Linux 37/37 in runs 42025207546 and 42027500654; Windows 37/37 in 42025207546 and 42032474244 and 7/37 in
+  42027500654, F89 again (this time `Nop.Plugin.Shipping.FixedOrByWeight.dll` "rename failed, cannot initialize
+  plugin"). Still blocked on F89.
 
 ## Notes for testing by hand
 
@@ -139,10 +152,6 @@ source files and `webforcore-host.dll` aren't served.
 
 ## Open problems
 
-- [F86](../../FINDINGS.md#f86) (webForCore bug): a static file requested in another case than its own is a 404 on
-  Linux until it has been requested in its own case once; every product picture (`/content/images/thumbs/...`) on
-  Linux.
-- [F88](../../FINDINGS.md#f88) (webForCore bug, the same as F92, webForCore#152): inotify instances, one per watched
-  folder.
+- [F86](../../FINDINGS.md#f86), [F88](../../FINDINGS.md#f88): fixed in 0.9.0.
 - [F89](../../FINDINGS.md#f89) (app/environment, cause not confirmed): Windows smoke after setup fails at start in some
   runs.
