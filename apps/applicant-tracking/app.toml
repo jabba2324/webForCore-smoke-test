@@ -9,7 +9,7 @@ kinds = ["mvc", "owin", "identity"]
 licence = "Apache-2.0"
 status = "migrated"
 https = true
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 11/11 on Linux and Windows (webForCore-thirdparty 0.5.0's WebActivatorEx; 0.4.1's was silently unused on .NET 10, F55)."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 18/18 on Linux and Windows (4 POSTs: validation and anti-forgery; saving hits the app's own keyless Domicilio). webForCore-thirdparty 0.7.0's WebActivatorEx."
 
 needs = ["mssql"]
 
@@ -32,3 +32,49 @@ contains = "Log in."
 [[probes]]
 path = "/Content/bootstrap.css"
 contains = "Bootstrap"
+
+# Verbs. Every form here saves through the context with the keyless Domicilio (above), so a post that reaches the
+# database fails with the app's own model error, on .NET Framework too. What's probed is what the posts do before
+# that: the anti-forgery check and the model binding and validation, each answered with the form and its messages.
+[[probes]]
+path = "/Applicant/Create"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Applicant/Create"
+method = "POST"
+cookies = true
+form = { __RequestVerificationToken = "{token}", Nombre = "Smoke", ApellidoParterno = "Test", FechaNacimiento = "not a date" }
+contains = "The value &#39;not a date&#39; is not valid for FechaNacimiento."
+
+[[probes]]
+path = "/Applicant/Create"
+method = "POST"
+form = { Nombre = "Smoke", ApellidoParterno = "Test" }
+status = 500
+contains = "__RequestVerificationToken"
+
+[[probes]]
+path = "/Account/Register"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Account/Register"
+method = "POST"
+cookies = true
+form = { __RequestVerificationToken = "{token}", Email = "smoke@example.com", Password = "abc", ConfirmPassword = "abd" }
+contains = "The Password must be at least 6 characters long."
+
+[[probes]]
+path = "/Account/Login"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Account/Login"
+method = "POST"
+cookies = true
+form = { __RequestVerificationToken = "{token}", Email = "not-an-address", Password = "" }
+contains = "The Password field is required."

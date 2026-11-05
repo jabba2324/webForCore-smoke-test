@@ -23,56 +23,102 @@
       ]
     },
     "build": {
-      "at": "2026-11-04T20:20:39+00:00",
+      "at": "2026-11-05T11:24:02+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/applicant-tracking/logs/build.log",
-      "seconds": 27,
+      "seconds": 8,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.8.0, webForCore-thirdparty 0.6.0"
+      "webforcore": "packages 0.9.0, webForCore-thirdparty 0.7.0"
     },
     "fetch": {
-      "at": "2026-11-04T20:20:12+00:00",
+      "at": "2026-11-05T11:23:54+00:00",
       "commit": "ff9a2eb4b4f8fcf68efbab3b2f7857bb33ac307e",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-04T20:20:48+00:00",
+      "at": "2026-11-05T11:24:46+00:00",
       "checks": [
         {
-          "ms": 13,
+          "ms": 21,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 537,
+          "ms": 163,
           "ok": true,
           "path": "/Applicant/Create",
           "status": 200
         },
         {
-          "ms": 368,
+          "ms": 65,
           "ok": true,
           "path": "/Account/Login",
           "status": 200
         },
         {
-          "ms": 35,
+          "ms": 28,
           "ok": true,
           "path": "/Content/bootstrap.css",
           "status": 200
         },
         {
-          "ms": 11,
+          "ms": 9,
+          "ok": true,
+          "path": "/Applicant/Create",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 35,
+          "ok": true,
+          "path": "/Applicant/Create",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 22,
+          "ok": true,
+          "path": "/Applicant/Create",
+          "status": 500
+        },
+        {
+          "ms": 16,
+          "ok": true,
+          "path": "/Account/Register",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 13,
+          "ok": true,
+          "path": "/Account/Register",
+          "status": 200
+        },
+        {
+          "ms": 7,
+          "ok": true,
+          "path": "/Account/Login",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 8,
+          "ok": true,
+          "path": "/Account/Login",
+          "status": 200
+        },
+        {
+          "ms": 7,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 5,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
@@ -96,13 +142,13 @@
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 5,
           "ok": true,
           "path": "/bin_dotnet/ApplicantTracking.Web.dll",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 6,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404
@@ -110,7 +156,7 @@
       ],
       "log": "apps/applicant-tracking/logs/server.log",
       "status": "pass",
-      "summary": "11/11 probes"
+      "summary": "18/18 probes"
     }
   }
 }
