@@ -8,7 +8,7 @@ project = "WebApiClassic/ODataCompositeKeySample/ODataCompositeKeySample.AspNet/
 kinds = ["webapi"]
 licence = "MIT"
 status = "blocked"
-notes = "webForCore 0.8.0: builds; blocked: Microsoft.AspNet.OData 7.5.18 needs System.Data.Linq (F68). 8/15 on Linux and Windows."
+notes = "webForCore 0.9.0: F68 fixed, OData runs with POST, PATCH, PUT and DELETE; blocked by F134 (a path with '(' loses the Prefer header). 26/27 on Linux and Windows (CI runs 42021158598 and 42026762740)."
 
 # The first request compiles the site, so it gets 120 s.
 # The service document.
