@@ -1,6 +1,6 @@
 # Subtext: migration notes
 
-Status: blocked by DotNetOpenAuth on the log-in page (F44): 16/17 probes on Linux and Windows, webForCore 0.8.0. Source: https://github.com/haacked/Subtext at `87a2d90d`. Found by searching GitHub on 2026-10-31; the
+Status: blocked by DotNetOpenAuth on the log-in page (F44): 27/28 probes on Linux and Windows, webForCore 0.9.0. Source: https://github.com/haacked/Subtext at `87a2d90d`. Found by searching GitHub on 2026-10-31; the
 repo, licence (MIT), web project and its `<TargetFrameworkVersion>` were checked through the GitHub API.
 
 Round 3b, on webForCore 0.4.0 and webForCore-thirdparty 0.4.0. It also uses `webForCore.WebActivator` 0.4.1, a build of
@@ -78,6 +78,8 @@ page, an admin page (forms authentication redirect), RSS, two MVC controllers ro
   The log-in page fails in DotNetOpenAuth's OpenID control (F44, app/environment).
 
 ### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+**CI (Linux and Windows): 27/28 on both, in CI runs 42026922513 and (second).**
 
 27/28 on Linux, twice; still blocked by DotNetOpenAuth on the log-in page (F44, the same `TypeInitializationException`
 in `UriIdentifier`). System.Data.Linq, now provided, isn't in Subtext's web.config (its F37 entry was System.Design,
