@@ -142,6 +142,9 @@ From the assessment, not reached yet:
   and verbs: a book added to the cart (AJAX POST), shown in the cart, removed (the cart's AJAX delete, POST) and the
   cart empty again; the admin logs in (POST), sees their account page, logs out, and the page then sends them to log
   in. The administration isn't probed beyond `/admin`'s redirect (F166).
+- **CI (Linux and Windows):** Linux 27/27 in runs 42027500654 and 42032474244; Windows 27/27 in 42032474244 and 26/27
+  in 42027500654, where `/admin` was SmartStore's own 404 page instead of the 302 to the log-in (cause not found; the
+  server log shows nothing else). Setup 4/4 on both, every run.
 
 ## Open problems
 
