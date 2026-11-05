@@ -8,10 +8,23 @@ project = "aspnet/mvc/overview/getting-started/introduction/sample/MvcMovie/MvcM
 kinds = ["mvc", "owin", "identity"]
 licence = "MIT"
 status = "migrated"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 12/12 on Linux and Windows."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 29/29 on Linux and Windows (7 POSTs: movie create/edit/delete, search, Identity log-in and log-off)."
 
 # The first request compiles the site, so it gets 120 s.
 needs = ["mssql"]
+
+# The smoke user the log-in probes use, registered through the app's own form (Identity creates its database).
+[setup]
+databases = ["aspnet-MvcMovie-fefdc1f0-bd81-4ce9-b712-93a062e01031"]
+
+[[setup.steps]]
+get = "/Account/Register"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[setup.steps]]
+post = "/Account/Register"
+fields = { __RequestVerificationToken = "{token}", Email = "smoke@example.com", Password = "Smoke_test_1234", ConfirmPassword = "Smoke_test_1234" }
+contains = "Hello smoke@example.com!"
 
 [[probes]]
 path = "/"
@@ -32,3 +45,108 @@ contains = "__RequestVerificationToken"
 [[probes]]
 path = "/Content/Site.css"
 contains = "body"
+
+# Verbs. The movie forms, each with its anti-forgery token: create, edit and delete one movie, then the search
+# postback and the log-in. The run ends with the movie deleted, so the next one starts the same.
+[[probes]]
+path = "/Movies/Create"
+cookies = true
+contains = "Release Date"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+# Server-side validation: a genre that doesn't start with a capital letter is refused, and the form comes back.
+[[probes]]
+path = "/Movies/Create"
+method = "POST"
+cookies = true
+form = { __RequestVerificationToken = "{token}", Title = "Smoke Movie", ReleaseDate = "2020-01-02", Genre = "comedy", Price = "10", Rating = "PG" }
+contains = "The field Genre must match the regular expression"
+
+[[probes]]
+path = "/Movies/Create"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", Title = "Smoke Movie", ReleaseDate = "2020-01-02", Genre = "Comedy", Price = "10", Rating = "PG" }
+
+[[probes]]
+path = "/Movies?searchString=Smoke+Movie"
+cookies = true
+contains = "Smoke Movie"
+capture = { movie = '/Movies/Edit/(\d+)' }
+
+[[probes]]
+path = "/Movies/Edit/{movie}"
+cookies = true
+contains = 'value="Smoke Movie"'
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Movies/Edit/{movie}"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", ID = "{movie}", Title = "Smoke Movie Edited", ReleaseDate = "2020-01-02", Genre = "Drama", Price = "12", Rating = "R" }
+
+[[probes]]
+path = "/Movies/Details/{movie}"
+contains = "Smoke Movie Edited"
+
+# The genre filter (a GET form) and the app's own [HttpPost] Index, which echoes the search.
+[[probes]]
+path = "/Movies?movieGenre=Drama&searchString=Smoke"
+contains = "Smoke Movie Edited"
+
+[[probes]]
+path = "/Movies"
+method = "POST"
+form = { searchString = "Smoke" }
+contains = "From [HttpPost]Index: Smoke"
+
+[[probes]]
+path = "/Movies/Delete/{movie}"
+cookies = true
+contains = "Are you sure you want to delete this?"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Movies/Delete/{movie}"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}" }
+
+[[probes]]
+path = "/Movies/Details/{movie}"
+status = 404
+
+# Log in as setup's user (Identity, OWIN cookies), then the page only a signed-in user sees, then log off.
+[[probes]]
+path = "/Account/Login"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Account/Login"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", Email = "smoke@example.com", Password = "Smoke_test_1234", RememberMe = "false" }
+
+[[probes]]
+path = "/Manage"
+cookies = true
+contains = "Hello smoke@example.com!"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Account/LogOff"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}" }
+
+[[probes]]
+path = "/Manage"
+cookies = true
+status = 302
