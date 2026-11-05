@@ -2341,8 +2341,8 @@ the overlay).
 
 ## F134
 
-**A request whose path has a `(` reaches the application without its non-standard headers.** webForCore bug. To be
-raised (round 0.9.0). Found on 0.9.0, on Linux (the code is the same on any OS).
+**A request whose path has a `(` reaches the application without its non-standard headers.** webForCore bug,
+[webForCore#170](https://github.com/xforcore/webForCore/issues/170). Found on 0.9.0, on Linux (the code is the same on any OS).
 
 - **Apps:** odata-samples-compositekey. OData keys are in parentheses (`/People(FirstName='Kate',LastName='Jones')`),
   so a PUT with `Prefer: return=representation` answers 204 instead of OData's 200 with the entity
@@ -2360,8 +2360,8 @@ raised (round 0.9.0). Found on 0.9.0, on Linux (the code is the same on any OS).
 
 ## F135
 
-**An assembly without a strong name isn't loaded for a reference to a higher version.** webForCore bug. To be raised
-(round 0.9.0). Found on 0.9.0, on Linux; the 0.8.0 results show the same error (they were recorded as F50).
+**An assembly without a strong name isn't loaded for a reference to a higher version.** webForCore bug,
+[webForCore#171](https://github.com/xforcore/webForCore/issues/171). Found on 0.9.0, on Linux; the 0.8.0 results show the same error (they were recorded as F50).
 
 - **Apps:** jabbr. It deploys Nancy 0.20.0 with Nancy.SimpleAuthentication 0.3.14, whose assembly references Nancy
   0.21.1.0. OWIN startup fails on every request (7/12):
