@@ -1,6 +1,6 @@
 # AspNetDocs: ProductsApp (Web API 2 tutorial): migration notes
 
-Status: migrated (webForCore 0.4.0, all probes pass).
+Status: migrated (webForCore 0.9.0: 20/20 on Linux and Windows, 5 verb probes).
 (`LICENSE-CODE`; the docs are CC-BY-4.0). Split out of the `aspnetdocs-samples` entry. webForCore 0.1.0 packages (0.2.0 from round 2).
 
 ## Assessment
@@ -37,7 +37,7 @@ product's id captured from `Location`), a `GET` of it, a `PUT` (204), the change
 ### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
 
 No change to the overlay or the probes: the verb probes above (POST as JSON and as a form, PUT, DELETE, and a PUT to
-a product that isn't there; 5 of the 20 checks) already cover everything the API does. Results: RESULTS_PLACEHOLDER
+a product that isn't there; 5 of the 20 checks) already cover everything the API does. Results: **20/20 on Linux and Windows** (CI runs 42021158598 and 42026762740), the same in both runs.
 
 ## Open problems
 
