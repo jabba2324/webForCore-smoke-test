@@ -8,7 +8,7 @@ project = "samples/aspnet/MVC/EnumSample/EnumSample/EnumSample.csproj"
 kinds = ["mvc"]
 licence = "Apache-2.0"
 status = "migrated"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 9/9 on Linux and Windows."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 19/19 on Linux and Windows (3 POSTs: create/edit/delete with enum and [Flags] binding)."
 
 # The first request compiles the site, so it gets 120 s.
 needs = ["mssql"]
@@ -20,3 +20,60 @@ contains = "Index - Enum Sample Application"
 [[probes]]
 path = "/Home/Create"
 contains = "<select"
+
+# Verbs: create, edit and delete a row through the forms (anti-forgery token), with the enums bound from the drop-downs'
+# values and the [Flags] enum from its text box ("Eight, Sixteen" and "3"); the [Display] names show on the pages.
+# Each run deletes what it made.
+[[probes]]
+path = "/Home/Create"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Home/Create"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", Enum1 = "3", Enum2 = "4", FlagsEnum = "Eight, Sixteen" }
+
+[[probes]]
+path = "/"
+contains = "Trois"
+capture = { row = 'Trois\s*</td>\s*<td>\s*Quatre\s*</td>\s*<td>\s*Eight, Sixteen[\s\S]*?/Home/Edit/(\d+)' }
+
+[[probes]]
+path = "/Home/Edit/{row}"
+cookies = true
+contains = 'value="Eight, Sixteen"'
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Home/Edit/{row}"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", Id = "{row}", Enum1 = "2", Enum2 = "", FlagsEnum = "3" }
+
+[[probes]]
+path = "/Home/Details/{row}"
+contains = "One, Two"
+
+[[probes]]
+path = "/Home/Details/{row}"
+contains = "Duex"
+
+[[probes]]
+path = "/Home/Delete/{row}"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Home/Delete/{row}"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}" }
+
+[[probes]]
+path = "/Home/Details/{row}"
+status = 404

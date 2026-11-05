@@ -18,38 +18,101 @@
       ]
     },
     "build": {
-      "at": "2026-11-04T20:22:58+00:00",
+      "at": "2026-11-05T11:23:01+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/aspnet-samples-mvc-enumsample/logs/build.log",
-      "seconds": 14,
+      "seconds": 4,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.8.0"
+      "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-04T20:22:43+00:00",
+      "at": "2026-11-05T11:22:57+00:00",
       "commit": "f7d4a776327df09c13b39489b122209c5d04693b",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-04T20:23:17+00:00",
+      "at": "2026-11-05T11:23:47+00:00",
       "checks": [
         {
-          "ms": 10,
+          "ms": 12,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 252,
+          "ms": 80,
           "ok": true,
           "path": "/Home/Create",
           "status": 200
         },
         {
-          "ms": 5,
+          "ms": 7,
+          "ok": true,
+          "path": "/Home/Create",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 75,
+          "ok": true,
+          "path": "/Home/Create",
+          "status": 302
+        },
+        {
+          "ms": 649,
+          "ok": true,
+          "path": "/",
+          "status": 200
+        },
+        {
+          "ms": 110,
+          "ok": true,
+          "path": "/Home/Edit/{row}",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 21,
+          "ok": true,
+          "path": "/Home/Edit/{row}",
+          "status": 302
+        },
+        {
+          "ms": 12,
+          "ok": true,
+          "path": "/Home/Details/{row}",
+          "status": 200
+        },
+        {
+          "ms": 6,
+          "ok": true,
+          "path": "/Home/Details/{row}",
+          "status": 200
+        },
+        {
+          "ms": 11,
+          "ok": true,
+          "path": "/Home/Delete/{row}",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 13,
+          "ok": true,
+          "path": "/Home/Delete/{row}",
+          "status": 302
+        },
+        {
+          "ms": 6,
+          "ok": true,
+          "path": "/Home/Details/{row}",
+          "status": 404
+        },
+        {
+          "ms": 6,
           "ok": true,
           "path": "/web.config",
           "status": 404
@@ -61,31 +124,31 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 3,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 3,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 3,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 3,
           "ok": true,
           "path": "/bin_dotnet/EnumSample.dll",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 3,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404
@@ -93,7 +156,7 @@
       ],
       "log": "apps/aspnet-samples-mvc-enumsample/logs/server.log",
       "status": "pass",
-      "summary": "9/9 probes"
+      "summary": "19/19 probes"
     }
   }
 }
