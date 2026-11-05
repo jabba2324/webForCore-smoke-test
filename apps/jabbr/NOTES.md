@@ -43,6 +43,23 @@ Round 4, on webForCore 0.5.0 and webForCore-thirdparty 0.4.1.
 - **Round 5 (webForCore 0.6.0, webForCore-thirdparty 0.4.1; Linux and Windows):** it builds (F46 fixed in 0.6.0). 6/10 probes on Linux and on Windows: start-up fails in Nancy 0.20 (F50).
 - **Round 6 (webForCore 0.7.0 on .NET 10, webForCore-thirdparty 0.5.0; under webforcore-host; Linux and Windows):** 7/11 probes on Linux and Windows. Unchanged: Nancy 0.20 (F50).
 
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+Still 7/11 before the new probe, but the first error isn't F50's, and wasn't on 0.8.0 either (the 0.8.0 results show
+it; this file said F50): OWIN startup fails with `FileNotFoundException: Could not load file or assembly 'Nancy,
+Version=0.21.1.0, Culture=neutral, PublicKeyToken=null'`. JabbR deploys Nancy 0.20.0 and Nancy.SimpleAuthentication
+0.3.14, whose assembly references Nancy 0.21.1.0. Nancy has no strong name, and .NET Framework doesn't check the
+version of an assembly without one, so on IIS the reference binds to the 0.20.0 in `bin`. webForCore's resolver
+(`AssemblyLoaderNetCore.Resolve`) refuses an assembly whose version is lower than the request's, strong-named or not:
+[F135](../../FINDINGS.md#f135), webForCore bug. With an `AppDomain.AssemblyResolve` handler that returns the loaded
+Nancy (exploration only, not in the overlay), startup gets past it and stops at F50 (`AppDomainSetup.PrivateBinPathProbe`),
+which remains app/environment.
+
+One verb probe added: Nancy's log-in POST without its CSRF token or a `Sec-*` header is refused (403). The log-in,
+registration and chat flows wait until the app starts.
+
+Results: RESULTS_PLACEHOLDER
+
 ## Open problems
 
 - F50, app/environment: Nancy 0.20.

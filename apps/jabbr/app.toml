@@ -27,3 +27,11 @@ contains = "$.hubConnection"
 
 [[probes]]
 path = "/Content/images/big-logo.png"
+
+# Verbs: Nancy's log-in form refuses a POST that has neither its CSRF token nor a Sec-* header (403); the log-in,
+# registration and chat (SignalR) flows need the app to start first (F135, then F50).
+[[probes]]
+path = "/account/login"
+method = "POST"
+form = { username = "smoke", password = "smoke" }
+status = 403
