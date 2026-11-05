@@ -2,56 +2,56 @@
   "id": "eshop-legacy-webforms",
   "stages": {
     "build": {
-      "at": "2026-11-05T00:22:25+00:00",
+      "at": "2026-11-05T11:17:48+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\eshop-legacy-webforms\\logs.windows\\build.log",
-      "seconds": 36,
+      "seconds": 27,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.8.0"
+      "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T00:21:49+00:00",
+      "at": "2026-11-05T11:17:20+00:00",
       "commit": "63bc9ec4414d7e281dc9f9d7bdcf70030950457d",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-05T00:22:36+00:00",
+      "at": "2026-11-05T11:17:58+00:00",
       "checks": [
         {
-          "ms": 22,
+          "ms": 23,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 12,
+          "ms": 13,
           "ok": true,
           "path": "/Default/index/1/size/10",
           "status": 200
         },
         {
-          "ms": 487,
+          "ms": 507,
           "ok": true,
           "path": "/Catalog/Details/1",
           "status": 200
         },
         {
-          "ms": 46,
+          "ms": 47,
           "ok": true,
           "path": "/Catalog/Create",
           "status": 200
         },
         {
-          "ms": 10,
+          "ms": 12,
           "ok": true,
           "path": "/About.aspx",
           "status": 200
         },
         {
-          "ms": 31,
+          "ms": 22,
           "ok": true,
           "path": "/Content/site.css",
           "status": 200
@@ -63,76 +63,76 @@
           "status": 200
         },
         {
-          "ms": 15,
+          "ms": 16,
           "ok": true,
           "path": "/Pics/1.png",
           "status": 200
         },
         {
-          "ms": 9,
+          "ms": 10,
           "ok": true,
           "path": "/Catalog/Create",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 43,
+          "ms": 39,
           "ok": true,
           "path": "/Catalog/Create",
           "status": 302
         },
         {
-          "ms": 7,
+          "ms": 8,
           "ok": true,
           "path": "/Default/index/0/size/50",
           "status": 200
         },
         {
-          "ms": 5,
+          "ms": 10,
           "ok": true,
           "path": "/Catalog/Details/{item}",
           "status": 200
         },
         {
-          "ms": 15,
+          "ms": 17,
           "ok": true,
           "path": "/Catalog/Edit/{item}",
-          "status": 200
-        },
-        {
-          "method": "POST",
-          "ms": 4,
-          "ok": true,
-          "path": "/Catalog/Edit/{item}",
-          "status": 302
-        },
-        {
-          "ms": 5,
-          "ok": true,
-          "path": "/Default/index/0/size/50",
-          "status": 200
-        },
-        {
-          "ms": 3,
-          "ok": true,
-          "path": "/Catalog/Details/{item}",
-          "status": 200
-        },
-        {
-          "ms": 13,
-          "ok": true,
-          "path": "/Catalog/Delete/{item}",
           "status": 200
         },
         {
           "method": "POST",
           "ms": 6,
           "ok": true,
+          "path": "/Catalog/Edit/{item}",
+          "status": 302
+        },
+        {
+          "ms": 6,
+          "ok": true,
+          "path": "/Default/index/0/size/50",
+          "status": 200
+        },
+        {
+          "ms": 5,
+          "ok": true,
+          "path": "/Catalog/Details/{item}",
+          "status": 200
+        },
+        {
+          "ms": 15,
+          "ok": true,
+          "path": "/Catalog/Delete/{item}",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 5,
+          "ok": true,
           "path": "/Catalog/Delete/{item}",
           "status": 302
         },
         {
-          "ms": 4,
+          "ms": 6,
           "ok": true,
           "path": "/Default/index/0/size/50",
           "status": 200
@@ -144,7 +144,7 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 3,
           "ok": true,
           "path": "/App_Data/",
           "status": 404

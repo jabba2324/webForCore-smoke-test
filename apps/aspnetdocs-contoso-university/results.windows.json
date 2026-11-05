@@ -2,80 +2,80 @@
   "id": "aspnetdocs-contoso-university",
   "stages": {
     "build": {
-      "at": "2026-11-04T20:24:20+00:00",
+      "at": "2026-11-05T11:19:40+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\aspnetdocs-contoso-university\\logs.windows\\build.log",
-      "seconds": 54,
+      "seconds": 44,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.8.0"
+      "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-04T20:23:25+00:00",
+      "at": "2026-11-05T11:18:56+00:00",
       "commit": "bbfca35de1c811927fbd019d51969aa878dbd032",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-04T20:24:47+00:00",
+      "at": "2026-11-05T11:20:06+00:00",
       "checks": [
         {
-          "ms": 10,
+          "ms": 19,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 14037,
+          "ms": 13624,
           "ok": true,
           "path": "/Student",
           "status": 200
         },
         {
-          "ms": 43,
+          "ms": 38,
           "ok": true,
           "path": "/Student?sortOrder=name_desc&searchString=an",
           "status": 200
         },
         {
-          "ms": 81,
+          "ms": 80,
           "ok": true,
           "path": "/Student/Create",
           "status": 200
         },
         {
-          "ms": 769,
+          "ms": 499,
           "ok": true,
           "path": "/Course",
           "status": 200
         },
         {
-          "ms": 605,
+          "ms": 577,
           "ok": true,
           "path": "/Instructor?id=9&courseID=2042",
           "status": 200
         },
         {
-          "ms": 430,
+          "ms": 408,
           "ok": true,
           "path": "/Department",
           "status": 200
         },
         {
-          "ms": 43,
+          "ms": 49,
           "ok": true,
           "path": "/Home/About",
           "status": 200
         },
         {
-          "ms": 20,
+          "ms": 25,
           "ok": true,
           "path": "/Content/Site.css",
           "status": 200
         },
         {
-          "ms": 9,
+          "ms": 6,
           "ok": true,
           "path": "/web.config",
           "status": 404
@@ -111,7 +111,7 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 5,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404

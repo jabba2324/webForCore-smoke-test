@@ -16,50 +16,50 @@
       ]
     },
     "build": {
-      "at": "2026-11-04T20:24:52+00:00",
+      "at": "2026-11-05T11:16:27+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/aspnet-samples-webapi-actionresults/logs/build.log",
-      "seconds": 25,
+      "seconds": 9,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.8.0"
+      "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-04T20:24:27+00:00",
+      "at": "2026-11-05T11:16:18+00:00",
       "commit": "f7d4a776327df09c13b39489b122209c5d04693b",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-04T20:25:01+00:00",
+      "at": "2026-11-05T11:16:34+00:00",
       "checks": [
         {
-          "ms": 47,
+          "ms": 60,
           "ok": true,
           "path": "/text",
           "status": 200
         },
         {
-          "ms": 11,
+          "ms": 10,
           "ok": true,
           "path": "/file",
           "status": 200
         },
         {
-          "ms": 49,
+          "ms": 57,
           "ok": true,
           "path": "/product/2",
           "status": 200
         },
         {
-          "ms": 4,
+          "ms": 6,
           "ok": true,
           "path": "/product/99",
           "status": 404
         },
         {
-          "ms": 6,
+          "ms": 5,
           "ok": true,
           "path": "/web.config",
           "status": 404
@@ -89,7 +89,7 @@
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/ActionResults.dll",
           "status": 404
