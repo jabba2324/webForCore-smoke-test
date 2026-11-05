@@ -46,3 +46,68 @@ contains = "esh-"
 
 [[probes]]
 path = "/Images/brand.png"
+
+# MVC forms with anti-forgery tokens ([ValidateAntiForgeryToken]): each form's GET sets the token's cookie and puts
+# the token in the form, captured for the post, which sends both (the probes share a cookie jar). An item created,
+# found in the list (its id captured from its Edit link), edited, deleted, and gone; and a post without the token,
+# which MVC refuses.
+[[probes]]
+path = "/Catalog/Create"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Catalog/Create"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", Name = "Smoke Test Hoodie", Description = "Made by a probe", CatalogBrandId = "2", CatalogTypeId = "2", Price = "12.50", AvailableStock = "5", RestockThreshold = "1", MaxStockThreshold = "10" }
+
+[[probes]]
+path = "/Catalog/Index?pageSize=100"
+cookies = true
+contains = "Made by a probe"
+capture = { item = 'Smoke Test Hoodie[\s\S]*?/Catalog/Edit/(\d+)' }
+
+[[probes]]
+path = "/Catalog/Edit/{item}"
+cookies = true
+contains = "value=\"Smoke Test Hoodie\""
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Catalog/Edit/{item}"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", Id = "{item}", Name = "Smoke Test Hoodie", Description = "Changed by a probe", CatalogBrandId = "2", CatalogTypeId = "2", Price = "15.75", PictureFileName = "dummy.png", AvailableStock = "5", RestockThreshold = "1", MaxStockThreshold = "10" }
+
+[[probes]]
+path = "/Catalog/Details/{item}"
+cookies = true
+contains = "Changed by a probe"
+
+[[probes]]
+path = "/Catalog/Delete/{item}"
+cookies = true
+contains = "Changed by a probe"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Catalog/Delete/{item}"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}" }
+
+[[probes]]
+path = "/Catalog/Details/{item}"
+cookies = true
+status = 404
+
+[[probes]]
+path = "/Catalog/Create"
+method = "POST"
+status = 500
+form = { Name = "No token" }
+contains = "__RequestVerificationToken"

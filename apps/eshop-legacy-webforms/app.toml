@@ -41,3 +41,99 @@ contains = "Sys"
 
 [[probes]]
 path = "/Pics/1.png"
+
+# Web Forms postbacks (the catalog is the in-memory mock): each form's GET gives its view state and event validation,
+# captured for the post, which sends them with the fields and the button's name, as a browser does. Create, then the
+# new item in the list (its id captured from its Edit link), Edit, Delete, and the list without it.
+[[probes]]
+path = "/Catalog/Create"
+cookies = true
+contains = "ctl00$MainContent$Name"
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Catalog/Create"
+method = "POST"
+cookies = true
+status = 302
+[probes.form]
+__VIEWSTATE = "{viewstate}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$MainContent$Name" = "Smoke Test Mug"
+"ctl00$MainContent$Description" = "Made by a probe"
+"ctl00$MainContent$Brand" = "2"
+"ctl00$MainContent$Type" = "1"
+"ctl00$MainContent$Price" = "4.50"
+"ctl00$MainContent$Stock" = "7"
+"ctl00$MainContent$Restock" = "0"
+"ctl00$MainContent$Maxstock" = "0"
+"ctl00$MainContent$ctl06" = "[ Create ]"
+
+[[probes]]
+path = "/Default/index/0/size/50"
+cookies = true
+contains = "Smoke Test Mug"
+capture = { item = 'Smoke Test Mug[\s\S]*?/Catalog/Edit/(\d+)' }
+
+[[probes]]
+path = "/Catalog/Details/{item}"
+cookies = true
+contains = "Made by a probe"
+
+[[probes]]
+path = "/Catalog/Edit/{item}"
+cookies = true
+contains = "value=\"Smoke Test Mug\""
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Catalog/Edit/{item}"
+method = "POST"
+cookies = true
+status = 302
+[probes.form]
+__VIEWSTATE = "{viewstate}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$MainContent$Name" = "Smoke Test Mug II"
+"ctl00$MainContent$Description" = "Changed by a probe"
+"ctl00$MainContent$BrandDropDownList" = "2"
+"ctl00$MainContent$TypeDropDownList" = "1"
+"ctl00$MainContent$Price" = "9.99"
+"ctl00$MainContent$PictureFileName" = "dummy.png"
+"ctl00$MainContent$Stock" = "7"
+"ctl00$MainContent$Restock" = "0"
+"ctl00$MainContent$Maxstock" = "0"
+"ctl00$MainContent$ctl07" = "[ Save ]"
+
+# The mock sets an item's brand and type when it lists the catalog (its Update doesn't), and Details and Delete
+# show them: the list first.
+[[probes]]
+path = "/Default/index/0/size/50"
+cookies = true
+contains = "Changed by a probe"
+
+[[probes]]
+path = "/Catalog/Details/{item}"
+cookies = true
+contains = "9.99"
+
+[[probes]]
+path = "/Catalog/Delete/{item}"
+cookies = true
+contains = "Smoke Test Mug II"
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Catalog/Delete/{item}"
+method = "POST"
+cookies = true
+status = 302
+form = { __VIEWSTATE = "{viewstate}", __VIEWSTATEGENERATOR = "{generator}", __EVENTVALIDATION = "{validation}", "ctl00$MainContent$ctl11" = "[ Delete ]" }
+
+[[probes]]
+path = "/Default/index/0/size/50"
+cookies = true
+contains = ".NET Bot Black Hoodie"
+absent = "Smoke Test Mug"
