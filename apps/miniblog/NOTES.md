@@ -79,7 +79,7 @@ All 18 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0.
 
 ### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
 
-**CI (Linux and Windows): 44/44 on both, in CI runs 42026922513 and (second).**
+**CI (Linux and Windows): 44/44 on both, in CI runs 42026922513 and 42030748535.**
 
 44/44 on Linux, twice in a row (the posts the probes make are deleted again). 25 probes more, for everything MiniBlog
 takes other than GET, as its pages' scripts send it:

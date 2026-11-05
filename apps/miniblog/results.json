@@ -16,205 +16,219 @@
       "target_frameworks": []
     },
     "build": {
-      "at": "2026-11-05T12:37:39+00:00",
+      "at": "2026-11-05T12:57:43+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/miniblog/logs/build.log",
-      "seconds": 7,
+      "seconds": 8,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T12:37:32+00:00",
+      "at": "2026-11-05T12:57:35+00:00",
       "commit": "7700ea7b713a336657f3540b930c3a2e22c09ef0",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-05T12:37:45+00:00",
+      "at": "2026-11-05T12:57:51+00:00",
       "checks": [
         {
-          "ms": 10,
+          "ms": 17,
           "ok": true,
           "path": "/",
-          "status": 200
-        },
-        {
-          "ms": 10,
-          "ok": true,
-          "path": "/post/test-1",
-          "status": 200
-        },
-        {
-          "ms": 7,
-          "ok": true,
-          "path": "/category/Chrome",
-          "status": 200
-        },
-        {
-          "ms": 11,
-          "ok": true,
-          "path": "/feed/rss/",
-          "status": 200
-        },
-        {
-          "ms": 124,
-          "ok": true,
-          "path": "/robots.txt",
-          "status": 200
-        },
-        {
-          "ms": 5,
-          "ok": true,
-          "path": "/sitemap.xml",
-          "status": 200
-        },
-        {
-          "ms": 159,
-          "ok": true,
-          "path": "/views/login.cshtml",
-          "status": 200
-        },
-        {
-          "ms": 14,
-          "ok": true,
-          "path": "/metaweblog",
-          "status": 200
-        },
-        {
-          "ms": 4,
-          "ok": true,
-          "path": "/views/robots/rsd",
-          "status": 200
-        },
-        {
-          "ms": 37,
-          "ok": true,
-          "path": "/themes/OneColumn/site.css",
-          "status": 200
-        },
-        {
-          "ms": 3,
-          "ok": true,
-          "path": "/posts/9fa751db-c036-435b-97e3-bd6373b0991b.xml",
-          "status": 403
-        },
-        {
-          "ms": 15,
-          "ok": true,
-          "path": "/no-such-page",
-          "status": 404
-        },
-        {
-          "ms": 7,
-          "ok": true,
-          "path": "/views/login.cshtml",
-          "status": 200
-        },
-        {
-          "method": "POST",
-          "ms": 18,
-          "ok": true,
-          "path": "/post.ashx?mode=save",
-          "status": 403
-        },
-        {
-          "method": "POST",
-          "ms": 4,
-          "ok": true,
-          "path": "/views/login.cshtml",
-          "status": 200
-        },
-        {
-          "method": "POST",
-          "ms": 6,
-          "ok": true,
-          "path": "/views/login.cshtml",
-          "status": 302
-        },
-        {
-          "ms": 8,
-          "ok": true,
-          "path": "/",
-          "status": 200
-        },
-        {
-          "method": "POST",
-          "ms": 6,
-          "ok": true,
-          "path": "/post.ashx?mode=save",
-          "status": 200
-        },
-        {
-          "ms": 7,
-          "ok": true,
-          "path": "/post/smoke-probe-post",
-          "status": 200
-        },
-        {
-          "method": "POST",
-          "ms": 3,
-          "ok": true,
-          "path": "/post.ashx?mode=save",
-          "status": 200
-        },
-        {
-          "ms": 5,
-          "ok": true,
-          "path": "/post/smoke-probe-post",
-          "status": 200
-        },
-        {
-          "method": "POST",
-          "ms": 30,
-          "ok": true,
-          "path": "/comment.ashx",
           "status": 200
         },
         {
           "ms": 54,
           "ok": true,
+          "path": "/post/test-1",
+          "status": 200
+        },
+        {
+          "ms": 12,
+          "ok": true,
+          "path": "/category/Chrome",
+          "status": 200
+        },
+        {
+          "ms": 20,
+          "ok": true,
+          "path": "/feed/rss/",
+          "status": 200
+        },
+        {
+          "ms": 178,
+          "ok": true,
+          "path": "/robots.txt",
+          "status": 200
+        },
+        {
+          "ms": 7,
+          "ok": true,
+          "path": "/sitemap.xml",
+          "status": 200
+        },
+        {
+          "ms": 218,
+          "ok": true,
+          "path": "/views/login.cshtml",
+          "status": 200
+        },
+        {
+          "ms": 22,
+          "ok": true,
+          "path": "/metaweblog",
+          "status": 200
+        },
+        {
+          "ms": 6,
+          "ok": true,
+          "path": "/views/robots/rsd",
+          "status": 200
+        },
+        {
+          "ms": 61,
+          "ok": true,
+          "path": "/themes/OneColumn/site.css",
+          "status": 200
+        },
+        {
+          "ms": 5,
+          "ok": true,
+          "path": "/posts/9fa751db-c036-435b-97e3-bd6373b0991b.xml",
+          "status": 403
+        },
+        {
+          "ms": 22,
+          "ok": true,
+          "path": "/no-such-page",
+          "status": 404
+        },
+        {
+          "ms": 10,
+          "ok": true,
+          "path": "/views/login.cshtml",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 28,
+          "ok": true,
+          "path": "/post.ashx?mode=save",
+          "status": 403
+        },
+        {
+          "method": "POST",
+          "ms": 6,
+          "ok": true,
+          "path": "/views/login.cshtml",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 10,
+          "ok": true,
+          "path": "/views/login.cshtml",
+          "status": 302
+        },
+        {
+          "ms": 14,
+          "ok": true,
+          "path": "/",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 11,
+          "ok": true,
+          "path": "/post.ashx?mode=save",
+          "status": 200
+        },
+        {
+          "ms": 39,
+          "ok": true,
           "path": "/post/smoke-probe-post",
           "status": 200
         },
         {
           "method": "POST",
           "ms": 5,
+          "ok": true,
+          "path": "/post.ashx?mode=save",
+          "status": 200
+        },
+        {
+          "ms": 7,
+          "ok": true,
+          "path": "/post/smoke-probe-post",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 42,
           "ok": true,
           "path": "/comment.ashx",
           "status": 200
         },
         {
-          "ms": 5,
+          "ms": 9,
           "ok": true,
           "path": "/post/smoke-probe-post",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 3,
+          "ms": 4,
+          "ok": true,
+          "path": "/comment.ashx",
+          "status": 200
+        },
+        {
+          "ms": 7,
+          "ok": true,
+          "path": "/post/smoke-probe-post",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 4,
           "ok": true,
           "path": "/post.ashx?mode=delete",
           "status": 200
         },
         {
-          "ms": 5,
+          "ms": 8,
           "ok": true,
           "path": "/post/smoke-probe-post",
           "status": 404
         },
         {
           "method": "POST",
-          "ms": 9,
+          "ms": 14,
           "ok": true,
           "path": "/views/login.cshtml",
           "status": 302
         },
         {
-          "ms": 3,
+          "ms": 6,
           "ok": true,
           "path": "/",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 16,
+          "ok": true,
+          "path": "/metaweblog",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 7,
+          "ok": true,
+          "path": "/metaweblog",
           "status": 200
         },
         {
@@ -225,8 +239,14 @@
           "status": 200
         },
         {
+          "ms": 7,
+          "ok": true,
+          "path": "/post/smoke-xml-rpc-post",
+          "status": 200
+        },
+        {
           "method": "POST",
-          "ms": 4,
+          "ms": 5,
           "ok": true,
           "path": "/metaweblog",
           "status": 200
@@ -239,64 +259,44 @@
           "status": 200
         },
         {
-          "ms": 5,
-          "ok": true,
-          "path": "/post/smoke-xml-rpc-post",
-          "status": 200
-        },
-        {
           "method": "POST",
-          "ms": 3,
+          "ms": 4,
           "ok": true,
           "path": "/metaweblog",
           "status": 200
         },
         {
-          "method": "POST",
           "ms": 3,
-          "ok": true,
-          "path": "/metaweblog",
-          "status": 200
-        },
-        {
-          "method": "POST",
-          "ms": 3,
-          "ok": true,
-          "path": "/metaweblog",
-          "status": 200
-        },
-        {
-          "ms": 2,
           "ok": true,
           "path": "/post/smoke-xml-rpc-post",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 5,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/packages.config",
           "status": 404
@@ -308,7 +308,7 @@
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404
