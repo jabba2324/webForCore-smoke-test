@@ -88,7 +88,7 @@ The probes cover:
 
 ### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
 
-**CI (Linux and Windows): 49/49 on both, in CI runs 42026922513 and (second).**
+**CI (Linux and Windows): 49/49 on both, in CI runs 42026922513 and 42030748535.**
 
 49/49 on Linux, on a new database and again on the same one. Changes:
 - **System.Data.Linq is back in web.config.** 0.9.0 provides it (F37), so the overlay no longer removes

@@ -12,7 +12,7 @@ generated = ["Web/Data/HelpFiles/**", "Web/Data/test.config"]
 kinds = ["webforms", "mvc", "webapi"]
 licence = "EPL-1.0"
 status = "migrated"
-notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 49/49 on Linux and Windows (CI runs 42026922513 and (second)), with registration, log-in, the Web API, a page and its content made and deleted, and an account deleted. log4net's log moved out of bin_dotnet (F154)."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 49/49 on Linux and Windows (CI runs 42026922513 and 42030748535), with registration, log-in, the Web API, a page and its content made and deleted, and an account deleted. log4net's log moved out of bin_dotnet (F154)."
 needs = ["mssql"]
 
 # The first request compiles the site, so it gets 120 s. The probes need the compose SQL Server with an empty
