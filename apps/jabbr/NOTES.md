@@ -1,6 +1,7 @@
 # JabbR: migration notes
 
-Status: blocked. Source: https://github.com/JabbR/JabbR at `eb5b4e2f` (the `dev` branch's last commit, 2016). Licence MIT.
+Status: blocked (webForCore 0.9.0, 7/12 on Linux and Windows): [F135](../../FINDINGS.md#f135) (webForCore bug), then [F50](../../FINDINGS.md#f50) (Nancy 0.20).
+Source: https://github.com/JabbR/JabbR at `eb5b4e2f` (the `dev` branch's last commit, 2016). Licence MIT.
 Round 4, on webForCore 0.5.0 and webForCore-thirdparty 0.4.1.
 
 ## Assessment
@@ -58,7 +59,7 @@ which remains app/environment.
 One verb probe added: Nancy's log-in POST without its CSRF token or a `Sec-*` header is refused (403). The log-in,
 registration and chat flows wait until the app starts.
 
-Results: RESULTS_PLACEHOLDER
+Results: **7/12 on Linux and Windows** (CI runs 42021158598 and 42026762740): the forbidden-path checks pass; every app probe is the Nancy 0.21.1.0 load failure (F135).
 
 ## Open problems
 
