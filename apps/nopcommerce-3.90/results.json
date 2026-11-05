@@ -39,27 +39,27 @@
       ]
     },
     "build": {
-      "at": "2026-11-04T22:37:08+00:00",
+      "at": "2026-11-05T12:07:28+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/nopcommerce-3.90/logs/build.log",
-      "seconds": 129,
+      "seconds": 120,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.8.0"
+      "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-04T22:34:59+00:00",
+      "at": "2026-11-05T12:03:47+00:00",
       "commit": "12d1f0139149a9d6e84964d325d62bae6ac748f6",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-04T22:37:55+00:00",
+      "at": "2026-11-05T12:08:34+00:00",
       "created": [
         "nop390"
       ],
-      "date": "2026-11-04",
+      "date": "2026-11-05",
       "status": "pass",
       "steps": [
         {
@@ -82,82 +82,82 @@
       "summary": "3/3 steps"
     },
     "smoke": {
-      "at": "2026-11-04T22:38:05+00:00",
+      "at": "2026-11-05T12:12:02+00:00",
       "checks": [
         {
-          "ms": 116,
+          "ms": 126,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 525,
+          "ms": 315,
           "ok": true,
           "path": "/computers",
           "status": 200
         },
         {
-          "ms": 551,
+          "ms": 366,
           "ok": true,
           "path": "/apple-macbook-pro-13-inch",
           "status": 200
         },
         {
-          "ms": 202,
+          "ms": 134,
           "ok": true,
           "path": "/search?q=apple",
           "status": 200
         },
         {
-          "ms": 760,
+          "ms": 161,
           "ok": true,
           "path": "/blog",
           "status": 200
         },
         {
-          "ms": 935,
+          "ms": 166,
           "ok": true,
           "path": "/login",
           "status": 200
         },
         {
-          "ms": 636,
+          "ms": 637,
           "ok": true,
           "path": "/register",
           "status": 200
         },
         {
-          "ms": 139,
+          "ms": 116,
           "ok": true,
           "path": "/contactus",
           "status": 200
         },
         {
-          "ms": 74,
+          "ms": 60,
           "ok": true,
           "path": "/news/rss/1",
           "status": 200
         },
         {
-          "ms": 61,
+          "ms": 85,
           "ok": true,
           "path": "/sitemap.xml",
           "status": 200
         },
         {
-          "ms": 72,
+          "ms": 114,
           "ok": true,
           "path": "/no-such-page",
           "status": 404
         },
         {
-          "ms": 60,
+          "ms": 48,
           "ok": true,
           "path": "/admin",
           "status": 302
         },
         {
-          "ms": 16,
+          "ms": 20,
           "ok": true,
           "path": "/Themes/DefaultClean/Content/css/styles.css",
           "status": 200
@@ -169,64 +169,154 @@
           "status": 200
         },
         {
-          "ms": 46,
-          "ok": false,
+          "ms": 6,
+          "ok": true,
           "path": "/content/images/thumbs/0000020_build-your-own-computer_415.jpeg",
-          "status": 404,
-          "title": "The resource cannot be found."
+          "status": 200
         },
         {
-          "ms": 57,
+          "ms": 77,
           "ok": true,
           "path": "/Plugins/Widgets.NivoSlider/Nop.Plugin.Widgets.NivoSlider.dll",
           "status": 403
         },
         {
-          "ms": 4,
+          "method": "POST",
+          "ms": 156,
+          "ok": true,
+          "path": "/addproducttocart/details/4/1",
+          "status": 200
+        },
+        {
+          "ms": 325,
+          "ok": true,
+          "path": "/cart",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 114,
+          "ok": true,
+          "path": "/cart",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 159,
+          "ok": true,
+          "path": "/login",
+          "status": 302
+        },
+        {
+          "ms": 453,
+          "ok": true,
+          "path": "/Admin/Category/Create",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 187,
+          "ok": true,
+          "path": "/Admin/Category/Create",
+          "status": 302
+        },
+        {
+          "method": "POST",
+          "ms": 135,
+          "ok": true,
+          "path": "/Admin/Category/List",
+          "status": 200
+        },
+        {
+          "ms": 150,
+          "ok": true,
+          "path": "/{sename}",
+          "status": 200
+        },
+        {
+          "ms": 134,
+          "ok": true,
+          "path": "/Admin/Category/Edit/{category}",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 103,
+          "ok": true,
+          "path": "/Admin/Category/Edit/{category}",
+          "status": 302
+        },
+        {
+          "ms": 96,
+          "ok": true,
+          "path": "/{sename}",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 76,
+          "ok": true,
+          "path": "/Admin/Category/Delete/{category}",
+          "status": 302
+        },
+        {
+          "ms": 78,
+          "ok": true,
+          "path": "/{sename}",
+          "status": 404
+        },
+        {
+          "ms": 33,
+          "ok": true,
+          "path": "/logout",
+          "status": 302
+        },
+        {
+          "ms": 10,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 3,
           "ok": true,
           "path": "/bin_dotnet/Nop.Web.dll",
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 3,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404
         }
       ],
       "log": "apps/nopcommerce-3.90/logs/server.log",
-      "status": "fail",
-      "summary": "22/23 probes"
+      "status": "pass",
+      "summary": "37/37 probes"
     }
   }
 }

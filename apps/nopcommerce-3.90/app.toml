@@ -131,3 +131,97 @@ path = "/content/images/thumbs/0000020_build-your-own-computer_415.jpeg"
 [[probes]]
 path = "/Plugins/Widgets.NivoSlider/Nop.Plugin.Widgets.NivoSlider.dll"
 status = 403
+
+# Verbs (round 0.9.0). The shopping cart, anonymously: a product added from its page (the AJAX add-to-cart POST, with
+# the quantity its form sends; the MacBook's minimum is 2), the cart showing it, and the item removed with the cart
+# form's "update cart" post (the cart is then empty). Then the administration: the admin logs in (the log-in form),
+# creates a category (the admin form, with its anti-forgery token, as every admin POST needs), finds it in the
+# category grid (Kendo's AJAX POST, JSON), sees it on the front end at its SEO name, edits its description, and deletes
+# it (it's then a 404). nopCommerce deletes a category by marking it deleted, and its old SEO name stays taken, so a
+# second run's category gets a new one: the probes use the name the grid gives.
+[[probes]]
+path = "/addproducttocart/details/4/1"
+method = "POST"
+cookies = true
+headers = { X-Requested-With = "XMLHttpRequest" }
+form = { "addtocart_4.EnteredQuantity" = "2" }
+contains = "\"success\":true"
+
+[[probes]]
+path = "/cart"
+cookies = true
+contains = "Apple MacBook Pro 13-inch"
+capture = { item = 'name="removefromcart" value="(\d+)"' }
+
+[[probes]]
+path = "/cart"
+method = "POST"
+cookies = true
+form = { removefromcart = "{item}", "itemquantity{item}" = "2", updatecart = "Update shopping cart" }
+contains = "Your Shopping Cart is empty!"
+
+[[probes]]
+path = "/login"
+method = "POST"
+cookies = true
+status = 302
+form = { Email = "admin@yourStore.com", Password = "Smoke_test_1234", RememberMe = "false" }
+
+[[probes]]
+path = "/Admin/Category/Create"
+cookies = true
+contains = "id=\"category-form\""
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Admin/Category/Create"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", Id = "0", Name = "Smoke Probe Category", Description = "Made by the smoke test", CategoryTemplateId = "1", ParentCategoryId = "0", PageSize = "6", AllowCustomersToSelectPageSize = "false", PageSizeOptions = "6, 3, 9", Published = "true", DisplayOrder = "0", PictureId = "0", save = "" }
+
+[[probes]]
+path = "/Admin/Category/List"
+method = "POST"
+cookies = true
+headers = { X-Requested-With = "XMLHttpRequest" }
+form = { __RequestVerificationToken = "{token}", page = "1", pageSize = "15", SearchCategoryName = "Smoke Probe Category" }
+contains = "\"Name\":\"Smoke Probe Category\""
+capture = { category = '"Breadcrumb":"Smoke Probe Category"[^}]*?"Id":(\d+)', sename = '"SeName":"([^"]+)"' }
+
+[[probes]]
+path = "/{sename}"
+contains = "Made by the smoke test"
+
+[[probes]]
+path = "/Admin/Category/Edit/{category}"
+cookies = true
+contains = "Smoke Probe Category"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Admin/Category/Edit/{category}"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", Id = "{category}", Name = "Smoke Probe Category", Description = "Edited by the smoke test", CategoryTemplateId = "1", ParentCategoryId = "0", PageSize = "6", AllowCustomersToSelectPageSize = "false", PageSizeOptions = "6, 3, 9", Published = "true", DisplayOrder = "0", PictureId = "0", SeName = "{sename}", save = "" }
+
+[[probes]]
+path = "/{sename}"
+contains = "Edited by the smoke test"
+
+[[probes]]
+path = "/Admin/Category/Delete/{category}"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}" }
+
+[[probes]]
+path = "/{sename}"
+status = 404
+
+[[probes]]
+path = "/logout"
+cookies = true
+status = 302

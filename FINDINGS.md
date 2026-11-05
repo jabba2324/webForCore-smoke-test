@@ -153,9 +153,9 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F83](#f83) | C# 14's span conversions break LINQ to Entities at run time (`Contains(ReadOnlySpan)`), not only the build | guide gap | nopcommerce-3.90 | [#138](https://github.com/xforcore/webForCore/issues/138) |
 | [F84](#f84) | `AppDomain.CurrentDomain.DynamicDirectory` is null: plugin managers that shadow-copy there fail at start | guide gap | nopcommerce-3.90, smartstorenet | [#139](https://github.com/xforcore/webForCore/issues/139) |
 | [F85](#f85) | System.Linq.Dynamic 1.0.7 (net40) needs .NET Framework's `System.Data.Entity` 4.0 | app/environment | nopcommerce-3.90 | – |
-| [F86](#f86) | Linux: a static file in another case is 404 until requested once in its own case, then 200 in any case | webForCore bug | nopcommerce-3.90 | [#140](https://github.com/xforcore/webForCore/issues/140) |
+| [F86](#f86) | Linux: a static file in another case is 404 until requested once in its own case, then 200 in any case (fixed in 0.9.0) | webForCore bug | nopcommerce-3.90 | [#140](https://github.com/xforcore/webForCore/issues/140) |
 | [F87](#f87) | `System.Web.Optimization` and `WebGrease` don't have Microsoft's identities: BundleTransformer fails with CS0012 | webForCore bug | smartstorenet | [#141](https://github.com/xforcore/webForCore/issues/141) |
-| [F88](#f88) | The same as F92: one inotify instance per watched folder; nopCommerce takes more than 50 of the user's 128 | webForCore bug | nopcommerce-3.90 | [#152](https://github.com/xforcore/webForCore/issues/152) |
+| [F88](#f88) | The same as F92: one inotify instance per watched folder; nopCommerce takes more than 50 of the user's 128 (fixed in 0.9.0) | webForCore bug | nopcommerce-3.90 | [#152](https://github.com/xforcore/webForCore/issues/152) |
 | [F89](#f89) | Windows, intermittent: nopCommerce's plugin manager can't replace a plugin copy in the compilation folder at start ("rename failed") | app/environment | nopcommerce-3.90 | – |
 | [F90](#f90) | The parameterless crypto factories (`KeyedHashAlgorithm.Create()`, `HashAlgorithm.Create()`, ...) throw on .NET | guide gap | kooboo-cms | [#151](https://github.com/xforcore/webForCore/issues/151) |
 | [F91](#f91) | DotNetZip 1.9 (`Ionic.Zip.Reduced`) can't extract on Linux | app/environment | kooboo-cms | - |
@@ -1764,7 +1764,8 @@ App/environment. Found on 0.8.0, migrating nopCommerce 3.90.
 
 **Linux: a static file requested in another case than its own is a 404 until it has been requested once in its own
 case; then it is a 200 in any case.** webForCore bug. Raised as [#140](https://github.com/xforcore/webForCore/issues/140).
-Found on 0.8.0 (Linux), migrating nopCommerce 3.90.
+Found on 0.8.0 (Linux), migrating nopCommerce 3.90. **Fixed in 0.9.0:** in round 0.9.0 the product thumbnail probe
+(`/content/images/thumbs/...`, the folder is `Content/Images/Thumbs`) passes on Linux from a fresh start.
 
 - **Apps:** nopcommerce-3.90: it writes every product picture's URL as `/content/images/thumbs/<file>`, and the folder
   is `Content/Images/Thumbs` (where `MapPath("~/content/images/thumbs")` puts the files, as webForCore resolves the
@@ -1804,7 +1805,7 @@ problem as F40 (SignalR and DataVisualization at 0.0.0.0, #40).
 **The same as [F92](#f92) (found the same day with Kooboo CMS, raised as
 [#152](https://github.com/xforcore/webForCore/issues/152)): one inotify instance per watched folder; nopCommerce 3.90's
 worker takes more than 50 of the user's 128.** webForCore bug (`docs/IIS-COMPATIBILITY.md` says about 15). Found on
-0.8.0 (Linux), migrating nopCommerce 3.90.
+0.8.0 (Linux), migrating nopCommerce 3.90. **Fixed in 0.9.0** (with F92).
 
 - **Apps:** nopcommerce-3.90: its worker had 48 inotify instances after a dozen store pages (from `/proc/<pid>/fd`), and
   more after the administration: each folder with a `web.config` (23 in the site and its plugins) and each folder of
