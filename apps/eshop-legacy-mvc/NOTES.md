@@ -111,7 +111,7 @@ the seed scripts' `USE [Microsoft.eShopOnContainers.Services.CatalogDb]` has to 
 
 ### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
 
-**CI (Linux and Windows): 30/30 on both, in CI runs 42026922513 and (second).**
+**CI (Linux and Windows): 30/30 on both, in CI runs 42026922513 and 42030748535.**
 
 30/30 on Linux, twice in a row. Four probes more, for the Web API's verbs: `BrandsController` has `Get` and `Delete`
 only. `DELETE /api/brands/1` answers 200 and `DELETE /api/brands/99` 404, and `GET /api/brands/1` after it still has
