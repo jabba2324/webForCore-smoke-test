@@ -77,6 +77,18 @@ page, an admin page (forms authentication redirect), RSS, two MVC controllers ro
 - **On the packages of xforcore/webForCore#32** (F35 and F38 fixed): the install wizard runs, and 15 of 16 checks pass (10 probes and the 6 forbidden paths).
   The log-in page fails in DotNetOpenAuth's OpenID control (F44, app/environment).
 
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+27/28 on Linux, twice; still blocked by DotNetOpenAuth on the log-in page (F44, the same `TypeInitializationException`
+in `UriIdentifier`). System.Data.Linq, now provided, isn't in Subtext's web.config (its F37 entry was System.Design,
+still removed). 11 probes more, for what can be posted without the log-in: the search box (a postback whose 302 goes
+to `/search.aspx?q=...`) and the MetaWeblog API (`POST /services/metablogapi.aspx`, XML-RPC; it checks the blog
+owner's name and password itself, so it works without the log-in page): a wrong password is "Username and password
+denied."; a post made with `newPost`, its page (its URL taken from `getPost`'s `link`), `editPost`, `getPost` with the
+change, the search page finding it (Subtext's Lucene.Net index), `blogger.deletePost`, and `getPost`'s "The entry
+could not be found" after. Subtext caches a post's page, so it isn't asked for after the edit and the delete. Not
+probed: the comment form (an image CAPTCHA), the contact form (it sends e-mail) and everything behind the log-in.
+
 ## Open problems
 
 - F35, webForCore bug: fixed in #32.
