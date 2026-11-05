@@ -27,6 +27,13 @@ All 10 probes pass on the released 0.2.0 packages (the overlay's `PackageReferen
 
 All 10 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0.
 
+### Probes with verbs (C# runner, November 2026)
+
+Nine probes more, on webForCore 0.8.0: the API's whole CRUD on its in-memory repository. A JSON `POST` (201, the new
+product's id captured from `Location`), a `GET` of it, a `PUT` (204), the changed product (by id, and in
+`?category=Hardware`), a `DELETE` (204) and a 404 after it; a form-encoded `POST` (Web API binds it like JSON), and a
+`PUT` to a product that isn't there (404). 20 checks in all (13 probes, 7 forbidden paths), all passing on Linux and Windows (CI run 41940185337).
+
 ## Open problems
 
 Round 1 (webForCore 0.1.0); the webForCore bugs below are fixed in 0.2.0 (PR #16) and kept for the record.
