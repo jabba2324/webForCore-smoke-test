@@ -133,7 +133,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F63](#f63) | Calls that become ambiguous on .NET 10 (CS0121): the app's own `DistinctBy`, empty `params` calls | guide gap | umbraco-6, umbraco-7 | [#93](https://github.com/xforcore/webForCore/issues/93) |
 | [F64](#f64) | Umbraco on Linux: Windows file names, packages only on its MyGet feed, an installer that needs a JSON POST | app/environment | umbraco-6, umbraco-7 | - |
 | [F65](#f65) | Linux: named semaphores and events throw `PlatformNotSupportedException` (only named `Mutex` works) | guide gap | umbraco-7 | [#94](https://github.com/xforcore/webForCore/issues/94) |
-| [F66](#f66) | webForCore's `CallContext` doesn't reach prebuilt .NET Framework libraries: Log4Net.Async logs nothing | guide gap | umbraco-7 | [#95](https://github.com/xforcore/webForCore/issues/95) |
+| [F66](#f66) | webForCore's `CallContext` doesn't reach prebuilt .NET Framework libraries: Log4Net.Async logs nothing; SimpleInjector 3.1's Web API scopes fail | guide gap | umbraco-7, blogengine | [#95](https://github.com/xforcore/webForCore/issues/95) |
 | [F67](#f67) | Linux with no locale (`C`/`POSIX`: CI runners, containers): the culture is invariant, so apps that pick resources by culture find none | guide gap | umbraco-6 | [#97](https://github.com/xforcore/webForCore/issues/97) |
 | [F68](#f68) | Web API OData (Microsoft.AspNet.OData 7.5.18) needs System.Data.Linq to build any model | documented gap (consequence undocumented) | odata-samples-compositekey | [#120](https://github.com/xforcore/webForCore/issues/120) |
 | [F69](#f69) | Windows Identity Foundation (`System.IdentityModel`) isn't on .NET or in NAMESPACES.md: IdentityServer3 can't load | guide gap | identityserver3-example | [#119](https://github.com/xforcore/webForCore/issues/119) |
@@ -185,6 +185,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F133](#f133) | Linux: DNN builds every physical path with `\` (`ApplicationMapPath` is `BaseDirectory.Replace("/", "\\")`), and QuickIO.NET is Win32 | app/environment | dnn-platform-9 | – |
 | [F154](#f154) | A library's relative paths resolve against `BaseDirectory` (`bin_dotnet/`): log4net writes its log into `bin_dotnet`, and every log line restarts the application | guide gap | mojoportal | to raise |
 | [F155](#f155) | Web Pages 1 sites meet Razor 3's stricter parser: `@string.Join(...)` in a code block is a parser error | guide gap | rabbit-webpages | to raise |
+| [F156](#f156) | BlogEngine asks for a restart by touching `PhysicalApplicationPath + "\\web.config"`: on Linux the path doesn't exist | app/environment | blogengine | – |
 ---
 
 ## F1
@@ -1451,6 +1452,14 @@ Raised as [#95](https://github.com/xforcore/webForCore/issues/95). Found on 0.7.
 - **Fix in the app:** the root logger writes through the file appender directly (synchronous logging).
 - **Guide:** `docs/NAMESPACES.md` should say the carried types serve code compiled against webForCore, and
   Log4Net.Async belongs in `docs/MIGRATING.md`'s "Libraries that don't run on .NET".
+- **Round 0.9.0, blogengine:** SimpleInjector.Extensions.ExecutionContextScoping 3.1.0 (net45 only), which
+  SimpleInjector.Integration.WebApi 3.1.0's `BeginScope` uses: every Web API controller failed ("Make sure that the
+  controller has a parameterless public constructor"), inner `TypeLoadException` for `CallContext` at
+  `ExecutionContextScopeManager.get_CurrentScope()`. Fix in the app: the three SimpleInjector packages at 3.3.2,
+  whose ExecutionContextScoping has a .NET Standard 1.3 build (`AsyncLocal`). MIGRATING.md names only
+  Log4Net.Async; a general line (a prebuilt .NET Framework library that uses `CallContext` throws this
+  `TypeLoadException`: look for a version with a .NET Standard or .NET build) would cover both. Not raised again:
+  #95 is closed; listed in this round's report for a docs follow-up.
 
 ## F67
 
@@ -2388,3 +2397,18 @@ Windows).
   as JSON and the tag page pass (probes).
 - **Guide:** the MVC 3/4 step in MIGRATING.md (#122) covers the version setting; Razor 1's parsing differences (this
   one: `@` before a C# keyword inside code) aren't mentioned, nor the fix.
+
+## F156
+
+**BlogEngine.NET asks for a restart by touching a Windows path to web.config.** App/environment. Found on 0.9.0, on
+Linux.
+
+- **Apps:** blogengine. `Utils.RecycleIIS()` (BlogEngine.Core), called when an extension is enabled or disabled
+  (`ExtensionManager.ChangeStatus`), first tries IIS's ADSI (`IIS://.../W3SVC/AppPools/...`, Windows), then
+  `File.SetLastWriteTimeUtc(Request.PhysicalApplicationPath + "\\web.config", ...)`.
+- **Error:** `App_Data/logger.txt`: `Utils.RecycleIIS() : Could not find file '<site>\web.config'`. On Linux `\` isn't a
+  separator and the file is `Web.Config`, so nothing is touched and the application doesn't restart; touching the
+  real file would restart it, as on IIS. Seen once, at the first start, with nothing visibly wrong; the probes don't
+  enable or disable extensions.
+- **Fix in the app (not made):** `Path.Combine(HttpRuntime.AppDomainAppPath, "Web.Config")`, or
+  `HttpRuntime.UnloadAppDomain()`, which the code has commented out.
