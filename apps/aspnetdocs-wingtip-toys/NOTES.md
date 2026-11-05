@@ -1,6 +1,6 @@
 # AspNetDocs: Wingtip Toys (Web Forms 4.5 + EF 6 tutorial): migration notes
 
-Status: blocked (webForCore 0.8.0, 18/21 probes on Linux, 19/21 on Windows; F80, F81 and F82 are webForCore bugs; the shopping cart works from 0.8.0). Source: the
+Status: migrated (webForCore 0.9.0: 39/39 on Linux and Windows; F80-F82 fixed in 0.9.0). Source: the
 completed project of the AspNetDocs tutorial "Getting Started with ASP.NET 4.5 Web Forms and Visual Studio 2013"
 (`aspnet/web-forms/overview/getting-started/getting-started-with-aspnet-45-web-forms` in dotnet/AspNetDocs). The
 repository has only the tutorial's snippets; the tutorial links the project on the retired MSDN Code Gallery
@@ -113,6 +113,8 @@ The currency is the process culture's, as on IIS with the server's culture (no `
 so the probes don't check the total.
 
 ### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+**CI (Linux and Windows): 39/39 on both, in CI runs 42026922513 and (second).**
 
 **21/21 on Linux, then 39/39 with the verb probes, twice in a row.** 0.9.0 fixed F80 (`/Product/Convertible%20Car`
 renders), F81 (`/` is the home page, no redirect to `/Default`) and F82 (`/elmah.axd` lists the errors on Linux),

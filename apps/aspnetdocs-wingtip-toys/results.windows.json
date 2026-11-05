@@ -2,146 +2,260 @@
   "id": "aspnetdocs-wingtip-toys",
   "stages": {
     "build": {
-      "at": "2026-11-05T11:20:00+00:00",
+      "at": "2026-11-05T12:40:42+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\aspnetdocs-wingtip-toys\\logs.windows\\build.log",
-      "seconds": 32,
+      "seconds": 26,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T11:19:27+00:00",
+      "at": "2026-11-05T12:40:16+00:00",
       "commit": "e0c91fbfb40567858d48eb5cad5a7183d1e3a482",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-05T11:20:37+00:00",
+      "at": "2026-11-05T12:41:13+00:00",
       "checks": [
         {
-          "ms": 25,
+          "ms": 16,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 56,
+          "ms": 29,
           "ok": true,
           "path": "/ProductList",
           "status": 200
         },
         {
-          "ms": 55,
+          "ms": 30,
           "ok": true,
           "path": "/Category/Planes",
           "status": 200
         },
         {
-          "ms": 36,
+          "ms": 22,
           "ok": true,
           "path": "/Product/Convertible%20Car",
           "status": 200
         },
         {
-          "ms": 20,
+          "ms": 12,
           "ok": true,
           "path": "/ProductDetails?productID=2",
           "status": 200
         },
         {
-          "ms": 69,
+          "ms": 49,
           "ok": true,
           "path": "/ShoppingCart",
           "status": 200
         },
         {
-          "ms": 56,
+          "ms": 25,
           "ok": true,
           "path": "/AddToCart?productID=1",
           "status": 302
         },
         {
-          "ms": 81,
+          "ms": 46,
           "ok": true,
           "path": "/ShoppingCart",
           "status": 200
         },
         {
-          "ms": 1237,
+          "ms": 681,
           "ok": true,
           "path": "/Account/Login",
           "status": 200
         },
         {
-          "ms": 19,
+          "ms": 11,
           "ok": true,
           "path": "/Account/Register",
           "status": 200
         },
         {
-          "ms": 13,
+          "ms": 6,
           "ok": true,
           "path": "/About",
           "status": 200
         },
         {
-          "ms": 24,
+          "ms": 10,
           "ok": true,
           "path": "/Content/Site.css",
           "status": 200
         },
         {
-          "ms": 20,
+          "ms": 9,
           "ok": true,
           "path": "/Admin/AdminPage",
           "status": 302
         },
         {
-          "ms": 23,
+          "ms": 11,
           "ok": true,
           "path": "/elmah.axd",
           "status": 200
         },
         {
-          "ms": 9,
+          "ms": 7,
+          "ok": true,
+          "path": "/AddToCart?productID=2",
+          "status": 302
+        },
+        {
+          "ms": 6,
+          "ok": true,
+          "path": "/ShoppingCart",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 40,
+          "ok": true,
+          "path": "/ShoppingCart",
+          "status": 200
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/Account/Login",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 19,
+          "ok": true,
+          "path": "/Account/Login",
+          "status": 200
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/Account/Login",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 42,
+          "ok": true,
+          "path": "/Account/Login",
+          "status": 302
+        },
+        {
+          "ms": 158,
+          "ok": true,
+          "path": "/Admin/AdminPage",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 13,
+          "ok": true,
+          "path": "/Admin/AdminPage",
+          "status": 302
+        },
+        {
+          "ms": 6,
+          "ok": true,
+          "path": "/Admin/AdminPage?ProductAction=add",
+          "status": 200
+        },
+        {
+          "ms": 5,
+          "ok": true,
+          "path": "/ProductList",
+          "status": 200
+        },
+        {
+          "ms": 5,
+          "ok": true,
+          "path": "/ProductDetails?productID={product}",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 10,
+          "ok": true,
+          "path": "/Admin/AdminPage",
+          "status": 302
+        },
+        {
+          "ms": 5,
+          "ok": true,
+          "path": "/Admin/AdminPage?ProductAction=remove",
+          "status": 200
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/ProductList",
+          "status": 200
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/About",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 4,
+          "ok": true,
+          "path": "/About",
+          "status": 302
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/Admin/AdminPage",
+          "status": 302
+        },
+        {
+          "ms": 5,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/WingtipToys.dll",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404
@@ -149,7 +263,7 @@
       ],
       "log": "apps\\aspnetdocs-wingtip-toys\\logs.windows\\server.log",
       "status": "pass",
-      "summary": "21/21 probes"
+      "summary": "39/39 probes"
     }
   }
 }

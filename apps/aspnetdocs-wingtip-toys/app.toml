@@ -9,8 +9,8 @@ site = "Getting Started with ASP.NET 4.5 Web Forms and Visual Studio 2013 - Wing
 project = "Getting Started with ASP.NET 4.5 Web Forms and Visual Studio 2013 - Wingtip Toys/[C#]-Getting Started with ASP.NET 4.5 Web Forms and Visual Studio 2013 - Wingtip Toys/C#/WingtipToys/WingtipToys.csproj"
 kinds = ["webforms", "owin", "identity"]
 licence = "Apache-2.0"
-status = "blocked"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): 18/21 on Linux, 19/21 on Windows; the session-keyed shopping cart works (add, then view, with the session cookie). Blocked by webForCore bugs: paths with a space answer 400 (F80), FriendlyUrls redirects / (F81), Server.MachineName on Linux breaks ELMAH (F82). Needs SQL Server."
+status = "migrated"
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 39/39 on Linux and Windows (CI runs 42026922513 and (second)); 0.9.0 fixed F80-F82. The cart updated and a product added (with its image) and removed by the admin, as postbacks. Needs SQL Server."
 needs = ["mssql"]
 # ExceptionUtility logs the errors the probes and by-hand checks cause; the admin page saves the probes' product image.
 generated = ["**/App_Data/ErrorLog.txt", "**/Catalog/Images/smokeprobe.gif", "**/Catalog/Images/Thumbs/smokeprobe.gif"]
