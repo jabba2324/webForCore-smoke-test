@@ -9,7 +9,7 @@ project = "src/Umbraco.Web.UI/Umbraco.Web.UI.csproj"
 kinds = ["mvc", "webapi", "webforms", "owin", "identity", "signalr"]
 licence = "MIT"
 status = "migrated"
-notes = "Umbraco 8.18.15 on webForCore 0.8.0: builds, installs unattended on SQL Server, makes a template, document type and home page through the back office API (X-UMB-XSRF-TOKEN), and passes 28/28 on Linux and Windows (CI run 41940185337): Web Forms, MVC, Web API with POST and DELETE, OWIN/Identity log-in, SignalR, published content on the front end. No AngularJS client build. Found F93 (CSharpTest.Net.Collections) and F94 (Roslyn version)."
+notes = "Umbraco 8.18.15 on webForCore 0.9.0: builds, installs unattended on SQL Server, makes a template, document type and home page through the back office API (X-UMB-XSRF-TOKEN), and passes 40/40 on Linux and Windows (CI runs 42027500654, 42032474244): Web Forms, MVC, Web API with POST and DELETE (a page published, edited, unpublished, deleted and purged; a media folder made and deleted), OWIN/Identity log-in, SignalR. No AngularJS client build. Found F93 and F94."
 needs = ["mssql"]
 
 # The unattended install's back-office user (Umbraco reads these at its first start).

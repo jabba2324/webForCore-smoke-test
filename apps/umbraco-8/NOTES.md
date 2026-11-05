@@ -1,6 +1,6 @@
 # Umbraco 8: migration notes
 
-Status: migrated (CI run 41920542509: 21/21 on Linux and Windows). Source: https://github.com/umbraco/Umbraco-CMS at `4fbf8020` (tag release-8.18.15, the last
+Status: migrated (round 0.9.0, webForCore 0.9.0: 40/40 on Linux and Windows in CI runs 42027500654 and 42032474244). Source: https://github.com/umbraco/Umbraco-CMS at `4fbf8020` (tag release-8.18.15, the last
 8.x release). The repo, licence (MIT), web project and its `<TargetFrameworkVersion>` (v4.7.2) were checked when the
 app was pinned.
 
