@@ -2,14 +2,13 @@
   "id": "composite-c1",
   "stages": {
     "build": {
-      "at": "2026-11-04T21:18:41+00:00",
-      "error_count": 46,
+      "at": "2026-11-05T11:15:43+00:00",
+      "error_count": 41,
       "errors": [
         "error CS0103: The name 'AspNetCompatibilityRequirementsMode' does not exist in the current context ",
         "error CS0103: The name 'InstanceContextMode' does not exist in the current context ",
         "error CS0103: The name 'WebMessageBodyStyle' does not exist in the current context ",
         "error CS0234: The type or namespace name 'Activation' does not exist in the namespace 'System.ServiceModel' (are you missing an assembly reference?) ",
-        "error CS0234: The type or namespace name 'Linq' does not exist in the namespace 'System.Data' (are you missing an assembly reference?) ",
         "error CS0234: The type or namespace name 'Web' does not exist in the namespace 'System.ServiceModel' (are you missing an assembly reference?) ",
         "error CS0234: The type or namespace name 'Workflow' does not exist in the namespace 'System' (are you missing an assembly reference?) ",
         "error CS0246: The type or namespace name 'Activity' could not be found (are you missing a using directive or an assembly reference?) ",
@@ -22,34 +21,35 @@
         "error CS0246: The type or namespace name 'AspNetCompatibilityRequirementsAttribute' could not be found (are you missing a using directive or an assembly reference?) ",
         "error CS0246: The type or namespace name 'CodeActivity' could not be found (are you missing a using directive or an assembly reference?) ",
         "error CS0246: The type or namespace name 'ConditionalEventArgs' could not be found (are you missing a using directive or an assembly reference?) ",
-        "error CS0246: The type or namespace name 'DataContext' could not be found (are you missing a using directive or an assembly reference?) ",
         "error CS0246: The type or namespace name 'DependencyProperty' could not be found (are you missing a using directive or an assembly reference?) ",
         "error CS0246: The type or namespace name 'EventDrivenActivity' could not be found (are you missing a using directive or an assembly reference?) ",
         "error CS0246: The type or namespace name 'ExternalDataEventArgs' could not be found (are you missing a using directive or an assembly reference?) ",
         "error CS0246: The type or namespace name 'ExternalDataExchange' could not be found (are you missing a using directive or an assembly reference?) ",
         "error CS0246: The type or namespace name 'ExternalDataExchangeAttribute' could not be found (are you missing a using directive or an assembly reference?) ",
         "error CS0246: The type or namespace name 'ExternalDataExchangeService' could not be found (are you missing a using directive or an assembly reference?) ",
-        "error CS0246: The type or namespace name 'Function' could not be found (are you missing a using directive or an assembly reference?) ",
-        "error CS0246: The type or namespace name 'FunctionAttribute' could not be found (are you missing a using directive or an assembly reference?) ",
         "error CS0246: The type or namespace name 'HandleExternalEventActivity' could not be found (are you missing a using directive or an assembly reference?) ",
         "error CS0246: The type or namespace name 'HandleExternalEventActivityValidator' could not be found (are you missing a using directive or an assembly reference?) ",
-        "error CS0246: The type or namespace name 'ITable' could not be found (are you missing a using directive or an assembly reference?) ",
-        "error CS0246: The type or namespace name 'IfElseActivity' could not be found (are you missing a using directive or an assembly reference?) "
+        "error CS0246: The type or namespace name 'IfElseActivity' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'IfElseBranchActivity' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'ManualWorkflowSchedulerService' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'ServiceBehavior' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'ServiceBehaviorAttribute' could not be found (are you missing a using directive or an assembly reference?) ",
+        "error CS0246: The type or namespace name 'SetStateActivity' could not be found (are you missing a using directive or an assembly reference?) "
       ],
       "log": "apps\\composite-c1\\logs.windows\\build.log",
-      "seconds": 43,
+      "seconds": 33,
       "status": "fail",
-      "summary": "46 distinct errors",
-      "webforcore": "packages 0.8.0"
+      "summary": "41 distinct errors",
+      "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-04T21:17:57+00:00",
+      "at": "2026-11-05T11:15:09+00:00",
       "commit": "98b7e87d03003e2dac1799f569da63789528dad8",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-04T21:18:42+00:00",
+      "at": "2026-11-05T11:15:44+00:00",
       "status": "skip",
       "summary": "not built ($WFC_CHECKOUTS/composite-c1/Website/bin_dotnet/Composite.Website.dll missing)"
     }
