@@ -1,6 +1,6 @@
 # Subtext: migration notes
 
-Status: blocked by DotNetOpenAuth on the log-in page (F44): 16/17 probes on Linux and Windows, webForCore 0.8.0. Source: https://github.com/haacked/Subtext at `87a2d90d`. Found by searching GitHub on 2026-10-31; the
+Status: blocked by DotNetOpenAuth on the log-in page (F44): 27/28 probes on Linux and Windows, webForCore 0.9.0. Source: https://github.com/haacked/Subtext at `87a2d90d`. Found by searching GitHub on 2026-10-31; the
 repo, licence (MIT), web project and its `<TargetFrameworkVersion>` were checked through the GitHub API.
 
 Round 3b, on webForCore 0.4.0 and webForCore-thirdparty 0.4.0. It also uses `webForCore.WebActivator` 0.4.1, a build of
@@ -76,6 +76,20 @@ page, an admin page (forms authentication redirect), RSS, two MVC controllers ro
   (F38, webForCore bug, [#35](https://github.com/xforcore/webForCore/issues/35)).
 - **On the packages of xforcore/webForCore#32** (F35 and F38 fixed): the install wizard runs, and 15 of 16 checks pass (10 probes and the 6 forbidden paths).
   The log-in page fails in DotNetOpenAuth's OpenID control (F44, app/environment).
+
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+**CI (Linux and Windows): 27/28 on both, in CI runs 42026922513 and 42030748535.**
+
+27/28 on Linux, twice; still blocked by DotNetOpenAuth on the log-in page (F44, the same `TypeInitializationException`
+in `UriIdentifier`). System.Data.Linq, now provided, isn't in Subtext's web.config (its F37 entry was System.Design,
+still removed). 11 probes more, for what can be posted without the log-in: the search box (a postback whose 302 goes
+to `/search.aspx?q=...`) and the MetaWeblog API (`POST /services/metablogapi.aspx`, XML-RPC; it checks the blog
+owner's name and password itself, so it works without the log-in page): a wrong password is "Username and password
+denied."; a post made with `newPost`, its page (its URL taken from `getPost`'s `link`), `editPost`, `getPost` with the
+change, the search page finding it (Subtext's Lucene.Net index), `blogger.deletePost`, and `getPost`'s "The entry
+could not be found" after. Subtext caches a post's page, so it isn't asked for after the edit and the delete. Not
+probed: the comment form (an image CAPTCHA), the contact form (it sends e-mail) and everything behind the log-in.
 
 ## Open problems
 

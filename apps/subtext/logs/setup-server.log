@@ -1,147 +1,145 @@
 info: WebFormsForCore.Host.WorkerPool[0]
-      Started worker 1 (process 2990) for <repo>/apps/subtext/src/src/Subtext.Web/bin_dotnet/Subtext.Web.dll: the host started.
+      Started worker 1 (process 3281903) for $WFC_CHECKOUTS/subtext/src/Subtext.Web/bin_dotnet/Subtext.Web.dll: the host started.
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://127.0.0.1:39245
+      Now listening on: http://127.0.0.1:42093
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: <repo>/apps/subtext/src/src/Subtext.Web
+      Content root path: $WFC_CHECKOUTS/subtext/src/Subtext.Web
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39245/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42093/ - - -
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application ea4841dc in process 2990 (worker 1 of webforcore-host).
-warn: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application ea4841dc runs with the invariant culture: the process has no locale (LANG and LC_ALL unset, or C, POSIX or C.UTF-8), which can't happen on IIS, so resources chosen by culture name aren't found. Set <globalization culture="en-US" uiCulture="en-US" /> in Web.config, or give the environment a locale (LANG=en_US.UTF-8): https://github.com/xforcore/webForCore/blob/main/docs/MIGRATING.md#6-code-changes
+      Started application 31b01c63 in process 3281903 (worker 1 of webforcore-host).
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://unix:/tmp/webforcore-w8s4hT/worker-1.sock
-info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 1 (process 2990) is serving (2.5 s after it started).
+      Now listening on: http://unix:/tmp/webforcore-g5rS8R/worker-1.sock
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: <repo>/apps/subtext/src/src/Subtext.Web
+      Content root path: $WFC_CHECKOUTS/subtext/src/Subtext.Web
+info: WebFormsForCore.Host.WorkerPool[0]
+      Worker 1 (process 3281903) is serving (1.9 s after it started).
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39245/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42093/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 302.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39245/ - 302 - text/html;+charset=utf-8 247.0499ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42093/ - 302 138 - 258.0072ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39245/ - 302 - text/html;+charset=utf-8 2504.0111ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42093/ - 302 138 - 1815.6420ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39245/install/default.aspx - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42093/install/default.aspx - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/install/default.aspx HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39245/install/default.aspx - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42093/install/default.aspx - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39245/install/default.aspx - 200 2896 text/html;+charset=utf-8 1067.7340ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42093/install/default.aspx - 200 2896 text/html;+charset=utf-8 1404.9835ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39245/install/default.aspx - 200 2896 text/html;+charset=utf-8 1070.3779ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42093/install/default.aspx - 200 2896 text/html;+charset=utf-8 1409.0194ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 POST http://127.0.0.1:39245/install/default.aspx - application/x-www-form-urlencoded 564
+      Request starting HTTP/1.1 POST http://127.0.0.1:42093/install/default.aspx - application/x-www-form-urlencoded 568
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/install/default.aspx HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 POST http://127.0.0.1:39245/install/default.aspx - application/x-www-form-urlencoded 564
+      Request starting HTTP/1.1 POST http://127.0.0.1:42093/install/default.aspx - application/x-www-form-urlencoded 568
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 302.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 POST http://127.0.0.1:39245/install/default.aspx - 302 - text/html 5182.0873ms
+      Request finished HTTP/1.1 POST http://127.0.0.1:42093/install/default.aspx - 302 151 text/html;+charset=utf-8 7741.9227ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 POST http://127.0.0.1:39245/install/default.aspx - 302 - text/html 5186.6766ms
+      Request finished HTTP/1.1 POST http://127.0.0.1:42093/install/default.aspx - 302 151 text/html;+charset=utf-8 7745.3348ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39245/install/Step02_ConfigureHost.aspx - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42093/install/Step02_ConfigureHost.aspx - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/install/Step02_ConfigureHost.aspx HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39245/install/Step02_ConfigureHost.aspx - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42093/install/Step02_ConfigureHost.aspx - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:42093/install/Step02_ConfigureHost.aspx - 200 4031 text/html;+charset=utf-8 44.6060ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39245/install/Step02_ConfigureHost.aspx - 200 4031 text/html;+charset=utf-8 38.7811ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39245/install/Step02_ConfigureHost.aspx - 200 4031 text/html;+charset=utf-8 37.1141ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42093/install/Step02_ConfigureHost.aspx - 200 4031 text/html;+charset=utf-8 46.7722ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39245/install/Step02_ConfigureHost.aspx - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42093/install/Step02_ConfigureHost.aspx - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/install/Step02_ConfigureHost.aspx HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39245/install/Step02_ConfigureHost.aspx - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42093/install/Step02_ConfigureHost.aspx - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39245/install/Step02_ConfigureHost.aspx - 200 4031 text/html;+charset=utf-8 5.3178ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39245/install/Step02_ConfigureHost.aspx - 200 4031 text/html;+charset=utf-8 6.1717ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42093/install/Step02_ConfigureHost.aspx - 200 4031 text/html;+charset=utf-8 9.1368ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 POST http://127.0.0.1:39245/install/Step02_ConfigureHost.aspx - application/x-www-form-urlencoded 921
+      Request starting HTTP/1.1 POST http://127.0.0.1:42093/install/Step02_ConfigureHost.aspx - application/x-www-form-urlencoded 925
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:42093/install/Step02_ConfigureHost.aspx - 200 4031 text/html;+charset=utf-8 8.1597ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/install/Step02_ConfigureHost.aspx HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 POST http://127.0.0.1:39245/install/Step02_ConfigureHost.aspx - application/x-www-form-urlencoded 921
+      Request starting HTTP/1.1 POST http://127.0.0.1:42093/install/Step02_ConfigureHost.aspx - application/x-www-form-urlencoded 925
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:42093/install/Step02_ConfigureHost.aspx - 302 174 text/html;+charset=utf-8 36.8591ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 302.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 POST http://127.0.0.1:39245/install/Step02_ConfigureHost.aspx - 302 - text/html 25.5354ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 POST http://127.0.0.1:39245/install/Step02_ConfigureHost.aspx - 302 - text/html 26.0833ms
+      Request finished HTTP/1.1 POST http://127.0.0.1:42093/install/Step02_ConfigureHost.aspx - 302 174 text/html;+charset=utf-8 38.3455ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39245/install/Step03_CreateBlog.aspx?email=admin%40example.com - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42093/install/Step03_CreateBlog.aspx?email=admin%40example.com - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/install/Step03_CreateBlog.aspx?email=admin%40example.com HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39245/install/Step03_CreateBlog.aspx?email=admin%40example.com - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42093/install/Step03_CreateBlog.aspx?email=admin%40example.com - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39245/install/Step03_CreateBlog.aspx?email=admin%40example.com - 200 2860 text/html;+charset=utf-8 23.4871ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42093/install/Step03_CreateBlog.aspx?email=admin%40example.com - 200 2860 text/html;+charset=utf-8 31.5846ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39245/install/Step03_CreateBlog.aspx?email=admin%40example.com - 200 2860 text/html;+charset=utf-8 24.3376ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42093/install/Step03_CreateBlog.aspx?email=admin%40example.com - 200 2860 text/html;+charset=utf-8 34.2877ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39245/install/Step03_CreateBlog.aspx?email=admin%40example.com - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42093/install/Step03_CreateBlog.aspx?email=admin%40example.com - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/install/Step03_CreateBlog.aspx?email=admin%40example.com HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39245/install/Step03_CreateBlog.aspx?email=admin%40example.com - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42093/install/Step03_CreateBlog.aspx?email=admin%40example.com - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39245/install/Step03_CreateBlog.aspx?email=admin%40example.com - 200 2860 text/html;+charset=utf-8 3.2959ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42093/install/Step03_CreateBlog.aspx?email=admin%40example.com - 200 2860 text/html;+charset=utf-8 4.1853ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39245/install/Step03_CreateBlog.aspx?email=admin%40example.com - 200 2860 text/html;+charset=utf-8 3.9543ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42093/install/Step03_CreateBlog.aspx?email=admin%40example.com - 200 2860 text/html;+charset=utf-8 5.3808ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 POST http://127.0.0.1:39245/install/Step03_CreateBlog.aspx?email=admin%40example.com - application/x-www-form-urlencoded 601
+      Request starting HTTP/1.1 POST http://127.0.0.1:42093/install/Step03_CreateBlog.aspx?email=admin%40example.com - application/x-www-form-urlencoded 615
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/install/Step03_CreateBlog.aspx?email=admin%40example.com HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 POST http://127.0.0.1:39245/install/Step03_CreateBlog.aspx?email=admin%40example.com - application/x-www-form-urlencoded 601
+      Request starting HTTP/1.1 POST http://127.0.0.1:42093/install/Step03_CreateBlog.aspx?email=admin%40example.com - application/x-www-form-urlencoded 615
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:42093/install/Step03_CreateBlog.aspx?email=admin%40example.com - 302 130 text/html;+charset=utf-8 291.3659ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 302.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 POST http://127.0.0.1:39245/install/Step03_CreateBlog.aspx?email=admin%40example.com - 302 - text/html 232.2401ms
+      Request finished HTTP/1.1 POST http://127.0.0.1:42093/install/Step03_CreateBlog.aspx?email=admin%40example.com - 302 130 text/html;+charset=utf-8 292.0786ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39245/default.aspx - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 POST http://127.0.0.1:39245/install/Step03_CreateBlog.aspx?email=admin%40example.com - 302 - text/html 231.5662ms
+      Request starting HTTP/1.1 GET http://127.0.0.1:42093/default.aspx - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/default.aspx HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39245/default.aspx - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42093/default.aspx - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39245/default.aspx - 200 9249 text/html;+charset=utf-8 1903.3859ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42093/default.aspx - 200 9248 text/html;+charset=utf-8 2218.4969ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39245/default.aspx - 200 9249 text/html;+charset=utf-8 1904.2422ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42093/default.aspx - 200 9248 text/html;+charset=utf-8 2219.1157ms
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
 info: WebFormsForCore.Hosting.WorkerProcess.WorkerLifetime[0]
@@ -149,6 +147,6 @@ info: WebFormsForCore.Hosting.WorkerProcess.WorkerLifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application ea4841dc is shutting down (HostingEnvironment).
+      Application 31b01c63 is shutting down (HostingEnvironment).
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 1 (process 2990) exited (0).
+      Worker 1 (process 3281903) exited (0).

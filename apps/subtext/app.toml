@@ -10,7 +10,7 @@ generated = ["src/Subtext.Web/App_Data/**"]
 kinds = ["webforms", "mvc"]
 licence = "MIT"
 status = "blocked"
-notes = "On webForCore 0.8.0 (.NET 10, under webforcore-host) it builds and the install wizard runs: 16/17 probes on Linux and Windows; the log-in page's DotNetOpenAuth fails (F44, app/environment). Uses webForCore-thirdparty 0.5.0's WebActivator."
+notes = "Blocked: the log-in page's DotNetOpenAuth fails (F44, app/environment). webForCore 0.9.0: 27/28 on Linux and Windows (CI runs 42026922513 and 42030748535), with the search postback and the MetaWeblog API's posts made, edited and deleted."
 needs = ["mssql"]
 
 # The first request compiles the site, so it gets 120 s. The probes need the compose SQL Server with a "SubtextData"
@@ -82,3 +82,82 @@ contains = "OpenSearchDescription"
 [[probes]]
 path = "/css/lightbox.css"
 contains = "#lightbox"
+
+# Verbs. The log-in page fails (F44), so nothing behind it can be reached; the comment form needs its CAPTCHA's text,
+# and the contact form sends e-mail. What can be posted: the search box (a postback that redirects to the search
+# page), and the MetaWeblog API (XML-RPC over POST, as Windows Live Writer uses it; it checks the blog owner's name
+# and password itself): a wrong password is a fault, a post made with newPost, its page, editPost, getPost with the
+# change, a search that finds it (Subtext's Lucene.Net index), blogger.deletePost, and getPost's fault for it after.
+# The post's own page isn't asked for after the edit or the delete: Subtext caches it.
+[[probes]]
+path = "/"
+cookies = true
+contains = "search$txtSearch"
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/"
+method = "POST"
+cookies = true
+status = 302
+form = { __VIEWSTATE = "{viewstate}", __EVENTVALIDATION = "{validation}", "search$txtSearch" = "Welcome", "search$btnSearch" = "Search" }
+capture = { search = { header = "Location", regex = "(/search\\.aspx\\?q=Welcome)$" } }
+
+[[probes]]
+path = "/services/metablogapi.aspx"
+method = "POST"
+content_type = "text/xml"
+body = "<?xml version=\"1.0\"?><methodCall><methodName>metaWeblog.getRecentPosts</methodName><params><param><value><string>0</string></value></param><param><value><string>smokeadmin</string></value></param><param><value><string>wrong</string></value></param><param><value><i4>5</i4></value></param></params></methodCall>"
+contains = "Username and password denied."
+
+[[probes]]
+path = "/services/metablogapi.aspx"
+method = "POST"
+content_type = "text/xml"
+body = "<?xml version=\"1.0\"?><methodCall><methodName>metaWeblog.newPost</methodName><params><param><value><string>0</string></value></param><param><value><string>smokeadmin</string></value></param><param><value><string>Smoke_test_1234</string></value></param><param><value><struct><member><name>title</name><value><string>Smoke XML-RPC Post</string></value></member><member><name>description</name><value><string>Posted over XML-RPC</string></value></member></struct></value></param><param><value><boolean>1</boolean></value></param></params></methodCall>"
+contains = "<methodResponse>"
+capture = { post = '<string>(\d+)</string>' }
+
+[[probes]]
+path = "/services/metablogapi.aspx"
+method = "POST"
+content_type = "text/xml"
+body = "<?xml version=\"1.0\"?><methodCall><methodName>metaWeblog.getPost</methodName><params><param><value><string>{post}</string></value></param><param><value><string>smokeadmin</string></value></param><param><value><string>Smoke_test_1234</string></value></param></params></methodCall>"
+contains = "Posted over XML-RPC"
+capture = { link = '<name>link</name>\s*<value>\s*<string>https?://[^/]+(/archive/[^<]+)</string>' }
+
+[[probes]]
+path = "{link}"
+contains = "Posted over XML-RPC"
+
+[[probes]]
+path = "/services/metablogapi.aspx"
+method = "POST"
+content_type = "text/xml"
+body = "<?xml version=\"1.0\"?><methodCall><methodName>metaWeblog.editPost</methodName><params><param><value><string>{post}</string></value></param><param><value><string>smokeadmin</string></value></param><param><value><string>Smoke_test_1234</string></value></param><param><value><struct><member><name>title</name><value><string>Smoke XML-RPC Post</string></value></member><member><name>description</name><value><string>Edited over XML-RPC</string></value></member></struct></value></param><param><value><boolean>1</boolean></value></param></params></methodCall>"
+contains = "<boolean>1</boolean>"
+
+[[probes]]
+path = "/services/metablogapi.aspx"
+method = "POST"
+content_type = "text/xml"
+body = "<?xml version=\"1.0\"?><methodCall><methodName>metaWeblog.getPost</methodName><params><param><value><string>{post}</string></value></param><param><value><string>smokeadmin</string></value></param><param><value><string>Smoke_test_1234</string></value></param></params></methodCall>"
+contains = "Edited over XML-RPC"
+
+[[probes]]
+path = "/search.aspx?q=Smoke"
+contains = "Smoke XML-RPC Post"
+
+[[probes]]
+path = "/services/metablogapi.aspx"
+method = "POST"
+content_type = "text/xml"
+body = "<?xml version=\"1.0\"?><methodCall><methodName>blogger.deletePost</methodName><params><param><value><string>key</string></value></param><param><value><string>{post}</string></value></param><param><value><string>smokeadmin</string></value></param><param><value><string>Smoke_test_1234</string></value></param><param><value><boolean>1</boolean></value></param></params></methodCall>"
+contains = "<boolean>1</boolean>"
+
+[[probes]]
+path = "/services/metablogapi.aspx"
+method = "POST"
+content_type = "text/xml"
+body = "<?xml version=\"1.0\"?><methodCall><methodName>metaWeblog.getPost</methodName><params><param><value><string>{post}</string></value></param><param><value><string>smokeadmin</string></value></param><param><value><string>Smoke_test_1234</string></value></param></params></methodCall>"
+contains = "The entry could not be found"

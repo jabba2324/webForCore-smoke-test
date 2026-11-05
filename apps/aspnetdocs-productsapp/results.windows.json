@@ -2,115 +2,115 @@
   "id": "aspnetdocs-productsapp",
   "stages": {
     "build": {
-      "at": "2026-11-05T11:17:06+00:00",
+      "at": "2026-11-05T12:35:29+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\aspnetdocs-productsapp\\logs.windows\\build.log",
-      "seconds": 23,
+      "seconds": 25,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T11:16:43+00:00",
+      "at": "2026-11-05T12:35:03+00:00",
       "commit": "546ffe728556a60591b93ab4fcbd4437f71e2449",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-05T11:17:16+00:00",
+      "at": "2026-11-05T12:35:37+00:00",
       "checks": [
         {
-          "ms": 154,
+          "ms": 80,
           "ok": true,
           "path": "/api/products",
           "status": 200
         },
         {
-          "ms": 22,
+          "ms": 12,
           "ok": true,
           "path": "/api/products/2",
           "status": 200
         },
         {
-          "ms": 12,
+          "ms": 7,
           "ok": true,
           "path": "/api/products?category=Hardware",
           "status": 200
         },
         {
-          "ms": 6,
+          "ms": 3,
           "ok": true,
           "path": "/api/products/99",
           "status": 404
         },
         {
           "method": "POST",
-          "ms": 65,
+          "ms": 35,
           "ok": true,
           "path": "/api/products",
           "status": 201
         },
         {
-          "ms": 7,
+          "ms": 4,
           "ok": true,
           "path": "/api/products/{product}",
           "status": 200
         },
         {
           "method": "PUT",
-          "ms": 7,
-          "ok": true,
-          "path": "/api/products/{product}",
-          "status": 204
-        },
-        {
-          "ms": 3,
-          "ok": true,
-          "path": "/api/products/{product}",
-          "status": 200
-        },
-        {
-          "ms": 3,
-          "ok": true,
-          "path": "/api/products?category=Hardware",
-          "status": 200
-        },
-        {
-          "method": "DELETE",
           "ms": 4,
           "ok": true,
           "path": "/api/products/{product}",
           "status": 204
         },
         {
-          "ms": 3,
+          "ms": 2,
+          "ok": true,
+          "path": "/api/products/{product}",
+          "status": 200
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/api/products?category=Hardware",
+          "status": 200
+        },
+        {
+          "method": "DELETE",
+          "ms": 2,
+          "ok": true,
+          "path": "/api/products/{product}",
+          "status": 204
+        },
+        {
+          "ms": 2,
           "ok": true,
           "path": "/api/products/{product}",
           "status": 404
         },
         {
           "method": "POST",
-          "ms": 20,
+          "ms": 11,
           "ok": true,
           "path": "/api/products",
           "status": 201
         },
         {
           "method": "PUT",
-          "ms": 7,
+          "ms": 2,
           "ok": true,
           "path": "/api/products/99",
           "status": 404
         },
         {
-          "ms": 7,
+          "ms": 6,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
@@ -122,13 +122,13 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/packages.config",
           "status": 404
@@ -140,7 +140,7 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 4,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404

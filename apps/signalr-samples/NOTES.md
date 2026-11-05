@@ -1,7 +1,6 @@
 # SignalR 2 samples: migration notes
 
-Status: blocked by F70 (webForCore#118): 18/19 probes on Linux and on Windows, on webForCore 0.7.0 and 0.8.0. The one failure is a
-webForCore bug in the hub proxy's header comment.
+Status: migrated (webForCore 0.9.0: 22/22 on Linux and Windows, 2 verb probes; F70 fixed in 0.9.0).
 
 SignalR/SignalR at tag `2.4.3` (`7f53f266`), Apache-2.0 (`LICENSE.txt`). `samples/Microsoft.AspNet.SignalR.Samples`:
 SignalR's own sample site. Web Forms pages on a master page (one per sample), 24 hubs (one in a VB.NET class library,
@@ -83,6 +82,28 @@ answers `Access-Control-Allow-Origin` for the request's origin. WebSockets weren
 One run lost three probes to the machine running out of inotify instances (other smoke runs at the same time;
 [F72](../../FINDINGS.md#f72)): `Configuration Error: Failed to start monitoring changes to '.../Hubs/DemoHub'`. The
 recorded run is the one after.
+
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+F70 is fixed in 0.9.0 (#118): `/signalr/hubs` begins `ASP.NET SignalR JavaScript Library 2.4.3`, so every probe passes
+(19/19 before the new ones), with no overlay change. F71 (VB `MyType`) is documented in MIGRATING.md (#121); the
+overlay's `<MyType>Empty</MyType>` is that documented step, not a workaround.
+
+Verb probes (22 probes; 2 with verbs):
+
+- the `/cookieauth` branch's log-in, a form POST its own OWIN middleware answers by signing in with Katana's cookie
+  authentication, sets `.AspNet.Cookies`; the authenticated persistent connection (`/cookieauth/echo`) then
+  negotiates, where an anonymous request is redirected (the probe before);
+- a POST to `/signalr/send` with no connection token is SignalR's 400, "Protocol error: Missing connection token.".
+
+A hub call can't be a probe yet: `connect`, `start` and `send` take the negotiated connection token in the query
+string, URL-encoded (it's base64, with `+` and `/`), and the runner puts a captured value into a path as it is. By hand
+(curl, long polling) the whole flow works: negotiate, `connect` (`{"C":...,"S":1,"M":[]}`), `start`
+(`{ "Response": "started" }`) and a POST to `send` calling `demo.SetStateValue("Smoke Co")`, which answers
+`{"S":{"Company":"Smoke Co"},"R":"Smoke Co","I":"0"}`. A way to URL-encode a captured value in the runner would let
+a probe do it.
+
+Results: **22/22 on Linux and Windows** (CI runs 42021158598 and 42026762740), the same in both runs.
 
 ## Open problems
 

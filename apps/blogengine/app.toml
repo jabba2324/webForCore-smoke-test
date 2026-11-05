@@ -4,13 +4,244 @@ name = "BlogEngine.NET"
 repo = "https://github.com/BlogEngine/BlogEngine.NET"
 ref = "95c84261ed94402f45094c1fda85afbbf6f4d833"
 site = "BlogEngine/BlogEngine.NET"
+project = "BlogEngine/BlogEngine.NET/BlogEngine.NET.csproj"
 kinds = ["webforms", "webapi", "webpages"]
 licence = "MS-RL"
-status = "blocked"
-notes = "Blocked: BlogEngine.Core compiles a LINQ to SQL DataContext (the database file store). webForCore recommends moving it to EF 6; that rewrite is the app's, so not pursued here."
+status = "migrated"
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 48/48 on Linux and Windows (CI runs 42026922513 and 42030748535), with a post, a comment (a client callback) and the trash through the admin's Web API. Its LINQ to SQL file store compiles on 0.9.0."
+
+# The blog writes its log, and the probes' posts and comments, into App_Data (the posts and comments are deleted again).
+generated = ["BlogEngine/BlogEngine.NET/App_Data/logger.txt", "BlogEngine/BlogEngine.NET/App_Data/posts/*.xml"]
 
 # The first request compiles the site, so it gets 120 s.
-# [[probes]]
-# path = "/"
-# status = 200
-# contains = ""
+[[probes]]
+path = "/"
+contains = "Welcome to BlogEngine.NET"
+
+[[probes]]
+path = "/post/welcome-to-blogengine-net"
+contains = "If you see this post it means that BlogEngine.NET is running"
+
+[[probes]]
+path = "/page/example-page"
+contains = "Example Page"
+
+[[probes]]
+path = "/archive"
+contains = "Welcome to BlogEngine.NET"
+
+[[probes]]
+path = "/category/BlogEngineNET"
+contains = "Welcome to BlogEngine.NET"
+
+[[probes]]
+path = "/?tag=welcome"
+contains = "Welcome to BlogEngine.NET"
+
+[[probes]]
+path = "/search?q=welcome"
+contains = "Welcome to BlogEngine.NET"
+
+# The contact form needs the Recaptcha extension's settings, so the extensions must have loaded (Utils.CodeAssemblies
+# scans the bin folder: bin_dotnet here, overlay).
+[[probes]]
+path = "/contact"
+contains = "txtName"
+
+# HTTP handlers (.axd): RSS, Atom, the site map, OpenSearch, RSD (for the MetaWeblog API).
+[[probes]]
+path = "/syndication.axd"
+contains = "<rss"
+
+[[probes]]
+path = "/syndication.axd?format=atom"
+contains = "<feed"
+
+[[probes]]
+path = "/sitemap.axd"
+contains = "<urlset"
+
+[[probes]]
+path = "/opensearch.axd"
+contains = "OpenSearchDescription"
+
+[[probes]]
+path = "/rsd.axd"
+contains = "MetaWeblog"
+
+[[probes]]
+path = "/Account/login.aspx"
+contains = "ctl00$MainContent$LoginUser$UserName"
+
+# Forms authentication sends the admin to the log-in page.
+[[probes]]
+path = "/admin/"
+status = 302
+
+# Static files.
+[[probes]]
+path = "/Custom/Themes/Standard/src/css/styles.min.css"
+contains = "body"
+
+[[probes]]
+path = "/Scripts/Auto/blog.js"
+contains = "BlogEngine"
+
+# Verbs. The admin's log-in (a Web Forms postback; admin/admin, the default account in App_Data/users.xml), then the
+# Web API the Angular admin uses, with the log-in's cookie: a post made (POST /api/posts), shown, changed (PUT
+# /api/posts/update/foo, as the post editor sends it), read back. A comment on it, sent as the comment form's
+# script sends it: an ASP.NET client callback (WebForm_DoCallback: the page's view state and event validation,
+# __CALLBACKID and __CALLBACKPARAM with the fields joined by "-|-", the extension's simple CAPTCHA answer last). It's
+# the admin's: an anonymous comment e-mails the blog's owner (SendCommentMail, through smtp.gmail.com in
+# App_Data/settings.xml), an outside service. The blog trusts its authenticated users, so the comment shows at once;
+# the admin then unapproves it (PUT /api/comments/processchecked/unapprove) and it's hidden, approves it again and it
+# shows; then it's deleted (DELETE /api/comments/{id}), the post is deleted (DELETE /api/posts/{id}), the trash is emptied
+# (PUT /api/trash/purgeall/all, so the next run can use the same slug), and the admin logs off.
+[[probes]]
+path = "/Account/login.aspx"
+cookies = true
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Account/login.aspx?ReturnURL=/admin/"
+method = "POST"
+cookies = true
+status = 302
+[probes.form]
+__VIEWSTATE = "{viewstate}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$MainContent$LoginUser$UserName" = "admin"
+"ctl00$MainContent$LoginUser$Password" = "admin"
+"ctl00$MainContent$LoginUser$LoginButton" = "Log in"
+
+[[probes]]
+path = "/admin/"
+cookies = true
+contains = "ng-app"
+
+# The admin's About page shows the process's identity (overlay: Environment.UserName off Windows, where
+# WindowsIdentity throws PlatformNotSupportedException).
+[[probes]]
+path = "/admin/about.cshtml"
+cookies = true
+contains = "Identity:"
+
+[[probes]]
+path = "/api/tools/check1"
+cookies = true
+contains = "ASP.NET application Identity is: "
+
+[[probes]]
+path = "/api/posts"
+method = "POST"
+cookies = true
+status = 201
+json = { Title = "Smoke Probe Post", Slug = "smoke-probe-post", Content = "<p>Written by a probe</p>", Description = "A probe's post", DateCreated = "2026-01-02 03:04", IsPublished = true, HasCommentsEnabled = true, Categories = [], Tags = [{ TagName = "smokeprobe" }] }
+capture = { post = '"Id":"([0-9a-f-]{36})"' }
+
+[[probes]]
+path = "/post/smoke-probe-post"
+contains = "Written by a probe"
+
+[[probes]]
+path = "/api/posts/update/foo"
+method = "PUT"
+cookies = true
+status = 200
+json = { Id = "{post}", Title = "Smoke Probe Post", Slug = "smoke-probe-post", Content = "<p>Edited by a probe</p>", Description = "A probe's post", DateCreated = "2026-01-02 03:04", IsPublished = true, HasCommentsEnabled = true, Categories = [], Tags = [{ TagName = "smokeprobe" }] }
+
+[[probes]]
+path = "/api/posts/{post}"
+cookies = true
+contains = "Edited by a probe"
+
+[[probes]]
+path = "/post/smoke-probe-post"
+cookies = true
+contains = "Edited by a probe"
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"', captcha = 'id="ctl00_cphBody_ucCommentList_hfCaptcha" value="([^"]*)"' }
+
+[[probes]]
+path = "/post/smoke-probe-post"
+method = "POST"
+cookies = true
+contains = "A comment from a probe"
+capture = { comment = 'id="id_([0-9a-f-]{36})"' }
+[probes.form]
+__VIEWSTATE = "{viewstate}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$cphBody$ucCommentList$hfCaptcha" = "{captcha}"
+__CALLBACKID = "ctl00$cphBody$ucCommentList"
+__CALLBACKPARAM = "Smoke Probe-|-probe@example.com-|--|--|-A comment from a probe-|-false-|-false-|-{captcha}-|--|--|--|--|-10"
+
+[[probes]]
+path = "/post/smoke-probe-post"
+contains = "A comment from a probe"
+
+[[probes]]
+path = "/api/comments/processchecked/unapprove"
+method = "PUT"
+cookies = true
+status = 200
+json = '[{ "Id": "{comment}", "IsChecked": true }]'
+
+[[probes]]
+path = "/post/smoke-probe-post"
+contains = "Edited by a probe"
+absent = "A comment from a probe"
+
+[[probes]]
+path = "/api/comments/processchecked/approve"
+method = "PUT"
+cookies = true
+status = 200
+json = '[{ "Id": "{comment}", "IsChecked": true }]'
+
+[[probes]]
+path = "/post/smoke-probe-post"
+contains = "A comment from a probe"
+
+[[probes]]
+path = "/api/comments/{comment}"
+method = "DELETE"
+cookies = true
+status = 200
+
+[[probes]]
+path = "/post/smoke-probe-post"
+contains = "Edited by a probe"
+absent = "A comment from a probe"
+
+[[probes]]
+path = "/api/posts/{post}"
+method = "DELETE"
+cookies = true
+status = 200
+
+[[probes]]
+path = "/post/smoke-probe-post"
+status = 404
+
+[[probes]]
+path = "/api/trash/purgeall/all"
+method = "PUT"
+cookies = true
+status = 200
+json = {}
+
+[[probes]]
+path = "/api/trash?type=0"
+cookies = true
+contains = "\"TotalCount\":0"
+
+[[probes]]
+path = "/Account/login.aspx?logoff"
+cookies = true
+status = 302
+
+[[probes]]
+path = "/admin/"
+cookies = true
+status = 302

@@ -1,5 +1,5 @@
 diff --git a/Brettle.Web.NeatHtml/Brettle.Web.NeatHtml.csproj b/Brettle.Web.NeatHtml/Brettle.Web.NeatHtml.csproj
-index 6d59c6fc..b7aa77c9 100644
+index 6d59c6fc..3d113896 100644
 --- a/Brettle.Web.NeatHtml/Brettle.Web.NeatHtml.csproj
 +++ b/Brettle.Web.NeatHtml/Brettle.Web.NeatHtml.csproj
 @@ -1,306 +1,23 @@
@@ -734,10 +734,10 @@ index 00000000..88ac927b
 +    }
 +}
 diff --git a/Web/Web.config b/Web/Web.config
-index f8e128b0..9e79800c 100644
+index f8e128b0..6fc723b4 100644
 --- a/Web/Web.config
 +++ b/Web/Web.config
-@@ -1,1307 +1,1300 @@
+@@ -1,1307 +1,1301 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<configuration>
 -  <configSections>
@@ -2966,6 +2966,7 @@ index f8e128b0..9e79800c 100644
 +      <!-- Set debugmode to false for production -->
 +      <compilation debug="false" defaultLanguage="C#" targetFramework="4.8">
 +        <assemblies>
++          <add assembly="System.Data.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089" />
 +        </assemblies>
 +        <expressionBuilders>
 +          <add expressionPrefix="mojoCode" type="mojoPortal.Core.Compilation.CodeExpressionBuilder" />
@@ -3345,8 +3346,21 @@ index f8e128b0..9e79800c 100644
 +    </assemblyBinding>
 +  </runtime>
 +</configuration>
+diff --git a/Web/log4net.config b/Web/log4net.config
+index 96d4cc5c..87c8bee6 100644
+--- a/Web/log4net.config
++++ b/Web/log4net.config
+@@ -17,7 +17,7 @@
+ 	-->
+ 
+ 	<appender name="RollingLogFileAppender" type="log4net.Appender.RollingFileAppender">
+-		<file value="Data/currentlog.config" />
++		<file value="../Data/currentlog.config" />
+ 		<lockingModel type="log4net.Appender.FileAppender+MinimalLock" />
+ 		<appendToFile value="true" />
+ 		<encoding value="utf-8" />
 diff --git a/Web/mojoPortal.Web.csproj b/Web/mojoPortal.Web.csproj
-index 7fe10832..5f8e9a5e 100644
+index 7fe10832..58238e49 100644
 --- a/Web/mojoPortal.Web.csproj
 +++ b/Web/mojoPortal.Web.csproj
 @@ -1,3075 +1,116 @@
@@ -9629,7 +9643,7 @@ similarity index 100%
 rename from Web/packages.config
 rename to Web/packages.config.netfx
 diff --git a/mojoPortal.Business.WebHelpers/mojoPortal.Business.WebHelpers.csproj b/mojoPortal.Business.WebHelpers/mojoPortal.Business.WebHelpers.csproj
-index 32c06179..b8d53dc9 100644
+index 32c06179..3f4b0f6d 100644
 --- a/mojoPortal.Business.WebHelpers/mojoPortal.Business.WebHelpers.csproj
 +++ b/mojoPortal.Business.WebHelpers/mojoPortal.Business.WebHelpers.csproj
 @@ -1,261 +1,36 @@
@@ -10188,7 +10202,7 @@ index 00000000..32c06179
 +</Project>
 \ No newline at end of file
 diff --git a/mojoPortal.Business/mojoPortal.Business.csproj b/mojoPortal.Business/mojoPortal.Business.csproj
-index 30efb8b6..7b041142 100644
+index 30efb8b6..82121d20 100644
 --- a/mojoPortal.Business/mojoPortal.Business.csproj
 +++ b/mojoPortal.Business/mojoPortal.Business.csproj
 @@ -1,407 +1,40 @@
@@ -11044,7 +11058,7 @@ index 00000000..30efb8b6
 +</Project>
 \ No newline at end of file
 diff --git a/mojoPortal.Core/mojoPortal.Core.csproj b/mojoPortal.Core/mojoPortal.Core.csproj
-index 42746447..fd09b743 100644
+index 42746447..0a191d2e 100644
 --- a/mojoPortal.Core/mojoPortal.Core.csproj
 +++ b/mojoPortal.Core/mojoPortal.Core.csproj
 @@ -1,119 +1,31 @@
@@ -11316,7 +11330,7 @@ index 00000000..42746447
 +</Project>
 \ No newline at end of file
 diff --git a/mojoPortal.Data.MSSQL/mojoPortal.Data.MSSQL.csproj b/mojoPortal.Data.MSSQL/mojoPortal.Data.MSSQL.csproj
-index 266848b5..ed601bfd 100644
+index 266848b5..feeb5af0 100644
 --- a/mojoPortal.Data.MSSQL/mojoPortal.Data.MSSQL.csproj
 +++ b/mojoPortal.Data.MSSQL/mojoPortal.Data.MSSQL.csproj
 @@ -1,158 +1,28 @@
@@ -11673,7 +11687,7 @@ index 00000000..266848b5
 +</Project>
 \ No newline at end of file
 diff --git a/mojoPortal.Features.Business/mojoPortal.Features.Business.csproj b/mojoPortal.Features.Business/mojoPortal.Features.Business.csproj
-index eab63b96..04be62c6 100644
+index eab63b96..38a6ab48 100644
 --- a/mojoPortal.Features.Business/mojoPortal.Features.Business.csproj
 +++ b/mojoPortal.Features.Business/mojoPortal.Features.Business.csproj
 @@ -1,247 +1,37 @@
@@ -12217,7 +12231,7 @@ index 00000000..eab63b96
 +</Project>
 \ No newline at end of file
 diff --git a/mojoPortal.Features.Data.MSSQL/mojoPortal.Features.Data.MSSQL.csproj b/mojoPortal.Features.Data.MSSQL/mojoPortal.Features.Data.MSSQL.csproj
-index aeaca7ff..5d4eabaf 100644
+index aeaca7ff..83434ebf 100644
 --- a/mojoPortal.Features.Data.MSSQL/mojoPortal.Features.Data.MSSQL.csproj
 +++ b/mojoPortal.Features.Data.MSSQL/mojoPortal.Features.Data.MSSQL.csproj
 @@ -1,88 +1,33 @@
@@ -12428,7 +12442,7 @@ index 00000000..aeaca7ff
 +</Project>
 \ No newline at end of file
 diff --git a/mojoPortal.Features.UI/mojoPortal.Features.UI.csproj b/mojoPortal.Features.UI/mojoPortal.Features.UI.csproj
-index 4aa8e711..c29f1e48 100644
+index 4aa8e711..f12659df 100644
 --- a/mojoPortal.Features.UI/mojoPortal.Features.UI.csproj
 +++ b/mojoPortal.Features.UI/mojoPortal.Features.UI.csproj
 @@ -1,2127 +1,175 @@
@@ -16874,7 +16888,7 @@ similarity index 100%
 rename from mojoPortal.Features.UI/packages.config
 rename to mojoPortal.Features.UI/packages.config.netfx
 diff --git a/mojoPortal.Web.Controls/mojoPortal.Web.Controls.csproj b/mojoPortal.Web.Controls/mojoPortal.Web.Controls.csproj
-index 7c415313..add24e91 100644
+index 7c415313..fc165ba7 100644
 --- a/mojoPortal.Web.Controls/mojoPortal.Web.Controls.csproj
 +++ b/mojoPortal.Web.Controls/mojoPortal.Web.Controls.csproj
 @@ -1,268 +1,34 @@
@@ -17446,7 +17460,7 @@ index 00000000..7c415313
 +</Project>
 \ No newline at end of file
 diff --git a/mojoPortal.Web.Editor/mojoPortal.Web.Editor.csproj b/mojoPortal.Web.Editor/mojoPortal.Web.Editor.csproj
-index 2945d873..47340ee8 100644
+index 2945d873..e64ea812 100644
 --- a/mojoPortal.Web.Editor/mojoPortal.Web.Editor.csproj
 +++ b/mojoPortal.Web.Editor/mojoPortal.Web.Editor.csproj
 @@ -1,158 +1,34 @@
@@ -17797,7 +17811,7 @@ index 00000000..2945d873
 +</Project>
 \ No newline at end of file
 diff --git a/mojoPortal.Web.Framework/mojoPortal.Web.Framework.csproj b/mojoPortal.Web.Framework/mojoPortal.Web.Framework.csproj
-index b58a88f2..bdcef273 100644
+index b58a88f2..dfe45197 100644
 --- a/mojoPortal.Web.Framework/mojoPortal.Web.Framework.csproj
 +++ b/mojoPortal.Web.Framework/mojoPortal.Web.Framework.csproj
 @@ -1,219 +1,37 @@

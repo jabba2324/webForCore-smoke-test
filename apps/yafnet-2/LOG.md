@@ -23,3 +23,7 @@ Appended by `scripts/wfc.py`, one line per stage run.
 - 2026-11-03T12:34:13+00:00 **build**: fail (6 distinct errors)
 - 2026-11-03T12:53:00+00:00 **fetch** (windows): pass at `7435be389709`
 - 2026-11-03T12:53:03+00:00 **build** (windows): fail (6 distinct errors)
+- 2026-11-05T11:56:04+00:00 **fetch**: pass at `7435be389709`
+- 2026-11-05T11:56:07+00:00 **build**: fail (6 distinct errors)
+- 2026-11-05T11:56:44+00:00 **build**: fail (5 distinct errors)
+- 2026-11-05T11:57:11+00:00 **build**: fail (1 distinct errors)

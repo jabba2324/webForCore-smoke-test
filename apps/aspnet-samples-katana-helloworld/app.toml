@@ -8,7 +8,7 @@ project = "samples/aspnet/Katana/HelloWorld/HelloWorld.csproj"
 kinds = ["owin"]
 licence = "Apache-2.0"
 status = "migrated"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 9/9 on Linux and Windows."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 12/12 on Linux and Windows (CI runs 42021158598 and 42026762740), POST, PUT and DELETE included."
 
 # The first request compiles the site, so it gets 120 s.
 [[probes]]
@@ -17,4 +17,23 @@ contains = "Hello World"
 
 [[probes]]
 path = "/any/path/at/all"
+contains = "Hello World"
+
+# Verbs: the app has no forms or API, but its OWIN pipeline answers every request, whatever the method, so a POST
+# with a form body, a PUT with JSON and a DELETE must reach `app.Run` and get the same text.
+[[probes]]
+path = "/form"
+method = "POST"
+form = { name = "smoke", value = "1" }
+contains = "Hello World"
+
+[[probes]]
+path = "/items/1"
+method = "PUT"
+json = { name = "smoke" }
+contains = "Hello World"
+
+[[probes]]
+path = "/items/1"
+method = "DELETE"
 contains = "Hello World"

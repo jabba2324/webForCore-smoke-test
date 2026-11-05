@@ -9,7 +9,7 @@ kinds = ["signalr", "owin"]
 licence = "MIT"
 status = "blocked"
 needs = ["mssql"]
-notes = "Blocked: Nancy 0.20 needs AppDomainSetup.PrivateBinPathProbe (F50, app/environment): 7/11 probes on Linux and Windows on webForCore 0.8.0 (.NET 10, under webforcore-host). Ninject 3.0 -> 3.3.6."
+notes = "Blocked: Nancy.SimpleAuthentication references Nancy 0.21.1 with 0.20 deployed, which .NET Framework allows for assemblies without strong names (F135, webForCore bug); then Nancy 0.20 needs AppDomainSetup.PrivateBinPathProbe (F50). 7/12 on Linux and Windows on webForCore 0.9.0 (CI runs 42021158598 and 42026762740)."
 
 # The first request compiles the site, so it gets 120 s. The probes need the compose SQL Server; EF's migrations
 # create the JabbR database. Pages are Nancy modules on OWIN; /signalr is SignalR 2.
@@ -27,3 +27,11 @@ contains = "$.hubConnection"
 
 [[probes]]
 path = "/Content/images/big-logo.png"
+
+# Verbs: Nancy's log-in form refuses a POST that has neither its CSRF token nor a Sec-* header (403); the log-in,
+# registration and chat (SignalR) flows need the app to start first (F135, then F50).
+[[probes]]
+path = "/account/login"
+method = "POST"
+form = { username = "smoke", password = "smoke" }
+status = 403

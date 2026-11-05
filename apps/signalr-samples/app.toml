@@ -7,8 +7,8 @@ site = "samples/Microsoft.AspNet.SignalR.Samples"
 project = "samples/Microsoft.AspNet.SignalR.Samples/Microsoft.AspNet.SignalR.Samples.csproj"
 kinds = ["signalr", "owin", "webforms"]
 licence = "Apache-2.0"
-status = "blocked"
-notes = "Blocked by F70 (webForCore#118). webForCore 0.8.0: 18/19 on Linux and Windows; the failure is the hub proxy's [!VERSION!] header (F70). VB library needs MyType Empty (F71)."
+status = "migrated"
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 22/22 on Linux and Windows (CI runs 42021158598 and 42026762740); F70 fixed in 0.9.0. VB library needs MyType Empty (F71, documented)."
 # The build writes Scripts/jquery.signalR*.js (CopyJs, as the original build did); the repository ignores them anyway.
 generated = ["samples/Microsoft.AspNet.SignalR.Samples/Scripts/jquery.signalR*.js"]
 
@@ -67,3 +67,27 @@ contains = "<title>SignalR Chat</title>"
 [[probes]]
 path = "/Scripts/jquery.signalR.js"
 contains = "ASP.NET SignalR JavaScript Library 2.4.3"
+
+# Verbs: the /cookieauth branch's log-in (a form POST its own middleware answers, signing in with Katana's cookie
+# authentication) sets .AspNet.Cookies, and the authenticated persistent connection then negotiates instead of
+# redirecting. A send with no connection token is SignalR's protocol error (400). A hub call (connect, start, then
+# POST send) needs the negotiated connection token URL-encoded in the query, which a probe can't do with a captured
+# value; it works by hand (NOTES.md).
+[[probes]]
+path = "/cookieauth/Account/Login"
+method = "POST"
+cookies = true
+form = { UserName = "smoke", Password = "smoke" }
+capture = { auth = { cookie = ".AspNet.Cookies" } }
+
+[[probes]]
+path = "/cookieauth/echo/negotiate?clientProtocol=1.5"
+cookies = true
+contains = "\"Url\":\"/cookieauth/echo\",\"ConnectionToken\":\""
+
+[[probes]]
+path = "/signalr/send?transport=longPolling&clientProtocol=1.5"
+method = "POST"
+form = { data = "{\"H\":\"demo\",\"M\":\"SetStateValue\",\"A\":[\"Smoke Co\"],\"I\":0}" }
+status = 400
+contains = "Protocol error: Missing connection token."

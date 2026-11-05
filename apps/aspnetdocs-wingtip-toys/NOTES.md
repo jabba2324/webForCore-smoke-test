@@ -1,6 +1,6 @@
 # AspNetDocs: Wingtip Toys (Web Forms 4.5 + EF 6 tutorial): migration notes
 
-Status: blocked (webForCore 0.8.0, 18/21 probes on Linux, 19/21 on Windows; F80, F81 and F82 are webForCore bugs; the shopping cart works from 0.8.0). Source: the
+Status: migrated (webForCore 0.9.0: 39/39 on Linux and Windows; F80-F82 fixed in 0.9.0). Source: the
 completed project of the AspNetDocs tutorial "Getting Started with ASP.NET 4.5 Web Forms and Visual Studio 2013"
 (`aspnet/web-forms/overview/getting-started/getting-started-with-aspnet-45-web-forms` in dotnet/AspNetDocs). The
 repository has only the tutorial's snippets; the tutorial links the project on the retired MSDN Code Gallery
@@ -111,6 +111,28 @@ still F80, F81 and F82 (Linux).
 
 The currency is the process culture's, as on IIS with the server's culture (no `<globalization>` in `Web.config`),
 so the probes don't check the total.
+
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+**CI (Linux and Windows): 39/39 on both, in CI runs 42026922513 and 42030748535.**
+
+**21/21 on Linux, then 39/39 with the verb probes, twice in a row.** 0.9.0 fixed F80 (`/Product/Convertible%20Car`
+renders), F81 (`/` is the home page, no redirect to `/Default`) and F82 (`/elmah.axd` lists the errors on Linux),
+with no overlay change: there were no workarounds for them.
+
+18 probes more, for verbs, Web Forms postbacks in one cookie jar:
+- **The cart** (the session's): a second product added, then the cart's Update button with the first product's
+  quantity set to 3 and the second's Remove ticked. The cart lists its items in no set order (by their GUID ids), so
+  the rows' control names are captured, and the post, which needs them as field names, is written out as
+  `multipart/form-data` (the runner substitutes captures in values, not names).
+- **The administrator** (`canEditUser@wingtiptoys.com`, which `RoleActions` seeds in the canEdit role): a wrong
+  password ("Invalid login attempt"), the log-in, a product added on `Admin/AdminPage` (its form is
+  `multipart/form-data` with the product's image, a file, so this body is written out too), "Product added!", the
+  product in the list and on its own page, the product removed (its id from the page's drop-down), "Product
+  removed!", the list without it, and Log off (the LoginStatus link's `__doPostBack`), after which the admin page
+  redirects to the log-in. The image is saved under `Catalog/Images/` (`generated` in `app.toml`).
+- Not probed: registration (the app can't delete the account it makes, so a second run on the same database would
+  fail) and check-out (PayPal).
 
 ## Open problems
 

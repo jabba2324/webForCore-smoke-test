@@ -1,5 +1,5 @@
 diff --git a/samples/aspnet/WebApi/BSONSample/BSONSample/BSONSample.csproj b/samples/aspnet/WebApi/BSONSample/BSONSample/BSONSample.csproj
-index b153f84..858f3d2 100644
+index b153f84..698fe2b 100644
 --- a/samples/aspnet/WebApi/BSONSample/BSONSample/BSONSample.csproj
 +++ b/samples/aspnet/WebApi/BSONSample/BSONSample/BSONSample.csproj
 @@ -1,269 +1,47 @@
@@ -613,6 +613,19 @@ index 0000000..0bcddde
 +        }
 +    }
 +}
+diff --git a/samples/aspnet/WebApi/BSONSample/BSONSample/Web.config b/samples/aspnet/WebApi/BSONSample/BSONSample/Web.config
+index 745111a..3c6a490 100644
+--- a/samples/aspnet/WebApi/BSONSample/BSONSample/Web.config
++++ b/samples/aspnet/WebApi/BSONSample/BSONSample/Web.config
+@@ -12,7 +12,7 @@
+   <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 --></configSections>
+   <connectionStrings>
+     <add name="MyDataContext"
+-      connectionString="Data Source=(localdb)\v11.0; Initial Catalog=MyDataContext-20131115085455; Integrated Security=True; MultipleActiveResultSets=True; AttachDbFilename=|DataDirectory|MyDataContext-20131115085455.mdf"
++      connectionString="Data Source=127.0.0.1,14330; Initial Catalog=BSONSample; User ID=sa; Password=Smoke_test_1234; TrustServerCertificate=True; MultipleActiveResultSets=True"
+       providerName="System.Data.SqlClient"/>
+   </connectionStrings>
+   <appSettings>
 diff --git a/samples/aspnet/WebApi/BSONSample/BSONSample/packages.config b/samples/aspnet/WebApi/BSONSample/BSONSample/packages.config
 deleted file mode 100644
 index c6bb336..0000000

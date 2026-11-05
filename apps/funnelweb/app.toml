@@ -8,7 +8,7 @@ project = "src/FunnelWeb.Web/FunnelWeb.Web.csproj"
 kinds = ["mvc"]
 licence = "BSD-3-Clause"
 status = "blocked"
-notes = "Blocked on its NHibernate 3.3 (F39, app/environment): its installer, log-in and upgrade (MVC) work, 10/11 probes on Linux and Windows on webForCore 0.8.0 (.NET 10, under webforcore-host); the blog's NHibernate proxies don't. Needs SQL Server."
+notes = "Blocked on its NHibernate 3.3 (F39, app/environment): 12/16 on Linux and Windows on webForCore 0.9.0 (CI runs 42026922513 and 42030748535); the admin log-in after the home page fails with F39 too."
 needs = ["mssql"]
 
 # The first request compiles the site, so it gets 120 s. The probes need the compose SQL Server with a "FunnelWeb"
@@ -45,3 +45,36 @@ status = 302
 # A static file.
 [[probes]]
 path = "/Content/Images/external.png"
+
+# Verbs (MVC forms; FunnelWeb's admin area has no anti-forgery tokens): a log-in with web.config's credentials, the
+# installer as the logged-in admin, its upgrade posted again (nothing left to run), and log-out. Setup logs in the same
+# way and works, but here the log-in comes after the home page, whose NHibernate session factory failed (F39), and
+# the log-in fails with the same error (it builds the factory too): these probes fail with F39. A failed log-in and
+# the blog's own forms (posts, comments, the wiki editor) need NHibernate's entities as well, so they aren't probed.
+[[probes]]
+path = "/admin/login"
+method = "POST"
+cookies = true
+status = 302
+form = { Username = "test", Password = "test", DatabaseIssue = "", ReturnUrl = "/admin/install" }
+
+[[probes]]
+path = "/admin/install"
+cookies = true
+contains = "Your database is up to date. No install is necessary."
+
+[[probes]]
+path = "/admin/install/upgrade"
+method = "POST"
+cookies = true
+contains = "The upgrade completed successfully. 0 scripts were run."
+
+[[probes]]
+path = "/admin/logout"
+cookies = true
+status = 302
+
+[[probes]]
+path = "/admin/install"
+cookies = true
+status = 302

@@ -1,6 +1,6 @@
 # FunnelWeb: migration notes
 
-Status: blocked by its NHibernate 3.3 (F39): 10/11 probes on Linux and Windows, webForCore 0.8.0. Source: https://github.com/funnelweblog/FunnelWeb at `32f561e9`. Found by searching GitHub on 2026-10-31; the
+Status: blocked by its NHibernate 3.3 (F39): 12/16 probes on Linux and Windows, webForCore 0.9.0. Source: https://github.com/funnelweblog/FunnelWeb at `32f561e9`. Found by searching GitHub on 2026-10-31; the
 repo, licence (BSD-3-Clause), web project and its `<TargetFrameworkVersion>` were checked through the GitHub API.
 
 Round 3b, on webForCore 0.4.0 (no webForCore-thirdparty packages).
@@ -49,6 +49,19 @@ log-in form (MVC), the installer (forms authentication redirect) and a static fi
   MemberwiseClone should be 'public/protected virtual' or 'protected internal virtual'`, for every entity. With that
   check bypassed (exploration only, reverted), `NHibernate.AdoNet.SqlClientSqlCommandSet` fails: it reflects on
   System.Data's internal `SqlCommandSet`. NHibernate 3.3 doesn't run on .NET (F39, app/environment).
+
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+**CI (Linux and Windows): 12/16 on both, in CI runs 42026922513 and 42030748535.**
+
+12/16 on Linux; still blocked by NHibernate 3.3 (F39): the home page fails with "The following types may not be
+used as proxies", as before. Five probes more, for the admin area's MVC forms (no anti-forgery tokens): a log-in
+with web.config's credentials, the installer as the admin ("Your database is up to date"), its upgrade posted again
+("0 scripts were run"), log-out, and the installer redirecting to the log-in after it. Setup makes the same log-in
+and it works, but in the probes it comes after the home page has failed to build NHibernate's session factory, and
+the log-in, which builds it too, fails with the same error: the log-in, installer and upgrade probes fail with F39
+(log-out and the redirect pass). Not probed: a failed log-in and the blog's own forms (posts, comments, the wiki
+editor), which need NHibernate's entities too.
 
 ## Open problems
 
