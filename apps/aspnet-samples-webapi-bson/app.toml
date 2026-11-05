@@ -8,4 +8,65 @@ project = "samples/aspnet/WebApi/BSONSample/BSONSample/BSONSample.csproj"
 kinds = ["webapi", "mvc"]
 licence = "Apache-2.0"
 status = "migrated"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 8/8 on Linux and Windows."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 18/18 on Linux and Windows (CI runs 42021158598 and 42026762740), with the MyData API's POST, PUT and DELETE on SQL Server and a BSON read."
+needs = ["mssql"]
+
+# The first request compiles the site, so it gets 120 s. Web.config's MyDataContext points at the compose SQL Server
+# (it was LocalDB); Global.asax sets DropCreateDatabaseAlways, so every start begins with an empty BSONSample database.
+[[probes]]
+path = "/"
+contains = "BSON Sample Application"
+
+# The HelpPage area lists the API's actions.
+[[probes]]
+path = "/Help"
+contains = "PUT api/MyData/{id}"
+
+# Web API with verbs, on Entity Framework: a MyData created (POST, JSON; 201 with its URL in Location), read as JSON
+# and as BSON (BsonMediaTypeFormatter, by Accept), changed (PUT), deleted (DELETE, which returns it) and gone.
+[[probes]]
+path = "/api/MyData"
+method = "POST"
+json = { Name = "Smoke BSON", Decimal = 12.5, Double = 0.25, Long = 1234567890123, TimeSpan = "01:02:03" }
+status = 201
+contains = "\"Name\":\"Smoke BSON\""
+capture = { item = { header = "Location", regex = "/api/MyData/(\\d+)$" } }
+
+[[probes]]
+path = "/api/MyData/{item}"
+contains = "\"Long\":1234567890123,\"TimeSpan\":\"01:02:03\""
+
+[[probes]]
+path = "/api/MyData/{item}"
+headers = { Accept = "application/bson" }
+contains = "Smoke BSON"
+
+[[probes]]
+path = "/api/MyData/{item}"
+method = "PUT"
+json = { Id = "{item}", Name = "Smoke BSON II", Decimal = 13.75, Double = 0.5, Long = 42, TimeSpan = "00:00:10" }
+status = 204
+
+[[probes]]
+path = "/api/MyData"
+contains = "\"Name\":\"Smoke BSON II\",\"Decimal\":13.75"
+
+# A PUT whose id doesn't match the body's is the action's own 400.
+[[probes]]
+path = "/api/MyData/{item}"
+method = "PUT"
+json = { Id = 0, Name = "Mismatch" }
+status = 400
+
+[[probes]]
+path = "/api/MyData/{item}"
+method = "DELETE"
+contains = "\"Name\":\"Smoke BSON II\""
+
+[[probes]]
+path = "/api/MyData/{item}"
+status = 404
+
+[[probes]]
+path = "/api/MyData"
+absent = "Smoke BSON"

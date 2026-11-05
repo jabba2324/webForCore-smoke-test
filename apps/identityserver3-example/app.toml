@@ -8,7 +8,7 @@ project = "src/ScottBrady91.IdentityServer3.Example/ScottBrady91.IdentityServer3
 kinds = ["owin", "identity"]
 licence = "MIT"
 status = "blocked"
-notes = "webForCore 0.8.0: builds; blocked: IdentityServer3 2.5 needs System.IdentityModel (WIF), which .NET lacks (F69). 7/10 on Linux and Windows."
+notes = "webForCore 0.9.0: builds; blocked: IdentityServer3 2.5 needs System.IdentityModel (WIF), which .NET lacks (F69, documented in 0.9.0). 7/11 on Linux and Windows (CI runs 42021158598 and 42026762740)."
 # IdentityServer3 is configured with RequireSsl = true.
 https = true
 
@@ -27,3 +27,13 @@ contains = "\"kty\":\"RSA\""
 [[probes]]
 path = "/core/connect/authorize?client_id=implicitclient&response_type=id_token&scope=openid&redirect_uri=https%3A%2F%2Flocalhost%3A44304%2Faccount%2FsignInCallback&nonce=n1"
 status = 302
+
+# Verbs: the token endpoint (a form POST). The example's clients are implicit and hybrid only, so a token request
+# from a client it doesn't know is OAuth 2.0's invalid_client (400). The log-in and consent forms need a sign-in
+# message from the authorize redirect above and its anti-forgery token: they're reachable once the endpoints are.
+[[probes]]
+path = "/core/connect/token"
+method = "POST"
+form = { grant_type = "client_credentials", client_id = "smoke", client_secret = "smoke", scope = "openid" }
+status = 400
+contains = "\"error\":\"invalid_client\""

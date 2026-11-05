@@ -29,8 +29,21 @@ index 0000000..ef19cb2
 +        }
 +    }
 +}
+diff --git a/samples/aspnet/WebApi/WebFormSample/WebForm/Web.config b/samples/aspnet/WebApi/WebFormSample/WebForm/Web.config
+index 499ad8f..d70d64b 100644
+--- a/samples/aspnet/WebApi/WebFormSample/WebForm/Web.config
++++ b/samples/aspnet/WebApi/WebFormSample/WebForm/Web.config
+@@ -59,7 +59,7 @@
+     </handlers>
+   </system.webServer>
+   <connectionStrings>
+-    <add name="DefaultConnection" providerName="System.Data.SqlClient" connectionString="Data Source=(LocalDb)\v11.0;Initial Catalog=aspnet-WebForm-20120722222744;Integrated Security=SSPI;AttachDBFilename=|DataDirectory|\aspnet-WebForm-20120722222744.mdf" />
++    <add name="DefaultConnection" providerName="System.Data.SqlClient" connectionString="Data Source=127.0.0.1,14330;Initial Catalog=WebFormSample;User ID=sa;Password=Smoke_test_1234;TrustServerCertificate=True" />
+   </connectionStrings>
+   <runtime>
+     <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
 diff --git a/samples/aspnet/WebApi/WebFormSample/WebForm/WebForm.csproj b/samples/aspnet/WebApi/WebFormSample/WebForm/WebForm.csproj
-index daa5124..0a13b41 100644
+index daa5124..065e7a2 100644
 --- a/samples/aspnet/WebApi/WebFormSample/WebForm/WebForm.csproj
 +++ b/samples/aspnet/WebApi/WebFormSample/WebForm/WebForm.csproj
 @@ -1,342 +1,46 @@
