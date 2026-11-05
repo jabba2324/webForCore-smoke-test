@@ -1,7 +1,6 @@
 # SignalR 2 samples: migration notes
 
-Status: blocked by F70 (webForCore#118): 18/19 probes on Linux and on Windows, on webForCore 0.7.0 and 0.8.0. The one failure is a
-webForCore bug in the hub proxy's header comment.
+Status: migrated (webForCore 0.9.0: 22/22 on Linux and Windows, 2 verb probes; F70 fixed in 0.9.0).
 
 SignalR/SignalR at tag `2.4.3` (`7f53f266`), Apache-2.0 (`LICENSE.txt`). `samples/Microsoft.AspNet.SignalR.Samples`:
 SignalR's own sample site. Web Forms pages on a master page (one per sample), 24 hubs (one in a VB.NET class library,
@@ -104,7 +103,7 @@ string, URL-encoded (it's base64, with `+` and `/`), and the runner puts a captu
 `{"S":{"Company":"Smoke Co"},"R":"Smoke Co","I":"0"}`. A way to URL-encode a captured value in the runner would let
 a probe do it.
 
-Results: RESULTS_PLACEHOLDER
+Results: **22/22 on Linux and Windows** (CI runs 42021158598 and 42026762740), the same in both runs.
 
 ## Open problems
 
