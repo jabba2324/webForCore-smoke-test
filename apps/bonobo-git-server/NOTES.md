@@ -1,6 +1,6 @@
 # Bonobo Git Server: migration notes
 
-Status: migrated (webForCore 0.4.0, all probes pass).
+Status: blocked (webForCore 0.9.0: git smart HTTP never answers, F144).
 (master, 2021). MIT. webForCore 0.1.0 packages (0.2.0 from round 2).
 
 ## Assessment
@@ -73,7 +73,33 @@ All 9 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0, and its 5 `
 `webForCore.WebActivatorEx` (webForCore-thirdparty 0.4.0) added to the web project for its `UnityMvcActivator` (Bonobo also sets
 the resolver from `Global.asax`, so it passed without it).
 
+### Round 0.9.0: verbs (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+- **Probes (24 added, 10 of them POSTs):** the log-on with a wrong password ("The username or password provided is
+  incorrect.") and as the default `admin`; a user created, edited (the form comes back with the new name) and
+  deleted; a team created and deleted; a repository created (multipart form), shown and deleted; and git's smart HTTP
+  (Basic authentication) on it: `GET info/refs?service=git-upload-pack` and a `git-upload-pack` POST asking for an
+  object the empty repository doesn't have, which git refuses in its own protocol ("not our ref"). Each run deletes
+  what it made.
+- **Overlay changes:**
+  - LibGit2Sharp 0.23.1 (+ NativeBinaries 1.0.164) → 0.30.0. 0.23's .NET Framework build doesn't load its native
+    library on .NET, and its Linux binary needs OpenSSL 1.0 ([F145](../../FINDINGS.md#f145), app/environment): creating
+    a repository was a 500. 0.30.0 compiles unchanged.
+  - `<LangVersion>7.3</LangVersion>`: saving a user was a 500, LINQ to Entities can't translate C# 14's
+    `Contains(ReadOnlySpan)` ([F83](../../FINDINGS.md#f83), as the guide says).
+- **Blocked: git's refs advertisement never answers** ([F144](../../FINDINGS.md#f144), webForCore bug). Bonobo writes
+  the advertisement's header with `Response.Write` and then sets `BufferOutput = false`; the first unbuffered write
+  throws in `HttpResponseBufferElement.Recycle` ("The buffer is not associated with this pool") and the response never
+  ends, so no clone, fetch or push can start. Before that, some requests fail first in the app itself: it writes a
+  `\0` to the standard input of `git upload-pack --advertise-refs`, which may have exited already (a broken pipe,
+  Bonobo's own race). The upload-pack POST, which writes nothing before turning buffering off, works.
+- **Windows:** `GitPath` is `/usr/bin/git` in the overlay (the app ships a Windows `git.exe` in `App_Data/Git`, which
+  can't run on Linux), so on Windows the git probes can't start git either (app/environment).
+- **Results:** 33/34 on Linux (10 before): all but `info/refs`.
+
 ## Open problems
+
+- **Round 0.9.0:** [F144](../../FINDINGS.md#f144) (webForCore bug): unbuffered `Response.Write` throws and the response never ends; git's refs advertisement (`info/refs`) never answers, so git can't clone, fetch or push. LibGit2Sharp on Linux: upgraded to 0.30.0 ([F145](../../FINDINGS.md#f145)). On Windows, `GitPath` (`/usr/bin/git`) doesn't exist (app/environment).
 
 Round 1 (webForCore 0.1.0); the webForCore bugs below are fixed in 0.2.0 (PR #16) and kept for the record.
 

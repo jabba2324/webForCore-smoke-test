@@ -1,8 +1,8 @@
 diff --git a/Bonobo.Git.Server/Bonobo.Git.Server.csproj b/Bonobo.Git.Server/Bonobo.Git.Server.csproj
-index ad78e85..670f4da 100644
+index ad78e85..600822a 100644
 --- a/Bonobo.Git.Server/Bonobo.Git.Server.csproj
 +++ b/Bonobo.Git.Server/Bonobo.Git.Server.csproj
-@@ -1,775 +1,80 @@
+@@ -1,775 +1,81 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
@@ -48,6 +48,8 @@ index ad78e85..670f4da 100644
 -    </NuGetPackageImportStamp>
 +    <ImplicitUsings>disable</ImplicitUsings>
 +    <Nullable>disable</Nullable>
++    <!-- C# 14 binds array.Contains in EF 6 queries to MemoryExtensions.Contains(ReadOnlySpan), which LINQ to Entities can't translate (F83). -->
++    <LangVersion>7.3</LangVersion>
 +    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 +    <OutputPath>bin_dotnet</OutputPath>
 +    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
@@ -727,8 +729,7 @@ index ad78e85..670f4da 100644
 +    <PackageReference Include="CommonServiceLocator" Version="1.3" />
 +    <PackageReference Include="DotNetZip" Version="1.10.1" />
 +    <PackageReference Include="EntityFramework" Version="6.5.1" />
-+    <PackageReference Include="LibGit2Sharp" Version="0.23.1" />
-+    <PackageReference Include="LibGit2Sharp.NativeBinaries" Version="1.0.164" />
++    <PackageReference Include="LibGit2Sharp" Version="0.30.0" />
 +    <PackageReference Include="MediaTypeMap" Version="2.1.0.0" />
 +    <PackageReference Include="Microsoft.IdentityModel.Protocol.Extensions" Version="1.0.4.403061554" />
 +    <PackageReference Include="MvcCheckBoxList" Version="1.4.5" />

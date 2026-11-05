@@ -36,3 +36,15 @@ Appended by `scripts/wfc.py`, one line per stage run.
 - 2026-11-03T12:44:28+00:00 **fetch** (windows): pass at `6277ecfe1015`
 - 2026-11-03T12:44:43+00:00 **build** (windows): pass
 - 2026-11-03T12:44:54+00:00 **smoke** (windows): pass (10/10 probes)
+- 2026-11-05T11:34:39+00:00 **fetch**: pass at `6277ecfe1015`
+- 2026-11-05T11:34:49+00:00 **build**: pass
+- 2026-11-05T11:34:59+00:00 **smoke**: pass (10/10 probes)
+- 2026-11-05T11:36:48+00:00 **build**: pass
+- 2026-11-05T11:44:18+00:00 **build**: pass
+- 2026-11-05T11:44:51+00:00 **smoke**: fail (28/34 probes)
+- 2026-11-05T11:45:07+00:00 **smoke**: fail (33/34 probes)
+- 2026-11-05T11:45:28+00:00 **smoke**: fail (33/34 probes)
+- 2026-11-05T11:59:11+00:00 **fetch**: pass at `6277ecfe1015`
+- 2026-11-05T11:59:59+00:00 **fetch**: pass (existing checkout) at `6277ecfe1015`
+- 2026-11-05T12:00:10+00:00 **build**: pass
+- 2026-11-05T12:00:37+00:00 **smoke**: fail (33/34 probes)
