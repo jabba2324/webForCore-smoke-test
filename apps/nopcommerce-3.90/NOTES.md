@@ -134,6 +134,9 @@ source files and `webforcore-host.dll` aren't served.
   and SEO name captured), sees it on the front end, edits its description (shown on the front end), deletes it (then
   a 404), and logs out. nopCommerce marks a deleted category deleted and keeps its SEO name taken, so a second run's
   category gets another name; the probes use the one the grid gives. 37/37 twice in a row on the same database.
+- **Round 0.9.0, CI:** Linux 37/37 in runs 42025207546 and 42027500654; Windows 37/37 in 42025207546 and 42032474244 and 7/37 in
+  42027500654, F89 again (this time `Nop.Plugin.Shipping.FixedOrByWeight.dll` "rename failed, cannot initialize
+  plugin"). Still blocked on F89.
 
 ## Notes for testing by hand
 
