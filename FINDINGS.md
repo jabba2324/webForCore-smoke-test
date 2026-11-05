@@ -89,7 +89,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F19](#f19) | `System.Web.Abstractions`/`System.Web.Routing` 4.0.0.0 in web.config can't be loaded | webForCore bug | roadkill | [#20](https://github.com/xforcore/webForCore/issues/20) |
 | [F20](#f20) | `Assembly.LoadFrom` returns the default context's copy; WebActivatorEx start methods never run | webForCore bug | applicant-tracking, roadkill | [#21](https://github.com/xforcore/webForCore/issues/21) |
 | [F21](#f21) | Glimpse doesn't run on .NET | guide gap | realocate | [#22](https://github.com/xforcore/webForCore/issues/22) |
-| [F22](#f22) | AutoMapper before 12 doesn't run on .NET 11 or .NET 10 (umbraco-7: fixed by webForCore-thirdparty 0.6.0's AutoMapperLegacy) | app/environment | realocate, socialgoal, umbraco-7, nopcommerce-3.90 | - |
+| [F22](#f22) | AutoMapper before 12 doesn't run on .NET 11 or .NET 10 (umbraco-7: fixed by webForCore-thirdparty 0.6.0's AutoMapperLegacy; socialgoal: by 0.7.0's, round 0.9.0) | app/environment | realocate, socialgoal, umbraco-7, nopcommerce-3.90 | - |
 | [F23](#f23) | `recaptcha` 1.0.5's lib folders aren't framework names (NU1202) | app/environment | roadkill | - |
 | [F24](#f24) | A transitive Microsoft.AspNet.Razor replaces webForCore's in the output with no build error | webForCore bug | bonobo-git-server, applicant-tracking, realocate, roadkill | [#23](https://github.com/xforcore/webForCore/issues/23) |
 | [F25](#f25) | .NET Framework builds of StructureMap 4.0 and NLog 4.2 need `AppDomainSetup` members .NET lacks; their .NET Standard builds work | app/environment | roadkill | - |
@@ -142,15 +142,15 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F72](#f72) | Linux: the user's inotify instances (128 by default) run out with many apps running: "Failed to start monitoring changes" | app/environment | signalr-samples, identityserver3-example (on this machine) | - |
 | [F73](#f73) | MVC 3/4 apps: `webpages:Version` 1.0.0.0/2.0.0.0 fails every request ("Conflicting versions of ASP.NET Web Pages") | guide gap | mvc-music-store | [#122](https://github.com/xforcore/webForCore/issues/122) |
 | [F74](#f74) | MVC 3/4 apps: `[Compare]` is ambiguous (CS0104) between MVC's and DataAnnotations' `CompareAttribute` | guide gap | mvc-music-store | [#122](https://github.com/xforcore/webForCore/issues/122) |
-| [F75](#f75) | No `aspnet_regsql`: `SqlServices.Install` can't find `InstallCommon.sql`, so SQL membership/roles/profile apps can't create their database | webForCore bug | mvc-music-store | [#123](https://github.com/xforcore/webForCore/issues/123) |
-| [F76](#f76) | ICU: `en-US`/`en-GB` `NumberDecimalDigits` is 3, so `{0:F}` prints `8.990` for 8.99 | guide gap | mvc-music-store | [#124](https://github.com/xforcore/webForCore/issues/124) |
+| [F75](#f75) | No `aspnet_regsql`: `SqlServices.Install` can't find `InstallCommon.sql`, so SQL membership/roles/profile apps can't create their database (fixed in 0.9.0: `webforcore-regsql`) | webForCore bug | mvc-music-store | [#123](https://github.com/xforcore/webForCore/issues/123) |
+| [F76](#f76) | ICU: `en-US`/`en-GB` `NumberDecimalDigits` is 3, so `{0:F}` prints `8.990` for 8.99 (documented in 0.9.0) | guide gap | mvc-music-store | [#124](https://github.com/xforcore/webForCore/issues/124) |
 | [F77](#f77) | Windows-only data stores (SQL CE, SQL Express user instances) and data written on Windows (`\` in a wiki's page index) | app/environment | screwturn-wiki, mvc-music-store, rabbit-webpages | - |
 | [F78](#f78) | WebMatrix.Data and WebMatrix.WebData aren't provided or documented (Microsoft's 3.2.9 packages work) | guide gap | rabbit-webpages | [#130](https://github.com/xforcore/webForCore/issues/130) |
 | [F79](#f79) | `Response.End()` after `StatusCode = 401` sends the 401: forms authentication doesn't redirect to the log-in page | webForCore bug | rabbit-webpages | [#129](https://github.com/xforcore/webForCore/issues/129) |
 | [F80](#f80) | A request path with an escaped character (a space, non-ASCII) is answered 400 before the application | webForCore bug | aspnetdocs-wingtip-toys | [#126](https://github.com/xforcore/webForCore/issues/126) |
 | [F81](#f81) | `Request.RawUrl` is the default document's path for a directory request: FriendlyUrls 301s `/` to `/Default` | webForCore bug | aspnetdocs-wingtip-toys | [#127](https://github.com/xforcore/webForCore/issues/127) |
 | [F82](#f82) | Linux: `Server.MachineName` throws `DllNotFoundException` (kernel32); ELMAH's log pages fail | webForCore bug | aspnetdocs-wingtip-toys | [#128](https://github.com/xforcore/webForCore/issues/128) |
-| [F83](#f83) | C# 14's span conversions break LINQ to Entities at run time (`Contains(ReadOnlySpan)`), not only the build | guide gap | nopcommerce-3.90 | [#138](https://github.com/xforcore/webForCore/issues/138) |
+| [F83](#f83) | C# 14's span conversions break LINQ to Entities at run time (`Contains(ReadOnlySpan)`), not only the build | guide gap | nopcommerce-3.90, bonobo-git-server | [#138](https://github.com/xforcore/webForCore/issues/138) |
 | [F84](#f84) | `AppDomain.CurrentDomain.DynamicDirectory` is null: plugin managers that shadow-copy there fail at start | guide gap | nopcommerce-3.90, smartstorenet | [#139](https://github.com/xforcore/webForCore/issues/139) |
 | [F85](#f85) | System.Linq.Dynamic 1.0.7 (net40) needs .NET Framework's `System.Data.Entity` 4.0 | app/environment | nopcommerce-3.90 | – |
 | [F86](#f86) | Linux: a static file in another case is 404 until requested once in its own case, then 200 in any case | webForCore bug | nopcommerce-3.90 | [#140](https://github.com/xforcore/webForCore/issues/140) |
@@ -183,6 +183,8 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F131](#f131) | `Thread.ResetAbort()` after `catch (ThreadAbortException)` throws `PlatformNotSupportedException`; the guide doesn't say to remove it | guide gap | dnn-platform-9 | [#143](https://github.com/xforcore/webForCore/issues/143) |
 | [F132](#f132) | An application's design-time classes (`System.Web.UI.Design.ExpressionEditor`, System.Design) don't compile | guide gap | dnn-platform-9 | [#144](https://github.com/xforcore/webForCore/issues/144) |
 | [F133](#f133) | Linux: DNN builds every physical path with `\` (`ApplicationMapPath` is `BaseDirectory.Replace("/", "\\")`), and QuickIO.NET is Win32 | app/environment | dnn-platform-9 | – |
+| [F144](#f144) | `Response.Write` with `BufferOutput = false` throws in `HttpResponseBufferElement.Recycle` ("The buffer is not associated with this pool") and the response never ends | webForCore bug | bonobo-git-server | (to be raised) |
+| [F145](#f145) | LibGit2Sharp 0.23's .NET Framework build doesn't load its native library on .NET, and its Linux binary needs OpenSSL 1.0 | app/environment | bonobo-git-server | - |
 ---
 
 ## F1
@@ -715,6 +717,11 @@ console app). Found on 0.2.0.
   and passes 21/21 on Linux and Windows (7/14 before). One mapping had to change, for F104 (an AutoMapper 12 difference the
   package passes through). socialgoal and realocate aren't moved to it here.
 - **nopcommerce-3.90** (AutoMapper 5.2.0, instance API: `MapperConfiguration`, `IMapper`): `Method System.Linq.Enumerable.MaxInteger: type argument 'System.String' violates the constraint of type parameter 'T'` on every page; upgraded to 12.0.1, which compiles unchanged (round 7).
+- **Fixed for socialgoal by webForCore-thirdparty 0.7.0** (round 0.9.0, webForCore 0.9.0): `webForCore.AutoMapperLegacy`
+  0.7.0 replaces AutoMapper 3.1.1 in SocialGoal.Web and SocialGoal.Web.Core with the README's steps (the package, its
+  three global usings, `AutoMapperLegacy.ITypeConverter<,>` in `PagedListConverter`); nothing else changed, and the
+  projects already compiled C# 14. The home page renders and the goal forms map through it: 24/24 on Linux (10 before,
+  9 passing). realocate is on AutoMapper 12 already.
 
 ## F23
 
@@ -1601,6 +1608,11 @@ default SQL membership, role and profile providers can't create their database.*
   `FileNotFoundException: Could not find file '<dotnet>/shared/Microsoft.NETCore.App/10.0.14/InstallCommon.sql'`.
 - **Affects:** every MVC 2–4 and Web Forms 3.5/4.0 template app's accounts, `SqlWebEventProvider`, and SQL Server
   session state (`InstallSqlState.sql`).
+- **Fixed in 0.9.0** (round 0.9.0): System.Web carries .NET Framework 4.8's scripts and `webforcore-regsql` (the .NET
+  tool `webForCore.RegSql`) is aspnet_regsql. mvc-music-store points `LocalSqlServer` at SQL Server, as
+  `docs/MIGRATING.md` section 5 now says, and its setup runs the script `webforcore-regsql -A mr -sqlexportonly` writes
+  (the runner runs SQL files, not tools): registration, log-on, the `Administrator` role's store manager, checkout and
+  a password change all work, 44/44 on Linux.
 
 ## F76
 
@@ -1614,6 +1626,8 @@ Found on 0.7.0, on Linux (Fedora 44, ICU 77.1).
   is 3 for `en-US` and `en-GB` (ICU's pattern `#,##0.###`), 2 for the invariant culture and on Windows NLS.
 - **Guide:** `docs/MIGRATING.md` section 6 says ICU's formats differ "slightly" (currency and date patterns); this one
   changes ordinary numbers (`F`, `N` with no precision).
+- **Round 0.9.0:** `docs/MIGRATING.md` now describes it (#124, closed), with `{0:F2}` as the fix; mvc-music-store's
+  album page uses it, and a probe checks the price is `8.99`.
 
 ## F77
 
@@ -1727,6 +1741,10 @@ describes only the compile errors.** Guide gap. Raised as [#138](https://github.
   projects, not for the old-style ones it rewrites.
 - **Repro:** net10.0, EntityFramework 6.5.1, no `<LangVersion>`: `var ids = new[] { 1, 2 };
   db.Products.Where(p => ids.Contains(p.Id)).ToList()` throws; with `<LangVersion>13.0</LangVersion>` it works.
+- **bonobo-git-server** (round 0.9.0, webForCore 0.9.0): its user edit form (`Account/Edit`, an administrator saving any
+  user) was a 500, `LINQ to Entities does not recognize the method 'Boolean Contains[String](System.ReadOnlySpan`1[System.String], System.String)'`
+  (the role provider's query on the posted role names). The project set no `<LangVersion>`; `7.3` fixes it, as the
+  guide says. It wasn't seen before because no probe posted that form.
 
 ## F84
 
@@ -2327,3 +2345,63 @@ the overlay).
   net40, P/Invoke to `kernel32`).
 - **Why it isn't webForCore's:** `\` isn't a separator on Linux (MIGRATING.md section 6). Portable paths would mean
   rewriting DNN's file layer, so the app runs on Windows only (where it stops at F130 for now).
+
+## F144
+
+**`Response.Write` with `BufferOutput = false` throws in `HttpResponseBufferElement.Recycle`, and the response never
+ends.** webForCore bug. Found on 0.9.0 (Linux), adding verb probes to Bonobo Git Server (round 0.9.0).
+
+- **Apps:** bonobo-git-server: git's smart HTTP. `GitCmdResult.ExecuteResult` writes the refs advertisement header
+  with `response.Write(string)`, sets `BufferOutput = false` and copies git's output to `Response.OutputStream`, so
+  `GET /<repo>.git/info/refs?service=git-upload-pack` (the first request of every clone, fetch and push) fails. Bonobo's
+  log:
+  ```
+  System.ArgumentException: The buffer is not associated with this pool and may not be returned to it. (Parameter 'array')
+     at System.Buffers.SharedArrayPool`1.Return(T[] array, Boolean clearArray)
+     at System.Web.HttpResponseBufferElement.Recycle()
+     at System.Web.HttpWriter.RecycleBufferElements()
+     at System.Web.HttpWriter.ClearBuffers()
+     at System.Web.HttpResponse.Flush(Boolean finalFlush, Boolean async)
+     at System.Web.HttpResponse.Flush()
+     at System.Web.HttpWriter.WriteFromStream(Byte[] data, Int32 offset, Int32 size)
+     at System.Web.HttpResponseStream.Write(Byte[] buffer, Int32 offset, Int32 count)
+     at System.IO.Stream.CopyTo(Stream destination, Int32 bufferSize)
+  ```
+  The worker logs the request as finished (200) in about 50 ms, but the host never gets the end of the response: the
+  client waits until it gives up (`git push` reports a 500 or hangs; curl waits for ever). The `git-upload-pack` POST,
+  which writes nothing before `BufferOutput = false`, works (the probe's request gets git's own "not our ref").
+- **Cause** (`src/WebFormsForCore.Web/HttpWriter.cs`): `HttpResponseBufferElement.Recycle()` always returns `_data` to
+  `ArrayPool<byte>.Shared`, but only the parameterless constructor rents it. The `(byte[] data, int size)` constructor
+  wraps arrays the element doesn't own: `FlushCharBuffer`'s `new byte[estByteSize]` (the path every `Write(string)`
+  takes when response buffering is off: `BufferData(byteBuffer, 0, realByteSize, false)` adds it as an element of its
+  own), `Clone()`'s copy and `Substitute()`'s bytes. Returning an array whose length isn't one of the pool's sizes
+  throws; one that happens to be (a 1,024- or 4,096-byte string) would be handed out again while the response may still
+  hold it.
+- **Repro:** an `.ashx` in any site:
+  ```csharp
+  public void ProcessRequest(HttpContext context) {
+      context.Response.ContentType = "text/plain";
+      context.Response.BufferOutput = false;
+      context.Response.Write("hello");
+      context.Response.Write(" world");
+  }
+  ```
+  hangs (no response within 30 s); without the `BufferOutput = false` line it answers `hello world` at once. On IIS
+  both answer at once.
+- **Suggested fix:** recycle to the pool only what the element rented (a flag set by the parameterless constructor);
+  let the others go to the GC, as .NET Framework's managed buffers did. And whatever fails while the response is being
+  sent, the worker should end (or abort) the response so the client isn't left waiting.
+
+## F145
+
+**LibGit2Sharp 0.23's .NET Framework build doesn't load its native library on .NET, and its Linux binary needs
+OpenSSL 1.0.** App/environment. Found on 0.9.0 (Linux), adding verb probes to Bonobo Git Server.
+
+- **Apps:** bonobo-git-server (LibGit2Sharp 0.23.1 with LibGit2Sharp.NativeBinaries 1.0.164): creating a repository
+  (`Repository.Init`) and every repository page fail with `TypeInitializationException: The type initializer for
+  'LibGit2Sharp.Core.NativeMethods' threw an exception. ---> DllNotFoundException: Unable to load shared library
+  'git2-a5cf255'`: .NET doesn't probe `lib/linux/x86_64/` (the net40 build's own layout, with a Mono dllmap), and
+  `libgit2-a5cf255.so` links `libssl.so.1.0.0`/`libcrypto.so.1.0.0`, which current distributions don't have.
+- **What worked:** LibGit2Sharp 0.30.0 (netstandard2.0, native binaries in `runtimes/<rid>/native`, OpenSSL 3), with
+  NativeBinaries left to its dependency. Bonobo compiles against it unchanged; repositories are created, browsed and
+  deleted. Not webForCore's: the package's .NET Framework build, as on any .NET app.
