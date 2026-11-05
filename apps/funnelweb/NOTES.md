@@ -52,7 +52,7 @@ log-in form (MVC), the installer (forms authentication redirect) and a static fi
 
 ### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
 
-**CI (Linux and Windows): 12/16 on both, in CI runs 42026922513 and (second).**
+**CI (Linux and Windows): 12/16 on both, in CI runs 42026922513 and 42030748535.**
 
 12/16 on Linux; still blocked by NHibernate 3.3 (F39): the home page fails with "The following types may not be
 used as proxies", as before. Five probes more, for the admin area's MVC forms (no anti-forgery tokens): a log-in
