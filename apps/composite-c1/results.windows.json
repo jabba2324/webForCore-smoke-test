@@ -2,7 +2,7 @@
   "id": "composite-c1",
   "stages": {
     "build": {
-      "at": "2026-11-05T11:15:43+00:00",
+      "at": "2026-11-05T12:48:02+00:00",
       "error_count": 41,
       "errors": [
         "error CS0103: The name 'AspNetCompatibilityRequirementsMode' does not exist in the current context ",
@@ -37,19 +37,19 @@
         "error CS0246: The type or namespace name 'SetStateActivity' could not be found (are you missing a using directive or an assembly reference?) "
       ],
       "log": "apps\\composite-c1\\logs.windows\\build.log",
-      "seconds": 33,
+      "seconds": 35,
       "status": "fail",
       "summary": "41 distinct errors",
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T11:15:09+00:00",
+      "at": "2026-11-05T12:47:27+00:00",
       "commit": "98b7e87d03003e2dac1799f569da63789528dad8",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-05T11:15:44+00:00",
+      "at": "2026-11-05T12:48:03+00:00",
       "status": "skip",
       "summary": "not built ($WFC_CHECKOUTS/composite-c1/Website/bin_dotnet/Composite.Website.dll missing)"
     }
