@@ -162,16 +162,16 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F92](#f92) | Linux: every watched directory is an inotify instance on .NET 10; Kooboo's worker alone takes 48+ of the default 128 (fixed in 0.9.0) | webForCore bug | kooboo-cms (umbraco-8: 20) | [#152](https://github.com/xforcore/webForCore/issues/152) |
 | [F93](#f93) | CSharpTest.Net.Collections 14.906 (Umbraco 8's NuCache file store) reflects into `FileStream` and P/Invokes kernel32 | app/environment | umbraco-8 | - |
 | [F94](#f94) | An app's own `Microsoft.CodeAnalysis` (Roslyn) package conflicts with webForCore.Compilers' 5.9.0 (NU1107) | guide gap | umbraco-8 | [#153](https://github.com/xforcore/webForCore/issues/153) |
-| [F97](#f97) | Linux: each monitored folder takes an inotify instance of its own (two for many), so a site with many folders can't start | webForCore bug | orchard-1.10 | [#145](https://github.com/xforcore/webForCore/issues/145) |
-| [F98](#f98) | `<httpRuntime fcnMode>` is ignored: `Disabled` and `Single` still monitor every folder | webForCore bug | orchard-1.10 | [#146](https://github.com/xforcore/webForCore/issues/146) |
-| [F99](#f99) | web.config's `<probing privatePath>` isn't applied: `Assembly.Load` doesn't find the assemblies there | webForCore bug | orchard-1.10 | [#147](https://github.com/xforcore/webForCore/issues/147) |
+| [F97](#f97) | Linux: each monitored folder takes an inotify instance of its own (two for many), so a site with many folders can't start (fixed in 0.9.0) | webForCore bug | orchard-1.10 | [#145](https://github.com/xforcore/webForCore/issues/145) |
+| [F98](#f98) | `<httpRuntime fcnMode>` is ignored: `Disabled` and `Single` still monitor every folder (fixed in 0.9.0) | webForCore bug | orchard-1.10 | [#146](https://github.com/xforcore/webForCore/issues/146) |
+| [F99](#f99) | web.config's `<probing privatePath>` isn't applied: `Assembly.Load` doesn't find the assemblies there (fixed in 0.9.0) | webForCore bug | orchard-1.10 | [#147](https://github.com/xforcore/webForCore/issues/147) |
 | [F100](#f100) | Autofac.Configuration 3.x, Castle.Core 3.x and NHibernate 4.x don't run on .NET (`AppDomainSetup.ConfigurationFile`, `AppDomain.DefineDynamicAssembly`) | guide gap | orchard-1.10 | [#148](https://github.com/xforcore/webForCore/issues/148) |
 | [F101](#f101) | `System.Data.Services.Client` isn't on .NET or in the guide; Microsoft.Data.Services.Client 5.8.4 has the same namespace | guide gap | orchard-1.10 | [#149](https://github.com/xforcore/webForCore/issues/149) |
 | [F102](#f102) | Plug-in class libraries built into their own folder lose their NuGet libraries (SDK libraries don't copy packages) | guide gap | orchard-1.10 | [#150](https://github.com/xforcore/webForCore/issues/150) |
 | [F103](#f103) | Orchard's run-time module compilation parses the old `.csproj` format, so it can't read the SDK projects | app/environment | orchard-1.10 | - |
 | [F104](#f104) | webForCore.AutoMapperLegacy on AutoMapper 12: a member mapped from a value already of its type is mapped again through a base-type map, and the whole configuration fails (fixed in webForCore-thirdparty 0.7.0) | app/environment (webForCore-thirdparty) | umbraco-7 | [thirdparty#11](https://github.com/xforcore/webForCore-thirdparty/issues/11) |
 | [F105](#f105) | `ApplicationSettingsBase` (Settings.settings, Web Reference SOAP clients) throws `TypeLoadException`: `ConfigurationManagerInternal` is looked up in `System.Configuration` 4.0.0.0 (fixed in 0.9.0) | webForCore bug | umbraco-7 | [#154](https://github.com/xforcore/webForCore/issues/154) |
-| [F106](#f106) | webForCore's BinaryFormatter port can't serialize a `System.Type` (.NET Framework writes `UnitySerializationHolder`) | webForCore bug | orchard-1.10 | [#156](https://github.com/xforcore/webForCore/issues/156) |
+| [F106](#f106) | webForCore's BinaryFormatter port can't serialize a `System.Type` (.NET Framework writes `UnitySerializationHolder`) (fixed in 0.9.0) | webForCore bug | orchard-1.10 | [#156](https://github.com/xforcore/webForCore/issues/156) |
 | [F116](#f116) | Windows Workflow Foundation 3 (`System.Workflow.*`) isn't on .NET, and the docs and blocker search don't say so | guide gap | composite-c1 | [#132](https://github.com/xforcore/webForCore/issues/132) |
 | [F117](#f117) | Run-time C# compilation in application code (`CodeDomProvider.CreateProvider("c#")`) throws `PlatformNotSupportedException`; no documented replacement | guide gap | composite-c1 | [#133](https://github.com/xforcore/webForCore/issues/133) |
 | [F118](#f118) | CoreWCF's source generator reaches applications: `CS8370`/`CS8107` for any `[ServiceContract]` with `LangVersion` below 11 | webForCore bug | composite-c1 | [#134](https://github.com/xforcore/webForCore/issues/134) |
@@ -1932,7 +1932,8 @@ gap. Raised as [#153](https://github.com/xforcore/webForCore/issues/153). Found 
 
 **Linux: each monitored folder takes an inotify instance of its own (two for many), so a site with many folders can't
 start.** webForCore bug. Raised as [#145](https://github.com/xforcore/webForCore/issues/145). Found on 0.8.0 (Linux),
-migrating Orchard CMS 1.10.4.
+migrating Orchard CMS 1.10.4. **Fixed in 0.9.0:** in round 0.9.0 Orchard's worker holds 8 inotify instances on Linux
+(webforcore-host 1) and starts; its setup then stops where Windows's did (F100).
 
 - **Apps:** orchard-1.10: every request is a 500 (`IOException: The configured user limit (128) on the number of inotify
   instances has been reached`), static files included; Linux is blocked at 9/15. Probably any module or plug-in based
@@ -1956,6 +1957,7 @@ migrating Orchard CMS 1.10.4.
 
 **`<httpRuntime fcnMode>` is ignored: `Disabled` and `Single` still monitor every folder.** webForCore bug. Raised as
 [#146](https://github.com/xforcore/webForCore/issues/146). Found on 0.8.0 (Linux), migrating Orchard CMS 1.10.4.
+**Fixed in 0.9.0** (its release notes; Orchard's web.config sets no `fcnMode`, so the apps here don't exercise it).
 
 - **Apps:** orchard-1.10 (tried as the IIS setting for sites with many folders, F97; reverted).
 - **Error:** with `fcnMode="Disabled"` or `"Single"`, F97's repro fails at the same folder as without the attribute,
@@ -1967,7 +1969,8 @@ migrating Orchard CMS 1.10.4.
 
 **web.config's `<runtime><assemblyBinding><probing privatePath>` isn't applied: `Assembly.Load` doesn't find the
 assemblies there.** webForCore bug. Raised as [#147](https://github.com/xforcore/webForCore/issues/147). Found on 0.8.0,
-migrating Orchard CMS 1.10.4.
+migrating Orchard CMS 1.10.4. **Fixed in 0.9.0:** orchard-1.10's `AssemblyResolve` workaround is gone in round
+0.9.0, and Orchard loads its modules' assemblies from `App_Data/Dependencies` through `<probing privatePath>`.
 
 - **Apps:** orchard-1.10: Orchard copies each module's assembly to `App_Data/Dependencies` and loads it by name, with
   `<probing privatePath="App_Data/Dependencies" />`. No module loaded (`FileNotFoundException: Could not load file or
@@ -2000,6 +2003,9 @@ webForCore's; MIGRATING.md section 3's "Libraries that don't run on .NET" could 
   calls `IEntityPersister.GetConcreteProxyClass(EntityMode)`, which NHibernate 5 removed, so the Core recipe's first content
   query throws `MissingMethodException` and the tenant stays "initializing" (503). Orchard's queries need moving to
   NHibernate 5's built-in LINQ.
+- **Round 0.9.0 (Linux):** with F97 and F99 fixed, Linux reaches the same `MissingMethodException`; the tenant never
+  initializes on either platform. NHibernate 5's LINQ translates to HQL, while Orchard's `DefaultContentQuery` needs
+  the old provider's LINQ-to-`ICriteria` translation, so the port is Orchard's own work.
 
 ## F101
 
@@ -2120,6 +2126,7 @@ ignored by Umbraco, as on .NET Framework without that site).
 
 **webForCore's BinaryFormatter port can't serialize a `System.Type`.** webForCore bug. Raised as
 [#156](https://github.com/xforcore/webForCore/issues/156). Found on 0.8.0, in orchard-1.10's Windows CI run 41924348101.
+**Fixed in 0.9.0:** round 0.9.0's Orchard log has no serialization error.
 
 - **Apps:** orchard-1.10. `Orchard.Data.SessionConfigurationCache` (switched to
   `WebFormsForCore.Serialization.Formatters.Binary.BinaryFormatter`, as MIGRATING.md says) caches NHibernate's
