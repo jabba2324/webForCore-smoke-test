@@ -63,7 +63,7 @@ controls included), and `Edit.aspx?Page=MainPage` renders the editor.
 
 ### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0, drawingForCore 0.3.0)
 
-**CI (Linux and Windows): 45/45 on both, in CI runs 42026922513 and (second).**
+**CI (Linux and Windows): 45/45 on both, in CI runs 42026922513 and 42030748535.**
 
 45/45 on Linux, twice in a row. 21 probes more, Web Forms postbacks each with the view state and event validation of
 its page's GET, in one cookie jar (the log-in is kept in session): a wrong password, the administrator's log-in
