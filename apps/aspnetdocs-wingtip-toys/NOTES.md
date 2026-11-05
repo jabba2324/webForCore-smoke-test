@@ -112,6 +112,26 @@ still F80, F81 and F82 (Linux).
 The currency is the process culture's, as on IIS with the server's culture (no `<globalization>` in `Web.config`),
 so the probes don't check the total.
 
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+**21/21 on Linux, then 39/39 with the verb probes, twice in a row.** 0.9.0 fixed F80 (`/Product/Convertible%20Car`
+renders), F81 (`/` is the home page, no redirect to `/Default`) and F82 (`/elmah.axd` lists the errors on Linux),
+with no overlay change: there were no workarounds for them.
+
+18 probes more, for verbs, Web Forms postbacks in one cookie jar:
+- **The cart** (the session's): a second product added, then the cart's Update button with the first product's
+  quantity set to 3 and the second's Remove ticked. The cart lists its items in no set order (by their GUID ids), so
+  the rows' control names are captured, and the post, which needs them as field names, is written out as
+  `multipart/form-data` (the runner substitutes captures in values, not names).
+- **The administrator** (`canEditUser@wingtiptoys.com`, which `RoleActions` seeds in the canEdit role): a wrong
+  password ("Invalid login attempt"), the log-in, a product added on `Admin/AdminPage` (its form is
+  `multipart/form-data` with the product's image, a file, so this body is written out too), "Product added!", the
+  product in the list and on its own page, the product removed (its id from the page's drop-down), "Product
+  removed!", the list without it, and Log off (the LoginStatus link's `__doPostBack`), after which the admin page
+  redirects to the log-in. The image is saved under `Catalog/Images/` (`generated` in `app.toml`).
+- Not probed: registration (the app can't delete the account it makes, so a second run on the same database would
+  fail) and check-out (PayPal).
+
 ## Open problems
 
 - [F80](../../FINDINGS.md#f80) (webForCore bug, [#126](https://github.com/xforcore/webForCore/issues/126)): paths

@@ -12,8 +12,8 @@ licence = "Apache-2.0"
 status = "blocked"
 notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): 18/21 on Linux, 19/21 on Windows; the session-keyed shopping cart works (add, then view, with the session cookie). Blocked by webForCore bugs: paths with a space answer 400 (F80), FriendlyUrls redirects / (F81), Server.MachineName on Linux breaks ELMAH (F82). Needs SQL Server."
 needs = ["mssql"]
-# ExceptionUtility logs the errors the probes and by-hand checks cause.
-generated = ["**/App_Data/ErrorLog.txt"]
+# ExceptionUtility logs the errors the probes and by-hand checks cause; the admin page saves the probes' product image.
+generated = ["**/App_Data/ErrorLog.txt", "**/Catalog/Images/smokeprobe.gif", "**/Catalog/Images/Thumbs/smokeprobe.gif"]
 
 # The first request compiles the site, so it gets 120 s.
 
@@ -80,3 +80,139 @@ status = 302
 [[probes]]
 path = "/elmah.axd"
 contains = "Error Log for"
+
+# Verbs: Web Forms postbacks, each with the hidden fields of the page's GET before it, in one cookie jar (the OWIN
+# authentication cookie and the session's cart). The anonymous cart first
+# (AddToCart above put the Convertible Car in it): a second product added, the first one's quantity changed and the
+# second removed with the cart's Update button (the session's cart: logging in moves it to the user's). Then the seeded
+# administrator (RoleActions: canEditUser, in the canEdit role) logs in; adds a product on the admin page, whose form
+# is multipart/form-data with the product's image (a file, so the body is written out here: the runner's multipart
+# has text fields only); sees it in the list and its page; removes it. Then Log off (the LoginStatus link's
+# __doPostBack). Registration isn't probed: Wingtip Toys can't delete the account it
+# makes, so a second run on the same database would fail; check-out goes to PayPal.
+[[probes]]
+path = "/AddToCart?productID=2"
+status = 302
+cookies = true
+
+[[probes]]
+path = "/ShoppingCart"
+cookies = true
+contains = "Old-time Car"
+capture = { carrow = 'Convertible Car[\s\S]*?CartList\$(ctl\d+)\$PurchaseQuantity', oldrow = 'Old-time Car[\s\S]*?CartList\$(ctl\d+)\$PurchaseQuantity', viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+# The cart lists its items in no set order (by their GUIDs), so the rows' names are captured, and the post, which
+# needs them as field names, is written out as multipart/form-data (a browser could send it so too).
+[[probes]]
+path = "/ShoppingCart"
+method = "POST"
+cookies = true
+contains = "value=\"3\" id=\"MainContent_CartList_PurchaseQuantity_"
+absent = "Old-time Car"
+content_type = "multipart/form-data; boundary=smokeprobe"
+body = "--smokeprobe\r\nContent-Disposition: form-data; name=\"__VIEWSTATE\"\r\n\r\n{viewstate}\r\n--smokeprobe\r\nContent-Disposition: form-data; name=\"__VIEWSTATEGENERATOR\"\r\n\r\n{generator}\r\n--smokeprobe\r\nContent-Disposition: form-data; name=\"__EVENTVALIDATION\"\r\n\r\n{validation}\r\n--smokeprobe\r\nContent-Disposition: form-data; name=\"ctl00$MainContent$CartList${carrow}$PurchaseQuantity\"\r\n\r\n3\r\n--smokeprobe\r\nContent-Disposition: form-data; name=\"ctl00$MainContent$CartList${oldrow}$PurchaseQuantity\"\r\n\r\n1\r\n--smokeprobe\r\nContent-Disposition: form-data; name=\"ctl00$MainContent$CartList${oldrow}$Remove\"\r\n\r\non\r\n--smokeprobe\r\nContent-Disposition: form-data; name=\"ctl00$MainContent$UpdateBtn\"\r\n\r\nUpdate\r\n--smokeprobe--\r\n"
+
+[[probes]]
+path = "/Account/Login"
+cookies = true
+contains = "ctl00$MainContent$Password"
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Account/Login"
+method = "POST"
+cookies = true
+contains = "Invalid login attempt"
+[probes.form]
+__VIEWSTATE = "{viewstate}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$MainContent$Email" = "canEditUser@wingtiptoys.com"
+"ctl00$MainContent$Password" = "wrong"
+"ctl00$MainContent$ctl05" = "Log in"
+
+[[probes]]
+path = "/Account/Login"
+cookies = true
+contains = "ctl00$MainContent$Password"
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Account/Login"
+method = "POST"
+cookies = true
+status = 302
+[probes.form]
+__VIEWSTATE = "{viewstate}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$MainContent$Email" = "canEditUser@wingtiptoys.com"
+"ctl00$MainContent$Password" = "Pa$$word1"
+"ctl00$MainContent$ctl05" = "Log in"
+
+[[probes]]
+path = "/Admin/AdminPage"
+cookies = true
+contains = "ctl00$MainContent$AddProductButton"
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Admin/AdminPage"
+method = "POST"
+cookies = true
+status = 302
+content_type = "multipart/form-data; boundary=smokeprobe"
+body = "--smokeprobe\r\nContent-Disposition: form-data; name=\"__VIEWSTATE\"\r\n\r\n{viewstate}\r\n--smokeprobe\r\nContent-Disposition: form-data; name=\"__VIEWSTATEGENERATOR\"\r\n\r\n{generator}\r\n--smokeprobe\r\nContent-Disposition: form-data; name=\"__EVENTVALIDATION\"\r\n\r\n{validation}\r\n--smokeprobe\r\nContent-Disposition: form-data; name=\"ctl00$MainContent$DropDownAddCategory\"\r\n\r\n1\r\n--smokeprobe\r\nContent-Disposition: form-data; name=\"ctl00$MainContent$AddProductName\"\r\n\r\nSmoke Probe Toy\r\n--smokeprobe\r\nContent-Disposition: form-data; name=\"ctl00$MainContent$AddProductDescription\"\r\n\r\nAdded by a probe\r\n--smokeprobe\r\nContent-Disposition: form-data; name=\"ctl00$MainContent$AddProductPrice\"\r\n\r\n4.50\r\n--smokeprobe\r\nContent-Disposition: form-data; name=\"ctl00$MainContent$ProductImage\"; filename=\"smokeprobe.gif\"\r\nContent-Type: image/gif\r\n\r\nGIF89a smoke\r\n--smokeprobe\r\nContent-Disposition: form-data; name=\"ctl00$MainContent$AddProductButton\"\r\n\r\nAdd Product\r\n--smokeprobe--\r\n"
+
+[[probes]]
+path = "/Admin/AdminPage?ProductAction=add"
+cookies = true
+contains = "Product added!"
+capture = { product = '<option value="(\d+)">Smoke Probe Toy</option>', viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/ProductList"
+cookies = true
+contains = "Smoke Probe Toy"
+
+[[probes]]
+path = "/ProductDetails?productID={product}"
+cookies = true
+contains = "Added by a probe"
+
+[[probes]]
+path = "/Admin/AdminPage"
+method = "POST"
+cookies = true
+status = 302
+content_type = "multipart/form-data; boundary=smokeprobe"
+body = "--smokeprobe\r\nContent-Disposition: form-data; name=\"__VIEWSTATE\"\r\n\r\n{viewstate}\r\n--smokeprobe\r\nContent-Disposition: form-data; name=\"__VIEWSTATEGENERATOR\"\r\n\r\n{generator}\r\n--smokeprobe\r\nContent-Disposition: form-data; name=\"__EVENTVALIDATION\"\r\n\r\n{validation}\r\n--smokeprobe\r\nContent-Disposition: form-data; name=\"ctl00$MainContent$DropDownRemoveProduct\"\r\n\r\n{product}\r\n--smokeprobe\r\nContent-Disposition: form-data; name=\"ctl00$MainContent$RemoveProductButton\"\r\n\r\nRemove Product\r\n--smokeprobe--\r\n"
+
+[[probes]]
+path = "/Admin/AdminPage?ProductAction=remove"
+cookies = true
+contains = "Product removed!"
+
+[[probes]]
+path = "/ProductList"
+cookies = true
+contains = "Convertible Car"
+absent = "Smoke Probe Toy"
+
+[[probes]]
+path = "/About"
+cookies = true
+contains = "Log off"
+capture = { logoff = "__doPostBack\\(&#39;([^&]+)&#39;,&#39;&#39;\\)\">Log off", viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/About"
+method = "POST"
+cookies = true
+status = 302
+form = { __EVENTTARGET = "{logoff}", __EVENTARGUMENT = "", __VIEWSTATE = "{viewstate}", __VIEWSTATEGENERATOR = "{generator}", __EVENTVALIDATION = "{validation}" }
+
+[[probes]]
+path = "/Admin/AdminPage"
+cookies = true
+status = 302
