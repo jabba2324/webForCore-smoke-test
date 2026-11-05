@@ -88,3 +88,175 @@ status = 404
 [[probes]]
 path = "/public/Config.cs"
 status = 404
+
+# Verbs: Web Forms postbacks, each with the view state and event validation of the page's GET before it (the probes
+# share a cookie jar, for the session the log-in keeps). The administrator ("admin", web.config's MasterPassword)
+# logs in, makes a page with the editor, edits it, starts a discussion on it, deletes it from the administration's
+# Pages tab, and logs out. Registration isn't probed: it needs the CAPTCHA's text.
+[[probes]]
+path = "/Login.aspx"
+cookies = true
+contains = "ctl00$CphMasterSA$txtUsername"
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Login.aspx"
+method = "POST"
+cookies = true
+contains = "ctl00$CphMasterSA$btnLogin"
+absent = "Administrator"
+[probes.form]
+__VIEWSTATE = "{viewstate}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$CphMasterSA$txtUsername" = "admin"
+"ctl00$CphMasterSA$txtPassword" = "wrong"
+"ctl00$CphMasterSA$btnLogin" = "Login"
+
+[[probes]]
+path = "/Login.aspx"
+cookies = true
+contains = "ctl00$CphMasterSA$txtUsername"
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Login.aspx"
+method = "POST"
+cookies = true
+status = 302
+[probes.form]
+__VIEWSTATE = "{viewstate}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$CphMasterSA$txtUsername" = "admin"
+"ctl00$CphMasterSA$txtPassword" = "password"
+"ctl00$CphMasterSA$btnLogin" = "Login"
+
+[[probes]]
+path = "/Edit.aspx?Page=SmokeProbe"
+cookies = true
+contains = "ctl00$CphMasterSA$editor$txtMarkup"
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Edit.aspx?Page=SmokeProbe"
+method = "POST"
+cookies = true
+status = 302
+[probes.form]
+__VIEWSTATE = "{viewstate}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$CphMasterSA$txtName" = "SmokeProbe"
+"ctl00$CphMasterSA$txtTitle" = "Smoke Probe Page"
+"ctl00$CphMasterSA$editor$txtMarkup" = "Written by a probe."
+"ctl00$CphMasterSA$txtComment" = "Made by a probe"
+"ctl00$CphMasterSA$btnSave" = "Save"
+
+[[probes]]
+path = "/SmokeProbe.ashx"
+cookies = true
+contains = "Written by a probe."
+
+# An existing page's name can't be changed in the editor: its field isn't rendered, so it isn't posted.
+[[probes]]
+path = "/Edit.aspx?Page=SmokeProbe"
+cookies = true
+contains = "Written by a probe."
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Edit.aspx?Page=SmokeProbe"
+method = "POST"
+cookies = true
+status = 302
+[probes.form]
+__VIEWSTATE = "{viewstate}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$CphMasterSA$txtTitle" = "Smoke Probe Page"
+"ctl00$CphMasterSA$editor$txtMarkup" = "Edited by a probe."
+"ctl00$CphMasterSA$txtComment" = "Changed by a probe"
+"ctl00$CphMasterSA$btnSave" = "Save"
+
+[[probes]]
+path = "/SmokeProbe.ashx"
+cookies = true
+contains = "Edited by a probe."
+
+[[probes]]
+path = "/History.aspx?Page=SmokeProbe"
+cookies = true
+contains = "Changed by a probe"
+
+[[probes]]
+path = "/Post.aspx?Page=SmokeProbe"
+cookies = true
+contains = "ctl00$CphMaster$txtSubject"
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Post.aspx?Page=SmokeProbe"
+method = "POST"
+cookies = true
+status = 302
+[probes.form]
+__VIEWSTATE = "{viewstate}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$CphMaster$txtSubject" = "A probe's question"
+"ctl00$CphMaster$editor$txtMarkup" = "Discussed by a probe."
+"ctl00$CphMaster$btnSend" = "Send"
+
+[[probes]]
+path = "/SmokeProbe.ashx?Discuss=1"
+cookies = true
+contains = "Discussed by a probe."
+
+[[probes]]
+path = "/AdminPages.aspx?Admin=SmokeProbe"
+cookies = true
+contains = "ctl00$cphAdmin$btnDeletePage"
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/AdminPages.aspx?Admin=SmokeProbe"
+method = "POST"
+cookies = true
+contains = "ctl00$cphAdmin$rptPages"
+[probes.form]
+__VIEWSTATE = "{viewstate}"
+__VIEWSTATEGENERATOR = "{generator}"
+__EVENTVALIDATION = "{validation}"
+"ctl00$cphAdmin$txtCurrentPage" = "SmokeProbe"
+"ctl00$cphAdmin$btnDeletePage" = "Delete Page"
+
+[[probes]]
+path = "/SmokeProbe.ashx"
+cookies = true
+status = 302
+
+[[probes]]
+path = "/AllPages.aspx"
+cookies = true
+contains = "Wiki Index - ScrewTurn Wiki"
+absent = "SmokeProbe"
+
+# Logging out is the Logout button on the log-in page, which shows it to a user who's logged in.
+[[probes]]
+path = "/Login.aspx"
+cookies = true
+contains = "ctl00$CphMasterSA$btnLogout"
+capture = { viewstate = 'id="__VIEWSTATE" value="([^"]*)"', generator = 'id="__VIEWSTATEGENERATOR" value="([^"]*)"', validation = 'id="__EVENTVALIDATION" value="([^"]*)"' }
+
+[[probes]]
+path = "/Login.aspx"
+method = "POST"
+cookies = true
+status = 302
+form = { __VIEWSTATE = "{viewstate}", __VIEWSTATEGENERATOR = "{generator}", __EVENTVALIDATION = "{validation}", "ctl00$CphMasterSA$btnLogout" = "Logout" }
+
+[[probes]]
+path = "/Edit.aspx?Page=MainPage"
+cookies = true
+status = 302

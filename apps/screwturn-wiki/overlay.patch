@@ -1,5 +1,5 @@
 diff --git a/AclEngine/AclEngine.csproj b/AclEngine/AclEngine.csproj
-index 2304b8e..2f1be6d 100644
+index 2304b8e..92662d8 100644
 --- a/AclEngine/AclEngine.csproj
 +++ b/AclEngine/AclEngine.csproj
 @@ -1,68 +1,30 @@
@@ -178,7 +178,7 @@ index 0000000..2304b8e
 +</Project>
 \ No newline at end of file
 diff --git a/Core/Core.csproj b/Core/Core.csproj
-index 4aae6ec..4b0b935 100644
+index 4aae6ec..ddeda58 100644
 --- a/Core/Core.csproj
 +++ b/Core/Core.csproj
 @@ -1,145 +1,36 @@
@@ -517,7 +517,7 @@ index 0000000..4aae6ec
 +</Project>
 \ No newline at end of file
 diff --git a/PluginFramework/PluginFramework.csproj b/PluginFramework/PluginFramework.csproj
-index 575a651..74a9e74 100644
+index 575a651..f092217 100644
 --- a/PluginFramework/PluginFramework.csproj
 +++ b/PluginFramework/PluginFramework.csproj
 @@ -1,123 +1,35 @@
@@ -811,7 +811,7 @@ index 0000000..575a651
 +</Project>
 \ No newline at end of file
 diff --git a/SearchEngine/SearchEngine.csproj b/SearchEngine/SearchEngine.csproj
-index e134915..8815a32 100644
+index e134915..762edfd 100644
 --- a/SearchEngine/SearchEngine.csproj
 +++ b/SearchEngine/SearchEngine.csproj
 @@ -1,120 +1,30 @@
@@ -1125,10 +1125,10 @@ index 0000000..42c7faf
 +    }
 +}
 diff --git a/WebApplication/WebApplication.csproj b/WebApplication/WebApplication.csproj
-index 6341f31..92c2765 100644
+index 6341f31..e659d14 100644
 --- a/WebApplication/WebApplication.csproj
 +++ b/WebApplication/WebApplication.csproj
-@@ -1,2665 +1,89 @@
+@@ -1,2665 +1,46 @@
 -﻿<?xml version="1.0" encoding="utf-8"?>
 -<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 -  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -3819,50 +3819,7 @@ index 6341f31..92c2765 100644
 +    <Compile Remove="App_Code/**;bin_dotnet/**;obj/**" />
 +    <Content Remove="bin_dotnet/**" />
 +    <None Remove="bin_dotnet/**" />
-+    <Compile Remove="public/ACL.cs" />
-+    <Compile Remove="public/AccessDeniedNotice.cs" />
-+    <Compile Remove="public/AccountActivationMessage.cs" />
-+    <Compile Remove="public/ApproveDraftMessage.cs" />
-+    <Compile Remove="public/AttachmentDownloads.cs" />
-+    <Compile Remove="public/Categories.cs" />
-+    <Compile Remove="public/Config.cs" />
-+    <Compile Remove="public/Dev.EditNotice.cs" />
-+    <Compile Remove="public/Dev.Footer.cs" />
-+    <Compile Remove="public/Dev.Header.cs" />
-+    <Compile Remove="public/Dev.HtmlHead.cs" />
-+    <Compile Remove="public/Dev.PageFooter.cs" />
-+    <Compile Remove="public/Dev.PageHeader.cs" />
-+    <Compile Remove="public/Dev.Sidebar.cs" />
-+    <Compile Remove="public/DiscussionChangeMessage.cs" />
-+    <Compile Remove="public/EditNotice.cs" />
-+    <Compile Remove="public/FileDownloads.cs" />
-+    <Compile Remove="public/Footer.cs" />
-+    <Compile Remove="public/Groups.bak.cs" />
-+    <Compile Remove="public/Groups.cs" />
-+    <Compile Remove="public/Header.cs" />
-+    <Compile Remove="public/HtmlHead.cs" />
-+    <Compile Remove="public/IndexDocuments.cs" />
-+    <Compile Remove="public/IndexMappings.cs" />
-+    <Compile Remove="public/IndexWords.cs" />
-+    <Compile Remove="public/Links.cs" />
-+    <Compile Remove="public/Log.cs" />
-+    <Compile Remove="public/LoginNotice.cs" />
-+    <Compile Remove="public/Namespaces.cs" />
-+    <Compile Remove="public/NavigationPaths.cs" />
-+    <Compile Remove="public/PageChangeMessage.cs" />
-+    <Compile Remove="public/PageFooter.cs" />
-+    <Compile Remove="public/PageHeader.cs" />
-+    <Compile Remove="public/Pages.bak.cs" />
-+    <Compile Remove="public/Pages.cs" />
-+    <Compile Remove="public/Pages/Dev/MainPage.cs" />
-+    <Compile Remove="public/Pages/MainPage.cs" />
-+    <Compile Remove="public/PasswordResetProcedureMessage.cs" />
-+    <Compile Remove="public/Plugins/Status.cs" />
-+    <Compile Remove="public/RecentChanges3.cs" />
-+    <Compile Remove="public/RegisterNotice.cs" />
-+    <Compile Remove="public/Sidebar.cs" />
-+    <Compile Remove="public/Users.cs" />
-+    <Compile Remove="public/UsersData.cs" />
++    <Compile Remove="public/**" />
 +    <Compile Include="../AssemblyVersion.cs" Link="AssemblyVersion.cs" />
 +  </ItemGroup>
 +
