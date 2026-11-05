@@ -13,7 +13,7 @@ kinds = ["webforms", "mvc", "webapi"]
 licence = "MIT"
 status = "blocked"
 needs = ["mssql"]
-notes = "On webForCore 0.8.0 the web project and its 19 libraries build (Linux and Windows), but every request fails at start: BuildManager.GetType(name, false) throws for a missing assembly (F130), which ClientDependency and DNN's provider registration rely on. Linux is blocked after that by DNN's Windows paths. F130-F133."
+notes = "On webForCore 0.9.0 the web project and its 19 libraries build and F130 is fixed, so DNN starts and sends every page to its installer (8/11 on both platforms). The install stops on Linux at DNN's Windows paths (F133), and on Windows when its own change to bin recycles the worker and the streamed install request is cut (F167). F131-F133."
 
 # The compose SQL Server, database dnn9 (web.config's connection string). Install.aspx?mode=install is DNN's unattended
 # install: the schema and data scripts, the host settings and the default site from DotNetNuke.install.config, with the

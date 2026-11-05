@@ -186,6 +186,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F164](#f164) | The guide adds `UseAspNetCoreSessionProvider()` (out-of-process, serialized session state) to every app that uses `Session`; an `InProc` app with values that aren't serializable (MVC `TempData`) fails | guide gap | mvcforum | to raise |
 | [F165](#f165) | webForCore.AutoMapperLegacy needs C# 14, so F83's `<LangVersion>` fix can't be used: `array.Contains(x)` in an expression tree becomes `MemoryExtensions.Contains(op_Implicit(array), x)`, which Umbraco 7's SQL expression visitor rejects | app/environment (webForCore-thirdparty) | umbraco-7 | to raise (thirdparty) |
 | [F166](#f166) | Telerik.Web.Mvc (SmartStoreNET's checked-in .NET Framework build) calls `AppDomain.DefineDynamicAssembly`, which .NET doesn't have: every administration page is a 500 | app/environment | smartstorenet | - |
+| [F167](#f167) | Windows: a long request (DNN's install) is cut about 5 s after its own change to `bin` recycles the worker; .NET Framework drains in-flight requests for `<httpRuntime shutdownTimeout>` (DNN: 120 s) | webForCore bug (cause not confirmed) | dnn-platform-9 | to raise |
 ---
 
 ## F1
@@ -2421,3 +2422,28 @@ App/environment (the library's, the same kind as Castle.Core 3's in F100; webFor
   rebuilt or replaced, beyond a migration. The store front doesn't use it and works.
 - The guide's symptom table (AGENT-MIGRATION.md, MIGRATING.md) names this error for Autofac.Configuration 3, Castle.Core
   3 and NHibernate 4 only; Telerik.Web.Mvc could join the list, but there is no newer version to point to.
+
+## F167
+
+**Windows: DNN's install request is cut about 5 s after the worker serving it is recycled for a change to `bin`, though
+.NET Framework lets in-flight requests run for `<httpRuntime shutdownTimeout>` (DNN sets 120 s).** webForCore bug,
+cause not confirmed. Found on 0.9.0 (Windows, CI run 42027500654), with DNN Platform 9.13.10, now that F130 is fixed.
+
+- **Apps:** dnn-platform-9 on Windows (Linux stops earlier, F133). Setup's `Install.aspx?mode=install` (DNN's
+  installer, which streams its progress with `Response.Flush` while it installs) fails: the runner gets "Unable to read
+  data from the transport connection: An existing connection was forcibly closed by the remote host", and the
+  site stays uninstalled (8/11: every page redirects to the installer).
+- **What the host logged:** the install request starts on worker 5; DNN's install changes `bin` (it installs packages),
+  `Application ... is shutting down (BinDirChangeOrDirectoryRename)`, `Recycling worker 5`, worker 6 starts, and the
+  forwarded request finishes after about 5 s (`200`, 4971 ms in the worker; 9784 ms at the host) with YARP's
+  `HttpIOException: The response ended prematurely` and "the application aborted the connection". Workers 1-4 had
+  recycled the same way on the requests before (`BinDirChangeOrDirectoryRename`, one `ConfigurationChange`). DNN's
+  web.config has `fcnMode="Single"`, `shutdownTimeout="120"` and `executionTimeout="1200"`.
+- **.NET Framework:** `HttpRuntime.Dispose` waits for running requests for `<httpRuntime shutdownTimeout>` (90 s by
+  default; `WaitForRequestsToFinish(drainTimeoutSec * 1000)`, referencesource `System.Web/HttpRuntime.cs`) before it
+  aborts them, so on IIS DNN's installer finishes in the old AppDomain while the new one starts. IIS-COMPATIBILITY.md
+  says the old worker's requests are aborted after `<hostingEnvironment shutdownTimeout>` (30 s), which is a different
+  setting (registered objects), and here the request didn't get even that.
+- **Not confirmed:** whether the worker aborts its requests on shutdown, or DNN's own code ends the response when it
+  sees the application shutting down. A repro: a page that writes and flushes a line a second for 60 s and, after 2 s,
+  touches a file in `bin_dotnet`; on IIS all 60 lines arrive.
