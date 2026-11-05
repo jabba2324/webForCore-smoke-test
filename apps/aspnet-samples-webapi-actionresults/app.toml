@@ -26,3 +26,22 @@ contains = "Bar"
 [[probes]]
 path = "/product/99"
 status = 404
+
+# Verbs: every action is a GET (attribute routes on `Get...` methods), so other methods get Web API's own 405, and the
+# product is still there after them.
+[[probes]]
+path = "/product/2"
+method = "DELETE"
+status = 405
+contains = "does not support http method 'DELETE'"
+
+[[probes]]
+path = "/text"
+method = "POST"
+form = { text = "smoke" }
+status = 405
+contains = "does not support http method 'POST'"
+
+[[probes]]
+path = "/product/2"
+contains = "Bar"

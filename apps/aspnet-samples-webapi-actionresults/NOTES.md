@@ -29,6 +29,13 @@ All 10 probes pass on the released 0.2.0 packages (the overlay's `PackageReferen
 
 All 10 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0.
 
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+Every action is a GET (attribute-routed `Get...` methods returning custom `IHttpActionResult`s), so the app has
+nothing that takes another verb. Two verb probes check Web API's 405 for them (a DELETE of `/product/2`, a POST of a
+form to `/text`), and a GET after them shows the product is still there. No overlay change. Results:
+RESULTS_PLACEHOLDER
+
 ## Open problems
 
 Round 1 (webForCore 0.1.0); the webForCore bugs below are fixed in 0.2.0 (PR #16) and kept for the record.
