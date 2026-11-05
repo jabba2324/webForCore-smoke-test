@@ -133,7 +133,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F63](#f63) | Calls that become ambiguous on .NET 10 (CS0121): the app's own `DistinctBy`, empty `params` calls | guide gap | umbraco-6, umbraco-7 | [#93](https://github.com/xforcore/webForCore/issues/93) |
 | [F64](#f64) | Umbraco on Linux: Windows file names, packages only on its MyGet feed, an installer that needs a JSON POST | app/environment | umbraco-6, umbraco-7 | - |
 | [F65](#f65) | Linux: named semaphores and events throw `PlatformNotSupportedException` (only named `Mutex` works) | guide gap | umbraco-7 | [#94](https://github.com/xforcore/webForCore/issues/94) |
-| [F66](#f66) | webForCore's `CallContext` doesn't reach prebuilt .NET Framework libraries: Log4Net.Async logs nothing; SimpleInjector 3.1's Web API scopes fail | guide gap | umbraco-7, blogengine | [#95](https://github.com/xforcore/webForCore/issues/95) |
+| [F66](#f66) | webForCore's `CallContext` doesn't reach prebuilt .NET Framework libraries: Log4Net.Async logs nothing; SimpleInjector 3.1's Web API scopes fail | guide gap | umbraco-7, blogengine | [#95](https://github.com/xforcore/webForCore/issues/95), [#178](https://github.com/xforcore/webForCore/issues/178) |
 | [F67](#f67) | Linux with no locale (`C`/`POSIX`: CI runners, containers): the culture is invariant, so apps that pick resources by culture find none | guide gap | umbraco-6 | [#97](https://github.com/xforcore/webForCore/issues/97) |
 | [F68](#f68) | Web API OData (Microsoft.AspNet.OData 7.5.18) needs System.Data.Linq to build any model | documented gap (consequence undocumented) | odata-samples-compositekey | [#120](https://github.com/xforcore/webForCore/issues/120) |
 | [F69](#f69) | Windows Identity Foundation (`System.IdentityModel`) isn't on .NET or in NAMESPACES.md: IdentityServer3 can't load | guide gap | identityserver3-example | [#119](https://github.com/xforcore/webForCore/issues/119) |
@@ -183,12 +183,12 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F131](#f131) | `Thread.ResetAbort()` after `catch (ThreadAbortException)` throws `PlatformNotSupportedException`; the guide doesn't say to remove it | guide gap | dnn-platform-9 | [#143](https://github.com/xforcore/webForCore/issues/143) |
 | [F132](#f132) | An application's design-time classes (`System.Web.UI.Design.ExpressionEditor`, System.Design) don't compile | guide gap | dnn-platform-9 | [#144](https://github.com/xforcore/webForCore/issues/144) |
 | [F133](#f133) | Linux: DNN builds every physical path with `\` (`ApplicationMapPath` is `BaseDirectory.Replace("/", "\\")`), and QuickIO.NET is Win32 | app/environment | dnn-platform-9 | – |
-| [F154](#f154) | A library's relative paths resolve against `BaseDirectory` (`bin_dotnet/`): log4net writes its log into `bin_dotnet`, and every log line restarts the application | guide gap | mojoportal | to raise |
-| [F155](#f155) | Web Pages 1 sites meet Razor 3's stricter parser: `@string.Join(...)` in a code block is a parser error | guide gap | rabbit-webpages | to raise |
+| [F154](#f154) | A library's relative paths resolve against `BaseDirectory` (`bin_dotnet/`): log4net writes its log into `bin_dotnet`, and every log line restarts the application | guide gap | mojoportal | [#173](https://github.com/xforcore/webForCore/issues/173) |
+| [F155](#f155) | Web Pages 1 sites meet Razor 3's stricter parser: `@string.Join(...)` in a code block is a parser error | guide gap | rabbit-webpages | [#174](https://github.com/xforcore/webForCore/issues/174) |
 | [F156](#f156) | BlogEngine asks for a restart by touching `PhysicalApplicationPath + "\\web.config"`: on Linux the path doesn't exist | app/environment | blogengine | – |
-| [F157](#f157) | LINQ to SQL's generated SQL (`GetCommand().CommandText`) has the platform's newline: code that searches it for `\r\n` fails on Linux | guide gap | carrotcake-cms-mvc | to raise |
-| [F158](#f158) | `ServicePointManager.SecurityProtocol` with `SecurityProtocolType.Ssl3` throws `NotSupportedException` on .NET | guide gap | carrotcake-cms-mvc | to raise |
-| [F159](#f159) | `AppDomain.CurrentDomain.RelativeSearchPath` is null on .NET (the application's `bin` on IIS) | guide gap | carrotcake-cms-mvc | to raise |
+| [F157](#f157) | LINQ to SQL's generated SQL (`GetCommand().CommandText`) has the platform's newline: code that searches it for `\r\n` fails on Linux | guide gap | carrotcake-cms-mvc | [#175](https://github.com/xforcore/webForCore/issues/175) |
+| [F158](#f158) | `ServicePointManager.SecurityProtocol` with `SecurityProtocolType.Ssl3` throws `NotSupportedException` on .NET | guide gap | carrotcake-cms-mvc | [#176](https://github.com/xforcore/webForCore/issues/176) |
+| [F159](#f159) | `AppDomain.CurrentDomain.RelativeSearchPath` is null on .NET (the application's `bin` on IIS) | guide gap | carrotcake-cms-mvc | [#177](https://github.com/xforcore/webForCore/issues/177) |
 ---
 
 ## F1
