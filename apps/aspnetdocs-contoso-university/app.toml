@@ -10,7 +10,7 @@ project = "ASP.NET MVC Application Using Entity Framework Code First/[C#]-ASP.NE
 kinds = ["mvc"]
 licence = "Apache-2.0"
 status = "migrated"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 16/16 on Linux and Windows."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 37/37 on Linux and Windows (9 POSTs: student and department create/edit/delete, optimistic concurrency)."
 needs = ["mssql"]
 
 # The first request compiles the site, so it gets 120 s.
@@ -50,3 +50,133 @@ contains = "Enrollment Date"
 [[probes]]
 path = "/Content/Site.css"
 contains = "body"
+
+# Verbs: the student and department forms, each with its anti-forgery token. A student is created, found by the
+# search, edited and deleted; a department is created, edited, edited again with the row version it had before (the
+# app's optimistic concurrency check refuses it), and deleted (first with the stale row version, refused the same
+# way). Each run ends with what it made deleted.
+[[probes]]
+path = "/Student/Create"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+# A last name is required: the form comes back with the message.
+[[probes]]
+path = "/Student/Create"
+method = "POST"
+cookies = true
+form = { __RequestVerificationToken = "{token}", LastName = "", FirstMidName = "Sam", EnrollmentDate = "2020-09-01" }
+contains = "The Last Name field is required."
+
+[[probes]]
+path = "/Student/Create"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", LastName = "Smokeman", FirstMidName = "Sam", EnrollmentDate = "2020-09-01" }
+
+[[probes]]
+path = "/Student?searchString=Smokeman"
+contains = "Smokeman"
+capture = { student = '/Student/Edit/(\d+)' }
+
+[[probes]]
+path = "/Student/Edit/{student}"
+cookies = true
+contains = 'value="Smokeman"'
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Student/Edit/{student}"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", ID = "{student}", LastName = "Smokeman", FirstMidName = "Samantha", EnrollmentDate = "2021-02-03" }
+
+[[probes]]
+path = "/Student/Details/{student}"
+contains = "Samantha"
+
+[[probes]]
+path = "/Student/Delete/{student}"
+cookies = true
+contains = "Are you sure you want to delete this?"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Student/Delete/{student}"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}" }
+
+[[probes]]
+path = "/Student/Details/{student}"
+status = 404
+
+[[probes]]
+path = "/Department/Create"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Department/Create"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", Name = "Smoke Department", Budget = "1000", StartDate = "2020-09-01", InstructorID = "" }
+
+[[probes]]
+path = "/Department"
+contains = "Smoke Department"
+capture = { department = 'Smoke Department[\s\S]*?/Department/Edit/(\d+)' }
+
+[[probes]]
+path = "/Department/Edit/{department}"
+cookies = true
+contains = 'value="Smoke Department"'
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"', rowversion = 'name="RowVersion" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Department/Edit/{department}"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", DepartmentID = "{department}", RowVersion = "{rowversion}", Name = "Smoke Department Edited", Budget = "2000", StartDate = "2020-09-01", InstructorID = "" }
+
+[[probes]]
+path = "/Department/Edit/{department}"
+method = "POST"
+cookies = true
+form = { __RequestVerificationToken = "{token}", DepartmentID = "{department}", RowVersion = "{rowversion}", Name = "Smoke Department Stale", Budget = "3000", StartDate = "2020-09-01", InstructorID = "" }
+contains = "was modified by another user after you got the original value"
+
+[[probes]]
+path = "/Department/Details/{department}"
+contains = "Smoke Department Edited"
+
+[[probes]]
+path = "/Department/Delete/{department}"
+cookies = true
+contains = "Are you sure you want to delete this?"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"', current = 'name="RowVersion" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Department/Delete/{department}"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", DepartmentID = "{department}", RowVersion = "{rowversion}" }
+capture = { refused = { header = "Location", regex = "concurrencyError=True" } }
+
+[[probes]]
+path = "/Department/Delete/{department}"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", DepartmentID = "{department}", RowVersion = "{current}" }
+capture = { deleted = { header = "Location", regex = "^/Department$" } }
+
+[[probes]]
+path = "/Department/Details/{department}"
+status = 404
