@@ -2327,3 +2327,29 @@ the overlay).
   net40, P/Invoke to `kernel32`).
 - **Why it isn't webForCore's:** `\` isn't a separator on Linux (MIGRATING.md section 6). Portable paths would mean
   rewriting DNN's file layer, so the app runs on Windows only (where it stops at F130 for now).
+
+## F164
+
+**The guide adds `UseAspNetCoreSessionProvider()` to every app that uses `Session`, which makes `InProc` session state
+out-of-process: values that aren't serializable (MVC `TempData` of a view model) fail.** Guide gap. Found on 0.9.0
+(Linux; the code is platform-independent), with MVCForum.
+
+- **Apps:** mvcforum: 1. Its web.config has no `<sessionState>` (`InProc` on IIS, nothing serialized). The forum puts a
+  `GenericMessageViewModel` (not `[Serializable]`) in `TempData` after creating a topic, deleting a member and in a
+  dozen other places, and MVC's `SessionStateTempDataProvider` keeps `TempData` in session, so the request after one
+  of them was a 500. The round's new probes reached it; the old ones didn't.
+- **Error:** `HttpException: Unable to serialize the session state. In 'StateServer' and 'SQLServer' mode, ...` ←
+  `SerializationException: Type 'MvcForum.Web.ViewModels.GenericMessageViewModel' ... is not marked as serializable`, at
+  `AspNetCoreSessionProvider.SetAndReleaseItemExclusive` ← `SessionStateModule.OnReleaseState`.
+- **Gap:** AGENT-MIGRATION.md Phase 2 step 6 says "Include session state only if the app uses `Session`", and
+  MIGRATING.md section 4's `Program.cs` has `AddDistributedMemoryCache()` and `UseAspNetCoreSessionProvider()`. Session
+  state works without them (in process, as `InProc`); the provider is `StateServer`/`SQLServer`, and MIGRATING.md's
+  "Session state" says so, but not that its values must then be serializable, which an `InProc` app never needed.
+  This repo's `scripts/convert.cs` follows the guide (it adds the provider, and ASP.NET Core's `AddSession`/`UseSession`,
+  when the code uses `Session`).
+- **Workaround (the migration the guide should give):** no provider, so session state is in process, as web.config
+  says. MVCForum's `Program.cs` now has only `AddWebForms()` and `UseWebForms(o => o.HandleAllRequestsWithWebForms())`.
+- **Suggested fix:** step 6 and section 4: use `UseAspNetCoreSessionProvider()` (and a distributed cache) only for what
+  was out of process on IIS (`mode="StateServer"`, `"SQLServer"`, `"Custom"`) or to scale out; an `InProc` app keeps
+  in-process session state, and needs its session values serializable before it moves to the provider. The symptom
+  belongs in the Phase 3 table.

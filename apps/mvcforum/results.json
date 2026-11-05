@@ -22,71 +22,222 @@
       ]
     },
     "build": {
-      "at": "2026-11-04T20:25:28+00:00",
+      "at": "2026-11-05T11:26:17+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/mvcforum/logs/build.log",
-      "seconds": 19,
+      "seconds": 14,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.8.0, webForCore-thirdparty 0.6.0"
+      "webforcore": "packages 0.9.0, webForCore-thirdparty 0.7.0"
     },
     "fetch": {
-      "at": "2026-11-04T20:25:08+00:00",
+      "at": "2026-11-05T11:26:03+00:00",
       "commit": "8ce337990e079950113dae594f9407bf04854ed5",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-04T20:25:58+00:00",
+      "at": "2026-11-05T11:26:35+00:00",
       "checks": [
         {
-          "ms": 158,
+          "ms": 170,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 476,
+          "ms": 651,
           "ok": true,
           "path": "/thread/read-me/",
           "status": 200
         },
         {
-          "ms": 241,
+          "ms": 254,
           "ok": true,
           "path": "/cat/example-category/",
           "status": 200
         },
         {
-          "ms": 67,
+          "ms": 115,
           "ok": true,
           "path": "/members/logon/",
           "status": 200
         },
         {
-          "ms": 49,
+          "ms": 90,
           "ok": true,
           "path": "/members/register/",
           "status": 200
         },
         {
-          "ms": 112,
+          "ms": 176,
           "ok": true,
           "path": "/home/latestrss/",
           "status": 200
         },
         {
-          "ms": 40,
+          "ms": 69,
           "ok": true,
           "path": "/api/TinyMce/UploadImage",
           "status": 405
         },
         {
-          "ms": 16,
+          "ms": 21,
           "ok": true,
           "path": "/Themes/Metro/Content/Styles/Theme.min.css",
           "status": 200
+        },
+        {
+          "ms": 165,
+          "ok": true,
+          "path": "/thread/read-me/",
+          "status": 200
+        },
+        {
+          "ms": 78,
+          "ok": true,
+          "path": "/members/register/",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 228,
+          "ok": true,
+          "path": "/members/register/",
+          "status": 302
+        },
+        {
+          "ms": 408,
+          "ok": true,
+          "path": "/profile/smokemember/",
+          "status": 200
+        },
+        {
+          "ms": 26,
+          "ok": true,
+          "path": "/members/logoff/",
+          "status": 302
+        },
+        {
+          "ms": 74,
+          "ok": true,
+          "path": "/members/logon/",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 76,
+          "ok": true,
+          "path": "/members/logon/",
+          "status": 302
+        },
+        {
+          "ms": 482,
+          "ok": true,
+          "path": "/topic/create/",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 271,
+          "ok": true,
+          "path": "/topic/create/",
+          "status": 302
+        },
+        {
+          "ms": 310,
+          "ok": true,
+          "path": "{topic}",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 72,
+          "ok": true,
+          "path": "/post/createpost/",
+          "status": 200
+        },
+        {
+          "ms": 244,
+          "ok": true,
+          "path": "{topic}",
+          "status": 200
+        },
+        {
+          "ms": 208,
+          "ok": true,
+          "path": "/topic/editposttopic/{post}/",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 71,
+          "ok": true,
+          "path": "/topic/editposttopic/{post}/",
+          "status": 302
+        },
+        {
+          "ms": 156,
+          "ok": true,
+          "path": "{topic}",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 187,
+          "ok": true,
+          "path": "/post/deletepost/",
+          "status": 302
+        },
+        {
+          "ms": 179,
+          "ok": true,
+          "path": "{topic}",
+          "status": 200
+        },
+        {
+          "ms": 247,
+          "ok": true,
+          "path": "/search/?term=Smoke+Probe+Topic",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 59,
+          "ok": true,
+          "path": "/post/deletepost/",
+          "status": 302
+        },
+        {
+          "ms": 24,
+          "ok": true,
+          "path": "{topic}",
+          "status": 302
+        },
+        {
+          "ms": 1216,
+          "ok": true,
+          "path": "/admin/account/manage/?search=smokemember",
+          "status": 200
+        },
+        {
+          "ms": 162,
+          "ok": true,
+          "path": "/admin/account/delete/{member}/?p=1&search=smokemember",
+          "status": 302
+        },
+        {
+          "ms": 69,
+          "ok": true,
+          "path": "/admin/account/manage/?search=smokemember",
+          "status": 200
+        },
+        {
+          "ms": 8,
+          "ok": true,
+          "path": "/members/logoff/",
+          "status": 302
         },
         {
           "ms": 5,
@@ -101,7 +252,7 @@
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
@@ -113,19 +264,19 @@
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/MvcForum.Web.dll",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404
@@ -133,7 +284,7 @@
       ],
       "log": "apps/mvcforum/logs/server.log",
       "status": "pass",
-      "summary": "15/15 probes"
+      "summary": "39/39 probes"
     }
   }
 }

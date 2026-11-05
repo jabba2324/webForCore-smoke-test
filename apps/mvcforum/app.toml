@@ -10,6 +10,9 @@ licence = "MIT"
 status = "migrated"
 notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 15/15 on Linux and Windows, with System.ComponentModel.Annotations raised to 5.0.0 for .NET 10's package pruning (F54, webForCore#62)."
 needs = ["mssql"]
+# The forum's pipelines (creating, editing and deleting topics, posts and members) and badges: MvcForum.Plugins,
+# which copies itself into App_Data/Plugins, where the site looks for it (the copy is in the app's .gitignore).
+also_build = ["MvcForum.Plugins/MvcForum.Plugins.csproj"]
 
 # The first request compiles the site, so it gets 120 s.
 # The first request compiles the site and EF migrations create and seed the database (an example category, a
@@ -49,3 +52,161 @@ contains = "does not support http method 'GET'"
 [[probes]]
 path = "/Themes/Metro/Content/Styles/Theme.min.css"
 contains = "form-control"
+
+# Verbs. The seed's "Read Me" topic gives the admin's generated password. A member registers (a form with its
+# anti-forgery token), which logs them in; they log off, and the admin logs on. The admin creates a topic (the
+# multipart create form), replies to it (the AJAX post form), edits the topic's post, deletes the reply, finds the
+# topic with the search, deletes the topic, and deletes the member through the admin area. A run leaves the database
+# as it found it.
+[[probes]]
+path = "/thread/read-me/"
+cookies = true
+capture = { password = 'Password: <strong>([^<]+)</strong>' }
+
+[[probes]]
+path = "/members/register/"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/members/register/"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", UserName = "smokemember", Password = "Smoke_1234", ConfirmPassword = "Smoke_1234", Email = "smokemember@example.com", ReturnUrl = "" }
+
+[[probes]]
+path = "/profile/smokemember/"
+cookies = true
+contains = "smokemember"
+
+[[probes]]
+path = "/members/logoff/"
+cookies = true
+status = 302
+
+[[probes]]
+path = "/members/logon/"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/members/logon/"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", UserName = "admin", Password = "{password}", RememberMe = "false", ReturnUrl = "" }
+
+[[probes]]
+path = "/topic/create/"
+cookies = true
+contains = "Example Category"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"', category = '<option value="([0-9a-f-]{36})">Example Category' }
+
+[[probes]]
+path = "/topic/create/"
+method = "POST"
+cookies = true
+status = 302
+capture = { topic = { header = "Location", regex = '^(/thread/[^/?]+/)' } }
+[probes.multipart]
+__RequestVerificationToken = "{token}"
+TopicId = "00000000-0000-0000-0000-000000000000"
+Name = "Smoke Probe Topic"
+PollCloseAfterDays = "0"
+Category = "{category}"
+Tags = ""
+Content = "<p>Posted by the smoke test</p>"
+SubscribeToTopic = "false"
+IsSticky = "false"
+IsLocked = "false"
+IsPostEdit = "False"
+
+[[probes]]
+path = "{topic}"
+cookies = true
+contains = "Posted by the smoke test"
+capture = { topicid = 'id="Topic" name="Topic" type="hidden" value="([0-9a-f-]{36})"', post = '/topic/editposttopic/([0-9a-f-]{36})/' }
+
+[[probes]]
+path = "/post/createpost/"
+method = "POST"
+cookies = true
+headers = { X-Requested-With = "XMLHttpRequest" }
+form = { Topic = "{topicid}", InReplyTo = "", PostContent = "<p>Smoke probe reply</p>" }
+contains = "Smoke probe reply"
+capture = { reply = 'id="postcontent-([0-9a-f-]{36})"' }
+
+[[probes]]
+path = "{topic}"
+cookies = true
+contains = "Smoke probe reply"
+
+[[probes]]
+path = "/topic/editposttopic/{post}/"
+cookies = true
+contains = "Smoke Probe Topic"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/topic/editposttopic/{post}/"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", TopicId = "{topicid}", Id = "{post}", Name = "Smoke Probe Topic", PollCloseAfterDays = "0", Category = "{category}", Tags = "", Content = "<p>Edited by the smoke test</p>", SubscribeToTopic = "false", IsSticky = "false", IsLocked = "false", IsPostEdit = "True" }
+
+[[probes]]
+path = "{topic}"
+cookies = true
+contains = "Edited by the smoke test"
+
+[[probes]]
+path = "/post/deletepost/"
+method = "POST"
+cookies = true
+status = 302
+form = { id = "{reply}" }
+
+[[probes]]
+path = "{topic}"
+cookies = true
+absent = "Smoke probe reply"
+
+[[probes]]
+path = "/search/?term=Smoke+Probe+Topic"
+cookies = true
+contains = "Smoke Probe Topic"
+
+# Deleting the topic's first post deletes the topic.
+[[probes]]
+path = "/post/deletepost/"
+method = "POST"
+cookies = true
+status = 302
+form = { id = "{post}" }
+
+[[probes]]
+path = "{topic}"
+cookies = true
+status = 302
+
+[[probes]]
+path = "/admin/account/manage/?search=smokemember"
+cookies = true
+contains = "/admin/account/delete/"
+capture = { member = '/admin/account/delete/([0-9a-f-]{36})/' }
+
+[[probes]]
+path = "/admin/account/delete/{member}/?p=1&search=smokemember"
+cookies = true
+status = 302
+
+[[probes]]
+path = "/admin/account/manage/?search=smokemember"
+cookies = true
+absent = "/admin/account/delete/"
+
+[[probes]]
+path = "/members/logoff/"
+cookies = true
+status = 302
