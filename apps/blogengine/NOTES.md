@@ -1,6 +1,6 @@
 # BlogEngine.NET: migration notes
 
-Status: migrating (webForCore 0.9.0: 48/48 on Linux; LINQ to SQL is provided now). Source: https://github.com/BlogEngine/BlogEngine.NET
+Status: migrated (webForCore 0.9.0: 48/48 on Linux and Windows; LINQ to SQL is provided now). Source: https://github.com/BlogEngine/BlogEngine.NET
 at `95c84261` (master, 2023). MS-RL (stated in README.md; the repo has no licence file). Not migrated.
 
 ## Assessment
@@ -78,6 +78,8 @@ the latter is needed). The default XML provider (`App_Data`) needs no database, 
 web.config is unchanged.
 
 ## Smoke
+
+**CI (Linux and Windows): 48/48 on both, in CI runs 42026922513 and (second).**
 
 **Round 0.9.0, Linux: 48/48** (41 of the app's probes and the runner's 7 forbidden paths), twice in a row, and from a
 fresh checkout.
