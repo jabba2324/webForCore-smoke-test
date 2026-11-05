@@ -28,3 +28,18 @@ Appended by `scripts/wfc.py`, one line per stage run.
 - 2026-11-03T12:41:55+00:00 **fetch** (windows): pass at `885be06e42b5`
 - 2026-11-03T12:42:31+00:00 **build** (windows): pass
 - 2026-11-03T12:42:50+00:00 **smoke** (windows): pass (16/16 probes)
+- 2026-11-05T11:24:53+00:00 **fetch**: pass at `885be06e42b5`
+- 2026-11-05T11:25:24+00:00 **build**: pass
+- 2026-11-05T11:25:43+00:00 **smoke**: pass (16/16 probes)
+- 2026-11-05T11:27:45+00:00 **setup**: fail (sources/Data.Tools.Migrator/SqlServerScripts/Create_Initial_Db_Structure.sql failed)
+- 2026-11-05T11:28:23+00:00 **setup**: pass (created starterTemplateMVC5)
+- 2026-11-05T11:29:30+00:00 **smoke**: fail (26/32 probes)
+- 2026-11-05T11:29:41+00:00 **smoke**: fail (24/32 probes)
+- 2026-11-05T11:30:02+00:00 **setup**: pass (created starterTemplateMVC5)
+- 2026-11-05T11:30:07+00:00 **smoke**: pass (32/32 probes)
+- 2026-11-05T11:30:12+00:00 **smoke**: pass (32/32 probes)
+- 2026-11-05T11:59:11+00:00 **fetch**: pass at `885be06e42b5`
+- 2026-11-05T11:59:21+00:00 **fetch**: pass (existing checkout) at `885be06e42b5`
+- 2026-11-05T11:59:49+00:00 **build**: pass
+- 2026-11-05T11:59:49+00:00 **setup**: pass (created starterTemplateMVC5)
+- 2026-11-05T11:59:59+00:00 **smoke**: pass (32/32 probes)

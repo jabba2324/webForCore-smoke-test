@@ -1,6 +1,6 @@
 # SocialGoal: migration notes
 
-Status: blocked (F18: ELMAH's config sections fail; then F17, then AutoMapper 3). Source:
+Status: migrated (webForCore 0.9.0 and webForCore-thirdparty 0.7.0's AutoMapperLegacy, 24/24 probes on Linux and Windows). Source:
 https://github.com/MarlabsInc/SocialGoal at `42cfdb48`. Found by searching GitHub on 2026-10-31; the repo, licence
 (MIT), web project and its `<TargetFrameworkVersion>` were checked through the GitHub API. webForCore 0.2.0 packages.
 
@@ -65,8 +65,28 @@ pass. `/` fails on AutoMapper 3.1 ([F22](../../FINDINGS.md#f22), app/environment
 Unchanged: ELMAH and the Google provider work (0.3.0), and `/` fails on AutoMapper 3.1 (F22). Its Katana
 `ExcludeAssets` references were removed.
 
+### Round 0.9.0: AutoMapper, verbs (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+- **F22 fixed by webForCore-thirdparty's `webForCore.AutoMapperLegacy` 0.7.0** (AutoMapper 3.x's static API on
+  AutoMapper 12), following its README, in `SocialGoal.Web` and `SocialGoal.Web.Core`:
+  - `<PackageReference Include="webForCore.AutoMapperLegacy" Version="0.7.0" />` for `AutoMapper` 3.1.1-ci1000;
+  - its global usings as `<Using>` items: `AutoMapperLegacy`, `Mapper` and `Profile` (the app has 3.x profiles);
+  - `PagedListConverter` implements `AutoMapperLegacy.ITypeConverter<,>`;
+  - nothing else: the projects set no `<LangVersion>` (C# 14 already), and the EF queries' `Contains` are on lists
+    and queries, not arrays (F83 can't happen).
+- **`[setup]` (new):** creates `SocialGoal` and registers `smokeuser` through the app's Register form.
+- **Probes (14 added, 6 of them POSTs, with anti-forgery tokens where the forms have them):** `/` (now a 302 to the
+  log-in, the home page is `[Authorize]`); the log-in, whose form calls the user name `Email`, with a wrong password
+  ("Invalid username or password.") and the right one; the home page signed in; a goal created (302 to it), shown,
+  edited, found by the search form, deleted (then 404); log-off. The log-in page and bootstrap.css probes now check
+  their text.
+- **Results:** 24/24 on Linux (9/10 before), twice in a row, from a new database.
+
+**CI (round 0.9.0, run 42029051731, both attempts):** 24/24 on Linux, 24/24 on Windows, the same in run 42024931148.
+
 ## Open problems
 
+- **Round 0.9.0:** F18 and F17 were fixed in 0.3.0; F22 is resolved by webForCore.AutoMapperLegacy 0.7.0 (above). Nothing open.
 - [F18](../../FINDINGS.md#f18) (webForCore bug): configuration types referenced through `System.dll` reach the host's
   ConfigurationManager. Blocks every request.
 - [F17](../../FINDINGS.md#f17) (guide gap): Katana's Google provider needs System.Net.Http.WebRequest.

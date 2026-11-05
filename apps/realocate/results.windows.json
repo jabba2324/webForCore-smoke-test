@@ -2,44 +2,75 @@
   "id": "realocate",
   "stages": {
     "build": {
-      "at": "2026-11-05T11:28:15+00:00",
+      "at": "2026-11-05T13:22:45+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\realocate\\logs.windows\\build.log",
-      "seconds": 42,
+      "seconds": 61,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T11:27:32+00:00",
+      "at": "2026-11-05T13:21:43+00:00",
       "commit": "0c2a3bd76c9fd2581ab993447e4fcdeef143197a",
       "overlay": true,
       "status": "pass"
     },
+    "setup": {
+      "at": "2026-11-05T13:22:57+00:00",
+      "created": [
+        "ReaLocate"
+      ],
+      "date": "2026-11-05",
+      "status": "pass",
+      "steps": [
+        {
+          "ok": true,
+          "status": 200,
+          "step": "/Account/Register"
+        },
+        {
+          "ok": true,
+          "status": 302,
+          "step": "/Account/Register"
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "step": "/Account/Register"
+        },
+        {
+          "ok": true,
+          "status": 302,
+          "step": "/Account/Register"
+        }
+      ],
+      "summary": "4/4 steps"
+    },
     "smoke": {
-      "at": "2026-11-05T11:28:38+00:00",
+      "at": "2026-11-05T13:23:07+00:00",
       "checks": [
         {
-          "ms": 328,
+          "ms": 88,
           "ok": true,
           "path": "/Account/Login",
           "status": 200
         },
         {
-          "ms": 19,
+          "ms": 18,
           "ok": true,
           "path": "/Account/Register",
           "status": 200
         },
         {
-          "ms": 28,
+          "ms": 30,
           "ok": true,
           "path": "/Home/GetAllRealEstatesList",
           "status": 200
         },
         {
-          "ms": 17,
+          "ms": 16,
           "ok": true,
           "path": "/Agencies/CreateAgency",
           "status": 302
@@ -51,7 +82,7 @@
           "status": 200
         },
         {
-          "ms": 63,
+          "ms": 531,
           "ok": true,
           "path": "/signalr/hubs",
           "status": 200
@@ -60,6 +91,104 @@
           "ms": 23,
           "ok": true,
           "path": "/Content/Site.css",
+          "status": 200
+        },
+        {
+          "ms": 8,
+          "ok": true,
+          "path": "/Account/Login",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 114,
+          "ok": true,
+          "path": "/Account/Login",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 154,
+          "ok": true,
+          "path": "/Account/Login",
+          "status": 302
+        },
+        {
+          "ms": 1322,
+          "ok": true,
+          "path": "/Manage",
+          "status": 200
+        },
+        {
+          "ms": 356,
+          "ok": true,
+          "path": "/RealEstates/CreateRealEstate",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 18,
+          "ok": true,
+          "path": "/Account/LogOff",
+          "status": 302
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/Manage",
+          "status": 302
+        },
+        {
+          "ms": 5,
+          "ok": true,
+          "path": "/Account/Login",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 31,
+          "ok": true,
+          "path": "/Account/Login",
+          "status": 302
+        },
+        {
+          "ms": 765,
+          "ok": true,
+          "path": "/Administration/Users/Users",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 29,
+          "ok": true,
+          "path": "/Administration/Users/Users_Read",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 35,
+          "ok": true,
+          "path": "/Administration/Users/Users_Update",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 22,
+          "ok": true,
+          "path": "/Administration/Users/Users_Read",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 13,
+          "ok": true,
+          "path": "/Administration/Users/Users_Update",
+          "status": 200
+        },
+        {
+          "ms": 48,
+          "ok": true,
+          "path": "/signalr/negotiate?clientProtocol=1.5&connectionData=%5B%7B%22name%22%3A%22chathub%22%7D%5D",
           "status": 200
         },
         {
@@ -75,25 +204,25 @@
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/ReaLocate.Web.dll",
           "status": 404
@@ -107,7 +236,7 @@
       ],
       "log": "apps\\realocate\\logs.windows\\server.log",
       "status": "pass",
-      "summary": "14/14 probes"
+      "summary": "29/29 probes"
     }
   }
 }

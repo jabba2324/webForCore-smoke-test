@@ -18,74 +18,74 @@
       ]
     },
     "build": {
-      "at": "2026-11-05T11:15:41+00:00",
+      "at": "2026-11-05T13:20:53+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/aspnetdocs-contoso-university/logs/build.log",
-      "seconds": 8,
+      "seconds": 13,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T11:15:33+00:00",
+      "at": "2026-11-05T13:20:40+00:00",
       "commit": "bbfca35de1c811927fbd019d51969aa878dbd032",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-05T11:16:00+00:00",
+      "at": "2026-11-05T13:21:16+00:00",
       "checks": [
         {
-          "ms": 9,
+          "ms": 12,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 11786,
+          "ms": 12255,
           "ok": true,
           "path": "/Student",
           "status": 200
         },
         {
-          "ms": 19,
+          "ms": 25,
           "ok": true,
           "path": "/Student?sortOrder=name_desc&searchString=an",
           "status": 200
         },
         {
-          "ms": 36,
+          "ms": 46,
           "ok": true,
           "path": "/Student/Create",
           "status": 200
         },
         {
-          "ms": 251,
+          "ms": 296,
           "ok": true,
           "path": "/Course",
           "status": 200
         },
         {
-          "ms": 300,
+          "ms": 367,
           "ok": true,
           "path": "/Instructor?id=9&courseID=2042",
           "status": 200
         },
         {
-          "ms": 294,
+          "ms": 312,
           "ok": true,
           "path": "/Department",
           "status": 200
         },
         {
-          "ms": 22,
+          "ms": 27,
           "ok": true,
           "path": "/Home/About",
           "status": 200
         },
         {
-          "ms": 10,
+          "ms": 13,
           "ok": true,
           "path": "/Content/Site.css",
           "status": 200
@@ -93,11 +93,146 @@
         {
           "ms": 7,
           "ok": true,
+          "path": "/Student/Create",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 22,
+          "ok": true,
+          "path": "/Student/Create",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 10,
+          "ok": true,
+          "path": "/Student/Create",
+          "status": 302
+        },
+        {
+          "ms": 14,
+          "ok": true,
+          "path": "/Student?searchString=Smokeman",
+          "status": 200
+        },
+        {
+          "ms": 23,
+          "ok": true,
+          "path": "/Student/Edit/{student}",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 10,
+          "ok": true,
+          "path": "/Student/Edit/{student}",
+          "status": 302
+        },
+        {
+          "ms": 11,
+          "ok": true,
+          "path": "/Student/Details/{student}",
+          "status": 200
+        },
+        {
+          "ms": 10,
+          "ok": true,
+          "path": "/Student/Delete/{student}",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 11,
+          "ok": true,
+          "path": "/Student/Delete/{student}",
+          "status": 302
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/Student/Details/{student}",
+          "status": 404
+        },
+        {
+          "ms": 14,
+          "ok": true,
+          "path": "/Department/Create",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 17,
+          "ok": true,
+          "path": "/Department/Create",
+          "status": 302
+        },
+        {
+          "ms": 5,
+          "ok": true,
+          "path": "/Department",
+          "status": 200
+        },
+        {
+          "ms": 15,
+          "ok": true,
+          "path": "/Department/Edit/{department}",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 16,
+          "ok": true,
+          "path": "/Department/Edit/{department}",
+          "status": 302
+        },
+        {
+          "method": "POST",
+          "ms": 24,
+          "ok": true,
+          "path": "/Department/Edit/{department}",
+          "status": 200
+        },
+        {
+          "ms": 19,
+          "ok": true,
+          "path": "/Department/Details/{department}",
+          "status": 200
+        },
+        {
+          "ms": 10,
+          "ok": true,
+          "path": "/Department/Delete/{department}",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 18,
+          "ok": true,
+          "path": "/Department/Delete/{department}",
+          "status": 302
+        },
+        {
+          "method": "POST",
+          "ms": 6,
+          "ok": true,
+          "path": "/Department/Delete/{department}",
+          "status": 302
+        },
+        {
+          "ms": 5,
+          "ok": true,
+          "path": "/Department/Details/{department}",
+          "status": 404
+        },
+        {
+          "ms": 5,
+          "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
@@ -135,7 +270,7 @@
       ],
       "log": "apps/aspnetdocs-contoso-university/logs/server.log",
       "status": "pass",
-      "summary": "16/16 probes"
+      "summary": "37/37 probes"
     }
   }
 }

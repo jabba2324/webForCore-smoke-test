@@ -8,7 +8,7 @@ project = "aspnet/mvc/overview/deployment/docker-aspnetmvc/samples/MVCRandomAnsw
 kinds = ["mvc"]
 licence = "MIT"
 status = "migrated"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 9/9 on Linux and Windows."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 13/13 on Linux and Windows (2 POSTs: the question form, with and without its token)."
 
 # The first request compiles the site, so it gets 120 s.
 [[probes]]
@@ -18,3 +18,29 @@ contains = "Magic 8 ball"
 [[probes]]
 path = "/Home/About"
 contains = "<h2>"
+
+# Verbs: the question form (POST with its anti-forgery token), answered on the page it returns.
+[[probes]]
+path = "/"
+cookies = true
+contains = "Ask your question"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/"
+method = "POST"
+cookies = true
+form = { __RequestVerificationToken = "{token}", NextQuestion = "Will the smoke test pass?" }
+contains = "Will the smoke test pass?"
+
+# Without the token the post is refused (ValidateAntiForgeryToken), and the question isn't recorded.
+[[probes]]
+path = "/"
+method = "POST"
+form = { NextQuestion = "Smoke question without a token" }
+status = 500
+contains = "__RequestVerificationToken"
+
+[[probes]]
+path = "/"
+absent = "Smoke question without a token"

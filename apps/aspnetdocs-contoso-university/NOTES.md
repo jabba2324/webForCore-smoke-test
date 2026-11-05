@@ -1,6 +1,6 @@
 # AspNetDocs: Contoso University (MVC 5 + EF 6 tutorial): migration notes
 
-Status: migrated (webForCore 0.7.0, 16/16 probes on Linux and Windows). Source: the completed project of the AspNetDocs tutorial
+Status: migrated (webForCore 0.9.0, 37/37 probes on Linux and Windows). Source: the completed project of the AspNetDocs tutorial
 "Getting Started with Entity Framework 6 Code First using MVC 5"
 (`aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc` in dotnet/AspNetDocs). The repository has
 only the tutorial's snippets; the tutorial links the project on the retired MSDN Code Gallery
@@ -60,6 +60,20 @@ limit (webForCore `docs/IIS-COMPATIBILITY.md`, #107), not this app; the next run
 By hand: `POST /Student/Create` with the form's anti-forgery token returns 302 to `/Student` and the student is
 listed; without the token it is a 500 (`HttpAntiForgeryException`), as on IIS. `/Course/UpdateCourseCredits` and
 `/Student/Details/1` render.
+
+### Round 0.9.0: verbs (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+21 probes added, 9 of them POSTs, all with the forms' anti-forgery tokens:
+- **Students:** Create posted without a last name (the form comes back with "The Last Name field is required."),
+  then posted properly (302); the search finds the student and gives its id; Edit posted (`TryUpdateModel`) and the
+  details show it; Delete posted and the details are 404.
+- **Departments** (the tutorial's optimistic concurrency, a `[Timestamp] RowVersion`): Create (302), Edit with the row
+  version from the edit page (302), the same edit again with that now stale row version (the page comes back with
+  "was modified by another user after you got the original value"), Delete with the stale row version (redirected
+  with `concurrencyError=True`) and with the current one (redirected to the list), then 404.
+- The run deletes what it made. **37/37 on Linux** (16 before), twice in a row.
+
+**CI (round 0.9.0, run 42029051731, both attempts):** 37/37 on Linux, 37/37 on Windows, the same in run 42024931148.
 
 ## Open problems
 

@@ -1,6 +1,6 @@
 # ASP.NET samples: MVC EnumSample: migration notes
 
-Status: migrated (webForCore 0.4.0, all probes pass).
+Status: migrated (webForCore 0.9.0, 19/19 probes on Linux and Windows).
 (`LICENSE.txt`). Split out of the `aspnet-samples` entry. webForCore 0.1.0 packages (0.2.0 from round 2).
 
 ## Assessment
@@ -28,6 +28,15 @@ All 8 probes pass on the released 0.2.0 packages (the overlay's `PackageReferenc
 ### Round 3: webForCore 0.4.0
 
 All 8 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0.
+
+### Round 0.9.0: verbs (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+10 probes added, 3 of them POSTs, with the anti-forgery token: a row created with the enums from the drop-downs'
+values (`3`, `4`) and the `[Flags]` enum from its text box (`Eight, Sixteen`), found on the index by its `[Display]`
+names (Trois, Quatre), edited (`Enum2` emptied, flags `3`, shown as "One, Two" and "Duex"), deleted, and then 404.
+**19/19 on Linux** (9 before), twice in a row.
+
+**CI (round 0.9.0, run 42029051731, both attempts):** 19/19 on Linux, 19/19 on Windows, the same in run 42024931148.
 
 ## Open problems
 

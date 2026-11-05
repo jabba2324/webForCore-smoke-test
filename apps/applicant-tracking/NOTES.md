@@ -1,6 +1,6 @@
 # ApplicantTracking: migration notes
 
-Status: migrated (webForCore 0.4.0, all probes pass).
+Status: migrated (webForCore 0.9.0, 18/18 probes on Linux and Windows).
 https://github.com/feliperomero3/ApplicantTracking at `ff9a2eb4`. Found by searching GitHub on 2026-10-31; the repo,
 licence (Apache-2.0), web project and its `<TargetFrameworkVersion>` were checked through the GitHub API. webForCore
 0.2.0 packages.
@@ -69,6 +69,17 @@ All 10 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0, and its 4 
 and all 10 probes pass. webForCore's documented workaround was tried as well, without the third-party package:
 `UnityMvcActivator.Start()` called from `Application_Start` (`docs/MIGRATING.md` section 3). That passes all 10 too, so
 the workaround shows no problem of its own here. The committed overlay uses the third-party package (CLAUDE.md).
+
+### Round 0.9.0: verbs (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+Every form here saves through `ApplicationDbContext`, whose model has the keyless `Domicilio` (above), so any post that
+reaches the database (log-in, registration, an applicant) fails with the app's own model error, as on .NET Framework.
+The 7 probes added (4 POSTs, over HTTPS) cover what the posts do before that: the applicant form with an invalid date
+(model binding: "The value 'not a date' is not valid for FechaNacimiento."), the same form without its anti-forgery
+token (500, the anti-forgery error), registration with a short password and log-in without a password (validation
+messages). No API. **18/18 on Linux** (11 before), twice in a row.
+
+**CI (round 0.9.0, run 42029051731, both attempts):** 18/18 on Linux, 18/18 on Windows, the same in run 42024931148.
 
 ## Open problems
 

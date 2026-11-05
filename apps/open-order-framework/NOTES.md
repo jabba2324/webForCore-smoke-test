@@ -1,6 +1,6 @@
 # OpenOrderFramework: migration notes
 
-Status: migrated (webForCore 0.4.0, all probes pass).
+Status: migrated (webForCore 0.9.0, 23/23 probes on Linux and Windows).
 https://github.com/lbacaj/OpenOrderFramework at `a6e25736`. Found by searching GitHub on 2026-10-31; the repo, licence
 (MIT), web project and its `<TargetFrameworkVersion>` were checked through the GitHub API. webForCore 0.2.0 packages.
 
@@ -68,6 +68,20 @@ On a fresh database the first requests hang. The app's seed deadlocks; it's the 
 
 Seen with `dotnet-stack`; SQL Server showed nothing blocked. Once the database exists, all 12 probes pass. The app's own
 workflow creates the database with `Update-Database`, which doesn't run that seed.
+
+### Round 0.9.0: verbs (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+- **`[setup]`:** after the first request (which still deadlocks on a new database, F26), the app is restarted and
+  `smoke@example.com` registered through the Register form. The seed that would make `admin@gmail.com` and the Admin
+  role is what deadlocks, so neither exists, and the catalogue (the administrator's to fill) is empty.
+- **Probes (10 added, 5 of them POSTs):** the log-in with a wrong password ("Invalid login attempt.") and the right one;
+  the change-password form, posted (302), "Your password has been changed.", and changed back; the `[Authorize]`
+  checkout page signed in; log-off (POST) and checkout redirecting again.
+- **Not probed:** the cart's AJAX posts (`AddToCart`, `RemoveFromCart`) and checkout need items, and the admin area
+  the Admin role; checkout also mails the order through Mailgun.
+- **Results:** 23/23 on Linux (13 before), twice in a row, from a new database (setup: the first request times out as allowed, the restart and registration pass).
+
+**CI (round 0.9.0, run 42029051731, both attempts):** 23/23 on Linux, 23/23 on Windows, the same in run 42024931148.
 
 ## Open problems
 

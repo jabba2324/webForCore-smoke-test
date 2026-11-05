@@ -20,23 +20,23 @@
       ]
     },
     "build": {
-      "at": "2026-11-05T11:18:11+00:00",
+      "at": "2026-11-05T13:21:37+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/open-order-framework/logs/build.log",
-      "seconds": 9,
+      "seconds": 10,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T11:18:02+00:00",
+      "at": "2026-11-05T13:21:27+00:00",
       "commit": "a6e2573643507b83db3c4b5921153737229b0200",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-05T11:23:29+00:00",
+      "at": "2026-11-05T13:27:02+00:00",
       "created": [],
       "date": "2026-11-05",
       "status": "pass",
@@ -46,51 +46,130 @@
           "may_fail": true,
           "ok": false,
           "step": "/"
+        },
+        {
+          "ok": true,
+          "step": "restart"
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "step": "/Account/Register"
+        },
+        {
+          "ok": true,
+          "status": 200,
+          "step": "/Account/Register"
         }
       ],
-      "summary": "0/1 steps, 1 allowed to fail"
+      "summary": "3/4 steps, 1 allowed to fail"
     },
     "smoke": {
-      "at": "2026-11-05T11:23:35+00:00",
+      "at": "2026-11-05T13:27:11+00:00",
       "checks": [
         {
-          "ms": 15,
+          "ms": 17,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 191,
+          "ms": 1822,
           "ok": true,
           "path": "/Store",
           "status": 200
         },
         {
-          "ms": 52,
+          "ms": 72,
           "ok": true,
           "path": "/ShoppingCart",
           "status": 200
         },
         {
-          "ms": 740,
+          "ms": 1316,
           "ok": true,
           "path": "/Account/Login",
           "status": 200
         },
         {
-          "ms": 369,
+          "ms": 22,
           "ok": true,
           "path": "/Account/Register",
           "status": 200
         },
         {
-          "ms": 17,
+          "ms": 22,
           "ok": true,
           "path": "/Content/Site.css",
           "status": 200
         },
         {
-          "ms": 7,
+          "ms": 13,
+          "ok": true,
+          "path": "/Account/Login",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 230,
+          "ok": true,
+          "path": "/Account/Login",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 66,
+          "ok": true,
+          "path": "/Account/Login",
+          "status": 302
+        },
+        {
+          "ms": 421,
+          "ok": true,
+          "path": "/Manage/ChangePassword",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 159,
+          "ok": true,
+          "path": "/Manage/ChangePassword",
+          "status": 302
+        },
+        {
+          "ms": 29,
+          "ok": true,
+          "path": "/Manage?Message=ChangePasswordSuccess",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 23,
+          "ok": true,
+          "path": "/Manage/ChangePassword",
+          "status": 302
+        },
+        {
+          "ms": 424,
+          "ok": true,
+          "path": "/Checkout/AddressAndPayment",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 6,
+          "ok": true,
+          "path": "/Account/LogOff",
+          "status": 302
+        },
+        {
+          "ms": 11,
+          "ok": true,
+          "path": "/Checkout/AddressAndPayment",
+          "status": 302
+        },
+        {
+          "ms": 6,
           "ok": true,
           "path": "/web.config",
           "status": 404
@@ -134,7 +213,7 @@
       ],
       "log": "apps/open-order-framework/logs/server.log",
       "status": "pass",
-      "summary": "13/13 probes"
+      "summary": "23/23 probes"
     }
   }
 }

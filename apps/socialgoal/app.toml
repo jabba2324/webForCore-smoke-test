@@ -7,19 +7,118 @@ site = "source/SocialGoal"
 project = "source/SocialGoal/SocialGoal.Web.csproj"
 kinds = ["mvc", "owin", "identity"]
 licence = "MIT"
-status = "blocked"
-notes = "Blocked on AutoMapper 3.1, which doesn't run on .NET (F22; the upgrade to 12 is a rewrite): 9/10 probes on Linux and Windows on webForCore 0.8.0 (.NET 10, under webforcore-host). ELMAH and Katana Google work since webForCore 0.3.0."
+status = "migrated"
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host), webForCore-thirdparty 0.7.0's AutoMapperLegacy for AutoMapper 3.1 (F22): passes all probes, 24/24 on Linux and Windows (6 POSTs: log-in, goal create/edit/delete, search)."
 
 # The first request compiles the site, so it gets 120 s.
 needs = ["mssql"]
 
-# The first request compiles the site, so it gets 120 s. Blocked before any page renders (NOTES.md), so the probes
-# are the page kinds the app has, without text checks yet.
+# The user the probes log in as, registered through the app's own form (Identity; EF creates the database).
+[setup]
+databases = ["SocialGoal"]
+
+[[setup.steps]]
+get = "/Account/Register"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[setup.steps]]
+post = "/Account/Register"
+fields = { __RequestVerificationToken = "{token}", UserName = "smokeuser", Password = "Smoke_test_1234", ConfirmPassword = "Smoke_test_1234" }
+contains = "Social Goal"
+
+# The first request compiles the site, so it gets 120 s. The home page is [Authorize]: log-in first.
 [[probes]]
 path = "/"
+status = 302
 
 [[probes]]
 path = "/Account/Login"
+contains = "__RequestVerificationToken"
 
 [[probes]]
 path = "/Content/bootstrap.css"
+contains = "Bootstrap"
+
+# Verbs. Log in as setup's smokeuser (the log-in form calls the user name "Email"; a wrong password first), then a goal: created, shown, edited, found by the
+# search form, and deleted. AutoMapper maps each form model (webForCore.AutoMapperLegacy, F22).
+[[probes]]
+path = "/Account/Login"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Account/Login"
+method = "POST"
+cookies = true
+form = { __RequestVerificationToken = "{token}", Email = "smokeuser", Password = "wrong", RememberMe = "false" }
+contains = "Invalid username or password."
+
+[[probes]]
+path = "/Account/Login"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", Email = "smokeuser", Password = "Smoke_test_1234", RememberMe = "false" }
+
+[[probes]]
+path = "/"
+cookies = true
+contains = "smokeuser"
+
+[[probes]]
+path = "/Goal/Create"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"', user = 'name="UserId" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Goal/Create"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", GoalName = "Smoke Goal", Desc = "A smoke test goal", StartDate = "2026-01-01", EndDate = "2026-12-31", MetricId = "", Target = "", GoalType = "false", UserId = "{user}" }
+capture = { goal = { header = "Location", regex = "/Goal/Index/(\\d+)$" } }
+
+[[probes]]
+path = "/Goal/Index/{goal}"
+cookies = true
+contains = "A smoke test goal"
+
+[[probes]]
+path = "/Goal/Edit/{goal}"
+cookies = true
+contains = 'value="Smoke Goal"'
+
+[[probes]]
+path = "/Goal/Edit"
+method = "POST"
+cookies = true
+status = 302
+form = { GoalId = "{goal}", GoalName = "Smoke Goal Edited", Desc = "A smoke test goal", StartDate = "2026-01-01", EndDate = "2026-12-31", Target = "", GoalType = "false", UserId = "{user}" }
+
+[[probes]]
+path = "/Goal/Index/{goal}"
+cookies = true
+contains = "Smoke Goal Edited"
+
+[[probes]]
+path = "/Search/SearchAll"
+method = "POST"
+cookies = true
+form = { searchText = "Smoke Goal" }
+contains = "Smoke Goal Edited"
+
+[[probes]]
+path = "/Goal/Delete/{goal}"
+method = "POST"
+cookies = true
+status = 302
+
+[[probes]]
+path = "/Goal/Index/{goal}"
+cookies = true
+status = 404
+
+[[probes]]
+path = "/Account/LogOff"
+cookies = true
+status = 302

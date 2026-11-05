@@ -1,207 +1,201 @@
 info: WebFormsForCore.Host.WorkerPool[0]
-      Started worker 1 (process 3268) for <repo>/apps/roadkill/src/src/Roadkill.Web/bin_dotnet/Roadkill.Web.dll: the host started.
+      Started worker 1 (process 3333645) for $WFC_CHECKOUTS/roadkill/src/Roadkill.Web/bin_dotnet/Roadkill.Web.dll: the host started.
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://127.0.0.1:49331
+      Now listening on: http://127.0.0.1:44349
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: <repo>/apps/roadkill/src/src/Roadkill.Web
+      Content root path: $WFC_CHECKOUTS/roadkill/src/Roadkill.Web
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:49331/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:44349/ - - -
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application cf61a8f9 in process 3268 (worker 1 of webforcore-host).
-warn: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application cf61a8f9 runs with the invariant culture: the process has no locale (LANG and LC_ALL unset, or C, POSIX or C.UTF-8), which can't happen on IIS, so resources chosen by culture name aren't found. Set <globalization culture="en-US" uiCulture="en-US" /> in Web.config, or give the environment a locale (LANG=en_US.UTF-8): https://github.com/xforcore/webForCore/blob/main/docs/MIGRATING.md#6-code-changes
+      Started application 431d9410 in process 3333645 (worker 1 of webforcore-host).
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://unix:/tmp/webforcore-VqpoKC/worker-1.sock
+      Now listening on: http://unix:/tmp/webforcore-r75QEl/worker-1.sock
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 1 (process 3268) is serving (1.9 s after it started).
+      Worker 1 (process 3333645) is serving (0.8 s after it started).
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: <repo>/apps/roadkill/src/src/Roadkill.Web
+      Content root path: $WFC_CHECKOUTS/roadkill/src/Roadkill.Web
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:49331/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:44349/ - - -
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application cf61a8f9 is shutting down (BinDirChangeOrDirectoryRename).
+      Application 431d9410 is shutting down (BinDirChangeOrDirectoryRename).
 info: WebFormsForCore.Host.WorkerPool[0]
-      Recycling worker 1 (process 3268): BinDirChangeOrDirectoryRename.
+      Recycling worker 1 (process 3333645): BinDirChangeOrDirectoryRename.
 info: WebFormsForCore.Host.WorkerPool[0]
-      Started worker 2 (process 3329) for <repo>/apps/roadkill/src/src/Roadkill.Web/bin_dotnet/Roadkill.Web.dll: worker 1 recycled.
+      Started worker 2 (process 3333861) for $WFC_CHECKOUTS/roadkill/src/Roadkill.Web/bin_dotnet/Roadkill.Web.dll: worker 1 recycled.
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:49331/ - 500 19198 text/html;+charset=utf-8 2268.2354ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:44349/ - 500 18571 text/html;+charset=utf-8 1626.7311ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 500.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:49331/ - 500 19198 text/html;+charset=utf-8 3639.5904ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:44349/ - 500 18571 text/html;+charset=utf-8 2081.0189ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:49331/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:44349/ - - -
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 1 (process 3268) exited (0).
+      Worker 1 (process 3333645) exited (0).
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application cf61a8f9 in process 3329 (worker 2 of webforcore-host).
-warn: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application cf61a8f9 runs with the invariant culture: the process has no locale (LANG and LC_ALL unset, or C, POSIX or C.UTF-8), which can't happen on IIS, so resources chosen by culture name aren't found. Set <globalization culture="en-US" uiCulture="en-US" /> in Web.config, or give the environment a locale (LANG=en_US.UTF-8): https://github.com/xforcore/webForCore/blob/main/docs/MIGRATING.md#6-code-changes
+      Started application 431d9410 in process 3333861 (worker 2 of webforcore-host).
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://unix:/tmp/webforcore-VqpoKC/worker-2.sock
+      Now listening on: http://unix:/tmp/webforcore-r75QEl/worker-2.sock
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 2 (process 3329) is serving (0.4 s after it started).
+      Worker 2 (process 3333861) is serving (0.5 s after it started).
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: <repo>/apps/roadkill/src/src/Roadkill.Web
+      Content root path: $WFC_CHECKOUTS/roadkill/src/Roadkill.Web
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:49331/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:44349/ - - -
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application cf61a8f9 is shutting down (BinDirChangeOrDirectoryRename).
+      Application 431d9410 is shutting down (BinDirChangeOrDirectoryRename).
 info: WebFormsForCore.Host.WorkerPool[0]
-      Recycling worker 2 (process 3329): BinDirChangeOrDirectoryRename.
+      Recycling worker 2 (process 3333861): BinDirChangeOrDirectoryRename.
 info: WebFormsForCore.Host.WorkerPool[0]
-      Started worker 3 (process 3368) for <repo>/apps/roadkill/src/src/Roadkill.Web/bin_dotnet/Roadkill.Web.dll: worker 2 recycled.
+      Started worker 3 (process 3333957) for $WFC_CHECKOUTS/roadkill/src/Roadkill.Web/bin_dotnet/Roadkill.Web.dll: worker 2 recycled.
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 500.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:49331/ - 500 18860 text/html;+charset=utf-8 1573.1972ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:44349/ - 500 18571 text/html;+charset=utf-8 2074.3192ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:49331/ - 500 18860 text/html;+charset=utf-8 1265.6085ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:44349/ - 500 18571 text/html;+charset=utf-8 1627.8893ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:49331/User/Login - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:44349/User/Login - - -
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 2 (process 3329) exited (0).
+      Worker 2 (process 3333861) exited (0).
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application cf61a8f9 in process 3368 (worker 3 of webforcore-host).
-warn: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application cf61a8f9 runs with the invariant culture: the process has no locale (LANG and LC_ALL unset, or C, POSIX or C.UTF-8), which can't happen on IIS, so resources chosen by culture name aren't found. Set <globalization culture="en-US" uiCulture="en-US" /> in Web.config, or give the environment a locale (LANG=en_US.UTF-8): https://github.com/xforcore/webForCore/blob/main/docs/MIGRATING.md#6-code-changes
+      Started application 431d9410 in process 3333957 (worker 3 of webforcore-host).
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://unix:/tmp/webforcore-VqpoKC/worker-3.sock
+      Now listening on: http://unix:/tmp/webforcore-r75QEl/worker-3.sock
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 3 (process 3368) is serving (0.4 s after it started).
+      Worker 3 (process 3333957) is serving (0.5 s after it started).
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: <repo>/apps/roadkill/src/src/Roadkill.Web
+      Content root path: $WFC_CHECKOUTS/roadkill/src/Roadkill.Web
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/User/Login HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:49331/User/Login - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:44349/User/Login - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:49331/User/Login - 200 4528 text/html;+charset=utf-8 4328.0226ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:44349/User/Login - 200 4528 text/html;+charset=utf-8 4333.6364ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:49331/Assets/CSS/roadkill.css - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:49331/User/Login - 200 4528 text/html;+charset=utf-8 3978.9623ms
+      Request starting HTTP/1.1 GET http://127.0.0.1:44349/Assets/CSS/roadkill.css - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/Assets/CSS/roadkill.css HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:44349/User/Login - 200 4528 text/html;+charset=utf-8 3874.4295ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:49331/Assets/CSS/roadkill.css - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:44349/Assets/CSS/roadkill.css - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:49331/Assets/CSS/roadkill.css - 200 66881 text/css 47.3981ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:44349/Assets/CSS/roadkill.css - 200 66881 text/css 26.8496ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:49331/Assets/CSS/roadkill.css - 200 66881 text/css 49.2188ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:44349/Assets/CSS/roadkill.css - 200 66881 text/css 31.1674ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:49331/web.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:44349/web.config - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/web.config HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:49331/web.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:44349/web.config - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:44349/web.config - 404 252 text/html 4.3050ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:49331/web.config - 404 252 text/html 5.2462ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:49331/web.config - 404 252 text/html 2.2922ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:44349/web.config - 404 252 text/html 7.5807ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:49331/App_Data/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:44349/App_Data/ - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:44349/App_Data/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/App_Data/ HTTP/1.1 RequestVersionExact 
-info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:49331/App_Data/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:49331/App_Data/ - 404 252 text/html 0.3904ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:44349/App_Data/ - 404 252 text/html 1.7745ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:49331/App_Data/ - 404 252 text/html 0.7983ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:44349/App_Data/ - 404 252 text/html 2.8650ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:49331/Global.asax.cs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:44349/Global.asax.cs - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/Global.asax.cs HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:49331/Global.asax.cs - - -
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:49331/Global.asax.cs - 404 215 text/html 0.3488ms
+      Request starting HTTP/1.1 GET http://127.0.0.1:44349/Global.asax.cs - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:49331/Global.asax.cs - 404 215 text/html 0.6789ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:44349/Global.asax.cs - 404 215 text/html 1.0325ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:44349/Global.asax.cs - 404 215 text/html 1.7259ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:49331/obj/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:44349/obj/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/obj/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:49331/obj/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:44349/obj/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:49331/obj/ - 404 252 text/html 0.3094ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:44349/obj/ - 404 252 text/html 0.5851ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:49331/obj/ - 404 252 text/html 0.6588ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:44349/obj/ - 404 252 text/html 1.3441ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:49331/packages.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:44349/packages.config - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/packages.config HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:49331/packages.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:44349/packages.config - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:49331/packages.config - 404 215 text/html 0.2764ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:44349/packages.config - 404 215 text/html 0.7080ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:49331/packages.config - 404 215 text/html 0.6097ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:44349/packages.config - 404 215 text/html 1.5561ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:49331/bin_dotnet/Roadkill.Web.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:44349/bin_dotnet/Roadkill.Web.dll - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/bin_dotnet/Roadkill.Web.dll HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:49331/bin_dotnet/Roadkill.Web.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:44349/bin_dotnet/Roadkill.Web.dll - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:49331/bin_dotnet/Roadkill.Web.dll - 404 252 text/html 0.5154ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:44349/bin_dotnet/Roadkill.Web.dll - 404 252 text/html 1.1777ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:49331/bin_dotnet/Roadkill.Web.dll - 404 252 text/html 0.8461ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:44349/bin_dotnet/Roadkill.Web.dll - 404 252 text/html 1.9261ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:49331/bin_dotnet/webforcore-host/webforcore-host.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:44349/bin_dotnet/webforcore-host/webforcore-host.dll - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/bin_dotnet/webforcore-host/webforcore-host.dll HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:49331/bin_dotnet/webforcore-host/webforcore-host.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:44349/bin_dotnet/webforcore-host/webforcore-host.dll - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:49331/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 0.2954ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:44349/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 0.6905ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:49331/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 0.6112ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:44349/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 1.6589ms
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
 info: WebFormsForCore.Hosting.WorkerProcess.WorkerLifetime[0]
@@ -209,6 +203,6 @@ info: WebFormsForCore.Hosting.WorkerProcess.WorkerLifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application cf61a8f9 is shutting down (HostingEnvironment).
+      Application 431d9410 is shutting down (HostingEnvironment).
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 3 (process 3368) exited (0).
+      Worker 3 (process 3333957) exited (0).

@@ -8,12 +8,18 @@ project = "sources/App.UI.Mvc5/App.UI.Mvc5.csproj"
 kinds = ["mvc", "owin", "signalr", "identity"]
 licence = "MIT"
 status = "migrated"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 16/16 on Linux and Windows (Identity, OWIN, SignalR, areas, LibMan assets). WindowsAzure.Storage's net45 build referenced (F33)."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 32/32 on Linux and Windows (7 POSTs: forms and AJAX validation, log-in, profile edit; setup runs the migrator's scripts). WindowsAzure.Storage's net45 build referenced (F33)."
 
-# The first request compiles the site, so it gets 120 s.
 needs = ["mssql"]
 
-# The first request compiles the site and its migrator creates the database, so it gets 120 s.
+# The database: the app's own migrator (Data.Tools.Migrator, a console program) runs its two scripts, which are UTF-16;
+# setup runs the overlay's Smoke_Setup.sql, the two in UTF-8 (sqlcmd reads it on standard input on Linux). They make
+# the schema and the super user, admin with the password "password".
+[setup]
+databases = ["starterTemplateMVC5"]
+sql_files = ["sources/Data.Tools.Migrator/SqlServerScripts/Smoke_Setup.sql"]
+
+# The first request compiles the site, so it gets 120 s.
 [[probes]]
 path = "/"
 contains = "Skeleton MVC5 is a simple and useful starter kit"
@@ -54,3 +60,107 @@ contains = "border-radius"
 [[probes]]
 path = "/signalr/hubs"
 contains = "signalR"
+
+# Verbs. The features area's sample form (FluentValidation, anti-forgery token): posted incomplete and complete, and
+# its AJAX promo-code check, answered with JSON.
+[[probes]]
+path = "/features/forms-and-validation/"
+cookies = true
+contains = "sampleForm"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/features/forms-and-validation/"
+method = "POST"
+cookies = true
+form = { __RequestVerificationToken = "{token}", FirstName = "Smoke" }
+contains = "Some fields are not valid."
+
+[[probes]]
+path = "/features/forms-and-validation/"
+method = "POST"
+cookies = true
+form = { __RequestVerificationToken = "{token}", FirstName = "Smoke", LastName = "Test", Username = "smoke", Email = "smoke@example.com", AddressLine1 = "1 Main St", CountryId = "1", StateId = "1", Zip = "12345", CardName = "Smoke Test", CardNumber = "4111111111111111", CardExpiration = "12/30", CardCVV = "123", PaymentType = "CreditCard" }
+contains = "All fields validated correctly."
+
+[[probes]]
+path = "/features/forms-and-validation/redeem-code"
+method = "POST"
+cookies = true
+headers = { X-Requested-With = "XMLHttpRequest" }
+form = { __RequestVerificationToken = "{token}", PromoCode = "test" }
+contains = '"isValid":true,"promoCode":"TEST"'
+
+# Log in as setup's super user: a wrong password first, then the right one (OWIN cookies, Identity with its own
+# Dapper store).
+[[probes]]
+path = "/users/account/login/"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/users/account/login/"
+method = "POST"
+cookies = true
+form = { __RequestVerificationToken = "{token}", EmailOrUsername = "admin", Password = "wrong", RememberMe = "false" }
+contains = "Invalid credentials."
+
+[[probes]]
+path = "/users/account/login/"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", EmailOrUsername = "admin", Password = "password", RememberMe = "false" }
+
+# The super user's area, then the profile form: the full name changed, shown, and changed back.
+[[probes]]
+path = "/management/users/"
+cookies = true
+contains = "admin@yourdomain.com"
+
+[[probes]]
+path = "/users/profile/edit"
+cookies = true
+contains = 'name="UserName" type="text" value="admin"'
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"', timezone = 'name="TimeZoneId">[\s\S]*?<option selected="selected" value="([^"]+)"' }
+
+[[probes]]
+path = "/users/profile/edit"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", FullName = "Smoke Admin", Email = "admin@yourdomain.com", UserName = "admin", CultureId = "en-US", UICultureId = "en-US", TimeZoneId = "{timezone}", PictureBlobId = "", PictureBlobName = "" }
+
+[[probes]]
+path = "/users/profile/edit"
+cookies = true
+contains = 'value="Smoke Admin"'
+
+[[probes]]
+path = "/users/profile/edit"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", FullName = "Administrator [Super User]", Email = "admin@yourdomain.com", UserName = "admin", CultureId = "en-US", UICultureId = "en-US", TimeZoneId = "{timezone}", PictureBlobId = "", PictureBlobName = "" }
+
+[[probes]]
+path = "/users/profile/edit"
+cookies = true
+contains = 'value="Administrator [Super User]"'
+
+# SignalR's negotiate for the hub, as the signed-in user. (Not further: connect and send need the connection token
+# URL-encoded in the query, which a probe's capture can't do.)
+[[probes]]
+path = "/signalr/negotiate?clientProtocol=2.1&connectionData=%5B%7B%22name%22%3A%22databus%22%7D%5D"
+cookies = true
+contains = '"ConnectionToken":"'
+
+[[probes]]
+path = "/users/account/logoff"
+cookies = true
+status = 302
+
+[[probes]]
+path = "/management/users/"
+cookies = true
+status = 302

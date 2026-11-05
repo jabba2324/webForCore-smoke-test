@@ -1,6 +1,6 @@
 # Clean Architecture in ASP.NET MVC 5: migration notes
 
-Status: migrated (webForCore 0.4.0, all probes pass).
+Status: migrated (webForCore 0.9.0, 12/12 probes on Linux and Windows).
 `5cbeba34` (master, 2018). BSD-3-Clause. webForCore 0.1.0 packages (0.2.0 from round 2).
 
 ## Assessment
@@ -52,6 +52,13 @@ All 11 probes pass on the released 0.2.0 packages (the overlay's `PackageReferen
 ### Round 3: webForCore 0.4.0
 
 All 11 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0.
+
+### Round 0.9.0: verbs (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+No probes added: the app has no forms (Contact is a static page), no API and no AJAX endpoints, so it takes nothing
+but GET. 12/12 on Linux, as before.
+
+**CI (round 0.9.0, run 42029051731, both attempts):** 12/12 on Linux, 12/12 on Windows, the same in run 42024931148.
 
 ## Open problems
 

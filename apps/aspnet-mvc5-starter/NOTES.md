@@ -1,6 +1,6 @@
 # Asp.Net MVC 5 Starter Kit: migration notes
 
-Status: migrated (webForCore 0.4.0, all probes pass). Source: https://github.com/akasarto/aspnet-mvc5-starter-template at `885be06e`. Found by searching GitHub on 2026-10-31; the
+Status: migrated (webForCore 0.9.0, 32/32 probes on Linux and Windows). Source: https://github.com/akasarto/aspnet-mvc5-starter-template at `885be06e`. Found by searching GitHub on 2026-10-31; the
 repo, licence (MIT), web project and its `<TargetFrameworkVersion>` were checked through the GitHub API.
 
 ## Assessment
@@ -51,6 +51,29 @@ Probes:
 
 **All 9 app probes pass; the 6 forbidden paths return 404.** The Azure storage, Cloudinary and MailGun services, which
 need accounts, weren't exercised.
+
+### Round 0.9.0: verbs (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+- **The database was never created.** The app's schema and its super user come from `Data.Tools.Migrator`, a console
+  program (`app.cmd install`), which the smoke test never ran; until now no probe reached the database (every page
+  probed renders without it). The first log-in post was a 500 ("Cannot open database starterTemplateMVC5").
+- **`[setup]` (new):** creates `starterTemplateMVC5` and runs the migrator's two scripts. They are UTF-16, and on Linux
+  the runner pipes a setup SQL file into the container's `sqlcmd` on standard input, which reads them as bytes
+  ("Incorrect syntax near '�'"), so the overlay adds `Smoke_Setup.sql`, the two scripts in UTF-8, one after the other
+  (`sources/Data.Tools.Migrator/SqlServerScripts/`). They make the schema and `admin` (password `password`,
+  SuperUser).
+- **Probes (16 added, 7 of them POSTs):** the features area's sample form (FluentValidation, anti-forgery token)
+  posted incomplete ("Some fields are not valid.") and complete ("All fields validated correctly."), and its AJAX
+  promo-code check (`X-Requested-With`, JSON `"isValid":true,"promoCode":"TEST"`); the log-in with a wrong password
+  ("Invalid credentials.") and the right one (302); the super user's `/management/users/`; the profile form: the full
+  name changed (302), shown, and changed back (the time zone is taken from the form); SignalR's negotiate for the
+  `databus` hub; log-off and `/management/users/` redirecting again.
+- **Not probed:** SignalR's connect and send. Both need the negotiated connection token in the query string, URL
+  encoded, and a probe's capture can't encode it (it has `+`, `/` and `=`). User administration (add, edit) needs a
+  new user per run, and the app can't delete one.
+- **Results:** 32/32 on Linux (16 before), twice in a row, from a new database.
+
+**CI (round 0.9.0, run 42029051731, both attempts):** 32/32 on Linux, 32/32 on Windows, the same in run 42024931148.
 
 ## Open problems
 

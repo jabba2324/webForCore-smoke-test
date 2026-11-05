@@ -8,10 +8,33 @@ project = "ReaLocate.Source/Web/ReaLocate.Web/ReaLocate.Web.csproj"
 kinds = ["mvc", "owin", "signalr", "identity"]
 licence = "MIT"
 status = "migrated"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 14/14 on Linux and Windows."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 29/29 on Linux and Windows (7 POSTs: log-in/log-off, the admin Kendo grid's AJAX read and update)."
 
-# The first request compiles the site, so it gets 120 s.
 needs = ["mssql"]
+
+# Two regular users, registered through the app's own form (multipart, as the page sends it): smokeuser logs in in
+# the probes, smokeedit is the one the administrator edits (the app's grid update writes the whole user, password
+# hash included, so that one can't log in afterwards).
+[setup]
+databases = ["ReaLocate"]
+
+[[setup.steps]]
+get = "/Account/Register"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[setup.steps]]
+post = "/Account/Register"
+multipart = { __RequestVerificationToken = "{token}", UserName = "smokeuser", FirstName = "Smoke", LastName = "User", PhoneNumber = "0123456789", Email = "smoke@example.com", Password = "Smoke_1234", ConfirmPassword = "Smoke_1234" }
+follow_redirects = false  # to "/", which fails on an empty database (above)
+
+[[setup.steps]]
+get = "/Account/Register"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[setup.steps]]
+post = "/Account/Register"
+multipart = { __RequestVerificationToken = "{token}", UserName = "smokeedit", FirstName = "Smoke", LastName = "Edit", PhoneNumber = "0123456789", Email = "smoke.edit@example.com", Password = "Smoke_1234", ConfirmPassword = "Smoke_1234" }
+follow_redirects = false
 
 # The first request compiles the site, so it gets 120 s. EF migrations create the database and seed the roles and the
 # admin user. "/" isn't probed: Views/Home/Index.cshtml calls m.First() on the listings, which throws on an empty
@@ -46,3 +69,103 @@ contains = "chatHub"
 [[probes]]
 path = "/Content/Site.css"
 contains = "padding-top"
+
+# Verbs. A regular user's log-in (a wrong password first), the pages only a signed-in user sees, and log-off.
+[[probes]]
+path = "/Account/Login"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Account/Login"
+method = "POST"
+cookies = true
+form = { __RequestVerificationToken = "{token}", UserName = "smokeuser", Password = "wrong", RememberMe = "false" }
+contains = "Invalid login attempt."
+
+[[probes]]
+path = "/Account/Login"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", UserName = "smokeuser", Password = "Smoke_1234", RememberMe = "false" }
+
+[[probes]]
+path = "/Manage"
+cookies = true
+contains = "Hello smokeuser!"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/RealEstates/CreateRealEstate"
+cookies = true
+contains = "Create Real Estate"
+
+[[probes]]
+path = "/Account/LogOff"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}" }
+
+[[probes]]
+path = "/Manage"
+cookies = true
+status = 302
+
+# The administration area's Kendo grids post their AJAX reads and updates as forms: the seeded administrator logs in,
+# reads the users, renames setup's smokeedit, reads the new name back (a Kendo filter), and renames it back.
+[[probes]]
+path = "/Account/Login"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Account/Login"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", UserName = "admin@gmail.com", Password = "123456q", RememberMe = "false" }
+
+[[probes]]
+path = "/Administration/Users/Users"
+cookies = true
+contains = "/Administration/Users/Users_Update"
+
+[[probes]]
+path = "/Administration/Users/Users_Read"
+method = "POST"
+cookies = true
+headers = { X-Requested-With = "XMLHttpRequest" }
+form = { sort = "", page = "1", pageSize = "50", group = "", filter = "" }
+contains = '"UserName":"smokeuser"'
+capture = { user = '"Id":"([^"]+)","UserName":"smokeedit"' }
+
+[[probes]]
+path = "/Administration/Users/Users_Update"
+method = "POST"
+cookies = true
+headers = { X-Requested-With = "XMLHttpRequest" }
+form = { sort = "", group = "", filter = "", Id = "{user}", UserName = "smokeedit", FirstName = "Smokey", LastName = "Edited", Email = "smoke.edit@example.com" }
+contains = '"FirstName":"Smokey","LastName":"Edited"'
+
+[[probes]]
+path = "/Administration/Users/Users_Read"
+method = "POST"
+cookies = true
+headers = { X-Requested-With = "XMLHttpRequest" }
+form = { sort = "", page = "1", pageSize = "50", group = "", filter = "UserName~eq~'smokeedit'" }
+contains = '"FirstName":"Smokey","LastName":"Edited"'
+
+[[probes]]
+path = "/Administration/Users/Users_Update"
+method = "POST"
+cookies = true
+headers = { X-Requested-With = "XMLHttpRequest" }
+form = { sort = "", group = "", filter = "", Id = "{user}", UserName = "smokeedit", FirstName = "Smoke", LastName = "Edit", Email = "smoke.edit@example.com" }
+contains = '"FirstName":"Smoke","LastName":"Edit"'
+
+# SignalR's negotiate for the chat hub.
+[[probes]]
+path = "/signalr/negotiate?clientProtocol=1.5&connectionData=%5B%7B%22name%22%3A%22chathub%22%7D%5D"
+contains = '"ConnectionToken":"'

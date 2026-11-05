@@ -7,11 +7,23 @@ site = "src/MVC3/MvcMusicStore-Completed/MvcMusicStore"
 project = "src/MVC3/MvcMusicStore-Completed/MvcMusicStore/MvcMusicStore.csproj"
 kinds = ["mvc"]
 licence = "MS-PL"
-status = "blocked"
-notes = "Blocked: log-on and registration are broken by F75 (webForCore#123), which no probe can reach (they need a POST). webForCore 0.8.0 (.NET 10, under webforcore-host), webForCore-thirdparty 0.6.0, on SQL Server: passes all probes, 20/20 on Linux and Windows (CI run 41900122122). Log-on and registration fail: no aspnet_regsql for the default membership provider (F75); prices print 8.990 (ICU, F76)."
+status = "migrated"
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host), webForCore-thirdparty 0.7.0: passes all probes, 44/44 on Linux and Windows (10 POSTs: log-on, cart AJAX, checkout, store manager, password). F75 fixed in 0.9.0 (webforcore-regsql); prices use {0:F2} (F76)."
 
 needs = ["mssql"]
-# No [setup]: Entity Framework creates and seeds the database (DropCreateDatabaseIfModelChanges) on the first request.
+# Entity Framework creates and seeds the store's database (DropCreateDatabaseIfModelChanges) on the first request.
+# The SQL membership and role providers' database (LocalSqlServer, overlaid to SQL Server) is setup's: the overlay's
+# aspnetdb-membership-roles.sql is `webforcore-regsql -d MvcMusicStoreMembership -A mr -sqlexportonly` (aspnet_regsql's
+# script; the runner runs SQL files, not tools), smoke-administrator.sql makes the Administrator role with smokeadmin
+# in it, and the steps register smokeadmin through the app's own form.
+[setup]
+databases = ["MvcMusicStoreMembership"]
+sql_files = ["src/MVC3/MvcMusicStore-Completed/aspnetdb-membership-roles.sql", "src/MVC3/MvcMusicStore-Completed/smoke-administrator.sql"]
+
+[[setup.steps]]
+post = "/Account/Register"
+fields = { UserName = "smokeadmin", Email = "smokeadmin@example.com", Password = "Smoke_test_1234", ConfirmPassword = "Smoke_test_1234" }
+follow_redirects = false
 
 # The first request compiles the site and creates the database, so it gets 120 s.
 [[probes]]
@@ -29,6 +41,15 @@ contains = "<em>Jazz</em> Albums"
 [[probes]]
 path = "/Store/Details/1"
 contains = "The Best Of Men At Work"
+
+# The price, "{0:F}" in the app: three decimals on ICU (F76); F2, as docs/MIGRATING.md says.
+[[probes]]
+path = "/Store/Details/1"
+absent = "8.990"
+
+[[probes]]
+path = "/Store/Details/1"
+contains = "8.99"
 
 [[probes]]
 path = "/ShoppingCart"
@@ -69,3 +90,141 @@ contains = "jQuery"
 [[probes]]
 path = "/no-such-controller"
 status = 404
+
+# Verbs (the app has no anti-forgery tokens: MVC 3's template). Log on as setup's smokeadmin (a wrong password first),
+# then the cart: two albums added, one removed by the cart page's AJAX post, and checked out (a wrong promo code
+# first); the store manager's album forms (create, edit, delete); a password change and back; and log off.
+[[probes]]
+path = "/Account/LogOn"
+method = "POST"
+cookies = true
+form = { UserName = "smokeadmin", Password = "wrong", RememberMe = "false" }
+contains = "The user name or password provided is incorrect."
+
+[[probes]]
+path = "/Account/LogOn"
+method = "POST"
+cookies = true
+status = 302
+form = { UserName = "smokeadmin", Password = "Smoke_test_1234", RememberMe = "false" }
+
+[[probes]]
+path = "/ShoppingCart/AddToCart/1"
+cookies = true
+status = 302
+
+[[probes]]
+path = "/ShoppingCart/AddToCart/2"
+cookies = true
+status = 302
+
+[[probes]]
+path = "/ShoppingCart"
+cookies = true
+contains = "The Best Of Men At Work"
+capture = { record = 'class="RemoveLink" data-id="(\d+)"' }
+
+[[probes]]
+path = "/ShoppingCart/RemoveFromCart/{record}"
+method = "POST"
+cookies = true
+headers = { X-Requested-With = "XMLHttpRequest" }
+contains = "has been removed from your shopping cart."
+
+[[probes]]
+path = "/Checkout/AddressAndPayment"
+cookies = true
+contains = "PromoCode"
+
+[[probes]]
+path = "/Checkout/AddressAndPayment"
+method = "POST"
+cookies = true
+form = { FirstName = "Smoke", LastName = "Test", Address = "1 Main St", City = "Redmond", State = "WA", PostalCode = "98052", Country = "USA", Phone = "555-0100", Email = "smokeadmin@example.com", PromoCode = "WRONG" }
+contains = "PromoCode"
+
+[[probes]]
+path = "/Checkout/AddressAndPayment"
+method = "POST"
+cookies = true
+status = 302
+form = { FirstName = "Smoke", LastName = "Test", Address = "1 Main St", City = "Redmond", State = "WA", PostalCode = "98052", Country = "USA", Phone = "555-0100", Email = "smokeadmin@example.com", PromoCode = "FREE" }
+capture = { order = { header = "Location", regex = "/Checkout/Complete/(\\d+)$" } }
+
+[[probes]]
+path = "/Checkout/Complete/{order}"
+cookies = true
+contains = "Thanks for your order! Your order number is:"
+
+[[probes]]
+path = "/ShoppingCart"
+cookies = true
+absent = "data-id="
+
+[[probes]]
+path = "/StoreManager"
+cookies = true
+contains = "Create New"
+
+[[probes]]
+path = "/StoreManager/Create"
+method = "POST"
+cookies = true
+status = 302
+form = { GenreId = "1", ArtistId = "1", Title = "Smoke Album", Price = "9", AlbumArtUrl = "/Content/Images/placeholder.gif" }
+
+[[probes]]
+path = "/StoreManager"
+cookies = true
+contains = "Smoke Album"
+capture = { album = 'Smoke Album[\s\S]*?/StoreManager/Edit/(\d+)' }
+
+# The edit fails, as on .NET Framework: Album has [Bind(Exclude = "AlbumId")], so the posted album has id 0 and EF
+# updates no row (the sample's own bug).
+[[probes]]
+path = "/StoreManager/Edit/{album}"
+method = "POST"
+cookies = true
+status = 500
+form = { AlbumId = "{album}", GenreId = "1", ArtistId = "1", Title = "Smoke Album Edited", Price = "10", AlbumArtUrl = "/Content/Images/placeholder.gif" }
+contains = "Store update, insert, or delete statement affected an unexpected number of rows (0)"
+
+[[probes]]
+path = "/StoreManager/Details/{album}"
+cookies = true
+contains = "Smoke Album"
+
+[[probes]]
+path = "/StoreManager/Delete/{album}"
+method = "POST"
+cookies = true
+status = 302
+
+[[probes]]
+path = "/StoreManager"
+cookies = true
+absent = "Smoke Album"
+
+[[probes]]
+path = "/Account/ChangePassword"
+method = "POST"
+cookies = true
+status = 302
+form = { OldPassword = "Smoke_test_1234", NewPassword = "Smoke_test_5678", ConfirmPassword = "Smoke_test_5678" }
+
+[[probes]]
+path = "/Account/ChangePassword"
+method = "POST"
+cookies = true
+status = 302
+form = { OldPassword = "Smoke_test_5678", NewPassword = "Smoke_test_1234", ConfirmPassword = "Smoke_test_1234" }
+
+[[probes]]
+path = "/Account/LogOff"
+cookies = true
+status = 302
+
+[[probes]]
+path = "/StoreManager"
+cookies = true
+status = 302

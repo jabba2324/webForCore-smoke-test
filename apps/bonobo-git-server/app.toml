@@ -6,8 +6,8 @@ ref = "6277ecfe1015b4612795bf8bb0f03ae2dd25b1ad"
 site = "Bonobo.Git.Server"
 kinds = ["mvc"]
 licence = "MIT"
-status = "migrated"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 10/10 on Linux and Windows; on Windows too now (6/9 on 0.6.0): F51 and F52 are fixed (webForCore#49, #50), so its SQLite database is in App_Data. With webForCore-thirdparty 0.5.0's WebActivatorEx."
+status = "blocked"
+notes = "Blocked on F144 (webForCore 0.9.0): unbuffered Response.Write throws and never ends the response, so git smart HTTP (info/refs) never answers. 33/34 on Linux, 32/34 on Windows (GitPath is /usr/bin/git there) (10 POSTs: log-on, user/team/repository create, edit, delete, git-upload-pack). LibGit2Sharp 0.30.0 (F145), LangVersion 7.3 (F83)."
 
 # The first request compiles the site, so it gets 120 s.
 [[probes]]
@@ -29,3 +29,172 @@ contains = "body"
 status = 200
 absent = "<package "
 contains = "404 Page Not Found"
+
+# Verbs. Log on as the default administrator (admin/admin), then a user, a team and a repository, each created,
+# edited where the app can, and deleted, so each run starts the same. The repository's creation runs LibGit2Sharp
+# (git init); git's smart HTTP then runs git on the server.
+[[probes]]
+path = "/Home/LogOn"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Home/LogOn"
+method = "POST"
+cookies = true
+form = { __RequestVerificationToken = "{token}", Username = "admin", Password = "wrong", RememberMe = "false" }
+contains = "The username or password provided is incorrect."
+
+[[probes]]
+path = "/Home/LogOn"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", Username = "admin", Password = "admin", RememberMe = "false" }
+
+[[probes]]
+path = "/Account/Create"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Account/Create"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", Username = "smokeuser", Name = "Smoke", Surname = "User", Email = "smoke@example.com", Password = "Smoke_1234", ConfirmPassword = "Smoke_1234" }
+
+[[probes]]
+path = "/Account/Index"
+cookies = true
+contains = "smokeuser"
+capture = { user = 'smokeuser[\s\S]*?/Account/Edit/([0-9a-f-]+)' }
+
+[[probes]]
+path = "/Account/Edit/{user}"
+cookies = true
+contains = 'value="smokeuser"'
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Account/Edit/{user}"
+method = "POST"
+cookies = true
+form = { __RequestVerificationToken = "{token}", Id = "{user}", Username = "smokeuser", Name = "Smokey", Surname = "User", Email = "smoke@example.com", NewPassword = "", ConfirmPassword = "" }
+contains = 'value="Smokey"'
+
+[[probes]]
+path = "/Account/Detail/{user}"
+cookies = true
+contains = "Smokey"
+
+[[probes]]
+path = "/Account/Delete/{user}"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Account/Delete/{user}"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", Id = "{user}" }
+
+[[probes]]
+path = "/Account/Index"
+cookies = true
+absent = "smokeuser"
+
+[[probes]]
+path = "/Team/Create"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Team/Create"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", Name = "smoke-team", Description = "Smoke test team" }
+
+[[probes]]
+path = "/Team/Index"
+cookies = true
+contains = "smoke-team"
+capture = { team = 'smoke-team[\s\S]*?/Team/Delete/([0-9a-f-]+)' }
+
+[[probes]]
+path = "/Team/Delete/{team}"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Team/Delete/{team}"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", Id = "{team}" }
+
+[[probes]]
+path = "/Team/Index"
+cookies = true
+absent = "smoke-team"
+
+[[probes]]
+path = "/Repository/Create"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Repository/Create"
+method = "POST"
+cookies = true
+status = 302
+multipart = { __RequestVerificationToken = "{token}", Name = "smoke-repo", Group = "", Description = "Smoke test repository", AllowAnonymous = "false", AllowAnonymousPush = "0", LinksUseGlobal = "true" }
+
+[[probes]]
+path = "/Repository/Index"
+cookies = true
+contains = "smoke-repo"
+capture = { repo = 'smoke-repo[\s\S]*?/Repository/Detail/([0-9a-f-]+)' }
+
+[[probes]]
+path = "/Repository/Detail/{repo}"
+cookies = true
+contains = "Smoke test repository"
+
+# git's smart HTTP (Basic authentication): the refs advertisement git asks for first, then an upload-pack POST asking
+# for an object the empty repository doesn't have, which git refuses in its own protocol. Both fail on webForCore 0.9.0:
+# the GitController writes the advertisement with Response.Write after BufferOutput = false, and the unbuffered
+# write throws in HttpWriter (F144); the response never ends.
+[[probes]]
+path = "/smoke-repo.git/info/refs?service=git-upload-pack"
+headers = { Authorization = "Basic YWRtaW46YWRtaW4=" }
+timeout = 15
+contains = "# service=git-upload-pack"
+
+[[probes]]
+path = "/smoke-repo.git/git-upload-pack"
+method = "POST"
+headers = { Authorization = "Basic YWRtaW46YWRtaW4=" }
+content_type = "application/x-git-upload-pack-request"
+body = "0032want 0123456789012345678901234567890123456789\n00000009done\n"
+timeout = 15
+contains = "not our ref"
+
+[[probes]]
+path = "/Repository/Delete/{repo}"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Repository/Delete/{repo}"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", Id = "{repo}" }
+
+[[probes]]
+path = "/Repository/Index"
+cookies = true
+absent = "smoke-repo"

@@ -8,7 +8,7 @@ project = "OpenOrderFramework/OpenOrderFramework.csproj"
 kinds = ["mvc", "owin", "identity"]
 licence = "MIT"
 status = "migrated"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 13/13 on Linux and Windows once its database exists; on a fresh database its own Identity seed deadlocks (F26)."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 23/23 on Linux and Windows (5 POSTs: log-in, password change and back, log-off). On a new database its own Identity seed deadlocks (F26): setup restarts it and registers a user."
 
 # The first request compiles the site, so it gets 120 s.
 needs = ["mssql"]
@@ -22,6 +22,20 @@ needs = ["mssql"]
 get = "/"
 timeout = 180
 may_fail = true
+
+# Then the user the probes log in as, registered through the app's own form once the app has started again (the
+# seed's admin@gmail.com doesn't exist: the seed is what deadlocks).
+[[setup.steps]]
+restart = true
+
+[[setup.steps]]
+get = "/Account/Register"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[setup.steps]]
+post = "/Account/Register"
+fields = { __RequestVerificationToken = "{token}", Email = "smoke@example.com", Password = "Smoke_test_1234", ConfirmPassword = "Smoke_test_1234" }
+follow_redirects = false
 
 [[probes]]
 path = "/"
@@ -46,3 +60,69 @@ contains = "__RequestVerificationToken"
 [[probes]]
 path = "/Content/Site.css"
 contains = "padding-top"
+
+# Verbs. Log in as setup's user (a wrong password first), the account pages, a password change and back, and log
+# off. The store has no items (the seed that would add the administrator never runs, F26, and the catalogue is the
+# administrator's), so the cart's AJAX posts and the admin area aren't reachable.
+[[probes]]
+path = "/Account/Login"
+cookies = true
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Account/Login"
+method = "POST"
+cookies = true
+form = { __RequestVerificationToken = "{token}", Email = "smoke@example.com", Password = "wrong", RememberMe = "false" }
+contains = "Invalid login attempt."
+
+[[probes]]
+path = "/Account/Login"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", Email = "smoke@example.com", Password = "Smoke_test_1234", RememberMe = "false" }
+
+[[probes]]
+path = "/Manage/ChangePassword"
+cookies = true
+contains = "Hello smoke@example.com!"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Manage/ChangePassword"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", OldPassword = "Smoke_test_1234", NewPassword = "Smoke_test_5678", ConfirmPassword = "Smoke_test_5678" }
+
+[[probes]]
+path = "/Manage?Message=ChangePasswordSuccess"
+cookies = true
+contains = "Your password has been changed."
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Manage/ChangePassword"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", OldPassword = "Smoke_test_5678", NewPassword = "Smoke_test_1234", ConfirmPassword = "Smoke_test_1234" }
+
+[[probes]]
+path = "/Checkout/AddressAndPayment"
+cookies = true
+contains = "Hello smoke@example.com!"
+capture = { token = 'name="__RequestVerificationToken" type="hidden" value="([^"]+)"' }
+
+[[probes]]
+path = "/Account/LogOff"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}" }
+
+[[probes]]
+path = "/Checkout/AddressAndPayment"
+cookies = true
+status = 302

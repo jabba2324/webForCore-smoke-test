@@ -1,5 +1,5 @@
 diff --git a/sources/App.Identity/App.Identity.csproj b/sources/App.Identity/App.Identity.csproj
-index 730c84c..f3a61b9 100644
+index 730c84c..6e332a9 100644
 --- a/sources/App.Identity/App.Identity.csproj
 +++ b/sources/App.Identity/App.Identity.csproj
 @@ -1,100 +1,39 @@
@@ -239,7 +239,7 @@ index 0000000..730c84c
 +</Project>
 \ No newline at end of file
 diff --git a/sources/App.UI.Mvc5/App.UI.Mvc5.csproj b/sources/App.UI.Mvc5/App.UI.Mvc5.csproj
-index 3b582cb..7eb0260 100644
+index 3b582cb..467a454 100644
 --- a/sources/App.UI.Mvc5/App.UI.Mvc5.csproj
 +++ b/sources/App.UI.Mvc5/App.UI.Mvc5.csproj
 @@ -1,94 +1,55 @@
@@ -2379,7 +2379,7 @@ index 37f2c12..e3c3dc7 100644
  		<assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
  			<dependentAssembly>
 diff --git a/sources/Data.Core/Data.Core.csproj b/sources/Data.Core/Data.Core.csproj
-index 2a228db..b23de40 100644
+index 2a228db..5c2254d 100644
 --- a/sources/Data.Core/Data.Core.csproj
 +++ b/sources/Data.Core/Data.Core.csproj
 @@ -1,68 +1,28 @@
@@ -2546,7 +2546,7 @@ index 0000000..2a228db
 +</Project>
 \ No newline at end of file
 diff --git a/sources/Data.Store.SqlServer/Data.Store.SqlServer.csproj b/sources/Data.Store.SqlServer/Data.Store.SqlServer.csproj
-index da259b5..a4799c0 100644
+index da259b5..eb050f7 100644
 --- a/sources/Data.Store.SqlServer/Data.Store.SqlServer.csproj
 +++ b/sources/Data.Store.SqlServer/Data.Store.SqlServer.csproj
 @@ -1,72 +1,34 @@
@@ -2725,7 +2725,7 @@ index 0000000..da259b5
 +</Project>
 \ No newline at end of file
 diff --git a/sources/Data.Tools.Migrator/Data.Tools.Migrator.csproj b/sources/Data.Tools.Migrator/Data.Tools.Migrator.csproj
-index 82ade75..2712b46 100644
+index 82ade75..3f077f3 100644
 --- a/sources/Data.Tools.Migrator/Data.Tools.Migrator.csproj
 +++ b/sources/Data.Tools.Migrator/Data.Tools.Migrator.csproj
 @@ -1,119 +1,39 @@
@@ -3002,8 +3002,665 @@ index 0000000..82ade75
 +  </PropertyGroup>
 +</Project>
 \ No newline at end of file
+diff --git a/sources/Data.Tools.Migrator/SqlServerScripts/Smoke_Setup.sql b/sources/Data.Tools.Migrator/SqlServerScripts/Smoke_Setup.sql
+new file mode 100644
+index 0000000..76afd22
+--- /dev/null
++++ b/sources/Data.Tools.Migrator/SqlServerScripts/Smoke_Setup.sql
+@@ -0,0 +1,651 @@
++-- webForCore smoke test: the migrator's two scripts (Create_Initial_Db_Structure.sql, then
++-- Create_Initial_SuperUser_Account.sql) in UTF-8, for sqlcmd reading them on standard input.
++/****** Object:  Table [dbo].[Blobs]    Script Date: 12/18/2017 12:48:01 PM ******/
++SET ANSI_NULLS ON
++GO
++SET QUOTED_IDENTIFIER ON
++GO
++CREATE TABLE [dbo].[Blobs](
++	[Id] [uniqueidentifier] NOT NULL,
++	[Folder] [nvarchar](10) NOT NULL,
++	[Extension] [nvarchar](10) NOT NULL,
++	[ContentType] [nvarchar](100) NOT NULL,
++	[ContentLength] [bigint] NOT NULL,
++	[SourceFileName] [nvarchar](1000) NOT NULL,
++	[UTCCreated] [datetime2](7) NOT NULL,
++	[IsDeleted] [bit] NOT NULL,
++	[IsPurged] [bit] NOT NULL,
++ CONSTRAINT [PK_Blobs_1] PRIMARY KEY CLUSTERED 
++(
++	[Id] ASC
++)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
++) ON [PRIMARY]
++GO
++/****** Object:  Table [dbo].[Logs]    Script Date: 12/18/2017 12:48:02 PM ******/
++SET ANSI_NULLS ON
++GO
++SET QUOTED_IDENTIFIER ON
++GO
++CREATE TABLE [dbo].[Logs](
++	[Id] [int] IDENTITY(1,1) NOT NULL,
++	[Message] [nvarchar](max) NULL,
++	[MessageTemplate] [nvarchar](max) NULL,
++	[Level] [nvarchar](128) NULL,
++	[TimeStamp] [datetime] NOT NULL,
++	[Exception] [nvarchar](max) NULL,
++	[Properties] [nvarchar](max) NULL,
++ CONSTRAINT [PK_Logs] PRIMARY KEY CLUSTERED 
++(
++	[Id] ASC
++)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
++) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
++GO
++/****** Object:  Table [dbo].[UserBlobs]    Script Date: 12/18/2017 12:48:02 PM ******/
++SET ANSI_NULLS ON
++GO
++SET QUOTED_IDENTIFIER ON
++GO
++CREATE TABLE [dbo].[UserBlobs](
++	[UserId] [int] NOT NULL,
++	[BlobId] [uniqueidentifier] NOT NULL,
++ CONSTRAINT [PK_UserBlobs] PRIMARY KEY CLUSTERED 
++(
++	[UserId] ASC,
++	[BlobId] ASC
++)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
++) ON [PRIMARY]
++GO
++/****** Object:  Table [dbo].[UserClaims]    Script Date: 12/18/2017 12:48:02 PM ******/
++SET ANSI_NULLS ON
++GO
++SET QUOTED_IDENTIFIER ON
++GO
++CREATE TABLE [dbo].[UserClaims](
++	[Id] [int] IDENTITY(1,1) NOT NULL,
++	[UserId] [int] NOT NULL,
++	[Type] [nvarchar](max) NOT NULL,
++	[Value] [nvarchar](max) NOT NULL,
++ CONSTRAINT [PK_UserClaims] PRIMARY KEY CLUSTERED 
++(
++	[Id] ASC
++)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
++) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
++GO
++/****** Object:  Table [dbo].[UserRealms]    Script Date: 12/18/2017 12:48:02 PM ******/
++SET ANSI_NULLS ON
++GO
++SET QUOTED_IDENTIFIER ON
++GO
++CREATE TABLE [dbo].[UserRealms](
++	[UserId] [int] NOT NULL,
++	[Realm] [int] NOT NULL,
++ CONSTRAINT [PK_UserRealms] PRIMARY KEY CLUSTERED 
++(
++	[UserId] ASC,
++	[Realm] ASC
++)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
++) ON [PRIMARY]
++GO
++/****** Object:  Table [dbo].[UserRoles]    Script Date: 12/18/2017 12:48:02 PM ******/
++SET ANSI_NULLS ON
++GO
++SET QUOTED_IDENTIFIER ON
++GO
++CREATE TABLE [dbo].[UserRoles](
++	[UserId] [int] NOT NULL,
++	[Role] [nvarchar](128) NOT NULL,
++ CONSTRAINT [PK_UserRoles] PRIMARY KEY CLUSTERED 
++(
++	[UserId] ASC,
++	[Role] ASC
++)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
++) ON [PRIMARY]
++GO
++/****** Object:  Table [dbo].[Users]    Script Date: 12/18/2017 12:48:02 PM ******/
++SET ANSI_NULLS ON
++GO
++SET QUOTED_IDENTIFIER ON
++GO
++CREATE TABLE [dbo].[Users](
++	[Id] [int] IDENTITY(1,1) NOT NULL,
++	[IsBlocked] [bit] NOT NULL,
++	[UTCCreation] [datetime2](7) NOT NULL,
++	[MobilePhone] [nvarchar](30) NULL,
++	[LockoutEnabled] [bit] NOT NULL,
++	[TwoFactorEnabled] [bit] NOT NULL,
++	[MobilePhoneConfirmed] [bit] NOT NULL,
++	[LockoutEndDateUtc] [datetimeoffset](7) NULL,
++	[AccessFailedCount] [tinyint] NOT NULL,
++	[EmailConfirmed] [bit] NOT NULL,
++	[PasswordHash] [nvarchar](max) NULL,
++	[SecurityStamp] [nvarchar](max) NULL,
++	[UserName] [nvarchar](256) NOT NULL,
++	[FullName] [nvarchar](256) NOT NULL,
++	[Email] [nvarchar](256) NOT NULL,
++	[CultureId] [nvarchar](10) NOT NULL,
++	[UICultureId] [nvarchar](10) NOT NULL,
++	[TimeZoneId] [nvarchar](100) NOT NULL,
++	[PictureBlobId] [uniqueidentifier] NULL,
++	[ScreenAutoLockMinutes] [int] NOT NULL,
++ CONSTRAINT [PK__UserEnti__3214EC070425A276] PRIMARY KEY CLUSTERED 
++(
++	[Id] ASC
++)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY],
++ CONSTRAINT [IX_Users] UNIQUE NONCLUSTERED 
++(
++	[UserName] ASC
++)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
++) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
++GO
++ALTER TABLE [dbo].[Blobs] ADD  CONSTRAINT [DF_Blobs_UTCCreated]  DEFAULT (getutcdate()) FOR [UTCCreated]
++GO
++ALTER TABLE [dbo].[Blobs] ADD  CONSTRAINT [DF_Blobs_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
++GO
++ALTER TABLE [dbo].[Blobs] ADD  CONSTRAINT [DF_Blobs_IsPurged]  DEFAULT ((0)) FOR [IsPurged]
++GO
++ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_IsDeleted]  DEFAULT ((0)) FOR [IsBlocked]
++GO
++ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_UTCCreation]  DEFAULT (getutcdate()) FOR [UTCCreation]
++GO
++ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_LockoutEnabled_1]  DEFAULT ((0)) FOR [LockoutEnabled]
++GO
++ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_TwoFactorEnabled_1]  DEFAULT ((0)) FOR [TwoFactorEnabled]
++GO
++ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_MobilePhoneConfirmed_1]  DEFAULT ((0)) FOR [MobilePhoneConfirmed]
++GO
++ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_AccessFailedCount_1]  DEFAULT ((0)) FOR [AccessFailedCount]
++GO
++ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_EmailConfirmed]  DEFAULT ((0)) FOR [EmailConfirmed]
++GO
++ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_CultureId]  DEFAULT (N'en-US') FOR [CultureId]
++GO
++ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_UICultureId]  DEFAULT (N'en-US') FOR [UICultureId]
++GO
++ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_TimeZoneId]  DEFAULT (N'UTC') FOR [TimeZoneId]
++GO
++ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_ScreenAutoLockMinutes]  DEFAULT ((0)) FOR [ScreenAutoLockMinutes]
++GO
++ALTER TABLE [dbo].[UserBlobs]  WITH CHECK ADD  CONSTRAINT [FK_UserBlobs_Blobs] FOREIGN KEY([BlobId])
++REFERENCES [dbo].[Blobs] ([Id])
++GO
++ALTER TABLE [dbo].[UserBlobs] CHECK CONSTRAINT [FK_UserBlobs_Blobs]
++GO
++ALTER TABLE [dbo].[UserBlobs]  WITH CHECK ADD  CONSTRAINT [FK_UserFiles_Users] FOREIGN KEY([UserId])
++REFERENCES [dbo].[Users] ([Id])
++GO
++ALTER TABLE [dbo].[UserBlobs] CHECK CONSTRAINT [FK_UserFiles_Users]
++GO
++ALTER TABLE [dbo].[UserClaims]  WITH CHECK ADD  CONSTRAINT [FK_dbo_UserClaims_dbo_Users_User_Id] FOREIGN KEY([UserId])
++REFERENCES [dbo].[Users] ([Id])
++ON DELETE CASCADE
++GO
++ALTER TABLE [dbo].[UserClaims] CHECK CONSTRAINT [FK_dbo_UserClaims_dbo_Users_User_Id]
++GO
++ALTER TABLE [dbo].[UserRealms]  WITH CHECK ADD  CONSTRAINT [FK_UserRealms_Users] FOREIGN KEY([UserId])
++REFERENCES [dbo].[Users] ([Id])
++GO
++ALTER TABLE [dbo].[UserRealms] CHECK CONSTRAINT [FK_UserRealms_Users]
++GO
++ALTER TABLE [dbo].[UserRoles]  WITH CHECK ADD  CONSTRAINT [FK_dbo_UserRoles_dbo_Users_UserId] FOREIGN KEY([UserId])
++REFERENCES [dbo].[Users] ([Id])
++ON DELETE CASCADE
++GO
++ALTER TABLE [dbo].[UserRoles] CHECK CONSTRAINT [FK_dbo_UserRoles_dbo_Users_UserId]
++GO
++ALTER TABLE [dbo].[Users]  WITH CHECK ADD  CONSTRAINT [FK_Users_Blobs] FOREIGN KEY([PictureBlobId])
++REFERENCES [dbo].[Blobs] ([Id])
++GO
++ALTER TABLE [dbo].[Users] CHECK CONSTRAINT [FK_Users_Blobs]
++GO
++/****** Object:  StoredProcedure [dbo].[BlobsInsert]    Script Date: 12/18/2017 12:48:02 PM ******/
++SET ANSI_NULLS ON
++GO
++SET QUOTED_IDENTIFIER ON
++GO
++
++CREATE PROCEDURE [dbo].[BlobsInsert]
++
++	@Id uniqueidentifier,
++	@Folder nvarchar(10),
++	@Extension nvarchar(10),
++	@ContentType nvarchar(max),
++	@ContentLength bigint,
++	@SourceFileName nvarchar(max),
++	@UTCCreated datetime2,
++	@UserId int
++	
++AS
++BEGIN
++
++	INSERT INTO [Blobs]
++	(
++		[Id],
++		[Folder],
++		[Extension],
++		[ContentType],
++		[ContentLength],
++		[SourceFileName],
++		[UTCCreated]
++	)
++	VALUES
++	(
++		@Id,
++		@Folder,
++		@Extension,
++		@ContentType,
++		@ContentLength,
++		@SourceFileName,
++		@UTCCreated
++	)
++	
++	-- INSERT BLOB x USER RELATION
++		
++	INSERT INTO [UserBlobs]
++	(
++		[UserId],
++		[BlobId]
++	)
++	VALUES
++	(
++		@UserId,
++		@Id
++	)
++	
++END
++
++GO
++/****** Object:  StoredProcedure [dbo].[LogsSelect]    Script Date: 12/18/2017 12:48:02 PM ******/
++SET ANSI_NULLS ON
++GO
++SET QUOTED_IDENTIFIER ON
++GO
++
++
++CREATE PROCEDURE [dbo].[LogsSelect]
++
++	@Id int = null,
++	@Top int = 1000
++
++AS
++BEGIN
++
++	SELECT TOP(@Top)
++		*
++	FROM 
++		[Logs] L
++	WHERE
++		L.Id = CASE WHEN(@Id IS NULL) THEN L.Id ELSE @Id END
++	ORDER BY
++		[TimeStamp] DESC
++					
++END
++
++
++GO
++/****** Object:  StoredProcedure [dbo].[UsersManagementInsert]    Script Date: 12/18/2017 12:48:02 PM ******/
++SET ANSI_NULLS ON
++GO
++SET QUOTED_IDENTIFIER ON
++GO
++
++CREATE PROCEDURE [dbo].[UsersManagementInsert]
++
++	@LockoutEnabled bit,
++	@EmailConfirmed bit,
++	@PasswordHash nvarchar(max),
++	@SecurityStamp nvarchar(max),
++	@UserName nvarchar(256),
++	@FullName nvarchar(256),
++	@Email nvarchar(256)
++
++AS
++BEGIN
++
++	-- USER
++	INSERT INTO [Users]
++	(
++		[LockoutEnabled],
++		[EmailConfirmed],
++		[PasswordHash],
++		[SecurityStamp],
++		[UserName],
++		[FullName],
++		[Email]
++	)
++	VALUES
++	(
++		@LockoutEnabled,
++		@EmailConfirmed,
++		@PasswordHash,
++		@SecurityStamp,
++		@UserName,
++		@FullName,
++		@Email
++	)
++
++	SELECT SCOPE_IDENTITY() AS Id
++
++END
++
++GO
++/****** Object:  StoredProcedure [dbo].[UsersManagementSelect]    Script Date: 12/18/2017 12:48:02 PM ******/
++SET ANSI_NULLS ON
++GO
++SET QUOTED_IDENTIFIER ON
++GO
++
++CREATE PROCEDURE [dbo].[UsersManagementSelect]
++
++	@Id int = null,
++	@Email nvarchar(256) = null,
++	@UserName nvarchar(256) = null
++
++AS
++BEGIN
++
++	DECLARE @UserIds TABLE (UserId int)
++
++	INSERT INTO @UserIds
++		SELECT
++			Id
++		FROM 
++			[Users] U
++		WHERE 
++			U.Id = CASE WHEN(@Id IS NULL) THEN U.Id ELSE @Id END
++			AND U.Email = CASE WHEN(@Email IS NULL) THEN U.Email ELSE @Email END
++			AND U.UserName = CASE WHEN(@UserName IS NULL) THEN U.UserName ELSE @UserName END
++
++	-- Users
++	SELECT
++		U.*,
++		B.*
++	FROM
++		[Users] U
++		LEFT JOIN Blobs B ON (B.Id = U.PictureBlobId)
++	WHERE
++		U.Id IN (SELECT UserId FROM @UserIds)
++	ORDER BY
++		U.Id
++
++	-- Claims
++	SELECT [UC].* FROM [UserClaims] [UC] WHERE [UC].UserId IN (SELECT UserId FROM @UserIds)
++
++	-- Realms
++	SELECT [URM].* FROM [UserRealms] [URM] WHERE [URM].UserId IN (SELECT UserId FROM @UserIds)
++
++	-- Roles
++	SELECT [URL].* FROM [UserRoles] [URL] WHERE [URL].UserId IN (SELECT UserId FROM @UserIds)
++					
++END
++
++GO
++/****** Object:  StoredProcedure [dbo].[UsersManagementUpdate]    Script Date: 12/18/2017 12:48:02 PM ******/
++SET ANSI_NULLS ON
++GO
++SET QUOTED_IDENTIFIER ON
++GO
++
++CREATE PROCEDURE [dbo].[UsersManagementUpdate]
++
++	@Id int,
++	@IsBlocked bit,
++	@SecurityStamp nvarchar(max)
++	
++AS
++BEGIN
++
++	UPDATE
++		[Users]
++	SET
++		[IsBlocked] = @IsBlocked,
++		[SecurityStamp] = @SecurityStamp
++	WHERE
++		Id = @Id
++	
++END
++
++GO
++/****** Object:  StoredProcedure [dbo].[UsersWithAdminProfileInsert]    Script Date: 12/18/2017 12:48:02 PM ******/
++SET ANSI_NULLS ON
++GO
++SET QUOTED_IDENTIFIER ON
++GO
++
++CREATE PROCEDURE [dbo].[UsersWithAdminProfileInsert]
++
++	@MobilePhone nvarchar(30),
++	@LockoutEnabled bit,
++	@TwoFactorEnabled bit,
++	@MobilePhoneConfirmed bit,
++	@LockoutEndDateUtc datetimeoffset,
++	@AccessFailedCount tinyint,
++	@EmailConfirmed bit,
++	@PasswordHash nvarchar(max),
++	@SecurityStamp nvarchar(max),
++	@UserName nvarchar(256),
++	@FullName nvarchar(256),
++	@Email nvarchar(256),
++	@CultureId nvarchar(10) = null,
++	@UICultureId nvarchar(10) = null,
++	@TimeZoneId nvarchar(100) = null
++
++AS
++BEGIN
++
++	-- USER
++	INSERT INTO [Users]
++	(
++		[MobilePhone],
++		[LockoutEnabled],
++		[TwoFactorEnabled],
++		[MobilePhoneConfirmed],
++		[LockoutEndDateUtc],
++		[AccessFailedCount],
++		[EmailConfirmed],
++		[PasswordHash],
++		[SecurityStamp],
++		[UserName],
++		[FullName],
++		[Email],
++		[CultureId],
++		[UICultureId],
++		[TimeZoneId]
++	)
++	VALUES
++	(
++		@MobilePhone,
++		@LockoutEnabled,
++		@TwoFactorEnabled,
++		@MobilePhoneConfirmed,
++		@LockoutEndDateUtc,
++		@AccessFailedCount,
++		@EmailConfirmed,
++		@PasswordHash,
++		@SecurityStamp,
++		@UserName,
++		@FullName,
++		@Email,
++		@CultureId,
++		@UICultureId,
++		@TimeZoneId
++	)
++	
++	SELECT SCOPE_IDENTITY() AS Id
++
++END
++
++GO
++/****** Object:  StoredProcedure [dbo].[UsersWithAdminProfileSelect]    Script Date: 12/18/2017 12:48:02 PM ******/
++SET ANSI_NULLS ON
++GO
++SET QUOTED_IDENTIFIER ON
++GO
++
++CREATE PROCEDURE [dbo].[UsersWithAdminProfileSelect]
++
++	@Id int = null,
++	@Email nvarchar(256) = null,
++	@UserName nvarchar(256) = null
++
++AS
++BEGIN
++
++	DECLARE @UserIds TABLE (UserId int)
++
++	INSERT INTO @UserIds
++		SELECT
++			Id
++		FROM 
++			[Users] U
++		WHERE 
++			U.Id = CASE WHEN(@Id IS NULL) THEN U.Id ELSE @Id END
++			AND U.Email = CASE WHEN(@Email IS NULL) THEN U.Email ELSE @Email END
++			AND U.UserName = CASE WHEN(@UserName IS NULL) THEN U.UserName ELSE @UserName END
++
++	-- Users
++	SELECT
++		U.*,
++		B.*
++	FROM
++		[Users] U
++		LEFT JOIN Blobs B ON (B.Id = U.PictureBlobId)
++	WHERE
++		U.Id IN (SELECT UserId FROM @UserIds)
++	ORDER BY
++		U.Id
++
++	-- Claims
++	SELECT [UC].* FROM [UserClaims] [UC] WHERE [UC].UserId IN (SELECT UserId FROM @UserIds)
++
++	-- Realms
++	SELECT [URM].* FROM [UserRealms] [URM] WHERE [URM].UserId IN (SELECT UserId FROM @UserIds)
++
++	-- Roles
++	SELECT [URL].* FROM [UserRoles] [URL] WHERE [URL].UserId IN (SELECT UserId FROM @UserIds)
++					
++END
++
++GO
++/****** Object:  StoredProcedure [dbo].[UsersWithAdminProfileUpdate]    Script Date: 12/18/2017 12:48:02 PM ******/
++SET ANSI_NULLS ON
++GO
++SET QUOTED_IDENTIFIER ON
++GO
++
++CREATE PROCEDURE [dbo].[UsersWithAdminProfileUpdate]
++
++	@Id int,
++	@UserName nvarchar(256),
++	@FullName nvarchar(256),
++	@Email nvarchar(256),
++	@CultureId nvarchar(10),
++	@UICultureId nvarchar(10),
++	@TimeZoneId nvarchar(100),
++	@ScreenAutoLockMinutes int,
++	@PictureBlobId uniqueidentifier = null
++	
++AS
++BEGIN
++
++	UPDATE
++		[Users]
++	SET
++		[UserName] = @UserName,
++		[FullName] = @FullName,
++		[Email] = @Email,
++		[CultureId] = @CultureId,
++		[UICultureId] = @UICultureId,
++		[TimeZoneId] = @TimeZoneId,
++		[PictureBlobId] = @PictureBlobId,
++		[ScreenAutoLockMinutes] = @ScreenAutoLockMinutes
++	WHERE
++		Id = @Id
++	
++END
++
++GO
++/****** Object:  StoredProcedure [dbo].[UsersWithIdentityUpdate]    Script Date: 12/18/2017 12:48:02 PM ******/
++SET ANSI_NULLS ON
++GO
++SET QUOTED_IDENTIFIER ON
++GO
++
++CREATE PROCEDURE [dbo].[UsersWithIdentityUpdate]
++
++	@Id int,
++	@IsBlocked bit,
++	@MobilePhone nvarchar(30),
++	@LockoutEnabled bit,
++	@TwoFactorEnabled bit,
++	@MobilePhoneConfirmed bit,
++	@LockoutEndDateUtc datetimeoffset,
++	@AccessFailedCount tinyint,
++	@EmailConfirmed bit,
++	@PasswordHash nvarchar(max),
++	@SecurityStamp nvarchar(max),
++	@UserName nvarchar(256),
++	@FullName nvarchar(256),
++	@Email nvarchar(256)
++	
++AS
++BEGIN
++
++	UPDATE
++		[Users]
++	SET
++		[IsBlocked] = @IsBlocked,
++		[MobilePhone] = @MobilePhone,
++		[LockoutEnabled] = @LockoutEnabled,
++		[TwoFactorEnabled] = @TwoFactorEnabled,
++		[MobilePhoneConfirmed] = @MobilePhoneConfirmed,
++		[LockoutEndDateUtc] = @LockoutEndDateUtc,
++		[AccessFailedCount] = @AccessFailedCount,
++		[EmailConfirmed] = @EmailConfirmed,
++		[PasswordHash] = @PasswordHash,
++		[SecurityStamp] = @SecurityStamp,
++		[UserName] = @UserName,
++		[FullName] = @FullName,
++		[Email] = @Email
++	WHERE
++		Id = @Id
++	
++END
++
++GO
++
++GO
++
++DECLARE @UserId INT = 0
++
++INSERT INTO [Users]
++(
++	[EmailConfirmed],
++	[LockoutEnabled],
++	[PasswordHash],
++	[SecurityStamp],
++	[UserName],
++	[Email],
++	[FullName],
++	[CultureId],
++	[UICultureId]
++)
++	VALUES
++(
++	1, /* email is confirmed */
++	0, /* user will not get locked out */
++	'AINCgbCLUSYjSnDrVGtCJCNphNWOAtcGScdSIOXYpGoezJoyFBEuZ7cTq3jpdVCEwg==', /* hash for 'password' */
++	'79df49ad-983c-4680-8cd7-15c2058fd8e3', /* random GUID for security purposes (changed each time the user identity is updated) */
++	'admin', /* initial user name */
++	'admin@yourdomain.com', /* initial user email */
++	'Administrator [Super User]', /* initial name */
++	'en-US', /* Default date, time and number culture */
++	'en-US' /* Default language translation culture */
++)
++
++SET @UserId = SCOPE_IDENTITY()
++
++INSERT INTO UserRealms ([UserId], [Realm]) Values (@UserId, 1)
++
++INSERT INTO UserRoles ([UserId], [Role]) Values (@UserId, 'SuperUser')
++
++GO
 diff --git a/sources/Domain.Core/Domain.Core.csproj b/sources/Domain.Core/Domain.Core.csproj
-index 3e82448..21fefd6 100644
+index 3e82448..ac7ec1c 100644
 --- a/sources/Domain.Core/Domain.Core.csproj
 +++ b/sources/Domain.Core/Domain.Core.csproj
 @@ -1,94 +1,33 @@
@@ -3225,7 +3882,7 @@ index 0000000..3e82448
 +</Project>
 \ No newline at end of file
 diff --git a/sources/Shared.Extensions/Shared.Extensions.csproj b/sources/Shared.Extensions/Shared.Extensions.csproj
-index 68c3c10..deb1d61 100644
+index 68c3c10..54dc53e 100644
 --- a/sources/Shared.Extensions/Shared.Extensions.csproj
 +++ b/sources/Shared.Extensions/Shared.Extensions.csproj
 @@ -1,73 +1,23 @@
@@ -3399,7 +4056,7 @@ index 0000000..68c3c10
 +</Project>
 \ No newline at end of file
 diff --git a/sources/Shared.Infrastructure.Azure/Shared.Infrastructure.Azure.csproj b/sources/Shared.Infrastructure.Azure/Shared.Infrastructure.Azure.csproj
-index 99741f1..3cf7259 100644
+index 99741f1..78dde5e 100644
 --- a/sources/Shared.Infrastructure.Azure/Shared.Infrastructure.Azure.csproj
 +++ b/sources/Shared.Infrastructure.Azure/Shared.Infrastructure.Azure.csproj
 @@ -1,84 +1,41 @@
@@ -3609,7 +4266,7 @@ index 0000000..99741f1
 +</Project>
 \ No newline at end of file
 diff --git a/sources/Shared.Infrastructure.Cloudinary/Shared.Infrastructure.Cloudinary.csproj b/sources/Shared.Infrastructure.Cloudinary/Shared.Infrastructure.Cloudinary.csproj
-index d4f3629..7a47ddc 100644
+index d4f3629..c5596d1 100644
 --- a/sources/Shared.Infrastructure.Cloudinary/Shared.Infrastructure.Cloudinary.csproj
 +++ b/sources/Shared.Infrastructure.Cloudinary/Shared.Infrastructure.Cloudinary.csproj
 @@ -1,68 +1,33 @@
@@ -3779,7 +4436,7 @@ index 0000000..d4f3629
 +</Project>
 \ No newline at end of file
 diff --git a/sources/Shared.Infrastructure.DynamicImage/Shared.Infrastructure.DynamicImage.csproj b/sources/Shared.Infrastructure.DynamicImage/Shared.Infrastructure.DynamicImage.csproj
-index e347155..8f6970e 100644
+index e347155..e95ae2d 100644
 --- a/sources/Shared.Infrastructure.DynamicImage/Shared.Infrastructure.DynamicImage.csproj
 +++ b/sources/Shared.Infrastructure.DynamicImage/Shared.Infrastructure.DynamicImage.csproj
 @@ -1,58 +1,27 @@
@@ -3925,7 +4582,7 @@ index 0000000..e347155
 +</Project>
 \ No newline at end of file
 diff --git a/sources/Shared.Infrastructure.FileSystem/Shared.Infrastructure.FileSystem.csproj b/sources/Shared.Infrastructure.FileSystem/Shared.Infrastructure.FileSystem.csproj
-index c396024..3af5428 100644
+index c396024..bd2471c 100644
 --- a/sources/Shared.Infrastructure.FileSystem/Shared.Infrastructure.FileSystem.csproj
 +++ b/sources/Shared.Infrastructure.FileSystem/Shared.Infrastructure.FileSystem.csproj
 @@ -1,58 +1,27 @@
@@ -4071,7 +4728,7 @@ index 0000000..c396024
 +</Project>
 \ No newline at end of file
 diff --git a/sources/Shared.Infrastructure.MailGun/Shared.Infrastructure.MailGun.csproj b/sources/Shared.Infrastructure.MailGun/Shared.Infrastructure.MailGun.csproj
-index 3df9d43..db62f60 100644
+index 3df9d43..c4f3229 100644
 --- a/sources/Shared.Infrastructure.MailGun/Shared.Infrastructure.MailGun.csproj
 +++ b/sources/Shared.Infrastructure.MailGun/Shared.Infrastructure.MailGun.csproj
 @@ -1,72 +1,32 @@
@@ -4248,7 +4905,7 @@ index 0000000..3df9d43
 +</Project>
 \ No newline at end of file
 diff --git a/sources/Shared.Infrastructure.Smtp/Shared.Infrastructure.Smtp.csproj b/sources/Shared.Infrastructure.Smtp/Shared.Infrastructure.Smtp.csproj
-index 6ac360f..fe6185a 100644
+index 6ac360f..cb9a0bf 100644
 --- a/sources/Shared.Infrastructure.Smtp/Shared.Infrastructure.Smtp.csproj
 +++ b/sources/Shared.Infrastructure.Smtp/Shared.Infrastructure.Smtp.csproj
 @@ -1,58 +1,27 @@
@@ -4394,7 +5051,7 @@ index 0000000..6ac360f
 +</Project>
 \ No newline at end of file
 diff --git a/sources/Shared.Infrastructure/Shared.Infrastructure.csproj b/sources/Shared.Infrastructure/Shared.Infrastructure.csproj
-index a5645d5..784afd4 100644
+index a5645d5..30b6bcb 100644
 --- a/sources/Shared.Infrastructure/Shared.Infrastructure.csproj
 +++ b/sources/Shared.Infrastructure/Shared.Infrastructure.csproj
 @@ -1,62 +1,27 @@

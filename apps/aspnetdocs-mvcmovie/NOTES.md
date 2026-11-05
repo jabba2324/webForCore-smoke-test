@@ -1,6 +1,6 @@
 # AspNetDocs: MvcMovie (Getting Started with MVC 5): migration notes
 
-Status: migrated (webForCore 0.4.0, all probes pass).
+Status: migrated (webForCore 0.9.0, 29/29 probes on Linux and Windows).
 (`LICENSE-CODE`; the docs are CC-BY-4.0). Split out of the `aspnetdocs-samples` entry. webForCore 0.1.0 packages (0.2.0 from round 2).
 
 ## Assessment
@@ -41,6 +41,20 @@ All 11 probes pass on the released 0.2.0 packages (the overlay's `PackageReferen
 ### Round 3: webForCore 0.4.0
 
 All 11 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0, and its 2 `ExcludeAssets` references for transitive Microsoft packages were removed: webForCore's packages override them since 0.3.0 (webForCore#23).
+
+### Round 0.9.0: verbs (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+- **`[setup]` (new):** creates the Identity database (`aspnet-MvcMovie-fefdc1f0-...`) and registers `smoke@example.com`
+  through the app's own Register form (anti-forgery token captured), which signs it in ("Hello smoke@example.com!").
+- **Probes (17 added, 7 of them POSTs):** the movie forms with their anti-forgery tokens: Create posted with an
+  invalid genre (the `[RegularExpression]` message comes back), then a valid one (302); the search finds it and gives
+  its id; Edit posted and the details show the new title; the genre filter (a GET form) and the app's own
+  `[HttpPost] Index` ("From [HttpPost]Index: Smoke"); Delete posted and the details are then 404. Then the Identity
+  log-in as setup's user (302), `/Manage` signed in, log-off (POST, 302) and `/Manage` redirecting again. Each run
+  deletes the movie it made, so runs repeat.
+- **Results:** 29/29 on Linux (12 before), twice in a row.
+
+**CI (round 0.9.0, run 42029051731, both attempts):** 29/29 on Linux, 29/29 on Windows, the same in run 42024931148.
 
 ## Open problems
 
