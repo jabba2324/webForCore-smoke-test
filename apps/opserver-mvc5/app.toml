@@ -8,7 +8,7 @@ project = "Opserver/Opserver.csproj"
 kinds = ["mvc"]
 licence = "MIT"
 status = "migrated"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 11/11 on Linux and Windows. 0.8.0 builds System.Data.SqlClient with GetTypes() fixed (F47, webForCore#41), which failed one probe on 0.7.0 (10/11)."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 16/16 on Linux and Windows (CI runs 42021158598 and 42026762740), with the log-in POST and log-out."
 needs = ["mssql"]
 
 # The first request compiles the site, so it gets 120 s. Config/SecuritySettings.config (provider "alladmin", the
@@ -29,3 +29,36 @@ status = 302
 [[probes]]
 path = "/Content/js/Scripts.js"
 contains = "Status"
+
+# Verbs: the log-in form (a POST; the "alladmin" provider takes any user name and password) sets the forms
+# authentication cookie and redirects to the form's url; the SQL dashboard then shows the compose instance, and
+# /debug the user; /logout signs out, after which the dashboard redirects again. Opserver's other POSTs are admin
+# actions on what it monitors (SQL Agent jobs, plans, Redis, HAProxy, exceptions stores), which this setup has none of.
+[[probes]]
+path = "/login"
+method = "POST"
+cookies = true
+form = { user = "smoke", pass = "smoke", url = "/sql/servers" }
+status = 302
+capture = { next = { header = "Location", regex = "^(/sql/servers)$" } }
+
+[[probes]]
+path = "{next}"
+cookies = true
+contains = "data-uk=\"[&quot;compose&quot;]\""
+
+[[probes]]
+path = "/debug"
+cookies = true
+contains = "User: smoke"
+
+[[probes]]
+path = "/logout"
+cookies = true
+status = 302
+capture = { login = { header = "Location", regex = "^(/login)$" } }
+
+[[probes]]
+path = "/sql/servers"
+cookies = true
+status = 302

@@ -1,6 +1,6 @@
 # ASP.NET samples: Web API ActionResults: migration notes
 
-Status: migrated (webForCore 0.4.0, all probes pass).
+Status: migrated (webForCore 0.9.0: 14/14 on Linux and Windows, 2 verb probes).
 (`LICENSE.txt`). Split out of the `aspnet-samples` entry. webForCore 0.1.0 packages (0.2.0 from round 2).
 
 ## Assessment
@@ -28,6 +28,13 @@ All 10 probes pass on the released 0.2.0 packages (the overlay's `PackageReferen
 ### Round 3: webForCore 0.4.0
 
 All 10 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0.
+
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+Every action is a GET (attribute-routed `Get...` methods returning custom `IHttpActionResult`s), so the app has
+nothing that takes another verb. Two verb probes check Web API's 405 for them (a DELETE of `/product/2`, a POST of a
+form to `/text`), and a GET after them shows the product is still there. No overlay change. Results:
+**14/14 on Linux and Windows** (CI runs 42021158598 and 42026762740), the same in both runs.
 
 ## Open problems
 

@@ -8,7 +8,7 @@ project = "WebApiClassic/ODataCompositeKeySample/ODataCompositeKeySample.AspNet/
 kinds = ["webapi"]
 licence = "MIT"
 status = "blocked"
-notes = "webForCore 0.8.0: builds; blocked: Microsoft.AspNet.OData 7.5.18 needs System.Data.Linq (F68). 8/15 on Linux and Windows."
+notes = "webForCore 0.9.0: F68 fixed, OData runs with POST, PATCH, PUT and DELETE; blocked by F134 (a path with '(' loses the Prefer header). 26/27 on Linux and Windows (CI runs 42021158598 and 42026762740)."
 
 # The first request compiles the site, so it gets 120 s.
 # The service document.
@@ -42,6 +42,79 @@ contains = "\"value\":[{\"LastName\":\"Park\"},{\"LastName\":\"James\"}]"
 path = "/People/$count"
 contains = "3"
 
+# $format names a media type no formatter writes for an entity set: Web API's default content negotiation falls back
+# to the formatter that can write the type (excludeMatchOnTypeOnly is false), so it's JSON. (The 406 written here
+# before 0.9.0 was a guess: OData never started then.)
 [[probes]]
 path = "/People?$format=application/xml"
-status = 406
+contains = "\"@odata.context\":\""
+
+# Verbs on the composite key (the repository is in memory, so each run starts from its three people): a person
+# created (POST; 201 with the entity and its URL in Location), changed with PATCH (Delta<Person>), replaced with
+# PUT, deleted, and gone; a body that doesn't bind is the model-validation filter's 400, and a PATCH or DELETE of a
+# key that isn't there is a 404.
+[[probes]]
+path = "/People"
+method = "POST"
+json = { FirstName = "Smoke", LastName = "Test", Age = 30 }
+status = 201
+contains = "\"FirstName\":\"Smoke\",\"LastName\":\"Test\",\"Age\":30"
+capture = { person = { header = "Location", regex = "(/People\\(FirstName='Smoke',LastName='Test'\\))$" } }
+
+[[probes]]
+path = "{person}"
+contains = "\"FirstName\":\"Smoke\",\"LastName\":\"Test\",\"Age\":30"
+
+[[probes]]
+path = "{person}"
+method = "PATCH"
+json = { Age = 31 }
+status = 204
+
+[[probes]]
+path = "{person}"
+contains = "\"Age\":31"
+
+# With Prefer: return=representation, the update answers 200 with the entity.
+[[probes]]
+path = "{person}"
+method = "PUT"
+headers = { Prefer = "return=representation" }
+json = { FirstName = "Smoke", LastName = "Test", Age = 32 }
+status = 200
+contains = "\"FirstName\":\"Smoke\",\"LastName\":\"Test\",\"Age\":32"
+
+[[probes]]
+path = "/People?$filter=LastName%20eq%20'Test'&$select=Age"
+contains = "\"value\":[{\"Age\":32}]"
+
+[[probes]]
+path = "{person}"
+method = "DELETE"
+status = 204
+
+[[probes]]
+path = "{person}"
+status = 404
+
+[[probes]]
+path = "/People/$count"
+contains = "3"
+
+[[probes]]
+path = "/People"
+method = "POST"
+json = { FirstName = "Bad", LastName = "Age", Age = "x" }
+status = 400
+contains = "Cannot convert the literal 'x' to the expected type 'Edm.Int32'."
+
+[[probes]]
+path = "/People(FirstName='No',LastName='One')"
+method = "PATCH"
+json = { Age = 1 }
+status = 404
+
+[[probes]]
+path = "/People(FirstName='No',LastName='One')"
+method = "DELETE"
+status = 404
