@@ -12,7 +12,7 @@
       "target_frameworks": []
     },
     "build": {
-      "at": "2026-11-05T12:36:52+00:00",
+      "at": "2026-11-05T13:00:19+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/rabbit-webpages/logs/build.log",
@@ -22,13 +22,13 @@
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T12:36:44+00:00",
+      "at": "2026-11-05T13:00:10+00:00",
       "commit": "a819ee234c8cdb8b734f4e6e577f73517e7872a1",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-05T12:36:59+00:00",
+      "at": "2026-11-05T13:00:26+00:00",
       "created": [
         "RabbitStarterSite"
       ],
@@ -54,16 +54,16 @@
       "summary": "3/3 steps"
     },
     "smoke": {
-      "at": "2026-11-05T12:37:04+00:00",
+      "at": "2026-11-05T13:00:31+00:00",
       "checks": [
         {
-          "ms": 14,
+          "ms": 12,
           "ok": true,
           "path": "/",
           "status": 302
         },
         {
-          "ms": 145,
+          "ms": 141,
           "ok": true,
           "path": "/Pages",
           "status": 200
@@ -81,19 +81,19 @@
           "status": 200
         },
         {
-          "ms": 12,
+          "ms": 11,
           "ok": true,
           "path": "/Account/Login",
           "status": 200
         },
         {
-          "ms": 10,
+          "ms": 9,
           "ok": true,
           "path": "/Account/Register",
           "status": 200
         },
         {
-          "ms": 12,
+          "ms": 10,
           "ok": true,
           "path": "/Account/ForgotPassword",
           "status": 200
@@ -105,31 +105,31 @@
           "status": 302
         },
         {
-          "ms": 1120,
+          "ms": 972,
           "ok": true,
           "path": "/Rabbit-Admin/",
           "status": 200
         },
         {
-          "ms": 9,
+          "ms": 8,
           "ok": true,
           "path": "/Rabbit-Admin/CodeGen",
           "status": 200
         },
         {
-          "ms": 27,
+          "ms": 25,
           "ok": true,
           "path": "/Rabbit-Admin/Test",
           "status": 200
         },
         {
-          "ms": 24,
+          "ms": 21,
           "ok": true,
           "path": "/Templates/Sample1/Site.css",
           "status": 200
         },
         {
-          "ms": 4,
+          "ms": 3,
           "ok": true,
           "path": "/robots.txt",
           "status": 200
@@ -141,33 +141,33 @@
           "status": 404
         },
         {
-          "ms": 431,
+          "ms": 376,
           "ok": true,
           "path": "/Pages/Create",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 49,
+          "ms": 48,
           "ok": true,
           "path": "/Pages/Create",
           "status": 302
         },
         {
-          "ms": 11,
+          "ms": 10,
           "ok": true,
           "path": "/Pages/{page}",
           "status": 200
         },
         {
-          "ms": 21,
+          "ms": 20,
           "ok": true,
           "path": "/Pages/Edit/{page}",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 20,
+          "ms": 19,
           "ok": true,
           "path": "/Pages/Edit",
           "status": 200
@@ -179,7 +179,7 @@
           "status": 200
         },
         {
-          "ms": 5,
+          "ms": 4,
           "ok": true,
           "path": "/Pages/{page}",
           "status": 200
@@ -192,7 +192,7 @@
         },
         {
           "method": "POST",
-          "ms": 12,
+          "ms": 11,
           "ok": true,
           "path": "/Pages/Delete/{page}",
           "status": 302
@@ -205,40 +205,40 @@
         },
         {
           "method": "POST",
-          "ms": 25,
+          "ms": 24,
           "ok": true,
           "path": "/Account/Login",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 21,
+          "ms": 19,
           "ok": true,
           "path": "/Account/Login",
           "status": 302
         },
         {
           "method": "POST",
-          "ms": 22,
+          "ms": 20,
           "ok": true,
           "path": "/Account/ChangePassword",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 12,
+          "ms": 11,
           "ok": true,
           "path": "/Account/ChangePassword",
           "status": 200
         },
         {
-          "ms": 16,
+          "ms": 15,
           "ok": true,
           "path": "/Account/Logout",
           "status": 302
         },
         {
-          "ms": 4,
+          "ms": 3,
           "ok": true,
           "path": "/Account/ChangePassword",
           "status": 302
@@ -256,19 +256,19 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/packages.config",
           "status": 404
@@ -280,7 +280,7 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404
