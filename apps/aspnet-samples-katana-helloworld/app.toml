@@ -18,3 +18,22 @@ contains = "Hello World"
 [[probes]]
 path = "/any/path/at/all"
 contains = "Hello World"
+
+# Verbs: the app has no forms or API, but its OWIN pipeline answers every request, whatever the method, so a POST
+# with a form body, a PUT with JSON and a DELETE must reach `app.Run` and get the same text.
+[[probes]]
+path = "/form"
+method = "POST"
+form = { name = "smoke", value = "1" }
+contains = "Hello World"
+
+[[probes]]
+path = "/items/1"
+method = "PUT"
+json = { name = "smoke" }
+contains = "Hello World"
+
+[[probes]]
+path = "/items/1"
+method = "DELETE"
+contains = "Hello World"
