@@ -29,6 +29,13 @@ All 8 probes pass on the released 0.2.0 packages (the overlay's `PackageReferenc
 
 All 8 probes pass on the 0.4.0 packages. The overlay moved to 0.4.0.
 
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+The API has one action, a GET (`CustomerController.Get`), so there is nothing to create, change or delete. Two verb
+probes check Web API's own answer to other methods, over OWIN (`UseWebApi`): a POST with JSON and a DELETE to
+`/Customer/7` are 405 with `The requested resource does not support http method '...'`; then the GET still answers.
+No overlay change. Results: RESULTS_PLACEHOLDER
+
 ## Open problems
 
 Round 1 (webForCore 0.1.0); the webForCore bugs below are fixed in 0.2.0 (PR #16) and kept for the record.

@@ -17,3 +17,22 @@ contains = "<FirstName>Mary</FirstName>"
 
 [[probes]]
 path = "/Customer/7?$format=xml"
+
+# Verbs: the API has only a GET (`CustomerController.Get`), so other methods are Web API's own 405, with the Allow
+# header's message in the error body; the customer is still there after them.
+[[probes]]
+path = "/Customer/7"
+method = "POST"
+json = { ID = 8, LastName = "Smoke" }
+status = 405
+contains = "does not support http method 'POST'"
+
+[[probes]]
+path = "/Customer/7"
+method = "DELETE"
+status = 405
+contains = "does not support http method 'DELETE'"
+
+[[probes]]
+path = "/Customer/7"
+contains = "<FirstName>Mary</FirstName>"
