@@ -1,7 +1,6 @@
 # Rabbit (WebMatrix Starter Site): migration notes
 
-Status: blocked (webForCore 0.7.0, webForCore-thirdparty 0.6.0, drawingForCore 0.2.0: 20/21 probes on Linux and Windows): one
-probe fails on a webForCore bug ([F79](../../FINDINGS.md#f79)).
+Status: migrated (webForCore 0.9.0: 37/37 on Linux and Windows; F79 fixed in 0.9.0).
 yysun/Rabbit at `a819ee23` (23 Jul 2011), MIT (`License.txt`). The repository has the Rabbit framework's class
 library and two sites; this is `WebSite`: WebMatrix's ASP.NET Web Pages 1 **Starter Site** (accounts with
 `WebSecurity`, `_SiteLayout`, `Account/*.cshtml`) with Yiyi Sun's Rabbit framework in `App_Code` (a module/hook
@@ -65,6 +64,8 @@ webForCore `Response.End()` sends the response before `FormsAuthenticationModule
 alike) ([F79](../../FINDINGS.md#f79), webForCore#129).
 
 ### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+**CI (Linux and Windows): 37/37 on both, in CI runs 42026922513 and (second).**
 
 **21/21 on Linux, then 37/37 with the verb probes, twice in a row.** 0.9.0 fixed F79: `/Account/ChangePassword`
 sends an anonymous user to the log-in page.
