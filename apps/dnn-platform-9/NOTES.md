@@ -211,6 +211,12 @@ deployed taken out of web.config, none of which is in the overlay):
 **Windows (CI run 41917710466, webForCore 0.8.0): build pass, setup fail, smoke 7/11**, the same as Linux: every
 request is F130's `FileNotFoundException` for `ClientDependency.Core.Mvc`. F133 doesn't apply there.
 
+**Round 0.9.0 (webForCore 0.9.0; Linux): build pass, setup fail, smoke 8/11.** F130 is fixed: DNN starts with its
+default web.config (ClientDependency's MVC filter and the two providers whose assemblies aren't deployed are skipped,
+as on IIS), the static file is served, and `/`, `/Login.aspx` and the Services Framework route redirect to the
+installer. `Install.aspx?mode=install` then stops at F133, as foreseen: "Unable to load config for \"web.config\""
+(DNN's `\`-built paths). Linux stays blocked by DNN's own Windows paths; Windows is CI's (below).
+
 ## Open problems
 
 - [F130](../../FINDINGS.md#f130): `BuildManager.GetType(name, throwOnError: false)` throws `FileNotFoundException` for an

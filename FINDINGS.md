@@ -179,7 +179,7 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F120](#f120) | C1's core needs LINQ to SQL (even with the XML data store) and WCF REST hosting | documented gap | composite-c1 | – |
 | [F121](#f121) | Types .NET added (`System.Collections.Generic.KeyValuePair`) make the app's own type ambiguous (`CS0104`) | guide gap | composite-c1, smartstorenet | [#136](https://github.com/xforcore/webForCore/issues/136) |
 | [F123](#f123) | A Web Site Project has no `.csproj`; the guide's template compiles its `CodeFile=` code (CS0103) | guide gap | rock-rms (assessed only) | [#131](https://github.com/xforcore/webForCore/issues/131) |
-| [F130](#f130) | `BuildManager.GetType(name, throwOnError: false)` throws `FileNotFoundException` for a missing assembly (.NET Framework returns `null`): ClientDependency and DNN fail at start | webForCore bug | dnn-platform-9 | [#137](https://github.com/xforcore/webForCore/issues/137) |
+| [F130](#f130) | `BuildManager.GetType(name, throwOnError: false)` throws `FileNotFoundException` for a missing assembly (.NET Framework returns `null`): ClientDependency and DNN fail at start (fixed in 0.9.0) | webForCore bug | dnn-platform-9 | [#137](https://github.com/xforcore/webForCore/issues/137) |
 | [F131](#f131) | `Thread.ResetAbort()` after `catch (ThreadAbortException)` throws `PlatformNotSupportedException`; the guide doesn't say to remove it | guide gap | dnn-platform-9 | [#143](https://github.com/xforcore/webForCore/issues/143) |
 | [F132](#f132) | An application's design-time classes (`System.Web.UI.Design.ExpressionEditor`, System.Design) don't compile | guide gap | dnn-platform-9 | [#144](https://github.com/xforcore/webForCore/issues/144) |
 | [F133](#f133) | Linux: DNN builds every physical path with `\` (`ApplicationMapPath` is `BaseDirectory.Replace("/", "\\")`), and QuickIO.NET is Win32 | app/environment | dnn-platform-9 | – |
@@ -2273,7 +2273,9 @@ assessing rock-rms (rejected for its licence, so not migrated).
 ## F130
 
 **`BuildManager.GetType(name, throwOnError: false)` throws `FileNotFoundException` for an assembly that isn't there;
-.NET Framework returns `null`.** webForCore bug. Raised as [#137](https://github.com/xforcore/webForCore/issues/137).
+.NET Framework returns `null`.** webForCore bug. Raised as [#137](https://github.com/xforcore/webForCore/issues/137). **Fixed in 0.9.0:**
+in round 0.9.0 DNN starts with its default web.config and ClientDependency's module (Linux): requests reach the
+installer, and the static file probe passes.
 Found on 0.8.0 (Linux; the code is platform-independent), with DNN Platform 9.13.10.
 
 - **Apps:** dnn-platform-9: every request is a 500 in `HttpApplication.InitModules`, the static files included, so the
