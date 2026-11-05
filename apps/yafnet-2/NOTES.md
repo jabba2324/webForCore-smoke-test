@@ -1,6 +1,6 @@
 # YAF.NET 2.x: migration notes
 
-Status: blocked. Source: https://github.com/YAFNET/YAFNET at `7435be38` (tag v2.31.16; master is ASP.NET Core now).
+Status: blocked (webForCore 0.9.0: one build error left, F49). Source: https://github.com/YAFNET/YAFNET at `7435be38` (tag v2.31.16; master is ASP.NET Core now).
 Licence Apache-2.0. Round 4, on webForCore 0.5.0 and webForCore-thirdparty 0.4.1.
 
 ## Assessment
@@ -51,6 +51,21 @@ Not reached. The build stops in the vendored ServiceStack.Text.
   5.0.x pins. .NET 11 pruned them as part of Microsoft.NETCore.App. On .NET 10 they are only in
   Microsoft.AspNetCore.App, which a plain class library doesn't reference (F54, guide gap,
   [#62](https://github.com/xforcore/webForCore/issues/62)). Not fixed here, since F48 and F49 block it regardless.
+
+- **Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0; Linux):** the build gets as far as F49 and stops there,
+  with one error. Overlay changes:
+  - every class library gets `<FrameworkReference Include="Microsoft.AspNetCore.App" />`, MIGRATING.md's step for
+    F54 (#62): the restore passes;
+  - `scoped ref int index` on ServiceStack.Text's `UnescapeJsonString` and `UnescapeJsString`
+    (`Json/JsonTypeSerializer.cs`), MIGRATING.md's fix for C# 11 ref safety (F48): `CS8347` and `CS8168` are gone;
+  - migration step 2 is undone: `YAF.Types/Models/*.cs` keep `using System.Data.Linq.Mapping;` and `[Table(...)]`,
+    since 0.9.0 provides System.Data.Linq (the `webForCore` package brings `webForCore.Data.Linq`).
+
+  Left: `CS0246: The type or namespace name 'NetStandardPclExport' could not be found` (`PclExport.cs:35`), F49:
+  ServiceStack picks its platform with `#if`s, and of the paths YAF.NET's fork has, the .NET Framework one needs
+  `AppDomain.DefineDynamicAssembly` and the .NET Standard one the `LicenseUtils` the fork removed. Repairing the
+  vendored library (or moving to a ServiceStack that targets .NET) is the app's work, so it stays blocked; no
+  probes, since nothing runs. The forum's forms (log-in, registration, posting) wait on it.
 
 ## Open problems
 

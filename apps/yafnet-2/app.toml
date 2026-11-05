@@ -8,7 +8,7 @@ project = "yafsrc/YetAnotherForum.NET/YAF.csproj"
 kinds = ["webforms"]
 licence = "Apache-2.0"
 status = "blocked"
-notes = "Blocked: its vendored ServiceStack 5.9 fork only works as .NET Framework code (F49), and C# 11 ref safety (F48); on webForCore 0.8.0 (.NET 10, under webforcore-host) the restore fails first, with NU1605 in its Lucene.Net libraries (F54, webForCore#62). Linux and Windows."
+notes = "Blocked: its vendored ServiceStack 5.9 fork only works as .NET Framework code (F49, app/environment). On webForCore 0.9.0 the restore passes (MIGRATING.md's #62 step: Microsoft.AspNetCore.App in its class libraries), C# 11 ref safety is fixed with `scoped` (F48), and System.Data.Linq's attributes stay in YAF.Types (now provided): the one build error left is ServiceStack.Text's missing NetStandardPclExport. Linux and Windows (CI run 42026922513)."
 
 # The first request compiles the site, so it gets 120 s.
 # [[probes]]

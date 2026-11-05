@@ -11,7 +11,7 @@ remove = ["Website/bin/*.refresh", "Website/bin/*.xml", "Website/bin/AjaxMin.dll
 kinds = ["webpages"]
 licence = "Apache-2.0"
 status = "migrated"
-notes = "webForCore 0.8.0 (.NET 10, under webforcore-host): passes all probes, 19/19 on Linux and Windows. It also restores, builds and runs from the NuGet feeds alone (webForCore#53 step 5)."
+notes = "webForCore 0.9.0 (.NET 10, under webforcore-host): passes all probes, 44/44 on Linux and Windows (CI runs 42026922513 and 42030748535), with log-in, the post editor's and comments' AJAX posts and the MetaWeblog API."
 
 # The first request compiles the site, so it gets 120 s.
 [[probes]]
@@ -60,4 +60,178 @@ status = 403
 
 [[probes]]
 path = "/no-such-page"
+status = 404
+
+# Verbs. MiniBlog's forms and AJAX calls: the log-in form (forms authentication with web.config's <credentials>, the
+# demo user demo/demo), the admin's post editor (POST /post.ashx?mode=save and ?mode=delete, as admin.js sends them)
+# and comments (POST /comment.ashx, as comments.js sends them), each with the Web Pages anti-forgery token
+# (AntiForgery.Validate) captured from the page before it; and the MetaWeblog API (XML-RPC over POST). A post made
+# and edited, a comment on it added and deleted, the post deleted; then the same through MetaWeblog. Comments are
+# posted signed in: an anonymous comment e-mails the blog's owner (smtp.live.com in web.config).
+[[probes]]
+path = "/views/login.cshtml"
+cookies = true
+contains = "Sign in"
+capture = { token = 'name="?__RequestVerificationToken"? type="?hidden"? value="?([^" >]+)' }
+
+[[probes]]
+path = "/post.ashx?mode=save"
+method = "POST"
+cookies = true
+status = 403
+form = { __RequestVerificationToken = "{token}", id = "", title = "Not signed in", excerpt = "", content = "x", isPublished = "true", categories = "" }
+
+[[probes]]
+path = "/views/login.cshtml"
+method = "POST"
+cookies = true
+contains = "Username or password is incorrect"
+form = { __RequestVerificationToken = "{token}", username = "demo", password = "wrong" }
+
+[[probes]]
+path = "/views/login.cshtml"
+method = "POST"
+cookies = true
+status = 302
+form = { __RequestVerificationToken = "{token}", username = "demo", password = "demo" }
+
+[[probes]]
+path = "/"
+cookies = true
+contains = "id=btnNew"
+capture = { token = 'name="?__RequestVerificationToken"? type="?hidden"? value="?([^" >]+)' }
+
+[[probes]]
+path = "/post.ashx?mode=save"
+method = "POST"
+cookies = true
+headers = { X-Requested-With = "XMLHttpRequest" }
+contains = "/post/smoke-probe-post"
+form = { __RequestVerificationToken = "{token}", id = "", title = "Smoke Probe Post", excerpt = "A probe's post", content = "<p>Written by a probe</p>", isPublished = "true", categories = "Smoke" }
+
+[[probes]]
+path = "/post/smoke-probe-post"
+cookies = true
+contains = "Written by a probe"
+capture = { post = 'class="?post"? data-id="?([0-9a-f-]{36})', token = 'name="?__RequestVerificationToken"? type="?hidden"? value="?([^" >]+)' }
+
+[[probes]]
+path = "/post.ashx?mode=save"
+method = "POST"
+cookies = true
+headers = { X-Requested-With = "XMLHttpRequest" }
+status = 200
+form = { __RequestVerificationToken = "{token}", id = "{post}", title = "Smoke Probe Post", excerpt = "A probe's post", content = "<p>Edited by a probe</p>", isPublished = "true", categories = "Smoke" }
+
+[[probes]]
+path = "/post/smoke-probe-post"
+cookies = true
+contains = "Edited by a probe"
+
+[[probes]]
+path = "/comment.ashx"
+method = "POST"
+cookies = true
+headers = { X-Requested-With = "XMLHttpRequest" }
+contains = "A comment from a probe"
+form = { __RequestVerificationToken = "{token}", mode = "save", postId = "{post}", name = "Smoke Probe", email = "probe@example.com", website = "example.com", content = "A comment from a probe" }
+capture = { comment = '<article data-id="?([0-9a-f-]{36})' }
+
+[[probes]]
+path = "/post/smoke-probe-post"
+cookies = true
+contains = "A comment from a probe"
+
+[[probes]]
+path = "/comment.ashx"
+method = "POST"
+cookies = true
+headers = { X-Requested-With = "XMLHttpRequest" }
+status = 200
+form = { __RequestVerificationToken = "{token}", mode = "delete", postId = "{post}", commentId = "{comment}" }
+
+[[probes]]
+path = "/post/smoke-probe-post"
+cookies = true
+contains = "Edited by a probe"
+absent = "A comment from a probe"
+
+[[probes]]
+path = "/post.ashx?mode=delete"
+method = "POST"
+cookies = true
+headers = { X-Requested-With = "XMLHttpRequest" }
+status = 200
+form = { __RequestVerificationToken = "{token}", id = "{post}" }
+
+[[probes]]
+path = "/post/smoke-probe-post"
+cookies = true
+status = 404
+
+# Signing out is a post to the log-in page.
+[[probes]]
+path = "/views/login.cshtml"
+method = "POST"
+cookies = true
+status = 302
+form = { signout = "true", ReturnUrl = "/" }
+
+[[probes]]
+path = "/"
+cookies = true
+contains = "Web Developer Checklist"
+absent = "id=btnNew"
+
+# MetaWeblog (XML-RPC, as Windows Live Writer uses it): a wrong password is a fault; a post made with newPost,
+# changed with editPost, read with getPost, and deleted with blogger.deletePost.
+[[probes]]
+path = "/metaweblog"
+method = "POST"
+content_type = "text/xml"
+body = "<?xml version=\"1.0\"?><methodCall><methodName>metaWeblog.getRecentPosts</methodName><params><param><value><string>1</string></value></param><param><value><string>demo</string></value></param><param><value><string>wrong</string></value></param><param><value><i4>5</i4></value></param></params></methodCall>"
+contains = "<fault>"
+
+[[probes]]
+path = "/metaweblog"
+method = "POST"
+content_type = "text/xml"
+body = "<?xml version=\"1.0\"?><methodCall><methodName>metaWeblog.getRecentPosts</methodName><params><param><value><string>1</string></value></param><param><value><string>demo</string></value></param><param><value><string>demo</string></value></param><param><value><i4>50</i4></value></param></params></methodCall>"
+contains = "Web Developer Checklist"
+
+[[probes]]
+path = "/metaweblog"
+method = "POST"
+content_type = "text/xml"
+body = "<?xml version=\"1.0\"?><methodCall><methodName>metaWeblog.newPost</methodName><params><param><value><string>1</string></value></param><param><value><string>demo</string></value></param><param><value><string>demo</string></value></param><param><value><struct><member><name>title</name><value><string>Smoke XML-RPC Post</string></value></member><member><name>description</name><value><string>Posted over XML-RPC</string></value></member><member><name>categories</name><value><array><data><value><string>Smoke</string></value></data></array></value></member></struct></value></param><param><value><boolean>1</boolean></value></param></params></methodCall>"
+contains = "<methodResponse>"
+capture = { rpcpost = '<string>([0-9a-f-]{36})</string>' }
+
+[[probes]]
+path = "/post/smoke-xml-rpc-post"
+contains = "Posted over XML-RPC"
+
+[[probes]]
+path = "/metaweblog"
+method = "POST"
+content_type = "text/xml"
+body = "<?xml version=\"1.0\"?><methodCall><methodName>metaWeblog.editPost</methodName><params><param><value><string>{rpcpost}</string></value></param><param><value><string>demo</string></value></param><param><value><string>demo</string></value></param><param><value><struct><member><name>title</name><value><string>Smoke XML-RPC Post</string></value></member><member><name>wp_slug</name><value><string>smoke-xml-rpc-post</string></value></member><member><name>description</name><value><string>Edited over XML-RPC</string></value></member><member><name>categories</name><value><array><data><value><string>Smoke</string></value></data></array></value></member></struct></value></param><param><value><boolean>1</boolean></value></param></params></methodCall>"
+contains = "<boolean>1</boolean>"
+
+[[probes]]
+path = "/metaweblog"
+method = "POST"
+content_type = "text/xml"
+body = "<?xml version=\"1.0\"?><methodCall><methodName>metaWeblog.getPost</methodName><params><param><value><string>{rpcpost}</string></value></param><param><value><string>demo</string></value></param><param><value><string>demo</string></value></param></params></methodCall>"
+contains = "Edited over XML-RPC"
+
+[[probes]]
+path = "/metaweblog"
+method = "POST"
+content_type = "text/xml"
+body = "<?xml version=\"1.0\"?><methodCall><methodName>blogger.deletePost</methodName><params><param><value><string>key</string></value></param><param><value><string>{rpcpost}</string></value></param><param><value><string>demo</string></value></param><param><value><string>demo</string></value></param><param><value><boolean>1</boolean></value></param></params></methodCall>"
+contains = "<boolean>1</boolean>"
+
+[[probes]]
+path = "/post/smoke-xml-rpc-post"
 status = 404

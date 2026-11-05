@@ -1,0 +1,326 @@
+{
+  "id": "blogengine",
+  "stages": {
+    "build": {
+      "at": "2026-11-05T13:05:07+00:00",
+      "error_count": 0,
+      "errors": [],
+      "log": "apps\\blogengine\\logs.windows\\build.log",
+      "seconds": 64,
+      "status": "pass",
+      "summary": null,
+      "webforcore": "packages 0.9.0"
+    },
+    "fetch": {
+      "at": "2026-11-05T13:04:02+00:00",
+      "commit": "95c84261ed94402f45094c1fda85afbbf6f4d833",
+      "overlay": true,
+      "status": "pass"
+    },
+    "smoke": {
+      "at": "2026-11-05T13:06:03+00:00",
+      "checks": [
+        {
+          "ms": 8135,
+          "ok": true,
+          "path": "/",
+          "status": 200
+        },
+        {
+          "ms": 1633,
+          "ok": true,
+          "path": "/post/welcome-to-blogengine-net",
+          "status": 200
+        },
+        {
+          "ms": 1585,
+          "ok": true,
+          "path": "/page/example-page",
+          "status": 200
+        },
+        {
+          "ms": 1587,
+          "ok": true,
+          "path": "/archive",
+          "status": 200
+        },
+        {
+          "ms": 1575,
+          "ok": true,
+          "path": "/category/BlogEngineNET",
+          "status": 200
+        },
+        {
+          "ms": 1567,
+          "ok": true,
+          "path": "/?tag=welcome",
+          "status": 200
+        },
+        {
+          "ms": 1598,
+          "ok": true,
+          "path": "/search?q=welcome",
+          "status": 200
+        },
+        {
+          "ms": 1592,
+          "ok": true,
+          "path": "/contact",
+          "status": 200
+        },
+        {
+          "ms": 27,
+          "ok": true,
+          "path": "/syndication.axd",
+          "status": 200
+        },
+        {
+          "ms": 6,
+          "ok": true,
+          "path": "/syndication.axd?format=atom",
+          "status": 200
+        },
+        {
+          "ms": 5,
+          "ok": true,
+          "path": "/sitemap.axd",
+          "status": 200
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/opensearch.axd",
+          "status": 200
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/rsd.axd",
+          "status": 200
+        },
+        {
+          "ms": 844,
+          "ok": true,
+          "path": "/Account/login.aspx",
+          "status": 200
+        },
+        {
+          "ms": 1671,
+          "ok": true,
+          "path": "/admin/",
+          "status": 302
+        },
+        {
+          "ms": 23,
+          "ok": true,
+          "path": "/Custom/Themes/Standard/src/css/styles.min.css",
+          "status": 200
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/Scripts/Auto/blog.js",
+          "status": 200
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/Account/login.aspx",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 33,
+          "ok": true,
+          "path": "/Account/login.aspx?ReturnURL=/admin/",
+          "status": 302
+        },
+        {
+          "ms": 105,
+          "ok": true,
+          "path": "/admin/",
+          "status": 200
+        },
+        {
+          "ms": 6,
+          "ok": true,
+          "path": "/admin/about.cshtml",
+          "status": 200
+        },
+        {
+          "ms": 403,
+          "ok": true,
+          "path": "/api/tools/check1",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 107,
+          "ok": true,
+          "path": "/api/posts",
+          "status": 201
+        },
+        {
+          "ms": 1559,
+          "ok": true,
+          "path": "/post/smoke-probe-post",
+          "status": 200
+        },
+        {
+          "method": "PUT",
+          "ms": 12,
+          "ok": true,
+          "path": "/api/posts/update/foo",
+          "status": 200
+        },
+        {
+          "ms": 9,
+          "ok": true,
+          "path": "/api/posts/{post}",
+          "status": 200
+        },
+        {
+          "ms": 1566,
+          "ok": true,
+          "path": "/post/smoke-probe-post",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 1652,
+          "ok": true,
+          "path": "/post/smoke-probe-post",
+          "status": 200
+        },
+        {
+          "ms": 1585,
+          "ok": true,
+          "path": "/post/smoke-probe-post",
+          "status": 200
+        },
+        {
+          "method": "PUT",
+          "ms": 15,
+          "ok": true,
+          "path": "/api/comments/processchecked/unapprove",
+          "status": 200
+        },
+        {
+          "ms": 1554,
+          "ok": true,
+          "path": "/post/smoke-probe-post",
+          "status": 200
+        },
+        {
+          "method": "PUT",
+          "ms": 6,
+          "ok": true,
+          "path": "/api/comments/processchecked/approve",
+          "status": 200
+        },
+        {
+          "ms": 1576,
+          "ok": true,
+          "path": "/post/smoke-probe-post",
+          "status": 200
+        },
+        {
+          "method": "DELETE",
+          "ms": 14,
+          "ok": true,
+          "path": "/api/comments/{comment}",
+          "status": 200
+        },
+        {
+          "ms": 1554,
+          "ok": true,
+          "path": "/post/smoke-probe-post",
+          "status": 200
+        },
+        {
+          "method": "DELETE",
+          "ms": 9,
+          "ok": true,
+          "path": "/api/posts/{post}",
+          "status": 200
+        },
+        {
+          "ms": 13,
+          "ok": true,
+          "path": "/post/smoke-probe-post",
+          "status": 404
+        },
+        {
+          "method": "PUT",
+          "ms": 11,
+          "ok": true,
+          "path": "/api/trash/purgeall/all",
+          "status": 200
+        },
+        {
+          "ms": 30,
+          "ok": true,
+          "path": "/api/trash?type=0",
+          "status": 200
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/Account/login.aspx?logoff",
+          "status": 302
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/admin/",
+          "status": 302
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/web.config",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/App_Data/",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/Global.asax.cs",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/obj/",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/packages.config",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/bin_dotnet/BlogEngine.NET.dll",
+          "status": 404
+        },
+        {
+          "ms": 2,
+          "ok": true,
+          "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
+          "status": 404
+        }
+      ],
+      "log": "apps\\blogengine\\logs.windows\\server.log",
+      "status": "pass",
+      "summary": "48/48 probes"
+    }
+  }
+}

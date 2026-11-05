@@ -1,174 +1,233 @@
 info: WebFormsForCore.Host.WorkerPool[0]
-      Started worker 1 (process 3239) for <repo>/apps/funnelweb/src/src/FunnelWeb.Web/bin_dotnet/FunnelWeb.Web.dll: the host started.
+      Started worker 1 (process 3312572) for $WFC_CHECKOUTS/funnelweb/src/FunnelWeb.Web/bin_dotnet/FunnelWeb.Web.dll: the host started.
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://127.0.0.1:39181
+      Now listening on: http://127.0.0.1:42707
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: <repo>/apps/funnelweb/src/src/FunnelWeb.Web
-info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/ - - -
+      Content root path: $WFC_CHECKOUTS/funnelweb/src/FunnelWeb.Web
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Started application f6c6ed31 in process 3239 (worker 1 of webforcore-host).
-warn: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application f6c6ed31 runs with the invariant culture: the process has no locale (LANG and LC_ALL unset, or C, POSIX or C.UTF-8), which can't happen on IIS, so resources chosen by culture name aren't found. Set <globalization culture="en-US" uiCulture="en-US" /> in Web.config, or give the environment a locale (LANG=en_US.UTF-8): https://github.com/xforcore/webForCore/blob/main/docs/MIGRATING.md#6-code-changes
+      Started application 4434b0f9 in process 3312572 (worker 1 of webforcore-host).
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://unix:/tmp/webforcore-Bmke0t/worker-1.sock
+      Now listening on: http://unix:/tmp/webforcore-qSAGDi/worker-1.sock
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 1 (process 3239) is serving (0.5 s after it started).
+      Worker 1 (process 3312572) is serving (0.4 s after it started).
 info: Microsoft.Hosting.Lifetime[0]
       Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
       Hosting environment: Production
 info: Microsoft.Hosting.Lifetime[0]
-      Content root path: <repo>/apps/funnelweb/src/src/FunnelWeb.Web
+      Content root path: $WFC_CHECKOUTS/funnelweb/src/FunnelWeb.Web
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/ - - -
 Fetching list of already executed scripts.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/ - 500 26207 text/html;+charset=utf-8 1029.6012ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/ - 500 26132 text/html;+charset=utf-8 405.7101ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 500.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/ - 500 26132 text/html;+charset=utf-8 457.8503ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/ HTTP/1.1 RequestVersionExact 
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/ - 500 26207 text/html;+charset=utf-8 1201.8069ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/ - - -
 Fetching list of already executed scripts.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/ - 500 26132 text/html;+charset=utf-8 47.0273ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 500.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/ - 500 26207 text/html;+charset=utf-8 55.8256ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/ - 500 26207 text/html;+charset=utf-8 52.6872ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/ - 500 26132 text/html;+charset=utf-8 51.0610ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/admin/login - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/admin/login - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/admin/login HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/admin/login - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/admin/login - - -
 Fetching list of already executed scripts.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/admin/login - 200 5422 text/html;+charset=utf-8 1794.1421ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/admin/login - 200 5422 text/html;+charset=utf-8 667.3270ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/admin/login - 200 5422 text/html;+charset=utf-8 1795.4434ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/admin/login - 200 5422 text/html;+charset=utf-8 668.6857ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/admin/install - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/admin/install - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/admin/install HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/admin/install - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/admin/install - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/admin/install - 302 158 text/html;+charset=utf-8 10.8965ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/admin/install - 302 158 text/html;+charset=utf-8 9.0090ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 302.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/admin/install - 302 158 text/html;+charset=utf-8 11.8006ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/admin/install - 302 158 text/html;+charset=utf-8 9.8489ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/Content/Images/external.png - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/Content/Images/external.png - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/Content/Images/external.png HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/Content/Images/external.png - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/Content/Images/external.png - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/Content/Images/external.png - 200 165 image/png 18.6125ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/Content/Images/external.png - 200 165 image/png 14.8846ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 200.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/Content/Images/external.png - 200 165 image/png 19.1327ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/Content/Images/external.png - 200 165 image/png 15.5923ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/web.config - - -
+      Request starting HTTP/1.1 POST http://127.0.0.1:42707/admin/login - application/x-www-form-urlencoded 71
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/admin/login HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:42707/admin/login - application/x-www-form-urlencoded 71
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:42707/admin/login - 500 30560 text/html;+charset=utf-8 23.4628ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 500.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:42707/admin/login - 500 30560 text/html;+charset=utf-8 26.5579ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/admin/install - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/admin/install HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/admin/install - - -
+Fetching list of already executed scripts.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/admin/install - 302 158 text/html;+charset=utf-8 10.3273ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 302.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/admin/install - 302 158 text/html;+charset=utf-8 10.9369ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:42707/admin/install/upgrade - - 0
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/admin/install/upgrade HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 POST http://127.0.0.1:42707/admin/install/upgrade - - 0
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:42707/admin/install/upgrade - 302 168 text/html;+charset=utf-8 2.6237ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 302.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 POST http://127.0.0.1:42707/admin/install/upgrade - 302 168 text/html;+charset=utf-8 3.4639ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/admin/logout - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/admin/logout HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/admin/logout - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/admin/logout - 302 118 text/html;+charset=utf-8 5.7947ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 302.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/admin/logout - 302 118 text/html;+charset=utf-8 6.5546ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/admin/install - - -
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
+      Proxying to http://localhost/admin/install HTTP/1.1 RequestVersionExact 
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/admin/install - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/admin/install - 302 158 text/html;+charset=utf-8 1.5944ms
+info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
+      Received HTTP/1.1 response 302.
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/admin/install - 302 158 text/html;+charset=utf-8 2.4533ms
+info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/web.config - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/web.config HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/web.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/web.config - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/web.config - 404 252 text/html 5.4208ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/web.config - 404 252 text/html 3.2507ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/web.config - 404 252 text/html 5.3189ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/web.config - 404 252 text/html 2.8881ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/App_Data/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/App_Data/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/App_Data/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/App_Data/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/App_Data/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/App_Data/ - 404 252 text/html 0.7079ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/App_Data/ - 404 252 text/html 0.6066ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/App_Data/ - 404 252 text/html 1.2575ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/App_Data/ - 404 252 text/html 1.2512ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/Global.asax.cs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/Global.asax.cs - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/Global.asax.cs HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/Global.asax.cs - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/Global.asax.cs - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/Global.asax.cs - 404 215 text/html 0.4780ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/Global.asax.cs - 404 215 text/html 0.5815ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/Global.asax.cs - 404 215 text/html 0.9356ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/Global.asax.cs - 404 215 text/html 1.0878ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/obj/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/obj/ - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/obj/ HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/obj/ - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/obj/ - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/obj/ - 404 252 text/html 0.5023ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/obj/ - 404 252 text/html 0.6239ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/obj/ - 404 252 text/html 1.3519ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/obj/ - 404 252 text/html 1.1720ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/packages.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/packages.config - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/packages.config HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/packages.config - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/packages.config - - -
+info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/packages.config - 404 215 text/html 0.6625ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/packages.config - 404 215 text/html 0.6357ms
-info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/packages.config - 404 215 text/html 1.0768ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/packages.config - 404 215 text/html 1.1749ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/bin_dotnet/FunnelWeb.Web.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/bin_dotnet/FunnelWeb.Web.dll - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/bin_dotnet/FunnelWeb.Web.dll HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/bin_dotnet/FunnelWeb.Web.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/bin_dotnet/FunnelWeb.Web.dll - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/bin_dotnet/FunnelWeb.Web.dll - 404 252 text/html 0.9988ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/bin_dotnet/FunnelWeb.Web.dll - 404 252 text/html 0.8768ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/bin_dotnet/FunnelWeb.Web.dll - 404 252 text/html 1.4892ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/bin_dotnet/FunnelWeb.Web.dll - 404 252 text/html 1.4247ms
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/bin_dotnet/webforcore-host/webforcore-host.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/bin_dotnet/webforcore-host/webforcore-host.dll - - -
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[9]
       Proxying to http://localhost/bin_dotnet/webforcore-host/webforcore-host.dll HTTP/1.1 RequestVersionExact 
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
-      Request starting HTTP/1.1 GET http://127.0.0.1:39181/bin_dotnet/webforcore-host/webforcore-host.dll - - -
+      Request starting HTTP/1.1 GET http://127.0.0.1:42707/bin_dotnet/webforcore-host/webforcore-host.dll - - -
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 0.8052ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 0.7928ms
 info: Yarp.ReverseProxy.Forwarder.HttpForwarder[56]
       Received HTTP/1.1 response 404.
 info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
-      Request finished HTTP/1.1 GET http://127.0.0.1:39181/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 1.1892ms
+      Request finished HTTP/1.1 GET http://127.0.0.1:42707/bin_dotnet/webforcore-host/webforcore-host.dll - 404 252 text/html 1.3643ms
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
 info: WebFormsForCore.Hosting.WorkerProcess.WorkerLifetime[0]
@@ -176,6 +235,6 @@ info: WebFormsForCore.Hosting.WorkerProcess.WorkerLifetime[0]
 info: Microsoft.Hosting.Lifetime[0]
       Application is shutting down...
 info: Microsoft.AspNetCore.Builder.WebFormsMiddleware[0]
-      Application f6c6ed31 is shutting down (HostingEnvironment).
+      Application 4434b0f9 is shutting down (HostingEnvironment).
 info: WebFormsForCore.Host.WorkerPool[0]
-      Worker 1 (process 3239) exited (0).
+      Worker 1 (process 3312572) exited (0).

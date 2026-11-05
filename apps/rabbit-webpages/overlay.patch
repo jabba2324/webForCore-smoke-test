@@ -22,6 +22,19 @@ index 0000000..2f21594
 +        app.Run();
 +    }
 +}
+diff --git a/WebSite/Views/Tags/_Page_Edit.cshtml b/WebSite/Views/Tags/_Page_Edit.cshtml
+index b08e715..75af24b 100644
+--- a/WebSite/Views/Tags/_Page_Edit.cshtml
++++ b/WebSite/Views/Tags/_Page_Edit.cshtml
+@@ -16,7 +16,7 @@
+     <div class="article-tags">Tags: <div class="editable" id="article-tags" style="display:inline">
+     @if (Page.Tags != null && Page.Tags.Length > 0)
+     {
+-        @string.Join(", ", Page.Tags)
++        @(string.Join(", ", Page.Tags))
+     }
+     else
+     {
 diff --git a/WebSite/Web.config b/WebSite/Web.config
 index 6c81c37..06f601e 100644
 --- a/WebSite/Web.config
@@ -37,7 +50,7 @@ index 6c81c37..06f601e 100644
    </system.web>
 diff --git a/WebSite/WebSite.csproj b/WebSite/WebSite.csproj
 new file mode 100644
-index 0000000..44d739d
+index 0000000..1c5cafa
 --- /dev/null
 +++ b/WebSite/WebSite.csproj
 @@ -0,0 +1,41 @@

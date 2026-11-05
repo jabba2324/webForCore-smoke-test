@@ -23,23 +23,23 @@
       ]
     },
     "build": {
-      "at": "2026-11-05T11:22:49+00:00",
+      "at": "2026-11-05T13:01:37+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/screwturn-wiki/logs/build.log",
-      "seconds": 29,
+      "seconds": 23,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T11:22:19+00:00",
+      "at": "2026-11-05T13:01:14+00:00",
       "commit": "7b1ccb462779d586f8beb8f37f78322e055149b6",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-05T11:23:03+00:00",
+      "at": "2026-11-05T13:01:50+00:00",
       "checks": [
         {
           "ms": 13,
@@ -48,19 +48,19 @@
           "status": 200
         },
         {
-          "ms": 9,
+          "ms": 8,
           "ok": true,
           "path": "/MainPage.ashx",
           "status": 200
         },
         {
-          "ms": 8,
+          "ms": 6,
           "ok": true,
           "path": "/Dev.MainPage.ashx",
           "status": 200
         },
         {
-          "ms": 23,
+          "ms": 18,
           "ok": true,
           "path": "/AllPages.aspx",
           "status": 200
@@ -72,13 +72,13 @@
           "status": 200
         },
         {
-          "ms": 17,
+          "ms": 15,
           "ok": true,
           "path": "/History.aspx?Page=MainPage",
           "status": 200
         },
         {
-          "ms": 26,
+          "ms": 23,
           "ok": true,
           "path": "/Search.aspx?Query=wiki",
           "status": 200
@@ -96,7 +96,7 @@
           "status": 200
         },
         {
-          "ms": 17,
+          "ms": 15,
           "ok": true,
           "path": "/Login.aspx",
           "status": 200
@@ -108,19 +108,19 @@
           "status": 200
         },
         {
-          "ms": 25,
+          "ms": 22,
           "ok": true,
           "path": "/Edit.aspx?Page=MainPage",
           "status": 302
         },
         {
-          "ms": 74,
+          "ms": 83,
           "ok": true,
           "path": "/Captcha.aspx",
           "status": 200
         },
         {
-          "ms": 17,
+          "ms": 16,
           "ok": true,
           "path": "/Themes/Default/Screen_Styles.css",
           "status": 200
@@ -132,16 +132,149 @@
           "status": 200
         },
         {
-          "ms": 4,
+          "ms": 3,
           "ok": true,
           "path": "/public/Users.cs",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/public/Config.cs",
           "status": 404
+        },
+        {
+          "ms": 6,
+          "ok": true,
+          "path": "/Login.aspx",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 18,
+          "ok": true,
+          "path": "/Login.aspx",
+          "status": 200
+        },
+        {
+          "ms": 3,
+          "ok": true,
+          "path": "/Login.aspx",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 5,
+          "ok": true,
+          "path": "/Login.aspx",
+          "status": 302
+        },
+        {
+          "ms": 16,
+          "ok": true,
+          "path": "/Edit.aspx?Page=SmokeProbe",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 178,
+          "ok": true,
+          "path": "/Edit.aspx?Page=SmokeProbe",
+          "status": 302
+        },
+        {
+          "ms": 9,
+          "ok": true,
+          "path": "/SmokeProbe.ashx",
+          "status": 200
+        },
+        {
+          "ms": 10,
+          "ok": true,
+          "path": "/Edit.aspx?Page=SmokeProbe",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 246,
+          "ok": true,
+          "path": "/Edit.aspx?Page=SmokeProbe",
+          "status": 302
+        },
+        {
+          "ms": 7,
+          "ok": true,
+          "path": "/SmokeProbe.ashx",
+          "status": 200
+        },
+        {
+          "ms": 5,
+          "ok": true,
+          "path": "/History.aspx?Page=SmokeProbe",
+          "status": 200
+        },
+        {
+          "ms": 11,
+          "ok": true,
+          "path": "/Post.aspx?Page=SmokeProbe",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 14,
+          "ok": true,
+          "path": "/Post.aspx?Page=SmokeProbe",
+          "status": 302
+        },
+        {
+          "ms": 9,
+          "ok": true,
+          "path": "/SmokeProbe.ashx?Discuss=1",
+          "status": 200
+        },
+        {
+          "ms": 27,
+          "ok": true,
+          "path": "/AdminPages.aspx?Admin=SmokeProbe",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 621,
+          "ok": true,
+          "path": "/AdminPages.aspx?Admin=SmokeProbe",
+          "status": 200
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/SmokeProbe.ashx",
+          "status": 302
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/AllPages.aspx",
+          "status": 200
+        },
+        {
+          "ms": 19,
+          "ok": true,
+          "path": "/Login.aspx",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 16,
+          "ok": true,
+          "path": "/Login.aspx",
+          "status": 302
+        },
+        {
+          "ms": 4,
+          "ok": true,
+          "path": "/Edit.aspx?Page=MainPage",
+          "status": 302
         },
         {
           "ms": 4,
@@ -156,7 +289,7 @@
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
@@ -188,7 +321,7 @@
       ],
       "log": "apps/screwturn-wiki/logs/server.log",
       "status": "pass",
-      "summary": "24/24 probes"
+      "summary": "45/45 probes"
     }
   }
 }
