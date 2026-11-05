@@ -2400,6 +2400,7 @@ the overlay).
 - **Checked:** with an `AppDomain.AssemblyResolve` handler that returns the loaded Nancy (exploration only, not in the
   overlay), JabbR's startup gets past this to [F50](#f50).
 - **Fix belongs in webForCore:** in `Resolve`, accept an assembly of any version when the request has no public key token.
+
 ## F164
 
 **The guide adds `UseAspNetCoreSessionProvider()` to every app that uses `Session`, which makes `InProc` session state
