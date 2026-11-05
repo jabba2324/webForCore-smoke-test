@@ -2,23 +2,23 @@
   "id": "mojoportal",
   "stages": {
     "build": {
-      "at": "2026-11-05T11:24:57+00:00",
+      "at": "2026-11-05T12:46:21+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\mojoportal\\logs.windows\\build.log",
-      "seconds": 119,
+      "seconds": 117,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T11:22:57+00:00",
+      "at": "2026-11-05T12:44:23+00:00",
       "commit": "31b4fb1efd121dba2aab58af5ad6b0f30161259e",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-05T11:24:58+00:00",
+      "at": "2026-11-05T12:46:22+00:00",
       "created": [
         "mojoportal"
       ],
@@ -28,76 +28,285 @@
       "summary": "created mojoportal"
     },
     "smoke": {
-      "at": "2026-11-05T11:26:41+00:00",
+      "at": "2026-11-05T12:47:00+00:00",
       "checks": [
         {
-          "ms": 21844,
+          "ms": 7763,
           "ok": true,
           "path": "/Setup/Default.aspx",
           "status": 200
         },
         {
-          "ms": 17829,
+          "ms": 6438,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 11774,
+          "ms": 807,
           "ok": true,
           "path": "/Secure/Login.aspx",
           "status": 200
         },
         {
-          "ms": 13181,
+          "ms": 256,
           "ok": true,
           "path": "/Secure/Register.aspx",
           "status": 200
         },
         {
-          "ms": 5812,
+          "ms": 734,
           "ok": true,
           "path": "/FileManager",
           "status": 200
         },
         {
-          "ms": 2291,
+          "ms": 74,
           "ok": true,
           "path": "/api/UserProfile/Property/FirstName",
           "status": 401
         },
         {
-          "ms": 4316,
+          "ms": 31,
           "ok": true,
           "path": "/csshandler.ashx?s=1&skin=framework",
           "status": 200
         },
         {
-          "ms": 11301,
+          "ms": 6,
           "ok": true,
           "path": "/SearchEngineInfo.ashx",
           "status": 200
         },
         {
-          "ms": 1307,
+          "ms": 17,
           "ok": true,
           "path": "/Data/Sites/1/skins/framework/img/favicons/favicon-16x16.png",
           "status": 200
         },
         {
-          "ms": 1642,
+          "ms": 263,
+          "ok": true,
+          "path": "/Secure/Register.aspx",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 516,
+          "ok": true,
+          "path": "/Secure/Register.aspx",
+          "status": 200
+        },
+        {
+          "ms": 42,
+          "ok": true,
+          "path": "/Logoff.aspx",
+          "status": 302
+        },
+        {
+          "ms": 202,
+          "ok": true,
+          "path": "/Secure/Login.aspx",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 194,
+          "ok": true,
+          "path": "/Secure/Login.aspx",
+          "status": 200
+        },
+        {
+          "ms": 208,
+          "ok": true,
+          "path": "/Secure/Login.aspx",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 202,
+          "ok": true,
+          "path": "/Secure/Login.aspx",
+          "status": 302
+        },
+        {
+          "ms": 38,
+          "ok": true,
+          "path": "/api/UserProfile/Property/FirstName",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 36,
+          "ok": true,
+          "path": "/api/UserProfile/Property/FirstName",
+          "status": 200
+        },
+        {
+          "ms": 8,
+          "ok": true,
+          "path": "/api/UserProfile/Property/FirstName",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 20,
+          "ok": true,
+          "path": "/BadWord/CheckString",
+          "status": 200
+        },
+        {
+          "ms": 8,
+          "ok": true,
+          "path": "/Logoff.aspx",
+          "status": 302
+        },
+        {
+          "ms": 206,
+          "ok": true,
+          "path": "/Secure/Login.aspx",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 169,
+          "ok": true,
+          "path": "/Secure/Login.aspx",
+          "status": 302
+        },
+        {
+          "ms": 4848,
+          "ok": true,
+          "path": "/Admin/ServerLog.aspx",
+          "status": 200
+        },
+        {
+          "ms": 291,
+          "ok": true,
+          "path": "/Admin/PageSettings.aspx?start=1",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 63,
+          "ok": true,
+          "path": "/Admin/PageSettings.aspx?start=1",
+          "status": 302
+        },
+        {
+          "ms": 178,
+          "ok": true,
+          "path": "/smoke-probe-page",
+          "status": 200
+        },
+        {
+          "ms": 260,
+          "ok": true,
+          "path": "/Admin/PageLayout.aspx?pageid={page}",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 196,
+          "ok": true,
+          "path": "/Admin/PageLayout.aspx?pageid={page}",
+          "status": 200
+        },
+        {
+          "ms": 179,
+          "ok": true,
+          "path": "/smoke-probe-page",
+          "status": 200
+        },
+        {
+          "ms": 214,
+          "ok": true,
+          "path": "/HtmlEdit.aspx?pageid={page}&mid={module}",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 154,
+          "ok": true,
+          "path": "/HtmlEdit.aspx?pageid={page}&mid={module}",
+          "status": 302
+        },
+        {
+          "ms": 185,
+          "ok": true,
+          "path": "/smoke-probe-page",
+          "status": 200
+        },
+        {
+          "ms": 252,
+          "ok": true,
+          "path": "/Admin/PageSettings.aspx?pageid={page}",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 48,
+          "ok": true,
+          "path": "/Admin/PageSettings.aspx?pageid={page}",
+          "status": 302
+        },
+        {
+          "ms": 169,
+          "ok": true,
+          "path": "/smoke-probe-page",
+          "status": 404
+        },
+        {
+          "ms": 510,
+          "ok": true,
+          "path": "/MemberList.aspx?search=smokeprobe",
+          "status": 200
+        },
+        {
+          "ms": 284,
+          "ok": true,
+          "path": "/Admin/ManageUsers.aspx?userid={user}",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 61,
+          "ok": true,
+          "path": "/Admin/ManageUsers.aspx?userid={user}",
+          "status": 302
+        },
+        {
+          "ms": 190,
+          "ok": true,
+          "path": "/MemberList.aspx",
+          "status": 200
+        },
+        {
+          "ms": 5,
+          "ok": true,
+          "path": "/Logoff.aspx",
+          "status": 302
+        },
+        {
+          "ms": 7,
+          "ok": true,
+          "path": "/Admin/PageSettings.aspx?start=1",
+          "status": 302
+        },
+        {
+          "ms": 5,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 7,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 1,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
@@ -115,7 +324,7 @@
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/mojoPortal.Web.dll",
           "status": 404
@@ -129,7 +338,7 @@
       ],
       "log": "apps\\mojoportal\\logs.windows\\server.log",
       "status": "pass",
-      "summary": "16/16 probes"
+      "summary": "49/49 probes"
     }
   }
 }

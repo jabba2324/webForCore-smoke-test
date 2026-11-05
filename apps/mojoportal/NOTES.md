@@ -1,6 +1,6 @@
 # mojoPortal: migration notes
 
-Status: migrated (webForCore 0.8.0: all 16 probes on Linux and Windows; F40 was fixed in 0.8.0). Source: https://github.com/i7MEDIA/mojoportal at `31b4fb1e`. Found by searching GitHub on 2026-10-31; the
+Status: migrated (webForCore 0.9.0: 49/49 on Linux and Windows). Source: https://github.com/i7MEDIA/mojoportal at `31b4fb1e`. Found by searching GitHub on 2026-10-31; the
 repo, licence (EPL-1.0), web project and its `<TargetFrameworkVersion>` were checked through the GitHub API.
 
 Round 3b, on webForCore 0.4.0 (no webForCore-thirdparty packages).
@@ -87,6 +87,8 @@ The probes cover:
   default site on SQL Server. Then the home page, log-in, register, MVC, Web API, handlers and static file all work.
 
 ### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+**CI (Linux and Windows): 49/49 on both, in CI runs 42026922513 and (second).**
 
 49/49 on Linux, on a new database and again on the same one. Changes:
 - **System.Data.Linq is back in web.config.** 0.9.0 provides it (F37), so the overlay no longer removes

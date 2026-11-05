@@ -46,23 +46,23 @@
       ]
     },
     "build": {
-      "at": "2026-11-05T11:32:04+00:00",
+      "at": "2026-11-05T12:43:13+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/mojoportal/logs/build.log",
-      "seconds": 26,
+      "seconds": 74,
       "status": "pass",
       "summary": null,
       "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-05T11:26:28+00:00",
+      "at": "2026-11-05T12:41:58+00:00",
       "commit": "31b4fb1efd121dba2aab58af5ad6b0f30161259e",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-05T11:39:12+00:00",
+      "at": "2026-11-05T12:43:13+00:00",
       "created": [
         "mojoportal"
       ],
@@ -72,170 +72,189 @@
       "summary": "created mojoportal"
     },
     "smoke": {
-      "at": "2026-11-05T11:39:45+00:00",
+      "at": "2026-11-05T12:43:46+00:00",
       "checks": [
         {
-          "ms": 1286,
+          "ms": 6264,
           "ok": true,
           "path": "/Setup/Default.aspx",
           "status": 200
         },
         {
-          "ms": 247,
+          "ms": 6163,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 196,
+          "ms": 788,
           "ok": true,
           "path": "/Secure/Login.aspx",
           "status": 200
         },
         {
-          "ms": 221,
+          "ms": 226,
           "ok": true,
           "path": "/Secure/Register.aspx",
           "status": 200
         },
         {
-          "ms": 129,
+          "ms": 677,
           "ok": true,
           "path": "/FileManager",
           "status": 200
         },
         {
-          "ms": 64,
+          "ms": 56,
           "ok": true,
           "path": "/api/UserProfile/Property/FirstName",
           "status": 401
         },
         {
-          "ms": 35,
+          "ms": 37,
           "ok": true,
           "path": "/csshandler.ashx?s=1&skin=framework",
           "status": 200
         },
         {
-          "ms": 12,
+          "ms": 13,
           "ok": true,
           "path": "/SearchEngineInfo.ashx",
           "status": 200
         },
         {
-          "ms": 19,
+          "ms": 16,
           "ok": true,
           "path": "/Data/Sites/1/skins/framework/img/favicons/favicon-16x16.png",
           "status": 200
         },
         {
-          "ms": 218,
+          "ms": 192,
           "ok": true,
           "path": "/Secure/Register.aspx",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 328,
+          "ms": 389,
           "ok": true,
           "path": "/Secure/Register.aspx",
           "status": 200
         },
         {
-          "ms": 34,
+          "ms": 37,
           "ok": true,
           "path": "/Logoff.aspx",
           "status": 302
         },
         {
-          "ms": 195,
+          "ms": 189,
           "ok": true,
           "path": "/Secure/Login.aspx",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 180,
+          "ms": 194,
           "ok": true,
           "path": "/Secure/Login.aspx",
           "status": 200
         },
         {
-          "ms": 224,
+          "ms": 213,
           "ok": true,
           "path": "/Secure/Login.aspx",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 191,
+          "ms": 178,
           "ok": true,
           "path": "/Secure/Login.aspx",
           "status": 302
         },
         {
-          "ms": 30,
+          "ms": 33,
           "ok": true,
           "path": "/api/UserProfile/Property/FirstName",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 28,
+          "ms": 31,
           "ok": true,
           "path": "/api/UserProfile/Property/FirstName",
           "status": 200
         },
         {
-          "ms": 11,
+          "ms": 10,
           "ok": true,
           "path": "/api/UserProfile/Property/FirstName",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 17,
+          "ms": 24,
           "ok": true,
           "path": "/BadWord/CheckString",
           "status": 200
         },
         {
-          "ms": 7,
+          "ms": 12,
           "ok": true,
           "path": "/Logoff.aspx",
           "status": 302
         },
         {
-          "ms": 196,
+          "ms": 179,
           "ok": true,
           "path": "/Secure/Login.aspx",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 159,
+          "ms": 246,
           "ok": true,
           "path": "/Secure/Login.aspx",
           "status": 302
         },
         {
-          "ms": 181,
+          "ms": 4977,
           "ok": true,
           "path": "/Admin/ServerLog.aspx",
           "status": 200
         },
         {
-          "ms": 262,
+          "ms": 284,
           "ok": true,
           "path": "/Admin/PageSettings.aspx?start=1",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 87,
+          "ms": 68,
           "ok": true,
           "path": "/Admin/PageSettings.aspx?start=1",
           "status": 302
+        },
+        {
+          "ms": 189,
+          "ok": true,
+          "path": "/smoke-probe-page",
+          "status": 200
+        },
+        {
+          "ms": 214,
+          "ok": true,
+          "path": "/Admin/PageLayout.aspx?pageid={page}",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 194,
+          "ok": true,
+          "path": "/Admin/PageLayout.aspx?pageid={page}",
+          "status": 200
         },
         {
           "ms": 165,
@@ -244,95 +263,76 @@
           "status": 200
         },
         {
-          "ms": 199,
-          "ok": true,
-          "path": "/Admin/PageLayout.aspx?pageid={page}",
-          "status": 200
-        },
-        {
-          "method": "POST",
-          "ms": 183,
-          "ok": true,
-          "path": "/Admin/PageLayout.aspx?pageid={page}",
-          "status": 200
-        },
-        {
-          "ms": 194,
-          "ok": true,
-          "path": "/smoke-probe-page",
-          "status": 200
-        },
-        {
-          "ms": 190,
+          "ms": 179,
           "ok": true,
           "path": "/HtmlEdit.aspx?pageid={page}&mid={module}",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 27,
+          "ms": 78,
           "ok": true,
           "path": "/HtmlEdit.aspx?pageid={page}&mid={module}",
           "status": 302
         },
         {
-          "ms": 158,
+          "ms": 164,
           "ok": true,
           "path": "/smoke-probe-page",
           "status": 200
         },
         {
-          "ms": 206,
+          "ms": 229,
           "ok": true,
           "path": "/Admin/PageSettings.aspx?pageid={page}",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 29,
+          "ms": 43,
           "ok": true,
           "path": "/Admin/PageSettings.aspx?pageid={page}",
           "status": 302
         },
         {
-          "ms": 157,
+          "ms": 149,
           "ok": true,
           "path": "/smoke-probe-page",
           "status": 404
         },
         {
-          "ms": 192,
+          "ms": 446,
           "ok": true,
           "path": "/MemberList.aspx?search=smokeprobe",
           "status": 200
         },
         {
-          "ms": 258,
+          "ms": 259,
           "ok": true,
           "path": "/Admin/ManageUsers.aspx?userid={user}",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 42,
+          "ms": 48,
           "ok": true,
           "path": "/Admin/ManageUsers.aspx?userid={user}",
           "status": 302
         },
         {
-          "ms": 163,
+          "ms": 190,
           "ok": true,
           "path": "/MemberList.aspx",
           "status": 200
         },
         {
-          "ms": 6,
+          "ms": 11,
           "ok": true,
           "path": "/Logoff.aspx",
           "status": 302
         },
         {
-          "ms": 12,
+          "ms": 11,
           "ok": true,
           "path": "/Admin/PageSettings.aspx?start=1",
           "status": 302
@@ -368,7 +368,7 @@
           "status": 404
         },
         {
-          "ms": 4,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/mojoPortal.Web.dll",
           "status": 404
