@@ -673,13 +673,13 @@ index 5987c72..87b0b2d 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Http.Owin" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.8.0" />
-+    <PackageReference Include="webForCore.WebGrease" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Http.Owin" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.9.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.9.0" />
++    <PackageReference Include="webForCore.WebGrease" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -1543,9 +1543,9 @@ index 3eab60a..e208b16 100644
 -    <Compile Include="Text\BuiltIn\ToC\TocPlugin.cs" />
 -    <Compile Include="Text\BuiltIn\ToC\Tree.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.9.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -2542,11 +2542,11 @@ index 00fdc71..e5a1ac7 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.9.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -2570,7 +2570,7 @@ index 00fdc71..e5a1ac7 100644
 +  <ItemGroup>
 +    <!-- webForCore-thirdparty 0.4.0: WebActivatorEx's start methods run (the original package's never do,
 +         webForCore#21); it wins over the original that the app's packages bring. -->
-+    <PackageReference Include="webForCore.WebActivatorEx" Version="0.6.0" />
++    <PackageReference Include="webForCore.WebActivatorEx" Version="0.7.0" />
 +  </ItemGroup>
 +
 +</Project>

@@ -16,84 +16,72 @@
       ]
     },
     "build": {
-      "at": "2026-11-04T20:25:21+00:00",
+      "at": "2026-11-05T11:17:36+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/odata-samples-compositekey/logs/build.log",
-      "seconds": 15,
+      "seconds": 8,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.8.0"
+      "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-04T20:25:05+00:00",
+      "at": "2026-11-05T11:17:28+00:00",
       "commit": "2e60476b62d411fbac8265b4e23a5d8f414676c7",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-04T20:25:26+00:00",
+      "at": "2026-11-05T11:17:43+00:00",
       "checks": [
         {
-          "expected_text": "\"name\":\"People\"",
-          "ms": 29,
-          "ok": false,
+          "ms": 14,
+          "ok": true,
           "path": "/",
-          "status": 404,
-          "title": "The resource cannot be found."
+          "status": 200
         },
         {
-          "expected_text": "<Key><PropertyRef Name=\"FirstName\" /><PropertyRef Name=\"LastName\" /></Key>",
-          "ms": 5,
-          "ok": false,
+          "ms": 38,
+          "ok": true,
           "path": "/$metadata",
-          "status": 404,
-          "title": "The resource cannot be found."
+          "status": 200
         },
         {
-          "expected_text": "\"FirstName\":\"Lewis\",\"LastName\":\"James\",\"Age\":6",
-          "ms": 5,
-          "ok": false,
+          "ms": 63,
+          "ok": true,
           "path": "/People",
-          "status": 404,
-          "title": "The resource cannot be found."
+          "status": 200
         },
         {
-          "expected_text": "\"Age\":5",
-          "ms": 3,
-          "ok": false,
+          "ms": 32,
+          "ok": true,
           "path": "/People(FirstName='Kate',LastName='Jones')",
-          "status": 404,
-          "title": "The resource cannot be found."
+          "status": 200
         },
         {
-          "ms": 3,
+          "ms": 6,
           "ok": true,
           "path": "/People(FirstName='Kate',LastName='Nobody')",
           "status": 404
         },
         {
-          "expected_text": "\"value\":[{\"LastName\":\"Park\"},{\"LastName\":\"James\"}]",
-          "ms": 3,
-          "ok": false,
+          "ms": 76,
+          "ok": true,
           "path": "/People?$filter=Age%20gt%205&$orderby=Age%20desc&$select=LastName",
-          "status": 404,
-          "title": "The resource cannot be found."
+          "status": 200
         },
         {
-          "expected_text": "3",
-          "ms": 3,
-          "ok": false,
+          "ms": 10,
+          "ok": true,
           "path": "/People/$count",
-          "status": 404,
-          "title": "The resource cannot be found."
+          "status": 200
         },
         {
-          "ms": 2,
+          "ms": 4,
           "ok": false,
           "path": "/People?$format=application/xml",
-          "status": 404,
-          "title": "The resource cannot be found."
+          "status": 200,
+          "title": "{\"@odata.context\":\"http://127.0.0.1:46771/$metadata#People\",\"value\":[{\"FirstName\":\"Kate\",\"LastName\":\"Jones\",\"Age\":5},{\"FirstName\":\"Lewis\",\"LastName\":\"James\",\"Age\":6},{\"FirstName\":\"Carlos \",\"LastName\":\"Park\",\"Age\":7}]}"
         },
         {
           "ms": 5,
@@ -114,13 +102,13 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/packages.config",
           "status": 404
@@ -132,7 +120,7 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404
@@ -140,7 +128,7 @@
       ],
       "log": "apps/odata-samples-compositekey/logs/server.log",
       "status": "fail",
-      "summary": "8/15 probes"
+      "summary": "14/15 probes"
     }
   }
 }

@@ -18,98 +18,98 @@
       ]
     },
     "build": {
-      "at": "2026-11-04T20:25:52+00:00",
+      "at": "2026-11-05T11:15:24+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/mvc-music-store/logs/build.log",
-      "seconds": 16,
+      "seconds": 9,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.8.0"
+      "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-04T20:25:36+00:00",
+      "at": "2026-11-05T11:15:15+00:00",
       "commit": "ea2552d6eda7c20e9477a512e5c615665618cf35",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-04T20:26:12+00:00",
+      "at": "2026-11-05T11:15:45+00:00",
       "checks": [
         {
-          "ms": 12,
+          "ms": 26,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 13,
+          "ms": 17,
           "ok": true,
           "path": "/Store",
           "status": 200
         },
         {
-          "ms": 80,
+          "ms": 112,
           "ok": true,
           "path": "/Store/Browse?genre=Jazz",
           "status": 200
         },
         {
-          "ms": 36,
+          "ms": 49,
           "ok": true,
           "path": "/Store/Details/1",
           "status": 200
         },
         {
-          "ms": 46,
+          "ms": 57,
           "ok": true,
           "path": "/ShoppingCart",
           "status": 200
         },
         {
-          "ms": 278,
+          "ms": 331,
           "ok": true,
           "path": "/Account/LogOn",
           "status": 200
         },
         {
-          "ms": 15,
+          "ms": 21,
           "ok": true,
           "path": "/Account/Register",
           "status": 200
         },
         {
-          "ms": 8,
+          "ms": 11,
           "ok": true,
           "path": "/StoreManager",
           "status": 302
         },
         {
-          "ms": 4,
+          "ms": 5,
           "ok": true,
           "path": "/Checkout/AddressAndPayment",
           "status": 302
         },
         {
-          "ms": 17,
+          "ms": 20,
           "ok": true,
           "path": "/Store/GenreMenu",
           "status": 500
         },
         {
-          "ms": 14,
+          "ms": 18,
           "ok": true,
           "path": "/Content/Site.css",
           "status": 200
         },
         {
-          "ms": 8,
+          "ms": 11,
           "ok": true,
           "path": "/Scripts/jquery-1.5.1.min.js",
           "status": 200
         },
         {
-          "ms": 3,
+          "ms": 4,
           "ok": true,
           "path": "/no-such-controller",
           "status": 404
@@ -121,37 +121,37 @@
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/MvcMusicStore.dll",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404

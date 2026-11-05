@@ -3,7 +3,7 @@
 //     dotnet run scripts/convert.cs -- apps/<id>/src/<web project>.csproj [--lib apps/<id>/src/<library>.csproj]...
 //
 // - copies each project to <name>.csproj.netfx (once) and rewrites it as an SDK-style net10.0 project;
-// - adds the webForCore packages for the frameworks it references ($WEBFORCORE_VERSION, default 0.8.0); keeps the
+// - adds the webForCore packages for the frameworks it references ($WEBFORCORE_VERSION, default 0.9.0); keeps the
 //   app's other packages (from packages.config or PackageReference), drops Microsoft's ASP.NET packages and the System.*
 //   packages that are part of .NET, and raises the versions webForCore forces (FINDINGS.md F7); keeps HintPath
 //   references outside packages/;
@@ -13,7 +13,7 @@
 // It prints what it did, for NOTES.md. It is a starting point, not the whole migration: check its output, then build.
 // It keeps the Katana providers webForCore doesn't provide (Google, Facebook, WsFederation, ...); webForCore's own
 // Katana packages win over their dependencies (0.3.0). For WebActivatorEx and AjaxControlToolkit it adds the builds
-// from webForCore-thirdparty ($THIRDPARTY_VERSION, default 0.6.0; CLAUDE.md). It doesn't handle lib/net45 assemblies
+// from webForCore-thirdparty ($THIRDPARTY_VERSION, default 0.7.0; CLAUDE.md). It doesn't handle lib/net45 assemblies
 // NuGet skips (F6), connection strings or Linux paths.
 #:property PublishAot=false
 #:property NuGetAudit=false
@@ -33,8 +33,8 @@ static class Convert
         The rest is at the top of scripts/convert.cs.
         """;
 
-    static readonly string Wfc = Environment.GetEnvironmentVariable("WEBFORCORE_VERSION") ?? "0.8.0";
-    static readonly string Thirdparty = Environment.GetEnvironmentVariable("THIRDPARTY_VERSION") ?? "0.6.0";
+    static readonly string Wfc = Environment.GetEnvironmentVariable("WEBFORCORE_VERSION") ?? "0.9.0";
+    static readonly string Thirdparty = Environment.GetEnvironmentVariable("THIRDPARTY_VERSION") ?? "0.7.0";
     // webForCore-thirdparty's builds: (regex over references and packages, its package). The original package is kept
     // (packages such as Unity.Mvc bring it anyway); the build wins the conflict.
     static readonly (string Pattern, string Package)[] ThirdpartyPackages = [("WebActivatorEx", "webForCore.WebActivatorEx"), ("AjaxControlToolkit", "webForCore.AjaxControlToolkit")];

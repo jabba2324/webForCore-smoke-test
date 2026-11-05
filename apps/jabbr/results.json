@@ -31,93 +31,161 @@
       ]
     },
     "build": {
-      "at": "2026-11-04T20:26:31+00:00",
+      "at": "2026-11-05T11:15:46+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/jabbr/logs/build.log",
-      "seconds": 12,
+      "seconds": 15,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.8.0"
+      "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-04T20:26:18+00:00",
+      "at": "2026-11-05T11:15:31+00:00",
       "commit": "eb5b4e2f1e5bdbb1ea91230f1884716170a6976d",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-04T20:26:47+00:00",
+      "at": "2026-11-05T11:16:03+00:00",
       "checks": [
         {
           "expected_text": "JabbR",
-          "ms": 115,
+          "ms": 141,
           "ok": false,
           "path": "/",
+          "stack": [
+            "[FileNotFoundException: Could not load file or assembly 'Nancy, Version=0.21.1.0, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.",
+            "[TargetInvocationException: Exception has been thrown by the target of an invocation.]",
+            "   at Owin.Loader.DefaultLoader.<>c__DisplayClass9_0.b__0(IAppBuilder builder)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinHttpModule.<>c__DisplayClass5_0.b__0(IAppBuilder builder)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinAppContext.Initialize(Action`1 startup)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinBuilder.Build(Action`1 startup)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinHttpModule.InitializeBlueprint()",
+            "   at System.Threading.LazyInitializer.EnsureInitializedCore[T](T& target, Boolean& initialized, Object& syncLock, Func`1 valueFactory)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinHttpModule.Init(HttpApplication context)",
+            "   at System.Web.HttpApplication.InitModulesCommon()",
+            "   at System.Web.HttpApplication.InitModules()",
+            "   at System.Web.HttpApplication.InitInternal(HttpContext context, HttpApplicationState state, MethodInfo[] handlers)",
+            "   at System.Web.HttpApplicationFactory.GetNormalApplicationInstance(HttpContext context)",
+            "   at System.Web.HttpApplicationFactory.GetApplicationInstance(HttpContext context)",
+            "   at System.Web.HttpRuntime.ProcessRequestInternal(HttpWorkerRequest wr)"
+          ],
           "status": 500,
           "title": "Could not load file or assembly 'Nancy, Version=0.21.1.0, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
         },
         {
           "expected_text": "password",
-          "ms": 57,
+          "ms": 99,
           "ok": false,
           "path": "/account/login",
+          "stack": [
+            "[FileNotFoundException: Could not load file or assembly 'Nancy, Version=0.21.1.0, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.",
+            "[TargetInvocationException: Exception has been thrown by the target of an invocation.]",
+            "   at Owin.Loader.DefaultLoader.<>c__DisplayClass9_0.b__0(IAppBuilder builder)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinHttpModule.<>c__DisplayClass5_0.b__0(IAppBuilder builder)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinAppContext.Initialize(Action`1 startup)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinBuilder.Build(Action`1 startup)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinHttpModule.InitializeBlueprint()",
+            "   at System.Threading.LazyInitializer.EnsureInitializedCore[T](T& target, Boolean& initialized, Object& syncLock, Func`1 valueFactory)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinHttpModule.Init(HttpApplication context)",
+            "   at System.Web.HttpApplication.InitModulesCommon()",
+            "   at System.Web.HttpApplication.InitModules()",
+            "   at System.Web.HttpApplication.InitInternal(HttpContext context, HttpApplicationState state, MethodInfo[] handlers)",
+            "   at System.Web.HttpApplicationFactory.GetNormalApplicationInstance(HttpContext context)",
+            "   at System.Web.HttpApplicationFactory.GetApplicationInstance(HttpContext context)",
+            "   at System.Web.HttpRuntime.ProcessRequestInternal(HttpWorkerRequest wr)"
+          ],
           "status": 500,
           "title": "Could not load file or assembly 'Nancy, Version=0.21.1.0, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
         },
         {
           "expected_text": "$.hubConnection",
-          "ms": 58,
+          "ms": 112,
           "ok": false,
           "path": "/signalr/hubs",
+          "stack": [
+            "[FileNotFoundException: Could not load file or assembly 'Nancy, Version=0.21.1.0, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.",
+            "[TargetInvocationException: Exception has been thrown by the target of an invocation.]",
+            "   at Owin.Loader.DefaultLoader.<>c__DisplayClass9_0.b__0(IAppBuilder builder)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinHttpModule.<>c__DisplayClass5_0.b__0(IAppBuilder builder)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinAppContext.Initialize(Action`1 startup)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinBuilder.Build(Action`1 startup)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinHttpModule.InitializeBlueprint()",
+            "   at System.Threading.LazyInitializer.EnsureInitializedCore[T](T& target, Boolean& initialized, Object& syncLock, Func`1 valueFactory)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinHttpModule.Init(HttpApplication context)",
+            "   at System.Web.HttpApplication.InitModulesCommon()",
+            "   at System.Web.HttpApplication.InitModules()",
+            "   at System.Web.HttpApplication.InitInternal(HttpContext context, HttpApplicationState state, MethodInfo[] handlers)",
+            "   at System.Web.HttpApplicationFactory.GetNormalApplicationInstance(HttpContext context)",
+            "   at System.Web.HttpApplicationFactory.GetApplicationInstance(HttpContext context)",
+            "   at System.Web.HttpRuntime.ProcessRequestInternal(HttpWorkerRequest wr)"
+          ],
           "status": 500,
           "title": "Could not load file or assembly 'Nancy, Version=0.21.1.0, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
         },
         {
-          "ms": 65,
+          "ms": 88,
           "ok": false,
           "path": "/Content/images/big-logo.png",
+          "stack": [
+            "[FileNotFoundException: Could not load file or assembly 'Nancy, Version=0.21.1.0, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.",
+            "[TargetInvocationException: Exception has been thrown by the target of an invocation.]",
+            "   at Owin.Loader.DefaultLoader.<>c__DisplayClass9_0.b__0(IAppBuilder builder)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinHttpModule.<>c__DisplayClass5_0.b__0(IAppBuilder builder)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinAppContext.Initialize(Action`1 startup)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinBuilder.Build(Action`1 startup)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinHttpModule.InitializeBlueprint()",
+            "   at System.Threading.LazyInitializer.EnsureInitializedCore[T](T& target, Boolean& initialized, Object& syncLock, Func`1 valueFactory)",
+            "   at Microsoft.Owin.Host.SystemWeb.OwinHttpModule.Init(HttpApplication context)",
+            "   at System.Web.HttpApplication.InitModulesCommon()",
+            "   at System.Web.HttpApplication.InitModules()",
+            "   at System.Web.HttpApplication.InitInternal(HttpContext context, HttpApplicationState state, MethodInfo[] handlers)",
+            "   at System.Web.HttpApplicationFactory.GetNormalApplicationInstance(HttpContext context)",
+            "   at System.Web.HttpApplicationFactory.GetApplicationInstance(HttpContext context)",
+            "   at System.Web.HttpRuntime.ProcessRequestInternal(HttpWorkerRequest wr)"
+          ],
           "status": 500,
           "title": "Could not load file or assembly 'Nancy, Version=0.21.1.0, Culture=neutral, PublicKeyToken=null'. The system cannot find the file specified.<br>"
         },
         {
-          "ms": 5,
+          "ms": 6,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/JabbR.dll",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404

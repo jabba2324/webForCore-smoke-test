@@ -333,13 +333,13 @@ index a55cd71..e2f7929 100644
    <ItemGroup>
 -    <None Include="app.config" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
 +    <!-- On .NET Framework this library referenced System.Web only (SystemWebPackage), so the membership types System.Web
 +         forwards to System.Web.ApplicationServices weren't visible, and its own MembershipUser and MembershipCreateStatus
 +         weren't ambiguous with System.Web.Security's (CS0104). The webForCore package references
 +         System.Web.ApplicationServices; keep it out of this project's compilation as it was. -->
-+    <PackageReference Include="webForCore.Web.ApplicationServices" Version="0.8.0" ExcludeAssets="compile" />
++    <PackageReference Include="webForCore.Web.ApplicationServices" Version="0.9.0" ExcludeAssets="compile" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -2538,12 +2538,12 @@ index 031d0c5..b4a5e41 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.8.0" />
-+    <PackageReference Include="webForCore.WebGrease" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.9.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.9.0" />
++    <PackageReference Include="webForCore.WebGrease" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -2605,7 +2605,7 @@ index 031d0c5..b4a5e41 100644
 +  <ItemGroup>
 +    <!-- webForCore-thirdparty 0.4.0: WebActivatorEx's start methods run (the original package's never do,
 +         webForCore#21); it wins over the original that the app's packages bring. -->
-+    <PackageReference Include="webForCore.WebActivatorEx" Version="0.6.0" />
++    <PackageReference Include="webForCore.WebActivatorEx" Version="0.7.0" />
 +  </ItemGroup>
 +
 +</Project>

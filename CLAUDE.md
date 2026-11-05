@@ -21,7 +21,7 @@ or solution.
    `status` to `verified`, or `rejected` with the reason in `notes`.
 2. `dotnet run scripts/wfc.cs -- fetch <id>` and `dotnet run scripts/wfc.cs -- assess <id>`. Write the assessment in `apps/<id>/NOTES.md`.
 3. Migrate in `apps/<id>/src/` following `docs/AGENT-MIGRATION.md`, against webForCore's release packages
-   (`PackageReference Include="webForCore" Version="0.8.0"` and the framework packages; `dotnet run scripts/wfc.cs -- packages`
+   (`PackageReference Include="webForCore" Version="0.9.0"` and the framework packages; `dotnet run scripts/wfc.cs -- packages`
    downloads them), not its source. Keep changes minimal; don't modernise the app. Record each change and its
    reason in `NOTES.md` as you go, not afterwards.
 4. `dotnet run scripts/wfc.cs -- build <id>` and `dotnet run scripts/wfc.cs -- smoke <id>` on Linux while migrating, then the CI workflow for
@@ -40,7 +40,7 @@ or solution.
 webForCore ships only Microsoft assemblies. Builds of third-party libraries for it are in
 [webForCore-thirdparty](https://github.com/xforcore/webForCore-thirdparty), for this test bed: an app that uses one
 of them references the package from there. `dotnet run scripts/wfc.cs -- packages` downloads its release (`THIRDPARTY_VERSION`,
-default 0.6.0) into the same folder as webForCore's; by hand:
+default 0.7.0) into the same folder as webForCore's; by hand:
 
 ```bash
 gh release download --repo xforcore/webForCore-thirdparty --pattern '*.nupkg' --dir .packages/v<webForCore version> --skip-existing

@@ -132,7 +132,7 @@ index 6fa09b733..29774288e 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -321,7 +321,7 @@ index 48a59277e..67280cb1d 100644
  
 +  <ItemGroup>
 +    <!-- Migrated to webForCore (.NET 10): it targeted netstandard2.0 (and net472), and references projects that are net10.0 now. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
 +    <FrameworkReference Include="Microsoft.AspNetCore.App" />
 +  </ItemGroup>
  </Project>
@@ -472,7 +472,7 @@ index 186e11baf..f8d864b43 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -1422,7 +1422,7 @@ index ca1188290..8c49567d0 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -2261,7 +2261,7 @@ index 8b27cc380..6563f6592 100644
  
 +  <ItemGroup>
 +    <!-- Migrated to webForCore (.NET 10): it targeted netstandard2.0 (and net472), and references projects that are net10.0 now. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
 +    <FrameworkReference Include="Microsoft.AspNetCore.App" />
 +  </ItemGroup>
  </Project>
@@ -2307,7 +2307,7 @@ index 4beb9c1c1..ddcdc3cec 100644
  
 +  <ItemGroup>
 +    <!-- Migrated to webForCore (.NET 10): it targeted netstandard2.0 (and net472), and references projects that are net10.0 now. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
 +    <FrameworkReference Include="Microsoft.AspNetCore.App" />
 +  </ItemGroup>
  </Project>
@@ -2478,7 +2478,7 @@ index d6f81cfe5..92f373caf 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -2956,10 +2956,10 @@ index 360343d9a..238bbbfc8 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -3478,10 +3478,10 @@ index 1e2c14fe6..642efe77c 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Helpers" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Razor" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Helpers" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Razor" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -4214,14 +4214,14 @@ index 74a32d587..d6bf78663 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
 +    <!-- The project didn't reference System.Web.ApplicationServices: DNN's own RoleProvider and MembershipProvider are
 +         ambiguous with its types otherwise (CS0104; MIGRATING.md section 3, webForCore#29). -->
-+    <PackageReference Include="webForCore.Web.ApplicationServices" Version="0.8.0" ExcludeAssets="compile" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Helpers" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Razor" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.8.0" />
++    <PackageReference Include="webForCore.Web.ApplicationServices" Version="0.9.0" ExcludeAssets="compile" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Helpers" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Razor" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -5024,7 +5024,7 @@ index ab64636fd..53a956154 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
 +    <FrameworkReference Include="Microsoft.AspNetCore.App" />
 +  </ItemGroup>
 +
@@ -5476,7 +5476,7 @@ index cbcc464b5..8fdd73d16 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -7740,10 +7740,10 @@ index 4446ae1d7..63d403177 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Helpers" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Razor" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Helpers" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Razor" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -10318,8 +10318,8 @@ index 12490d457..38e120217 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -10899,10 +10899,10 @@ index eda265dfe..100f3a600 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Helpers" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Razor" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Helpers" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Razor" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -11385,7 +11385,7 @@ index b88356bfb..8d29bce75 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -11712,7 +11712,7 @@ index f133e5298..cedb1b084 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -15452,9 +15452,9 @@ index ca751bc4a..fb6a0c444 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.8.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.8.0" />
++    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.9.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
