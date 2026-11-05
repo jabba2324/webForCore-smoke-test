@@ -2,26 +2,26 @@
   "id": "aspnet-samples-katana-webapi",
   "stages": {
     "build": {
-      "at": "2026-11-04T20:24:08+00:00",
+      "at": "2026-11-05T11:15:33+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\aspnet-samples-katana-webapi\\logs.windows\\build.log",
-      "seconds": 86,
+      "seconds": 25,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.8.0"
+      "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-04T20:22:41+00:00",
+      "at": "2026-11-05T11:15:08+00:00",
       "commit": "f7d4a776327df09c13b39489b122209c5d04693b",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-04T20:24:23+00:00",
+      "at": "2026-11-05T11:15:40+00:00",
       "checks": [
         {
-          "ms": 56,
+          "ms": 69,
           "ok": true,
           "path": "/Customer/7",
           "status": 200
@@ -33,25 +33,25 @@
           "status": 200
         },
         {
-          "ms": 22,
+          "ms": 6,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 28,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 14,
+          "ms": 2,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 12,
+          "ms": 2,
           "ok": true,
           "path": "/obj/",
           "status": 404
@@ -63,13 +63,13 @@
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/WebApi.dll",
           "status": 404
         },
         {
-          "ms": 17,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404

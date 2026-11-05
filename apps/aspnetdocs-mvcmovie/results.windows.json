@@ -2,56 +2,56 @@
   "id": "aspnetdocs-mvcmovie",
   "stages": {
     "build": {
-      "at": "2026-11-04T20:29:32+00:00",
+      "at": "2026-11-05T11:19:11+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\aspnetdocs-mvcmovie\\logs.windows\\build.log",
-      "seconds": 34,
+      "seconds": 29,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.8.0"
+      "webforcore": "packages 0.9.0"
     },
     "fetch": {
-      "at": "2026-11-04T20:28:58+00:00",
+      "at": "2026-11-05T11:18:42+00:00",
       "commit": "546ffe728556a60591b93ab4fcbd4437f71e2449",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-04T20:29:56+00:00",
+      "at": "2026-11-05T11:19:35+00:00",
       "checks": [
         {
-          "ms": 11,
+          "ms": 22,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 12647,
+          "ms": 12339,
           "ok": true,
           "path": "/Movies",
           "status": 200
         },
         {
-          "ms": 232,
+          "ms": 220,
           "ok": true,
           "path": "/HelloWorld/Welcome?name=Scott&numTimes=4",
           "status": 200
         },
         {
-          "ms": 525,
+          "ms": 506,
           "ok": true,
           "path": "/Account/Register",
           "status": 200
         },
         {
-          "ms": 25,
+          "ms": 23,
           "ok": true,
           "path": "/Content/Site.css",
           "status": 200
         },
         {
-          "ms": 6,
+          "ms": 5,
           "ok": true,
           "path": "/web.config",
           "status": 404
@@ -87,7 +87,7 @@
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404
