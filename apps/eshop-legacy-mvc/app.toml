@@ -111,3 +111,27 @@ method = "POST"
 status = 500
 form = { Name = "No token" }
 contains = "__RequestVerificationToken"
+
+# Web API verbs: BrandsController has Get and Delete only. Its Delete answers 200 for a brand that exists and 404 for
+# one that doesn't, and deletes nothing ("demo only"), so the brand is still listed after it; a POST, which it has no
+# action for, is Web API's 405.
+[[probes]]
+path = "/api/brands/1"
+method = "DELETE"
+status = 200
+
+[[probes]]
+path = "/api/brands/99"
+method = "DELETE"
+status = 404
+
+[[probes]]
+path = "/api/brands/1"
+contains = "\"Brand\":\"Azure\""
+
+[[probes]]
+path = "/api/brands"
+method = "POST"
+json = { Id = 9, Brand = "Smoke" }
+status = 405
+contains = "does not support http method 'POST'"

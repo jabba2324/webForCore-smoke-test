@@ -109,6 +109,16 @@ the token, which MVC refuses (500, its anti-forgery error naming
 `__RequestVerificationToken`). 26 checks in all, all passing on Linux and Windows (CI run 41940185337). On a database of one's own,
 the seed scripts' `USE [Microsoft.eShopOnContainers.Services.CatalogDb]` has to change with the connection string.
 
+### Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0)
+
+30/30 on Linux, twice in a row. Four probes more, for the Web API's verbs: `BrandsController` has `Get` and `Delete`
+only. `DELETE /api/brands/1` answers 200 and `DELETE /api/brands/99` 404, and `GET /api/brands/1` after it still has
+Azure, since its `Delete` deletes nothing ("demo only - don't actually delete"); `POST /api/brands`, which it has no
+action for, is Web API's 405 ("does not support http method 'POST'"). The catalog's Create, Edit and Delete forms
+were already posted with their anti-forgery tokens. `FilesController` (`GET /api/files`, a BinaryFormatter stream)
+and the MVC `CatalogController2` (`[Route("api")]`, a `Json()` without `AllowGet`, which throws on .NET Framework
+too) take no other verbs. No overlay change.
+
 ## Open problems
 
 Round 1 (webForCore 0.1.0); the webForCore bugs below are fixed in 0.2.0 (PR #16) and kept for the record.
