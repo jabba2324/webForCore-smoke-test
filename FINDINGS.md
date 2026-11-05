@@ -893,7 +893,7 @@ F7, #6). Raised as [#30](https://github.com/xforcore/webForCore/issues/30). Foun
 - **What the guide says:** `docs/MIGRATING.md`'s "Versions webForCore requires" lists Newtonsoft.Json 13.0.4,
   Microsoft.IdentityModel.Tokens 8.19.1 and EntityFramework 6.4+.
 - **What worked:** Humanizer.Core raised to 2.14.1; the two System.* references removed (webForCore brings them).
-  `scripts/convert.py` now does both.
+  `scripts/convert.cs` now does both.
 
 ## F33
 
@@ -1107,7 +1107,7 @@ Raised as [#42](https://github.com/xforcore/webForCore/issues/42). Found on 0.5.
 - **Error:** `NU1605: Detected package downgrade: System.Data.SqlClient from 4.9.1 to 4.8.1 ... webForCore 0.5.0 ->
   webForCore.Web.Extensions 0.5.0 -> System.Data.SqlClient (>= 4.9.1)`; the same for System.DirectoryServices from
   `webForCore.Web.Services` (>= 11.0.0-rc.3).
-- **What worked:** raising the references. `scripts/convert.py` does it now.
+- **What worked:** raising the references. `scripts/convert.cs` does it now.
 
 ## F46
 
@@ -1162,7 +1162,7 @@ Found on 0.5.0. Documented in #44.
   - C# 11's ref-safety rules, which apply on .NET 7+ whatever the language version, give
     `CS8347 ... may expose variables referenced by parameter 'index' outside of their declaration scope` and CS8168.
 - **What worked:** `<LangVersion>` pinned (7.3 if the project set none, 13 for "latest") fixes the first.
-  `scripts/convert.py` does it for SDK-style projects. The second needs `scoped` in the source.
+  `scripts/convert.cs` does it for SDK-style projects. The second needs `scoped` in the source.
 
 ## F49
 
@@ -1301,7 +1301,7 @@ Raised as [#88](https://github.com/xforcore/webForCore/issues/88). Found on 0.7.
   'WebFormsForCore.CodeDom.Compiler.CodeDomProvider'`, on every page that compiles.
 - **Cause:** `CompilationUtil.CreateCodeDomProvider*` casts the configured type to webForCore's own `CodeDomProvider`.
 - **Docs:** the guide says to remove the `Microsoft.CodeDom.Providers.DotNetCompilerPlatform` entries only.
-  `scripts/convert.py` removes any `<system.codedom>`, which hides this in apps whose `web.config` is in the
+  `scripts/convert.cs` removes any `<system.codedom>`, which hides this in apps whose `web.config` is in the
   repository; Umbraco's is made from a template at build, so the migration removes it from the template.
 
 ## F59
@@ -1723,7 +1723,7 @@ describes only the compile errors.** Guide gap. Raised as [#138](https://github.
   inside an expression tree to `MemoryExtensions.Contains(ReadOnlySpan<T>, T)`; EF 6 can't translate it.
 - **What worked:** `<LangVersion>7.3</LangVersion>` (the projects set none), as `docs/MIGRATING.md` section 2 says. But
   its symptoms there are only `CS0029`/`CS1503`, so a project that compiles looks as if it didn't need it, and
-  `docs/AGENT-MIGRATION.md`'s Phase 2 doesn't list the property. `scripts/convert.py` pins it only for SDK-style
+  `docs/AGENT-MIGRATION.md`'s Phase 2 doesn't list the property. `scripts/convert.cs` pins it only for SDK-style
   projects, not for the old-style ones it rewrites.
 - **Repro:** net10.0, EntityFramework 6.5.1, no `<LangVersion>`: `var ids = new[] { 1, 2 };
   db.Products.Where(p => ids.Contains(p.Id)).ToList()` throws; with `<LangVersion>13.0</LangVersion>` it works.
@@ -2141,7 +2141,7 @@ neither `docs/NAMESPACES.md` nor the guide's blocker search mentions it.** Guide
 - **Why it can't be referenced:** WF3's assemblies exist only in .NET Framework's GAC on Windows (no package), and
   there's no port: CoreWF is WF4 (`System.Activities`), a different API. Getting C1 past this is a rewrite of its
   console's actions, not a migration.
-- **Also:** `scripts/wfc.py assess` doesn't look for `System.Workflow` either (its patterns follow the guide's table),
+- **Also:** `scripts/wfc.cs assess` doesn't look for `System.Workflow` either (its patterns follow the guide's table),
   so it reported C1 without this blocker.
 - **Suggested docs:** a row in NAMESPACES.md's summary (WF3 `System.Workflow.*`, and WF4 `System.Activities`), and
   `System.Workflow`/`System.Activities` in AGENT-MIGRATION.md's Phase 0 search, as for Windows Identity Foundation
