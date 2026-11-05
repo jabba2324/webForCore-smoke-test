@@ -140,12 +140,21 @@ Go, with SQL Server, expecting F22 to stop it at boot (it configures AutoMapper 
      `MemberModelMapper.MembershipUserTypeConverter`) name `AutoMapperLegacy.ITypeConverter<,>`, as the README says;
    - the other 87 files that name AutoMapper (of 90) compile unchanged, and everything else in the three projects compiles
      with C# 14 too;
-   - **one mapping changed (F104, against webForCore-thirdparty):** `ContentTypeModelMapperExtensions.cs`,
+   - **one mapping changed until round 0.9.0 (F104, against webForCore-thirdparty; fixed in webForCore-thirdparty
+     0.7.0, and the change is gone):** `ContentTypeModelMapperExtensions.cs`,
      `MapPropertyGroupBasicToPropertyGroupDisplay`, maps `Properties` with `Ignore()` and an `AfterMap` that assigns the
      same `Select(Mapper.Map<TPropertyTypeDisplay>)` (as a list) instead of `MapFrom`. With `MapFrom`, AutoMapper 12
      maps the `IEnumerable<MemberPropertyTypeDisplay>` again, element by element, finds the `PropertyTypeBasic ->
      PropertyTypeDisplay` map for the elements and fails building the configuration, so the first `Mapper.Map`
      anywhere (the back-office user store, in the installer's last step) threw and the install couldn't finish.
+   - **webForCore-thirdparty 0.7.0 (round 0.9.0):** the three projects reference `webForCore.AutoMapperLegacy` 0.7.0,
+     and Umbraco installs and maps without the F104 change.
+10. **C# 14 in expression trees (round 0.9.0, F165):** `ExpressionVisitorBase.VisitMethodCall` (Umbraco's LINQ to SQL
+    for PetaPoco) reads `MemoryExtensions.Contains(op_Implicit(array), x)` as `Enumerable.Contains(array, x)`, so it
+    builds its `IN (...)` as before. C# 14 (which step 9 needs) binds `array.Contains(x)` to the span overload inside
+    expression trees too, and the visitor threw `No logic supported for op_Implicit` for every query with one: saving
+    content in the back office (its permission check) was a 500. The guide's fix, a pinned `<LangVersion>` (F83),
+    isn't open here.
 
 Not done:
 - **The `umbraco/` and `Umbraco/` folders.** The repository has files in both (188 and 46: `Umbraco/js/installer.app.js`,
@@ -170,6 +179,11 @@ Not done:
   also under `LANG=C` (F67). Windows (CI run 41919373974, PR #26): setup 5/5, 21/21, the same as Linux.
 - Without the F104 change (step 9), the install got to its last step (`UmbracoVersion`) and failed there on every
   retry: setup 1/2, and the uninstalled site's probes.
+- **Round 0.9.0 (webForCore 0.9.0, webForCore-thirdparty 0.7.0; Linux):** without F104's change, setup 5/5 and 21/21
+  as before. Then verbs: setup makes a template and a document type through the back office's API (7 steps), and 12
+  probes (33 in all; 7 of them POST or DELETE) make, publish, edit, unpublish, delete and purge a page; they needed
+  step 10 (F165). 33/33 twice in a row on the same database, from a new one (`fetch --reset`, `build`, `setup`,
+  `smoke`).
 
 What round 6 saw (F22): Umbraco's boot threw in `CoreBootManager.InitializeModelMappers` → `Mapper.Initialize` →
 `CodeFileDisplayMapper.ConfigureMappings` line 41, `ArgumentException: The type or method has 3 generic parameter(s),
@@ -191,13 +205,12 @@ The setup, as Umbraco's AngularJS installer does it (`app.toml`):
   it) answers the user and sets the back-office cookie; `GetCurrentUser` with that cookie is the admin.
 - A stylesheet, `Smoke`, made with the legacy create dialog (`/umbraco/create.aspx`, a Web Forms postback checked by
   the back-office cookie): it writes `css/Smoke.css` and answers with the script that opens its editor.
-- Not done: content. The back office's API controllers (`UmbracoAuthorizedApiController`) and the editors' saves
-  (`/umbraco/RestServices/SaveFile/...`) check the `X-UMB-XSRF-TOKEN` header against the `UMB-XSRF-TOKEN` cookie
-  (a 417 without it), and the runner's steps can't send a header, so no document type, template or published page is
-  made (Umbraco 6 made them with Web Forms pages that 7 no longer has). By hand, with the header, the API works: the
-  sections, the content dashboard, the data types, the member type (`MemberType/GetById`), `ContentType/GetEmpty`, the media root.
+- Then, with the X-UMB-XSRF-TOKEN header (the UMB-XSRF-TOKEN cookie's value, captured from the log-in, as the back
+  office's client sends it; the runner's steps and probes can send headers since round 0.9.0): a template (`SmokePage`,
+  `Template/PostSave`, a Razor view that prints "Rendered by Umbraco 7: " and the page's name) and a document type
+  that uses it (`smokePage`, `ContentType/PostSave`). Umbraco 6 made them with Web Forms pages that 7 no longer has.
 
-The probes (all anonymous):
+The anonymous probes:
 - `/`: Umbraco's "no published content" page (`config/splashes/noNodes.aspx`, Web Forms, through Umbraco's module);
 - `/umbraco/`: the back office's page (an MVC view, `BackOfficeController`) with its server variables. Its AngularJS
   client (`lib/`, `js/`, `assets/`) isn't built (below), so in a browser it's a blank page;
@@ -210,6 +223,14 @@ The probes (all anonymous):
 - ClientDependency's composite handler (minifying a stylesheet), that stylesheet as a static file, and the stylesheet
   the setup made (`/css/Smoke.css`).
 
+The verbs (round 0.9.0), the back office's API as its AngularJS client calls it, in one cookie jar: the log-in (a JSON
+POST; the `UMB-XSRF-TOKEN` cookie captured), a page saved and published without the `X-UMB-XSRF-TOKEN` header
+(refused, 417) and with it (the content editor's multipart `Content/PostSave`, `contentItem` as JSON; its id
+captured), the page on the front end at `/` (Umbraco's MVC route with setup's template), saved again under a new name
+(the front end shows it), unpublished (`PostUnPublish`; `/` is the "no nodes" page again), deleted (`DELETE
+Content/DeleteById`; `GetById` shows it trashed) and the recycle bin emptied (`DELETE Content/EmptyRecycleBin`;
+`GetById` is then a 404). A run leaves the database as it found it.
+
 The forbidden paths (`/web.config`, `/bin_dotnet/...`, `App_Data`, ...) are 404s.
 
 Other things seen:
@@ -218,6 +239,8 @@ Other things seen:
   Studio settings class, and webForCore's `ApplicationSettingsBase` throws `TypeLoadException` (F105, webForCore bug).
   Umbraco catches and logs it ("An error occurred in InstallStatus trying to check upgrades"), so the install goes on;
   the back office's upgrade check (`CheckForUpgrade.asmx` → the same client) would fail the same way.
+  Fixed in 0.9.0 (round 0.9.0): the client is made and calls our.umbraco.org, which answers a 301 (Cloudflare) that
+  Umbraco logs under the same message and goes on.
 - Umbraco's log after the install has nothing else but "Umbraco has no content".
 - Locally the machine's inotify limit (128 instances per user, shared with other apps' servers) stopped some runs
   before the application started ("Failed to start monitoring changes"); runs with
@@ -225,12 +248,12 @@ Other things seen:
 
 ## Open problems
 
-- F104, against webForCore-thirdparty ([webForCore-thirdparty#11](https://github.com/xforcore/webForCore-thirdparty/issues/11)):
-  with AutoMapper 12, a member mapped from a value already of its type is mapped again through a base-type map, and
-  the whole configuration fails. Changed in one Umbraco mapping (step 9).
-- F105, webForCore bug ([#154](https://github.com/xforcore/webForCore/issues/154)): `ApplicationSettingsBase` throws;
-  only the install report and the upgrade check use it here.
-- F22: resolved for Umbraco 7 by webForCore-thirdparty 0.6.0's `webForCore.AutoMapperLegacy` (with F104's change).
+- F165, against webForCore-thirdparty (an issue to raise there): the package needs C# 14, whose span conversions
+  change `array.Contains` in expression trees, which Umbraco's SQL visitor rejected. Handled in the visitor (step 10).
+- F104 (fixed in webForCore-thirdparty 0.7.0, [webForCore-thirdparty#11](https://github.com/xforcore/webForCore-thirdparty/issues/11)):
+  the mapping change is gone (step 9).
+- F105 (fixed in 0.9.0, [#154](https://github.com/xforcore/webForCore/issues/154)): `ApplicationSettingsBase`.
+- F22: resolved for Umbraco 7 by webForCore-thirdparty's `webForCore.AutoMapperLegacy`.
 - F65, guide gap ([#94](https://github.com/xforcore/webForCore/issues/94)): named semaphores and events are
   Windows-only on .NET. Worked around in `MainDom.cs` (process-local on Linux).
 - F66, guide gap ([#95](https://github.com/xforcore/webForCore/issues/95)): Log4Net.Async 2.0.4 can't use webForCore's

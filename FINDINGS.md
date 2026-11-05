@@ -169,8 +169,8 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F101](#f101) | `System.Data.Services.Client` isn't on .NET or in the guide; Microsoft.Data.Services.Client 5.8.4 has the same namespace | guide gap | orchard-1.10 | [#149](https://github.com/xforcore/webForCore/issues/149) |
 | [F102](#f102) | Plug-in class libraries built into their own folder lose their NuGet libraries (SDK libraries don't copy packages) | guide gap | orchard-1.10 | [#150](https://github.com/xforcore/webForCore/issues/150) |
 | [F103](#f103) | Orchard's run-time module compilation parses the old `.csproj` format, so it can't read the SDK projects | app/environment | orchard-1.10 | - |
-| [F104](#f104) | webForCore.AutoMapperLegacy on AutoMapper 12: a member mapped from a value already of its type is mapped again through a base-type map, and the whole configuration fails | app/environment (webForCore-thirdparty) | umbraco-7 | [thirdparty#11](https://github.com/xforcore/webForCore-thirdparty/issues/11) |
-| [F105](#f105) | `ApplicationSettingsBase` (Settings.settings, Web Reference SOAP clients) throws `TypeLoadException`: `ConfigurationManagerInternal` is looked up in `System.Configuration` 4.0.0.0 | webForCore bug | umbraco-7 | [#154](https://github.com/xforcore/webForCore/issues/154) |
+| [F104](#f104) | webForCore.AutoMapperLegacy on AutoMapper 12: a member mapped from a value already of its type is mapped again through a base-type map, and the whole configuration fails (fixed in webForCore-thirdparty 0.7.0) | app/environment (webForCore-thirdparty) | umbraco-7 | [thirdparty#11](https://github.com/xforcore/webForCore-thirdparty/issues/11) |
+| [F105](#f105) | `ApplicationSettingsBase` (Settings.settings, Web Reference SOAP clients) throws `TypeLoadException`: `ConfigurationManagerInternal` is looked up in `System.Configuration` 4.0.0.0 (fixed in 0.9.0) | webForCore bug | umbraco-7 | [#154](https://github.com/xforcore/webForCore/issues/154) |
 | [F106](#f106) | webForCore's BinaryFormatter port can't serialize a `System.Type` (.NET Framework writes `UnitySerializationHolder`) | webForCore bug | orchard-1.10 | [#156](https://github.com/xforcore/webForCore/issues/156) |
 | [F116](#f116) | Windows Workflow Foundation 3 (`System.Workflow.*`) isn't on .NET, and the docs and blocker search don't say so | guide gap | composite-c1 | [#132](https://github.com/xforcore/webForCore/issues/132) |
 | [F117](#f117) | Run-time C# compilation in application code (`CodeDomProvider.CreateProvider("c#")`) throws `PlatformNotSupportedException`; no documented replacement | guide gap | composite-c1 | [#133](https://github.com/xforcore/webForCore/issues/133) |
@@ -183,6 +183,8 @@ Repro sites are small enough to paste: a `Program.cs` as in
 | [F131](#f131) | `Thread.ResetAbort()` after `catch (ThreadAbortException)` throws `PlatformNotSupportedException`; the guide doesn't say to remove it | guide gap | dnn-platform-9 | [#143](https://github.com/xforcore/webForCore/issues/143) |
 | [F132](#f132) | An application's design-time classes (`System.Web.UI.Design.ExpressionEditor`, System.Design) don't compile | guide gap | dnn-platform-9 | [#144](https://github.com/xforcore/webForCore/issues/144) |
 | [F133](#f133) | Linux: DNN builds every physical path with `\` (`ApplicationMapPath` is `BaseDirectory.Replace("/", "\\")`), and QuickIO.NET is Win32 | app/environment | dnn-platform-9 | – |
+| [F164](#f164) | The guide adds `UseAspNetCoreSessionProvider()` (out-of-process, serialized session state) to every app that uses `Session`; an `InProc` app with values that aren't serializable (MVC `TempData`) fails | guide gap | mvcforum | to raise |
+| [F165](#f165) | webForCore.AutoMapperLegacy needs C# 14, so F83's `<LangVersion>` fix can't be used: `array.Contains(x)` in an expression tree becomes `MemoryExtensions.Contains(op_Implicit(array), x)`, which Umbraco 7's SQL expression visitor rejects | app/environment (webForCore-thirdparty) | umbraco-7 | to raise (thirdparty) |
 ---
 
 ## F1
@@ -2043,7 +2045,8 @@ mapped again, through a map between base types of its elements, and the whole co
 for webForCore (it isn't webForCore's: AutoMapper 12's behaviour, which webForCore-thirdparty's compatibility package
 passes through). Raised as
 [xforcore/webForCore-thirdparty#11](https://github.com/xforcore/webForCore-thirdparty/issues/11). Found on webForCore
-0.8.0 with webForCore-thirdparty 0.6.0 (Linux).
+0.8.0 with webForCore-thirdparty 0.6.0 (Linux). **Fixed in webForCore-thirdparty 0.7.0** (round 0.9.0: umbraco-7's
+workaround below is gone, and it installs and passes every probe without it).
 
 - **Apps:** umbraco-7. `ContentTypeModelMapperExtensions.MapPropertyGroupBasicToPropertyGroupDisplay` maps
   `PropertyGroupBasic<MemberPropertyTypeBasic>` to `PropertyGroupDisplay<MemberPropertyTypeDisplay>` with
@@ -2084,7 +2087,9 @@ passes through). Raised as
 
 **`ApplicationSettingsBase` throws `TypeLoadException`, so a Visual Studio settings class (`Settings.settings`, and every
 "Web Reference" SOAP client, which reads its URL from one) can't read a setting.** webForCore bug. Raised as
-[#154](https://github.com/xforcore/webForCore/issues/154). Found on 0.8.0 (Linux).
+[#154](https://github.com/xforcore/webForCore/issues/154). Found on 0.8.0 (Linux). **Fixed in 0.9.0:** in round 0.9.0 umbraco-7's
+install report gets as far as calling our.umbraco.org with the SOAP client (which answers a Cloudflare 301, logged and
+ignored by Umbraco, as on .NET Framework without that site).
 
 - **Apps:** umbraco-7: `InstallHelper.InstallStatus`, in the installer's last step, creates
   `org.umbraco.update.CheckForUpgrade` (a Web Reference client), whose constructor reads
@@ -2353,3 +2358,32 @@ out-of-process: values that aren't serializable (MVC `TempData` of a view model)
   was out of process on IIS (`mode="StateServer"`, `"SQLServer"`, `"Custom"`) or to scale out; an `InProc` app keeps
   in-process session state, and needs its session values serializable before it moves to the provider. The symptom
   belongs in the Phase 3 table.
+
+## F165
+
+**webForCore.AutoMapperLegacy needs C# 14, so F83's fix (`<LangVersion>`) isn't open to its users: `array.Contains(x)`
+in an expression tree binds to `MemoryExtensions.Contains(ReadOnlySpan<T>, T)`, which LINQ providers and an app's own
+expression visitors don't know.** App/environment (webForCore-thirdparty). Found on webForCore 0.9.0 with
+webForCore-thirdparty 0.7.0 (Linux; the code is platform-independent), with Umbraco 7.15.
+
+- **Apps:** umbraco-7: 1. Saving content through the back office (its content editor's `PostSave`) was a 500 before the
+  action ran: `ContentPostValidateAttribute` checks the user's permissions with
+  `.Where<UserGroup2NodePermissionDto>(dto => localIds.Contains(dto.UserGroupId) && ...)` (`int[] localIds`), and
+  Umbraco's `ExpressionVisitorBase` turns that into SQL. The probes before round 0.9.0 made no content, so it wasn't
+  reached. Every Umbraco query with an array's `Contains` goes through the same visitor.
+- **Error:** `ArgumentOutOfRangeException: Specified argument was out of the range of valid values. (Parameter 'No logic
+  supported for op_Implicit')` at `Umbraco.Core.Persistence.Querying.ExpressionVisitorBase.VisitMethodCall` ←
+  `PetaPocoSqlExtensions.Where` ← `PermissionRepository.GetPermissionsForEntities`.
+- **Cause:** the package's README (step 3) says the project needs C# 14 (3.x's `ResolutionContext.SourceValue` and the
+  rest are extension properties) and that an old `<LangVersion>` has to go. C# 14's first-class span conversions bind
+  `array.Contains(x)` to `MemoryExtensions.Contains(ReadOnlySpan<T>, T)`, through `op_Implicit`, inside expression trees
+  too (F83). webForCore's guide avoids that by pinning `<LangVersion>` (7.3, or 13), which a project using the facade
+  can't.
+- **What worked:** in the app, Umbraco's visitor reads `MemoryExtensions.Contains(op_Implicit(array), x)` as
+  `Enumerable.Contains(array, x)` (a 14-line change at the top of `VisitMethodCall`), so it builds its `IN (...)` as it
+  did with C# 7.3. Content is then created, published, edited, unpublished, deleted and the recycle bin emptied
+  through the back-office API.
+- **Suggested fix (webForCore-thirdparty):** say in the README, next to step 3, that C# 14 changes `array.Contains` in
+  expression trees, so LINQ to Entities (EF 6), LINQ to SQL and an app's own visitors need either the array cast to
+  `IEnumerable<T>` at those calls or a visitor that maps the span call back; and name Umbraco 7's visitor among the
+  changes its Umbraco 7 note lists.
