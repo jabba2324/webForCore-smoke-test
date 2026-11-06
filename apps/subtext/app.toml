@@ -161,3 +161,23 @@ method = "POST"
 content_type = "text/xml"
 body = "<?xml version=\"1.0\"?><methodCall><methodName>metaWeblog.getPost</methodName><params><param><value><string>{post}</string></value></param><param><value><string>smokeadmin</string></value></param><param><value><string>Smoke_test_1234</string></value></param></params></methodCall>"
 contains = "The entry could not be found"
+
+# Subtext's Web.config sends every 404 by <httpErrors> ExecuteURL to /Subtext.Web/pages/SystemMessages/FileNotFound.aspx
+# (its developers' folder; the page doesn't exist), and its BlogRequestModule answers that child request with a
+# permanent redirect. IIS 10 answers request filtering's 404.8 with that page's status, and so does webForCore from 0.10.0
+# (#192; webForCore PR #218 compares it with IIS): a 301 "Object moved" page. The file itself is never served.
+[forbidden."/App_Data/"]
+status = 301
+contains = "Object moved"
+
+[forbidden."/obj/"]
+status = 301
+contains = "Object moved"
+
+[forbidden."/bin_dotnet/Subtext.Web.dll"]
+status = 301
+contains = "Object moved"
+
+[forbidden."/bin_dotnet/webforcore-host/webforcore-host.dll"]
+status = 301
+contains = "Object moved"

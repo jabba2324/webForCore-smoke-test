@@ -77,10 +77,10 @@ index 730c84c..6e332a9 100644
 -    <Compile Include="Repositories\IIdentityRepository.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.10.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.10.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.10.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -329,16 +329,16 @@ index 3b582cb..467a454 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.SignalR.SystemWeb" Version="0.9.0" />
-+    <PackageReference Include="webForCore.WebGrease" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.10.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.10.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.10.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.10.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.OAuth" Version="0.10.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Owin" Version="0.10.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.Identity.Core" Version="0.10.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.SignalR.SystemWeb" Version="0.10.0" />
++    <PackageReference Include="webForCore.WebGrease" Version="0.10.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -2449,7 +2449,7 @@ index 2a228db..5c2254d 100644
 -    <Compile Include="IDbConnectionFactory.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -2612,7 +2612,7 @@ index da259b5..eb050f7 100644
 -    <Compile Include="Infrastructure\SqlConnectionFactory.cs" />
 -    <Compile Include="UsersRepository.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -2810,7 +2810,7 @@ index 82ade75..3f077f3 100644
 -      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 -    </Content>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -3756,7 +3756,7 @@ index 3e82448..ac7ec1c 100644
 -      <Name>Shared.Extensions</Name>
 -    </ProjectReference>
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -3968,7 +3968,7 @@ index 68c3c10..54dc53e 100644
 -    <Compile Include="TimeSpan\ToLocalizedLabel.cs" />
 -    <Compile Include="TimeSpan\ToTimeZone.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
    </ItemGroup>
 -  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 -</Project>
@@ -4121,7 +4121,7 @@ index 99741f1..78dde5e 100644
 -    <Compile Include="AzureStorageService.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -4333,7 +4333,7 @@ index d4f3629..c5596d1 100644
 -    <Compile Include="CloudinaryThumbService.cs" />
 -    <Compile Include="ICloudinaryThumbService.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -4501,7 +4501,7 @@ index e347155..e95ae2d 100644
 -    <Compile Include="DynamicTextImage.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -4647,7 +4647,7 @@ index c396024..bd2471c 100644
 -    <Compile Include="FileSystemStorageService.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -4792,7 +4792,7 @@ index 3df9d43..c4f3229 100644
 -    <Compile Include="MailGunApiEmailDispatcherService.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -4970,7 +4970,7 @@ index 6ac360f..cb9a0bf 100644
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 -    <Compile Include="SystemNetSmtpEmailDispatcherService.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -5120,7 +5120,7 @@ index a5645d5..30b6bcb 100644
 -    <Compile Include="MimeTypeMap.cs" />
 -    <Compile Include="Properties\AssemblyInfo.cs" />
 +    <!-- webForCore 0.4.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
    </ItemGroup>
 +
    <ItemGroup>

@@ -3,6 +3,10 @@
 Status: blocked by DotNetOpenAuth on the log-in page (F44): 27/28 probes on Linux and Windows, webForCore 0.9.0. Source: https://github.com/haacked/Subtext at `87a2d90d`. Found by searching GitHub on 2026-10-31; the
 repo, licence (MIT), web project and its `<TargetFrameworkVersion>` were checked through the GitHub API.
 
+Round 0.10.0: the forbidden paths `/App_Data/`, `/obj/` and the two `bin_dotnet` assemblies answer 301 "Object moved" from
+Subtext's own `<httpErrors>` ExecuteURL page (a path that doesn't exist, which its BlogRequestModule redirects), as
+IIS 10 does; webForCore 0.9.0 answered 404. app.toml's `[forbidden]` overrides expect that; nothing is served.
+
 Round 3b, on webForCore 0.4.0 and webForCore-thirdparty 0.4.0. It also uses `webForCore.WebActivator` 0.4.1, a build of
 WebActivator 1.5 added to webForCore-thirdparty for this app
 ([xforcore/webForCore-thirdparty#1](https://github.com/xforcore/webForCore-thirdparty/pull/1), not released yet). Until

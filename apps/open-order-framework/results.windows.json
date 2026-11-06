@@ -2,25 +2,25 @@
   "id": "open-order-framework",
   "stages": {
     "build": {
-      "at": "2026-11-05T13:25:58+00:00",
+      "at": "2026-11-06T07:57:24+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\open-order-framework\\logs.windows\\build.log",
-      "seconds": 46,
+      "seconds": 29,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.9.0"
+      "webforcore": "packages 0.10.0"
     },
     "fetch": {
-      "at": "2026-11-05T13:25:12+00:00",
+      "at": "2026-11-06T07:56:54+00:00",
       "commit": "a6e2573643507b83db3c4b5921153737229b0200",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-05T13:31:08+00:00",
+      "at": "2026-11-06T08:02:38+00:00",
       "created": [],
-      "date": "2026-11-05",
+      "date": "2026-11-06",
       "status": "pass",
       "steps": [
         {
@@ -47,117 +47,117 @@
       "summary": "3/4 steps, 1 allowed to fail"
     },
     "smoke": {
-      "at": "2026-11-05T13:31:17+00:00",
+      "at": "2026-11-06T08:02:49+00:00",
       "checks": [
         {
-          "ms": 27,
+          "ms": 20,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 827,
+          "ms": 908,
           "ok": true,
           "path": "/Store",
           "status": 200
         },
         {
-          "ms": 81,
+          "ms": 84,
           "ok": true,
           "path": "/ShoppingCart",
           "status": 200
         },
         {
-          "ms": 1225,
+          "ms": 1269,
           "ok": true,
           "path": "/Account/Login",
-          "status": 200
-        },
-        {
-          "ms": 21,
-          "ok": true,
-          "path": "/Account/Register",
           "status": 200
         },
         {
           "ms": 23,
           "ok": true,
+          "path": "/Account/Register",
+          "status": 200
+        },
+        {
+          "ms": 27,
+          "ok": true,
           "path": "/Content/Site.css",
           "status": 200
         },
         {
-          "ms": 12,
+          "ms": 16,
           "ok": true,
           "path": "/Account/Login",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 244,
+          "ms": 306,
           "ok": true,
           "path": "/Account/Login",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 77,
+          "ms": 136,
           "ok": true,
           "path": "/Account/Login",
           "status": 302
         },
         {
-          "ms": 453,
+          "ms": 543,
           "ok": true,
           "path": "/Manage/ChangePassword",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 183,
+          "ms": 232,
           "ok": true,
           "path": "/Manage/ChangePassword",
           "status": 302
         },
         {
-          "ms": 37,
+          "ms": 35,
           "ok": true,
           "path": "/Manage?Message=ChangePasswordSuccess",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 24,
+          "ms": 21,
           "ok": true,
           "path": "/Manage/ChangePassword",
           "status": 302
         },
         {
-          "ms": 342,
+          "ms": 507,
           "ok": true,
           "path": "/Checkout/AddressAndPayment",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 9,
+          "ms": 8,
           "ok": true,
           "path": "/Account/LogOff",
           "status": 302
         },
         {
-          "ms": 13,
+          "ms": 15,
           "ok": true,
           "path": "/Checkout/AddressAndPayment",
           "status": 302
         },
         {
-          "ms": 10,
+          "ms": 7,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404

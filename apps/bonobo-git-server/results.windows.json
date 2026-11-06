@@ -2,167 +2,167 @@
   "id": "bonobo-git-server",
   "stages": {
     "build": {
-      "at": "2026-11-05T13:19:39+00:00",
+      "at": "2026-11-06T07:49:57+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\bonobo-git-server\\logs.windows\\build.log",
-      "seconds": 59,
+      "seconds": 49,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.9.0, webForCore-thirdparty 0.7.0"
+      "webforcore": "packages 0.10.0, webForCore-thirdparty 0.7.0"
     },
     "fetch": {
-      "at": "2026-11-05T13:18:39+00:00",
+      "at": "2026-11-06T07:49:08+00:00",
       "commit": "6277ecfe1015b4612795bf8bb0f03ae2dd25b1ad",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-05T13:20:00+00:00",
+      "at": "2026-11-06T07:50:18+00:00",
       "checks": [
         {
-          "ms": 2938,
+          "ms": 2865,
           "ok": true,
           "path": "/Home/LogOn",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 102,
+          "ms": 105,
           "ok": true,
           "path": "/Home/LogOn",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 35,
+          "ms": 31,
           "ok": true,
           "path": "/Home/LogOn",
           "status": 302
         },
         {
-          "ms": 450,
+          "ms": 536,
           "ok": true,
           "path": "/Account/Create",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 116,
+          "ms": 123,
           "ok": true,
           "path": "/Account/Create",
           "status": 302
         },
         {
-          "ms": 106,
+          "ms": 107,
           "ok": true,
           "path": "/Account/Index",
           "status": 200
         },
         {
-          "ms": 50,
+          "ms": 46,
           "ok": true,
           "path": "/Account/Edit/{user}",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 100,
+          "ms": 86,
           "ok": true,
           "path": "/Account/Edit/{user}",
           "status": 200
         },
         {
-          "ms": 27,
+          "ms": 22,
           "ok": true,
           "path": "/Account/Detail/{user}",
           "status": 200
         },
         {
-          "ms": 24,
+          "ms": 19,
           "ok": true,
           "path": "/Account/Delete/{user}",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 94,
+          "ms": 55,
           "ok": true,
           "path": "/Account/Delete/{user}",
           "status": 302
         },
         {
-          "ms": 21,
+          "ms": 18,
           "ok": true,
           "path": "/Account/Index",
           "status": 200
         },
         {
-          "ms": 359,
+          "ms": 446,
           "ok": true,
           "path": "/Team/Create",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 32,
+          "ms": 29,
           "ok": true,
           "path": "/Team/Create",
           "status": 302
         },
         {
-          "ms": 47,
+          "ms": 43,
           "ok": true,
           "path": "/Team/Index",
           "status": 200
         },
         {
-          "ms": 30,
+          "ms": 28,
           "ok": true,
           "path": "/Team/Delete/{team}",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 30,
+          "ms": 27,
           "ok": true,
           "path": "/Team/Delete/{team}",
           "status": 302
         },
         {
-          "ms": 20,
+          "ms": 16,
           "ok": true,
           "path": "/Team/Index",
           "status": 200
         },
         {
-          "ms": 821,
+          "ms": 1020,
           "ok": true,
           "path": "/Repository/Create",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 80,
+          "ms": 82,
           "ok": true,
           "path": "/Repository/Create",
           "status": 302
         },
         {
-          "ms": 70,
+          "ms": 63,
           "ok": true,
           "path": "/Repository/Index",
           "status": 200
         },
         {
-          "ms": 110,
+          "ms": 72,
           "ok": true,
           "path": "/Repository/Detail/{repo}",
           "status": 200
         },
         {
           "expected_text": "# service=git-upload-pack",
-          "ms": 69,
+          "ms": 59,
           "ok": false,
           "path": "/smoke-repo.git/info/refs?service=git-upload-pack",
           "status": 500,
@@ -171,63 +171,63 @@
         {
           "expected_text": "not our ref",
           "method": "POST",
-          "ms": 39,
+          "ms": 37,
           "ok": false,
           "path": "/smoke-repo.git/git-upload-pack",
           "status": 500,
           "title": "System.ComponentModel.Win32Exception (2): An error occurred trying to start process '/usr/bin/git' with working directory 'D:\\w\\bonobo-git-server\\Bonobo.Git.Server\\App_Data'. The system cannot find the file specified.\r\n   at System.Diagnostics.Process.StartWithCreateProcess(ProcessStartInfo startInf"
         },
         {
-          "ms": 30,
+          "ms": 31,
           "ok": true,
           "path": "/Repository/Delete/{repo}",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 39,
+          "ms": 38,
           "ok": true,
           "path": "/Repository/Delete/{repo}",
           "status": 302
         },
         {
-          "ms": 19,
+          "ms": 17,
           "ok": true,
           "path": "/Repository/Index",
           "status": 200
         },
         {
-          "ms": 8,
+          "ms": 5,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 2,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 2,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 2,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 25,
+          "ms": 18,
           "ok": true,
           "path": "/packages.config",
           "status": 200
         },
         {
-          "ms": 3,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/Bonobo.Git.Server.dll",
           "status": 404

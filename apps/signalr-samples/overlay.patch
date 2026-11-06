@@ -124,8 +124,8 @@ index 06307ce1..32e16398 100644
    <ItemGroup>
 -    <ProjectReference Include="..\..\src\Microsoft.AspNet.SignalR.Core\Microsoft.AspNet.SignalR.Core.csproj" />
 +    <!-- Was a project reference to SignalR's own Microsoft.AspNet.SignalR.Core (this repository's source). -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Microsoft.AspNet.SignalR.Core" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.SignalR.Core" Version="0.10.0" />
    </ItemGroup>
 -  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 -  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -739,13 +739,13 @@ index 2994b376..855ca833 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Web.Cors" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Microsoft.Owin.Cors" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
++    <PackageReference Include="webForCore.Web.Cors" Version="0.10.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Host.SystemWeb" Version="0.10.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Security.Cookies" Version="0.10.0" />
++    <PackageReference Include="webForCore.Microsoft.Owin.Cors" Version="0.10.0" />
 +    <!-- Was a project reference to SignalR's own Microsoft.AspNet.SignalR.Core (this repository's source). -->
-+    <PackageReference Include="webForCore.Microsoft.AspNet.SignalR.SystemWeb" Version="0.9.0" />
++    <PackageReference Include="webForCore.Microsoft.AspNet.SignalR.SystemWeb" Version="0.10.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>

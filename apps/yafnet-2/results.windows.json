@@ -2,25 +2,25 @@
   "id": "yafnet-2",
   "stages": {
     "build": {
-      "at": "2026-11-05T13:02:09+00:00",
+      "at": "2026-11-06T07:58:29+00:00",
       "error_count": 1,
       "errors": [
         "error CS0246: The type or namespace name 'NetStandardPclExport' could not be found (are you missing a using directive or an assembly reference?) "
       ],
       "log": "apps\\yafnet-2\\logs.windows\\build.log",
-      "seconds": 50,
+      "seconds": 58,
       "status": "fail",
       "summary": "1 distinct errors",
-      "webforcore": "packages 0.9.0"
+      "webforcore": "packages 0.10.0"
     },
     "fetch": {
-      "at": "2026-11-05T13:01:18+00:00",
+      "at": "2026-11-06T07:57:30+00:00",
       "commit": "7435be389709e493854b09cdc622115e537544b8",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-05T13:02:10+00:00",
+      "at": "2026-11-06T07:58:30+00:00",
       "status": "skip",
       "summary": "not built ($WFC_CHECKOUTS/yafnet-2/yafsrc/YetAnotherForum.NET/bin_dotnet/YAF.dll missing)"
     }

@@ -19,78 +19,78 @@
       ]
     },
     "build": {
-      "at": "2026-11-05T12:34:34+00:00",
+      "at": "2026-11-06T07:49:29+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/aspnet-samples-webapi-bson/logs/build.log",
-      "seconds": 9,
+      "seconds": 10,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.9.0"
+      "webforcore": "packages 0.10.0"
     },
     "fetch": {
-      "at": "2026-11-05T12:34:25+00:00",
+      "at": "2026-11-06T07:49:18+00:00",
       "commit": "f7d4a776327df09c13b39489b122209c5d04693b",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-05T12:34:55+00:00",
+      "at": "2026-11-06T07:49:51+00:00",
       "checks": [
         {
-          "ms": 12,
+          "ms": 11,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 905,
+          "ms": 918,
           "ok": true,
           "path": "/Help",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 11138,
+          "ms": 11581,
           "ok": true,
           "path": "/api/MyData",
           "status": 201
         },
         {
-          "ms": 162,
+          "ms": 195,
           "ok": true,
           "path": "/api/MyData/{item}",
           "status": 200
         },
         {
-          "ms": 10,
+          "ms": 13,
           "ok": true,
           "path": "/api/MyData/{item}",
           "status": 200
         },
         {
           "method": "PUT",
-          "ms": 15,
+          "ms": 16,
           "ok": true,
           "path": "/api/MyData/{item}",
           "status": 204
         },
         {
-          "ms": 10,
+          "ms": 12,
           "ok": true,
           "path": "/api/MyData",
           "status": 200
         },
         {
           "method": "PUT",
-          "ms": 3,
+          "ms": 4,
           "ok": true,
           "path": "/api/MyData/{item}",
           "status": 400
         },
         {
           "method": "DELETE",
-          "ms": 9,
+          "ms": 10,
           "ok": true,
           "path": "/api/MyData/{item}",
           "status": 200
@@ -108,7 +108,7 @@
           "status": 200
         },
         {
-          "ms": 6,
+          "ms": 5,
           "ok": true,
           "path": "/web.config",
           "status": 404
@@ -120,13 +120,13 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/obj/",
           "status": 404
@@ -138,7 +138,7 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/BSONSample.dll",
           "status": 404
