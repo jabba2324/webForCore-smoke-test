@@ -61,27 +61,27 @@
       ]
     },
     "build": {
-      "at": "2026-11-05T13:01:23+00:00",
+      "at": "2026-11-06T07:50:31+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/carrotcake-cms-mvc/logs/build.log",
-      "seconds": 19,
+      "seconds": 27,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.9.0"
+      "webforcore": "packages 0.10.0"
     },
     "fetch": {
-      "at": "2026-11-05T13:01:04+00:00",
+      "at": "2026-11-06T07:50:03+00:00",
       "commit": "bfc5c38eba9564824a1c58d6ccd935a3755a2d61",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-05T13:01:35+00:00",
+      "at": "2026-11-06T07:50:49+00:00",
       "created": [
         "CarrotCakeMVC"
       ],
-      "date": "2026-11-05",
+      "date": "2026-11-06",
       "status": "pass",
       "steps": [
         {
@@ -118,51 +118,64 @@
       "summary": "6/6 steps"
     },
     "smoke": {
-      "at": "2026-11-05T13:01:41+00:00",
+      "at": "2026-11-06T07:50:57+00:00",
       "checks": [
         {
-          "ms": 52,
+          "ms": 77,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 111,
+          "ms": 166,
           "ok": true,
           "path": "/index",
           "status": 200
         },
         {
-          "ms": 58,
+          "ms": 77,
           "ok": true,
           "path": "/rss.ashx",
           "status": 200
         },
         {
-          "ms": 13,
+          "ms": 16,
           "ok": true,
           "path": "/carrotwarewebresource.ashx?r=Q2Fycm90d2FyZS5XZWIuVUkuQ29tcG9uZW50cy5qcXVlcnliYXNpYy5qcXVlcnktdWktbGlnaHRncmVlbi5jc3M6Q2Fycm90d2FyZS5XZWIuVUkuQ29tcG9uZW50cy5kbGw=",
           "status": 200
         },
         {
-          "ms": 46,
+          "ms": 50,
           "ok": true,
           "path": "/c3-admin/Login",
           "status": 200
         },
         {
-          "ms": 6,
+          "ms": 8,
           "ok": true,
           "path": "/c3-admin/",
           "status": 302
         },
         {
-          "ms": 13,
+          "ms": 20,
           "ok": true,
           "path": "/Assets/Admin/skins/logon.classic.min.css",
           "status": 200
         },
         {
+          "ms": 10,
+          "ok": true,
+          "path": "/c3-admin/Login",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 1015,
+          "ok": true,
+          "path": "/c3-admin/Login",
+          "status": 200
+        },
+        {
           "ms": 7,
           "ok": true,
           "path": "/c3-admin/Login",
@@ -170,121 +183,83 @@
         },
         {
           "method": "POST",
-          "ms": 724,
-          "ok": true,
-          "path": "/c3-admin/Login",
-          "status": 200
-        },
-        {
-          "ms": 5,
-          "ok": true,
-          "path": "/c3-admin/Login",
-          "status": 200
-        },
-        {
-          "method": "POST",
-          "ms": 53,
+          "ms": 74,
           "ok": true,
           "path": "/c3-admin/Login",
           "status": 302
         },
         {
-          "ms": 70,
+          "ms": 85,
           "ok": true,
           "path": "/c3-admin/CategoryAddEdit",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 34,
+          "ms": 50,
           "ok": true,
           "path": "/c3-admin/CategoryAddEdit",
           "status": 302
         },
         {
-          "ms": 7,
+          "ms": 11,
           "ok": true,
           "path": "/c3-admin/CategoryAddEdit/{category}",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 22,
+          "ms": 30,
           "ok": true,
           "path": "/c3-admin/CategoryAddEdit/{category}",
           "status": 302
         },
         {
-          "ms": 23,
+          "ms": 31,
           "ok": true,
           "path": "/c3-admin/CategoryIndex",
           "status": 200
         },
         {
-          "ms": 5,
+          "ms": 7,
           "ok": true,
           "path": "/c3-admin/CategoryAddEdit/{category}",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 21,
+          "ms": 32,
           "ok": true,
           "path": "/c3-admin/CategoryDelete",
           "status": 302
         },
         {
-          "ms": 7,
+          "ms": 11,
           "ok": true,
           "path": "/c3-admin/CategoryIndex",
           "status": 200
         },
         {
-          "ms": 154,
+          "ms": 166,
           "ok": true,
           "path": "/c3-admin/BlogPostAddEdit",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 63,
+          "ms": 84,
           "ok": true,
           "path": "/c3-admin/BlogPostAddEdit",
           "status": 302
         },
         {
-          "ms": 96,
+          "ms": 149,
           "ok": true,
           "path": "/2026/01/02/smoke-probe-post",
           "status": 200
         },
         {
-          "ms": 55,
-          "ok": true,
-          "path": "/c3-admin/BlogPostAddEdit/{post}?mode=html",
-          "status": 200
-        },
-        {
-          "method": "POST",
-          "ms": 52,
-          "ok": true,
-          "path": "/c3-admin/BlogPostAddEdit/{post}?mode=html",
-          "status": 302
-        },
-        {
-          "ms": 55,
-          "ok": true,
-          "path": "/2026/01/02/smoke-probe-post",
-          "status": 200
-        },
-        {
-          "ms": 91,
-          "ok": true,
-          "path": "/archive/search?query=probe",
-          "status": 200
-        },
-        {
-          "ms": 23,
+          "ms": 69,
           "ok": true,
           "path": "/c3-admin/BlogPostAddEdit/{post}?mode=html",
           "status": 200
@@ -293,36 +268,61 @@
           "method": "POST",
           "ms": 74,
           "ok": true,
+          "path": "/c3-admin/BlogPostAddEdit/{post}?mode=html",
+          "status": 302
+        },
+        {
+          "ms": 75,
+          "ok": true,
+          "path": "/2026/01/02/smoke-probe-post",
+          "status": 200
+        },
+        {
+          "ms": 209,
+          "ok": true,
+          "path": "/archive/search?query=probe",
+          "status": 200
+        },
+        {
+          "ms": 43,
+          "ok": true,
+          "path": "/c3-admin/BlogPostAddEdit/{post}?mode=html",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 146,
+          "ok": true,
           "path": "/c3-admin/DeleteContentPage",
           "status": 302
         },
         {
-          "ms": 37,
+          "ms": 60,
           "ok": true,
           "path": "/c3-admin/BlogPostIndex",
           "status": 200
         },
         {
-          "ms": 378,
+          "ms": 428,
           "ok": true,
           "path": "/c3-admin/SiteInfo",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 7,
+          "ms": 6,
           "ok": true,
           "path": "/c3-admin/LogOff",
           "status": 302
         },
         {
-          "ms": 3,
+          "ms": 4,
           "ok": true,
           "path": "/c3-admin/",
           "status": 302
         },
         {
-          "ms": 5,
+          "ms": 10,
           "ok": true,
           "path": "/web.config",
           "status": 404
@@ -334,7 +334,7 @@
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 1,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
@@ -352,7 +352,7 @@
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/Carrotware.CMS.Mvc.UI.Admin.dll",
           "status": 404

@@ -18,25 +18,25 @@
       ]
     },
     "build": {
-      "at": "2026-11-05T12:35:45+00:00",
+      "at": "2026-11-06T07:53:34+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/aspnet-samples-webapi-webforms/logs/build.log",
-      "seconds": 10,
+      "seconds": 8,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.9.0"
+      "webforcore": "packages 0.10.0"
     },
     "fetch": {
-      "at": "2026-11-05T12:35:34+00:00",
+      "at": "2026-11-06T07:53:26+00:00",
       "commit": "f7d4a776327df09c13b39489b122209c5d04693b",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-05T12:36:03+00:00",
+      "at": "2026-11-06T07:53:52+00:00",
       "created": [],
-      "date": "2026-11-05",
+      "date": "2026-11-06",
       "status": "pass",
       "steps": [
         {
@@ -48,28 +48,28 @@
       "summary": "1/1 steps"
     },
     "smoke": {
-      "at": "2026-11-05T12:36:08+00:00",
+      "at": "2026-11-06T07:53:58+00:00",
       "checks": [
         {
-          "ms": 17,
+          "ms": 13,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 16,
+          "ms": 10,
           "ok": true,
           "path": "/About.aspx",
           "status": 200
         },
         {
-          "ms": 15,
+          "ms": 16,
           "ok": true,
           "path": "/Account/ChangePassword.aspx",
           "status": 302
         },
         {
-          "ms": 847,
+          "ms": 939,
           "ok": true,
           "path": "/api/values",
           "status": 200
@@ -90,26 +90,26 @@
         },
         {
           "method": "DELETE",
-          "ms": 5,
+          "ms": 4,
           "ok": true,
           "path": "/api/values/5",
           "status": 204
         },
         {
-          "ms": 5,
+          "ms": 4,
           "ok": true,
           "path": "/api/values/5",
           "status": 200
         },
         {
-          "ms": 57,
+          "ms": 63,
           "ok": true,
           "path": "/Account/Register.aspx",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 1100,
+          "ms": 1238,
           "ok": true,
           "path": "/Account/Register.aspx",
           "status": 200
@@ -122,20 +122,20 @@
         },
         {
           "method": "POST",
-          "ms": 123,
+          "ms": 127,
           "ok": true,
           "path": "/Account/Login.aspx",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 29,
+          "ms": 14,
           "ok": true,
           "path": "/Account/Login.aspx",
           "status": 302
         },
         {
-          "ms": 10,
+          "ms": 9,
           "ok": true,
           "path": "/",
           "status": 200
@@ -148,7 +148,7 @@
         },
         {
           "method": "POST",
-          "ms": 52,
+          "ms": 48,
           "ok": true,
           "path": "/Account/ChangePassword.aspx",
           "status": 302
@@ -168,13 +168,13 @@
         },
         {
           "method": "POST",
-          "ms": 10,
+          "ms": 9,
           "ok": true,
           "path": "/Account/LoginAjax.aspx",
           "status": 200
         },
         {
-          "ms": 4,
+          "ms": 3,
           "ok": true,
           "path": "/Account/ChangePassword.aspx",
           "status": 200
@@ -194,7 +194,7 @@
           "status": 200
         },
         {
-          "ms": 6,
+          "ms": 5,
           "ok": true,
           "path": "/web.config",
           "status": 404
@@ -224,7 +224,7 @@
           "status": 404
         },
         {
-          "ms": 3,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/WebForm.dll",
           "status": 404

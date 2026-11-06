@@ -16,26 +16,26 @@
       ]
     },
     "build": {
-      "at": "2026-11-05T12:37:06+00:00",
+      "at": "2026-11-06T07:50:15+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/aspnet-samples-katana-helloworld/logs/build.log",
       "seconds": 8,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.9.0"
+      "webforcore": "packages 0.10.0"
     },
     "fetch": {
-      "at": "2026-11-05T12:36:57+00:00",
+      "at": "2026-11-06T07:50:06+00:00",
       "commit": "f7d4a776327df09c13b39489b122209c5d04693b",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-05T12:37:10+00:00",
+      "at": "2026-11-06T07:50:19+00:00",
       "checks": [
         {
-          "ms": 13,
+          "ms": 10,
           "ok": true,
           "path": "/",
           "status": 200
@@ -48,7 +48,7 @@
         },
         {
           "method": "POST",
-          "ms": 8,
+          "ms": 9,
           "ok": true,
           "path": "/form",
           "status": 200

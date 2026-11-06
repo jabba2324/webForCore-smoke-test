@@ -29,27 +29,27 @@
       ]
     },
     "build": {
-      "at": "2026-11-05T13:08:26+00:00",
+      "at": "2026-11-06T08:01:26+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/subtext/logs/build.log",
-      "seconds": 23,
+      "seconds": 21,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.9.0"
+      "webforcore": "packages 0.10.0"
     },
     "fetch": {
-      "at": "2026-11-05T13:08:03+00:00",
+      "at": "2026-11-06T08:01:05+00:00",
       "commit": "87a2d90dae02022471cd52aa5f3004f778cc4c0b",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-05T13:08:44+00:00",
+      "at": "2026-11-06T08:01:44+00:00",
       "created": [
         "SubtextData"
       ],
-      "date": "2026-11-05",
+      "date": "2026-11-06",
       "status": "pass",
       "steps": [
         {
@@ -71,35 +71,35 @@
       "summary": "3/3 steps"
     },
     "smoke": {
-      "at": "2026-11-05T13:08:52+00:00",
+      "at": "2026-11-06T08:01:51+00:00",
       "checks": [
         {
-          "ms": 17,
+          "ms": 19,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 161,
+          "ms": 132,
           "ok": true,
           "path": "/archive/{setup_date}/welcome-to-subtext.aspx",
           "status": 200
         },
         {
-          "ms": 22,
+          "ms": 15,
           "ok": true,
           "path": "/archives.aspx",
           "status": 200
         },
         {
-          "ms": 17,
+          "ms": 12,
           "ok": true,
           "path": "/contact.aspx",
           "status": 200
         },
         {
           "expected_text": "Sign In with OpenID",
-          "ms": 66,
+          "ms": 76,
           "ok": false,
           "path": "/login.aspx",
           "stack": [
@@ -110,91 +110,91 @@
           "title": "Object reference not set to an instance of an object."
         },
         {
-          "ms": 3040,
+          "ms": 2227,
           "ok": true,
           "path": "/admin/default.aspx",
           "status": 302
         },
         {
-          "ms": 24,
+          "ms": 20,
           "ok": true,
           "path": "/rss.aspx",
           "status": 200
         },
         {
-          "ms": 657,
+          "ms": 586,
           "ok": true,
           "path": "/wlwmanifest.xml.ashx",
           "status": 200
         },
         {
-          "ms": 13,
+          "ms": 9,
           "ok": true,
           "path": "/opensearchdesc.xml.ashx",
           "status": 200
         },
         {
-          "ms": 19,
+          "ms": 16,
           "ok": true,
           "path": "/css/lightbox.css",
           "status": 200
         },
         {
-          "ms": 8,
+          "ms": 7,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 24,
+          "ms": 19,
           "ok": true,
           "path": "/",
           "status": 302
         },
         {
           "method": "POST",
-          "ms": 30,
+          "ms": 27,
           "ok": true,
           "path": "/services/metablogapi.aspx",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 109,
+          "ms": 388,
           "ok": true,
           "path": "/services/metablogapi.aspx",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 10,
+          "ms": 8,
           "ok": true,
           "path": "/services/metablogapi.aspx",
           "status": 200
         },
         {
-          "ms": 20,
+          "ms": 11,
           "ok": true,
           "path": "{link}",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 36,
+          "ms": 38,
           "ok": true,
           "path": "/services/metablogapi.aspx",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 9,
+          "ms": 6,
           "ok": true,
           "path": "/services/metablogapi.aspx",
           "status": 200
         },
         {
-          "ms": 30,
+          "ms": 23,
           "ok": true,
           "path": "/search.aspx?q=Smoke",
           "status": 200
@@ -208,22 +208,23 @@
         },
         {
           "method": "POST",
-          "ms": 7,
+          "ms": 10,
           "ok": true,
           "path": "/services/metablogapi.aspx",
           "status": 200
         },
         {
-          "ms": 22,
+          "ms": 24,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
           "ms": 9,
-          "ok": true,
+          "ok": false,
           "path": "/App_Data/",
-          "status": 404
+          "status": 301,
+          "title": "Object moved"
         },
         {
           "ms": 5,
@@ -233,32 +234,35 @@
         },
         {
           "ms": 4,
-          "ok": true,
+          "ok": false,
           "path": "/obj/",
-          "status": 404
+          "status": 301,
+          "title": "Object moved"
         },
         {
-          "ms": 6,
+          "ms": 5,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 6,
-          "ok": true,
+          "ms": 5,
+          "ok": false,
           "path": "/bin_dotnet/Subtext.Web.dll",
-          "status": 404
+          "status": 301,
+          "title": "Object moved"
         },
         {
-          "ms": 5,
-          "ok": true,
+          "ms": 4,
+          "ok": false,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
-          "status": 404
+          "status": 301,
+          "title": "Object moved"
         }
       ],
       "log": "apps/subtext/logs/server.log",
       "status": "fail",
-      "summary": "27/28 probes"
+      "summary": "23/28 probes"
     }
   }
 }

@@ -30,36 +30,36 @@
       ]
     },
     "build": {
-      "at": "2026-11-05T13:20:17+00:00",
+      "at": "2026-11-06T07:55:59+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/roadkill/logs/build.log",
       "seconds": 23,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.9.0, webForCore-thirdparty 0.7.0"
+      "webforcore": "packages 0.10.0, webForCore-thirdparty 0.7.0"
     },
     "fetch": {
-      "at": "2026-11-05T13:19:53+00:00",
+      "at": "2026-11-06T07:55:36+00:00",
       "commit": "1061add4a727c55793234e0a92f146c6f1db62cf",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-05T13:20:18+00:00",
+      "at": "2026-11-06T07:56:00+00:00",
       "created": [
         "Roadkill"
       ],
-      "date": "2026-11-05",
+      "date": "2026-11-06",
       "status": "pass",
       "steps": [],
       "summary": "created Roadkill"
     },
     "smoke": {
-      "at": "2026-11-05T13:20:35+00:00",
+      "at": "2026-11-06T07:56:14+00:00",
       "checks": [
         {
-          "ms": 1762,
+          "ms": 2327,
           "ok": false,
           "path": "/",
           "stack": [
@@ -108,43 +108,43 @@
           "title": "Method not found: 'System.Reflection.Emit.AssemblyBuilder System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName, System.Reflection.Emit.AssemblyBuilderAccess)'."
         },
         {
-          "ms": 5368,
+          "ms": 4867,
           "ok": true,
           "path": "/User/Login",
           "status": 200
         },
         {
-          "ms": 28,
+          "ms": 35,
           "ok": true,
           "path": "/Assets/CSS/roadkill.css",
           "status": 200
         },
         {
-          "ms": 6,
+          "ms": 7,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 3,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/packages.config",
           "status": 404
@@ -156,7 +156,7 @@
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404

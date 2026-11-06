@@ -54,25 +54,25 @@
       ]
     },
     "build": {
-      "at": "2026-11-05T13:08:54+00:00",
+      "at": "2026-11-06T07:50:55+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps/kooboo-cms/logs/build.log",
-      "seconds": 47,
+      "seconds": 31,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.9.0"
+      "webforcore": "packages 0.10.0"
     },
     "fetch": {
-      "at": "2026-11-05T13:08:07+00:00",
+      "at": "2026-11-06T07:50:24+00:00",
       "commit": "e5879728c817f37b275219636e7c24bf84a02830",
       "overlay": true,
       "status": "pass"
     },
     "setup": {
-      "at": "2026-11-05T13:09:05+00:00",
+      "at": "2026-11-06T07:51:06+00:00",
       "created": [],
-      "date": "2026-11-05",
+      "date": "2026-11-06",
       "status": "pass",
       "steps": [
         {
@@ -100,215 +100,215 @@
       "summary": "4/4 steps"
     },
     "smoke": {
-      "at": "2026-11-05T13:09:20+00:00",
+      "at": "2026-11-06T07:51:16+00:00",
       "checks": [
         {
-          "ms": 17,
+          "ms": 15,
           "ok": true,
           "path": "/",
           "status": 302
         },
         {
-          "ms": 832,
+          "ms": 506,
           "ok": true,
           "path": "/kooboo-404",
           "status": 200
         },
         {
-          "ms": 855,
+          "ms": 561,
           "ok": true,
           "path": "/dev~sample/",
           "status": 200
         },
         {
-          "ms": 1309,
+          "ms": 739,
           "ok": true,
           "path": "/dev~sample/Articles/Detail/Lorem-ipsum-dolor-sit-amet-4",
           "status": 200
         },
         {
-          "ms": 61,
+          "ms": 55,
           "ok": true,
           "path": "/dev~sample/Articles/Chrome",
           "status": 200
         },
         {
-          "ms": 290,
+          "ms": 145,
           "ok": true,
           "path": "/dev~sample/about",
           "status": 200
         },
         {
-          "ms": 94,
+          "ms": 51,
           "ok": true,
           "path": "/dev~sample/search?key=Lorem",
           "status": 200
         },
         {
-          "ms": 700,
+          "ms": 451,
           "ok": true,
           "path": "/dev~sample/Member/Login",
           "status": 200
         },
         {
-          "ms": 314,
+          "ms": 165,
           "ok": true,
           "path": "/dev~sample/Member/Register",
           "status": 200
         },
         {
-          "ms": 714,
+          "ms": 438,
           "ok": true,
           "path": "/Account/LogOn",
           "status": 200
         },
         {
-          "ms": 14,
+          "ms": 11,
           "ok": true,
           "path": "/Sites/Home/Cluster",
           "status": 302
         },
         {
-          "ms": 465,
+          "ms": 345,
           "ok": true,
           "path": "/Account/WebResource?name=siteStyles&version=20140305",
           "status": 200
         },
         {
-          "ms": 30,
+          "ms": 18,
           "ok": true,
           "path": "/Kooboo-WebResource/Index/jQuery/20130227",
           "status": 200
         },
         {
-          "ms": 27,
+          "ms": 19,
           "ok": true,
           "path": "/Cms_Data/Sites/sample/Themes/Default/common.css",
           "status": 200
         },
         {
-          "ms": 7,
+          "ms": 6,
           "ok": true,
           "path": "/Cms_Data/Sites/sample/Files/logo.png",
           "status": 200
         },
         {
-          "ms": 6,
+          "ms": 5,
           "ok": true,
           "path": "/Scripts/less.js",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 50,
+          "ms": 37,
           "ok": true,
           "path": "/Account/LogOn",
           "status": 302
         },
         {
           "method": "POST",
-          "ms": 71,
+          "ms": 53,
           "ok": true,
           "path": "/Contents/TextContent/Create?siteName=sample&repositoryName=sample&folderName=Article",
           "status": 200
         },
         {
-          "ms": 71,
+          "ms": 47,
           "ok": true,
           "path": "/dev~sample/Articles/Detail/Smoke-Probe-Article",
           "status": 200
         },
         {
-          "ms": 1849,
+          "ms": 1240,
           "ok": true,
           "path": "/Contents/TextContent?siteName=sample&repositoryName=sample&folderName=Article",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 42,
+          "ms": 32,
           "ok": true,
           "path": "/Contents/TextContent/Edit?siteName=sample&repositoryName=sample&folderName=Article&UUID={article}",
           "status": 200
         },
         {
-          "ms": 61,
+          "ms": 43,
           "ok": true,
           "path": "/dev~sample/Articles/Detail/Smoke-Probe-Article",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 28,
+          "ms": 18,
           "ok": true,
           "path": "/Contents/TextContent/Delete?siteName=sample&repositoryName=sample&folderName=Article",
           "status": 200
         },
         {
-          "ms": 63,
+          "ms": 37,
           "ok": true,
           "path": "/dev~sample/Articles/Detail/Smoke-Probe-Article",
           "status": 500
         },
         {
-          "ms": 133,
+          "ms": 63,
           "ok": true,
           "path": "/Contents/TextContent?siteName=sample&repositoryName=sample&folderName=Article",
           "status": 200
         },
         {
-          "ms": 31,
+          "ms": 17,
           "ok": true,
           "path": "/dev~sample/Member/Register",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 50,
+          "ms": 35,
           "ok": true,
           "path": "/dev~sample/Kooboo-Submit/RegisterMember",
           "status": 200
         },
         {
-          "ms": 37,
+          "ms": 17,
           "ok": true,
           "path": "/dev~sample/Member/Login",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 22,
+          "ms": 12,
           "ok": true,
           "path": "/dev~sample/Kooboo-Submit/ValidateMember",
           "status": 200
         },
         {
-          "ms": 2256,
+          "ms": 1394,
           "ok": true,
           "path": "/dev~sample/Member/Profile",
           "status": 200
         },
         {
-          "ms": 667,
+          "ms": 379,
           "ok": true,
           "path": "/Membership/MembershipUser?siteName=sample&membershipName=SampleSite",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 23,
+          "ms": 18,
           "ok": true,
           "path": "/Membership/MembershipUser/Delete?siteName=sample&membershipName=SampleSite",
           "status": 200
         },
         {
-          "ms": 61,
+          "ms": 40,
           "ok": true,
           "path": "/Membership/MembershipUser?siteName=sample&membershipName=SampleSite",
           "status": 200
         },
         {
-          "ms": 7,
+          "ms": 4,
           "ok": true,
           "path": "/web.config",
           "status": 404
@@ -332,7 +332,7 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/packages.config",
           "status": 404
@@ -344,7 +344,7 @@
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404

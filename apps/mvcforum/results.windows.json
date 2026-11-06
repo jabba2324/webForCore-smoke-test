@@ -2,93 +2,93 @@
   "id": "mvcforum",
   "stages": {
     "build": {
-      "at": "2026-11-05T13:13:06+00:00",
+      "at": "2026-11-06T07:53:00+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\mvcforum\\logs.windows\\build.log",
-      "seconds": 53,
+      "seconds": 57,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.9.0, webForCore-thirdparty 0.7.0"
+      "webforcore": "packages 0.10.0, webForCore-thirdparty 0.7.0"
     },
     "fetch": {
-      "at": "2026-11-05T13:12:12+00:00",
+      "at": "2026-11-06T07:52:03+00:00",
       "commit": "8ce337990e079950113dae594f9407bf04854ed5",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-05T13:13:46+00:00",
+      "at": "2026-11-06T07:53:36+00:00",
       "checks": [
         {
-          "ms": 156,
+          "ms": 208,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 739,
+          "ms": 557,
           "ok": true,
           "path": "/thread/read-me/",
           "status": 200
         },
         {
-          "ms": 279,
+          "ms": 240,
           "ok": true,
           "path": "/cat/example-category/",
           "status": 200
         },
         {
-          "ms": 111,
+          "ms": 81,
           "ok": true,
           "path": "/members/logon/",
           "status": 200
         },
         {
-          "ms": 69,
+          "ms": 57,
           "ok": true,
           "path": "/members/register/",
           "status": 200
         },
         {
-          "ms": 146,
+          "ms": 136,
           "ok": true,
           "path": "/home/latestrss/",
           "status": 200
         },
         {
-          "ms": 55,
+          "ms": 49,
           "ok": true,
           "path": "/api/TinyMce/UploadImage",
           "status": 405
         },
         {
-          "ms": 21,
+          "ms": 19,
           "ok": true,
           "path": "/Themes/Metro/Content/Styles/Theme.min.css",
           "status": 200
         },
         {
-          "ms": 87,
+          "ms": 93,
           "ok": true,
           "path": "/thread/read-me/",
           "status": 200
         },
         {
-          "ms": 43,
+          "ms": 47,
           "ok": true,
           "path": "/members/register/",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 260,
+          "ms": 252,
           "ok": true,
           "path": "/members/register/",
           "status": 302
         },
         {
-          "ms": 428,
+          "ms": 407,
           "ok": true,
           "path": "/profile/smokemember/",
           "status": 200
@@ -100,109 +100,109 @@
           "status": 302
         },
         {
-          "ms": 40,
+          "ms": 36,
           "ok": true,
           "path": "/members/logon/",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 75,
+          "ms": 71,
           "ok": true,
           "path": "/members/logon/",
           "status": 302
         },
         {
-          "ms": 529,
+          "ms": 549,
           "ok": true,
           "path": "/topic/create/",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 284,
+          "ms": 265,
           "ok": true,
           "path": "/topic/create/",
           "status": 302
         },
         {
-          "ms": 276,
+          "ms": 210,
           "ok": true,
           "path": "{topic}",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 96,
+          "ms": 89,
           "ok": true,
           "path": "/post/createpost/",
           "status": 200
         },
         {
-          "ms": 255,
+          "ms": 235,
           "ok": true,
           "path": "{topic}",
           "status": 200
         },
         {
-          "ms": 203,
+          "ms": 181,
           "ok": true,
           "path": "/topic/editposttopic/{post}/",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 58,
+          "ms": 57,
           "ok": true,
           "path": "/topic/editposttopic/{post}/",
           "status": 302
         },
         {
-          "ms": 140,
+          "ms": 99,
           "ok": true,
           "path": "{topic}",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 255,
+          "ms": 227,
           "ok": true,
           "path": "/post/deletepost/",
           "status": 302
         },
         {
-          "ms": 117,
+          "ms": 103,
           "ok": true,
           "path": "{topic}",
           "status": 200
         },
         {
-          "ms": 239,
+          "ms": 262,
           "ok": true,
           "path": "/search/?term=Smoke+Probe+Topic",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 69,
+          "ms": 62,
           "ok": true,
           "path": "/post/deletepost/",
           "status": 302
         },
         {
-          "ms": 9,
+          "ms": 10,
           "ok": true,
           "path": "{topic}",
           "status": 302
         },
         {
-          "ms": 1244,
+          "ms": 1144,
           "ok": true,
           "path": "/admin/account/manage/?search=smokemember",
           "status": 200
         },
         {
-          "ms": 165,
+          "ms": 160,
           "ok": true,
           "path": "/admin/account/delete/{member}/?p=1&search=smokemember",
           "status": 302
@@ -244,7 +244,7 @@
           "status": 404
         },
         {
-          "ms": 1,
+          "ms": 2,
           "ok": true,
           "path": "/packages.config",
           "status": 404

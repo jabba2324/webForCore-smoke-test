@@ -2,166 +2,198 @@
   "id": "blogengine",
   "stages": {
     "build": {
-      "at": "2026-11-05T13:05:07+00:00",
+      "at": "2026-11-06T07:55:27+00:00",
       "error_count": 0,
       "errors": [],
       "log": "apps\\blogengine\\logs.windows\\build.log",
-      "seconds": 64,
+      "seconds": 46,
       "status": "pass",
       "summary": null,
-      "webforcore": "packages 0.9.0"
+      "webforcore": "packages 0.10.0"
     },
     "fetch": {
-      "at": "2026-11-05T13:04:02+00:00",
+      "at": "2026-11-06T07:54:41+00:00",
       "commit": "95c84261ed94402f45094c1fda85afbbf6f4d833",
       "overlay": true,
       "status": "pass"
     },
     "smoke": {
-      "at": "2026-11-05T13:06:03+00:00",
+      "at": "2026-11-06T07:56:17+00:00",
       "checks": [
         {
-          "ms": 8135,
+          "ms": 4422,
           "ok": true,
           "path": "/",
           "status": 200
         },
         {
-          "ms": 1633,
+          "ms": 5918,
           "ok": true,
           "path": "/post/welcome-to-blogengine-net",
           "status": 200
         },
         {
-          "ms": 1585,
+          "ms": 1270,
           "ok": true,
           "path": "/page/example-page",
           "status": 200
         },
         {
-          "ms": 1587,
+          "ms": 1343,
           "ok": true,
           "path": "/archive",
           "status": 200
         },
         {
-          "ms": 1575,
+          "ms": 1371,
           "ok": true,
           "path": "/category/BlogEngineNET",
           "status": 200
         },
         {
-          "ms": 1567,
+          "ms": 1337,
           "ok": true,
           "path": "/?tag=welcome",
           "status": 200
         },
         {
-          "ms": 1598,
+          "ms": 1399,
           "ok": true,
           "path": "/search?q=welcome",
           "status": 200
         },
         {
-          "ms": 1592,
+          "ms": 1293,
           "ok": true,
           "path": "/contact",
           "status": 200
         },
         {
-          "ms": 27,
+          "ms": 13,
           "ok": true,
           "path": "/syndication.axd",
           "status": 200
         },
         {
-          "ms": 6,
+          "ms": 3,
           "ok": true,
           "path": "/syndication.axd?format=atom",
           "status": 200
         },
         {
-          "ms": 5,
+          "ms": 3,
           "ok": true,
           "path": "/sitemap.axd",
           "status": 200
         },
         {
-          "ms": 4,
+          "ms": 3,
           "ok": true,
           "path": "/opensearch.axd",
           "status": 200
         },
         {
-          "ms": 4,
+          "ms": 2,
           "ok": true,
           "path": "/rsd.axd",
           "status": 200
         },
         {
-          "ms": 844,
+          "ms": 576,
           "ok": true,
           "path": "/Account/login.aspx",
           "status": 200
         },
         {
-          "ms": 1671,
+          "ms": 1021,
           "ok": true,
           "path": "/admin/",
           "status": 302
         },
         {
-          "ms": 23,
+          "ms": 19,
           "ok": true,
           "path": "/Custom/Themes/Standard/src/css/styles.min.css",
           "status": 200
         },
         {
-          "ms": 4,
+          "ms": 3,
           "ok": true,
           "path": "/Scripts/Auto/blog.js",
           "status": 200
         },
         {
-          "ms": 4,
+          "ms": 3,
           "ok": true,
           "path": "/Account/login.aspx",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 33,
+          "ms": 18,
           "ok": true,
           "path": "/Account/login.aspx?ReturnURL=/admin/",
           "status": 302
         },
         {
-          "ms": 105,
+          "ms": 54,
           "ok": true,
           "path": "/admin/",
           "status": 200
         },
         {
-          "ms": 6,
+          "ms": 4,
           "ok": true,
           "path": "/admin/about.cshtml",
           "status": 200
         },
         {
-          "ms": 403,
+          "ms": 193,
           "ok": true,
           "path": "/api/tools/check1",
           "status": 200
         },
         {
           "method": "POST",
-          "ms": 107,
+          "ms": 53,
           "ok": true,
           "path": "/api/posts",
           "status": 201
         },
         {
-          "ms": 1559,
+          "ms": 1280,
+          "ok": true,
+          "path": "/post/smoke-probe-post",
+          "status": 200
+        },
+        {
+          "method": "PUT",
+          "ms": 9,
+          "ok": true,
+          "path": "/api/posts/update/foo",
+          "status": 200
+        },
+        {
+          "ms": 5,
+          "ok": true,
+          "path": "/api/posts/{post}",
+          "status": 200
+        },
+        {
+          "ms": 1295,
+          "ok": true,
+          "path": "/post/smoke-probe-post",
+          "status": 200
+        },
+        {
+          "method": "POST",
+          "ms": 1298,
+          "ok": true,
+          "path": "/post/smoke-probe-post",
+          "status": 200
+        },
+        {
+          "ms": 1275,
           "ok": true,
           "path": "/post/smoke-probe-post",
           "status": 200
@@ -170,149 +202,117 @@
           "method": "PUT",
           "ms": 12,
           "ok": true,
-          "path": "/api/posts/update/foo",
-          "status": 200
-        },
-        {
-          "ms": 9,
-          "ok": true,
-          "path": "/api/posts/{post}",
-          "status": 200
-        },
-        {
-          "ms": 1566,
-          "ok": true,
-          "path": "/post/smoke-probe-post",
-          "status": 200
-        },
-        {
-          "method": "POST",
-          "ms": 1652,
-          "ok": true,
-          "path": "/post/smoke-probe-post",
-          "status": 200
-        },
-        {
-          "ms": 1585,
-          "ok": true,
-          "path": "/post/smoke-probe-post",
-          "status": 200
-        },
-        {
-          "method": "PUT",
-          "ms": 15,
-          "ok": true,
           "path": "/api/comments/processchecked/unapprove",
           "status": 200
         },
         {
-          "ms": 1554,
+          "ms": 1319,
           "ok": true,
           "path": "/post/smoke-probe-post",
           "status": 200
         },
         {
           "method": "PUT",
-          "ms": 6,
+          "ms": 4,
           "ok": true,
           "path": "/api/comments/processchecked/approve",
           "status": 200
         },
         {
-          "ms": 1576,
+          "ms": 1261,
           "ok": true,
           "path": "/post/smoke-probe-post",
           "status": 200
         },
         {
           "method": "DELETE",
-          "ms": 14,
+          "ms": 7,
           "ok": true,
           "path": "/api/comments/{comment}",
           "status": 200
         },
         {
-          "ms": 1554,
+          "ms": 1300,
           "ok": true,
           "path": "/post/smoke-probe-post",
           "status": 200
         },
         {
           "method": "DELETE",
-          "ms": 9,
+          "ms": 6,
           "ok": true,
           "path": "/api/posts/{post}",
           "status": 200
         },
         {
-          "ms": 13,
+          "ms": 6,
           "ok": true,
           "path": "/post/smoke-probe-post",
           "status": 404
         },
         {
           "method": "PUT",
-          "ms": 11,
+          "ms": 6,
           "ok": true,
           "path": "/api/trash/purgeall/all",
           "status": 200
         },
         {
-          "ms": 30,
+          "ms": 17,
           "ok": true,
           "path": "/api/trash?type=0",
           "status": 200
         },
         {
-          "ms": 4,
+          "ms": 2,
           "ok": true,
           "path": "/Account/login.aspx?logoff",
           "status": 302
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/admin/",
           "status": 302
         },
         {
-          "ms": 4,
+          "ms": 3,
           "ok": true,
           "path": "/web.config",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/App_Data/",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/Global.asax.cs",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/obj/",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/packages.config",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/BlogEngine.NET.dll",
           "status": 404
         },
         {
-          "ms": 2,
+          "ms": 1,
           "ok": true,
           "path": "/bin_dotnet/webforcore-host/webforcore-host.dll",
           "status": 404
