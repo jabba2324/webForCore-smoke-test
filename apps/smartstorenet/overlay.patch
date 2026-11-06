@@ -882,9 +882,9 @@ index cd84ae426..f8d4dfd18 100644
 -    <Compile Include="XmlHelper.cs" />
 -    <Compile Include="Packaging\Updater\AppUpdater.cs" />
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.10.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.10.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -2797,7 +2797,7 @@ index fb594ed6a..0f94a5786 100644
 -    <EmbeddedResource Include="Sql\Indexes.sql" />
 -    <EmbeddedResource Include="Sql\StoredProcedures.sql" />
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -4779,9 +4779,9 @@ index 377945466..fb87be09d 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.10.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.10.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -5899,8 +5899,8 @@ index b392fe891..fa100dfd9 100644
 -      <SubType>Designer</SubType>
 -      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 -    </Content>
-+    <PackageReference Include="webForCore" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.10.0" />
 +    <PackageReference Include="Autofac" Version="5.2.0" />
 +    <PackageReference Include="Autofac.Mvc5" Version="5.0.0" />
 +    <PackageReference Include="EntityFramework" Version="6.5.1" />
@@ -6516,8 +6516,8 @@ index 77449e7c9..799edaa7c 100644
 -    <Content Include="Views\FixedRate\Configure.cshtml">
 -      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 -    </Content>
-+    <PackageReference Include="webForCore" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.10.0" />
 +    <PackageReference Include="Autofac" Version="5.2.0" />
 +    <PackageReference Include="Autofac.Mvc5" Version="5.0.0" />
 +    <PackageReference Include="EntityFramework" Version="6.5.1" />
@@ -7127,8 +7127,8 @@ index 4f0f0c8a6..1b8d8e871 100644
 -    <Content Include="Views\TaxByRegion\Configure.cshtml">
 -      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 -    </Content>
-+    <PackageReference Include="webForCore" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.10.0" />
 +    <PackageReference Include="Autofac" Version="5.2.0" />
 +    <PackageReference Include="Autofac.Mvc5" Version="5.0.0" />
 +    <PackageReference Include="EntityFramework" Version="6.5.1" />
@@ -8007,14 +8007,14 @@ index 3af5f9ff8..c150162e6 100644
 -    <Compile Include="WebStoreContext.cs" />
 -    <Compile Include="WebWorkContext.cs" />
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Web.Http.Cors" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Web.Cors" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.9.0" />
-+    <PackageReference Include="webForCore.WebGrease" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.10.0" />
++    <PackageReference Include="webForCore.Web.Http.WebHost" Version="0.10.0" />
++    <PackageReference Include="webForCore.Web.Http.Cors" Version="0.10.0" />
++    <PackageReference Include="webForCore.Web.Cors" Version="0.10.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.10.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.10.0" />
++    <PackageReference Include="webForCore.WebGrease" Version="0.10.0" />
    </ItemGroup>
 +
    <ItemGroup>
@@ -10064,11 +10064,11 @@ index 27cf819bd..46d05f10a 100644
 +
 +  <ItemGroup>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.9.0" />
-+    <PackageReference Include="webForCore.WebGrease" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.10.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.10.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.10.0" />
++    <PackageReference Include="webForCore.WebGrease" Version="0.10.0" />
 +  </ItemGroup>
 +
 +  <ItemGroup>
@@ -13543,11 +13543,11 @@ index c96f601e5..ceedbe069 100644
 -      <SubType>Designer</SubType>
 -    </Content>
 +    <!-- webForCore 0.8.0 packages (GitHub release): "webForCore" is the "Always" set. -->
-+    <PackageReference Include="webForCore" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Web.Mvc" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.9.0" />
-+    <PackageReference Include="webForCore.Web.Optimization" Version="0.9.0" />
-+    <PackageReference Include="webForCore.WebGrease" Version="0.9.0" />
++    <PackageReference Include="webForCore" Version="0.10.0" />
++    <PackageReference Include="webForCore.Web.Mvc" Version="0.10.0" />
++    <PackageReference Include="webForCore.Web.WebPages.Deployment" Version="0.10.0" />
++    <PackageReference Include="webForCore.Web.Optimization" Version="0.10.0" />
++    <PackageReference Include="webForCore.WebGrease" Version="0.10.0" />
    </ItemGroup>
 +
    <ItemGroup>

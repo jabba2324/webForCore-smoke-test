@@ -3,7 +3,7 @@
 //     dotnet run scripts/convert.cs -- apps/<id>/src/<web project>.csproj [--lib apps/<id>/src/<library>.csproj]...
 //
 // - copies each project to <name>.csproj.netfx (once) and rewrites it as an SDK-style net10.0 project;
-// - adds the webForCore packages for the frameworks it references ($WEBFORCORE_VERSION, default 0.9.0); keeps the
+// - adds the webForCore packages for the frameworks it references ($WEBFORCORE_VERSION, default 0.10.0); keeps the
 //   app's other packages (from packages.config or PackageReference), drops Microsoft's ASP.NET packages and the System.*
 //   packages that are part of .NET, and raises the versions webForCore forces (FINDINGS.md F7); keeps HintPath
 //   references outside packages/;
@@ -33,7 +33,7 @@ static class Convert
         The rest is at the top of scripts/convert.cs.
         """;
 
-    static readonly string Wfc = Environment.GetEnvironmentVariable("WEBFORCORE_VERSION") ?? "0.9.0";
+    static readonly string Wfc = Environment.GetEnvironmentVariable("WEBFORCORE_VERSION") ?? "0.10.0";
     static readonly string Thirdparty = Environment.GetEnvironmentVariable("THIRDPARTY_VERSION") ?? "0.7.0";
     // webForCore-thirdparty's builds: (regex over references and packages, its package). The original package is kept
     // (packages such as Unity.Mvc bring it anyway); the build wins the conflict.
